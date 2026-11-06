@@ -191,14 +191,17 @@ def main(state_dir):
     if not plan or watch.get("status") not in OPEN_STATES:
         print("no live plan")
         trades = watch.get("trades", 0)  # plans that hit the buy trigger today
-        if trades >= 2 and not watch.get("done_sent") and minutes <= hhmm("15:30"):
+        late = minutes >= hhmm("14:40")  # last debate (14:30 slot) has reported
+        if (trades >= 2 or late) and not watch.get("done_sent") and minutes <= hhmm("15:30"):
+            why = (["2 trades triggered today", "(daily limit), none live now."] if trades >= 2
+                   else ["No new entries after 14:30.", "No plan live."])
             telegram(card("🏁", f"DONE FOR TODAY · {now:%H:%M}", [
                 "",
-                "2 trades triggered today",
-                "(daily limit), none live now.",
+                *why,
+                f"Trades triggered: {trades}",
                 "",
                 "🔕 No more scans today.",
-                "🔎 Next scan: tomorrow 09:45 IST",
+                "🔎 Next scan: Mon–Fri 09:45 IST",
             ]))
             watch["done_sent"] = True
             save(watch_path, watch)
