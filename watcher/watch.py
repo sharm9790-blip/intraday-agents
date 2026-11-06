@@ -150,6 +150,8 @@ def send_scorecard(state_dir, today, watch):
         mark = "✅" if ru["pnl"] > 0 else ("❌" if ru["pnl"] < 0 else "⚪")
         lines += [
             f"{mark} <b>{esc(r['symbol'])}</b> · {r['start']}",
+            f"Entry {rs(r['entry'])} → Close {rs(r['close'])}  ({(r['close'] / r['entry'] - 1) * 100:+.1f}%)",
+            f"SL {rs(r['sl'])} · T1 {rs(r['t1'])} · T2 {rs(r['t2'])}",
             f"Plan: {inr(ru['pnl'])}  ({esc(', '.join(ru['steps']))})",
             f"Limit only: {inr(r['limit']['pnl'])}",
             f"Bought at once: {inr(r['market']['pnl'])}",
