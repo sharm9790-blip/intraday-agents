@@ -1,0 +1,134 @@
+[
+ {
+  "date": "2026-11-06",
+  "plans": [
+   {
+    "symbol": "ICICIBANK",
+    "start": "09:45",
+    "rules": {
+     "pnl": 0,
+     "steps": [
+      "ran up without the dip"
+     ]
+    },
+    "limit": {
+     "pnl": 0,
+     "steps": [
+      "never filled"
+     ]
+    },
+    "market": {
+     "pnl": 820,
+     "steps": [
+      "bought 1514.30",
+      "09:45 T1",
+      "12:35 T2"
+     ]
+    }
+   },
+   {
+    "symbol": "HDFCBANK",
+    "start": "09:50",
+    "rules": {
+     "pnl": 0,
+     "steps": [
+      "not triggered by 10:45"
+     ]
+    },
+    "limit": {
+     "pnl": 0,
+     "steps": [
+      "never filled"
+     ]
+    },
+    "market": {
+     "pnl": 1564,
+     "steps": [
+      "bought 771.60",
+      "12:20 T1",
+      "15:05 T2"
+     ]
+    }
+   },
+   {
+    "symbol": "GLENMARK",
+    "start": "11:10",
+    "rules": {
+     "pnl": 0,
+     "steps": [
+      "ran up without the dip"
+     ]
+    },
+    "limit": {
+     "pnl": 0,
+     "steps": [
+      "never filled"
+     ]
+    },
+    "market": {
+     "pnl": 207,
+     "steps": [
+      "bought 2591.00",
+      "11:10 T1",
+      "11:15 back at cost"
+     ]
+    }
+   },
+   {
+    "symbol": "NTPC",
+    "start": "11:55",
+    "rules": {
+     "pnl": 0,
+     "steps": [
+      "closed below cancel level"
+     ]
+    },
+    "limit": {
+     "pnl": 770,
+     "steps": [
+      "12:00 filled",
+      "13:15 T1",
+      "15:10 time stop 320.75"
+     ]
+    },
+    "market": {
+     "pnl": 662,
+     "steps": [
+      "bought 318.30",
+      "13:15 T1",
+      "15:10 time stop 320.75"
+     ]
+    }
+   },
+   {
+    "symbol": "TATASTEEL",
+    "start": "13:45",
+    "rules": {
+     "pnl": 0,
+     "steps": [
+      "ran up without the dip"
+     ]
+    },
+    "limit": {
+     "pnl": 0,
+     "steps": [
+      "never filled"
+     ]
+    },
+    "market": {
+     "pnl": 80,
+     "steps": [
+      "bought 185.38",
+      "13:45 T1",
+      "13:50 back at cost"
+     ]
+    }
+   }
+  ],
+  "totals": {
+   "rules": 0,
+   "limit": 770,
+   "market": 3333
+  }
+ }
+]
