@@ -44,8 +44,8 @@ jobs:
           cd statebr
           git config user.name "intraday-watcher"
           git config user.email "watcher@users.noreply.github.com"
-          if [ -n "$(git status --porcelain state/watch.json)" ]; then
-            git add state/watch.json
+          if [ -n "$(git status --porcelain state/)" ]; then
+            git add state/watch.json state/scorecard.json 2>/dev/null || git add state/watch.json
             git commit -m "watch $(TZ=Asia/Kolkata date +%H:%M)"
             for i in 1 2 3; do
               git pull --rebase origin claude/intraday-state && git push origin HEAD:claude/intraday-state && break
