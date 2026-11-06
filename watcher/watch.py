@@ -119,6 +119,51 @@ def plan_lines(plan):
     ]
 
 
+def fire_debate(now, go_count, last_verdict_id, watch):
+    """Start the cloud debate through the routine's API trigger at :00/:15/:30.
+
+    The routine's own hourly schedule covers :45, so together they give a scan
+    every 15 min. Only called when no plan is live. Returns True if it fired.
+    """
+    url = os.environ.get("CLAUDE_FIRE_URL")
+    token = os.environ.get("CLAUDE_FIRE_TOKEN")
+    minutes = now.hour * 60 + now.minute
+    quarter = now.minute // 15 * 15
+    slot = f"{now.hour:02d}:{quarter:02d}"
+    if not url or not token:
+        return False
+    if not hhmm("10:00") <= minutes <= hhmm("14:30") or quarter == 45 or go_count >= 2:
+        return False
+    if watch.get("last_fire") == slot:
+        return False
+    if last_verdict_id:  # a debate finished in the last 10 min: wait for the next slot
+        v = last_verdict_id.split("_")[-1]
+        if 0 <= minutes - (int(v[:2]) * 60 + int(v[2:])) < 10:
+            return False
+    if os.environ.get("DRY_RUN"):
+        print("FIRE debate for slot", slot)
+    else:
+        req = urllib.request.Request(
+            url,
+            data=json.dumps({"text": f"15-min scan, slot {slot} IST"}).encode(),
+            headers={
+                "Authorization": f"Bearer {token}",
+                "anthropic-beta": "experimental-cc-routine-2026-04-01",
+                "anthropic-version": "2023-06-01",
+                "Content-Type": "application/json",
+            },
+            method="POST",
+        )
+        try:
+            urllib.request.urlopen(req, timeout=30)
+        except urllib.error.HTTPError as e:
+            print("fire failed:", e.code, e.read()[:300])
+            return False
+        print("fired debate for slot", slot)
+    watch["last_fire"] = slot
+    return True
+
+
 def main(state_dir):
     now = datetime.now(IST)
     today = now.strftime("%Y-%m-%d")
@@ -145,6 +190,9 @@ def main(state_dir):
     plan = plan_doc.get("plan") if plan_doc.get("date") == today else None
     if not plan or watch.get("status") not in OPEN_STATES:
         print("no live plan")
+        go_count = plan_doc.get("go_count", 0) if plan_doc.get("date") == today else 0
+        if fire_debate(now, go_count, vid if plan_doc.get("date") == today else None, watch):
+            save(watch_path, watch)
         return
     if minutes < hhmm("09:15") or minutes > hhmm("15:30"):
         return
