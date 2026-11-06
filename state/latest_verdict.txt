@@ -1,6 +1,18 @@
-VERDICT 11:25 — NO TRADE
-Market: Nifty +0.25% but narrow (Midcap50 -1.2%), India VIX 17.1 rising. Staying flat.
-ICICIBANK: rejected - net R:R ~0.94 to T1 (needs 1.5), volume fading, stalled under 1527. Would turn GO only on a 15-min close above 1528 on >1M volume with Nifty >24,540 and VIX <17.5 (buy ~1529-1530, SL 1519, T1 >=1546, entries by 14:30).
-TITAN: rejected - results-gap stall under 5000 call wall, lower highs, R:R 0.75.
-M&M: rejected - distribution, sell-heavy depth, R:R 0.63.
-Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.
+⚪ <b>NO TRADE — 11:25 IST</b>
+
+📈 Nifty  +0.25%
+📉 Midcap 50  −1.2%
+😟 India VIX 17.1 (rising)
+Mood: narrow rally, stay flat
+
+<b>Why nothing passed</b>
+• ICICIBANK — reward 0.94× risk, volume fading
+• TITAN — stuck under ₹5,000 call wall
+• M&amp;M — selling pressure, reward 0.63× risk
+
+<b>Could flip to GO</b>
+ICICIBANK only on a 15-min close above ₹1,528 with volume above 1M
+Buy ~₹1,529 · SL ₹1,519 · T1 ₹1,546
+
+🔎 Next scan: 11:45 IST
+<i>Analysis only, not advice. You place orders yourself.</i>
