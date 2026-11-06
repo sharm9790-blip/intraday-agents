@@ -130,14 +130,12 @@ def send_scorecard(state_dir, today, watch):
     """Replay today's plans, send a Telegram scorecard, append to state/scorecard.json."""
     from replay import replay
     rows = []
-    for p in watch["plans"]:
+    for p in watch.get("plans", []):
         try:
             bars, _ = candles(p["yahoo"])
             rows.append(replay(p, bars))
         except Exception as e:  # one bad symbol must not block the rest
             print("replay failed", p.get("symbol"), e)
-    if not rows:
-        return
     hist_path = os.path.join(state_dir, "scorecard.json")
     hist = [d for d in load(hist_path, []) if d.get("date") != today]
     tot = {k: sum(r[k]["pnl"] for r in rows) for k in ("rules", "limit", "market")}
@@ -145,6 +143,9 @@ def send_scorecard(state_dir, today, watch):
     save(hist_path, hist[-250:])
     run = {k: sum(d["totals"][k] for d in hist) for k in ("rules", "limit", "market")}
     lines = [""]
+    if not rows:
+        n = watch.get("verdicts", 0)
+        lines += [f"No GO plans today ({n} scan{'s' if n != 1 else ''}, all NO TRADE).", ""]
     for r in rows:
         ru = r["rules"]
         mark = "✅" if ru["pnl"] > 0 else ("❌" if ru["pnl"] < 0 else "⚪")
@@ -237,6 +238,7 @@ def main(state_dir):
         except FileNotFoundError:
             telegram(card("📋", f"New verdict {esc(vid)}", ["(verdict text missing)"]))
         watch["verdict_id"] = vid
+        watch["verdicts"] = watch.get("verdicts", 0) + 1
         watch["status"] = "waiting" if plan_doc.get("plan") else None
         watch["since"] = None
         if plan_doc.get("plan"):
@@ -244,8 +246,10 @@ def main(state_dir):
             watch.setdefault("plans", []).append({**plan_doc["plan"], "start": f"{v[:2]}:{v[2:]}"})
         save(watch_path, watch)
 
-    # 1b) After the close: replay today's plans and send the scorecard once.
-    if minutes >= hhmm("15:20") and watch.get("plans") and not watch.get("scorecard_sent"):
+    # 1b) End of day (15:45 IST): replay today's plans and send the scorecard once.
+    # Needs at least one verdict today, so holidays and dead days stay silent.
+    if (minutes >= hhmm("15:45") and (watch.get("plans") or watch.get("verdicts"))
+            and not watch.get("scorecard_sent")):
         send_scorecard(state_dir, today, watch)
         watch["scorecard_sent"] = True
         save(watch_path, watch)

@@ -193,7 +193,7 @@ A 📊 status card is sent on runs in the first 5 minutes of each quarter hour w
 | 🔴 STOP LOSS HIT / ⚠️ EARLY EXIT / ↩️ BACK AT COST | Exit |
 | ❌ CANCELLED | Don't buy; delete the Groww alert |
 | ⏰ TIME STOP | Exit everything (15:10) |
-| 📒 SCORECARD | ~15:20: each of today's plans replayed on 5-min candles — by the plan's rules, as a plain limit order, and bought at once — with today's and the running paper P&L (`state/scorecard.json`) |
+| 📒 SCORECARD | 15:45 on market days (needs the pinger to run until 15:55): each of today's plans replayed on 5-min candles — by the plan's rules, as a plain limit order, and bought at once — with today's and the running paper P&L (`state/scorecard.json`) |
 | 🏁 DONE FOR TODAY | Sent once a day: when 2 bought trades are used, or at ~14:40 when scanning ends with no plan live |
 
 ---
