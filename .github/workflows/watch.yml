@@ -2,8 +2,9 @@ name: intraday-watcher
 
 on:
   schedule:
-    # every 5 min, 08:30–16:29 IST (03:00–10:59 UTC), Mon–Fri; the script exits outside 09:15–15:30
-    - cron: "*/5 3-10 * * 1-5"
+    # Backup only: GitHub delays scheduled runs a lot. The 5-min cadence comes from an
+    # external pinger (cron-job.org) calling workflow_dispatch, Mon–Fri 09:15–15:30 IST.
+    - cron: "*/30 3-10 * * 1-5"
   workflow_dispatch:
 
 permissions:
