@@ -1,10 +1,11 @@
 {
  "date": "2026-11-06",
- "verdict_id": "2026-11-06_1155",
- "status": "cancelled",
- "since": "11:55",
+ "verdict_id": "2026-11-06_1345",
+ "status": "waiting",
+ "since": "13:45",
  "log": [
-  "12:06 NTPC 317.45 VWAP \u20b9315.63 status cancelled"
+  "12:06 NTPC 317.45 VWAP \u20b9315.63 status cancelled",
+  "13:46 TATASTEEL 185.32 VWAP \u20b9181.79 status waiting"
  ],
  "last_fire": "13:30"
 }
