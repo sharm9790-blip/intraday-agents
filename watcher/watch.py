@@ -119,7 +119,7 @@ def plan_lines(plan):
     ]
 
 
-def fire_debate(now, go_count, last_verdict_id, watch):
+def fire_debate(now, trades, last_verdict_id, watch):
     """Start the cloud debate through the routine's API trigger at :00/:15/:30.
 
     The routine's own hourly schedule covers :45, so together they give a scan
@@ -132,7 +132,7 @@ def fire_debate(now, go_count, last_verdict_id, watch):
     slot = f"{now.hour:02d}:{quarter:02d}"
     if not url or not token:
         return False
-    if not hhmm("10:00") <= minutes <= hhmm("14:30") or quarter == 45 or go_count >= 2:
+    if not hhmm("10:00") <= minutes <= hhmm("14:30") or quarter == 45 or trades >= 2:
         return False
     if watch.get("last_fire") == slot:
         return False
@@ -190,11 +190,11 @@ def main(state_dir):
     plan = plan_doc.get("plan") if plan_doc.get("date") == today else None
     if not plan or watch.get("status") not in OPEN_STATES:
         print("no live plan")
-        go_count = plan_doc.get("go_count", 0) if plan_doc.get("date") == today else 0
-        if go_count >= 2 and not watch.get("done_sent") and minutes <= hhmm("15:30"):
+        trades = watch.get("trades", 0)  # plans that hit the buy trigger today
+        if trades >= 2 and not watch.get("done_sent") and minutes <= hhmm("15:30"):
             telegram(card("🏁", f"DONE FOR TODAY · {now:%H:%M}", [
                 "",
-                "2 trade plans already given",
+                "2 trades triggered today",
                 "(daily limit), none live now.",
                 "",
                 "🔕 No more scans today.",
@@ -202,7 +202,7 @@ def main(state_dir):
             ]))
             watch["done_sent"] = True
             save(watch_path, watch)
-        if fire_debate(now, go_count, vid if plan_doc.get("date") == today else None, watch):
+        if fire_debate(now, trades, vid if plan_doc.get("date") == today else None, watch):
             save(watch_path, watch)
         return
     if minutes < hhmm("09:15") or minutes > hhmm("15:30"):
@@ -253,6 +253,7 @@ def main(state_dir):
             ])
         elif trigger:
             status = "in_zone"
+            watch["trades"] = watch.get("trades", 0) + 1
             msg = card("🔔", f"BUY TRIGGER — {sym}", [
                 f"🕐 {t} IST", "",
                 f"✅ Green 5-min close {rs(trigger[-1][4])}",

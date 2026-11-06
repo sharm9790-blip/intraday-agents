@@ -14,7 +14,7 @@ All state lives on the git branch `claude/intraday-state`. Work on that branch.
 2. **Clock.** Call Groww `resolve_market_time_and_calendar`. Not a trading day, or outside 09:40–14:35 IST → write nothing and stop.
 3. **Today's state.** Read `state/plan.json` and `state/watch.json` (the 5-min watcher writes `watch.json`).
    - If `plan.json` is for today and `watch.json` shows that plan with status `waiting`, `in_zone` or `t1_hit` → a plan is live; do NOT debate. Stop.
-   - If today's GO count (`plan.json` → `go_count`, today only) is 2 → stop.
+   - If `watch.json` is for today and its `trades` (plans that hit the buy trigger) is 2 or more → stop. Plans that were cancelled before the buy trigger do NOT count; `go_count` in `plan.json` is just a tally of GO verdicts.
    - Collect today's rejected symbols from `state/rejected.json` (today only).
 4. **Bull → Bear → Judge.** Launch `bull-agent` (scan; skip rejected symbols unless data clearly changed; use TODAY's live 5-min candles; scan ~10 relative-strength F&O stocks, analyse the best up to 5), then `bear-agent` with the Bull's full output, then `judge-agent` with both. Run them one after another, never in parallel.
 5. **Write files** (IST time, HHMM):
