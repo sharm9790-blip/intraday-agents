@@ -192,7 +192,7 @@ A 📊 status card is sent on runs in the first 5 minutes of each quarter hour w
 | 🔴 STOP LOSS HIT / ⚠️ EARLY EXIT / ↩️ BACK AT COST | Exit |
 | ❌ CANCELLED | Don't buy; delete the Groww alert |
 | ⏰ TIME STOP | Exit everything (15:10) |
-| 🏁 DONE FOR TODAY | 2 bought trades used; no more scans today |
+| 🏁 DONE FOR TODAY | Sent once a day: when 2 bought trades are used, or at ~14:40 when scanning ends with no plan live |
 
 ---
 
