@@ -5,6 +5,11 @@
    {
     "symbol": "ICICIBANK",
     "start": "09:45",
+    "entry": 1492,
+    "sl": 1481,
+    "t1": 1516,
+    "t2": 1536,
+    "close": 1571.2,
     "rules": {
      "pnl": 0,
      "steps": [
@@ -17,6 +22,7 @@
       "never filled"
      ]
     },
+    "price_at_plan": 1514.3,
     "market": {
      "pnl": 820,
      "steps": [
@@ -29,6 +35,11 @@
    {
     "symbol": "HDFCBANK",
     "start": "09:50",
+    "entry": 766.5,
+    "sl": 761.8,
+    "t1": 777,
+    "t2": 784,
+    "close": 788.25,
     "rules": {
      "pnl": 0,
      "steps": [
@@ -41,6 +52,7 @@
       "never filled"
      ]
     },
+    "price_at_plan": 771.6,
     "market": {
      "pnl": 1564,
      "steps": [
@@ -53,6 +65,11 @@
    {
     "symbol": "GLENMARK",
     "start": "11:10",
+    "entry": 2558,
+    "sl": 2538,
+    "t1": 2605,
+    "t2": 2635,
+    "close": 2590.0,
     "rules": {
      "pnl": 0,
      "steps": [
@@ -65,6 +82,7 @@
       "never filled"
      ]
     },
+    "price_at_plan": 2591.0,
     "market": {
      "pnl": 207,
      "steps": [
@@ -77,6 +95,11 @@
    {
     "symbol": "NTPC",
     "start": "11:55",
+    "entry": 317.95,
+    "sl": 316.9,
+    "t1": 320.5,
+    "t2": 323.5,
+    "close": 323.45,
     "rules": {
      "pnl": 0,
      "steps": [
@@ -91,6 +114,7 @@
       "15:10 time stop 320.75"
      ]
     },
+    "price_at_plan": 318.3,
     "market": {
      "pnl": 662,
      "steps": [
@@ -103,6 +127,11 @@
    {
     "symbol": "TATASTEEL",
     "start": "13:45",
+    "entry": 183.5,
+    "sl": 182.6,
+    "t1": 185.9,
+    "t2": 187.0,
+    "close": 186.3,
     "rules": {
      "pnl": 0,
      "steps": [
@@ -115,6 +144,7 @@
       "never filled"
      ]
     },
+    "price_at_plan": 185.38,
     "market": {
      "pnl": 80,
      "steps": [
