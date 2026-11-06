@@ -160,6 +160,7 @@ What you do on each GO message: set the Groww price alert; after buying, immedia
 | `state/latest_verdict.txt` | Cloud debate | Telegram message for that verdict (mobile format). |
 | `state/rejected.json` | Cloud debate | `{"date", "symbols": {"SYM": "reason"}}` |
 | `state/watch.json` | Watcher | `date`, `verdict_id` already forwarded, `status`, `since`, `trades` (bought today), `last_fire` (slot), `done_sent`, `log`. |
+| `state/scorecard.json` | Watcher | One entry per day: each plan's replay (rules / limit / market P&L and steps) and day totals. |
 | `reports/YYYY-MM-DD_HHMM.md` | Cloud debate | Full Bull, Bear and Judge outputs. |
 
 Plan status flow (watcher):
@@ -192,6 +193,7 @@ A 📊 status card is sent on runs in the first 5 minutes of each quarter hour w
 | 🔴 STOP LOSS HIT / ⚠️ EARLY EXIT / ↩️ BACK AT COST | Exit |
 | ❌ CANCELLED | Don't buy; delete the Groww alert |
 | ⏰ TIME STOP | Exit everything (15:10) |
+| 📒 SCORECARD | ~15:20: each of today's plans replayed on 5-min candles — by the plan's rules, as a plain limit order, and bought at once — with today's and the running paper P&L (`state/scorecard.json`) |
 | 🏁 DONE FOR TODAY | Sent once a day: when 2 bought trades are used, or at ~14:40 when scanning ends with no plan live |
 
 ---

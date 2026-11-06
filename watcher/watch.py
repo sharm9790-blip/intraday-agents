@@ -119,6 +119,58 @@ def plan_lines(plan):
     ]
 
 
+def inr(x):
+    """Signed whole-rupee amount, e.g. +₹1,564 / −₹420."""
+    if round(x) == 0:
+        return "₹0"
+    return ("+" if x > 0 else "−") + "₹" + f"{abs(x):,.0f}"
+
+
+def send_scorecard(state_dir, today, watch):
+    """Replay today's plans, send a Telegram scorecard, append to state/scorecard.json."""
+    from replay import replay
+    rows = []
+    for p in watch["plans"]:
+        try:
+            bars, _ = candles(p["yahoo"])
+            rows.append(replay(p, bars))
+        except Exception as e:  # one bad symbol must not block the rest
+            print("replay failed", p.get("symbol"), e)
+    if not rows:
+        return
+    hist_path = os.path.join(state_dir, "scorecard.json")
+    hist = [d for d in load(hist_path, []) if d.get("date") != today]
+    tot = {k: sum(r[k]["pnl"] for r in rows) for k in ("rules", "limit", "market")}
+    hist.append({"date": today, "plans": rows, "totals": tot})
+    save(hist_path, hist[-250:])
+    run = {k: sum(d["totals"][k] for d in hist) for k in ("rules", "limit", "market")}
+    lines = [""]
+    for r in rows:
+        ru = r["rules"]
+        mark = "✅" if ru["pnl"] > 0 else ("❌" if ru["pnl"] < 0 else "⚪")
+        lines += [
+            f"{mark} <b>{esc(r['symbol'])}</b> · {r['start']}",
+            f"Plan: {inr(ru['pnl'])}  ({esc(', '.join(ru['steps']))})",
+            f"Limit only: {inr(r['limit']['pnl'])}",
+            f"Bought at once: {inr(r['market']['pnl'])}",
+            "",
+        ]
+    lines += [
+        "<b>Today</b>",
+        f"Plan rules  {inr(tot['rules'])}",
+        f"Limit only  {inr(tot['limit'])}",
+        f"Bought at once  {inr(tot['market'])}",
+        "",
+        f"<b>Running total · {len(hist)} day{'s' if len(hist) != 1 else ''}</b>",
+        f"Plan rules  {inr(run['rules'])}",
+        f"Limit only  {inr(run['limit'])}",
+        f"Bought at once  {inr(run['market'])}",
+        "",
+        "<i>Replay on 5-min candles, ~0.06% costs, SL assumed first when SL and target share a candle. Paper results, not real trades.</i>",
+    ]
+    telegram(card("📒", f"SCORECARD · {today}", lines))
+
+
 def fire_debate(now, trades, last_verdict_id, watch):
     """Start the cloud debate through the routine's API trigger at :00/:15/:30.
 
@@ -185,6 +237,15 @@ def main(state_dir):
         watch["verdict_id"] = vid
         watch["status"] = "waiting" if plan_doc.get("plan") else None
         watch["since"] = None
+        if plan_doc.get("plan"):
+            v = vid.split("_")[-1]
+            watch.setdefault("plans", []).append({**plan_doc["plan"], "start": f"{v[:2]}:{v[2:]}"})
+        save(watch_path, watch)
+
+    # 1b) After the close: replay today's plans and send the scorecard once.
+    if minutes >= hhmm("15:20") and watch.get("plans") and not watch.get("scorecard_sent"):
+        send_scorecard(state_dir, today, watch)
+        watch["scorecard_sent"] = True
         save(watch_path, watch)
 
     plan = plan_doc.get("plan") if plan_doc.get("date") == today else None
