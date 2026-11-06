@@ -23,6 +23,9 @@
   "TATACAP": "14:20 net R:R 0.91, sell book 2.6x buy, 356.3 high tested repeatedly, no OI; flips only on 5-min close >356.40 with SL<=2.5 and T1>=363 before 14:30",
   "MARUTI_14": "14:20 net R:R 0.76, 12800 call wall, volume dying",
   "BAJAJ-AUTO": "14:20 net R:R 0.86, 10919 failed high, 10900 call wall",
-  "SBIN": "14:20 net R:R 0.84, 1016 rejected, PCR 0.75"
+  "SBIN": "14:20 net R:R 0.84, 1016 rejected, PCR 0.75",
+  "SIEMENS": "14:36 results due today unannounced, below 3551 trigger, 3550 call wall, net R:R 0.8",
+  "DIVISLAB": "14:36 rejection wick 10280, volume fading, sell depth 2x, 10300 call wall, net R:R 0.65",
+  "MCX": "14:36 climax candle into 52wk high 3538, sell-heavy depth, SL incoherent, net R:R 0.68"
  }
 }
