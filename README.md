@@ -2,6 +2,8 @@
 
 Bull → Bear → Judge intraday analysis for NSE stocks, with Telegram alerts. Analysis only — nothing here places orders.
 
+📘 Full setup, operations and troubleshooting guide: [docs/SETUP.md](docs/SETUP.md)
+
 | Part | Where it runs | How often | What it does |
 |---|---|---|---|
 | Debate (option 1) | Claude cloud routine | every 15 min, 09:45–14:45 IST, Mon–Fri (hourly schedule at :45 + API fires from the watcher at :00/:15/:30) | Runs `.claude/agents/bull-agent`, `bear-agent`, `judge-agent` via the `intraday-debate` skill; writes `reports/`, `state/plan.json`, `state/latest_verdict.txt` to branch `claude/intraday-state`. The verdict tells you which Groww alerts / SL / target orders to set. |
