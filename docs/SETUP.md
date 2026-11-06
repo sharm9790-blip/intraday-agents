@@ -182,6 +182,7 @@ A 📊 status card is sent on runs in the first 5 minutes of each quarter hour w
 | Message | Meaning |
 |---|---|
 | 🟢 GO — SYMBOL | New plan: buy zone, SL, targets, qty, conditions, what to set in Groww |
+| ⚡ HIGH CONFIDENCE · 📝 Draft order | Inside a GO with confidence above 7: tap-to-copy Qty / Buy / SL / T1 values and a Groww stock link. You place the order yourself. |
 | ⚪ NO TRADE | Nothing passed; reasons and next scan time |
 | ⚠️ NO ANALYSIS | A data connector was missing in the cloud run |
 | 📊 SYMBOL · HH:MM | Status of the live plan |

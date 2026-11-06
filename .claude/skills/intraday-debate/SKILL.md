@@ -34,7 +34,7 @@ All state lives on the git branch `claude/intraday-state`. Work on that branch.
               "exit_if_close_below_after_entry": 763.5, "time_stop": "15:10"}
      ```
      Numbers only, no ₹ signs. `yahoo` = NSE symbol + `.NS` (M&M → `M&M.NS`).
-   - `state/latest_verdict.txt` — the Telegram message, read on a PHONE. Follow `.claude/skills/intraday-debate/telegram-format.md` exactly: Telegram HTML (`<b>`, `<i>` only), short lines (≤ 34 characters where possible), emoji markers, blank lines between blocks, no tables, no markdown, `&` written as `&amp;` (e.g. `M&amp;M`), max 2,500 characters.
+   - `state/latest_verdict.txt` — the Telegram message, read on a PHONE. Follow `.claude/skills/intraday-debate/telegram-format.md` exactly: Telegram HTML (`<b>`, `<i>` only), short lines (≤ 34 characters where possible), emoji markers, blank lines between blocks, no tables, no markdown, `&` written as `&amp;` (e.g. `M&amp;M`), max 2,500 characters. If the Judge's confidence for the GO pick is **above 7/10**, add the **Draft order block** from `telegram-format.md` (verified Groww stock link + tap-to-copy values). It is text for the user only — never call any Groww order tool.
 6. **Commit and push**: `git add -A && git commit -m "verdict YYYY-MM-DD_HHMM" && git push origin claude/intraday-state` (on a push conflict: `git pull --rebase` then push again). The watcher sends `latest_verdict.txt` to Telegram on its next run.
 
 ## Rules
