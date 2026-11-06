@@ -1,45 +1,45 @@
-🟡 <b>GO (conditional) — NTPC</b>
-🕐 11:55 IST  ·  Confidence 4.5/10
+🟡 <b>GO (conditional) — TATASTEEL</b>
+🕐 13:45 IST  ·  Confidence 4/10
 
-📥 Buy limit  <b>₹317.95</b>  (max ₹318.2)
-🛑 Stop loss  <b>₹316.9</b>
-🎯 Target 1  <b>₹320.5</b>  (sell half)
-🎯 Target 2  <b>₹323.5</b>
-📦 Qty  <b>310</b> shares
+📥 Buy limit  <b>₹183.5</b>  (max ₹183.75)
+🛑 Stop loss  <b>₹182.6</b>
+🎯 Target 1  <b>₹185.9</b>  (sell half)
+🎯 Target 2  <b>₹187</b>
+📦 Qty  <b>540</b> shares
 
 <b>✅ Buy only if</b>
-• Dips to ₹317.9–318.0
-• No 5-min close below ₹317.7
-• VIX stays under 17.5
+• Dips to ₹183.2–183.6
+• Green 5-min close above ₹183.4
+• No results/news headline yet
 
 <b>❌ Cancel if</b>
-• Not filled by 13:30
-• 5-min close below ₹317.7
-• Hits ₹320.5 before the dip
+• Not filled by 14:30
+• Hits ₹185.9 before the dip
+• 5-min close below ₹182.9
 
 <b>💰 Risk vs reward</b>
-Max loss ≈ ₹380
-Profit ≈ ₹365 (T1) · ₹1,130 (T2)
-Reward 1.9× the risk
+Max loss ≈ ₹565
+Profit ≈ ₹610 (T1) · ₹1,510 (T2)
+Reward 2.1× the risk
 
 <b>📲 Set in Groww now</b>
-1. Price alert at ₹317.95
-2. After buying: SL-M at ₹316.9
-3. Sell 155 shares at ₹320.5
+1. Price alert at ₹183.5
+2. After buying: SL-M at ₹182.6
+3. Sell 270 shares at ₹185.9
 4. Exit all by 15:10
 
 <b>Why this stock</b>
-• Ex-dividend, +1.5% adjusted
-• Higher lows, Supertrend ₹317.2
-• Call OI unwinding at 320
+• Broke 12:00–13:00 base on volume
+• Pullback gives ~2× reward
 
 <b>Weak spots</b>
-• 320 call wall just above T1
-• Breakout stalled, volume fading
+• Q2 results today, time unconfirmed
+• Call-heavy OI, VIX up 9%
 
 <b>Skipped</b>
-• KOTAKBANK — double top, R:R 0.8
-• SUNPHARMA — volume dead, R:R 0.7
+• GLENMARK — profit-fall, call wall
+• NTPC — failed breakout, call wall
+• AXISBANK — reward below risk
 
 📡 Watcher checks every 5 min
 <i>Analysis only, not advice. You place orders yourself.</i>

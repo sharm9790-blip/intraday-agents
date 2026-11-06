@@ -12,6 +12,10 @@
   "KALYANKJIL_breakout": "breakout >587.6 rejected: 588.5-593 Sep supply, R:R <1 after costs (pullback 582 kept as backup)",
   "KOTAKBANK": "11:55 net R:R 0.8, double top 472.45-472.8, call writers 470/475/480, RBI hike headline; flips only on high-vol 5-min close >473.5",
   "SUNPHARMA": "11:55 net R:R 0.74, volume dead 8-32K/candle, 1900 call wall growing; flips only on volume break >1852",
-  "NTPC_breakout": "breakout >319.05 rejected: net R:R 1.26, 320 call wall (pullback 317.95 kept)"
+  "NTPC_breakout": "breakout >319.05 rejected: net R:R 1.26, 320 call wall (pullback 317.95 kept)",
+  "GLENMARK": "13:45 profit-fall result, parabolic, fading vol, call wall 2660-2700, net R:R 1.2; flips only on 5-min close >2683 on vol>100k",
+  "NTPC": "13:45 failed breakout 321.1, call wall 320, PCR 0.66, net R:R 0.95",
+  "AXISBANK": "13:45 net R:R 0.72, lags sector",
+  "TATASTEEL_breakout": "breakout >184.85 rejected: net R:R 1.06 (pullback 183.5 kept)"
  }
 }
