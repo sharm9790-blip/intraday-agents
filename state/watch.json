@@ -1,7 +1,9 @@
 {
  "date": "2026-11-06",
- "verdict_id": "2026-11-06_1125",
- "status": null,
- "since": null,
- "log": []
+ "verdict_id": "2026-11-06_1155",
+ "status": "cancelled",
+ "since": "11:55",
+ "log": [
+  "12:06 NTPC 317.45 VWAP \u20b9315.63 status cancelled"
+ ]
 }
