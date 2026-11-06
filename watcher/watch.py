@@ -191,6 +191,17 @@ def main(state_dir):
     if not plan or watch.get("status") not in OPEN_STATES:
         print("no live plan")
         go_count = plan_doc.get("go_count", 0) if plan_doc.get("date") == today else 0
+        if go_count >= 2 and not watch.get("done_sent") and minutes <= hhmm("15:30"):
+            telegram(card("🏁", f"DONE FOR TODAY · {now:%H:%M}", [
+                "",
+                "2 trade plans already given",
+                "(daily limit), none live now.",
+                "",
+                "🔕 No more scans today.",
+                "🔎 Next scan: tomorrow 09:45 IST",
+            ]))
+            watch["done_sent"] = True
+            save(watch_path, watch)
         if fire_debate(now, go_count, vid if plan_doc.get("date") == today else None, watch):
             save(watch_path, watch)
         return
