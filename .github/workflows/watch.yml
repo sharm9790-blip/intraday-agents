@@ -1,0 +1,51 @@
+name: intraday-watcher
+
+on:
+  schedule:
+    # every 5 min, 08:30–16:29 IST (03:00–10:59 UTC), Mon–Fri; the script exits outside 09:15–15:30
+    - cron: "*/5 3-10 * * 1-5"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: intraday-watcher
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check out state branch
+        id: state
+        run: |
+          if git ls-remote --exit-code --heads origin claude/intraday-state >/dev/null; then
+            git fetch origin claude/intraday-state
+            git worktree add statebr origin/claude/intraday-state
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "no state branch yet"
+          fi
+      - name: Run watcher
+        if: steps.state.outputs.ok == 'true'
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python3 watcher/watch.py statebr/state
+      - name: Save watcher state
+        if: steps.state.outputs.ok == 'true'
+        run: |
+          cd statebr
+          git config user.name "intraday-watcher"
+          git config user.email "watcher@users.noreply.github.com"
+          if [ -n "$(git status --porcelain state/watch.json)" ]; then
+            git add state/watch.json
+            git commit -m "watch $(TZ=Asia/Kolkata date +%H:%M)"
+            for i in 1 2 3; do
+              git pull --rebase origin claude/intraday-state && git push origin HEAD:claude/intraday-state && break
+              sleep 3
+            done
+          fi
