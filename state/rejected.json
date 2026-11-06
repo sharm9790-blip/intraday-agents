@@ -16,6 +16,9 @@
   "GLENMARK": "13:45 profit-fall result, parabolic, fading vol, call wall 2660-2700, net R:R 1.2; flips only on 5-min close >2683 on vol>100k",
   "NTPC": "13:45 failed breakout 321.1, call wall 320, PCR 0.66, net R:R 0.95",
   "AXISBANK": "13:45 net R:R 0.72, lags sector",
-  "TATASTEEL_breakout": "breakout >184.85 rejected: net R:R 1.06 (pullback 183.5 kept)"
+  "TATASTEEL_breakout": "breakout >184.85 rejected: net R:R 1.06 (pullback 183.5 kept)",
+  "HYUNDAI": "14:05 net R:R 0.9, T1 on 2200 call wall, double top 2178-2181; flips only on 5-min close >2182 on rising volume",
+  "HDFCLIFE": "14:05 net R:R 0.55, 556 sell queue, PCR 0.63, stop inside noise",
+  "ULTRACEMCO": "14:05 chase at day high net R:R 0.5, 12500 call wall; only pullback 12330 limit, SL 12300, by 14:30"
  }
 }

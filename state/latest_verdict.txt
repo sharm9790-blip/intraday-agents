@@ -1,45 +1,19 @@
-🟡 <b>GO (conditional) — TATASTEEL</b>
-🕐 13:45 IST  ·  Confidence 4/10
+⚪ <b>NO TRADE — 14:05 IST</b>
 
-📥 Buy limit  <b>₹183.5</b>  (max ₹183.75)
-🛑 Stop loss  <b>₹182.6</b>
-🎯 Target 1  <b>₹185.9</b>  (sell half)
-🎯 Target 2  <b>₹187</b>
-📦 Qty  <b>540</b> shares
+📈 Nifty 24,820  (+1.16%)
+🏦 Bank Nifty 58,642  (+1.5%)
+Mood: private banks lead, mid caps red
+VIX 17.5 (+12%)
 
-<b>✅ Buy only if</b>
-• Dips to ₹183.2–183.6
-• Green 5-min close above ₹183.4
-• No results/news headline yet
+<b>Why nothing passed</b>
+• HYUNDAI — 2200 call wall, R:R 0.9
+• HDFCLIFE — 556 sell queue, R:R 0.55
+• ULTRACEMCO — chasing high, R:R 0.5
 
-<b>❌ Cancel if</b>
-• Not filled by 14:30
-• Hits ₹185.9 before the dip
-• 5-min close below ₹182.9
+<b>Only if</b>
+• ULTRACEMCO dips to ₹12,330
+• Holds on volume before 14:30
+• Then SL ₹12,300, T1 ₹12,420
 
-<b>💰 Risk vs reward</b>
-Max loss ≈ ₹565
-Profit ≈ ₹610 (T1) · ₹1,510 (T2)
-Reward 2.1× the risk
-
-<b>📲 Set in Groww now</b>
-1. Price alert at ₹183.5
-2. After buying: SL-M at ₹182.6
-3. Sell 270 shares at ₹185.9
-4. Exit all by 15:10
-
-<b>Why this stock</b>
-• Broke 12:00–13:00 base on volume
-• Pullback gives ~2× reward
-
-<b>Weak spots</b>
-• Q2 results today, time unconfirmed
-• Call-heavy OI, VIX up 9%
-
-<b>Skipped</b>
-• GLENMARK — profit-fall, call wall
-• NTPC — failed breakout, call wall
-• AXISBANK — reward below risk
-
-📡 Watcher checks every 5 min
-<i>Analysis only, not advice. You place orders yourself.</i>
+🔎 Next scan: 15:00 IST
+<i>Educational analysis, not SEBI-registered advice. You place orders yourself.</i>

@@ -1,24 +1,6 @@
 {
  "date": "2026-11-06",
- "verdict_id": "2026-11-06_1345",
+ "verdict_id": "2026-11-06_1400",
  "go_count": 3,
- "plan": {
-  "symbol": "TATASTEEL",
-  "yahoo": "TATASTEEL.NS",
-  "side": "long",
-  "zone_low": 183.2,
-  "zone_high": 183.6,
-  "entry": 183.5,
-  "max_entry": 183.75,
-  "trigger_close_above": 183.4,
-  "sl": 182.6,
-  "t1": 185.9,
-  "t2": 187.0,
-  "qty": 540,
-  "deadline": "14:30",
-  "cancel_if_high_reaches": 185.9,
-  "cancel_if_close_below": 182.9,
-  "exit_if_close_below_after_entry": 182.85,
-  "time_stop": "15:10"
- }
+ "plan": null
 }
