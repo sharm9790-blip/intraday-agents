@@ -1,0 +1,14 @@
+{
+ "date": "2026-11-06",
+ "symbols": {
+  "ICICIBANK": "opened 1,521.5 above 1,519 no-trade limit, gap-and-fade",
+  "DLF": "broke 734.9 pullback SL at open",
+  "ETERNAL": "below 359.8 trigger, call wall 355/360",
+  "TITAN": "call wall 4,900-5,000, range 2.2x ATR, falling volume",
+  "ADANIPORTS": "09:45 reversal after late slide",
+  "BHARTIARTL": "open = high, fading",
+  "M&M": "results day 2, 1.75% above VWAP, 3,300 call wall; flips only on 15-min close > 3,305 with 3,300 CE OI falling before 10:45",
+  "HDFCBANK": "GO plan 09:54 cancelled: not triggered by 10:45, ran to 776.8 without pullback",
+  "KALYANKJIL_breakout": "breakout >587.6 rejected: 588.5-593 Sep supply, R:R <1 after costs (pullback 582 kept as backup)"
+ }
+}
