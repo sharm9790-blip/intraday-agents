@@ -67,11 +67,11 @@ Intraday · Limit · NSE
 Qty  <code>185</code>
 Buy limit  <code>766.5</code>
 SL-M trigger  <code>761.8</code>
-Sell half at  <code>777</code>
+Sell half  <code>92</code> @ <code>777</code>
 📲 groww.in/stocks/hdfc-bank-ltd
 ```
 
-Groww link: `https://groww.in/stocks/<slug>`, slug = the company's full name in lowercase, hyphenated, ending `-ltd` (TATASTEEL → `tata-steel-ltd`, M&M → `mahindra-mahindra-ltd`, HDFCBANK → `hdfc-bank-ltd`). Check it with `curl -s -o /dev/null -w '%{http_code}' -A Mozilla/5.0 <url>`: use it only if it returns `200`; otherwise try another spelling once, then drop the 📲 line. Values are plain numbers (no ₹) so they paste cleanly. "Sell half at" = half of Qty, rounded down, at T1.
+Groww link: `https://groww.in/stocks/<slug>`, slug = the company's full name in lowercase, hyphenated, ending `-ltd` (TATASTEEL → `tata-steel-ltd`, M&M → `mahindra-mahindra-ltd`, HDFCBANK → `hdfc-bank-ltd`). Check it with `curl -s -o /dev/null -w '%{http_code}' -A Mozilla/5.0 <url>`: use it only if it returns `200`; otherwise try another spelling once, then drop the 📲 line. Values are plain numbers (no ₹) so they paste cleanly. "Sell half" = half of Qty (rounded down) @ T1 price.
 
 ## NO TRADE template
 
