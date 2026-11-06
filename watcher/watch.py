@@ -68,14 +68,20 @@ def telegram(text):
         data = urllib.parse.urlencode(params).encode()
         urllib.request.urlopen(url, data, timeout=20)
 
-    base = {"chat_id": chat, "disable_web_page_preview": "true"}
-    try:
-        post({**base, "text": text[:4000], "parse_mode": "HTML"})
-    except urllib.error.HTTPError as e:
-        if e.code != 400:
-            raise
-        plain = html.unescape(re.sub(r"<[^>]+>", "", text))
-        post({**base, "text": plain[:4000]})
+    # TELEGRAM_CHAT_ID may list several chats: "id1,id2". One failing chat
+    # (e.g. someone blocked the bot) must not stop the others.
+    for chat_id in [c.strip() for c in chat.split(",") if c.strip()]:
+        base = {"chat_id": chat_id, "disable_web_page_preview": "true"}
+        try:
+            try:
+                post({**base, "text": text[:4000], "parse_mode": "HTML"})
+            except urllib.error.HTTPError as e:
+                if e.code != 400:
+                    raise
+                plain = html.unescape(re.sub(r"<[^>]+>", "", text))
+                post({**base, "text": plain[:4000]})
+        except urllib.error.HTTPError as e:
+            print("telegram failed for one chat:", e.code)
 
 
 def card(icon, title, lines, footer=True):
