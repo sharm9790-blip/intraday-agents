@@ -9,6 +9,9 @@
   "BHARTIARTL": "open = high, fading",
   "M&M": "results day 2, 1.75% above VWAP, 3,300 call wall; flips only on 15-min close > 3,305 with 3,300 CE OI falling before 10:45; 11:25 R:R 0.63, sell-heavy depth",
   "HDFCBANK": "GO plan 09:54 cancelled: not triggered by 10:45, ran to 776.8 without pullback",
-  "KALYANKJIL_breakout": "breakout >587.6 rejected: 588.5-593 Sep supply, R:R <1 after costs (pullback 582 kept as backup)"
+  "KALYANKJIL_breakout": "breakout >587.6 rejected: 588.5-593 Sep supply, R:R <1 after costs (pullback 582 kept as backup)",
+  "KOTAKBANK": "11:55 net R:R 0.8, double top 472.45-472.8, call writers 470/475/480, RBI hike headline; flips only on high-vol 5-min close >473.5",
+  "SUNPHARMA": "11:55 net R:R 0.74, volume dead 8-32K/candle, 1900 call wall growing; flips only on volume break >1852",
+  "NTPC_breakout": "breakout >319.05 rejected: net R:R 1.26, 320 call wall (pullback 317.95 kept)"
  }
 }

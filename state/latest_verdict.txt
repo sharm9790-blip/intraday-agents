@@ -1,18 +1,45 @@
-⚪ <b>NO TRADE — 11:25 IST</b>
+🟡 <b>GO (conditional) — NTPC</b>
+🕐 11:55 IST  ·  Confidence 4.5/10
 
-📈 Nifty  +0.25%
-📉 Midcap 50  −1.2%
-😟 India VIX 17.1 (rising)
-Mood: narrow rally, stay flat
+📥 Buy limit  <b>₹317.95</b>  (max ₹318.2)
+🛑 Stop loss  <b>₹316.9</b>
+🎯 Target 1  <b>₹320.5</b>  (sell half)
+🎯 Target 2  <b>₹323.5</b>
+📦 Qty  <b>310</b> shares
 
-<b>Why nothing passed</b>
-• ICICIBANK — reward 0.94× risk, volume fading
-• TITAN — stuck under ₹5,000 call wall
-• M&amp;M — selling pressure, reward 0.63× risk
+<b>✅ Buy only if</b>
+• Dips to ₹317.9–318.0
+• No 5-min close below ₹317.7
+• VIX stays under 17.5
 
-<b>Could flip to GO</b>
-ICICIBANK only on a 15-min close above ₹1,528 with volume above 1M
-Buy ~₹1,529 · SL ₹1,519 · T1 ₹1,546
+<b>❌ Cancel if</b>
+• Not filled by 13:30
+• 5-min close below ₹317.7
+• Hits ₹320.5 before the dip
 
-🔎 Next scan: 11:45 IST
+<b>💰 Risk vs reward</b>
+Max loss ≈ ₹380
+Profit ≈ ₹365 (T1) · ₹1,130 (T2)
+Reward 1.9× the risk
+
+<b>📲 Set in Groww now</b>
+1. Price alert at ₹317.95
+2. After buying: SL-M at ₹316.9
+3. Sell 155 shares at ₹320.5
+4. Exit all by 15:10
+
+<b>Why this stock</b>
+• Ex-dividend, +1.5% adjusted
+• Higher lows, Supertrend ₹317.2
+• Call OI unwinding at 320
+
+<b>Weak spots</b>
+• 320 call wall just above T1
+• Breakout stalled, volume fading
+
+<b>Skipped</b>
+• KOTAKBANK — double top, R:R 0.8
+• SUNPHARMA — volume dead, R:R 0.7
+
+📡 Watcher checks every 5 min
 <i>Analysis only, not advice. You place orders yourself.</i>

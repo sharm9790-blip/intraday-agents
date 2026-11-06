@@ -1,1 +1,24 @@
-{"date": "2026-11-06", "verdict_id": "2026-11-06_1125", "go_count": 1, "plan": null}
+{
+ "date": "2026-11-06",
+ "verdict_id": "2026-11-06_1155",
+ "go_count": 2,
+ "plan": {
+  "symbol": "NTPC",
+  "yahoo": "NTPC.NS",
+  "side": "long",
+  "zone_low": 317.9,
+  "zone_high": 318.0,
+  "entry": 317.95,
+  "max_entry": 318.2,
+  "trigger_close_above": 317.7,
+  "sl": 316.9,
+  "t1": 320.5,
+  "t2": 323.5,
+  "qty": 310,
+  "deadline": "13:30",
+  "cancel_if_high_reaches": 320.5,
+  "cancel_if_close_below": 317.7,
+  "exit_if_close_below_after_entry": 317.0,
+  "time_stop": "15:10"
+ }
+}
