@@ -34,12 +34,7 @@ All state lives on the git branch `claude/intraday-state`. Work on that branch.
               "exit_if_close_below_after_entry": 763.5, "time_stop": "15:10"}
      ```
      Numbers only, no ₹ signs. `yahoo` = NSE symbol + `.NS` (M&M → `M&M.NS`).
-   - `state/latest_verdict.txt` — a Telegram-ready message (max 3,500 characters, plain text, no markdown tables):
-     - line 1: `VERDICT HH:MM — GO SYMBOL` or `VERDICT HH:MM — NO TRADE`;
-     - for GO: entry condition, SL, T1 (book 50%, then SL to cost), T2, qty, max loss ₹, profit at T1/T2 ₹, cancel conditions, then:
-       `Set in Groww now: price alert at ₹<entry>. After you buy: SL-M sell at ₹<sl> and limit sell 50% at ₹<t1>. The watcher will also alert you every 5 min on changes.`
-     - one line each on why the other stocks were rejected;
-     - last line: the disclaimer below.
+   - `state/latest_verdict.txt` — the Telegram message, read on a PHONE. Follow `.claude/skills/intraday-debate/telegram-format.md` exactly: Telegram HTML (`<b>`, `<i>` only), short lines (≤ 34 characters where possible), emoji markers, blank lines between blocks, no tables, no markdown, `&` written as `&amp;` (e.g. `M&amp;M`), max 2,500 characters.
 6. **Commit and push**: `git add -A && git commit -m "verdict YYYY-MM-DD_HHMM" && git push origin claude/intraday-state` (on a push conflict: `git pull --rebase` then push again). The watcher sends `latest_verdict.txt` to Telegram on its next run.
 
 ## Rules
