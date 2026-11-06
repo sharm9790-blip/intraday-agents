@@ -57,7 +57,8 @@ def manage(bars, i0, entry, p):
 def replay(p, bars):
     """p: a plan dict (plan.json format) plus "start" (HH:MM it was given)."""
     s, d = _hm(p["start"]), _hm(p["deadline"])
-    res = {"symbol": p["symbol"], "start": p["start"]}
+    res = {"symbol": p["symbol"], "start": p["start"], "entry": p["entry"],
+           "sl": p["sl"], "t1": p["t1"], "t2": p["t2"], "close": round(bars[-1][4], 2)}
     rule = ("cancelled", "no trigger")
     for i, b in enumerate(bars):
         t = _m(b)
@@ -88,6 +89,7 @@ def replay(p, bars):
         pnl, steps = manage(bars, fill, p["entry"], p)
         res["limit"] = {"pnl": pnl, "steps": [f"{bars[fill][0]:%H:%M} filled"] + steps}
     i0 = next((i for i, b in enumerate(bars) if _m(b) >= s), None)
+    res["price_at_plan"] = round(bars[i0][1], 2) if i0 is not None else None
     if i0 is None:
         res["market"] = {"pnl": 0, "steps": ["no data"]}
     else:
