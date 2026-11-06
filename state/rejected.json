@@ -19,6 +19,10 @@
   "TATASTEEL_breakout": "breakout >184.85 rejected: net R:R 1.06 (pullback 183.5 kept)",
   "HYUNDAI": "14:05 net R:R 0.9, T1 on 2200 call wall, double top 2178-2181; flips only on 5-min close >2182 on rising volume",
   "HDFCLIFE": "14:05 net R:R 0.55, 556 sell queue, PCR 0.63, stop inside noise",
-  "ULTRACEMCO": "14:05 chase at day high net R:R 0.5, 12500 call wall; only pullback 12330 limit, SL 12300, by 14:30"
+  "ULTRACEMCO": "14:05 chase at day high net R:R 0.5, 12500 call wall; only pullback 12330 limit, SL 12300, by 14:30",
+  "TATACAP": "14:20 net R:R 0.91, sell book 2.6x buy, 356.3 high tested repeatedly, no OI; flips only on 5-min close >356.40 with SL<=2.5 and T1>=363 before 14:30",
+  "MARUTI_14": "14:20 net R:R 0.76, 12800 call wall, volume dying",
+  "BAJAJ-AUTO": "14:20 net R:R 0.86, 10919 failed high, 10900 call wall",
+  "SBIN": "14:20 net R:R 0.84, 1016 rejected, PCR 0.75"
  }
 }

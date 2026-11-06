@@ -1,19 +1,22 @@
-⚪ <b>NO TRADE — 14:05 IST</b>
+⚪ <b>NO TRADE — 14:20 IST</b>
 
-📈 Nifty 24,820  (+1.16%)
-🏦 Bank Nifty 58,642  (+1.5%)
+📈 Nifty 24,790  (+1.03%)
+🏦 Bank Nifty 58,583  (+1.4%)
 Mood: private banks lead, mid caps red
-VIX 17.5 (+12%)
+VIX 17.3 (+11%)
 
 <b>Why nothing passed</b>
-• HYUNDAI — 2200 call wall, R:R 0.9
-• HDFCLIFE — 556 sell queue, R:R 0.55
-• ULTRACEMCO — chasing high, R:R 0.5
+• TATACAP — sell book 2.6x, R:R 0.9
+• MARUTI — 12800 call wall, R:R 0.76
+• BAJAJ-AUTO — failed high, R:R 0.86
+• SBIN — 1016 rejected, R:R 0.84
 
 <b>Only if</b>
-• ULTRACEMCO dips to ₹12,330
-• Holds on volume before 14:30
-• Then SL ₹12,300, T1 ₹12,420
+• TATACAP closes 5-min above ₹356.4
+• Before 14:30, SL within ₹2.5
+• Target ₹363+ (else skip)
+
+Friday, narrow rally, little time left.
 
 🔎 Next scan: 15:00 IST
-<i>Educational analysis, not SEBI-registered advice. You place orders yourself.</i>
+<i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
