@@ -3,7 +3,7 @@
 `state/latest_verdict.txt` is sent to Telegram with `parse_mode=HTML` and read on a phone.
 
 Rules:
-- Only `<b>` and `<i>` tags. No tables, no markdown (`**`, `#`, `|`), no links.
+- Only `<b>`, `<i>` and `<code>` tags. No tables, no markdown (`**`, `#`, `|`). The only link allowed is the Groww stock page in the draft-order block.
 - Escape `&` as `&amp;`, `<` as `&lt;`, `>` as `&gt;` in any text (stock `M&M` → `M&amp;M`).
 - One fact per line, ≤ 34 characters where possible. Blank line between blocks.
 - Prices as `₹766.5`, Indian grouping for big numbers (`₹1,42,000` or `₹1.42L`).
@@ -55,6 +55,23 @@ Reward 1.8× the risk
 📡 Watcher checks every 5 min
 <i>Analysis only, not advice. You place orders yourself.</i>
 ```
+
+## Draft order block (GO with Judge confidence above 7 only)
+
+Insert right after the `📦 Qty` line of the GO template. It is a ready-to-copy order for the user to place in Groww themselves; nothing is sent to Groww. `<code>` makes each value tap-to-copy in Telegram.
+
+```
+⚡ <b>HIGH CONFIDENCE 7.5/10</b>
+📝 <b>Draft order</b> (you place it)
+Intraday · Limit · NSE
+Qty  <code>185</code>
+Buy limit  <code>766.5</code>
+SL-M trigger  <code>761.8</code>
+Sell half at  <code>777</code>
+📲 groww.in/stocks/hdfc-bank-ltd
+```
+
+Groww link: `https://groww.in/stocks/<slug>`, slug = the company's full name in lowercase, hyphenated, ending `-ltd` (TATASTEEL → `tata-steel-ltd`, M&M → `mahindra-mahindra-ltd`, HDFCBANK → `hdfc-bank-ltd`). Check it with `curl -s -o /dev/null -w '%{http_code}' -A Mozilla/5.0 <url>`: use it only if it returns `200`; otherwise try another spelling once, then drop the 📲 line. Values are plain numbers (no ₹) so they paste cleanly. "Sell half at" = half of Qty, rounded down, at T1.
 
 ## NO TRADE template
 
