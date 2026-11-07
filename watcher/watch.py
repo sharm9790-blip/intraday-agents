@@ -162,6 +162,16 @@ def plan_lines(plan):
     ]
 
 
+def lakh(x):
+    """Indian grouping: 100000 -> 1,00,000."""
+    s = str(int(round(abs(x))))
+    head, tail = s[:-3], s[-3:]
+    while len(head) > 2:
+        tail = head[-2:] + "," + tail
+        head = head[:-2]
+    return ("-" if x < 0 else "") + (head + "," + tail if head else tail)
+
+
 def inr(x):
     """Signed whole-rupee amount, e.g. +₹1,564 / −₹420."""
     if round(x) == 0:
@@ -182,9 +192,12 @@ def send_scorecard(state_dir, today, watch):
     hist_path = os.path.join(state_dir, "scorecard.json")
     hist = [d for d in load(hist_path, []) if d.get("date") != today]
     tot = {k: sum(r[k]["pnl"] for r in rows) for k in ("rules", "limit", "market")}
+    tot["targets"] = sum(r["targets"]["pf1"] * r["targets"]["t1_hit"]
+                         + r["targets"]["pf2"] * r["targets"]["t2_hit"] for r in rows)
     hist.append({"date": today, "plans": rows, "totals": tot})
     save(hist_path, hist[-250:])
-    run = {k: sum(d["totals"][k] for d in hist) for k in ("rules", "limit", "market")}
+    run = {k: sum(d["totals"].get(k, 0) for d in hist) for k in ("rules", "limit", "market", "targets")}
+    tgt = sum(r["targets"]["total"] for r in rows if "targets" in r)
     lines = [""]
     if not rows:
         n = watch.get("verdicts", 0)
@@ -194,24 +207,37 @@ def send_scorecard(state_dir, today, watch):
         mark = "✅" if ru["pnl"] > 0 else ("❌" if ru["pnl"] < 0 else "⚪")
         lines += [
             f"{mark} <b>{esc(r['symbol'])}</b> · {r['start']}",
-            f"Entry {rs(r['entry'])} → Close {rs(r['close'])}  ({(r['close'] / r['entry'] - 1) * 100:+.1f}%)",
-            f"SL {rs(r['sl'])} · T1 {rs(r['t1'])} · T2 {rs(r['t2'])}",
-            f"Plan: {inr(ru['pnl'])}  ({esc(', '.join(ru['steps']))})",
-            f"Limit only: {inr(r['limit']['pnl'])}",
-            f"Bought at once: {inr(r['market']['pnl'])}",
+        ]
+        tg = r.get("targets")
+        if tg:
+            yn = lambda ok: "✅" if ok else "❌"
+            lines += [
+                f"Cash ₹{lakh(tg['cash'])} · Qty <b>{tg['qty']}</b>",
+                f"Entry {rs(r['entry'])} {yn(tg['entry_hit'])}",
+                f"T1 {rs(r['t1'])} · 50% ({tg['half']}) {yn(tg['t1_hit'])}  +₹{lakh(tg['pf1'])}",
+                f"T2 {rs(r['t2'])} · rest ({tg['rest']}) {yn(tg['t2_hit'])}  +₹{lakh(tg['pf2'])}",
+                f"Target profit <b>+₹{lakh(tg['total'])}</b>",
+                f"High {rs(tg['high'])} · Close {rs(r['close'])}",
+            ]
+        lines += [
+            f"Plan rules {inr(ru['pnl'])} · Limit {inr(r['limit']['pnl'])} · At once {inr(r['market']['pnl'])}",
             "",
         ]
     lines += [
         "<b>Today</b>",
+        f"If all targets hit  +₹{lakh(tgt)}",
+        f"Targets reached (✅ only)  +₹{lakh(tot['targets'])}",
         f"Plan rules  {inr(tot['rules'])}",
         f"Limit only  {inr(tot['limit'])}",
         f"Bought at once  {inr(tot['market'])}",
         "",
         f"<b>Running total · {len(hist)} day{'s' if len(hist) != 1 else ''}</b>",
+        f"Targets reached  +₹{lakh(run['targets'])}",
         f"Plan rules  {inr(run['rules'])}",
         f"Limit only  {inr(run['limit'])}",
         f"Bought at once  {inr(run['market'])}",
         "",
+        "✅/❌ = price reached that level after the plan was given. Target profit is before costs.",
         "<i>Replay on 5-min candles, ~0.06% costs, SL assumed first when SL and target share a candle. Paper results, not real trades.</i>",
     ]
     telegram(card("📒", f"SCORECARD · {today}", lines))

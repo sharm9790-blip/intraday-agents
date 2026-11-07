@@ -201,7 +201,7 @@ A 📊 status card is sent on runs in the first 5 minutes of each quarter hour w
 | 🛡 CHECKS — SYMBOL | Right after each GO: code risk check (✅ passed with R:R, risk ₹, value, or ⛔ BLOCKED with reasons; 🧮 corrected qty) and a 24 h news check (✅ / 📰 / ⚠️ EVENT RISK) |
 | ❌ CANCELLED | Don't buy; delete the Groww alert |
 | ⏰ TIME STOP | Exit everything (15:10) |
-| 📒 SCORECARD | 15:45 on market days (needs the pinger to run until 15:55): each of today's plans replayed on 5-min candles — by the plan's rules, as a plain limit order, and bought at once — with today's and the running paper P&L (`state/scorecard.json`) |
+| 📒 SCORECARD | 15:45 on market days (needs the pinger to run until 15:55): per stock cash ₹1,00,000 ÷ entry = qty, 50% at T1 and rest at T2 with ✅/❌ for whether price reached entry / T1 / T2, target profit (before costs), high and close; then each of today's plans replayed on 5-min candles — by the plan's rules, as a plain limit order, and bought at once — with today's and the running paper P&L (`state/scorecard.json`) |
 | 🏁 DONE FOR TODAY | Sent once a day: when 2 bought trades are used, or at ~14:40 when scanning ends with no plan live |
 
 ---
