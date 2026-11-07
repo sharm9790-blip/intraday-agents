@@ -152,6 +152,13 @@ What you do on each GO message: set the Groww price alert; after buying, immedia
 
 ---
 
+### Code checks (risk.py, news.py)
+
+Adapted from the MIT-licensed [trader-skill](https://github.com/Jakeschincariol/trader-skill) ideas (trader-risk, trader-budget, trader-news), rewritten for NSE intraday.
+
+- `watcher/risk.py` — sizing and hard limits by code, not the AI. Settings at the top: `CAPITAL` ₹1,00,000, `RISK_PCT` 1, `FIXED_COST` ₹40, `PCT_COST` 0.04%, `MIN_RR` 1.5, `MAX_POSITION_X` 1.0 (position ≤ capital; raise for MIS leverage), `LAST_ENTRY` 14:30. Run by the cloud debate before the verdict (`--write` fixes qty or blocks) and again by the watcher on each new GO.
+- `watcher/news.py` — Google News RSS (no key), last 24 h, flags results / board meeting / SEBI / raids / F&O ban as high, dividends / deals / ratings as medium. Used by the cloud debate (high = NO-GO) and in the 🛡 CHECKS and 🔔 BUY TRIGGER messages.
+
 ## 5. State files (branch `claude/intraday-state`)
 
 | File | Written by | Content |
@@ -191,6 +198,7 @@ A 📊 status card is sent on runs in the first 5 minutes of each quarter hour w
 | 🎯 TARGET 1 HIT | Sell half, move SL to cost |
 | 🏁 TARGET 2 HIT | Sell the rest |
 | 🔴 STOP LOSS HIT / ⚠️ EARLY EXIT / ↩️ BACK AT COST | Exit |
+| 🛡 CHECKS — SYMBOL | Right after each GO: code risk check (✅ passed with R:R, risk ₹, value, or ⛔ BLOCKED with reasons; 🧮 corrected qty) and a 24 h news check (✅ / 📰 / ⚠️ EVENT RISK) |
 | ❌ CANCELLED | Don't buy; delete the Groww alert |
 | ⏰ TIME STOP | Exit everything (15:10) |
 | 📒 SCORECARD | 15:45 on market days (needs the pinger to run until 15:55): each of today's plans replayed on 5-min candles — by the plan's rules, as a plain limit order, and bought at once — with today's and the running paper P&L (`state/scorecard.json`) |
