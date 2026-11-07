@@ -71,7 +71,7 @@ Sell half  <code>92</code> @ <code>777</code>
 📲 groww.in/stocks/hdfc-bank-ltd
 ```
 
-Groww link: `https://groww.in/stocks/<slug>`, slug = the company's full name in lowercase, hyphenated, ending `-ltd` (TATASTEEL → `tata-steel-ltd`, M&M → `mahindra-mahindra-ltd`, HDFCBANK → `hdfc-bank-ltd`). Check it with `curl -s -o /dev/null -w '%{http_code}' -A Mozilla/5.0 <url>`: use it only if it returns `200`; otherwise try another spelling once, then drop the 📲 line. Values are plain numbers (no ₹) so they paste cleanly. "Sell half" = half of Qty (rounded down) @ T1 price.
+Groww link: `https://groww.in/stocks/<slug>`, slug = the company's full name in lowercase, hyphenated, ending `-ltd` (TATASTEEL → `tata-steel-ltd`, M&M → `mahindra-mahindra-ltd`, HDFCBANK → `hdfc-bank-ltd`). The cloud sandbox can't reach groww.in, so don't try to check it: build the slug carefully and include it. The GitHub watcher opens the link before forwarding and removes the 📲 line if the page doesn't exist. Values are plain numbers (no ₹) so they paste cleanly. "Sell half" = half of Qty (rounded down) @ T1 price.
 
 ## NO TRADE template
 

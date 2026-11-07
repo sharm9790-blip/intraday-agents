@@ -114,6 +114,27 @@ def candles(yahoo_symbol):
     return out, res["meta"].get("regularMarketPrice")
 
 
+def check_groww_links(text):
+    """Drop any groww.in/stocks/<slug> line whose page does not open (the cloud
+    debate can't reach groww.in to check it; GitHub can)."""
+    out = []
+    for line in text.split("\n"):
+        m = re.search(r"groww\.in/stocks/[a-z0-9-]+", line)
+        if m:
+            try:
+                req = urllib.request.Request("https://" + m.group(0),
+                                             headers={"User-Agent": "Mozilla/5.0"})
+                urllib.request.urlopen(req, timeout=15)
+            except urllib.error.HTTPError as e:
+                if e.code == 404:
+                    print("dropped broken Groww link", m.group(0))
+                    continue
+            except Exception:
+                pass  # network trouble: keep the line rather than guess
+        out.append(line)
+    return "\n".join(out)
+
+
 def stock_name(yahoo_symbol):
     """Company name from Yahoo's chart meta, for the news search."""
     try:
@@ -255,7 +276,7 @@ def main(state_dir):
     if plan_doc.get("date") == today and vid and vid != watch.get("verdict_id"):
         try:
             with open(os.path.join(state_dir, "latest_verdict.txt")) as f:
-                telegram(f.read())
+                telegram(check_groww_links(f.read()))
         except FileNotFoundError:
             telegram(card("📋", f"New verdict {esc(vid)}", ["(verdict text missing)"]))
         watch["verdict_id"] = vid
