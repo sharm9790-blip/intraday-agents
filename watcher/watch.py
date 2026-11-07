@@ -57,13 +57,14 @@ def esc(s):
     return html.escape(str(s), quote=False)
 
 
-def telegram(text):
-    """Send Telegram HTML; if the markup is rejected, resend as plain text."""
+def telegram(text, to=None):
+    """Send Telegram HTML; if the markup is rejected, resend as plain text.
+    to: one chat id (e.g. a personal My Trade reply); default = every chat."""
     if os.environ.get("DRY_RUN"):
-        print("TELEGRAM:\n" + text + "\n")
+        print(f"TELEGRAM{' to ' + str(to) if to else ''}:\n" + text + "\n")
         return
     token = os.environ.get("TELEGRAM_BOT_TOKEN")
-    chat = os.environ.get("TELEGRAM_CHAT_ID")
+    chat = str(to) if to else os.environ.get("TELEGRAM_CHAT_ID")
     if not token or not chat:
         print("telegram not configured; message was:", text)
         return

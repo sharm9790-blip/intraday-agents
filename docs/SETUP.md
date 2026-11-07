@@ -161,6 +161,22 @@ Adapted from the MIT-licensed [trader-skill](https://github.com/Jakeschincariol/
 - The cloud sandbox can't reach outside websites (Google News, Yahoo, groww.in — proxy 403, tested 2026-11-07). So in the cloud the news check uses InvestSights news/earnings tools; the GitHub watcher runs news.py and verifies Groww links.
 - `watcher/news.py` — Google News RSS (no key), last 24 h, flags results / board meeting / SEBI / raids / F&O ban as high, dividends / deals / ratings as medium. Used by the cloud debate (high = NO-GO) and in the 🛡 CHECKS and 🔔 BUY TRIGGER messages.
 
+### 🧾 My Trade tracker (two-way bot)
+
+Tell the bot what you really did in Groww; it tracks **your** trade every 5 min, separately from the plan alerts.
+
+| You send | Bot does |
+|---|---|
+| `BOUGHT TATASTEEL` | Owner (first `TELEGRAM_CHAT_ID`): starts tracking with today's plan qty and the market price, and fires the routine with payload `SYNC_POSITIONS` → one read-only Groww call (`get_my_trading_positions_today`) → `state/positions.json` → real qty and average price replace the estimate (🔄 SYNCED FROM GROWW, 2–5 min). Others: plan qty, market price. |
+| `BOUGHT TATASTEEL 544 183.55` | Uses your numbers (no Groww call) |
+| `BOUGHT SBIN 100 812 SL 806 T1 824` | Any stock outside the plan (SL required) |
+| `SOLD TATASTEEL` / `SOLD TATASTEEL 272 185.9` | Books the sale (owner: real sell price synced from Groww) |
+| `MYTRADES` · `HELP` | Status / commands |
+
+Alerts, only to the person who sent the trade: real risk check (≤ ₹1,000), 🔴 SL touched, 🎯 T1 (sell half, SL to cost), 🏁 T2, ↩️ back at cost, ⏳ 15:00, ⏰ 15:10 exit, status every 15 min, 🧾 MY TRADES TODAY at 15:45.
+
+Plumbing: `watcher/mytrade.py` + `.github/workflows/mytrade.yml`. `watch.yml` starts `mytrade.yml` (`gh workflow run`) on any pinger run that has an open trade, a pending Groww sync, a new Telegram message, or a due summary. State: `state/mytrades.json` (Telegram offset, trades per chat), `state/positions.json` (last Groww sync). Messages are read only from the chats in `TELEGRAM_CHAT_ID`; messages sent outside 09:00–15:55 are handled at the next morning's first run. Skill: `.claude/skills/positions-sync/SKILL.md`. Nothing places, changes or cancels orders.
+
 ### NSE holidays
 
 `NSE_HOLIDAYS` at the top of `watcher/watch.py` lists weekday holidays (2026: 10 Nov Diwali Balipratipada, 24 Nov Guru Nanak Jayanti, 25 Dec Christmas). On those days the watcher does nothing, so no cloud runs are wasted. **Add the next year's NSE list every December.** Special sessions such as Diwali Muhurat trading (Sunday 8 Nov 2026) are not covered — the system runs Mon–Fri only.
