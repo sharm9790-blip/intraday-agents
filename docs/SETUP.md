@@ -147,6 +147,8 @@ Without the two `CLAUDE_FIRE_*` secrets no debates run at all. Never put any tok
 - **Daily limit: 2 trades that actually hit the buy trigger.** Plans cancelled before entry don't count. After 2, the watcher sends 🏁 DONE FOR TODAY and stops firing debates.
 - Rejected symbols are remembered for the day (`state/rejected.json`) and skipped unless data clearly changed.
 
+Groww watchlist **"My Draft Basket"** (created 2026-11-07) holds today's planned stocks: each GO says ➕ add it, every cancel / exit alert says ➖ remove it. The watchlist only keeps the stock handy; quantities and prices stay in the Telegram message.
+
 What you do on each GO message: set the Groww price alert; after buying, immediately place SL-M and the T1 sell order; exit everything by 15:10.
 
 ---

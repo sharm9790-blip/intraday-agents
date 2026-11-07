@@ -38,10 +38,11 @@ Profit ≈ ₹835 (T1) · ₹2,460 (T2)
 Reward 1.8× the risk
 
 <b>📲 Set in Groww now</b>
-1. Price alert at ₹766.5
-2. After buying: SL-M at ₹761.8
-3. Sell 92 shares at ₹777
-4. Exit all by 15:10
+1. ➕ Add HDFCBANK to "My Draft Basket"
+2. 🔔 Price alert at ₹766.5
+3. After buying: SL-M at ₹761.8
+4. Sell 92 shares at ₹777
+5. Exit all by 15:10
 
 <b>Why this stock</b>
 • Futures long build-up
