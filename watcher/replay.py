@@ -54,6 +54,24 @@ def manage(bars, i0, entry, p):
     return round(pnl - COST * entry * q), steps
 
 
+def targets(p, bars, cash=100000):
+    """Your sheet: cash ÷ entry = qty (whole shares), 50% sold at T1, rest at T2,
+    before costs. Plus whether price really reached entry / T1 / T2 after the plan."""
+    s, d = _hm(p["start"]), _hm(p["deadline"])
+    e, t1, t2 = p["entry"], p["t1"], p["t2"]
+    qty = int(cash // e)
+    half = qty // 2
+    after = [b for b in bars if s <= _m(b) < _hm("15:10")]
+    hi = max((b[2] for b in after), default=0)
+    filled = any(b[3] <= e for b in after if _m(b) < d)
+    return {
+        "cash": cash, "qty": qty, "half": half, "rest": qty - half,
+        "pf1": round(half * (t1 - e)), "pf2": round((qty - half) * (t2 - e)),
+        "total": round(half * (t1 - e) + (qty - half) * (t2 - e)),
+        "t1_hit": hi >= t1, "t2_hit": hi >= t2, "entry_hit": filled, "high": round(hi, 2),
+    }
+
+
 def replay(p, bars):
     """p: a plan dict (plan.json format) plus "start" (HH:MM it was given)."""
     s, d = _hm(p["start"]), _hm(p["deadline"])
@@ -90,6 +108,7 @@ def replay(p, bars):
         res["limit"] = {"pnl": pnl, "steps": [f"{bars[fill][0]:%H:%M} filled"] + steps}
     i0 = next((i for i, b in enumerate(bars) if _m(b) >= s), None)
     res["price_at_plan"] = round(bars[i0][1], 2) if i0 is not None else None
+    res["targets"] = targets(p, bars)
     if i0 is None:
         res["market"] = {"pnl": 0, "steps": ["no data"]}
     else:
