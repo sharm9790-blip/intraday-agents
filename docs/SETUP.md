@@ -30,9 +30,9 @@ Data sources (claude.ai connectors): **Groww**, **INDmoney**, **InvestSights**. 
 cron-job.org  ──every 15 min──▶  GitHub Actions: watch.yml  (watcher/watch.py)
                                    │  • forwards new verdicts to Telegram
                                    │  • checks live price of the plan, sends alerts
-                                   │  • no live plan → POST routine API trigger (:00/:15/:30)
+                                   │  • no live plan → POST routine API trigger (:00/:15/:30/:45)
                                    ▼
-Claude cloud routine  ◀── also its own hourly schedule at :45 IST
+Claude cloud routine  (no schedule of its own — only API fires)
   (runs .claude/skills/intraday-debate: Bull → Bear → Judge)
                                    │
                                    ▼
@@ -48,10 +48,9 @@ Telegram bot  @sharmi_intraday_bot  ──▶  your phone
 | Time | What happens |
 |---|---|
 | 09:15 | Watcher starts checking (exits by itself outside 09:15–15:30). |
-| 09:45 | First debate (routine schedule). |
-| 10:00 – 14:30 | Debate every 15 min: :00/:15/:30 fired by the watcher, :45 by the routine schedule. |
+| 09:45 | First debate (fired by the watcher). |
+| 09:45 – 14:30 | Debate every 15 min, all fired by the watcher through the routine's API trigger. |
 | 14:30 | No new entries after this (Judge rule); last fires. |
-| 14:45 | Last scheduled routine run (it stops itself: outside 09:40–14:35). |
 | 15:10 | Time stop — exit any open position. |
 | 15:30 | Watcher stops. |
 
@@ -82,7 +81,7 @@ Telegram bot  @sharmi_intraday_bot  ──▶  your phone
 
 - Page: https://claude.ai/code/routines/trig_014p6yZgKx8HWEs16mh19mgn
 - Name: "⚡ Intraday Bull/Bear/Judge — hourly (IST 9:45–14:45)"
-- Schedule trigger: cron `15 4-9 * * 1-5` (UTC) = 09:45, 10:45 … 14:45 IST
+- Schedule trigger: **none** (removed). Debates start only through the API trigger, fired by the watcher. Don't add a schedule back, or scans run twice.
 - API trigger: Fire URL `https://api.anthropic.com/v1/claude_code/routines/trig_014p6yZgKx8HWEs16mh19mgn/fire` + bearer token (stored only in GitHub secret `CLAUDE_FIRE_TOKEN`)
 - Model: `claude-sonnet-5-5`; environment: Default
 - Repo: this one; connectors: Groww, INDMONEY, investsights_in only
@@ -131,7 +130,7 @@ GitHub token for it: fine-grained PAT `intraday-pinger`, repository access **onl
 | `CLAUDE_FIRE_URL` | Routine API trigger URL |
 | `CLAUDE_FIRE_TOKEN` | Routine API trigger token |
 
-Without the two `CLAUDE_FIRE_*` secrets the debate simply stays hourly. Never put any token in code, chat or a commit.
+Without the two `CLAUDE_FIRE_*` secrets no debates run at all. Never put any token in code, chat or a commit.
 
 ### 3.7 Old desktop-app task (paused)
 
@@ -208,7 +207,7 @@ A 📊 status card is sent on runs in the first 5 minutes of each quarter hour w
 
 ## 7. Common tasks
 
-**Run a debate now** — routine page → **Run now**, or locally `gh workflow run watch.yml` (fires only in a free :00/:15/:30 slot, 10:00–14:30).
+**Run a debate now** — routine page → **Run now**, or locally `gh workflow run watch.yml` (fires only in a free quarter-hour slot, 09:45–14:30).
 
 **Test the watcher locally**
 ```bash
@@ -218,7 +217,7 @@ DRY_RUN=1 SSL_CERT_FILE=/etc/ssl/cert.pem python3 watcher/watch.py path/to/state
 
 **Change capital or risk** — edit the routine prompt on claude.ai (`scan capital=… risk=…`).
 
-**Change scan frequency** — debates: watcher fires :00/:15/:30 (see `fire_debate` in `watch.py`), schedule covers :45. Alerts: change the cron-job.org schedule.
+**Change scan frequency** — debates: watcher fires every quarter hour 09:45–14:30 (see `fire_debate` in `watch.py`). Alerts: change the cron-job.org schedule.
 
 **Change agent behaviour** — edit `.claude/agents/*.md` on `main`, merge into `claude/intraday-state`, push both. Also copy to `~/.claude/agents/` if you use the local `/intraday-debate` skill.
 
@@ -242,7 +241,7 @@ pbpaste | gh secret set CLAUDE_FIRE_TOKEN -R sharm9790-blip/intraday-agents
 |---|---|---|
 | No messages for a long time | `state/plan.json` `go_count`, `state/watch.json` `trades`, `status` | 2 trades bought → done for the day. Plan live → only status cards every 15 min. |
 | Watcher runs far apart | Actions page: are there `workflow_dispatch` runs every 15 min? | cron-job.org History: 401 = bad PAT, 404 = wrong URL / PAT repo access, timezone must be Asia/Kolkata. |
-| Debate never runs at :00/:15/:30 | Watcher log line `fired debate for slot …` or `fire failed: 401` | Regenerate the routine token and update `CLAUDE_FIRE_TOKEN`. |
+| No debates at all | Watcher log line `fired debate for slot …` or `fire failed: 401` | Regenerate the routine token and update `CLAUDE_FIRE_TOKEN`. |
 | Cloud run fails | Routine page → runs → open the session log | 401 `github_token_missing`: reconnect GitHub on claude.ai. 403 `repo_access_denied`: install the Claude GitHub app on the repo. |
 | ⚠️ NO ANALYSIS | Routine connectors | Re-attach Groww / INDMONEY / investsights_in on the routine; reconnect them at claude.ai/customize/connectors. |
 | Message arrives as plain text | Bad HTML (often a raw `&`) | Fix `latest_verdict.txt` formatting rules in `telegram-format.md`. |

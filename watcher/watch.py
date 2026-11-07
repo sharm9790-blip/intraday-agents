@@ -197,10 +197,9 @@ def send_scorecard(state_dir, today, watch):
 
 
 def fire_debate(now, trades, last_verdict_id, watch):
-    """Start the cloud debate through the routine's API trigger at :00/:15/:30.
-
-    The routine's own hourly schedule covers :45, so together they give a scan
-    every 15 min. Only called when no plan is live. Returns True if it fired.
+    """Start the cloud debate through the routine's API trigger every quarter hour,
+    09:45–14:30 IST. The routine has no schedule of its own, so this is the only
+    thing that starts debates. Only called when no plan is live. Returns True if it fired.
     """
     url = os.environ.get("CLAUDE_FIRE_URL")
     token = os.environ.get("CLAUDE_FIRE_TOKEN")
@@ -209,7 +208,7 @@ def fire_debate(now, trades, last_verdict_id, watch):
     slot = f"{now.hour:02d}:{quarter:02d}"
     if not url or not token:
         return False
-    if not hhmm("10:00") <= minutes <= hhmm("14:30") or quarter == 45 or trades >= 2:
+    if not hhmm("09:45") <= minutes <= hhmm("14:34") or trades >= 2:
         return False
     if watch.get("last_fire") == slot:
         return False
