@@ -25,6 +25,8 @@ import risk
 IST = timezone(timedelta(hours=5, minutes=30))
 FOOTER = "<i>Analysis only, not advice. You place orders yourself.</i>"
 OPEN_STATES = ("waiting", "in_zone", "t1_hit")
+# NSE equity trading holidays on weekdays (add next year's list each December).
+NSE_HOLIDAYS = {"2026-11-10", "2026-11-24", "2026-12-25"}
 STATUS_LABEL = {
     "waiting": "⏳ Waiting for dip",
     "in_zone": "🟢 In trade zone",
@@ -334,6 +336,9 @@ def fire_debate(now, trades, last_verdict_id, watch):
 def main(state_dir):
     now = datetime.now(IST)
     today = now.strftime("%Y-%m-%d")
+    if today in NSE_HOLIDAYS:
+        print("NSE holiday", today)
+        return
     minutes = now.hour * 60 + now.minute
     plan_doc = load(os.path.join(state_dir, "plan.json"), {})
     watch_path = os.path.join(state_dir, "watch.json")
