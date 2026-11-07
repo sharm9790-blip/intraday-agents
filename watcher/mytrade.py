@@ -520,6 +520,9 @@ def main(state_dir):
         if chat not in ok or not text:
             continue  # only the configured chats can give commands
         when = datetime.fromtimestamp(msg.get("date", now.timestamp()), w.IST)
+        if (now - when).total_seconds() > 1800:  # sent off-hours: say it was queued
+            w.telegram(f"📨 Got your message from {when:%a %H:%M} — I answer Mon–Fri "
+                       "9:00–15:55 IST, so here it is now:", to=chat)
         if when.strftime("%Y-%m-%d") != today:
             when = now
         try:
