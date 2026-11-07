@@ -173,7 +173,9 @@ Tell the bot what you really did in Groww; it tracks **your** trade every 5 min,
 | `SOLD TATASTEEL` / `SOLD TATASTEEL 272 185.9` | Books the sale (owner: real sell price synced from Groww) |
 | `MYTRADES` · `HELP` | Status / commands |
 
-Alerts, only to the person who sent the trade: real risk check (≤ ₹1,000), 🔴 SL touched, 🎯 T1 (sell half, SL to cost), 🏁 T2, ↩️ back at cost, ⏳ 15:00, ⏰ 15:10 exit, status every 15 min, 🧾 MY TRADES TODAY at 15:45.
+**📋 Live board:** while any trade is open, each person gets ONE pinned message listing all their open trades (price, P&L, distance to SL, next target, total), edited every 5 min — edits are silent, so the phone doesn't buzz. When all trades are closed it shows "✅ No open trades now".
+
+Loud alerts, only to the person who sent the trade: real risk check (≤ ₹1,000), 🔴 SL touched, 🎯 T1 (sell half, SL to cost), 🏁 T2, ↩️ back at cost, ⏳ 15:00, ⏰ 15:10 exit, 🧾 MY TRADES TODAY at 15:45.
 
 Plumbing: `watcher/mytrade.py` + `.github/workflows/mytrade.yml`. `watch.yml` starts `mytrade.yml` (`gh workflow run`) on any pinger run that has an open trade, a pending Groww sync, a new Telegram message, or a due summary. State: `state/mytrades.json` (Telegram offset, trades per chat), `state/positions.json` (last Groww sync). Messages are read only from the chats in `TELEGRAM_CHAT_ID`; messages sent outside 09:00–15:55 are handled at the next morning's first run. Skill: `.claude/skills/positions-sync/SKILL.md`. Nothing places, changes or cancels orders.
 
