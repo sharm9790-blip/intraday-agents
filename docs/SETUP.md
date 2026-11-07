@@ -169,6 +169,7 @@ Adapted from the MIT-licensed [trader-skill](https://github.com/Jakeschincariol/
 | `state/latest_verdict.txt` | Cloud debate | Telegram message for that verdict (mobile format). |
 | `state/rejected.json` | Cloud debate | `{"date", "symbols": {"SYM": "reason"}}` |
 | `state/watch.json` | Watcher | `date`, `verdict_id` already forwarded, `status`, `since`, `trades` (bought today), `last_fire` (slot), `done_sent`, `log`. |
+| `state/paper.json` | Watcher | Paper account: ₹1,00,000 start (2026-11-06), every plan taken exactly by its rules (costs included), trades per day and balance. |
 | `state/scorecard.json` | Watcher | One entry per day: each plan's replay (rules / limit / market P&L and steps) and day totals. |
 | `reports/YYYY-MM-DD_HHMM.md` | Cloud debate | Full Bull, Bear and Judge outputs. |
 
@@ -203,6 +204,7 @@ A 📊 status card is sent on runs in the first 5 minutes of each quarter hour w
 | 🛡 CHECKS — SYMBOL | Right after each GO: code risk check (✅ passed with R:R, risk ₹, value, or ⛔ BLOCKED with reasons; 🧮 corrected qty) and a 24 h news check (✅ / 📰 / ⚠️ EVENT RISK) |
 | ❌ CANCELLED | Don't buy; delete the Groww alert |
 | ⏰ TIME STOP | Exit everything (15:10) |
+| 📈 Paper lines | In 🎯 T1 / 🔴 SL / 🏁 T2 / ↩️ / ⚠️ / ⏰ alerts: the paper result of the live trade (plan qty, before costs) |
 | 📒 SCORECARD | 15:45 on market days (needs the pinger to run until 15:55): per stock cash ₹1,00,000 ÷ entry = qty, 50% at T1 and rest at T2 with ✅/❌ for whether price reached entry / T1 / T2, target profit (before costs), high and close; then each of today's plans replayed on 5-min candles — by the plan's rules, as a plain limit order, and bought at once — with today's and the running paper P&L (`state/scorecard.json`) |
 | 🏁 DONE FOR TODAY | Sent once a day: when 2 bought trades are used, or at ~14:40 when scanning ends with no plan live |
 
