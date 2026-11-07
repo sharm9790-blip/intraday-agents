@@ -16,8 +16,9 @@ All state lives on the git branch `claude/intraday-state`. Work on that branch.
    - If `plan.json` is for today and `watch.json` shows that plan with status `waiting`, `in_zone` or `t1_hit` → a plan is live; do NOT debate. Stop.
    - If `watch.json` is for today and its `trades` (plans that hit the buy trigger) is 2 or more → stop. Plans that were cancelled before the buy trigger do NOT count; `go_count` in `plan.json` is just a tally of GO verdicts.
    - Collect today's rejected symbols from `state/rejected.json` (today only).
-4. **Bull → Bear → Judge.** Launch `bull-agent` (scan; skip rejected symbols unless data clearly changed; use TODAY's live 5-min candles; scan ~10 relative-strength F&O stocks, analyse the best up to 5), then `bear-agent` with the Bull's full output, then `judge-agent` with both. Run them one after another, never in parallel.
-5. **Write files** (IST time, HHMM):
+4. **Learn from the record.** Run `python3 watcher/stats.py state` and paste its text into the Judge's prompt under "What recent plans did". The Judge must follow its "Lesson:" lines when setting the buy zone and targets (still net R:R ≥ 1.5).
+5. **Bull → Bear → Judge.** Launch `bull-agent` (scan; skip rejected symbols unless data clearly changed; use TODAY's live 5-min candles; scan ~10 relative-strength F&O stocks, analyse the best up to 5), then `bear-agent` with the Bull's full output, then `judge-agent` with both. Run them one after another, never in parallel.
+6. **Write files** (IST time, HHMM):
    - `reports/YYYY-MM-DD_HHMM.md` — all three outputs in full + the disclaimer.
    - `state/rejected.json` — `{"date": "YYYY-MM-DD", "symbols": {"SYM": "one-line reason"}}`, merged with today's.
    - `state/plan.json` — always overwrite with:
@@ -38,7 +39,7 @@ All state lives on the git branch `claude/intraday-state`. Work on that branch.
      1. `python3 watcher/news.py "<company name>"` — if `level` is `high` (results, board meeting, SEBI/raid, F&O ban… in the last 24 h or today), the trade is **NO-GO** unless the event is already over and priced in; say which headline. The cloud sandbox blocks outside websites, so it normally prints `unknown`: then use InvestSights `get_stock_news` / `get_earnings_calendar` / `get_corporate_actions` for the same check.
      2. `python3 watcher/risk.py state/plan.json --write` — code re-sizes `qty` (1% risk incl. ₹40 brokerage + 0.04% charges, position ≤ capital) and enforces hard limits (net R:R ≥ 1.5, levels in order, entry inside zone, deadline ≤ 14:30). Exit code 2 = **BLOCK**: the script has set `plan` to null; write a NO TRADE verdict that says "⛔ blocked by risk check" with its reasons. On PASS use the script's `qty` (and its risk ₹ / R:R) in the verdict and the draft order — never the Judge's own qty.
    - `state/latest_verdict.txt` — the Telegram message, read on a PHONE. Follow `.claude/skills/intraday-debate/telegram-format.md` exactly: Telegram HTML (`<b>`, `<i>` only), short lines (≤ 34 characters where possible), emoji markers, blank lines between blocks, no tables, no markdown, `&` written as `&amp;` (e.g. `M&amp;M`), max 2,500 characters. If the Judge's confidence for the GO pick is **above 7/10**, add the **Draft order block** from `telegram-format.md` (Groww stock link + tap-to-copy values; the watcher verifies the link). It is text for the user only — never call any Groww order tool.
-6. **Commit and push**: `git add -A && git commit -m "verdict YYYY-MM-DD_HHMM" && git push origin claude/intraday-state` (on a push conflict: `git pull --rebase` then push again). The watcher sends `latest_verdict.txt` to Telegram on its next run.
+7. **Commit and push**: `git add -A && git commit -m "verdict YYYY-MM-DD_HHMM" && git push origin claude/intraday-state` (on a push conflict: `git pull --rebase` then push again). The watcher sends `latest_verdict.txt` to Telegram on its next run.
 
 ## Rules
 - No agent places, modifies or cancels orders, and neither do you. Never call order, portfolio, holdings, positions, family, networth, watchlist or save_analysis tools.

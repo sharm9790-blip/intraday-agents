@@ -36,7 +36,7 @@ jobs:
           git config user.name "intraday-watcher"
           git config user.email "watcher@users.noreply.github.com"
           if [ -n "$(git status --porcelain state/)" ]; then
-            git add state/mytrades.json
+            git add state/
             git commit -m "mytrade $(TZ=Asia/Kolkata date +%H:%M)"
             for i in 1 2 3; do
               git pull --rebase origin claude/intraday-state && git push origin HEAD:claude/intraday-state && break
