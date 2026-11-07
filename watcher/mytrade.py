@@ -33,21 +33,39 @@ from datetime import datetime, timedelta
 import watch as w
 
 HELP = "\n".join([
-    "🤖 <b>My Trade commands</b>",
+    "🤖 <b>Bot commands</b>  (tap / or Menu)",
     "",
-    "<code>BOUGHT TATASTEEL</code>",
-    "  I read your real qty and price",
-    "  from Groww (owner) or use the plan",
-    "<code>BOUGHT TATASTEEL 544 183.55</code>",
-    "  your real qty and price",
-    "<code>BOUGHT SBIN 100 812 SL 806 T1 824</code>",
-    "  a stock outside today's plan",
-    "<code>SOLD TATASTEEL</code>  all left (Groww price)",
-    "<code>SOLD TATASTEEL 272 185.9</code>  part",
-    "<code>MYTRADES</code>  your open trades",
+    "<b>Your trades</b>",
+    "<code>BOUGHT TATASTEEL</code> — real qty/price from Groww",
+    "<code>BOUGHT TATASTEEL 544 183.55</code> — your numbers",
+    "<code>BOUGHT SBIN 100 812 SL 806 T1 824</code> — any stock",
+    "<code>SOLD TATASTEEL</code> — all left · <code>SOLD TATASTEEL 272 185.9</code> — part",
+    "<code>MYTRADES</code> — your open trades",
     "",
-    "I check every 5 min. I never place orders.",
+    "<b>Plan &amp; results</b>",
+    "<code>PLAN</code> — resend today's latest verdict",
+    "<code>SCORE</code> — scorecard + paper account so far",
+    "",
+    "<b>Settings for today</b>",
+    "<code>RISK 0.5</code> — half size (0.25–1) · <code>RISK 1</code> — normal",
+    "<code>PAUSE</code> — stop plan alerts for you today",
+    "<code>RESUME</code> — start them again",
+    "<code>HELP</code> — this list",
+    "",
+    "Replies within ~5 min (market days 9:00–15:55). I never place orders.",
 ])
+BOT_COMMANDS = [  # shown in Telegram's "/" menu
+    ("bought", "I bought — e.g. /bought TATASTEEL"),
+    ("sold", "I sold — e.g. /sold TATASTEEL"),
+    ("mytrades", "My open trades and P&L"),
+    ("plan", "Resend today's latest verdict"),
+    ("score", "Scorecard and paper account so far"),
+    ("risk", "Size for today — /risk 0.5 or /risk 1"),
+    ("pause", "Stop plan alerts for me today"),
+    ("resume", "Start plan alerts again"),
+    ("help", "All commands"),
+]
+
 CMD = re.compile(
     r"^/?(bought|buy|sold|sell)\s+([A-Za-z0-9&\-]+)"
     r"(?:\s+(\d+))?(?:\s+@?\s*(\d+(?:\.\d+)?))?"
@@ -144,7 +162,7 @@ def load_state(state_dir, today):
     st = w.load(os.path.join(state_dir, "mytrades.json"), {})
     if st.get("date") != today:
         st = {"offset": st.get("offset", 0), "date": today, "trades": {}, "summary_sent": False,
-              "boards": {}}
+              "boards": {}, "menu": st.get("menu")}
     return st
 
 
@@ -173,11 +191,67 @@ def fmt_pnl(x):
     return w.inr(round(x))
 
 
+def score_lines(state_dir, chat=None):
+    hist = w.load(os.path.join(state_dir, "scorecard.json"), [])
+    acc = w.load(os.path.join(state_dir, "paper.json"), {})
+    if not hist:
+        return ["No scorecard yet — the first one comes at 15:45."]
+    run = {k: sum(d["totals"].get(k, 0) for d in hist) for k in ("rules", "limit", "market", "targets")}
+    last = hist[-1]
+    lines = [f"Days tracked: <b>{len(hist)}</b> (last {last['date']})", "",
+             f"Plan rules  {w.inr(run['rules'])}", f"Limit only  {w.inr(run['limit'])}",
+             f"Bought at once  {w.inr(run['market'])}", f"Targets reached  +₹{w.lakh(run['targets'])}"]
+    if acc:
+        lines += ["", f"📈 Paper balance <b>₹{w.lakh(acc.get('balance', acc.get('start_balance', 0)))}</b>"
+                  f" (since {acc.get('start_date')})"]
+    real = w.load(os.path.join(state_dir, "realtrades.json"), {}).get("days", {})
+    mine = [d[chat] for d in real.values() if chat and chat in d]
+    if mine:
+        lines.append(f"🧾 Your real P&amp;L {w.inr(sum(x['pnl'] for x in mine))} "
+                     f"({sum(x['trades'] for x in mine)} trades, {len(mine)} days)")
+    return lines
+
+
 def handle(st, chat, text, when, state_dir, today):
     reply = lambda msg: w.telegram(msg, to=chat)
     t = text.strip()
-    if re.fullmatch(r"/?(help|start)", t, re.I):
+    t = re.sub(r"^/(\w+)@\w+", r"/\1", t)  # "/plan@sharmi_intraday_bot" -> "/plan"
+    if re.fullmatch(r"/?(help|start|commands|menu)", t, re.I):
         return reply(HELP)
+    if re.fullmatch(r"/?plan", t, re.I):
+        try:
+            with open(os.path.join(state_dir, "latest_verdict.txt")) as f:
+                doc = w.load(os.path.join(state_dir, "plan.json"), {})
+                if doc.get("date") != today:
+                    return reply("📋 No verdict yet today. First scan 09:45.")
+                return reply(w.check_groww_links(f.read()))
+        except FileNotFoundError:
+            return reply("📋 No verdict yet today.")
+    if re.fullmatch(r"/?score", t, re.I):
+        return reply(w.card("📒", "SCORE SO FAR", [""] + score_lines(state_dir, chat), footer=False))
+    if re.fullmatch(r"/?pause", t, re.I):
+        p = st.setdefault("paused", [])
+        if chat not in p:
+            p.append(chat)
+        return reply("🔕 Plan alerts paused for you today. Your own trade alerts still come.\n"
+                     "Send <code>RESUME</code> to turn them back on.")
+    if re.fullmatch(r"/?resume", t, re.I):
+        st["paused"] = [c for c in st.get("paused", []) if c != chat]
+        return reply("🔔 Plan alerts back on.")
+    mr = re.fullmatch(r"/?risk(?:\s+(\d*\.?\d+))?", t, re.I)
+    if mr:
+        if not mr.group(1):
+            cur = st.get("risk", {}).get(chat, 1)
+            return reply(f"⚖️ Your size today: <b>{cur}×</b>. Send <code>RISK 0.5</code> for half, "
+                         "<code>RISK 1</code> for normal.")
+        x = max(0.25, min(1.0, float(mr.group(1))))
+        st.setdefault("risk", {})[chat] = x
+        plan = today_plan(state_dir, today)
+        extra = f"\nToday's plan qty for you: <b>{int(plan['qty'] * x)}</b> {w.esc(plan['symbol'])}" if plan else ""
+        return reply(f"⚖️ Size set to <b>{x}×</b> for today (max risk ≈ ₹{int(1000 * x):,}).{extra}\n"
+                     "Used when you send BOUGHT without a quantity.")
+    if re.fullmatch(r"/?(bought|buy|sold|sell)", t, re.I):
+        return reply("✍️ Add the stock, e.g. <code>BOUGHT TATASTEEL</code> or <code>SOLD TATASTEEL</code>")
     if re.fullmatch(r"/?(mytrades|status|trades)", t, re.I):
         mine = [x for x in st["trades"].get(chat, []) if x["left"] > 0]
         if not mine:
@@ -206,7 +280,7 @@ def handle(st, chat, text, when, state_dir, today):
     if act.lower() in ("bought", "buy"):
         plan = today_plan(state_dir, today)
         plan = plan if plan and plan["symbol"].upper() == sym else None
-        q = int(qty) if qty else (plan["qty"] if plan else None)
+        q = int(qty) if qty else (int(plan["qty"] * st.get("risk", {}).get(chat, 1)) if plan else None)
         if not q:
             return reply(f"📦 How many shares? Send e.g. <code>BOUGHT {w.esc(sym)} 100 {price}</code>")
         tr = {
@@ -388,7 +462,16 @@ def track(st, now):
                                    ["", "✅ No open trades now."], footer=False), close=True)
 
 
-def summary(st):
+def summary(st, state_dir=None):
+    if state_dir:
+        path = os.path.join(state_dir, "realtrades.json")
+        hist = w.load(path, {"days": {}})
+        hist["days"][st["date"]] = {
+            chat: {"pnl": round(sum(t["realized"] for t in trs)), "trades": len(trs),
+                   "list": [{"symbol": t["symbol"], "qty": t["qty"], "entry": t["entry"],
+                             "pnl": round(t["realized"]), "open": t["left"]} for t in trs]}
+            for chat, trs in st["trades"].items() if trs}
+        w.save(path, hist)
     for chat, trades in st["trades"].items():
         if not trades:
             continue
@@ -448,11 +531,21 @@ def main(state_dir):
         if fire_sync():
             st["sync_fired"] = st["sync_request"]
     apply_sync(st, state_dir, today)
+    if st.get("sync_fired") and not st.get("sync_warned") == st["sync_fired"] \
+            and now.hour * 60 + now.minute - w.hhmm(st["sync_fired"]) >= 15:
+        st["sync_warned"] = st["sync_fired"]
+        w.telegram("⚠️ <b>Groww sync is late</b> (asked at " + st["sync_fired"] + ").\n"
+                   "I'm using my estimate. Send <code>BOUGHT SYMBOL QTY PRICE</code> to set it exactly.",
+                   to=owner_chat())
+    if st.get("menu") != len(BOT_COMMANDS) and not os.environ.get("DRY_RUN"):
+        if tg("setMyCommands", {"commands": json.dumps(
+                [{"command": c, "description": d} for c, d in BOT_COMMANDS])}):
+            st["menu"] = len(BOT_COMMANDS)
     if w.hhmm("09:15") <= now.hour * 60 + now.minute <= w.hhmm("15:30"):
         track(st, now)
     if now.hour * 60 + now.minute >= w.hhmm("15:45") and not st["summary_sent"] \
             and any(st["trades"].values()):
-        summary(st)
+        summary(st, state_dir)
         st["summary_sent"] = True
     w.save(os.path.join(state_dir, "mytrades.json"), st)
 

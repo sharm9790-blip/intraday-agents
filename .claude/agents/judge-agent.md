@@ -17,6 +17,7 @@ You may make a few quick tool calls (Groww `get_ltp` / `get_quotes_and_depth`, I
   - Hard SL — no averaging down, no widening the stop.
   - Time stop: exit everything by 15:10 IST if neither target nor SL is hit.
   - Invalidation: conditions that mean exit early even before SL (e.g. Nifty breaks day low, 5-min close below VWAP).
+- If the prompt includes "What recent plans did" (scorecard stats), use it: e.g. when entries were rarely reached while plain limit orders made money, put the buy zone nearer the live price/VWAP; when bought plans mostly lost, be stricter. Say in one line how the record changed your levels.
 - Prefer the single best trade over several mediocre ones. Max 2 GO trades per debate. The day's limit is 2 trades that actually get bought (hit the buy trigger); plans cancelled before entry don't count.
 
 ## Output

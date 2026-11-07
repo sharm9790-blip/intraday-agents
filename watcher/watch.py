@@ -19,8 +19,11 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
 
+import health
 import news
 import risk
+
+PAUSED = set()  # chats that sent PAUSE today (broadcasts skip them)
 
 IST = timezone(timedelta(hours=5, minutes=30))
 FOOTER = "<i>Analysis only, not advice. You place orders yourself.</i>"
@@ -77,6 +80,8 @@ def telegram(text, to=None):
     # TELEGRAM_CHAT_ID may list several chats: "id1,id2". One failing chat
     # (e.g. someone blocked the bot) must not stop the others.
     for chat_id in [c.strip() for c in chat.split(",") if c.strip()]:
+        if not to and chat_id in PAUSED:
+            continue
         base = {"chat_id": chat_id, "disable_web_page_preview": "true"}
         try:
             try:
@@ -290,6 +295,49 @@ def send_scorecard(state_dir, today, watch):
     telegram(card("📒", f"SCORECARD · {today}", lines))
 
 
+def weekly_report(state_dir, now):
+    """Friday (or the last trading day of the week) ≥ 15:50: the week in one card."""
+    import stats
+    wk = now.strftime("%G-W%V")
+    path = os.path.join(state_dir, "weekly.json")
+    if load(path, {}).get("last") == wk:
+        return
+    nxt = [(now + timedelta(days=i)) for i in range(1, 4)]
+    last_day = now.weekday() == 4 or all(
+        d.weekday() > 4 or d.strftime("%Y-%m-%d") in NSE_HOLIDAYS for d in nxt
+        if d.isocalendar()[1] == now.isocalendar()[1])
+    if not last_day:
+        return
+    hist = [d for d in load(os.path.join(state_dir, "scorecard.json"), [])
+            if datetime.strptime(d["date"], "%Y-%m-%d").strftime("%G-W%V") == wk]
+    s = stats.summarize(hist)
+    acc = load(os.path.join(state_dir, "paper.json"), {})
+    real = load(os.path.join(state_dir, "realtrades.json"), {}).get("days", {})
+    t = s["totals"]
+    lines = ["", f"Days {s['days']} · GO plans {s['plans']}"]
+    if s["plans"]:
+        n = s.get("with_targets") or 1
+        lines += [f"Bought by rules {s['bought']} · ✅ {s['wins']} · ❌ {s['losses']}",
+                  f"Entry reached {s['entry_fill']}/{n} · T1 {s['t1_hit']}/{n} · T2 {s['t2_hit']}/{n}"]
+    lines += ["", "<b>Week P&amp;L</b>",
+              f"Plan rules  {inr(t['rules'])}", f"Limit only  {inr(t['limit'])}",
+              f"Bought at once  {inr(t['market'])}", f"Targets reached  +₹{lakh(t['targets'])}"]
+    if acc:
+        lines += ["", f"📈 Paper balance <b>₹{lakh(acc.get('balance', 0))}</b> (since {acc.get('start_date')})"]
+    week_real = {}
+    for day, chats in real.items():
+        if datetime.strptime(day, "%Y-%m-%d").strftime("%G-W%V") == wk:
+            for c, v in chats.items():
+                week_real[c] = week_real.get(c, 0) + v["pnl"]
+    if s.get("cancels"):
+        lines += ["", "<b>Why plans weren't bought</b>"] + [f"• {esc(k)} ×{v}" for k, v in s["cancels"].items()]
+    lines += ["", "<i>Paper results from 5-min candles. One week is not enough to judge — keep collecting.</i>"]
+    telegram(card("🗓", f"WEEKLY REPORT · {wk}", lines))
+    for c, pnl in week_real.items():
+        telegram(f"🧾 <b>Your real trades this week: {inr(pnl)}</b> (before costs)", to=c)
+    save(path, {"last": wk})
+
+
 def fire_debate(now, trades, last_verdict_id, watch):
     """Start the cloud debate through the routine's API trigger every quarter hour,
     09:45–14:30 IST. The routine has no schedule of its own, so this is the only
@@ -328,9 +376,16 @@ def fire_debate(now, trades, last_verdict_id, watch):
             urllib.request.urlopen(req, timeout=30)
         except urllib.error.HTTPError as e:
             print("fire failed:", e.code, e.read()[:300])
+            watch["fire_error"] = e.code
+            return False
+        except Exception as e:
+            print("fire failed:", e)
+            watch["fire_error"] = "network"
             return False
         print("fired debate for slot", slot)
+    watch["fire_error"] = None
     watch["last_fire"] = slot
+    watch["fired_at"] = now.strftime("%H:%M")
     return True
 
 
@@ -346,6 +401,12 @@ def main(state_dir):
     watch = load(watch_path, {})
     if watch.get("date") != today:
         watch = {"date": today, "verdict_id": None, "status": None, "since": None, "log": []}
+    mt = load(os.path.join(state_dir, "mytrades.json"), {})
+    PAUSED.clear()
+    if mt.get("date") == today:
+        PAUSED.update(mt.get("paused", []))
+    health.check(now, watch, plan_doc, NSE_HOLIDAYS, telegram)
+    save(watch_path, watch)
 
     # 1) Forward a new verdict from the cloud debate (option 1 alert).
     vid = plan_doc.get("verdict_id")
@@ -392,6 +453,8 @@ def main(state_dir):
         send_scorecard(state_dir, today, watch)
         watch["scorecard_sent"] = True
         save(watch_path, watch)
+    if minutes >= hhmm("15:50") and watch.get("scorecard_sent"):
+        weekly_report(state_dir, now)
 
     plan = plan_doc.get("plan") if plan_doc.get("date") == today else None
     if plan and watch.get("qty_fix"):

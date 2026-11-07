@@ -172,12 +172,33 @@ Tell the bot what you really did in Groww; it tracks **your** trade every 5 min,
 | `BOUGHT SBIN 100 812 SL 806 T1 824` | Any stock outside the plan (SL required) |
 | `SOLD TATASTEEL` / `SOLD TATASTEEL 272 185.9` | Books the sale (owner: real sell price synced from Groww) |
 | `MYTRADES` · `HELP` | Status / commands |
+| `PLAN` | Resend today's latest verdict |
+| `SCORE` | Scorecard + paper account + your real P&L so far |
+| `RISK 0.5` / `RISK 1` | Your size for today (0.25–1×); used when BOUGHT has no qty |
+| `PAUSE` / `RESUME` | Stop / restart plan broadcasts for you today (your own trade alerts still come) |
+
+All commands are in the bot's **/ Menu** (registered with `setMyCommands`; `BOT_COMMANDS` in `mytrade.py`).
 
 **📋 Live board:** while any trade is open, each person gets ONE pinned message listing all their open trades (price, P&L, distance to SL, next target, total), edited every 5 min — edits are silent, so the phone doesn't buzz. When all trades are closed it shows "✅ No open trades now".
 
 Loud alerts, only to the person who sent the trade: real risk check (≤ ₹1,000), 🔴 SL touched, 🎯 T1 (sell half, SL to cost), 🏁 T2, ↩️ back at cost, ⏳ 15:00, ⏰ 15:10 exit, 🧾 MY TRADES TODAY at 15:45.
 
 Plumbing: `watcher/mytrade.py` + `.github/workflows/mytrade.yml`. `watch.yml` starts `mytrade.yml` (`gh workflow run`) on any pinger run that has an open trade, a pending Groww sync, a new Telegram message, or a due summary. State: `state/mytrades.json` (Telegram offset, trades per chat), `state/positions.json` (last Groww sync). Messages are read only from the chats in `TELEGRAM_CHAT_ID`; messages sent outside 09:00–15:55 are handled at the next morning's first run. Skill: `.claude/skills/positions-sync/SKILL.md`. Nothing places, changes or cancels orders.
+
+### 🩺 Health alerts (`watcher/health.py`)
+
+Each at most once: 🟢 **SYSTEM READY** at the first run from 09:15 (watcher, cloud trigger, December holiday reminder) · ⚠️ **WATCHER GAP** (no run for 20+ min) · ⚠️ **PINGER?** (run came from GitHub's backup schedule) · ⚠️ **SCAN FAILED** (routine trigger refused, with the fix for 401/403/429) · ⚠️ **NO VERDICT** (fired but no result in 25 min) · ⚠️ **Groww sync is late** (15 min, owner only).
+
+### 🗓 Weekly report and learning
+
+- Friday (or the week's last trading day) after the scorecard: 🗓 **WEEKLY REPORT** — plans, bought/wins/losses, entry/T1/T2 hit rates, week P&L four ways, paper balance, why plans weren't bought; each person also gets their real-trade total. State: `state/weekly.json`, `state/realtrades.json`.
+- `watcher/stats.py state` summarises the last 10 scorecard days. The cloud debate runs it first and gives it to the Judge ("What recent plans did"), whose rules say to follow its **Lesson:** lines (e.g. buy zone nearer the live price when entries are rarely reached).
+
+### 🧪 Tests and scripts
+
+- `tests/test_system.py` — offline tests (fake candles, clock, Telegram): risk, replay, firing window, buy→T1→T2 with paper lines, cancel, holiday, scorecard + paper account, health alerts, My Trade commands + Groww sync + 15:10 + summary, stats lesson. Run `python3 -m unittest discover -s tests -v`. GitHub runs them on every push (`tests.yml`); a ❌ means don't trust the change.
+- `scripts/deploy.sh "message"` — runs the tests, commits, pushes `main`, merges it into `claude/intraday-state`. Refuses to deploy if tests fail.
+- `scripts/check.sh` — secrets present, tests pass, state branch up to date, last watcher run, next year's holidays.
 
 ### NSE holidays
 
@@ -248,7 +269,7 @@ DRY_RUN=1 SSL_CERT_FILE=/etc/ssl/cert.pem python3 watcher/watch.py path/to/state
 
 **Change agent behaviour** — edit `.claude/agents/*.md` on `main`, merge into `claude/intraday-state`, push both. Also copy to `~/.claude/agents/` if you use the local `/intraday-debate` skill.
 
-**Rotate a token**
+**Rotate a token** (both the Telegram bot token and the routine token were pasted in chat on 6 Nov — rotate them once)
 - Telegram: @BotFather → `/revoke` → update `TELEGRAM_BOT_TOKEN` secret and `~/.config/telegram-bot/env`.
 - Routine: routine page → Edit → API trigger → **Regenerate** → update `CLAUDE_FIRE_TOKEN`.
 - Pinger: create a new PAT → paste into cron-job.org header → delete the old PAT.
