@@ -212,6 +212,14 @@ def score_lines(state_dir, chat=None):
     return lines
 
 
+def trading_day(d):
+    return d.weekday() < 5 and d.strftime("%Y-%m-%d") not in w.NSE_HOLIDAYS
+
+
+def market_open(t):
+    return trading_day(t) and w.hhmm("09:15") <= t.hour * 60 + t.minute <= w.hhmm("15:30")
+
+
 def handle(st, chat, text, when, state_dir, today):
     reply = lambda msg: w.telegram(msg, to=chat)
     t = text.strip()
@@ -223,6 +231,8 @@ def handle(st, chat, text, when, state_dir, today):
             with open(os.path.join(state_dir, "latest_verdict.txt")) as f:
                 doc = w.load(os.path.join(state_dir, "plan.json"), {})
                 if doc.get("date") != today:
+                    if not trading_day(datetime.now(w.IST)):
+                        return reply("📋 Market closed today. Next scan: next trading day 09:45 IST.")
                     return reply("📋 No verdict yet today. First scan 09:45.")
                 return reply(w.check_groww_links(f.read()))
         except FileNotFoundError:
@@ -267,6 +277,9 @@ def handle(st, chat, text, when, state_dir, today):
     if not m:
         return reply("🤔 I didn't get that.\n\n" + HELP)
     act, sym, qty, px, sl, t1, t2 = m.groups()
+    if not market_open(when):
+        return reply(f"🔒 Market is closed ({when:%a %H:%M} IST).\n"
+                     "BOUGHT / SOLD work Mon–Fri 9:15–15:30 IST. HELP, PLAN, SCORE work any time.")
     sym = sym.upper()
     yahoo = sym + ".NS"
     try:
@@ -521,8 +534,8 @@ def main(state_dir):
             continue  # only the configured chats can give commands
         when = datetime.fromtimestamp(msg.get("date", now.timestamp()), w.IST)
         if (now - when).total_seconds() > 1800:  # sent off-hours: say it was queued
-            w.telegram(f"📨 Got your message from {when:%a %H:%M} — I answer Mon–Fri "
-                       "9:00–15:55 IST, so here it is now:", to=chat)
+            w.telegram(f"📨 Got your message from {when:%a %H:%M} — sorry for the delay, "
+                       "here is the reply:", to=chat)
         if when.strftime("%Y-%m-%d") != today:
             when = now
         try:

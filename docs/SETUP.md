@@ -138,6 +138,27 @@ Without the two `CLAUDE_FIRE_*` secrets no debates run at all. Never put any tok
 
 ---
 
+### Instant replies at any hour (Cloudflare Worker)
+
+`cloudflare/worker.js` runs free on Cloudflare every minute. It asks Telegram
+whether an allowed chat messaged the bot; if so it shows "typing…" and starts
+`mytrade.yml`, which replies in ~30–60 s — nights and weekends too. It never
+confirms Telegram updates, so `mytrade.py` still gets every message, and a
+GitHub run happens only when a message actually arrives (~1 min each).
+
+Setup (dash.cloudflare.com, free account):
+1. Workers & Pages → Create → Worker → name `intraday-bot` → Deploy → Edit code →
+   paste `cloudflare/worker.js` → Deploy.
+2. Storage & Databases → KV → Create namespace `intraday-bot-state`.
+3. Worker → Settings → Bindings → Add → KV namespace → variable `STATE`.
+4. Worker → Settings → Variables and Secrets → add **Secret** `TELEGRAM_BOT_TOKEN`
+   and **Secret** `GITHUB_TOKEN` (fine-grained PAT, only this repo, Actions: Read and write).
+5. Worker → Settings → Trigger events → Cron trigger `* * * * *`.
+6. Test: open the worker's URL — `{"ok": true, ...}`. Send HELP to the bot; reply in ~1 min.
+
+If you rotate the bot token, update it here too. Off-hours, BOUGHT/SOLD reply
+"Market is closed"; HELP, PLAN, SCORE, MYTRADES work any time.
+
 ## 4. Trading rules built in
 
 - Capital ₹1,00,000, risk 1% per trade (₹1,000). Qty = floor(risk ÷ (entry − SL)), capped by intraday margin.
