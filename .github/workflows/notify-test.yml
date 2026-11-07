@@ -1,0 +1,47 @@
+name: notify-test
+
+# Manual check after changing secrets: sends a Telegram test message to every
+# chat with TELEGRAM_BOT_TOKEN, and (optionally) checks CLAUDE_FIRE_TOKEN by
+# firing the routine with a harmless payload (the debate stops on non-trading days / outside hours).
+on:
+  workflow_dispatch:
+    inputs:
+      fire:
+        description: "Also test the routine trigger token"
+        type: boolean
+        default: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Telegram test message
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          cd watcher && python3 - <<'PY'
+          import json, os, urllib.request, watch
+          me = json.load(urllib.request.urlopen(
+              f"https://api.telegram.org/bot{os.environ['TELEGRAM_BOT_TOKEN']}/getMe", timeout=20))
+          print("bot:", me["result"]["username"])
+          watch.telegram("✅ <b>TEST NOTIFICATION</b>\n\nNew bot token works from GitHub.\n"
+                         "Alerts, verdicts and the scorecard will arrive here.\n\n"
+                         "<i>Analysis only, not advice.</i>")
+          print("sent")
+          PY
+      - name: Routine trigger token test
+        if: ${{ inputs.fire }}
+        env:
+          URL: ${{ secrets.CLAUDE_FIRE_URL }}
+          TOKEN: ${{ secrets.CLAUDE_FIRE_TOKEN }}
+        run: |
+          code=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$URL" \
+            -H "Authorization: Bearer $TOKEN" \
+            -H "anthropic-beta: experimental-cc-routine-2026-04-01" \
+            -H "anthropic-version: 2023-06-01" -H "Content-Type: application/json" \
+            -d '{"text":"token test"}')
+          echo "routine fire HTTP $code"
+          [ "$code" -ge 200 ] && [ "$code" -lt 300 ]
