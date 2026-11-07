@@ -156,6 +156,7 @@ What you do on each GO message: set the Groww price alert; after buying, immedia
 Adapted from the MIT-licensed [trader-skill](https://github.com/Jakeschincariol/trader-skill) ideas (trader-risk, trader-budget, trader-news), rewritten for NSE intraday.
 
 - `watcher/risk.py` — sizing and hard limits by code, not the AI. Settings at the top: `CAPITAL` ₹1,00,000, `RISK_PCT` 1, `FIXED_COST` ₹40, `PCT_COST` 0.04%, `MIN_RR` 1.5, `MAX_POSITION_X` 1.0 (position ≤ capital; raise for MIS leverage), `LAST_ENTRY` 14:30. Run by the cloud debate before the verdict (`--write` fixes qty or blocks) and again by the watcher on each new GO.
+- The cloud sandbox can't reach outside websites (Google News, Yahoo, groww.in — proxy 403, tested 2026-11-07). So in the cloud the news check uses InvestSights news/earnings tools; the GitHub watcher runs news.py and verifies Groww links.
 - `watcher/news.py` — Google News RSS (no key), last 24 h, flags results / board meeting / SEBI / raids / F&O ban as high, dividends / deals / ratings as medium. Used by the cloud debate (high = NO-GO) and in the 🛡 CHECKS and 🔔 BUY TRIGGER messages.
 
 ## 5. State files (branch `claude/intraday-state`)
