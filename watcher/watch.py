@@ -409,7 +409,7 @@ def main(state_dir):
             msg = card("❌", f"CANCELLED — {sym}", [
                 f"🕐 {t} IST", "",
                 f"Reason: {cancel}", price_line, "",
-                "👉 <b>Do not buy.</b> Delete the Groww alert.",
+                "👉 <b>Do not buy.</b> Delete the Groww price alert.",
                 "🔎 Next cloud scan will look for a new setup.",
             ])
         elif trigger:
@@ -468,6 +468,9 @@ def main(state_dir):
             f"👉 <b>Exit everything</b> — {ts} rule.",
         ])
 
+    if msg and status in ("closed", "cancelled"):
+        msg = msg.replace("\n\n" + FOOTER,
+                          f"\n➖ Remove {sym} from \"My Draft Basket\"\n\n" + FOOTER)
     watch["log"].append(f"{t} {plan['symbol']} {price:.2f} VWAP {vw} status {status}")
     if msg:
         telegram(msg)
