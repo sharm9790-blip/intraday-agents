@@ -13,7 +13,6 @@ git push -q origin main
 WT=$(mktemp -d)/statebr
 git fetch -q origin claude/intraday-state
 git worktree add -q "$WT" origin/claude/intraday-state
-( cd "$WT" && git checkout -q -B claude/intraday-state origin/claude/intraday-state \
-  && git merge -q --no-edit origin/main && git push -q origin claude/intraday-state )
+( cd "$WT" && git merge -q --no-edit origin/main && git push -q origin HEAD:claude/intraday-state )
 git worktree remove --force "$WT"
 echo "✅ main pushed and merged into claude/intraday-state"
