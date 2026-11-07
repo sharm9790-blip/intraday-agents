@@ -1,0 +1,45 @@
+name: my-trade
+
+# Your real trades: reads BOUGHT / SOLD messages sent to the Telegram bot,
+# replies, and watches each open trade. Started by watch.yml (every pinger run)
+# only when there is an open trade, a new message, or the 15:45 summary is due.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: my-trade
+  cancel-in-progress: false
+
+jobs:
+  mytrade:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check out state branch
+        run: |
+          git fetch origin claude/intraday-state
+          git worktree add statebr origin/claude/intraday-state
+      - name: Run My Trade tracker
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          CLAUDE_FIRE_URL: ${{ secrets.CLAUDE_FIRE_URL }}
+          CLAUDE_FIRE_TOKEN: ${{ secrets.CLAUDE_FIRE_TOKEN }}
+        run: cd watcher && python3 mytrade.py ../statebr/state
+      - name: Save state
+        run: |
+          cd statebr
+          git config user.name "intraday-watcher"
+          git config user.email "watcher@users.noreply.github.com"
+          if [ -n "$(git status --porcelain state/)" ]; then
+            git add state/mytrades.json
+            git commit -m "mytrade $(TZ=Asia/Kolkata date +%H:%M)"
+            for i in 1 2 3; do
+              git pull --rebase origin claude/intraday-state && git push origin HEAD:claude/intraday-state && break
+              sleep 3
+            done
+          fi

@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: intraday-watcher
@@ -51,4 +52,16 @@ jobs:
               git pull --rebase origin claude/intraday-state && git push origin HEAD:claude/intraday-state && break
               sleep 3
             done
+          fi
+      - name: Start My Trade tracker if needed
+        if: steps.state.outputs.ok == 'true'
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if (cd watcher && python3 mytrade.py --needed ../statebr/state); then
+            gh workflow run mytrade.yml --ref main && echo "started my-trade"
+          else
+            echo "no open trade or new message"
           fi
