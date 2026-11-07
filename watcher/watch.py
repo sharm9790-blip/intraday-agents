@@ -19,6 +19,9 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
 
+import news
+import risk
+
 IST = timezone(timedelta(hours=5, minutes=30))
 FOOTER = "<i>Analysis only, not advice. You place orders yourself.</i>"
 OPEN_STATES = ("waiting", "in_zone", "t1_hit")
@@ -109,6 +112,19 @@ def candles(yahoo_symbol):
             continue
         out.append((datetime.fromtimestamp(ts, IST), o, h, l, c, v or 0))
     return out, res["meta"].get("regularMarketPrice")
+
+
+def stock_name(yahoo_symbol):
+    """Company name from Yahoo's chart meta, for the news search."""
+    try:
+        url = ("https://query1.finance.yahoo.com/v8/finance/chart/"
+               + urllib.parse.quote(yahoo_symbol) + "?interval=1d&range=1d")
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=15) as r:
+            meta = json.load(r)["chart"]["result"][0]["meta"]
+        return meta.get("longName") or meta.get("shortName")
+    except Exception:
+        return None
 
 
 def hhmm(s):
@@ -247,9 +263,30 @@ def main(state_dir):
         watch["verdicts"] = watch.get("verdicts", 0) + 1
         watch["status"] = "waiting" if plan_doc.get("plan") else None
         watch["since"] = None
+        watch.pop("qty_fix", None)
         if plan_doc.get("plan"):
             v = vid.split("_")[-1]
-            watch.setdefault("plans", []).append({**plan_doc["plan"], "start": f"{v[:2]}:{v[2:]}"})
+            start = f"{v[:2]}:{v[2:]}"
+            gp = plan_doc["plan"]
+            rk = risk.check(gp, start, watch.get("trades", 0))
+            nw = news.check(gp.get("name") or stock_name(gp["yahoo"]) or gp["symbol"])
+            lines = [""]
+            if rk["status"] == "BLOCK":
+                watch["status"] = None
+                lines += ["⛔ <b>BLOCKED — do not trade</b>",
+                          *["• " + esc(r) for r in rk["reasons"]]]
+            else:
+                lines += [f"✅ Risk check passed · R:R {rk['rr']}",
+                          f"Risk ₹{rk['risk']:,} · Value ₹{rk['value']:,}"]
+                if abs(rk["qty"] - gp["qty"]) > 0.02 * max(gp["qty"], 1):
+                    lines += [f"🧮 <b>Use qty {rk['qty']}</b> (not {gp['qty']})"]
+                if rk["qty"] != gp["qty"]:
+                    watch["qty_fix"] = rk["qty"]
+                watch.setdefault("plans", []).append({**gp, "qty": rk["qty"], "start": start})
+            lines += ["", *news.lines(nw)]
+            if nw["level"] == "high" and rk["status"] == "PASS":
+                lines += ["👉 Results/event day: skip, or half size"]
+            telegram(card("🛡", f"CHECKS — {esc(gp['symbol'])}", lines, footer=False))
         save(watch_path, watch)
 
     # 1b) End of day (15:45 IST): replay today's plans and send the scorecard once.
@@ -261,6 +298,8 @@ def main(state_dir):
         save(watch_path, watch)
 
     plan = plan_doc.get("plan") if plan_doc.get("date") == today else None
+    if plan and watch.get("qty_fix"):
+        plan = {**plan, "qty": watch["qty_fix"]}  # risk.py's size wins over the Judge's
     if not plan or watch.get("status") not in OPEN_STATES:
         print("no live plan")
         trades = watch.get("trades", 0)  # plans that hit the buy trigger today
@@ -336,6 +375,8 @@ def main(state_dir):
                 price_line, "",
                 f"📥 Buy  <b>~{rs(plan['entry'])}</b>  (max {rs(plan['max_entry'])})",
                 *plan_lines(plan), "",
+                *news.lines(news.check(plan.get("name") or stock_name(plan["yahoo"]) or plan["symbol"], 6)),
+                "",
                 "👉 Place SL-M right after the fill.",
             ])
     elif status == "in_zone":

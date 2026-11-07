@@ -14,3 +14,5 @@ Secrets (repo → Settings → Secrets and variables → Actions): `TELEGRAM_BOT
 Test the watcher locally: `DRY_RUN=1 python3 watcher/watch.py path/to/state` (on python.org Python for macOS add `SSL_CERT_FILE=/etc/ssl/cert.pem`).
 
 Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.
+
+Risk sizing, hard-limit checks and the news check (`watcher/risk.py`, `watcher/news.py`) adapt ideas from [Jakeschincariol/trader-skill](https://github.com/Jakeschincariol/trader-skill) (MIT).
