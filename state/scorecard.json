@@ -23,6 +23,19 @@
      ]
     },
     "price_at_plan": 1514.3,
+    "targets": {
+     "cash": 100000,
+     "qty": 67,
+     "half": 33,
+     "rest": 34,
+     "pf1": 792,
+     "pf2": 1496,
+     "total": 2288,
+     "t1_hit": true,
+     "t2_hit": true,
+     "entry_hit": false,
+     "high": 1567.9
+    },
     "market": {
      "pnl": 820,
      "steps": [
@@ -53,6 +66,19 @@
      ]
     },
     "price_at_plan": 771.6,
+    "targets": {
+     "cash": 100000,
+     "qty": 130,
+     "half": 65,
+     "rest": 65,
+     "pf1": 682,
+     "pf2": 1138,
+     "total": 1820,
+     "t1_hit": true,
+     "t2_hit": true,
+     "entry_hit": false,
+     "high": 785.5
+    },
     "market": {
      "pnl": 1564,
      "steps": [
@@ -83,6 +109,19 @@
      ]
     },
     "price_at_plan": 2591.0,
+    "targets": {
+     "cash": 100000,
+     "qty": 39,
+     "half": 19,
+     "rest": 20,
+     "pf1": 893,
+     "pf2": 1540,
+     "total": 2433,
+     "t1_hit": true,
+     "t2_hit": true,
+     "entry_hit": false,
+     "high": 2681.8
+    },
     "market": {
      "pnl": 207,
      "steps": [
@@ -115,6 +154,19 @@
      ]
     },
     "price_at_plan": 318.3,
+    "targets": {
+     "cash": 100000,
+     "qty": 314,
+     "half": 157,
+     "rest": 157,
+     "pf1": 400,
+     "pf2": 871,
+     "total": 1272,
+     "t1_hit": true,
+     "t2_hit": false,
+     "entry_hit": true,
+     "high": 322.4
+    },
     "market": {
      "pnl": 662,
      "steps": [
@@ -145,6 +197,19 @@
      ]
     },
     "price_at_plan": 185.38,
+    "targets": {
+     "cash": 100000,
+     "qty": 544,
+     "half": 272,
+     "rest": 272,
+     "pf1": 653,
+     "pf2": 952,
+     "total": 1605,
+     "t1_hit": true,
+     "t2_hit": false,
+     "entry_hit": false,
+     "high": 186.06
+    },
     "market": {
      "pnl": 80,
      "steps": [
@@ -158,7 +223,8 @@
   "totals": {
    "rules": 0,
    "limit": 770,
-   "market": 3333
+   "market": 3333,
+   "targets": 7594
   }
  }
 ]
