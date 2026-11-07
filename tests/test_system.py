@@ -249,6 +249,19 @@ class TestMyTrade(Base):
         self.assertIn("2026-11-09", self.get("realtrades.json")["days"])
 
 
+    def test_market_closed(self):
+        CLOCK[0] = dt.datetime(2026, 11, 7, 18, 0, tzinfo=IST)   # Saturday
+        ts = int(CLOCK[0].timestamp())
+        for uid, text in ((1, "BOUGHT TATASTEEL"), (2, "PLAN"), (3, "HELP")):
+            self.q.append({"update_id": uid, "message": {"chat": {"id": 111}, "text": text, "date": ts}})
+        mt.main(self.dir)
+        st = self.get("mytrades.json")
+        self.assertFalse(st["trades"].get("111"))
+        self.assertIn("Market is closed", self.texts())
+        self.assertIn("Bot commands", self.texts())
+        self.assertEqual(st["offset"], 4)
+
+
 class TestStats(unittest.TestCase):
     def test_lesson(self):
         day = {"date": "d", "totals": {"rules": 0, "limit": 770, "market": 3333, "targets": 7594},
