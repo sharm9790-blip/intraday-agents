@@ -161,6 +161,10 @@ Adapted from the MIT-licensed [trader-skill](https://github.com/Jakeschincariol/
 - The cloud sandbox can't reach outside websites (Google News, Yahoo, groww.in — proxy 403, tested 2026-11-07). So in the cloud the news check uses InvestSights news/earnings tools; the GitHub watcher runs news.py and verifies Groww links.
 - `watcher/news.py` — Google News RSS (no key), last 24 h, flags results / board meeting / SEBI / raids / F&O ban as high, dividends / deals / ratings as medium. Used by the cloud debate (high = NO-GO) and in the 🛡 CHECKS and 🔔 BUY TRIGGER messages.
 
+### NSE holidays
+
+`NSE_HOLIDAYS` at the top of `watcher/watch.py` lists weekday holidays (2026: 10 Nov Diwali Balipratipada, 24 Nov Guru Nanak Jayanti, 25 Dec Christmas). On those days the watcher does nothing, so no cloud runs are wasted. **Add the next year's NSE list every December.** Special sessions such as Diwali Muhurat trading (Sunday 8 Nov 2026) are not covered — the system runs Mon–Fri only.
+
 ## 5. State files (branch `claude/intraday-state`)
 
 | File | Written by | Content |
