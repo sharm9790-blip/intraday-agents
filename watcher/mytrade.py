@@ -25,6 +25,7 @@ import json
 import os
 import re
 import sys
+import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta
@@ -142,7 +143,8 @@ def get_updates(offset):
 def load_state(state_dir, today):
     st = w.load(os.path.join(state_dir, "mytrades.json"), {})
     if st.get("date") != today:
-        st = {"offset": st.get("offset", 0), "date": today, "trades": {}, "summary_sent": False}
+        st = {"offset": st.get("offset", 0), "date": today, "trades": {}, "summary_sent": False,
+              "boards": {}}
     return st
 
 
@@ -265,9 +267,50 @@ def handle(st, chat, text, when, state_dir, today):
     return reply(w.card("🧾", f"TRADE CLOSED — {w.esc(sym)}", lines, footer=False))
 
 
+def tg(method, params):
+    """Telegram Bot API call; returns the result or None."""
+    token = os.environ.get("TELEGRAM_BOT_TOKEN")
+    if not token:
+        return None
+    data = urllib.parse.urlencode(params).encode()
+    try:
+        with urllib.request.urlopen(f"https://api.telegram.org/bot{token}/{method}", data, timeout=20) as r:
+            return json.load(r).get("result")
+    except urllib.error.HTTPError as e:
+        body = e.read().decode("utf-8", "replace")
+        if "message is not modified" in body:
+            return True
+        print("telegram", method, e.code, body[:120])
+        return None
+
+
+def board(st, chat, text, close=False):
+    """One live board message per chat per day, edited in place (silent).
+    A new board is sent (silently) if there is none yet or the edit fails."""
+    b = st.setdefault("boards", {}).get(chat)
+    if os.environ.get("DRY_RUN"):
+        print(f"BOARD {'edit' if b else 'new'} to {chat}:\n{text}\n")
+        st["boards"][chat] = {"id": 1, "open": not close}
+        return
+    if b and b.get("id"):
+        if tg("editMessageText", {"chat_id": chat, "message_id": b["id"], "text": text,
+                                  "parse_mode": "HTML", "disable_web_page_preview": "true"}):
+            b["open"] = not close
+            return
+    if close:
+        return
+    res = tg("sendMessage", {"chat_id": chat, "text": text, "parse_mode": "HTML",
+                             "disable_notification": "true", "disable_web_page_preview": "true"})
+    if isinstance(res, dict):
+        st["boards"][chat] = {"id": res["message_id"], "open": True}
+        tg("pinChatMessage", {"chat_id": chat, "message_id": res["message_id"],
+                              "disable_notification": "true"})
+
+
 def track(st, now):
     """Alerts for each open trade, on candles that closed since the last check."""
     mins = now.hour * 60 + now.minute
+    boards, totals = {}, {}
     for chat, trades in st["trades"].items():
         for tr in trades:
             if tr["left"] <= 0:
@@ -323,14 +366,26 @@ def track(st, now):
                 f["warn"] = True
                 say("10 MIN TO EXIT", "⏳", [f"You still hold <b>{tr['left']}</b>", now_line,
                                             "", "Plan to be out by 15:10."])
-            elif not sent and now.minute % 15 < 5:
-                w.telegram(w.card("🧾", f"MY {w.esc(tr['symbol'])} · {now:%H:%M}", [
-                    now_line,
-                    f"{tr['left']} @ {w.rs(tr['entry'])}"
-                    + (f" · SL {w.rs(tr['sl'])}" if tr["sl"] else "")
-                    + (f" · T1 {w.rs(tr['t1'])}" if tr["t1"] and not f.get("t1") else ""),
-                ], footer=False), to=chat)
             tr["checked"] = (now - timedelta(minutes=5)).strftime("%H:%M")
+            nxt = (f"T1 {w.rs(tr['t1'])}" if tr["t1"] and not f.get("t1")
+                   else f"T2 {w.rs(tr['t2'])}" if tr["t2"] and not f.get("t2") else "exit by 15:10")
+            gap = lambda lvl: f"{(lvl / price - 1) * 100:+.1f}%" if lvl else ""
+            boards.setdefault(chat, []).extend([
+                f"<b>{w.esc(tr['symbol'])}</b> {tr['left']} @ {w.rs(tr['entry'])}",
+                f"💹 {w.rs(price)} · P&amp;L <b>{fmt_pnl(pnl)}</b>",
+                (f"🛑 SL {w.rs(tr['sl'])} ({gap(tr['sl'])})" if tr["sl"] else "🛑 no SL")
+                + f" · 🎯 {nxt}",
+                "",
+            ])
+            totals[chat] = totals.get(chat, 0) + pnl
+    for chat, lines in boards.items():
+        board(st, chat, w.card("📋", f"LIVE TRADES · {now:%H:%M}", [
+            "", *lines, f"Open trades P&amp;L <b>{fmt_pnl(totals[chat])}</b>",
+            "<i>Updates every 5 min in this message. Alerts come separately.</i>"], footer=False))
+    for chat in list(st.get("boards", {})):
+        if chat not in boards and st["boards"][chat].get("open"):
+            board(st, chat, w.card("📋", f"LIVE TRADES · {now:%H:%M}",
+                                   ["", "✅ No open trades now."], footer=False), close=True)
 
 
 def summary(st):
