@@ -179,6 +179,49 @@ def inr(x):
     return ("+" if x > 0 else "−") + "₹" + f"{abs(x):,.0f}"
 
 
+PAPER_START = 100000  # ₹ paper account opening balance
+
+
+def paper_account(state_dir, today, rows):
+    """Paper account that takes every plan exactly by its rules (the scorecard's
+    "Plan rules" result, costs included). Rewrites today's trades, keeps history
+    in state/paper.json, returns Telegram lines."""
+    path = os.path.join(state_dir, "paper.json")
+    acc = load(path, {"start_balance": PAPER_START, "start_date": today, "days": {}})
+    acc["days"][today] = [
+        {"symbol": r["symbol"], "start": r["start"], "pnl": r["rules"]["pnl"]}
+        for r in rows if r["rules"].get("bought")
+    ]
+    bal = peak = acc["start_balance"]
+    dd = 0.0
+    trades = []
+    for day in sorted(acc["days"]):
+        for tr in acc["days"][day]:
+            trades.append(tr["pnl"])
+            bal += tr["pnl"]
+            peak = max(peak, bal)
+            dd = min(dd, (bal - peak) / peak)
+    acc["balance"] = round(bal)
+    save(path, acc)
+    wins = sum(1 for p in trades if p > 0)
+    losses = sum(1 for p in trades if p < 0)
+    chg = (bal / acc["start_balance"] - 1) * 100
+    today_pnl = sum(t["pnl"] for t in acc["days"][today])
+    lines = [
+        f"<b>📈 Paper account</b> (plan rules, since {acc['start_date']})",
+        f"Balance <b>₹{lakh(bal)}</b>  ({chg:+.2f}%)",
+        f"Today {inr(today_pnl)} · {len(acc['days'][today])} trade{'s' if len(acc['days'][today]) != 1 else ''}",
+    ]
+    if trades:
+        lines += [
+            f"Trades {len(trades)} · Wins {wins} · Losses {losses} · Win rate {wins * 100 // len(trades)}%",
+            f"Biggest loss {inr(min(min(trades), 0))} · Max drawdown {dd * 100:.1f}%",
+        ]
+    else:
+        lines += ["No trades yet — no plan has hit its buy trigger."]
+    return lines
+
+
 def send_scorecard(state_dir, today, watch):
     """Replay today's plans, send a Telegram scorecard, append to state/scorecard.json."""
     from replay import replay
@@ -223,6 +266,7 @@ def send_scorecard(state_dir, today, watch):
             f"Plan rules {inr(ru['pnl'])} · Limit {inr(r['limit']['pnl'])} · At once {inr(r['market']['pnl'])}",
             "",
         ]
+    lines += paper_account(state_dir, today, rows) + [""]
     lines += [
         "<b>Today</b>",
         f"If all targets hit  +₹{lakh(tgt)}",
@@ -391,6 +435,8 @@ def main(state_dir):
     price_line = f"💹 Now <b>{rs(price)}</b>  ·  VWAP {vw}"
     t = f"{now:%H:%M}"
     status = watch["status"]
+    old_status = status
+    exit_px = None  # price the paper position is closed at, when it closes
     msg = None
 
     if status == "waiting":
@@ -428,6 +474,7 @@ def main(state_dir):
     elif status == "in_zone":
         if any(b[3] <= plan["sl"] for b in new) or price <= plan["sl"]:
             status = "closed"
+            exit_px = plan["sl"]
             msg = card("🔴", f"STOP LOSS HIT — {sym}", [
                 f"🕐 {t} IST", "", f"SL {rs(plan['sl'])} touched", price_line, "",
                 "👉 <b>Exit now</b> if still holding.",
@@ -442,6 +489,7 @@ def main(state_dir):
             ])
         elif last and last[4] < plan["exit_if_close_below_after_entry"]:
             status = "closed"
+            exit_px = last[4]
             msg = card("⚠️", f"EARLY EXIT — {sym}", [
                 f"🕐 {t} IST", "",
                 f"5-min close {rs(last[4])} below {rs(plan['exit_if_close_below_after_entry'])}",
@@ -450,24 +498,41 @@ def main(state_dir):
     elif status == "t1_hit":
         if any(b[2] >= plan["t2"] for b in new) or price >= plan["t2"]:
             status = "closed"
+            exit_px = plan["t2"]
             msg = card("🏁", f"TARGET 2 HIT — {sym}", [
                 f"🕐 {t} IST", "", f"T2 {rs(plan['t2'])} reached", price_line, "",
                 "👉 <b>Sell the rest.</b> Trade complete.",
             ])
         elif price <= plan["entry"]:
             status = "closed"
+            exit_px = plan["entry"]
             msg = card("↩️", f"BACK AT COST — {sym}", [
                 f"🕐 {t} IST", "", price_line, "",
                 f"👉 <b>Exit the rest</b> at {rs(plan['entry'])}. Half was booked at T1.",
             ])
     ts = plan.get("time_stop", "15:10")
     if status in ("in_zone", "t1_hit") and minutes >= hhmm(ts):
+        old_status = status
         status = "closed"
+        exit_px = price
         msg = card("⏰", f"TIME STOP — {sym}", [
             f"🕐 {t} IST", "", price_line, "",
             f"👉 <b>Exit everything</b> — {ts} rule.",
         ])
 
+    # Live paper trade: the plan's qty, bought at entry, half at T1, rest at the exit.
+    if msg and status != old_status and old_status in ("in_zone", "t1_hit"):
+        q, e = plan["qty"], plan["entry"]
+        half = q // 2
+        if status == "t1_hit":
+            watch["paper_booked"] = round(half * (plan["t1"] - e))
+            note = f"📈 Paper: {inr(watch['paper_booked'])} booked on {half} shares"
+        else:
+            booked = watch.get("paper_booked", 0) if old_status == "t1_hit" else 0
+            left = q - half if old_status == "t1_hit" else q
+            res = round(booked + left * (exit_px - e))
+            note = f"📈 Paper trade result: <b>{inr(res)}</b> (before costs)"
+        msg = msg.replace("\n\n" + FOOTER, "\n" + note + "\n\n" + FOOTER)
     if msg and status in ("closed", "cancelled"):
         msg = msg.replace("\n\n" + FOOTER,
                           f"\n➖ Remove {sym} from \"My Draft Basket\"\n\n" + FOOTER)

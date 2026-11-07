@@ -97,7 +97,7 @@ def replay(p, bars):
             break
     if rule[0] == "bought" and rule[1] < len(bars):
         pnl, steps = manage(bars, rule[1], p["entry"], p)
-        res["rules"] = {"pnl": pnl, "steps": steps}
+        res["rules"] = {"pnl": pnl, "steps": steps, "bought": True}
     else:
         res["rules"] = {"pnl": 0, "steps": [rule[1] if rule[0] == "cancelled" else "no fill"]}
     fill = next((i for i, b in enumerate(bars) if s <= _m(b) < d and b[3] <= p["entry"]), None)
