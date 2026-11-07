@@ -1,100 +1,11 @@
 {
- "date": "2026-11-06",
- "verdict_id": "2026-11-06_1436",
+ "date": "2026-11-07",
+ "verdict_id": null,
  "status": null,
  "since": null,
- "log": [
-  "12:06 NTPC 317.45 VWAP \u20b9315.63 status cancelled",
-  "13:46 TATASTEEL 185.32 VWAP \u20b9181.79 status waiting",
-  "13:50 TATASTEEL 185.56 VWAP \u20b9182.02 status cancelled"
- ],
- "last_fire": "14:30",
- "plans": [
-  {
-   "symbol": "ICICIBANK",
-   "yahoo": "ICICIBANK.NS",
-   "start": "09:45",
-   "zone_low": 1485,
-   "zone_high": 1495,
-   "entry": 1492,
-   "max_entry": 1493,
-   "trigger_close_above": 1482,
-   "sl": 1481,
-   "t1": 1516,
-   "t2": 1536,
-   "qty": 76,
-   "deadline": "14:30",
-   "cancel_if_high_reaches": 1505,
-   "cancel_if_close_below": 1482
-  },
-  {
-   "symbol": "HDFCBANK",
-   "yahoo": "HDFCBANK.NS",
-   "start": "09:50",
-   "zone_low": 766,
-   "zone_high": 767.5,
-   "entry": 766.5,
-   "max_entry": 768,
-   "trigger_close_above": 766,
-   "sl": 761.8,
-   "t1": 777,
-   "t2": 784,
-   "qty": 185,
-   "deadline": "10:45",
-   "cancel_if_high_reaches": 777,
-   "cancel_if_close_below": 0
-  },
-  {
-   "symbol": "GLENMARK",
-   "yahoo": "GLENMARK.NS",
-   "start": "11:10",
-   "zone_low": 2550,
-   "zone_high": 2565,
-   "entry": 2558,
-   "max_entry": 2560,
-   "trigger_close_above": 2555,
-   "sl": 2538,
-   "t1": 2605,
-   "t2": 2635,
-   "qty": 38,
-   "deadline": "13:30",
-   "cancel_if_high_reaches": 2605,
-   "cancel_if_close_below": 2545
-  },
-  {
-   "symbol": "NTPC",
-   "yahoo": "NTPC.NS",
-   "start": "11:55",
-   "zone_low": 317.9,
-   "zone_high": 318.0,
-   "entry": 317.95,
-   "max_entry": 318.2,
-   "trigger_close_above": 317.7,
-   "sl": 316.9,
-   "t1": 320.5,
-   "t2": 323.5,
-   "qty": 310,
-   "deadline": "13:30",
-   "cancel_if_high_reaches": 320.5,
-   "cancel_if_close_below": 317.7
-  },
-  {
-   "symbol": "TATASTEEL",
-   "yahoo": "TATASTEEL.NS",
-   "start": "13:45",
-   "zone_low": 183.2,
-   "zone_high": 183.6,
-   "entry": 183.5,
-   "max_entry": 183.75,
-   "trigger_close_above": 183.4,
-   "sl": 182.6,
-   "t1": 185.9,
-   "t2": 187.0,
-   "qty": 540,
-   "deadline": "14:30",
-   "cancel_if_high_reaches": 185.9,
-   "cancel_if_close_below": 182.9
-  }
- ],
- "scorecard_sent": true
+ "log": [],
+ "health": {
+  "ready": true
+ },
+ "last_run": "21:57"
 }
