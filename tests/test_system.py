@@ -402,6 +402,26 @@ class TestMyTrade(Base):
         self.assertIn("2026-11-09", self.get("realtrades.json")["days"])
 
 
+    def test_too_big_and_not_moving(self):
+        self.assertEqual(mt.size_warn(104, 958.5, 953.5, 104), [])
+        big = "\n".join(mt.size_warn(728, 957.66, 953.5, 104))
+        self.assertIn("Sell <b>488</b> now and keep <b>240</b>", big)
+        self.assertIn("7.0×", big)
+        # Groww shows far more shares than the plan → TOO BIG alert
+        self.say(1, 111, "BOUGHT TATASTEEL", 10, 1)
+        self.run_at(10, 5)
+        self.put("positions.json", {"date": "2026-11-09", "synced_at": "10:07", "positions": [
+            {"symbol": "TATASTEEL", "buy_qty": 4000, "buy_avg": 183.62, "sell_qty": 0, "sell_avg": 0}]})
+        self.run_at(10, 10)
+        t = self.texts()
+        self.assertIn("TOO BIG — TATASTEEL", t)
+        self.assertIn("needs more than your ₹1L margin", t)
+        # held 75+ min with price barely above the buy → one NOT MOVING nudge
+        self.assertNotIn("NOT MOVING", t)
+        self.run_at(11, 20)
+        self.run_at(11, 25)
+        self.assertEqual(self.texts().count("NOT MOVING — TATASTEEL"), 1)
+
     def test_indmoney_trade(self):
         self.say(1, 111, "BOUGHT TATASTEEL 100 183.5 IND", 10, 1)
         self.run_at(10, 5)
