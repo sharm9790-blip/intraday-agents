@@ -1,0 +1,40 @@
+{
+ "days": {
+  "2026-11-09": {
+   "1322737291": {
+    "pnl": 1248,
+    "trades": 4,
+    "list": [
+     {
+      "symbol": "BANKBARODA",
+      "qty": 396,
+      "entry": 252.86,
+      "pnl": 903,
+      "open": 0
+     },
+     {
+      "symbol": "MUTHOOTFIN",
+      "qty": 34,
+      "entry": 2931.0,
+      "pnl": 211,
+      "open": 0
+     },
+     {
+      "symbol": "IRFC",
+      "qty": 1223,
+      "entry": 82.09,
+      "pnl": 98,
+      "open": 0
+     },
+     {
+      "symbol": "HINDALCO",
+      "qty": 728,
+      "entry": 957.66,
+      "pnl": 36,
+      "open": 0
+     }
+    ]
+   }
+  }
+ }
+}
