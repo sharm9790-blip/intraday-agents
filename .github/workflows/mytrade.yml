@@ -38,8 +38,10 @@ jobs:
           if [ -n "$(git status --porcelain state/)" ]; then
             git add state/
             git commit -m "mytrade $(TZ=Asia/Kolkata date +%H:%M)"
+            ok=""
             for i in 1 2 3; do
-              git pull --rebase origin claude/intraday-state && git push origin HEAD:claude/intraday-state && break
+              git pull --rebase origin claude/intraday-state && git push origin HEAD:claude/intraday-state && ok=1 && break
               sleep 3
             done
+            [ -n "$ok" ] || { echo "::error::could not save my-trade state"; exit 1; }
           fi
