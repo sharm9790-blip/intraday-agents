@@ -242,12 +242,12 @@ def send_scorecard(state_dir, today, watch):
             print("replay failed", p.get("symbol"), e)
     hist_path = os.path.join(state_dir, "scorecard.json")
     hist = [d for d in load(hist_path, []) if d.get("date") != today]
-    tot = {k: sum(r[k]["pnl"] for r in rows) for k in ("rules", "limit", "market")}
+    tot = {k: sum(r.get(k, {}).get("pnl", 0) for r in rows) for k in ("rules", "limit", "market", "lock")}
     tot["targets"] = sum(r["targets"]["pf1"] * r["targets"]["t1_hit"]
                          + r["targets"]["pf2"] * r["targets"]["t2_hit"] for r in rows)
     hist.append({"date": today, "plans": rows, "totals": tot})
     save(hist_path, hist[-250:])
-    run = {k: sum(d["totals"].get(k, 0) for d in hist) for k in ("rules", "limit", "market", "targets")}
+    run = {k: sum(d["totals"].get(k, 0) for d in hist) for k in ("rules", "limit", "market", "lock", "targets")}
     tgt = sum(r["targets"]["total"] for r in rows if "targets" in r)
     lines = [""]
     if not rows:
@@ -272,6 +272,7 @@ def send_scorecard(state_dir, today, watch):
             ]
         lines += [
             f"Plan rules {inr(ru['pnl'])} · Limit {inr(r['limit']['pnl'])} · At once {inr(r['market']['pnl'])}",
+            f"At once + lock T1 {inr(r.get('lock', r['market'])['pnl'])}",
             "",
         ]
     lines += paper_account(state_dir, today, rows) + [""]
@@ -282,13 +283,16 @@ def send_scorecard(state_dir, today, watch):
         f"Plan rules  {inr(tot['rules'])}",
         f"Limit only  {inr(tot['limit'])}",
         f"Bought at once  {inr(tot['market'])}",
+        f"At once + lock T1  {inr(tot['lock'])}",
         "",
         f"<b>Running total · {len(hist)} day{'s' if len(hist) != 1 else ''}</b>",
         f"Targets reached  +₹{lakh(run['targets'])}",
         f"Plan rules  {inr(run['rules'])}",
         f"Limit only  {inr(run['limit'])}",
         f"Bought at once  {inr(run['market'])}",
+        f"At once + lock T1  {inr(run['lock'])}",
         "",
+        "Lock T1 = once price is halfway from T1 to T2, SL on the rest moves to T1.",
         "✅/❌ = price reached that level after the plan was given. Target profit is before costs.",
         "<i>Replay on 5-min candles, ~0.06% costs, SL assumed first when SL and target share a candle. Paper results, not real trades.</i>",
     ]
@@ -321,7 +325,8 @@ def weekly_report(state_dir, now):
                   f"Entry reached {s['entry_fill']}/{n} · T1 {s['t1_hit']}/{n} · T2 {s['t2_hit']}/{n}"]
     lines += ["", "<b>Week P&amp;L</b>",
               f"Plan rules  {inr(t['rules'])}", f"Limit only  {inr(t['limit'])}",
-              f"Bought at once  {inr(t['market'])}", f"Targets reached  +₹{lakh(t['targets'])}"]
+              f"Bought at once  {inr(t['market'])}", f"At once + lock T1  {inr(t['lock'])}",
+              f"Targets reached  +₹{lakh(t['targets'])}"]
     if acc:
         lines += ["", f"📈 Paper balance <b>₹{lakh(acc.get('balance', 0))}</b> (since {acc.get('start_date')})"]
     week_real = {}

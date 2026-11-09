@@ -7,6 +7,8 @@ cost, rest at T2, everything out at 15:10, ~0.06% round-trip costs):
   rules  - the plan exactly as given (buy-trigger conditions and cancel rules)
   limit  - a plain limit buy at the entry price, no other conditions, until the deadline
   market - bought at market when the plan was given (chasing)
+  lock   - same as market, plus one SL step: once price is halfway from T1 to T2,
+           the SL on the rest moves up to T1 (tracked to see if it beats "market")
 """
 COST = 0.0006
 
@@ -20,7 +22,7 @@ def _hm(s):
     return int(h) * 60 + int(m)
 
 
-def manage(bars, i0, entry, p):
+def manage(bars, i0, entry, p, lock=False):
     q = p["qty"]
     half = q // 2
     sl = p["sl"]
@@ -35,7 +37,7 @@ def manage(bars, i0, entry, p):
             break
         if b[3] <= sl:
             pnl += left * (sl - entry)
-            steps.append(f"{b[0]:%H:%M} " + ("SL" if sl < entry else "back at cost"))
+            steps.append(f"{b[0]:%H:%M} " + ("SL" if sl < entry else "back at cost" if sl == entry else "locked T1"))
             left = 0
             break
         if left == q and b[2] >= p["t1"]:
@@ -48,6 +50,9 @@ def manage(bars, i0, entry, p):
             steps.append(f"{b[0]:%H:%M} T2")
             left = 0
             break
+        if lock and left < q and sl < p["t1"] and b[2] >= (p["t1"] + p["t2"]) / 2:
+            sl = p["t1"]
+            steps.append(f"{b[0]:%H:%M} SL to T1")
     if left:
         pnl += left * (bars[-1][4] - entry)
         steps.append(f"close {bars[-1][4]:.2f}")
@@ -75,7 +80,7 @@ def targets(p, bars, cash=100000):
 def replay(p, bars):
     """p: a plan dict (plan.json format) plus "start" (HH:MM it was given)."""
     s, d = _hm(p["start"]), _hm(p["deadline"])
-    res = {"symbol": p["symbol"], "start": p["start"], "entry": p["entry"],
+    res = {"symbol": p["symbol"], "start": p["start"], "entry": p["entry"], "qty": p["qty"],
            "sl": p["sl"], "t1": p["t1"], "t2": p["t2"], "close": round(bars[-1][4], 2)}
     rule = ("cancelled", "no trigger")
     buy_now = p.get("entry_type") == "now"
@@ -119,4 +124,6 @@ def replay(p, bars):
     else:
         pnl, steps = manage(bars, i0, bars[i0][1], p)
         res["market"] = {"pnl": pnl, "steps": [f"bought {bars[i0][1]:.2f}"] + steps}
+        pnl, steps = manage(bars, i0, bars[i0][1], p, lock=True)
+        res["lock"] = {"pnl": pnl, "steps": [f"bought {bars[i0][1]:.2f}"] + steps}
     return res
