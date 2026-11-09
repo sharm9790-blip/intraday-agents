@@ -42,6 +42,7 @@ HELP = "\n".join([
     "<code>BOUGHT TATASTEEL 544 183.55 IND</code> — bought on INDmoney",
     "<code>SOLD TATASTEEL</code> — all left · <code>SOLD TATASTEEL 272 185.9</code> — part",
     "<code>MYTRADES</code> — your open trades",
+    "<code>ORDER GMK39038…</code> — check a Groww order by its id",
     "",
     "<b>Plan &amp; results</b>",
     "<code>PLAN</code> — resend today's latest verdict",
@@ -59,6 +60,7 @@ BOT_COMMANDS = [  # shown in Telegram's "/" menu
     ("bought", "I bought — e.g. /bought TATASTEEL"),
     ("sold", "I sold — e.g. /sold TATASTEEL"),
     ("mytrades", "My open trades and P&L"),
+    ("order", "Check a Groww order — /order ORDER_ID"),
     ("plan", "Resend today's latest verdict"),
     ("score", "Scorecard and paper account so far"),
     ("risk", "Size for today — /risk 0.5 or /risk 1"),
@@ -213,6 +215,79 @@ def score_lines(state_dir, chat=None):
     return lines
 
 
+ORDER_ID = re.compile(r"^/?order(?:\s+([A-Za-z0-9-]{6,40}))?\s*$", re.I)
+FINAL = ("executed", "cancelled", "rejected", "notfound")
+RECHECK_MIN = 10
+MAX_CHECKS = 12  # ~2 hours of re-checks for an order still open
+
+
+def save_order_requests(st, state_dir, today):
+    """The ids the cloud should look up (read-only get_order_details)."""
+    ids = [i for i, o in st.get("orders", {}).items() if o.get("state") not in FINAL]
+    w.save(os.path.join(state_dir, "order_requests.json"), {"date": today, "ids": ids[-5:]})
+
+
+def ask_order(st, oid, state_dir, today):
+    o = st.setdefault("orders", {}).setdefault(oid, {"state": None, "checks": 0})
+    o["req"] = datetime.now(w.IST).strftime("%H:%M")
+    o["checks"] = o.get("checks", 0) + 1
+    st["sync_request"] = o["req"]
+    save_order_requests(st, state_dir, today)
+
+
+def apply_orders(st, state_dir, today, now):
+    """Report Groww order status; start/close tracking when an order is executed."""
+    doc = w.load(os.path.join(state_dir, "orders.json"), {})
+    chat = owner_chat()
+    if doc.get("date") == today:
+        found = {str(o.get("id")): o for o in doc.get("orders", [])}
+        for oid, o in st.get("orders", {}).items():
+            if not o.get("req") or o.get("seen") == o["req"] or (doc.get("synced_at") or "") < o["req"]:
+                continue
+            o["seen"] = o["req"]
+            r = found.get(oid)
+            if doc.get("error") or not r:
+                o["state"] = "notfound"
+                why = doc.get("error") or "Groww didn't find this order id"
+                w.telegram(f"⚠️ Order <code>{w.esc(oid)}</code>: {w.esc(why[:80])}.\n"
+                           "Check the id in Groww and send ORDER again.", to=chat)
+                continue
+            state = (r.get("state") or "").lower()
+            changed = state != o.get("state")
+            o["state"] = state
+            sym, side = (r.get("symbol") or "").upper(), (r.get("side") or "").upper()
+            qty, filled = int(r.get("qty") or 0), int(r.get("filled_qty") or 0)
+            px, avg = r.get("price"), r.get("avg_price")
+            icon = {"executed": "✅", "partial": "🟠", "open": "🟡",
+                    "cancelled": "⚪", "rejected": "❌"}.get(state, "❔")
+            lines = ["", f"{w.esc(side)} <b>{qty}</b> {w.esc(sym)} · {w.esc(r.get('type') or '')}"
+                     + (f" @ {w.rs(float(px))}" if px else ""),
+                     f"Filled <b>{filled}</b>/{qty}" + (f" @ <b>{w.rs(float(avg))}</b>" if avg and filled else "")]
+            if r.get("reason"):
+                lines.append(f"Reason: {w.esc(str(r['reason'])[:80])}")
+            if state in ("open", "partial"):
+                lines.append(f"I'll check again in {RECHECK_MIN} min.")
+            if changed or state not in ("open", "partial"):
+                w.telegram(w.card(icon, f"ORDER {state.upper() or '?'} — {w.esc(sym)}", lines, footer=False), to=chat)
+            if state == "executed" and sym and filled and avg:
+                mine = [x for x in st["trades"].get(chat, []) if x["symbol"] == sym and x["left"] > 0]
+                cmd = None
+                if side == "BUY" and not mine:
+                    cmd = f"BOUGHT {sym} {filled} {avg}"
+                elif side == "SELL" and mine:
+                    cmd = f"SOLD {sym} {min(filled, mine[-1]['left'])} {avg}"
+                if cmd and market_open(now):
+                    handle(st, chat, cmd, now, state_dir, today)
+    # orders still open: look again every RECHECK_MIN minutes during market hours
+    for oid, o in st.get("orders", {}).items():
+        if o.get("state") in ("open", "partial") and o.get("seen") == o.get("req") \
+                and market_open(now) and o.get("checks", 0) < MAX_CHECKS \
+                and now.hour * 60 + now.minute - w.hhmm(o["req"]) >= RECHECK_MIN:
+            ask_order(st, oid, state_dir, today)
+    if st.get("orders"):
+        save_order_requests(st, state_dir, today)  # drop orders that are done
+
+
 def trading_day(d):
     return d.weekday() < 5 and d.strftime("%Y-%m-%d") not in w.NSE_HOLIDAYS
 
@@ -240,6 +315,16 @@ def handle(st, chat, text, when, state_dir, today):
             return reply("📋 No verdict yet today.")
     if re.fullmatch(r"/?score", t, re.I):
         return reply(w.card("📒", "SCORE SO FAR", [""] + score_lines(state_dir, chat), footer=False))
+    mo = ORDER_ID.match(t)
+    if mo:
+        if chat != owner_chat():
+            return reply("🔒 Order checks work only for the Groww account holder.")
+        if not mo.group(1):
+            return reply("🔎 Send the Groww order id, e.g. <code>ORDER GMK39038RDT490CCVRO</code>\n"
+                         "Groww → Orders → tap the order → copy the Order ID.")
+        oid = mo.group(1).upper()
+        ask_order(st, oid, state_dir, today)
+        return reply(f"🔎 Checking order <code>{w.esc(oid)}</code> in Groww (read-only, 2–5 min)…")
     if re.fullmatch(r"/?pause", t, re.I):
         p = st.setdefault("paused", [])
         if chat not in p:
@@ -513,6 +598,8 @@ def needed(state_dir):
     st = load_state(state_dir, now.strftime("%Y-%m-%d"))
     if open_trades(st) or st.get("sync_request"):
         return True
+    if any(o.get("state") in ("open", "partial") for o in st.get("orders", {}).values()):
+        return True
     if any(st["trades"].values()) and not st["summary_sent"]:
         return True
     try:
@@ -553,6 +640,10 @@ def main(state_dir):
         if fire_sync():
             st["sync_fired"] = st["sync_request"]
     apply_sync(st, state_dir, today)
+    apply_orders(st, state_dir, today, now)
+    if st.get("sync_request") and st.get("sync_fired") != st["sync_request"]:  # re-check asked above
+        if fire_sync():
+            st["sync_fired"] = st["sync_request"]
     if st.get("sync_fired") and not st.get("sync_warned") == st["sync_fired"] \
             and now.hour * 60 + now.minute - w.hhmm(st["sync_fired"]) >= 15:
         st["sync_warned"] = st["sync_fired"]

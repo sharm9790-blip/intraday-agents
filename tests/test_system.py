@@ -280,6 +280,34 @@ class TestMyTrade(Base):
         self.assertFalse(st.get("sync_request"))
         self.assertIn("On INDmoney", self.texts())
 
+    def test_order_check(self):
+        self.start = dt.datetime(2026, 11, 9, 10, 0, tzinfo=IST)
+        self.rows = [(183.4, 183.7, 183.3, 183.5)] * 6
+        self.say(1, 111, "ORDER gmk39038rdt", 10, 1)
+        self.say(2, 222, "ORDER GMK39038RDT", 10, 1)          # not the Groww account holder
+        self.run_at(10, 3)
+        self.assertEqual(self.get("order_requests.json")["ids"], ["GMK39038RDT"])
+        self.assertIn("only for the Groww account holder", self.texts())
+        sync = lambda t, state, filled, avg: (
+            self.put("positions.json", {"date": "2026-11-09", "synced_at": t, "positions": []}),
+            self.put("orders.json", {"date": "2026-11-09", "synced_at": t, "orders": [
+                {"id": "GMK39038RDT", "symbol": "TATASTEEL", "side": "BUY", "type": "LIMIT",
+                 "qty": 100, "filled_qty": filled, "price": 183.5, "avg_price": avg, "state": state}]}))
+        sync("10:05", "open", 0, None)
+        self.run_at(10, 8)
+        self.assertIn("ORDER OPEN — TATASTEEL", self.texts())
+        self.run_at(10, 14)                                    # 10 min later: asks Groww again
+        req = self.get("mytrades.json")["orders"]["GMK39038RDT"]["req"]
+        self.assertEqual(req, "10:14")
+        sync("10:16", "executed", 100, 183.52)
+        self.run_at(10, 18)
+        t = self.texts()
+        self.assertIn("ORDER EXECUTED — TATASTEEL", t)
+        self.assertIn("MY TRADE STARTED — TATASTEEL", t)       # tracking starts by itself
+        tr = self.get("mytrades.json")["trades"]["111"][0]
+        self.assertEqual((tr["qty"], tr["entry"]), (100, 183.52))
+        self.assertEqual(self.get("order_requests.json")["ids"], [])
+
     def test_market_closed(self):
         CLOCK[0] = dt.datetime(2026, 11, 7, 18, 0, tzinfo=IST)   # Saturday
         ts = int(CLOCK[0].timestamp())
