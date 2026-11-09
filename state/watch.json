@@ -85,13 +85,15 @@
   "13:30 IRFC 81.77 VWAP \u20b981.36 status in_zone",
   "13:30 HINDALCO 956.50 VWAP \u20b9947.85 status in_zone",
   "13:35 IRFC 81.81 VWAP \u20b981.36 status in_zone",
-  "13:35 HINDALCO 958.70 VWAP \u20b9947.95 status in_zone"
+  "13:35 HINDALCO 958.70 VWAP \u20b9947.95 status in_zone",
+  "13:40 IRFC 81.90 VWAP \u20b981.37 status in_zone",
+  "13:40 HINDALCO 958.30 VWAP \u20b9948.03 status in_zone"
  ],
  "health": {
   "ready": true,
   "pinger": true
  },
- "last_run": "13:35",
+ "last_run": "13:40",
  "fire_error": null,
  "last_fire": "13:30",
  "fired_at": "13:30",
