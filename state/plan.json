@@ -1,17 +1,31 @@
 {
  "date": "2026-11-09",
- "verdict_id": "2026-11-09_1010",
- "go_count": 0,
+ "verdict_id": "2026-11-09_1025",
+ "go_count": 1,
  "connectors": {
   "groww": true,
   "indmoney": true,
   "investsights": true
  },
- "plan": null,
- "blocked": {
-  "symbol": "MOTHERSON",
-  "reasons": [
-   "net R:R 1.50 below 1.5"
-  ]
+ "plan": {
+  "symbol": "BANKBARODA",
+  "yahoo": "BANKBARODA.NS",
+  "name": "Bank of Baroda",
+  "side": "long",
+  "entry_type": "dip",
+  "zone_low": 251.95,
+  "zone_high": 252.3,
+  "entry": 252.15,
+  "max_entry": 252.3,
+  "trigger_close_above": 251.95,
+  "sl": 251.4,
+  "t1": 254.6,
+  "t2": 256.5,
+  "qty": 396,
+  "deadline": "13:30",
+  "cancel_if_high_reaches": 254.2,
+  "cancel_if_close_below": 251.9,
+  "exit_if_close_below_after_entry": 251.6,
+  "time_stop": "15:10"
  }
 }
