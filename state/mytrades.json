@@ -1,5 +1,5 @@
 {
- "offset": 572145767,
+ "offset": 572145768,
  "date": "2026-11-09",
  "trades": {
   "1322737291": [
@@ -59,19 +59,25 @@
     "symbol": "IRFC",
     "yahoo": "IRFC.NS",
     "qty": 1223,
-    "left": 1223,
+    "left": 0,
     "entry": 82.09,
     "sl": 81.2,
     "t1": 83.2,
     "t2": 84.6,
     "opened": "11:48",
     "checked": "14:15",
-    "realized": 0.0,
-    "sells": [],
+    "realized": 158.98999999999444,
+    "sells": [
+     {
+      "qty": 1223,
+      "price": 82.22,
+      "at": "14:23"
+     }
+    ],
     "flags": {},
     "plan": true,
     "broker": "Groww",
-    "sync": "done"
+    "sync": "pending"
    },
    {
     "symbol": "HINDALCO",
@@ -83,7 +89,7 @@
     "t1": 970.0,
     "t2": 975.0,
     "opened": "12:47",
-    "checked": "14:15",
+    "checked": "14:18",
     "realized": 0.0,
     "sells": [],
     "flags": {},
@@ -101,6 +107,6 @@
   }
  },
  "menu": 10,
- "sync_request": null,
- "sync_fired": null
+ "sync_request": "14:23",
+ "sync_fired": "14:23"
 }
