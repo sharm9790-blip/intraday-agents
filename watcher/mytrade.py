@@ -158,6 +158,11 @@ def apply_sync(st, state_dir, today):
         if not tr["left"]:
             lines += ["", f"✅ <b>Trade closed: {fmt_pnl(tr['realized'])}</b> (before costs)"]
         w.telegram(w.card("🔄", f"SYNCED FROM GROWW — {w.esc(tr['symbol'])}", lines, footer=False), to=chat)
+        big = size_warn(tr["left"], ba, tr["sl"], tr.get("plan_qty")) if tr["left"] else []
+        if big:
+            w.telegram(w.card("⚠️", f"TOO BIG — {w.esc(tr['symbol'])}", ["", *big, "",
+                              "One bad candle here costs more than the whole plan allows."],
+                              footer=False), to=chat)
 
 
 def get_updates(offset):
@@ -201,6 +206,26 @@ def today_plan(state_dir, today, sym=None):
     if sym:
         plans = [p for p in plans if p["symbol"].upper() == sym.upper()]
     return plans[-1] if plans else None
+
+
+MAX_RISK = 1000          # ₹ to the stop-loss per trade
+MAX_VALUE = 100000 * 5   # ₹1L capital at ~5x intraday margin
+STALE_MIN = 75           # minutes with no real move before the "not moving" nudge
+
+
+def size_warn(qty, entry, sl, plan_qty=None):
+    """Lines warning that a position is bigger than the plan allows (empty if fine)."""
+    out = []
+    risk = qty * (entry - sl) if sl and entry > sl else 0
+    if risk > MAX_RISK:
+        keep = int(MAX_RISK // (entry - sl))
+        out.append(f"🛑 Risk to SL is <b>₹{w.lakh(risk)}</b>, over the ₹{w.lakh(MAX_RISK)} limit.")
+        out.append(f"👉 Sell <b>{qty - keep}</b> now and keep <b>{keep}</b>.")
+    if qty * entry > MAX_VALUE:
+        out.append(f"💰 Position ₹{w.lakh(qty * entry)} needs more than your ₹1L margin.")
+    if plan_qty and qty > plan_qty * 1.2:
+        out.append(f"📦 Plan qty was <b>{plan_qty}</b>, you hold <b>{qty}</b> ({qty / plan_qty:.1f}×).")
+    return out
 
 
 def fmt_pnl(x):
@@ -438,6 +463,7 @@ def handle(st, chat, text, when, state_dir, today):
             "t2": float(t2) if t2 else (plan["t2"] if plan else None),
             "opened": when.strftime("%H:%M"), "checked": when.strftime("%H:%M"),
             "realized": 0.0, "sells": [], "flags": {}, "plan": bool(plan),
+            "plan_qty": plan["qty"] if plan else None,
             "broker": "INDmoney" if on_ind else "Groww",
         }
         mine.append(tr)
@@ -454,7 +480,8 @@ def handle(st, chat, text, when, state_dir, today):
         if tr["sl"]:
             risk = q * (price - tr["sl"])
             ok = "✅" if risk <= 1000 else "⚠️ over ₹1,000 — reduce qty"
-            lines += [f"Real risk to SL {w.rs(tr['sl'])}: ₹{w.lakh(risk)} {ok}", "",
+            lines += [f"Real risk to SL {w.rs(tr['sl'])}: ₹{w.lakh(risk)} {ok}",
+                      *size_warn(q, price, tr["sl"], tr["plan_qty"]), "",
                       f"👉 Place <b>SL-M {q} @ {w.rs(tr['sl'])}</b> now"]
         else:
             lines += ["", "⚠️ No SL known — I can't warn you on a fall.",
@@ -582,6 +609,19 @@ def track(st, now):
                     f"T2 {w.rs(tr['t2'])} reached", now_line, "",
                     f"👉 Sell the remaining <b>{tr['left']}</b>",
                     f"Then send <code>SOLD {w.esc(tr['symbol'])}</code>"])
+                sent = True
+            held = mins - w.hhmm(tr["opened"])
+            if (not sent and tr["t1"] and tr["t1"] > tr["entry"] and not f.get("t1") and not f.get("stale")
+                    and held >= STALE_MIN and mins < w.hhmm("15:00")
+                    and price < tr["entry"] + 0.3 * (tr["t1"] - tr["entry"])):
+                f["stale"] = True
+                say("NOT MOVING", "😴", [
+                    f"Held {held} min, still near your buy {w.rs(tr['entry'])}", now_line,
+                    f"🎯 T1 {w.rs(tr['t1'])} is {(tr['t1'] / price - 1) * 100:+.1f}% away", "",
+                    "The setup expected a move by now. Your choice:",
+                    f"👉 Exit near cost and free the margin, <b>or</b>",
+                    f"👉 Move SL-M up to cost <b>{w.rs(tr['entry'])}</b> so it can't turn into a loss",
+                    f"Then send <code>SOLD {w.esc(tr['symbol'])}</code> if you exit"])
                 sent = True
             if mins >= w.hhmm("15:10") and not f.get("exit"):
                 f["exit"] = True

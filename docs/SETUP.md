@@ -210,6 +210,12 @@ All commands are in the bot's **/ Menu** (registered with `setMyCommands`; `BOT_
 
 Loud alerts, only to the person who sent the trade: real risk check (≤ ₹1,000), 🔴 SL touched, 🎯 T1 (sell half, SL to cost), 🏁 T2, ↩️ back at cost, ⏳ 15:00, ⏰ 15:10 exit, 🧾 MY TRADES TODAY at 15:45.
 
+Size and stale-trade guards (`MAX_RISK`, `MAX_VALUE`, `STALE_MIN` in `mytrade.py`):
+- ⚠️ **TOO BIG**: on BOUGHT and after each Groww sync, if risk to SL is over ₹1,000, the position is over ₹5L (₹1L × ~5x margin), or qty is over 1.2× the plan. It says how many to sell to get back to ₹1,000 risk.
+- 😴 **NOT MOVING**: once per trade, after 75 min with T1 not reached and price still under 30% of the way from entry to T1 (before 15:00). Suggests exiting near cost or moving SL-M to cost.
+- 🔓 **SLOT FREED**: when you've sold all of a live plan's stock (SOLD, or Groww shows it closed), the plan stops taking one of the 3 slots, so scans resume. It is still paper-tracked quietly (no alerts) for the scorecard.
+- `SCORE` starts with **Today so far**: every plan's status, paper P&L, and your real trades with booked P&L.
+
 Plumbing: `watcher/mytrade.py` + `.github/workflows/mytrade.yml`. `watch.yml` starts `mytrade.yml` (`gh workflow run`) on any pinger run that has an open trade, a pending Groww sync, a new Telegram message, or a due summary. State: `state/mytrades.json` (Telegram offset, trades per chat), `state/positions.json` (last Groww sync). Messages are read only from the chats in `TELEGRAM_CHAT_ID`; messages sent outside 09:00–15:55 are handled at the next morning's first run. Skill: `.claude/skills/positions-sync/SKILL.md`. Nothing places, changes or cancels orders.
 
 ### 🩺 Health alerts (`watcher/health.py`)
