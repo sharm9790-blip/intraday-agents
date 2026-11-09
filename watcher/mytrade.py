@@ -14,7 +14,7 @@ read-only; the real qty and average prices then replace the provisional ones.
 
 Every 5 min (workflow mytrade.yml) it reads new messages, replies, and watches
 each open trade against YOUR price: SL, T1 (sell half, SL to cost), T2,
-15:00 warning and 15:10 exit, P&L. Each person's trades and messages stay in
+14:50 warning and 15:00 exit, P&L. Each person's trades and messages stay in
 their own chat. Commands are accepted only from TELEGRAM_CHAT_ID chats.
 It never places, changes or cancels orders.
 
@@ -612,7 +612,7 @@ def track(st, now):
                 sent = True
             held = mins - w.hhmm(tr["opened"])
             if (not sent and tr["t1"] and tr["t1"] > tr["entry"] and not f.get("t1") and not f.get("stale")
-                    and held >= STALE_MIN and mins < w.hhmm("15:00")
+                    and held >= STALE_MIN and mins < w.hhmm(w.WARN_AT)
                     and price < tr["entry"] + 0.3 * (tr["t1"] - tr["entry"])):
                 f["stale"] = True
                 say("NOT MOVING", "😴", [
@@ -623,18 +623,18 @@ def track(st, now):
                     f"👉 Move SL-M up to cost <b>{w.rs(tr['entry'])}</b> so it can't turn into a loss",
                     f"Then send <code>SOLD {w.esc(tr['symbol'])}</code> if you exit"])
                 sent = True
-            if mins >= w.hhmm("15:10") and not f.get("exit"):
+            if mins >= w.hhmm(w.EXIT_BY) and not f.get("exit"):
                 f["exit"] = True
                 say("EXIT NOW", "⏰", [f"You still hold <b>{tr['left']}</b>", now_line, "",
-                                      "👉 <b>Sell everything</b> — 15:10 rule",
+                                      f"👉 <b>Sell everything</b> — {w.EXIT_BY} rule (Groww squares off at 15:05 + ₹50 fee)",
                                       f"Then send <code>SOLD {w.esc(tr['symbol'])}</code>"])
-            elif mins >= w.hhmm("15:00") and not f.get("warn"):
+            elif mins >= w.hhmm(w.WARN_AT) and not f.get("warn"):
                 f["warn"] = True
                 say("10 MIN TO EXIT", "⏳", [f"You still hold <b>{tr['left']}</b>", now_line,
-                                            "", "Plan to be out by 15:10."])
+                                            "", f"Plan to be out by {w.EXIT_BY}."])
             tr["checked"] = (now - timedelta(minutes=5)).strftime("%H:%M")
             nxt = (f"T1 {w.rs(tr['t1'])}" if tr["t1"] and not f.get("t1")
-                   else f"T2 {w.rs(tr['t2'])}" if tr["t2"] and not f.get("t2") else "exit by 15:10")
+                   else f"T2 {w.rs(tr['t2'])}" if tr["t2"] and not f.get("t2") else f"exit by {w.EXIT_BY}")
             gap = lambda lvl: f"{(lvl / price - 1) * 100:+.1f}%" if lvl else ""
             boards.setdefault(chat, []).extend([
                 f"<b>{w.esc(tr['symbol'])}</b> {tr['left']} @ {w.rs(tr['entry'])}",

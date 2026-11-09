@@ -395,8 +395,12 @@ class TestMyTrade(Base):
         self.run_at(10, 15)
         st = self.get("mytrades.json")
         self.assertEqual(st["trades"]["111"][0]["left"], 0)
-        self.run_at(15, 10)
+        self.run_at(14, 50)
+        self.assertIn("10 MIN TO EXIT", self.texts())
+        self.assertNotIn("EXIT NOW", self.texts())
+        self.run_at(15, 0)
         self.assertIn("EXIT NOW", self.texts())             # 222 still holds
+        self.assertIn("15:00 rule", self.texts())
         self.run_at(15, 46)
         self.assertIn("MY TRADES TODAY", self.texts())
         self.assertIn("2026-11-09", self.get("realtrades.json")["days"])

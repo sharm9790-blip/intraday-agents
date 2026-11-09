@@ -15,7 +15,7 @@ You may make a few quick tool calls (Groww `get_ltp` / `get_quotes_and_depth`, I
   - Target 1 = minimum acceptable profit — book 50% there and move SL to entry (cost).
   - Target 2 = trail the rest (e.g. below 5-min swing lows or VWAP).
   - Hard SL — no averaging down, no widening the stop.
-  - Time stop: exit everything by 15:10 IST if neither target nor SL is hit.
+  - Time stop: exit everything by 15:00 IST if neither target nor SL is hit.
   - Invalidation: conditions that mean exit early even before SL (e.g. Nifty breaks day low, 5-min close below VWAP).
 - **Entry type: BUY NOW or DIP.** Default to **BUY NOW** when the setup is already confirmed (price above VWAP, higher lows, volume rising, Nifty/sector not against it) and, with entry = live price and SL at a real structure level, net R:R after costs is still ≥ 1.5 to T1. Then `entry_type: "now"`, entry = live price, `zone_low` = entry − 0.2%, `zone_high` = `max_entry` = entry + 0.2%, `trigger_close_above` = `zone_low`, deadline = verdict time + 15 min. Use a **DIP** entry (`entry_type: "dip"`) only when the price is stretched (≥ 1% above VWAP, or a big candle just ran into resistance) or R:R at the live price is below 1.5 but passes at a nearby pullback; keep that zone within 0.5% of the live price. Say in one line why you chose NOW or DIP. (Record so far: on 6 Nov, 4 of 5 dip plans never got their dip, yet all 5 reached T1.)
 - If the prompt includes "What recent plans did" (scorecard stats), use it: e.g. when entries were rarely reached while plain limit orders made money, put the buy zone nearer the live price/VWAP; when bought plans mostly lost, be stricter. Say in one line how the record changed your levels.
@@ -39,7 +39,7 @@ Order plan:
 | Max loss | ₹x (incl. approx. costs) |
 | Profit at T1 / T2 | ₹x / ₹x (net of approx. costs) |
 | Net R:R | 1:x |
-| Time stop | 15:10 IST |
+| Time stop | 15:00 IST |
 Invalidate / exit early if: ...
 Confidence: x/10
 ```

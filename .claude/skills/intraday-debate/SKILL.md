@@ -33,7 +33,7 @@ All state lives on the git branch `claude/intraday-state`. Work on that branch.
               "zone_low": 766.0, "zone_high": 767.5, "entry": 766.5, "max_entry": 768.0,
               "trigger_close_above": 766.0, "sl": 761.8, "t1": 777.0, "t2": 784.0, "qty": 185,
               "deadline": "10:45", "cancel_if_high_reaches": 777.0, "cancel_if_close_below": 764.0,
-              "exit_if_close_below_after_entry": 763.5, "time_stop": "15:10"}
+              "exit_if_close_below_after_entry": 763.5, "time_stop": "15:00"}
      ```
      Always add `"connectors": {"groww": true, "indmoney": true, "investsights": true}` — `false` for any connector whose tools were missing, needed sign-in, or failed on every call this run (the watcher sends the user a one-time "OFFLINE — reconnect" alert).
      Numbers only, no ₹ signs. `yahoo` = NSE symbol + `.NS` (M&M → `M&M.NS`). Also add `"name"`: the company name for news search (e.g. `"Tata Steel"`), and `"entry_type"`: `"now"` (the watcher alerts BUY NOW as soon as the price is between `zone_low` and `max_entry`) or `"dip"` (waits for a green 5-min close in the zone), as the Judge decided.
