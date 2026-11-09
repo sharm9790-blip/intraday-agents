@@ -49,8 +49,8 @@ Telegram bot  @sharmi_intraday_bot  ──▶  your phone
 |---|---|
 | 09:15 | Watcher starts checking (exits by itself outside 09:15–15:30). |
 | 09:45 | First debate (fired by the watcher). |
-| 09:45 – 14:30 | Debate every 15 min, all fired by the watcher through the routine's API trigger. |
-| 14:30 | No new entries after this (Judge rule); last fires. |
+| 09:45 – 14:15 | Debate every 15 min (last fire 14:15), all fired by the watcher through the routine's API trigger. |
+| 14:30 | No new entries after this (Judge rule). No 14:30 scan: it could only say NO TRADE. |
 | 15:00 | Time stop — exit any open position. |
 | 15:30 | Watcher stops. |
 
@@ -335,7 +335,7 @@ A 📊 status card is sent on runs in the first 5 minutes of each quarter hour w
 
 ## 7. Common tasks
 
-**Run a debate now** — routine page → **Run now**, or locally `gh workflow run watch.yml` (fires only in a free quarter-hour slot, 09:45–14:30).
+**Run a debate now** — routine page → **Run now**, or locally `gh workflow run watch.yml` (fires only in a free quarter-hour slot, 09:45–14:15).
 
 **Test the watcher locally**
 ```bash
@@ -345,7 +345,7 @@ DRY_RUN=1 SSL_CERT_FILE=/etc/ssl/cert.pem python3 watcher/watch.py path/to/state
 
 **Change capital or risk** — edit the routine prompt on claude.ai (`scan capital=… risk=…`).
 
-**Change scan frequency** — debates: watcher fires every quarter hour 09:45–14:30 (see `fire_debate` in `watch.py`). Alerts: change the cron-job.org schedule.
+**Change scan frequency** — debates: watcher fires every quarter hour 09:45–14:15 (see `fire_debate` in `watch.py`). Alerts: change the cron-job.org schedule.
 
 **Change agent behaviour** — edit `.claude/agents/*.md` on `main`, merge into `claude/intraday-state`, push both. Also copy to `~/.claude/agents/` if you use the local `/intraday-debate` skill.
 
