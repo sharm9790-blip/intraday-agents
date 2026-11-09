@@ -599,7 +599,7 @@ def track(st, now):
                 say("MY T1 REACHED", "🎯", [
                     f"T1 {w.rs(tr['t1'])} reached", now_line, "",
                     f"👉 Sell <b>{half}</b> (if your T1 order didn't fill)",
-                    f"👉 Move SL-M to cost <b>{w.rs(tr['entry'])}</b>",
+                    f"👉 Edit SL-M: qty <b>{tr['left'] - half}</b> (what's left), trigger cost <b>{w.rs(tr['entry'])}</b>",
                     f"Then send <code>SOLD {w.esc(tr['symbol'])} {half} {tr['t1']}</code>"])
                 tr["sl"] = tr["entry"]
                 sent = True

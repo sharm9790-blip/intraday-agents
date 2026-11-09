@@ -229,9 +229,11 @@ class TestMultiPlan(Base):
             self.assertIn("BUY TRIGGER — SBIN", t)
             self.assertIn("Limit price  <code>183.5</code>", t)     # copy-ready order values
             self.assertIn("SL-M sell", t)
+            self.assertIn("When that T1 sell fills: edit the SL-M to qty", t)  # no short after T1
             self.assertNotIn("BUY TRIGGER — TATASTEEL", t)
             self.at(14, 1); w.main(self.dir)
             self.assertIn("TARGET 1 HIT — SBIN", self.texts())
+            self.assertIn("Edit SL-M: qty", self.texts())
             # same stock again → blocked, not a second SBIN plan
             self.verdict("2026-11-09_1405", other)
             self.at(14, 6); w.main(self.dir)

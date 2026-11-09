@@ -43,6 +43,7 @@ ok(zone && zone.to.length === 1 && zone.to[0] === "1322737291", "paused chat get
 const t1 = a.find((x) => x.key.endsWith(":t1"));
 ok(t1 && t1.text.includes("Sell <b>611</b>") && t1.to[0] === "1322737291", "T1 alert to owner, half qty");
 ok(t1 && t1.text.includes("+₹1,419"), "T1 P&L " + (t1 && t1.text));
+ok(t1 && t1.text.includes("Edit SL-M: qty <b>612</b>"), "T1 tells you to cut SL-M qty");
 
 // same prices again → no repeats
 ok(decide(list, { BANKINDIA: 142.5, IRFC: 83.25 }, sent, "14:23", mt).length === 0, "no repeat");
