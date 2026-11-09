@@ -108,16 +108,18 @@
   "14:20 HINDALCO 958.30 VWAP \u20b9948.82 status in_zone",
   "14:20 BANKINDIA 142.97 VWAP \u20b9141.68 status waiting",
   "14:25 HINDALCO 956.80 VWAP \u20b9948.9 status in_zone",
-  "14:25 BANKINDIA 142.90 VWAP \u20b9141.7 status waiting"
+  "14:25 BANKINDIA 142.90 VWAP \u20b9141.7 status waiting",
+  "14:30 HINDALCO 957.60 VWAP \u20b9948.98 status closed",
+  "14:30 BANKINDIA 142.99 VWAP \u20b9141.72 status cancelled"
  ],
  "health": {
   "ready": true,
   "pinger": true
  },
- "last_run": "14:25",
+ "last_run": "14:30",
  "fire_error": null,
- "last_fire": "14:15",
- "fired_at": "14:15",
+ "last_fire": "14:30",
+ "fired_at": "14:30",
  "verdicts": 13,
  "plans": [
   {
@@ -345,9 +347,10 @@
     "time_stop": "14:30",
     "start": "12:15"
    },
-   "status": "in_zone",
+   "status": "closed",
    "since": "12:15",
-   "paper_booked": 0
+   "paper_booked": 0,
+   "paper_result": -94
   },
   {
    "symbol": "BANKINDIA",
@@ -374,10 +377,11 @@
     "time_stop": "15:10",
     "start": "14:20"
    },
-   "status": "waiting",
+   "status": "cancelled",
    "since": "14:20",
    "paper_booked": 0
   }
  ],
- "trades": 2
+ "trades": 2,
+ "day_pnl": -94
 }
