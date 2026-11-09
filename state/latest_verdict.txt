@@ -1,16 +1,20 @@
-⚪ <b>NO TRADE — 14:36 IST</b>
+🔴 <b>NO TRADE</b>
+🕐 09:52 IST  ·  Confidence 8/10
 
-📈 Nifty 24,867  (+1.35%)
-🏦 Bank Nifty 58,783  (+1.75%)
-Mood: narrow rally, mid caps flat
-VIX 17.3 (+11%)
+Nothing met net R:R 1.5.
+Nifty fading, only 30 min of data.
 
-<b>Why nothing passed</b>
-• SIEMENS — results due today, R:R 0.8
-• DIVISLAB — call wall 10300, R:R 0.65
-• MCX — climax into 52wk high, R:R 0.68
+<b>Skipped</b>
+• SBIN — 1050 call wall, R:R 1.2
+• KALYANKJIL — results tomorrow
+• DIVISLAB — climax top, R:R 0.6
+• LAURUSLABS — 2400 call wall, R:R 0.8
 
-No fresh entries after 14:30.
-Only ~30 min left to 15:10 exit.
+<b>Flips SBIN to GO</b>
+• 5-min close above ₹1,050
+• Volume over 1M per candle
+
+ℹ️ Groww not connected this run;
+used INDmoney + InvestSights.
 
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>

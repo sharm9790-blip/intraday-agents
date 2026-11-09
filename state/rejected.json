@@ -1,31 +1,9 @@
 {
- "date": "2026-11-06",
+ "date": "2026-11-09",
  "symbols": {
-  "ICICIBANK": "11:25 net R:R 0.94 to T1, fading volume, stalled under 1527, VIX rising; flips only on 15-min close >1528 on >1M vol",
-  "DLF": "broke 734.9 pullback SL at open",
-  "ETERNAL": "below 359.8 trigger, call wall 355/360",
-  "TITAN": "call wall 4,900-5,000, range 2.2x ATR, falling volume; 11:25 R:R 0.75",
-  "ADANIPORTS": "09:45 reversal after late slide",
-  "BHARTIARTL": "open = high, fading",
-  "M&M": "results day 2, 1.75% above VWAP, 3,300 call wall; flips only on 15-min close > 3,305 with 3,300 CE OI falling before 10:45; 11:25 R:R 0.63, sell-heavy depth",
-  "HDFCBANK": "GO plan 09:54 cancelled: not triggered by 10:45, ran to 776.8 without pullback",
-  "KALYANKJIL_breakout": "breakout >587.6 rejected: 588.5-593 Sep supply, R:R <1 after costs (pullback 582 kept as backup)",
-  "KOTAKBANK": "11:55 net R:R 0.8, double top 472.45-472.8, call writers 470/475/480, RBI hike headline; flips only on high-vol 5-min close >473.5",
-  "SUNPHARMA": "11:55 net R:R 0.74, volume dead 8-32K/candle, 1900 call wall growing; flips only on volume break >1852",
-  "NTPC_breakout": "breakout >319.05 rejected: net R:R 1.26, 320 call wall (pullback 317.95 kept)",
-  "GLENMARK": "13:45 profit-fall result, parabolic, fading vol, call wall 2660-2700, net R:R 1.2; flips only on 5-min close >2683 on vol>100k",
-  "NTPC": "13:45 failed breakout 321.1, call wall 320, PCR 0.66, net R:R 0.95",
-  "AXISBANK": "13:45 net R:R 0.72, lags sector",
-  "TATASTEEL_breakout": "breakout >184.85 rejected: net R:R 1.06 (pullback 183.5 kept)",
-  "HYUNDAI": "14:05 net R:R 0.9, T1 on 2200 call wall, double top 2178-2181; flips only on 5-min close >2182 on rising volume",
-  "HDFCLIFE": "14:05 net R:R 0.55, 556 sell queue, PCR 0.63, stop inside noise",
-  "ULTRACEMCO": "14:05 chase at day high net R:R 0.5, 12500 call wall; only pullback 12330 limit, SL 12300, by 14:30",
-  "TATACAP": "14:20 net R:R 0.91, sell book 2.6x buy, 356.3 high tested repeatedly, no OI; flips only on 5-min close >356.40 with SL<=2.5 and T1>=363 before 14:30",
-  "MARUTI_14": "14:20 net R:R 0.76, 12800 call wall, volume dying",
-  "BAJAJ-AUTO": "14:20 net R:R 0.86, 10919 failed high, 10900 call wall",
-  "SBIN": "14:20 net R:R 0.84, 1016 rejected, PCR 0.75",
-  "SIEMENS": "14:36 results due today unannounced, below 3551 trigger, 3550 call wall, net R:R 0.8",
-  "DIVISLAB": "14:36 rejection wick 10280, volume fading, sell depth 2x, 10300 call wall, net R:R 0.65",
-  "MCX": "14:36 climax candle into 52wk high 3538, sell-heavy depth, SL incoherent, net R:R 0.68"
+  "SBIN": "09:52 net R:R 1.18, 1050 CE wall 62.9L, fading vol; flips only on 5-min close >1050 on >1M vol",
+  "KALYANKJIL": "09:52 results 11-10, dead volume, asks 58%, net R:R 0.8",
+  "DIVISLAB": "09:52 climax top, net R:R 0.6, 12000 CE wall",
+  "LAURUSLABS": "09:52 2400 CE wall 13L, net R:R 0.8, thin volume"
  }
 }
