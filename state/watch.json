@@ -4,6 +4,8 @@
  "status": null,
  "since": null,
  "log": [],
- "health": {},
- "last_run": "09:14"
+ "health": {
+  "ready": true
+ },
+ "last_run": "09:15"
 }
