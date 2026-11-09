@@ -73,16 +73,18 @@
   "13:00 HINDALCO 960.45 VWAP \u20b9946.93 status waiting",
   "13:05 BANKBARODA 256.12 VWAP \u20b9253.49 status waiting",
   "13:05 IRFC 82.10 VWAP \u20b981.31 status in_zone",
-  "13:05 HINDALCO 960.40 VWAP \u20b9947.08 status waiting"
+  "13:05 HINDALCO 960.40 VWAP \u20b9947.08 status waiting",
+  "13:10 IRFC 82.22 VWAP \u20b981.33 status in_zone",
+  "13:10 HINDALCO 960.30 VWAP \u20b9947.21 status waiting"
  ],
  "health": {
   "ready": true,
   "pinger": true
  },
- "last_run": "13:05",
+ "last_run": "13:10",
  "fire_error": null,
- "last_fire": "12:00",
- "fired_at": null,
+ "last_fire": "13:00",
+ "fired_at": "13:10",
  "verdicts": 8,
  "plans": [
   {
@@ -199,9 +201,10 @@
     "exit_if_close_below_after_entry": 251.6,
     "time_stop": "15:10"
    },
-   "status": "waiting",
+   "status": "closed",
    "since": "10:25",
-   "paper_booked": 0
+   "paper_booked": 0,
+   "user_sold": "13:10"
   },
   {
    "symbol": "MUTHOOTFIN",
