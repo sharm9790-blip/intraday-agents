@@ -23,13 +23,15 @@
   "11:30 BANKBARODA 253.57 VWAP \u20b9252.26 status waiting",
   "11:30 MUTHOOTFIN 2935.20 VWAP \u20b92,916.39 status waiting",
   "11:35 BANKBARODA 254.23 VWAP \u20b9252.4 status waiting",
-  "11:35 MUTHOOTFIN 2937.00 VWAP \u20b92,916.53 status waiting"
+  "11:35 MUTHOOTFIN 2937.00 VWAP \u20b92,916.53 status waiting",
+  "11:40 BANKBARODA 254.54 VWAP \u20b9252.52 status waiting",
+  "11:40 MUTHOOTFIN 2940.60 VWAP \u20b92,918.01 status cancelled"
  ],
  "health": {
   "ready": true,
   "pinger": true
  },
- "last_run": "11:35",
+ "last_run": "11:40",
  "fire_error": null,
  "last_fire": "11:30",
  "fired_at": "11:35",
@@ -134,7 +136,7 @@
     "time_stop": "15:10",
     "start": "11:10"
    },
-   "status": "waiting",
+   "status": "cancelled",
    "since": "11:10",
    "paper_booked": 0
   }
