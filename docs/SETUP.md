@@ -156,6 +156,34 @@ Setup (dash.cloudflare.com, free account):
 5. Worker → Settings → Trigger events → Cron trigger `* * * * *`.
 6. Test: open the worker's URL — `{"ok": true, ...}`. Send HELP to the bot; reply in ~1 min.
 
+**⚡ Live price alerts (Groww API, every minute, read-only).** The same worker,
+Mon–Fri 09:15–15:30 IST, reads `state/watch.json` and `state/mytrades.json` from the
+state branch, gets the Groww last traded price for all live-plan and open-trade
+stocks in one call (`GET /v1/live-data/ltp`, limit 5,000/day; this uses ~375), and
+sends an alert the first time a price reaches a level: plan ⚡ IN BUY ZONE /
+⚡ RAN UP (cancel level) / ⚡ BELOW CANCEL LEVEL (to every chat not PAUSEd), and
+for your own open trades ⚡ SL LEVEL HIT / ⚡ T1 REACHED / ⚡ T2 REACHED. Each alert
+is sent once a day (KV `livesent:<date>`). The 5-min watcher still applies the plan
+rules on candle closes (🔔 BUY TRIGGER etc.) and keeps the scorecard, so a ⚡ alert
+is the early heads-up and the 5-min alert the confirmation. The only Groww calls
+are the login and the LTP endpoint: nothing places, changes or cancels orders.
+
+Extra setup (you type the secrets in Cloudflare yourself; never paste them in chat):
+7. GitHub → Settings → Developer settings → your fine-grained token for the worker →
+   add **Contents: Read-only** (it needs to read the state files) → Update.
+8. Worker → Settings → Variables and Secrets → add, as **Secrets**, either
+   `GROWW_API_KEY` + `GROWW_API_SECRET`, or `GROWW_API_KEY` + `GROWW_TOTP_SECRET`
+   (the TOTP seed from Groww's Trading API page), or just `GROWW_ACCESS_TOKEN`
+   (the daily token; it expires at 06:00, so you'd paste it each morning).
+   The worker logs in itself and caches the token in KV until Groww's expiry.
+9. Paste the new `cloudflare/worker.js` → Deploy. Test: open the worker URL with
+   `?live=1` — `"live": {"ok": true, ...}` shows the stocks and Groww prices (or
+   `"watching": 0` when nothing is live). If Groww refuses the login you get one
+   ⚠️ Live price alerts off message that day; the 5-min alerts keep working.
+Treat the Groww keys like a password: Groww API keys can usually place orders.
+Regenerate them in Groww if they ever leak. Offline test of the alert logic:
+`jsc -m tests/worker_test.mjs` (macOS JavaScriptCore; `scripts/deploy.sh` runs it).
+
 **INDmoney trades:** add `IND` at the end (`BOUGHT TATASTEEL 544 183.55 IND`,
 `SOLD TATASTEEL IND`). The INDmoney connector only gives market data (no orders or
 positions), so these use your numbers and never ask Groww. Draft orders show an
