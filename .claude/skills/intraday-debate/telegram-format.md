@@ -58,12 +58,12 @@ Reward 1.8× the risk
 <i>Analysis only, not advice. You place orders yourself.</i>
 ```
 
-## Draft order block (GO with Judge confidence above 7 only)
+## Draft order block (every GO)
 
 Insert right after the `📦 Qty` line of the GO template. It is a ready-to-copy order for the user to place in Groww or INDmoney themselves; nothing is sent to either. `<code>` makes each value tap-to-copy in Telegram.
 
 ```
-⚡ <b>HIGH CONFIDENCE 7.5/10</b>
+⚡ <b>HIGH CONFIDENCE 7.5/10</b>   ← this line only when confidence is above 7
 📝 <b>Draft order</b> (you place it)
 Intraday · Limit · NSE
 Qty  <code>185</code>
