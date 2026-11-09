@@ -106,13 +106,15 @@
   "14:15 HINDALCO 956.90 VWAP \u20b9948.7 status in_zone",
   "14:20 IRFC 82.17 VWAP \u20b981.46 status in_zone",
   "14:20 HINDALCO 958.30 VWAP \u20b9948.82 status in_zone",
-  "14:20 BANKINDIA 142.97 VWAP \u20b9141.68 status waiting"
+  "14:20 BANKINDIA 142.97 VWAP \u20b9141.68 status waiting",
+  "14:25 HINDALCO 956.80 VWAP \u20b9948.9 status in_zone",
+  "14:25 BANKINDIA 142.90 VWAP \u20b9141.7 status waiting"
  ],
  "health": {
   "ready": true,
   "pinger": true
  },
- "last_run": "14:20",
+ "last_run": "14:25",
  "fire_error": null,
  "last_fire": "14:15",
  "fired_at": "14:15",
@@ -313,9 +315,10 @@
     "time_stop": "15:10",
     "start": "11:45"
    },
-   "status": "in_zone",
+   "status": "closed",
    "since": "11:45",
-   "paper_booked": 0
+   "paper_booked": 0,
+   "user_sold": "14:25"
   },
   {
    "symbol": "HINDALCO",
