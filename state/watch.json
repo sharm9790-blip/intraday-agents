@@ -5,9 +5,10 @@
  "since": null,
  "log": [],
  "health": {
-  "ready": true
+  "ready": true,
+  "pinger": true
  },
- "last_run": "10:20",
+ "last_run": "10:22",
  "fire_error": null,
  "last_fire": "10:15",
  "fired_at": "10:20",
