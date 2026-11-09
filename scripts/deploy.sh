@@ -5,6 +5,10 @@ set -e
 cd "$(dirname "$0")/.."
 G=$(command -v gh || echo /opt/homebrew/bin/gh)
 python3 -m unittest discover -s tests >/dev/null 2>&1 || { echo "❌ tests failed — not deploying"; python3 -m unittest discover -s tests 2>&1 | tail -20; exit 1; }
+JSC=/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Helpers/jsc
+if [[ -x $JSC ]]; then
+  out=$($JSC -m tests/worker_test.mjs); [[ $out == *"worker tests OK"* ]] || { echo "❌ worker tests failed"; echo "$out"; exit 1; }
+fi
 echo "✅ tests passed"
 if [[ -n "$1" && -n "$(git status --porcelain)" ]]; then
   git add -A && git commit -q -m "$1"
