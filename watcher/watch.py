@@ -21,6 +21,7 @@ from datetime import datetime, timedelta, timezone
 
 import health
 import news
+import recheck
 import risk
 
 PAUSED = set()  # chats that sent PAUSE today (broadcasts skip them)
@@ -498,6 +499,21 @@ def main(state_dir):
         for e in open_plans(watch):
             track(e, now, watch)
         save(watch_path, watch)
+
+    # 2b) Rejected stocks that broke out since → the next debate re-checks them.
+    if hhmm("09:45") <= minutes <= hhmm("14:30"):
+        try:
+            new = recheck.update(state_dir, today, now, candles, load, save,
+                                 skip={e["symbol"] for e in open_plans(watch)})
+        except Exception as e:  # never let this stop the watcher
+            print("recheck failed", e)
+            new = []
+        if new:
+            rc = load(os.path.join(state_dir, "recheck.json"), {}).get("symbols", {})
+            telegram(card("🔁", "RE-CHECK NEXT SCAN", [""] + [
+                f"• <b>{esc(s)}</b> closed {rs(rc[s]['close'])} above its {rc[s]['kind']} "
+                f"{rs(rc[s]['level'])} at {rc[s]['at']} (rejected {rc[s]['rejected_at']})" for s in new
+            ] + ["", "It was rejected earlier; the next scan looks at it again."], footer=False))
 
     # 3) Keep scanning while there is room for another plan.
     live = slots(watch)
