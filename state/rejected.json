@@ -32,6 +32,11 @@
   "NESTLEIND": "13:17 resistance close, poor R:R",
   "MAZDOCK": "13:17 narrow range, thin volume",
   "AUROPHARMA": "13:35 net R:R 0.9, rejected 1850 on 184k vol, RSI 88.6, 1860/1900 CE walls; flips on 5-min close >1860 on rising vol with T1>=1898",
-  "GLENMARK": "13:35 net R:R 1.3, weak Q2, dead volume, 2700 CE wall 400k; flips on close >2714 on real volume"
+  "GLENMARK": "13:35 net R:R 1.3, weak Q2, dead volume, 2700 CE wall 400k; flips on close >2714 on real volume",
+  "BDL": "13:50 net R:R ~1.1, T1 under 3x-tested 1090.5, volume dead, results 11-12; flips on 5-min close >1088.8 on >20k vol or dip to 1076-1077 VWAP with green close",
+  "INDIANB": "13:50 flat since 10:00, R:R ~1",
+  "TMCV": "13:50 dead range, R:R ~1",
+  "LUPIN": "13:50 fading from 10:15 peak",
+  "RVNL": "13:50 spike retraced, same theme as IRFC"
  }
 }
