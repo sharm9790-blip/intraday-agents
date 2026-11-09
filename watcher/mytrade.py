@@ -207,14 +207,49 @@ def fmt_pnl(x):
     return w.inr(round(x))
 
 
+PLAN_STATE = {"waiting": "⏳ waiting", "in_zone": "🟢 bought (paper)", "t1_hit": "🎯 T1 done",
+              "closed": "🏁 closed", "cancelled": "❌ cancelled"}
+
+
+def today_lines(state_dir, chat=None):
+    """Live part of SCORE: today's plans (paper) and your real trades so far."""
+    today = datetime.now(w.IST).strftime("%Y-%m-%d")
+    wt = w.load(os.path.join(state_dir, "watch.json"), {})
+    lines = [f"<b>Today so far · {datetime.now(w.IST):%H:%M}</b>"]
+    if wt.get("date") == today:
+        plans = wt.get("live", [])
+        lines.append(f"Scans {wt.get('verdicts', 0)} · GO plans {len(plans)} · "
+                     f"paper buys {wt.get('trades', 0)}")
+        for e in plans:
+            st = PLAN_STATE.get(e.get("status"), e.get("status"))
+            res = e.get("paper_result")
+            lines.append(f"• {w.esc(e['symbol'])} {e.get('since', '')} {st}"
+                         + (f" {w.inr(res)}" if res is not None else ""))
+        lines.append(f"📈 Paper P&amp;L today {w.inr(wt.get('day_pnl', 0))}")
+    else:
+        lines.append("No scans yet today.")
+    mt = w.load(os.path.join(state_dir, "mytrades.json"), {})
+    mine = mt.get("trades", {}).get(chat, []) if mt.get("date") == today and chat else []
+    if mine:
+        lines.append("")
+        for tr in mine:
+            lines.append(f"🧾 {w.esc(tr['symbol'])} {tr['qty']} @ {w.rs(tr['entry'])}"
+                         + (f" · {tr['left']} open" if tr["left"] else " · closed")
+                         + f" {fmt_pnl(tr['realized'])}")
+        lines.append(f"🧾 <b>Your real P&amp;L today {fmt_pnl(sum(t['realized'] for t in mine))}</b>"
+                     " (booked, before costs)")
+    return lines
+
+
 def score_lines(state_dir, chat=None):
     hist = w.load(os.path.join(state_dir, "scorecard.json"), [])
     acc = w.load(os.path.join(state_dir, "paper.json"), {})
+    lines = today_lines(state_dir, chat) + [""]
     if not hist:
-        return ["No scorecard yet — the first one comes at 15:45."]
+        return lines + ["No full-day scorecard yet — the first one comes at 15:45."]
     run = {k: sum(d["totals"].get(k, 0) for d in hist) for k in ("rules", "limit", "market", "targets")}
     last = hist[-1]
-    lines = [f"Days tracked: <b>{len(hist)}</b> (last {last['date']})", "",
+    lines += [f"<b>Finished days: {len(hist)}</b> (last {last['date']})", "",
              f"Plan rules  {w.inr(run['rules'])}", f"Limit only  {w.inr(run['limit'])}",
              f"Bought at once  {w.inr(run['market'])}", f"Targets reached  +₹{w.lakh(run['targets'])}"]
     if acc:
