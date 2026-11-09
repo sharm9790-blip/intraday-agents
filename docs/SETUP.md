@@ -230,6 +230,15 @@ Each at most once: 🟢 **SYSTEM READY** at the first run from 09:15 (watcher, c
 
 `NSE_HOLIDAYS` at the top of `watcher/watch.py` lists weekday holidays (2026: 10 Nov Diwali Balipratipada, 24 Nov Guru Nanak Jayanti, 25 Dec Christmas). On those days the watcher does nothing, so no cloud runs are wasted. **Add the next year's NSE list every December.** Special sessions such as Diwali Muhurat trading (Sunday 8 Nov 2026) are not covered — the system runs Mon–Fri only.
 
+### ORDER command (Groww order status, read-only)
+`ORDER <Groww order id>` (owner only; Groww → Orders → tap the order → Order ID).
+mytrade.py writes the id to `state/order_requests.json` and fires SYNC_POSITIONS; the
+cloud calls `get_order_details` (read-only) and writes `state/orders.json`. The bot
+replies 🟡 OPEN / 🟠 PARTIAL / ✅ EXECUTED / ⚪ CANCELLED / ❌ REJECTED, re-checks open
+orders every 10 min during market hours (max 12 times), and when a BUY is executed it
+starts tracking the trade with Groww's fill (a SELL closes it). Groww's connector has no
+"list my orders" tool, so the id must come from you.
+
 ### Entry type: BUY NOW or DIP
 The Judge sets `entry_type` in plan.json. **now** (default when the setup is confirmed
 and net R:R at the live price is ≥ 1.5): the watcher sends 🔔 BUY NOW on its next check
