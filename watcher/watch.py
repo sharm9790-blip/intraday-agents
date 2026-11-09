@@ -509,9 +509,14 @@ def main(state_dir):
     msg = None
 
     if status == "waiting":
-        hit_zone = [b for b in new if b[3] <= plan["zone_high"]]
-        trigger = [b for b in hit_zone if b[4] > b[1] and b[4] > plan["trigger_close_above"]
-                   and b[4] <= plan["max_entry"]]
+        buy_now = plan.get("entry_type") == "now"
+        if buy_now:  # BUY NOW plan: buy at once while the price is inside the zone
+            ok = plan["zone_low"] <= price <= plan["max_entry"]
+            hit_zone = trigger = [(now, price, price, price, price, 0)] if ok else []
+        else:
+            hit_zone = [b for b in new if b[3] <= plan["zone_high"]]
+            trigger = [b for b in hit_zone if b[4] > b[1] and b[4] > plan["trigger_close_above"]
+                       and b[4] <= plan["max_entry"]]
         cancel = None
         if minutes >= hhmm(plan["deadline"]) and not trigger:
             cancel = f"Not triggered by {plan['deadline']}"
@@ -530,9 +535,10 @@ def main(state_dir):
         elif trigger:
             status = "in_zone"
             watch["trades"] = watch.get("trades", 0) + 1
-            msg = card("🔔", f"BUY TRIGGER — {sym}", [
+            msg = card("🔔", f"{'BUY NOW' if buy_now else 'BUY TRIGGER'} — {sym}", [
                 f"🕐 {t} IST", "",
-                f"✅ Green 5-min close {rs(trigger[-1][4])}",
+                (f"✅ Price {rs(price)} is in the buy-now zone" if buy_now
+                 else f"✅ Green 5-min close {rs(trigger[-1][4])}"),
                 price_line, "",
                 f"📥 Buy  <b>~{rs(plan['entry'])}</b>  (max {rs(plan['max_entry'])})",
                 *plan_lines(plan), "",

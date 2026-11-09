@@ -34,7 +34,7 @@ All state lives on the git branch `claude/intraday-state`. Work on that branch.
               "deadline": "10:45", "cancel_if_high_reaches": 777.0, "cancel_if_close_below": 764.0,
               "exit_if_close_below_after_entry": 763.5, "time_stop": "15:10"}
      ```
-     Numbers only, no ₹ signs. `yahoo` = NSE symbol + `.NS` (M&M → `M&M.NS`). Also add `"name"`: the company name for news search (e.g. `"Tata Steel"`).
+     Numbers only, no ₹ signs. `yahoo` = NSE symbol + `.NS` (M&M → `M&M.NS`). Also add `"name"`: the company name for news search (e.g. `"Tata Steel"`), and `"entry_type"`: `"now"` (the watcher alerts BUY NOW as soon as the price is between `zone_low` and `max_entry`) or `"dip"` (waits for a green 5-min close in the zone), as the Judge decided.
    - **Code checks before the verdict text (mandatory for every GO):**
      1. `python3 watcher/news.py "<company name>"` — if `level` is `high` (results, board meeting, SEBI/raid, F&O ban… in the last 24 h or today), the trade is **NO-GO** unless the event is already over and priced in; say which headline. The cloud sandbox blocks outside websites, so it normally prints `unknown`: then use InvestSights `get_stock_news` / `get_earnings_calendar` / `get_corporate_actions` for the same check.
      2. `python3 watcher/risk.py state/plan.json --write` — code re-sizes `qty` (1% risk incl. ₹40 brokerage + 0.04% charges, position ≤ capital) and enforces hard limits (net R:R ≥ 1.5, levels in order, entry inside zone, deadline ≤ 14:30). Exit code 2 = **BLOCK**: the script has set `plan` to null; write a NO TRADE verdict that says "⛔ blocked by risk check" with its reasons. On PASS use the script's `qty` (and its risk ₹ / R:R) in the verdict and the draft order — never the Judge's own qty.

@@ -230,6 +230,14 @@ Each at most once: 🟢 **SYSTEM READY** at the first run from 09:15 (watcher, c
 
 `NSE_HOLIDAYS` at the top of `watcher/watch.py` lists weekday holidays (2026: 10 Nov Diwali Balipratipada, 24 Nov Guru Nanak Jayanti, 25 Dec Christmas). On those days the watcher does nothing, so no cloud runs are wasted. **Add the next year's NSE list every December.** Special sessions such as Diwali Muhurat trading (Sunday 8 Nov 2026) are not covered — the system runs Mon–Fri only.
 
+### Entry type: BUY NOW or DIP
+The Judge sets `entry_type` in plan.json. **now** (default when the setup is confirmed
+and net R:R at the live price is ≥ 1.5): the watcher sends 🔔 BUY NOW on its next check
+while the price is between `zone_low` and `max_entry` (±0.2%), else it cancels after
+15 min. **dip**: waits for a green 5-min close in the zone, as before. Added after
+6 Nov, when 4 of 5 dip plans never got their dip but all 5 reached T1. The
+scorecard keeps comparing plan / limit / at-once so the record shows which works.
+
 ## 5. State files (branch `claude/intraday-state`)
 
 | File | Written by | Content |

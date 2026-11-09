@@ -62,6 +62,12 @@ def text(s):
     if s.get("cancels"):
         lines.append("Why plans were not bought: "
                      + "; ".join(f"{k} x{v}" for k, v in s["cancels"].items()) + ".")
+    missed = sum(v for k, v in s.get("cancels", {}).items()
+                 if "without the dip" in k or "not triggered" in k)
+    if s["plans"] >= 4 and missed >= s["plans"] / 2 and s.get("t1_hit", 0) >= s["plans"] / 2:
+        lines.append(f"Lesson: {missed}/{s['plans']} plans never got their dip while T1 was reached in "
+                     f"{s['t1_hit']}/{s.get('with_targets', s['plans'])} — prefer BUY NOW when the setup "
+                     "is confirmed and net R:R at the live price is >= 1.5.")
     if s["days"] >= 3:
         if t["limit"] > t["rules"] and s["entry_fill"] < s["with_targets"] / 2:
             lines.append("Lesson: entries are too far below the price (often never reached) — "
