@@ -1,6 +1,6 @@
-{"date": "2026-11-09", "synced_at": "14:24", "connectors": {"groww": true},
+{"date": "2026-11-09", "synced_at": "14:50", "connectors": {"groww": true},
  "positions": [
   {"symbol": "IRFC", "product": "INTRADAY", "buy_qty": 1223, "buy_avg": 82.09, "sell_qty": 1223, "sell_avg": 82.17, "net_qty": 0},
-  {"symbol": "HINDALCO", "product": "INTRADAY", "buy_qty": 104, "buy_avg": 959.0, "sell_qty": 0, "sell_avg": 0, "net_qty": 104},
+  {"symbol": "HINDALCO", "product": "INTRADAY", "buy_qty": 728, "buy_avg": 957.66, "sell_qty": 728, "sell_avg": 957.71, "net_qty": 0},
   {"symbol": "BANKBARODA", "product": "INTRADAY", "buy_qty": 396, "buy_avg": 252.86, "sell_qty": 396, "sell_avg": 255.14, "net_qty": 0}
  ]}
