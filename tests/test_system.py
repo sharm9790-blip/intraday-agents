@@ -213,6 +213,24 @@ class TestHealth(Base):
         health.check(dt.datetime(2026, 11, 9, 10, 30, tzinfo=IST), watch, {}, w.NSE_HOLIDAYS, out.append)
         self.assertEqual(len(out), n, "alerts must not repeat")
 
+    def test_connector_offline_and_back(self):
+        flags, out = {}, []
+        doc = {"date": "2026-11-09", "connectors": {"groww": False, "indmoney": True}}
+        health.connectors(doc, "2026-11-09", flags, out.append)
+        health.connectors(doc, "2026-11-09", flags, out.append)
+        self.assertEqual(len(out), 1, "warn once")
+        self.assertIn("GROWW OFFLINE", out[0])
+        self.assertIn("claude.ai/customize/connectors", out[0])
+        doc["connectors"]["groww"] = True
+        health.connectors(doc, "2026-11-09", flags, out.append)
+        health.connectors(doc, "2026-11-09", flags, out.append)
+        self.assertEqual(len(out), 2)
+        self.assertIn("Groww back", out[1])
+        health.connectors({"date": "2026-11-08", "connectors": {"groww": False}}, "2026-11-09", flags, out.append)
+        self.assertEqual(len(out), 2, "old files ignored")
+        self.assertIn("reconnect", mt.reconnect_hint("Groww connector needs authentication"))
+        self.assertEqual(mt.reconnect_hint("order not found"), "")
+
 
 class TestMyTrade(Base):
     def setUp(self):

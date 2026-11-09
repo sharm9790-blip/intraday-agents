@@ -11,7 +11,7 @@ All state lives on the git branch `claude/intraday-state`. Work on that branch.
 
 ## Steps
 1. **Branch.** `git fetch origin claude/intraday-state && git checkout claude/intraday-state` (if it does not exist: `git checkout -b claude/intraday-state`). `git pull --rebase` before writing.
-2. **Clock.** Call Groww `resolve_market_time_and_calendar`. Not a trading day, or outside 09:40–14:35 IST → write nothing and stop.
+2. **Clock.** Call Groww `resolve_market_time_and_calendar` (if Groww is unavailable, use `TZ=Asia/Kolkata date` and the NSE holiday list in `watcher/watch.py`). Not a trading day, or outside 09:40–14:35 IST → write nothing and stop.
 3. **Today's state.** Read `state/plan.json` and `state/watch.json` (the 5-min watcher writes `watch.json`).
    - If `plan.json` is for today and `watch.json` shows that plan with status `waiting`, `in_zone` or `t1_hit` → a plan is live; do NOT debate. Stop.
    - If `watch.json` is for today and its `trades` (plans that hit the buy trigger) is 2 or more → stop. Plans that were cancelled before the buy trigger do NOT count; `go_count` in `plan.json` is just a tally of GO verdicts.
@@ -34,6 +34,7 @@ All state lives on the git branch `claude/intraday-state`. Work on that branch.
               "deadline": "10:45", "cancel_if_high_reaches": 777.0, "cancel_if_close_below": 764.0,
               "exit_if_close_below_after_entry": 763.5, "time_stop": "15:10"}
      ```
+     Always add `"connectors": {"groww": true, "indmoney": true, "investsights": true}` — `false` for any connector whose tools were missing, needed sign-in, or failed on every call this run (the watcher sends the user a one-time "OFFLINE — reconnect" alert).
      Numbers only, no ₹ signs. `yahoo` = NSE symbol + `.NS` (M&M → `M&M.NS`). Also add `"name"`: the company name for news search (e.g. `"Tata Steel"`), and `"entry_type"`: `"now"` (the watcher alerts BUY NOW as soon as the price is between `zone_low` and `max_entry`) or `"dip"` (waits for a green 5-min close in the zone), as the Judge decided.
    - **Code checks before the verdict text (mandatory for every GO):**
      1. `python3 watcher/news.py "<company name>"` — if `level` is `high` (results, board meeting, SEBI/raid, F&O ban… in the last 24 h or today), the trade is **NO-GO** unless the event is already over and priced in; say which headline. The cloud sandbox blocks outside websites, so it normally prints `unknown`: then use InvestSights `get_stock_news` / `get_earnings_calendar` / `get_corporate_actions` for the same check.

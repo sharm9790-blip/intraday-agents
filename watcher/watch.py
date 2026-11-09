@@ -411,6 +411,8 @@ def main(state_dir):
     if mt.get("date") == today:
         PAUSED.update(mt.get("paused", []))
     health.check(now, watch, plan_doc, NSE_HOLIDAYS, telegram)
+    health.connectors(load(os.path.join(state_dir, "positions.json"), {}), today,
+                      watch.setdefault("health", {}), telegram)
     save(watch_path, watch)
 
     # 1) Forward a new verdict from the cloud debate (option 1 alert).
