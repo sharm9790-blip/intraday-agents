@@ -50,12 +50,16 @@ jobs:
           git config user.name "intraday-watcher"
           git config user.email "watcher@users.noreply.github.com"
           if [ -n "$(git status --porcelain state/)" ]; then
-            git add state/watch.json state/scorecard.json 2>/dev/null || git add state/watch.json
+            # every file the watcher writes (watch, scorecard, paper, weekly, recheck…):
+            # leaving one out makes the rebase below refuse and the save is lost
+            git add state/
             git commit -m "watch $(TZ=Asia/Kolkata date +%H:%M)"
+            ok=""
             for i in 1 2 3; do
-              git pull --rebase origin claude/intraday-state && git push origin HEAD:claude/intraday-state && break
+              git pull --rebase origin claude/intraday-state && git push origin HEAD:claude/intraday-state && ok=1 && break
               sleep 3
             done
+            [ -n "$ok" ] || { echo "::error::could not save watcher state"; exit 1; }
           fi
       - name: Start My Trade tracker if needed
         if: steps.state.outputs.ok == 'true'
