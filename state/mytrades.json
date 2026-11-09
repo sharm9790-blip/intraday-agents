@@ -66,18 +66,18 @@
     "t2": 84.6,
     "opened": "11:48",
     "checked": "14:15",
-    "realized": 158.98999999999444,
+    "realized": 97.83999999999791,
     "sells": [
      {
       "qty": 1223,
-      "price": 82.22,
-      "at": "14:23"
+      "price": 82.17,
+      "at": "14:24"
      }
     ],
     "flags": {},
     "plan": true,
     "broker": "Groww",
-    "sync": "pending"
+    "sync": "done"
    },
    {
     "symbol": "HINDALCO",
@@ -89,7 +89,7 @@
     "t1": 970.0,
     "t2": 975.0,
     "opened": "12:47",
-    "checked": "14:18",
+    "checked": "14:20",
     "realized": 0.0,
     "sells": [],
     "flags": {},
@@ -107,6 +107,6 @@
   }
  },
  "menu": 10,
- "sync_request": "14:23",
- "sync_fired": "14:23"
+ "sync_request": null,
+ "sync_fired": null
 }
