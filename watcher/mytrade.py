@@ -109,6 +109,14 @@ def fire_sync():
         return False
 
 
+def reconnect_hint(err):
+    """Extra line when the cloud run says Groww itself is not connected."""
+    e = (err or "").lower()
+    if any(k in e for k in ("auth", "connect", "missing", "not available", "sign")):
+        return "\n👉 Groww seems disconnected — reconnect at https://claude.ai/customize/connectors"
+    return ""
+
+
 def apply_sync(st, state_dir, today):
     """Replace the owner's provisional numbers with Groww's real fills."""
     req = st.get("sync_request")
@@ -127,7 +135,8 @@ def apply_sync(st, state_dir, today):
         if pos.get("error"):
             w.telegram(f"⚠️ Groww sync failed ({w.esc(pos['error'][:60])}). "
                        f"Using my estimate for <b>{w.esc(tr['symbol'])}</b>; send "
-                       f"<code>BOUGHT {w.esc(tr['symbol'])} QTY PRICE</code> to correct it.", to=chat)
+                       f"<code>BOUGHT {w.esc(tr['symbol'])} QTY PRICE</code> to correct it."
+                       + reconnect_hint(pos["error"]), to=chat)
             continue
         if not p or not p.get("buy_qty"):
             w.telegram(f"🔄 Groww shows no <b>{w.esc(tr['symbol'])}</b> buy yet — order not filled? "
@@ -250,7 +259,8 @@ def apply_orders(st, state_dir, today, now):
                 o["state"] = "notfound"
                 why = doc.get("error") or "Groww didn't find this order id"
                 w.telegram(f"⚠️ Order <code>{w.esc(oid)}</code>: {w.esc(why[:80])}.\n"
-                           "Check the id in Groww and send ORDER again.", to=chat)
+                           "Check the id in Groww and send ORDER again."
+                           + reconnect_hint(doc.get("error")), to=chat)
                 continue
             state = (r.get("state") or "").lower()
             changed = state != o.get("state")

@@ -6,6 +6,8 @@ Called by watch.py on every run (market days). Sends, at most once each:
   ⚠️ PINGER?        run started by GitHub's backup schedule instead of the pinger
   ⚠️ SCAN FAILED    the routine API trigger was refused (401/403/429…)
   ⚠️ NO VERDICT     a debate was fired but nothing arrived within 25 min
+  ⚠️ GROWW OFFLINE  the cloud run could not use a connector (sign-in expired…)
+  ✅ GROWW BACK     the next run after that could use it again
 """
 import os
 from datetime import datetime
@@ -14,6 +16,29 @@ from datetime import datetime
 def _m(hhmm):
     h, m = hhmm.split(":")
     return int(h) * 60 + int(m)
+
+
+NAMES = {"groww": "Groww", "indmoney": "INDmoney", "investsights": "InvestSights"}
+FIX = "https://claude.ai/customize/connectors"
+
+
+def connectors(doc, today, flags, send):
+    """doc: plan.json or positions.json with "connectors": {"groww": true/false, ...}."""
+    if doc.get("date") != today:
+        return
+    for key, ok in (doc.get("connectors") or {}).items():
+        name = NAMES.get(key, key)
+        down = "down_" + key
+        if ok is False and not flags.get(down):
+            flags[down] = True
+            extra = ("\nUntil then BOUGHT/SOLD sync and ORDER\nchecks can't read Groww."
+                     if key == "groww" else "")
+            send(f"⚠️ <b>{name.upper()} OFFLINE</b>\nThe cloud run couldn't use {name}\n"
+                 f"(sign-in probably expired). Scans go on\nwith the other connectors.{extra}\n"
+                 f"👉 Reconnect: {FIX}")
+        elif ok is True and flags.get(down):
+            flags[down] = False
+            send(f"✅ <b>{name} back</b> — the cloud run can use it again.")
 
 
 def check(now, watch, plan_doc, holidays, send):
@@ -57,6 +82,8 @@ def check(now, watch, plan_doc, holidays, send):
                 403: "access refused → check the routine on claude.ai",
                 429: "too many runs / usage limit → scans paused for now"}.get(err, "see GitHub Actions log")
         send(f"⚠️ <b>SCAN FAILED</b> ({err})\nThe cloud debate could not be started.\n👉 {hint}")
+
+    connectors(plan_doc, today, flags, send)
 
     fired = watch.get("fired_at")
     if fired and mins - _m(fired) >= 25:
