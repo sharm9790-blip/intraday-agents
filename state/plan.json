@@ -1,11 +1,31 @@
 {
  "date": "2026-11-09",
- "verdict_id": "2026-11-09_1400",
- "go_count": 4,
+ "verdict_id": "2026-11-09_1420",
+ "go_count": 5,
  "connectors": {
   "groww": true,
   "indmoney": true,
   "investsights": true
  },
- "plan": null
+ "plan": {
+  "symbol": "BANKINDIA",
+  "yahoo": "BANKINDIA.NS",
+  "name": "Bank of India",
+  "side": "long",
+  "entry_type": "dip",
+  "zone_low": 142.45,
+  "zone_high": 142.55,
+  "entry": 142.5,
+  "max_entry": 142.55,
+  "trigger_close_above": 142.45,
+  "sl": 141.95,
+  "t1": 143.8,
+  "t2": 144.4,
+  "qty": 701,
+  "deadline": "14:30",
+  "cancel_if_high_reaches": 143.8,
+  "cancel_if_close_below": 142.2,
+  "exit_if_close_below_after_entry": 142.2,
+  "time_stop": "15:10"
+ }
 }

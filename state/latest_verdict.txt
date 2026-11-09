@@ -1,24 +1,38 @@
-⚪ <b>NO TRADE — 14:00 IST</b>
-Confidence 7/10
+🟢 <b>GO (conditional) — BANKINDIA</b>
+🕐 14:20 IST  ·  Confidence 5/10
 
-<b>No setup with R:R 1.5+</b>
-• Nifty 24,932, faded from high
-• Breadth weak, only Bank Nifty up
+📥 Buy limit  <b>₹142.5</b>  (max ₹142.55)
+⏳ <b>Wait for dip</b> — no chasing
+🛑 Stop loss  <b>₹141.95</b>
+🎯 Target 1  <b>₹143.8</b>  (sell half)
+🎯 Target 2  <b>₹144.4</b>
+📦 Qty  <b>701</b> shares
 
-<b>Closest — LICI ₹398.4</b>
-• Net R:R ~1.1 (needs 1.5)
-• ADX 12, no trend
+<b>✅ Buy only if</b>
+• Dips to ₹142.45–142.55
+• Filled by 14:30 IST
 
-<b>Would flip if</b>
-• 5-min close above ₹399.5
-  with SL ₹397.2, T1 ₹402.5
-• Little time left — skip after 14:25
+<b>❌ Cancel if</b>
+• Not filled by 14:30
+• Trades below ₹142.2 first
+• Trades above ₹143.4 unfilled
+
+<b>💰 Risk vs reward</b>
+Max loss ≈ ₹466
+Profit ≈ ₹800 (T1)
+Reward 1.8× the risk
+
+<b>Why</b>
+• PSU banks +3%, futures long build-up
+• Dip entry near VWAP, T1 under fut high
+
+<b>Caution</b>
+• Double top 143.3–143.8, 145 call wall
+• Same PSU factor as IRFC
+• Exit all by 15:10
 
 <b>Skipped</b>
-• SOLARINDS — downtrend, calls heavy
-• FEDERALBNK — tight band, dry volume
-• CHOLAFIN — weak
+• RECLTD — net R:R 0.83, dead volume
 
-📌 IRFC and HINDALCO plans stay live
 📡 Watcher checks every 5 min
-<i>Analysis only, not advice. You place orders yourself.</i>
+<i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>

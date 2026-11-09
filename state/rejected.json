@@ -41,6 +41,7 @@
   "LICI": "14:00 net R:R ~1.1, ADX 12; flips on 5-min close >399.5 with SL<=397.2, T1>=402.5",
   "SOLARINDS": "14:00 daily downtrend, PCR 0.42, net R:R ~1.36",
   "FEDERALBNK": "14:00 tight band 338-339.6, volume fading",
-  "CHOLAFIN": "14:00 weak +0.3%"
+  "CHOLAFIN": "14:00 weak +0.3%",
+  "RECLTD": "14:20 net R:R 0.83 at ask, range 301.5-304.3 dead volume, 310 CE wall, 3rd PSU exposure; flips on 5-min close >304.7 on >100k fut vol"
  }
 }
