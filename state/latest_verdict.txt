@@ -1,46 +1,22 @@
-🟢 <b>GO — HINDALCO</b>
-🕐 12:15 IST  ·  Confidence 5/10
+🔴 <b>NO TRADE — 13:17 scan</b>
+🕐 13:17 IST  ·  Confidence 7/10
 
-📥 Buy  <b>₹958.5</b>  (max ₹959)
-⏳ <b>Wait for dip</b>
-🛑 Stop loss  <b>₹953.5</b>
-🎯 Target 1  <b>₹970</b>  (sell half)
-🎯 Target 2  <b>₹975</b>
-📦 Qty  <b>104</b> shares
+<b>Best idea: LT</b> — rejected
+• Below VWAP ₹4,132
+• Failed twice at ₹4,157
+• Sellers 2.2× buyers
+• SL inside noise
+• Nifty fading
 
-<b>✅ Buy only if</b>
-• Dips to ₹957–959
-• Green 5-min close above ₹957
-
-<b>❌ Cancel if</b>
-• Not filled by 13:30
-• Hits ₹966 before the dip
-• 5-min close below ₹953.5
-
-<b>💰 Risk vs reward</b>
-Max loss ≈ ₹600
-Profit ≈ ₹510 (T1) · ₹1,370 (T2)
-Reward 1.86× the risk
-
-<b>📲 Set in Groww now</b>
-1. ➕ Add HINDALCO to "My Draft Basket"
-2. 🔔 Price alert at ₹958.5
-3. After buying: SL-M at ₹953.5
-4. Sell 52 shares at ₹970
-5. Exit all by 14:30
-
-<b>Why this stock</b>
-• Up 0.9% while Nifty is down
-• Futures long build-up
-• Strong Q2 results, no event today
-
-<b>Caution</b>
-• Stretched: 1.9% above VWAP
-• Volume fading, ₹971 overhead
+<b>Flips to GO if</b>
+• 15-min close above ₹4,157
+• Volume above 150k
+• T1 ₹4,200+ (R:R 1.5+)
 
 <b>Skipped</b>
-• IOC — 150 call wall, RSI 82
-• ICICIBANK — tight chop, R:R low
+• CGPOWER — range, thin volume
+• NESTLEIND — poor R:R
+• MAZDOCK — no edge
 
-📡 Watcher checks every 5 min
-<i>Analysis only, not advice. You place orders yourself.</i>
+📡 Live: IRFC, HINDALCO
+<i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
