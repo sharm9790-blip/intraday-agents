@@ -1,4 +1,4 @@
-{"date": "2026-11-09", "synced_at": "10:38",
+{"date": "2026-11-09", "synced_at": "11:19",
  "connectors": {"groww": true},
  "positions": [{"symbol": "BANKBARODA", "product": "INTRADAY",
-  "buy_qty": 396, "buy_avg": 252.86, "sell_qty": 0, "sell_avg": 0, "net_qty": 396}]}
+   "buy_qty": 396, "buy_avg": 252.86, "sell_qty": 0, "sell_avg": 0, "net_qty": 396}]}
