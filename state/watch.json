@@ -35,16 +35,18 @@
   "12:00 BANKBARODA 253.90 VWAP \u20b9252.64 status waiting",
   "12:00 IRFC 82.18 VWAP \u20b981.06 status waiting",
   "12:05 BANKBARODA 254.11 VWAP \u20b9252.66 status waiting",
-  "12:05 IRFC 82.02 VWAP \u20b981.1 status waiting"
+  "12:05 IRFC 82.02 VWAP \u20b981.1 status waiting",
+  "12:10 BANKBARODA 254.09 VWAP \u20b9252.69 status waiting",
+  "12:10 IRFC 82.13 VWAP \u20b981.13 status waiting"
  ],
  "health": {
   "ready": true,
   "pinger": true
  },
- "last_run": "12:05",
+ "last_run": "12:10",
  "fire_error": null,
- "last_fire": "11:45",
- "fired_at": "11:55",
+ "last_fire": "12:00",
+ "fired_at": "12:10",
  "verdicts": 7,
  "plans": [
   {
