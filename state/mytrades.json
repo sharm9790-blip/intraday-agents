@@ -1,5 +1,5 @@
 {
- "offset": 572145759,
+ "offset": 572145760,
  "date": "2026-11-09",
  "trades": {
   "1322737291": [
@@ -8,18 +8,18 @@
     "yahoo": "BANKBARODA.NS",
     "qty": 396,
     "left": 396,
-    "entry": 252.72,
+    "entry": 252.86,
     "sl": 251.4,
     "t1": 254.6,
     "t2": 256.5,
     "opened": "10:36",
-    "checked": "10:32",
+    "checked": "10:35",
     "realized": 0.0,
     "sells": [],
     "flags": {},
     "plan": true,
     "broker": "Groww",
-    "sync": "pending"
+    "sync": "done"
    }
   ]
  },
@@ -31,6 +31,6 @@
   }
  },
  "menu": 10,
- "sync_request": "10:37",
- "sync_fired": "10:37"
+ "sync_request": null,
+ "sync_fired": null
 }
