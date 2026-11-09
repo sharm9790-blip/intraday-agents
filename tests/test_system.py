@@ -62,9 +62,11 @@ class Base(unittest.TestCase):
         self.rows = []
         self.start = dt.datetime(2026, 11, 9, 13, 45, tzinfo=IST)
 
+        self.rows_by = {}
+
         def fake_candles(sym):
             now = CLOCK[0]
-            b = [x for x in bars_from(self.start, self.rows) if x[0] <= now]
+            b = [x for x in bars_from(self.start, self.rows_by.get(sym, self.rows)) if x[0] <= now]
             return b, (b[-1][4] if b else None)
         w.candles = fake_candles
 
@@ -96,7 +98,7 @@ class TestRisk(unittest.TestCase):
 
     def test_block(self):
         bad = {**PLAN, "t1": 183.9, "deadline": "14:45"}
-        r = risk.check(bad, "14:35", 2)
+        r = risk.check(bad, "14:35", 3)
         self.assertEqual(r["status"], "BLOCK")
         self.assertEqual(len(r["reasons"]), 4)
 
@@ -123,7 +125,7 @@ class TestFire(unittest.TestCase):
         self.assertTrue(w.fire_debate(dt.datetime(2026, 11, 9, 9, 46, tzinfo=IST), 0, None, st))
         self.assertFalse(w.fire_debate(dt.datetime(2026, 11, 9, 9, 51, tzinfo=IST), 0, None, st))
         self.assertFalse(w.fire_debate(dt.datetime(2026, 11, 9, 14, 36, tzinfo=IST), 0, None, {}))
-        self.assertFalse(w.fire_debate(dt.datetime(2026, 11, 9, 11, 0, tzinfo=IST), 2, None, {}))
+        self.assertFalse(w.fire_debate(dt.datetime(2026, 11, 9, 11, 0, tzinfo=IST), 3, None, {}))
 
 
 class TestWatcherFlow(Base):
@@ -193,6 +195,73 @@ class TestWatcherFlow(Base):
         acc = self.get("paper.json")
         self.assertEqual(len(acc["days"]["2026-11-09"]), 1)
         self.assertGreater(acc["balance"], 100000)
+
+
+class TestMultiPlan(Base):
+    """Up to 3 plans live at once; scans keep running while there is room."""
+    def verdict(self, vid, plan):
+        self.put("plan.json", {"date": "2026-11-09", "verdict_id": vid, "go_count": 1, "plan": plan})
+        with open(os.path.join(self.dir, "latest_verdict.txt"), "w") as f:
+            f.write(f"🟢 <b>GO — {plan['symbol'] if plan else 'none'}</b>")
+
+    def test_two_live_plans_and_scan_keeps_running(self):
+        fired = []
+        orig = w.fire_debate
+        w.fire_debate = lambda now, trades, vid, watch: fired.append(f"{now:%H:%M}") or False
+        try:
+            other = dict(PLAN, symbol="SBIN", yahoo="SBIN.NS", name="SBI")
+            self.rows = [(185, 185.5, 184.8, 185.2)] * 30          # TATASTEEL above its zone
+            self.rows_by["SBIN.NS"] = [(183.45, 183.7, 183.3, 183.6)] * 2 + \
+                                      [(183.6, 186.0, 183.5, 185.95)] * 28
+            self.verdict("2026-11-09_1345", PLAN)
+            self.at(13, 46); w.main(self.dir)
+            self.assertIn("13:46", fired)  # 1 live → still scans
+            self.verdict("2026-11-09_1350", other)
+            self.at(13, 52); w.main(self.dir)
+            wt = self.get("watch.json")
+            self.assertEqual([e["symbol"] for e in wt["live"]], ["TATASTEEL", "SBIN"])
+            self.assertIn("Live plans now: <b>2/3</b>", self.texts())
+            self.at(13, 56); w.main(self.dir)
+            t = self.texts()
+            self.assertIn("BUY TRIGGER — SBIN", t)
+            self.assertNotIn("BUY TRIGGER — TATASTEEL", t)
+            self.at(14, 1); w.main(self.dir)
+            self.assertIn("TARGET 1 HIT — SBIN", self.texts())
+            # same stock again → blocked, not a second SBIN plan
+            self.verdict("2026-11-09_1405", other)
+            self.at(14, 6); w.main(self.dir)
+            self.assertIn("SBIN already has a live plan", self.texts())
+            self.assertEqual(len(w.open_plans(self.get("watch.json"))), 2)
+        finally:
+            w.fire_debate = orig
+
+    def test_full_at_three_and_migration(self):
+        fired = []
+        orig = w.fire_debate
+        w.fire_debate = lambda now, trades, vid, watch: fired.append(1) or False
+        try:
+            # old single-plan watch.json (written by the previous watcher version)
+            self.put("plan.json", {"date": "2026-11-09", "verdict_id": "2026-11-09_1345", "plan": PLAN})
+            self.put("watch.json", {"date": "2026-11-09", "verdict_id": "2026-11-09_1345",
+                                    "status": "waiting", "since": "13:45", "qty_fix": 500, "log": []})
+            self.rows = [(185, 185.5, 184.8, 185.2)] * 30
+            self.at(13, 50); w.main(self.dir)
+            wt = self.get("watch.json")
+            self.assertEqual(wt["live"][0]["symbol"], "TATASTEEL")
+            self.assertEqual(wt["live"][0]["plan"]["qty"], 500)
+            self.assertNotIn("status", wt)
+            self.assertNotIn("GO —", self.texts(), "carry-over must not re-send the verdict")
+            n = len(fired)
+            for i, sym in enumerate(["SBIN", "PFC"]):
+                self.verdict(f"2026-11-09_14{i}0", dict(PLAN, symbol=sym, yahoo=sym + ".NS"))
+                self.at(14, i * 10 + 1); w.main(self.dir)
+            self.assertEqual(len(w.open_plans(self.get("watch.json"))), 3)
+            k = len(fired)
+            self.at(14, 16); w.main(self.dir)
+            self.assertEqual(len(fired), k, "3 live → no more scans")
+            self.assertGreater(k, n)
+        finally:
+            w.fire_debate = orig
 
 
 class TestHealth(Base):

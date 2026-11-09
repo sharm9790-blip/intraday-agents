@@ -28,6 +28,9 @@ PAUSED = set()  # chats that sent PAUSE today (broadcasts skip them)
 IST = timezone(timedelta(hours=5, minutes=30))
 FOOTER = "<i>Analysis only, not advice. You place orders yourself.</i>"
 OPEN_STATES = ("waiting", "in_zone", "t1_hit")
+MAX_LIVE = 3        # plans followed at the same time
+MAX_TRADES = 3      # plans that may hit the buy trigger per day
+DAY_LOSS_STOP = 2000  # no new plans once today's paper loss reaches this (₹)
 # NSE equity trading holidays on weekdays (add next year's list each December).
 NSE_HOLIDAYS = {"2026-11-10", "2026-11-24", "2026-12-25"}
 STATUS_LABEL = {
@@ -346,7 +349,7 @@ def weekly_report(state_dir, now):
 def fire_debate(now, trades, last_verdict_id, watch):
     """Start the cloud debate through the routine's API trigger every quarter hour,
     09:45–14:30 IST. The routine has no schedule of its own, so this is the only
-    thing that starts debates. Only called when no plan is live. Returns True if it fired.
+    thing that starts debates. Called while fewer than MAX_LIVE plans are live. Returns True if it fired.
     """
     url = os.environ.get("CLAUDE_FIRE_URL")
     token = os.environ.get("CLAUDE_FIRE_TOKEN")
@@ -355,7 +358,7 @@ def fire_debate(now, trades, last_verdict_id, watch):
     slot = f"{now.hour:02d}:{quarter:02d}"
     if not url or not token:
         return False
-    if not hhmm("09:45") <= minutes <= hhmm("14:34") or trades >= 2:
+    if not hhmm("09:45") <= minutes <= hhmm("14:34") or trades >= MAX_TRADES:
         return False
     if watch.get("last_fire") == slot:
         return False
@@ -405,7 +408,7 @@ def main(state_dir):
     watch_path = os.path.join(state_dir, "watch.json")
     watch = load(watch_path, {})
     if watch.get("date") != today:
-        watch = {"date": today, "verdict_id": None, "status": None, "since": None, "log": []}
+        watch = {"date": today, "verdict_id": None, "live": [], "log": []}
     mt = load(os.path.join(state_dir, "mytrades.json"), {})
     PAUSED.clear()
     if mt.get("date") == today:
@@ -415,7 +418,22 @@ def main(state_dir):
                       watch.setdefault("health", {}), telegram)
     save(watch_path, watch)
 
-    # 1) Forward a new verdict from the cloud debate (option 1 alert).
+    # 0) Live plans now live in watch["live"] (up to MAX_LIVE at once). Carry over a
+    #    plan that an older watcher version was following with top-level fields.
+    if "live" not in watch:
+        watch["live"] = []
+        p = plan_doc.get("plan") if plan_doc.get("date") == today else None
+        if p and watch.get("status") in OPEN_STATES:
+            v = (watch.get("verdict_id") or "_0000").split("_")[-1]
+            watch["live"].append({
+                "symbol": p["symbol"], "vid": watch.get("verdict_id"),
+                "plan": {**p, "qty": watch.get("qty_fix") or p["qty"]},
+                "status": watch["status"], "since": watch.get("since") or f"{v[:2]}:{v[2:]}",
+                "paper_booked": watch.get("paper_booked", 0)})
+        for k in ("status", "since", "qty_fix", "paper_booked"):
+            watch.pop(k, None)
+
+    # 1) Forward a new verdict from the cloud debate.
     vid = plan_doc.get("verdict_id")
     if plan_doc.get("date") == today and vid and vid != watch.get("verdict_id"):
         try:
@@ -425,9 +443,6 @@ def main(state_dir):
             telegram(card("📋", f"New verdict {esc(vid)}", ["(verdict text missing)"]))
         watch["verdict_id"] = vid
         watch["verdicts"] = watch.get("verdicts", 0) + 1
-        watch["status"] = "waiting" if plan_doc.get("plan") else None
-        watch["since"] = None
-        watch.pop("qty_fix", None)
         if plan_doc.get("plan"):
             v = vid.split("_")[-1]
             start = f"{v[:2]}:{v[2:]}"
@@ -435,20 +450,28 @@ def main(state_dir):
             rk = risk.check(gp, start, watch.get("trades", 0))
             nw = news.check(gp.get("name") or stock_name(gp["yahoo"]) or gp["symbol"])
             lines = [""]
-            if rk["status"] == "BLOCK":
-                watch["status"] = None
-                lines += ["⛔ <b>BLOCKED — do not trade</b>",
-                          *["• " + esc(r) for r in rk["reasons"]]]
+            reasons = list(rk["reasons"])
+            if any(e["symbol"] == gp["symbol"] for e in open_plans(watch)):
+                reasons.append(f"{gp['symbol']} already has a live plan")
+            if len(open_plans(watch)) >= MAX_LIVE:
+                reasons.append(f"{MAX_LIVE} plans already live")
+            if reasons:
+                lines += ["⛔ <b>BLOCKED — do not trade</b>", *["• " + esc(r) for r in reasons]]
             else:
                 lines += [f"✅ Risk check passed · R:R {rk['rr']}",
                           f"Risk ₹{rk['risk']:,} · Value ₹{rk['value']:,}"]
                 if abs(rk["qty"] - gp["qty"]) > 0.02 * max(gp["qty"], 1):
                     lines += [f"🧮 <b>Use qty {rk['qty']}</b> (not {gp['qty']})"]
-                if rk["qty"] != gp["qty"]:
-                    watch["qty_fix"] = rk["qty"]
-                watch.setdefault("plans", []).append({**gp, "qty": rk["qty"], "start": start})
+                p = {**gp, "qty": rk["qty"], "start": start}
+                watch.setdefault("plans", []).append(p)
+                watch["live"].append({"symbol": gp["symbol"], "vid": vid, "plan": p,
+                                      "status": "waiting", "since": start, "paper_booked": 0})
+                n = len(open_plans(watch))
+                if n > 1:
+                    lines += [f"📚 Live plans now: <b>{n}/{MAX_LIVE}</b> "
+                              f"({', '.join(esc(e['symbol']) for e in open_plans(watch))})"]
             lines += ["", *news.lines(nw)]
-            if nw["level"] == "high" and rk["status"] == "PASS":
+            if nw["level"] == "high" and not reasons:
                 lines += ["👉 Results/event day: skip, or half size"]
             telegram(card("🛡", f"CHECKS — {esc(gp['symbol'])}", lines, footer=False))
         save(watch_path, watch)
@@ -463,36 +486,52 @@ def main(state_dir):
     if minutes >= hhmm("15:50") and watch.get("scorecard_sent"):
         weekly_report(state_dir, now)
 
-    plan = plan_doc.get("plan") if plan_doc.get("date") == today else None
-    if plan and watch.get("qty_fix"):
-        plan = {**plan, "qty": watch["qty_fix"]}  # risk.py's size wins over the Judge's
-    if not plan or watch.get("status") not in OPEN_STATES:
+    # 2) Follow every live plan.
+    if hhmm("09:15") <= minutes <= hhmm("15:30"):
+        for e in open_plans(watch):
+            track(e, now, watch)
+        save(watch_path, watch)
+
+    # 3) Keep scanning while there is room for another plan.
+    live = open_plans(watch)
+    trades = watch.get("trades", 0)  # plans that hit the buy trigger today
+    waiting = sum(1 for e in live if e["status"] == "waiting")
+    loss_stop = watch.get("day_pnl", 0) <= -DAY_LOSS_STOP
+    full = trades + waiting >= MAX_TRADES or len(live) >= MAX_LIVE
+    late = minutes >= hhmm("14:40")  # last debate (14:30 slot) has reported
+    if not live:
         print("no live plan")
-        trades = watch.get("trades", 0)  # plans that hit the buy trigger today
-        late = minutes >= hhmm("14:40")  # last debate (14:30 slot) has reported
-        if (trades >= 2 or late) and not watch.get("done_sent") and minutes <= hhmm("15:30"):
-            why = (["2 trades triggered today", "(daily limit), none live now."] if trades >= 2
-                   else ["No new entries after 14:30.", "No plan live."])
+        if ((trades >= MAX_TRADES or late or loss_stop) and not watch.get("done_sent")
+                and minutes <= hhmm("15:30")):
+            why = ([f"Paper loss today {inr(watch['day_pnl'])}", "(daily loss stop), none live now."]
+                   if loss_stop else
+                   [f"{MAX_TRADES} trades triggered today", "(daily limit), none live now."]
+                   if trades >= MAX_TRADES else ["No new entries after 14:30.", "No plan live."])
             telegram(card("🏁", f"DONE FOR TODAY · {now:%H:%M}", [
-                "",
-                *why,
-                f"Trades triggered: {trades}",
-                "",
-                "🔕 No more scans today.",
-                "🔎 Next scan: Mon–Fri 09:45 IST",
+                "", *why, f"Trades triggered: {trades}", "",
+                "🔕 No more scans today.", "🔎 Next scan: Mon–Fri 09:45 IST",
             ]))
             watch["done_sent"] = True
             save(watch_path, watch)
-        if fire_debate(now, trades, vid if plan_doc.get("date") == today else None, watch):
+    else:
+        print("live:", ", ".join(f"{e['symbol']} {e['status']}" for e in live))
+    if not full and not loss_stop:
+        if fire_debate(now, trades + waiting, vid if plan_doc.get("date") == today else None, watch):
             save(watch_path, watch)
-        return
-    if minutes < hhmm("09:15") or minutes > hhmm("15:30"):
-        return
 
+
+def open_plans(watch):
+    return [e for e in watch.get("live", []) if e.get("status") in OPEN_STATES]
+
+
+def track(entry, now, watch):
+    """One 5-min check of one live plan: send alerts, update entry in place."""
+    plan = entry["plan"]
+    minutes = now.hour * 60 + now.minute
     sym = esc(plan["symbol"])
     bars, ltp = candles(plan["yahoo"])
     if not bars:
-        print("no candles yet")
+        print("no candles yet", plan["symbol"])
         return
     # Candles that closed after the verdict (ignore the one still forming).
     closed = [b for b in bars if b[0] + timedelta(minutes=5) <= now]
@@ -500,17 +539,13 @@ def main(state_dir):
     vol = sum(b[5] for b in bars)
     vwap = vwap_num / vol if vol else None
     last = closed[-1] if closed else None
-    since = watch.get("since")  # IST HH:MM after which we evaluate candles
-    if since is None:
-        since = (vid or "_0000").split("_")[-1]
-        since = f"{since[:2]}:{since[2:]}"
-        watch["since"] = since
+    since = entry.get("since") or "00:00"
     new = [b for b in closed if b[0].hour * 60 + b[0].minute >= hhmm(since)]
     price = ltp if ltp is not None else bars[-1][4]
     vw = rs(vwap) if vwap else "n/a"
     price_line = f"💹 Now <b>{rs(price)}</b>  ·  VWAP {vw}"
     t = f"{now:%H:%M}"
-    status = watch["status"]
+    status = entry["status"]
     old_status = status
     exit_px = None  # price the paper position is closed at, when it closes
     msg = None
@@ -538,6 +573,12 @@ def main(state_dir):
                 f"Reason: {cancel}", price_line, "",
                 "👉 <b>Do not buy.</b> Delete the Groww price alert.",
                 "🔎 Next cloud scan will look for a new setup.",
+            ])
+        elif trigger and watch.get("trades", 0) >= MAX_TRADES:
+            status = "cancelled"
+            msg = card("❌", f"SKIP — {sym}", [
+                f"🕐 {t} IST", "", f"{MAX_TRADES} trades already bought today.", price_line, "",
+                "👉 <b>Do not buy.</b> Delete the Groww price alert.",
             ])
         elif trigger:
             status = "in_zone"
@@ -607,12 +648,14 @@ def main(state_dir):
         q, e = plan["qty"], plan["entry"]
         half = q // 2
         if status == "t1_hit":
-            watch["paper_booked"] = round(half * (plan["t1"] - e))
-            note = f"📈 Paper: {inr(watch['paper_booked'])} booked on {half} shares"
+            entry["paper_booked"] = round(half * (plan["t1"] - e))
+            note = f"📈 Paper: {inr(entry['paper_booked'])} booked on {half} shares"
         else:
-            booked = watch.get("paper_booked", 0) if old_status == "t1_hit" else 0
+            booked = entry.get("paper_booked", 0) if old_status == "t1_hit" else 0
             left = q - half if old_status == "t1_hit" else q
             res = round(booked + left * (exit_px - e))
+            entry["paper_result"] = res
+            watch["day_pnl"] = watch.get("day_pnl", 0) + res
             note = f"📈 Paper trade result: <b>{inr(res)}</b> (before costs)"
         msg = msg.replace("\n\n" + FOOTER, "\n" + note + "\n\n" + FOOTER)
     if msg and status in ("closed", "cancelled"):
@@ -622,7 +665,8 @@ def main(state_dir):
     if msg:
         telegram(msg)
     elif now.minute % 15 < 5:
-        telegram(card("📊", f"{sym}  ·  {t}", [
+        n = len(open_plans(watch))
+        telegram(card("📊", f"{sym}  ·  {t}" + (f"  ·  {n} live" if n > 1 else ""), [
             price_line,
             f"Status: {STATUS_LABEL.get(status, status)}",
             "",
@@ -630,9 +674,8 @@ def main(state_dir):
             f"🛑 SL {rs(plan['sl'])}  ·  🎯 T1 {rs(plan['t1'])}",
             f"⌛ Cancel by {plan['deadline']}" if status == "waiting" else f"⏰ Exit by {ts}",
         ], footer=False))
-    watch["status"] = status
+    entry["status"] = status
     watch["log"] = watch["log"][-200:]
-    save(watch_path, watch)
 
 
 if __name__ == "__main__":

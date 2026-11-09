@@ -30,7 +30,7 @@ Data sources (claude.ai connectors): **Groww**, **INDmoney**, **InvestSights**. 
 cron-job.org  ──every 15 min──▶  GitHub Actions: watch.yml  (watcher/watch.py)
                                    │  • forwards new verdicts to Telegram
                                    │  • checks live price of the plan, sends alerts
-                                   │  • no live plan → POST routine API trigger (:00/:15/:30/:45)
+                                   │  • < 3 live plans → POST routine API trigger (:00/:15/:30/:45)
                                    ▼
 Claude cloud routine  (no schedule of its own — only API fires)
   (runs .claude/skills/intraday-debate: Bull → Bear → Judge)
@@ -169,8 +169,9 @@ If you rotate the bot token, update it here too. Off-hours, BOUGHT/SOLD reply
 - Capital ₹1,00,000, risk 1% per trade (₹1,000). Qty = floor(risk ÷ (entry − SL)), capped by intraday margin.
 - GO only if net R:R ≥ 1:1.5 to T1 after ~0.06% round-trip costs, SL at real structure, no high-severity Bear flag, before 14:30.
 - Book 50% at T1, move SL to cost, trail the rest to T2. No averaging down, no widening the stop.
-- Time stop 15:10. One live plan at a time.
-- **Daily limit: 2 trades that actually hit the buy trigger.** Plans cancelled before entry don't count. After 2, the watcher sends 🏁 DONE FOR TODAY and stops firing debates.
+- Time stop 15:10. **Up to 3 plans live at once** (each ₹1,000 risk, position ≤ ₹1,00,000; MIS margin ≈ ₹20,000 each). Scans keep running while fewer than 3 are live, so a good trade isn't missed because another plan is still waiting.
+- **Daily loss stop:** once today's paper loss reaches ₹2,000, no new plans.
+- **Daily limit: 3 trades that actually hit the buy trigger.** Plans cancelled before entry don't count. After 3, the watcher sends 🏁 DONE FOR TODAY and stops firing debates.
 - Rejected symbols are remembered for the day (`state/rejected.json`) and skipped unless data clearly changed.
 
 Groww watchlist **"My Draft Basket"** (created 2026-11-07) holds today's planned stocks: each GO says ➕ add it, every cancel / exit alert says ➖ remove it. The watchlist only keeps the stock handy; quantities and prices stay in the Telegram message.
@@ -254,7 +255,7 @@ scorecard keeps comparing plan / limit / at-once so the record shows which works
 | `state/plan.json` | Cloud debate | `date`, `verdict_id` (`YYYY-MM-DD_HHMM`), `go_count` (tally of GO verdicts, info only), `plan` (null or symbol, yahoo, zone_low/high, entry, max_entry, trigger_close_above, sl, t1, t2, qty, deadline, cancel rules, exit rule, time_stop — numbers only). |
 | `state/latest_verdict.txt` | Cloud debate | Telegram message for that verdict (mobile format). |
 | `state/rejected.json` | Cloud debate | `{"date", "symbols": {"SYM": "reason"}}` |
-| `state/watch.json` | Watcher | `date`, `verdict_id` already forwarded, `status`, `since`, `trades` (bought today), `last_fire` (slot), `done_sent`, `log`. |
+| `state/watch.json` | Watcher | `date`, `verdict_id` already forwarded, `live` (list of today's plans: symbol, plan, status waiting/in_zone/t1_hit/closed/cancelled, since, paper result), `trades` (bought today), `day_pnl` (paper), `last_fire` (slot), `done_sent`, `log`. |
 | `state/paper.json` | Watcher | Paper account: ₹1,00,000 start (2026-11-06), every plan taken exactly by its rules (costs included), trades per day and balance. |
 | `state/scorecard.json` | Watcher | One entry per day: each plan's replay (rules / limit / market P&L and steps) and day totals. |
 | `reports/YYYY-MM-DD_HHMM.md` | Cloud debate | Full Bull, Bear and Judge outputs. |
@@ -292,7 +293,7 @@ A 📊 status card is sent on runs in the first 5 minutes of each quarter hour w
 | ⏰ TIME STOP | Exit everything (15:10) |
 | 📈 Paper lines | In 🎯 T1 / 🔴 SL / 🏁 T2 / ↩️ / ⚠️ / ⏰ alerts: the paper result of the live trade (plan qty, before costs) |
 | 📒 SCORECARD | 15:45 on market days (needs the pinger to run until 15:55): per stock cash ₹1,00,000 ÷ entry = qty, 50% at T1 and rest at T2 with ✅/❌ for whether price reached entry / T1 / T2, target profit (before costs), high and close; then each of today's plans replayed on 5-min candles — by the plan's rules, as a plain limit order, and bought at once — with today's and the running paper P&L (`state/scorecard.json`) |
-| 🏁 DONE FOR TODAY | Sent once a day: when 2 bought trades are used, or at ~14:40 when scanning ends with no plan live |
+| 🏁 DONE FOR TODAY | Sent once a day: when 3 bought trades are used, or at ~14:40 when scanning ends with no plan live |
 
 ---
 
@@ -330,7 +331,7 @@ pbpaste | gh secret set CLAUDE_FIRE_TOKEN -R sharm9790-blip/intraday-agents
 
 | Symptom | Check | Fix |
 |---|---|---|
-| No messages for a long time | `state/plan.json` `go_count`, `state/watch.json` `trades`, `status` | 2 trades bought → done for the day. Plan live → only status cards every 15 min. |
+| No messages for a long time | `state/plan.json` `go_count`, `state/watch.json` `trades`, `live` | 3 trades bought or ₹2,000 paper loss → done for the day. 3 plans live → only status cards every 15 min until one ends. |
 | Watcher runs far apart | Actions page: are there `workflow_dispatch` runs every 15 min? | cron-job.org History: 401 = bad PAT, 404 = wrong URL / PAT repo access, timezone must be Asia/Kolkata. |
 | No debates at all | Watcher log line `fired debate for slot …` or `fire failed: 401` | Regenerate the routine token and update `CLAUDE_FIRE_TOKEN`. |
 | Cloud run fails | Routine page → runs → open the session log | 401 `github_token_missing`: reconnect GitHub on claude.ai. 403 `repo_access_denied`: install the Claude GitHub app on the repo. |

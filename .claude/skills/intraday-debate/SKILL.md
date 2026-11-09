@@ -13,15 +13,16 @@ All state lives on the git branch `claude/intraday-state`. Work on that branch.
 1. **Branch.** `git fetch origin claude/intraday-state && git checkout claude/intraday-state` (if it does not exist: `git checkout -b claude/intraday-state`). `git pull --rebase` before writing.
 2. **Clock.** Call Groww `resolve_market_time_and_calendar` (if Groww is unavailable, use `TZ=Asia/Kolkata date` and the NSE holiday list in `watcher/watch.py`). Not a trading day, or outside 09:40–14:35 IST → write nothing and stop.
 3. **Today's state.** Read `state/plan.json` and `state/watch.json` (the 5-min watcher writes `watch.json`).
-   - If `plan.json` is for today and `watch.json` shows that plan with status `waiting`, `in_zone` or `t1_hit` → a plan is live; do NOT debate. Stop.
-   - If `watch.json` is for today and its `trades` (plans that hit the buy trigger) is 2 or more → stop. Plans that were cancelled before the buy trigger do NOT count; `go_count` in `plan.json` is just a tally of GO verdicts.
+   - Live plans are the entries in `watch.json` → `live` (today only) with status `waiting`, `in_zone` or `t1_hit`. Up to **3** plans may be live at once, so a live plan does NOT stop the debate.
+   - Stop (write nothing) if 3 plans are live, or `trades` (plans that hit the buy trigger today) + live `waiting` plans is 3 or more, or `day_pnl` is −2000 or lower (daily loss stop). Plans cancelled before the buy trigger do NOT count; `go_count` in `plan.json` is just a tally of GO verdicts.
+   - Tell the Bull to skip the live symbols, and tell the Judge which plans are live (symbol, sector, status) so it avoids a near-duplicate bet (same sector moving together). Each plan is sized on its own (₹1,000 risk, position ≤ ₹1,00,000; MIS margin ≈ 20%, so 3 plans fit in ₹1,00,000).
    - Collect today's rejected symbols from `state/rejected.json` (today only).
 4. **Learn from the record.** Run `python3 watcher/stats.py state` and paste its text into the Judge's prompt under "What recent plans did". The Judge must follow its "Lesson:" lines when setting the buy zone and targets (still net R:R ≥ 1.5).
 5. **Bull → Bear → Judge.** Launch `bull-agent` (scan; skip rejected symbols unless data clearly changed; use TODAY's live 5-min candles; scan ~10 relative-strength F&O stocks, analyse the best up to 5), then `bear-agent` with the Bull's full output, then `judge-agent` with both. Run them one after another, never in parallel.
 6. **Write files** (IST time, HHMM):
    - `reports/YYYY-MM-DD_HHMM.md` — all three outputs in full + the disclaimer.
    - `state/rejected.json` — `{"date": "YYYY-MM-DD", "symbols": {"SYM": "one-line reason"}}`, merged with today's.
-   - `state/plan.json` — always overwrite with:
+   - `state/plan.json` — always overwrite with (it holds only THIS verdict's new plan; the watcher keeps the list of live plans itself):
      ```json
      {"date": "YYYY-MM-DD", "verdict_id": "YYYY-MM-DD_HHMM", "go_count": 0,
       "plan": null}
