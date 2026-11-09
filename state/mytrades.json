@@ -1,5 +1,5 @@
 {
- "offset": 572145766,
+ "offset": 572145767,
  "date": "2026-11-09",
  "trades": {
   "1322737291": [
@@ -65,13 +65,31 @@
     "t1": 83.2,
     "t2": 84.6,
     "opened": "11:48",
-    "checked": "12:41",
+    "checked": "12:43",
     "realized": 0.0,
     "sells": [],
     "flags": {},
     "plan": true,
     "broker": "Groww",
     "sync": "done"
+   },
+   {
+    "symbol": "HINDALCO",
+    "yahoo": "HINDALCO.NS",
+    "qty": 104,
+    "left": 104,
+    "entry": 963.7,
+    "sl": 953.5,
+    "t1": 970.0,
+    "t2": 975.0,
+    "opened": "12:47",
+    "checked": "12:43",
+    "realized": 0.0,
+    "sells": [],
+    "flags": {},
+    "plan": true,
+    "broker": "Groww",
+    "sync": "pending"
    }
   ]
  },
@@ -83,6 +101,6 @@
   }
  },
  "menu": 10,
- "sync_request": "12:46",
- "sync_fired": "12:46"
+ "sync_request": "12:48",
+ "sync_fired": "12:48"
 }
