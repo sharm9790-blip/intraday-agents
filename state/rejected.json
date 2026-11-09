@@ -18,6 +18,9 @@
   "NTPC": "11:25 SL inside noise, T1 = rejected high 328, 330 CE wall, net R:R 1.1; flips on close >328 on rising vol",
   "DRREDDY": "11:25 range 1380-1390, thin volume",
   "POWERINDIA": "11:25 gap faded on dying volume",
-  "APOLLOHOSP": "11:25 failed at 8575, rolling over"
+  "APOLLOHOSP": "11:25 failed at 8575, rolling over",
+  "HDFCBANK": "11:45 trigger fired, net R:R to T1 ~1.0 at 801.5, 800 CE wall 16.8M; flips on hold of 797.5-798.5 with SL 794.8",
+  "GAIL": "11:45 net R:R ~1.2; flips on 5-min close >187.5 on volume",
+  "HDFCLIFE": "11:45 net R:R ~1.0, no volume follow-through"
  }
 }

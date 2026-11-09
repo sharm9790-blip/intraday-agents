@@ -1,20 +1,36 @@
-⚪ <b>NO TRADE</b>
-🕐 11:25 IST  ·  Confidence 8/10
+🟢 <b>GO — IRFC</b>
+🕐 11:45 IST  ·  Confidence 5/10
 
-Live plans stay: BANKBARODA, MUTHOOTFIN
+📥 Buy  <b>₹81.75</b>  (max ₹81.8)
+⏳ <b>Wait for dip</b>
+🛑 Stop loss  <b>₹81.2</b>
+🎯 Target 1  <b>₹83.2</b>  (sell half)
+🎯 Target 2  <b>₹84.6</b>
+📦 Qty  <b>1,223</b> shares
 
-<b>Why none</b>
-• HINDZINC — net R:R 1.2, below 1.5
-• T1 ₹578.5 = rejected day high
-• Call walls at 580 and 590
-• Volume fading, sellers heavier
-• NTPC — stop inside noise
-• NTPC — 330 call wall, R:R 1.1
+<b>✅ Buy only if</b>
+• Dips to ₹81.6–81.8
+• Holds above ₹81.4
+• PSU Bank stays strong
 
-<b>Flips to GO</b>
-• HINDZINC 5-min close above ₹578.6
-• on volume 60k+, T1 ₹581+
-• or hold of ₹574.4–575 on rising vol
-• Nifty must stay above 24,839
+<b>❌ Cancel if</b>
+• Not filled by 13:15
+• Hits ₹83.2 before the dip
+• 5-min close below ₹81.2
 
-<i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
+<b>💰 Risk vs reward</b>
+Max loss ≈ ₹750
+Reward 2.2× the risk
+
+<b>⚠️ Careful</b>
+• Volume spike faded, no news
+• Same bank/PSU bet as BANKBARODA
+• Consider half size
+
+<b>Skipped</b>
+• HDFCBANK — already ran, R:R 1.0
+• GAIL — R:R 1.2
+• HDFCLIFE — R:R 1.0
+
+📡 Watcher checks every 5 min
+<i>Analysis only, not advice. You place orders yourself.</i>

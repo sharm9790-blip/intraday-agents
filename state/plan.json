@@ -1,11 +1,31 @@
 {
  "date": "2026-11-09",
- "verdict_id": "2026-11-09_1125",
- "go_count": 2,
+ "verdict_id": "2026-11-09_1145",
+ "go_count": 3,
  "connectors": {
   "groww": true,
   "indmoney": true,
   "investsights": true
  },
- "plan": null
+ "plan": {
+  "symbol": "IRFC",
+  "yahoo": "IRFC.NS",
+  "name": "Indian Railway Finance Corporation",
+  "side": "long",
+  "entry_type": "dip",
+  "zone_low": 81.6,
+  "zone_high": 81.8,
+  "entry": 81.75,
+  "max_entry": 81.8,
+  "trigger_close_above": 81.6,
+  "sl": 81.2,
+  "t1": 83.2,
+  "t2": 84.6,
+  "qty": 1223,
+  "deadline": "13:15",
+  "cancel_if_high_reaches": 83.2,
+  "cancel_if_close_below": 81.2,
+  "exit_if_close_below_after_entry": 81.2,
+  "time_stop": "15:10"
+ }
 }
