@@ -1,41 +1,20 @@
-🟢 <b>GO (dip) — MUTHOOTFIN</b>
-🕐 11:10 IST  ·  Confidence 5/10
+⚪ <b>NO TRADE</b>
+🕐 11:25 IST  ·  Confidence 8/10
 
-📥 Buy  <b>₹2,923</b>  (max ₹2,924)
-⏳ <b>Wait for dip</b> to ₹2,921–2,924
-🛑 Stop loss  <b>₹2,912</b>
-🎯 Target 1  <b>₹2,950</b>  (sell half)
-🎯 Target 2  <b>₹2,975</b>
-📦 Qty  <b>34</b> shares
+Live plans stay: BANKBARODA, MUTHOOTFIN
 
-<b>✅ Buy only if</b>
-• Dips to ₹2,921–2,924
-• Holds above VWAP ≈ ₹2,915
-• Nifty not breaking day low
+<b>Why none</b>
+• HINDZINC — net R:R 1.2, below 1.5
+• T1 ₹578.5 = rejected day high
+• Call walls at 580 and 590
+• Volume fading, sellers heavier
+• NTPC — stop inside noise
+• NTPC — 330 call wall, R:R 1.1
 
-<b>❌ Cancel if</b>
-• Not filled by 13:00
-• Hits ₹2,950 before the dip
-• 5-min close below ₹2,912
+<b>Flips to GO</b>
+• HINDZINC 5-min close above ₹578.6
+• on volume 60k+, T1 ₹581+
+• or hold of ₹574.4–575 on rising vol
+• Nifty must stay above 24,839
 
-<b>💰 Risk vs reward</b>
-Max loss ≈ ₹454
-Reward 1.85× the risk
-
-<b>Why this stock</b>
-• +2.6% while Nifty -0.5%
-• Higher lows since 10:05
-• Above VWAP, PCR 1.17
-
-<b>⚠️ Caution</b>
-• Rejected 3× at ₹2,940–2,948
-• 2,950 call wall at T1
-• Volume fading, may not dip
-• BANKBARODA plan also live
-
-<b>Skipped</b>
-• TATAPOWER — results 11 Nov
-• PNB, CANBK — fading
-
-🔎 Next scan: 11:15 IST
-<i>Educational analysis, not SEBI-registered advice. Intraday is high risk; you place orders yourself.</i>
+<i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>

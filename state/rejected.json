@@ -13,6 +13,11 @@
   "PNB": "11:10 fading, no breakout, same PSU-bank factor as BANKBARODA",
   "CANBK": "11:10 fading from 126.4 on cooling volume",
   "UNIONBANK": "11:10 fading below 10:00 level",
-  "ABB": "11:10 RSI 82 overbought"
+  "ABB": "11:10 RSI 82 overbought",
+  "HINDZINC": "11:25 net R:R 1.17-1.37, T1 = rejected high 578.45, 580/590 CE walls, fading vol; flips on 5-min close >578.6 on >60k vol with T1>=581",
+  "NTPC": "11:25 SL inside noise, T1 = rejected high 328, 330 CE wall, net R:R 1.1; flips on close >328 on rising vol",
+  "DRREDDY": "11:25 range 1380-1390, thin volume",
+  "POWERINDIA": "11:25 gap faded on dying volume",
+  "APOLLOHOSP": "11:25 failed at 8575, rolling over"
  }
 }
