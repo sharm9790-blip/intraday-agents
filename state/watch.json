@@ -5,13 +5,14 @@
  "since": "10:25",
  "log": [
   "10:30 BANKBARODA 252.52 VWAP \u20b9252.06 status waiting",
-  "10:35 BANKBARODA 252.77 VWAP \u20b9252.07 status waiting"
+  "10:35 BANKBARODA 252.77 VWAP \u20b9252.07 status waiting",
+  "10:40 BANKBARODA 252.42 VWAP \u20b9252.08 status waiting"
  ],
  "health": {
   "ready": true,
   "pinger": true
  },
- "last_run": "10:35",
+ "last_run": "10:40",
  "fire_error": null,
  "last_fire": "10:15",
  "fired_at": "10:20",
