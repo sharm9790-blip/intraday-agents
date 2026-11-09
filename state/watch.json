@@ -1,16 +1,42 @@
 {
  "date": "2026-11-09",
- "verdict_id": "2026-11-09_1010",
- "status": null,
- "since": null,
- "log": [],
+ "verdict_id": "2026-11-09_1025",
+ "status": "waiting",
+ "since": "10:25",
+ "log": [
+  "10:30 BANKBARODA 252.52 VWAP \u20b9252.06 status waiting"
+ ],
  "health": {
   "ready": true,
   "pinger": true
  },
- "last_run": "10:25",
+ "last_run": "10:30",
  "fire_error": null,
  "last_fire": "10:15",
  "fired_at": "10:20",
- "verdicts": 2
+ "verdicts": 3,
+ "plans": [
+  {
+   "symbol": "BANKBARODA",
+   "yahoo": "BANKBARODA.NS",
+   "name": "Bank of Baroda",
+   "side": "long",
+   "entry_type": "dip",
+   "zone_low": 251.95,
+   "zone_high": 252.3,
+   "entry": 252.15,
+   "max_entry": 252.3,
+   "trigger_close_above": 251.95,
+   "sl": 251.4,
+   "t1": 254.6,
+   "t2": 256.5,
+   "qty": 396,
+   "deadline": "13:30",
+   "cancel_if_high_reaches": 254.2,
+   "cancel_if_close_below": 251.9,
+   "exit_if_close_below_after_entry": 251.6,
+   "time_stop": "15:10",
+   "start": "10:25"
+  }
+ ]
 }
