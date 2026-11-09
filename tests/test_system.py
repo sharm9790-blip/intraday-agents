@@ -225,6 +225,8 @@ class TestMultiPlan(Base):
             self.at(13, 56); w.main(self.dir)
             t = self.texts()
             self.assertIn("BUY TRIGGER — SBIN", t)
+            self.assertIn("Limit price  <code>183.5</code>", t)     # copy-ready order values
+            self.assertIn("SL-M sell", t)
             self.assertNotIn("BUY TRIGGER — TATASTEEL", t)
             self.at(14, 1); w.main(self.dir)
             self.assertIn("TARGET 1 HIT — SBIN", self.texts())

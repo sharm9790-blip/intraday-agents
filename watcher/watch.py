@@ -176,6 +176,22 @@ def plan_lines(plan):
     ]
 
 
+def order_block(plan, qty=None):
+    """Tap-to-copy order values for Groww (the user places the order; nothing is sent)."""
+    q = qty or plan["qty"]
+    buy = plan["entry"] if plan.get("entry_type") != "now" else plan["max_entry"]
+    return [
+        "📝 <b>Your order</b> (tap a value to copy)",
+        f"Groww › search <code>{esc(plan['symbol'])}</code> › Buy",
+        "Intraday · Limit",
+        f"Qty  <code>{q}</code>",
+        f"Limit price  <code>{buy:g}</code>",
+        "Then right after the fill:",
+        f"SL-M sell {q} · trigger  <code>{plan['sl']:g}</code>",
+        f"Limit sell {q // 2} · price  <code>{plan['t1']:g}</code>",
+    ]
+
+
 def lakh(x):
     """Indian grouping: 100000 -> 1,00,000."""
     s = str(int(round(abs(x))))
@@ -465,6 +481,7 @@ def main(state_dir):
                           f"Risk ₹{rk['risk']:,} · Value ₹{rk['value']:,}"]
                 if abs(rk["qty"] - gp["qty"]) > 0.02 * max(gp["qty"], 1):
                     lines += [f"🧮 <b>Use qty {rk['qty']}</b> (not {gp['qty']})"]
+                lines += ["", *order_block(gp, rk["qty"])]
                 p = {**gp, "qty": rk["qty"], "start": start}
                 watch.setdefault("plans", []).append(p)
                 watch["live"].append({"symbol": gp["symbol"], "vid": vid, "plan": p,
@@ -645,7 +662,7 @@ def track(entry, now, watch):
                  else f"✅ Green 5-min close {rs(trigger[-1][4])}"),
                 price_line, "",
                 f"📥 Buy  <b>~{rs(plan['entry'])}</b>  (max {rs(plan['max_entry'])})",
-                *plan_lines(plan), "",
+                *plan_lines(plan), "", *order_block(plan), "",
                 *news.lines(news.check(plan.get("name") or stock_name(plan["yahoo"]) or plan["symbol"], 6)),
                 "",
                 "👉 Place SL-M right after the fill.",
