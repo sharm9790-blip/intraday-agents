@@ -189,6 +189,8 @@ def order_block(plan, qty=None):
         "Then right after the fill:",
         f"SL-M sell {q} · trigger  <code>{plan['sl']:g}</code>",
         f"Limit sell {q // 2} · price  <code>{plan['t1']:g}</code>",
+        f"⚠️ When that T1 sell fills: edit the SL-M to qty <code>{q - q // 2}</code>, "
+        f"trigger <code>{plan['entry']:g}</code> (cost), or it sells too many and leaves you short.",
     ]
 
 
@@ -682,7 +684,8 @@ def track(entry, now, watch):
             msg = card("🎯", f"TARGET 1 HIT — {sym}", [
                 f"🕐 {t} IST", "", f"T1 {rs(plan['t1'])} reached", price_line, "",
                 "👉 <b>Sell half</b> now.",
-                f"👉 Move SL to cost <b>{rs(plan['entry'])}</b>.",
+                f"👉 Edit SL-M: qty <b>{plan['qty'] - plan['qty'] // 2}</b> (what's left), "
+                f"trigger cost <b>{rs(plan['entry'])}</b>.",
                 f"🎯 Next: T2 {rs(plan['t2'])}",
             ])
         elif last and last[4] < plan["exit_if_close_below_after_entry"]:

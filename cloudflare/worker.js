@@ -194,7 +194,7 @@ export function decide(list, prices, sent, hm, mt) {
       const half = Math.min(Math.floor(t.qty / 2), t.left);
       add(k + "t1", [chat], "⚡", `T1 REACHED — ${s}`, [now, `T1 ${rs(t.t1)} reached.`, "",
         `👉 Sell <b>${half}</b> (if your T1 order didn't fill)`,
-        `👉 Move SL-M to cost <b>${rs(t.entry)}</b>`,
+        `👉 Edit SL-M: qty <b>${t.left - half}</b> (what's left), trigger cost <b>${rs(t.entry)}</b>`,
         `Then send <code>SOLD ${s} ${half} ${t.t1}</code>`]);
     }
   }
