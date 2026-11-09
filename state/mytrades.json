@@ -1,5 +1,5 @@
 {
- "offset": 572145760,
+ "offset": 572145761,
  "date": "2026-11-09",
  "trades": {
   "1322737291": [
@@ -13,13 +13,31 @@
     "t1": 254.6,
     "t2": 256.5,
     "opened": "10:36",
-    "checked": "11:10",
+    "checked": "11:13",
     "realized": 0.0,
     "sells": [],
     "flags": {},
     "plan": true,
     "broker": "Groww",
     "sync": "done"
+   },
+   {
+    "symbol": "MUTHOOTFIN",
+    "yahoo": "MUTHOOTFIN.NS",
+    "qty": 34,
+    "left": 34,
+    "entry": 2931.0,
+    "sl": 2912.0,
+    "t1": 2950.0,
+    "t2": 2975.0,
+    "opened": "11:17",
+    "checked": "11:13",
+    "realized": 0.0,
+    "sells": [],
+    "flags": {},
+    "plan": true,
+    "broker": "Groww",
+    "sync": "pending"
    }
   ]
  },
@@ -31,6 +49,6 @@
   }
  },
  "menu": 10,
- "sync_request": null,
- "sync_fired": null
+ "sync_request": "11:18",
+ "sync_fired": "11:18"
 }
