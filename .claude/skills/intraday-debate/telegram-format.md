@@ -74,7 +74,7 @@ Sell half  <code>92</code> @ <code>777</code>
 📲 INDmoney: search <code>HDFCBANK</code>
 ```
 
-Groww link: `https://groww.in/stocks/<slug>`, slug = the company's full name in lowercase, hyphenated, ending `-ltd` (TATASTEEL → `tata-steel-ltd`, M&M → `mahindra-mahindra-ltd`, HDFCBANK → `hdfc-bank-ltd`). The cloud sandbox can't reach groww.in, so don't try to check it: build the slug carefully and include it. The GitHub watcher opens the link before forwarding and removes the 📲 line if the page doesn't exist. Values are plain numbers (no ₹) so they paste cleanly. "Sell half" = half of Qty (rounded down) @ T1 price. INDmoney has no verifiable stock-page link, so give its line as the tap-to-copy NSE symbol only.
+Groww link: `https://groww.in/stocks/<slug>`, slug = the company's full name in lowercase, hyphenated, ending `-ltd` (TATASTEEL → `tata-steel-ltd`, M&M → `mahindra-mahindra-ltd`, HDFCBANK → `hdfc-bank-ltd`). The cloud sandbox can't reach groww.in, so don't try to check it: give your best guess and include it. Some names have no `-ltd` (BANKINDIA → `bank-of-india`, PNB → `punjab-national-bank`); the GitHub watcher opens the link before forwarding and swaps a wrong one for the real page from Groww's search, and its CHECKS / BUY TRIGGER cards add a verified 📲 Open in Groww link too. Values are plain numbers (no ₹) so they paste cleanly. "Sell half" = half of Qty (rounded down) @ T1 price. INDmoney has no verifiable stock-page link, so give its line as the tap-to-copy NSE symbol only.
 
 ## NO TRADE template
 

@@ -128,21 +128,52 @@ def candles(yahoo_symbol):
     return out, res["meta"].get("regularMarketPrice")
 
 
-def check_groww_links(text):
-    """Drop any groww.in/stocks/<slug> line whose page does not open (the cloud
-    debate can't reach groww.in to check it; GitHub can)."""
+GROWW_SEARCH = "https://groww.in/v1/api/search/v3/query/global/st_query?page=0&size=5&web=true&query="
+_LINKS = {}
+
+
+def groww_link(symbol):
+    """Groww stock page for an NSE symbol, from Groww's public search (the page name
+    is not always guessable: BANKINDIA → /stocks/bank-of-india, not bank-of-india-ltd).
+    Falls back to Groww's search page. Read-only; opening it places nothing."""
+    if symbol in _LINKS:
+        return _LINKS[symbol]
+    link = "https://groww.in/search?q=" + urllib.parse.quote(symbol)
+    try:
+        req = urllib.request.Request(GROWW_SEARCH + urllib.parse.quote(symbol),
+                                     headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=15) as r:
+            rows = (json.load(r).get("data") or {}).get("content") or []
+        hit = next((x for x in rows if x.get("entity_type") == "Stocks"
+                    and (x.get("nse_scrip_code") or "").upper() == symbol.upper()), None)
+        if hit and re.fullmatch(r"[a-z0-9-]+", hit.get("search_id") or ""):
+            link = "https://groww.in/stocks/" + hit["search_id"]
+    except Exception as e:
+        print("groww search failed", symbol, e)
+    _LINKS[symbol] = link
+    return link
+
+
+def check_groww_links(text, symbol=None):
+    """Fix the cloud's groww.in/stocks/<slug> links (the cloud can't reach groww.in to
+    check its guess; GitHub can): a page that doesn't open is replaced by the real one
+    for `symbol`, or the line is dropped if there is no symbol."""
     out = []
     for line in text.split("\n"):
-        m = re.search(r"groww\.in/stocks/[a-z0-9-]+", line)
+        m = re.search(r"(?:https://)?groww\.in/stocks/[a-z0-9-]+", line)
         if m:
+            url = m.group(0) if m.group(0).startswith("https://") else "https://" + m.group(0)
             try:
-                req = urllib.request.Request("https://" + m.group(0),
-                                             headers={"User-Agent": "Mozilla/5.0"})
-                urllib.request.urlopen(req, timeout=15)
+                urllib.request.urlopen(urllib.request.Request(
+                    url, headers={"User-Agent": "Mozilla/5.0"}), timeout=15)
             except urllib.error.HTTPError as e:
                 if e.code == 404:
-                    print("dropped broken Groww link", m.group(0))
-                    continue
+                    if not symbol:
+                        print("dropped broken Groww link", m.group(0))
+                        continue
+                    good = groww_link(symbol)
+                    print("fixed Groww link", m.group(0), "->", good)
+                    line = line.replace(m.group(0), good)
             except Exception:
                 pass  # network trouble: keep the line rather than guess
         out.append(line)
@@ -182,7 +213,7 @@ def order_block(plan, qty=None):
     buy = plan["entry"] if plan.get("entry_type") != "now" else plan["max_entry"]
     return [
         "📝 <b>Your order</b> (tap a value to copy)",
-        f"Groww › search <code>{esc(plan['symbol'])}</code> › Buy",
+        f'📲 <a href="{html.escape(groww_link(plan["symbol"]))}">Open {esc(plan["symbol"])} in Groww</a> › Buy',
         "Intraday · Limit",
         f"Qty  <code>{q}</code>",
         f"Limit price  <code>{buy:g}</code>",
@@ -461,7 +492,8 @@ def main(state_dir):
     if plan_doc.get("date") == today and vid and vid != watch.get("verdict_id"):
         try:
             with open(os.path.join(state_dir, "latest_verdict.txt")) as f:
-                telegram(check_groww_links(f.read()))
+                gp0 = plan_doc.get("plan") or {}
+                telegram(check_groww_links(f.read(), gp0.get("symbol")))
         except FileNotFoundError:
             telegram(card("📋", f"New verdict {esc(vid)}", ["(verdict text missing)"]))
         watch["verdict_id"] = vid

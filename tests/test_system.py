@@ -60,6 +60,7 @@ class Base(unittest.TestCase):
         w.telegram = lambda text, to=None: self.sent.append((to, text))
         news.check = lambda *a, **k: {"level": "none", "flagged": [], "count": 0}
         w.stock_name = lambda s: "Tata Steel"
+        w.groww_link = lambda sym: "https://groww.in/stocks/" + sym.lower()
         self.rows = []
         self.start = dt.datetime(2026, 11, 9, 13, 45, tzinfo=IST)
 
@@ -229,6 +230,7 @@ class TestMultiPlan(Base):
             self.assertIn("BUY TRIGGER — SBIN", t)
             self.assertIn("Limit price  <code>183.5</code>", t)     # copy-ready order values
             self.assertIn("SL-M sell", t)
+            self.assertIn('<a href="https://groww.in/stocks/sbin">Open SBIN in Groww</a>', t)
             self.assertIn("When that T1 sell fills: edit the SL-M to qty", t)  # no short after T1
             self.assertNotIn("BUY TRIGGER — TATASTEEL", t)
             self.at(14, 1); w.main(self.dir)
