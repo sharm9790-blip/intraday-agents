@@ -249,6 +249,21 @@ class TestMyTrade(Base):
         self.assertIn("2026-11-09", self.get("realtrades.json")["days"])
 
 
+    def test_indmoney_trade(self):
+        self.say(1, 111, "BOUGHT TATASTEEL 100 183.5 IND", 10, 1)
+        self.run_at(10, 5)
+        st = self.get("mytrades.json")
+        tr = st["trades"]["111"][0]
+        self.assertEqual((tr["broker"], tr["qty"], tr["entry"]), ("INDmoney", 100, 183.5))
+        self.assertNotIn("sync", tr)                     # no Groww lookup for INDmoney
+        self.assertFalse(st.get("sync_request"))
+        self.say(2, 111, "SOLD TATASTEEL", 10, 7)
+        self.run_at(10, 10)
+        st = self.get("mytrades.json")
+        self.assertEqual(st["trades"]["111"][0]["left"], 0)
+        self.assertFalse(st.get("sync_request"))
+        self.assertIn("On INDmoney", self.texts())
+
     def test_market_closed(self):
         CLOCK[0] = dt.datetime(2026, 11, 7, 18, 0, tzinfo=IST)   # Saturday
         ts = int(CLOCK[0].timestamp())

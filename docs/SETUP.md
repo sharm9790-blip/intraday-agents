@@ -156,6 +156,11 @@ Setup (dash.cloudflare.com, free account):
 5. Worker → Settings → Trigger events → Cron trigger `* * * * *`.
 6. Test: open the worker's URL — `{"ok": true, ...}`. Send HELP to the bot; reply in ~1 min.
 
+**INDmoney trades:** add `IND` at the end (`BOUGHT TATASTEEL 544 183.55 IND`,
+`SOLD TATASTEEL IND`). The INDmoney connector only gives market data (no orders or
+positions), so these use your numbers and never ask Groww. Draft orders show an
+INDmoney line with the tap-to-copy symbol.
+
 If you rotate the bot token, update it here too. Off-hours, BOUGHT/SOLD reply
 "Market is closed"; HELP, PLAN, SCORE, MYTRADES work any time.
 

@@ -39,6 +39,7 @@ HELP = "\n".join([
     "<code>BOUGHT TATASTEEL</code> — real qty/price from Groww",
     "<code>BOUGHT TATASTEEL 544 183.55</code> — your numbers",
     "<code>BOUGHT SBIN 100 812 SL 806 T1 824</code> — any stock",
+    "<code>BOUGHT TATASTEEL 544 183.55 IND</code> — bought on INDmoney",
     "<code>SOLD TATASTEEL</code> — all left · <code>SOLD TATASTEEL 272 185.9</code> — part",
     "<code>MYTRADES</code> — your open trades",
     "",
@@ -52,7 +53,7 @@ HELP = "\n".join([
     "<code>RESUME</code> — start them again",
     "<code>HELP</code> — this list",
     "",
-    "Replies within ~5 min (market days 9:00–15:55). I never place orders.",
+    "Replies in ~1–2 min, any time. I never place orders.",
 ])
 BOT_COMMANDS = [  # shown in Telegram's "/" menu
     ("bought", "I bought — e.g. /bought TATASTEEL"),
@@ -69,7 +70,7 @@ BOT_COMMANDS = [  # shown in Telegram's "/" menu
 CMD = re.compile(
     r"^/?(bought|buy|sold|sell)\s+([A-Za-z0-9&\-]+)"
     r"(?:\s+(\d+))?(?:\s+@?\s*(\d+(?:\.\d+)?))?"
-    r"(?:\s+sl\s*(\d+(?:\.\d+)?))?(?:\s+t1\s*(\d+(?:\.\d+)?))?(?:\s+t2\s*(\d+(?:\.\d+)?))?\s*$",
+    r"(?:\s+sl\s*(\d+(?:\.\d+)?))?(?:\s+t1\s*(\d+(?:\.\d+)?))?(?:\s+t2\s*(\d+(?:\.\d+)?))?(?:\s+(ind|indmoney|groww))?\s*$",
     re.I)
 
 
@@ -276,7 +277,8 @@ def handle(st, chat, text, when, state_dir, today):
     m = CMD.match(t)
     if not m:
         return reply("🤔 I didn't get that.\n\n" + HELP)
-    act, sym, qty, px, sl, t1, t2 = m.groups()
+    act, sym, qty, px, sl, t1, t2, broker = m.groups()
+    on_ind = (broker or "").lower() in ("ind", "indmoney")
     if not market_open(when):
         return reply(f"🔒 Market is closed ({when:%a %H:%M} IST).\n"
                      "BOUGHT / SOLD work Mon–Fri 9:15–15:30 IST. HELP, PLAN, SCORE work any time.")
@@ -303,10 +305,14 @@ def handle(st, chat, text, when, state_dir, today):
             "t2": float(t2) if t2 else (plan["t2"] if plan else None),
             "opened": when.strftime("%H:%M"), "checked": when.strftime("%H:%M"),
             "realized": 0.0, "sells": [], "flags": {}, "plan": bool(plan),
+            "broker": "INDmoney" if on_ind else "Groww",
         }
         mine.append(tr)
         lines = ["", f"Bought <b>{q}</b> @ <b>{w.rs(price)}</b>" + ("" if px else " (price now)")]
-        if chat == owner_chat() and not (qty and px):
+        if on_ind:
+            lines.append("📲 On INDmoney — I can't read INDmoney fills, so I use your numbers."
+                         + ("" if px else f"\nFor exact P&amp;L send <code>BOUGHT {w.esc(sym)} {q} PRICE IND</code>"))
+        elif chat == owner_chat() and not (qty and px):
             tr["sync"] = "pending"
             st["sync_request"] = datetime.now(w.IST).strftime("%H:%M")
             lines.append("🔄 Getting your real fill from Groww (2–5 min)…")
@@ -335,7 +341,7 @@ def handle(st, chat, text, when, state_dir, today):
     tr["left"] -= q
     tr["realized"] += pnl
     tr["sells"].append({"qty": q, "price": price, "at": when.strftime("%H:%M")})
-    if chat == owner_chat() and not (qty and px):
+    if chat == owner_chat() and not (qty and px) and tr.get("broker") != "INDmoney":
         tr["sync"] = "pending"
         st["sync_request"] = datetime.now(w.IST).strftime("%H:%M")
     lines = ["", f"Sold <b>{q}</b> @ <b>{w.rs(price)}</b>" + ("" if px else " (price now)"),
