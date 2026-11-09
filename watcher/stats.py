@@ -25,7 +25,7 @@ def summarize(days):
     plans = [p for d in days for p in d.get("plans", [])]
     out = {"days": len(days), "plans": len(plans),
            "totals": {k: sum(d["totals"].get(k, 0) for d in days)
-                      for k in ("rules", "limit", "market", "targets")}}
+                      for k in ("rules", "limit", "market", "lock", "targets")}}
     if not plans:
         return out
     bought = [p for p in plans if p["rules"].get("bought")]
@@ -53,7 +53,8 @@ def text(s):
         f"Scorecard, last {s['days']} trading day(s): {s['plans']} GO plans.",
         f"By plan rules: {s['bought']} bought ({s['wins']} wins, {s['losses']} losses), "
         f"P&L Rs {t['rules']}.",
-        f"Plain limit order at entry: Rs {t['limit']}. Bought at market at once: Rs {t['market']}.",
+        f"Plain limit order at entry: Rs {t['limit']}. Bought at market at once: Rs {t['market']} "
+        f"(with the SL stepped up to T1 halfway to T2: Rs {t['lock']}).",
     ]
     if s.get("with_targets"):
         n = s["with_targets"]

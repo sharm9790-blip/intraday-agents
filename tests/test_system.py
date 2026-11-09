@@ -321,6 +321,20 @@ class TestMyTrade(Base):
         self.assertEqual(st["offset"], 4)
 
 
+class TestLock(unittest.TestCase):
+    def test_lock_t1_halfway(self):
+        start = dt.datetime(2026, 11, 9, 10, 0, tzinfo=IST)
+        bars = bars_from(start, [(100, 102.1, 99.8, 102), (102, 103.2, 101.9, 103),
+                                 (103, 103.1, 101.5, 101.8), (101.8, 102, 101, 101.2)])
+        p = {"qty": 100, "sl": 99.0, "t1": 102.0, "t2": 104.0, "time_stop": "15:10"}
+        pnl_m, steps_m = replay.manage(bars, 0, 100.0, p)
+        pnl_l, steps_l = replay.manage(bars, 0, 100.0, p, lock=True)
+        self.assertIn("10:05 SL to T1", steps_l)
+        self.assertIn("10:10 locked T1", steps_l)
+        self.assertEqual(pnl_l, round(50 * 2 + 50 * 2 - 0.0006 * 100 * 100))   # rest sold at T1
+        self.assertLess(pnl_m, pnl_l)                                         # plain rule rode it back down
+
+
 class TestStats(unittest.TestCase):
     def test_lesson(self):
         day = {"date": "d", "totals": {"rules": 0, "limit": 770, "market": 3333, "targets": 7594},
