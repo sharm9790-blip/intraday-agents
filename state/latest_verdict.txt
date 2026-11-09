@@ -1,36 +1,19 @@
-🟢 <b>GO — IRFC</b>
-🕐 11:45 IST  ·  Confidence 5/10
+🔴 <b>NO TRADE</b>
+🕐 12:00 IST  ·  Confidence 8/10
 
-📥 Buy  <b>₹81.75</b>  (max ₹81.8)
-⏳ <b>Wait for dip</b>
-🛑 Stop loss  <b>₹81.2</b>
-🎯 Target 1  <b>₹83.2</b>  (sell half)
-🎯 Target 2  <b>₹84.6</b>
-📦 Qty  <b>1,223</b> shares
+<b>TRENT</b> — no go
+• Ran to ₹3129, at day high
+• Net reward/risk about 0.4
+• ₹3150 call wall above
+• Flips: 5-min close above ₹3135
+  on strong volume, or dip to
+  ₹3105–3112 holding ₹3090
 
-<b>✅ Buy only if</b>
-• Dips to ₹81.6–81.8
-• Holds above ₹81.4
-• PSU Bank stays strong
+<b>MARUTI</b> — no go
+• Net reward/risk 0.99
+• Daily RSI 89.7, tiny stop
 
-<b>❌ Cancel if</b>
-• Not filled by 13:15
-• Hits ₹83.2 before the dip
-• 5-min close below ₹81.2
+📡 Live plans still on watch:
+BANKBARODA, IRFC
 
-<b>💰 Risk vs reward</b>
-Max loss ≈ ₹750
-Reward 2.2× the risk
-
-<b>⚠️ Careful</b>
-• Volume spike faded, no news
-• Same bank/PSU bet as BANKBARODA
-• Consider half size
-
-<b>Skipped</b>
-• HDFCBANK — already ran, R:R 1.0
-• GAIL — R:R 1.2
-• HDFCLIFE — R:R 1.0
-
-📡 Watcher checks every 5 min
 <i>Analysis only, not advice. You place orders yourself.</i>
