@@ -275,5 +275,280 @@
    "targets": 7594,
    "lock": 3294
   }
+ },
+ {
+  "date": "2026-11-09",
+  "plans": [
+   {
+    "symbol": "BANKBARODA",
+    "start": "10:25",
+    "entry": 252.15,
+    "qty": 396,
+    "sl": 251.4,
+    "t1": 254.6,
+    "t2": 256.5,
+    "close": 260.01,
+    "rules": {
+     "pnl": 0,
+     "steps": [
+      "ran up without the dip"
+     ]
+    },
+    "limit": {
+     "pnl": 1286,
+     "steps": [
+      "10:40 filled",
+      "11:35 T1",
+      "13:35 T2"
+     ]
+    },
+    "price_at_plan": 252.98,
+    "targets": {
+     "cash": 100000,
+     "qty": 396,
+     "half": 198,
+     "rest": 198,
+     "pf1": 485,
+     "pf2": 861,
+     "total": 1346,
+     "t1_hit": true,
+     "t2_hit": true,
+     "entry_hit": true,
+     "high": 259.73
+    },
+    "market": {
+     "pnl": 958,
+     "steps": [
+      "bought 252.98",
+      "11:35 T1",
+      "13:35 T2"
+     ]
+    },
+    "lock": {
+     "pnl": 958,
+     "steps": [
+      "bought 252.98",
+      "11:35 T1",
+      "12:50 SL to T1",
+      "13:35 T2"
+     ]
+    }
+   },
+   {
+    "symbol": "MUTHOOTFIN",
+    "start": "11:10",
+    "entry": 2923.0,
+    "qty": 34,
+    "sl": 2912.0,
+    "t1": 2950.0,
+    "t2": 2975.0,
+    "close": 2917.6,
+    "rules": {
+     "pnl": 0,
+     "steps": [
+      "ran up without the dip"
+     ]
+    },
+    "limit": {
+     "pnl": -434,
+     "steps": [
+      "12:30 filled",
+      "13:10 SL"
+     ]
+    },
+    "price_at_plan": 2932.6,
+    "targets": {
+     "cash": 100000,
+     "qty": 34,
+     "half": 17,
+     "rest": 17,
+     "pf1": 459,
+     "pf2": 884,
+     "total": 1343,
+     "t1_hit": true,
+     "t2_hit": false,
+     "entry_hit": true,
+     "high": 2950.0
+    },
+    "market": {
+     "pnl": 236,
+     "steps": [
+      "bought 2932.60",
+      "11:35 T1",
+      "12:00 back at cost"
+     ]
+    },
+    "lock": {
+     "pnl": 236,
+     "steps": [
+      "bought 2932.60",
+      "11:35 T1",
+      "12:00 back at cost"
+     ]
+    }
+   },
+   {
+    "symbol": "IRFC",
+    "start": "11:45",
+    "entry": 81.75,
+    "qty": 1223,
+    "sl": 81.2,
+    "t1": 83.2,
+    "t2": 84.6,
+    "close": 83.5,
+    "rules": {
+     "pnl": 1408,
+     "steps": [
+      "15:00 time stop 82.95"
+     ],
+     "bought": true
+    },
+    "limit": {
+     "pnl": 1408,
+     "steps": [
+      "12:15 filled",
+      "15:00 time stop 82.95"
+     ]
+    },
+    "price_at_plan": 81.9,
+    "targets": {
+     "cash": 100000,
+     "qty": 1223,
+     "half": 611,
+     "rest": 612,
+     "pf1": 886,
+     "pf2": 1744,
+     "total": 2630,
+     "t1_hit": false,
+     "t2_hit": false,
+     "entry_hit": true,
+     "high": 82.95
+    },
+    "market": {
+     "pnl": 1224,
+     "steps": [
+      "bought 81.90",
+      "15:00 time stop 82.95"
+     ]
+    },
+    "lock": {
+     "pnl": 1224,
+     "steps": [
+      "bought 81.90",
+      "15:00 time stop 82.95"
+     ]
+    }
+   },
+   {
+    "symbol": "HINDALCO",
+    "start": "12:15",
+    "entry": 958.5,
+    "qty": 104,
+    "sl": 953.5,
+    "t1": 970.0,
+    "t2": 975.0,
+    "close": 960.0,
+    "rules": {
+     "pnl": 0,
+     "steps": [
+      "ran up without the dip"
+     ]
+    },
+    "limit": {
+     "pnl": -107,
+     "steps": [
+      "12:30 filled",
+      "14:30 time stop 958.05"
+     ]
+    },
+    "price_at_plan": 962.5,
+    "targets": {
+     "cash": 100000,
+     "qty": 104,
+     "half": 52,
+     "rest": 52,
+     "pf1": 598,
+     "pf2": 858,
+     "total": 1456,
+     "t1_hit": false,
+     "t2_hit": false,
+     "entry_hit": true,
+     "high": 967.7
+    },
+    "market": {
+     "pnl": -523,
+     "steps": [
+      "bought 962.50",
+      "14:30 time stop 958.05"
+     ]
+    },
+    "lock": {
+     "pnl": -523,
+     "steps": [
+      "bought 962.50",
+      "14:30 time stop 958.05"
+     ]
+    }
+   },
+   {
+    "symbol": "BANKINDIA",
+    "start": "14:20",
+    "entry": 142.5,
+    "qty": 701,
+    "sl": 141.95,
+    "t1": 143.8,
+    "t2": 144.4,
+    "close": 145.0,
+    "rules": {
+     "pnl": 0,
+     "steps": [
+      "not triggered by 14:30"
+     ]
+    },
+    "limit": {
+     "pnl": 0,
+     "steps": [
+      "never filled"
+     ]
+    },
+    "price_at_plan": 142.98,
+    "targets": {
+     "cash": 100000,
+     "qty": 701,
+     "half": 350,
+     "rest": 351,
+     "pf1": 455,
+     "pf2": 667,
+     "total": 1122,
+     "t1_hit": true,
+     "t2_hit": false,
+     "entry_hit": false,
+     "high": 144.05
+    },
+    "market": {
+     "pnl": 546,
+     "steps": [
+      "bought 142.98",
+      "14:55 T1",
+      "15:00 time stop 143.89"
+     ]
+    },
+    "lock": {
+     "pnl": 546,
+     "steps": [
+      "bought 142.98",
+      "14:55 T1",
+      "15:00 time stop 143.89"
+     ]
+    }
+   }
+  ],
+  "totals": {
+   "rules": 1408,
+   "limit": 2153,
+   "market": 2441,
+   "lock": 2441,
+   "targets": 2260
+  }
  }
 ]

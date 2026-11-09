@@ -385,5 +385,6 @@
  ],
  "trades": 2,
  "day_pnl": -94,
- "done_sent": true
+ "done_sent": true,
+ "scorecard_sent": true
 }
