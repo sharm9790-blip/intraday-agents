@@ -21,6 +21,7 @@ os.environ["CLAUDE_FIRE_TOKEN"] = "y"
 import health  # noqa: E402
 import mytrade as mt  # noqa: E402
 import news  # noqa: E402
+import recheck  # noqa: E402
 import replay  # noqa: E402
 import risk  # noqa: E402
 import stats  # noqa: E402
@@ -312,6 +313,49 @@ class TestScore(Base):
         self.assertIn("SBIN 10:25 🏁 closed −₹94", t)
         self.assertIn("Your real P&amp;L today +₹50", t)
         self.assertIn("first one comes at 15:45", t)
+
+
+class TestRecheck(Base):
+    def test_rejected_stock_breakout_is_flagged_once(self):
+        self.start = dt.datetime(2026, 11, 9, 11, 0, tzinfo=IST)
+        flat = (183.5, 183.6, 183.4, 183.5)
+        self.rows_by["SBIN.NS"] = [(183.5, 184.0, 183.4, 183.6)] * 2 + [flat] * 4 + \
+                                  [(183.6, 184.7, 183.6, 184.6)] + [flat] * 10      # 11:30 breaks 184 day high
+        self.rows_by["PNB.NS"] = [(185.0, 185.9, 184.9, 185.9)] * 17                  # never > flip 186 + 0.2%
+        self.rows_by["TINY.NS"] = [(100.0, 100.0, 99.9, 99.95)] * 2 + [(99.95, 100.1, 99.9, 100.1)] * 15  # +0.1% only
+        self.put("rejected.json", {"date": "2026-11-09", "symbols": {
+            "SBIN": "11:10 fading, no breakout",
+            "PNB": "11:10 R:R 1.1; flips on 5-min close >186.0 on >1M vol",
+            "TINY": "11:10 flat",
+            "OLD": "no time in this reason"}})
+        self.at(11, 25)
+        self.assertEqual(recheck.update(self.dir, "2026-11-09", CLOCK[0], w.candles, w.load, w.save), [])
+        self.at(11, 40)
+        self.assertEqual(recheck.update(self.dir, "2026-11-09", CLOCK[0], w.candles, w.load, w.save), ["SBIN"])
+        rc = self.get("recheck.json")["symbols"]["SBIN"]
+        self.assertEqual((rc["at"], rc["level"], rc["kind"]), ("11:30", 184.0, "day high"))
+        # already flagged → not new again; a fresh rejection needs a fresh breakout
+        self.at(11, 45)
+        self.assertEqual(recheck.update(self.dir, "2026-11-09", CLOCK[0], w.candles, w.load, w.save), [])
+        self.put("rejected.json", {"date": "2026-11-09", "symbols": {"SBIN": "11:45 rejected again"}})
+        self.at(11, 55)
+        recheck.update(self.dir, "2026-11-09", CLOCK[0], w.candles, w.load, w.save)
+        self.assertEqual(self.get("recheck.json")["symbols"], {})
+        self.assertEqual(recheck.level_for("13:50 x flips on 15-min close >4,157 on vol", [], 0), (4157.0, "flip level"))
+
+    def test_watcher_sends_recheck_card(self):
+        self.start = dt.datetime(2026, 11, 9, 11, 0, tzinfo=IST)
+        self.rows = [(183.5, 184.0, 183.4, 183.6)] * 2 + [(183.6, 184.7, 183.6, 184.6)] * 10
+        self.put("rejected.json", {"date": "2026-11-09", "symbols": {"SBIN": "11:05 fading"}})
+        orig = w.fire_debate
+        w.fire_debate = lambda *a: False
+        try:
+            self.at(11, 30); w.main(self.dir)
+            self.at(11, 35); w.main(self.dir)
+        finally:
+            w.fire_debate = orig
+        self.assertEqual(self.texts().count("RE-CHECK NEXT SCAN"), 1)
+        self.assertIn("SBIN", self.texts())
 
 
 class TestHealth(Base):
