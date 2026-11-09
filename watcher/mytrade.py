@@ -190,13 +190,17 @@ def price_at(yahoo, when):
     return px, bars, ltp
 
 
-def today_plan(state_dir, today):
-    doc = w.load(os.path.join(state_dir, "plan.json"), {})
+def today_plan(state_dir, today, sym=None):
+    """Today's plan for sym (any of the live plans), else the newest one."""
     wt = w.load(os.path.join(state_dir, "watch.json"), {})
-    p = doc.get("plan") if doc.get("date") == today else None
-    if p and wt.get("qty_fix"):
-        p = {**p, "qty": wt["qty_fix"]}
-    return p
+    plans = [e["plan"] for e in wt.get("live", [])] if wt.get("date") == today else []
+    if not plans:
+        doc = w.load(os.path.join(state_dir, "plan.json"), {})
+        p = doc.get("plan") if doc.get("date") == today else None
+        plans = [{**p, "qty": wt.get("qty_fix") or p["qty"]}] if p else []
+    if sym:
+        plans = [p for p in plans if p["symbol"].upper() == sym.upper()]
+    return plans[-1] if plans else None
 
 
 def fmt_pnl(x):
@@ -388,8 +392,7 @@ def handle(st, chat, text, when, state_dir, today):
     price = float(px) if px else round(mkt, 2)
     mine = st["trades"].setdefault(chat, [])
     if act.lower() in ("bought", "buy"):
-        plan = today_plan(state_dir, today)
-        plan = plan if plan and plan["symbol"].upper() == sym else None
+        plan = today_plan(state_dir, today, sym)
         q = int(qty) if qty else (int(plan["qty"] * st.get("risk", {}).get(chat, 1)) if plan else None)
         if not q:
             return reply(f"📦 How many shares? Send e.g. <code>BOUGHT {w.esc(sym)} 100 {price}</code>")
