@@ -4,6 +4,8 @@
   "SBIN": "09:52 net R:R 1.18, 1050 CE wall 62.9L, fading vol; flips only on 5-min close >1050 on >1M vol",
   "KALYANKJIL": "09:52 results 11-10, dead volume, asks 58%, net R:R 0.8",
   "DIVISLAB": "09:52 climax top, net R:R 0.6, 12000 CE wall",
-  "LAURUSLABS": "09:52 2400 CE wall 13L, net R:R 0.8, thin volume"
+  "LAURUSLABS": "09:52 2400 CE wall 13L, net R:R 0.8, thin volume",
+  "MOTHERSON": "10:10 entry missed at 164, dip plan blocked by risk check net R:R 1.50 <1.5; 165 CE wall, BB 165.9",
+  "MANKIND": "10:10 no breakout, RSI 79, 2700 CE writing, fading vol; flips on 5-min close >=2705 on >70k vol"
  }
 }

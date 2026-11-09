@@ -1,6 +1,17 @@
 {
  "date": "2026-11-09",
- "verdict_id": "2026-11-09_0952",
+ "verdict_id": "2026-11-09_1010",
  "go_count": 0,
- "plan": null
+ "connectors": {
+  "groww": true,
+  "indmoney": true,
+  "investsights": true
+ },
+ "plan": null,
+ "blocked": {
+  "symbol": "MOTHERSON",
+  "reasons": [
+   "net R:R 1.50 below 1.5"
+  ]
+ }
 }
