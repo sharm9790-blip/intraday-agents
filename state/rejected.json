@@ -23,6 +23,9 @@
   "GAIL": "11:45 net R:R ~1.2; flips on 5-min close >187.5 on volume",
   "HDFCLIFE": "11:45 net R:R ~1.0, no volume follow-through",
   "TRENT": "12:00 live 3129 at day high, net R:R ~0.4; 3150 CE wall; flips on 5-min close >3135 on >29k vol or hold 3105-3112 with SL<=3090",
-  "MARUTI": "12:00 net R:R 0.99, daily RSI 89.7, SL 0.22 ATR, EPS miss"
+  "MARUTI": "12:00 net R:R 0.99, daily RSI 89.7, SL 0.22 ATR, EPS miss",
+  "IOC": "12:15 range-bound, RSI 82, 150 CE wall, net R:R 0.7",
+  "ICICIBANK": "12:15 tight chop, RSI 83.6, R:R ~0.9",
+  "ADANIGREEN": "12:15 thin volume, R:R 1.3"
  }
 }

@@ -1,11 +1,31 @@
 {
  "date": "2026-11-09",
- "verdict_id": "2026-11-09_1200",
- "go_count": 3,
+ "verdict_id": "2026-11-09_1215",
+ "go_count": 4,
  "connectors": {
   "groww": true,
   "indmoney": true,
   "investsights": true
  },
- "plan": null
+ "plan": {
+  "symbol": "HINDALCO",
+  "yahoo": "HINDALCO.NS",
+  "name": "Hindalco Industries",
+  "side": "long",
+  "entry_type": "dip",
+  "zone_low": 957.0,
+  "zone_high": 959.0,
+  "entry": 958.5,
+  "max_entry": 959.0,
+  "trigger_close_above": 957.0,
+  "sl": 953.5,
+  "t1": 970.0,
+  "t2": 975.0,
+  "qty": 104,
+  "deadline": "13:30",
+  "cancel_if_high_reaches": 966.0,
+  "cancel_if_close_below": 953.5,
+  "exit_if_close_below_after_entry": 955.0,
+  "time_stop": "14:30"
+ }
 }

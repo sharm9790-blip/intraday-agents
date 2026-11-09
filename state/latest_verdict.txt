@@ -1,19 +1,46 @@
-🔴 <b>NO TRADE</b>
-🕐 12:00 IST  ·  Confidence 8/10
+🟢 <b>GO — HINDALCO</b>
+🕐 12:15 IST  ·  Confidence 5/10
 
-<b>TRENT</b> — no go
-• Ran to ₹3129, at day high
-• Net reward/risk about 0.4
-• ₹3150 call wall above
-• Flips: 5-min close above ₹3135
-  on strong volume, or dip to
-  ₹3105–3112 holding ₹3090
+📥 Buy  <b>₹958.5</b>  (max ₹959)
+⏳ <b>Wait for dip</b>
+🛑 Stop loss  <b>₹953.5</b>
+🎯 Target 1  <b>₹970</b>  (sell half)
+🎯 Target 2  <b>₹975</b>
+📦 Qty  <b>104</b> shares
 
-<b>MARUTI</b> — no go
-• Net reward/risk 0.99
-• Daily RSI 89.7, tiny stop
+<b>✅ Buy only if</b>
+• Dips to ₹957–959
+• Green 5-min close above ₹957
 
-📡 Live plans still on watch:
-BANKBARODA, IRFC
+<b>❌ Cancel if</b>
+• Not filled by 13:30
+• Hits ₹966 before the dip
+• 5-min close below ₹953.5
 
+<b>💰 Risk vs reward</b>
+Max loss ≈ ₹600
+Profit ≈ ₹510 (T1) · ₹1,370 (T2)
+Reward 1.86× the risk
+
+<b>📲 Set in Groww now</b>
+1. ➕ Add HINDALCO to "My Draft Basket"
+2. 🔔 Price alert at ₹958.5
+3. After buying: SL-M at ₹953.5
+4. Sell 52 shares at ₹970
+5. Exit all by 14:30
+
+<b>Why this stock</b>
+• Up 0.9% while Nifty is down
+• Futures long build-up
+• Strong Q2 results, no event today
+
+<b>Caution</b>
+• Stretched: 1.9% above VWAP
+• Volume fading, ₹971 overhead
+
+<b>Skipped</b>
+• IOC — 150 call wall, RSI 82
+• ICICIBANK — tight chop, R:R low
+
+📡 Watcher checks every 5 min
 <i>Analysis only, not advice. You place orders yourself.</i>
