@@ -59,7 +59,7 @@ Reward 1.8× the risk
 
 ## Draft order block (GO with Judge confidence above 7 only)
 
-Insert right after the `📦 Qty` line of the GO template. It is a ready-to-copy order for the user to place in Groww themselves; nothing is sent to Groww. `<code>` makes each value tap-to-copy in Telegram.
+Insert right after the `📦 Qty` line of the GO template. It is a ready-to-copy order for the user to place in Groww or INDmoney themselves; nothing is sent to either. `<code>` makes each value tap-to-copy in Telegram.
 
 ```
 ⚡ <b>HIGH CONFIDENCE 7.5/10</b>
@@ -70,9 +70,10 @@ Buy limit  <code>766.5</code>
 SL-M trigger  <code>761.8</code>
 Sell half  <code>92</code> @ <code>777</code>
 📲 groww.in/stocks/hdfc-bank-ltd
+📲 INDmoney: search <code>HDFCBANK</code>
 ```
 
-Groww link: `https://groww.in/stocks/<slug>`, slug = the company's full name in lowercase, hyphenated, ending `-ltd` (TATASTEEL → `tata-steel-ltd`, M&M → `mahindra-mahindra-ltd`, HDFCBANK → `hdfc-bank-ltd`). The cloud sandbox can't reach groww.in, so don't try to check it: build the slug carefully and include it. The GitHub watcher opens the link before forwarding and removes the 📲 line if the page doesn't exist. Values are plain numbers (no ₹) so they paste cleanly. "Sell half" = half of Qty (rounded down) @ T1 price.
+Groww link: `https://groww.in/stocks/<slug>`, slug = the company's full name in lowercase, hyphenated, ending `-ltd` (TATASTEEL → `tata-steel-ltd`, M&M → `mahindra-mahindra-ltd`, HDFCBANK → `hdfc-bank-ltd`). The cloud sandbox can't reach groww.in, so don't try to check it: build the slug carefully and include it. The GitHub watcher opens the link before forwarding and removes the 📲 line if the page doesn't exist. Values are plain numbers (no ₹) so they paste cleanly. "Sell half" = half of Qty (rounded down) @ T1 price. INDmoney has no verifiable stock-page link, so give its line as the tap-to-copy NSE symbol only.
 
 ## NO TRADE template
 
