@@ -264,6 +264,39 @@ class TestMultiPlan(Base):
             w.fire_debate = orig
 
 
+    def test_sold_frees_slot(self):
+        fired = []
+        orig = w.fire_debate
+        w.fire_debate = lambda now, trades, vid, watch: fired.append(1) or False
+        try:
+            self.rows = [(185, 185.5, 184.8, 185.2)] * 40
+            for i, sym in enumerate(["TATASTEEL", "SBIN", "PFC"]):
+                self.verdict(f"2026-11-09_134{i}", dict(PLAN, symbol=sym, yahoo=sym + ".NS"))
+                self.at(13, 46 + i); w.main(self.dir)
+            self.assertEqual(len(w.open_plans(self.get("watch.json"))), 3)
+            k = len(fired)
+            # still holding SBIN → slot stays taken
+            self.put("mytrades.json", {"date": "2026-11-09", "trades": {"1": [
+                {"symbol": "SBIN", "opened": "13:55", "qty": 10, "left": 10}]}})
+            self.at(14, 0); w.main(self.dir)
+            self.assertEqual(len(fired), k)
+            # sold everything → plan ends, scan runs again
+            self.put("mytrades.json", {"date": "2026-11-09", "trades": {"1": [
+                {"symbol": "SBIN", "opened": "13:55", "qty": 10, "left": 0}]}})
+            self.at(14, 5); w.main(self.dir)
+            self.assertIn("SLOT FREED — SBIN", self.texts())
+            self.assertEqual([e["symbol"] for e in w.open_plans(self.get("watch.json"))], ["TATASTEEL", "PFC"])
+            self.assertGreater(len(fired), k)
+            # Groww positions closed for PFC (no SOLD message) also frees it, once
+            self.put("positions.json", {"date": "2026-11-09", "positions": [
+                {"symbol": "PFC", "buy_qty": 5, "sell_qty": 5, "net_qty": 0}]})
+            self.at(14, 10); w.main(self.dir)
+            self.at(14, 15); w.main(self.dir)
+            self.assertEqual(self.texts().count("SLOT FREED — PFC"), 1)
+        finally:
+            w.fire_debate = orig
+
+
 class TestHealth(Base):
     def test_ready_gap_fire_noverdict(self):
         watch = {}
