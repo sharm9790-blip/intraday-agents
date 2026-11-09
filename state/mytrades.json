@@ -14,12 +14,12 @@
     "t2": 256.5,
     "opened": "10:36",
     "checked": "12:40",
-    "realized": 1005.8399999999968,
+    "realized": 902.8799999999892,
     "sells": [
      {
       "qty": 396,
-      "price": 255.4,
-      "at": "12:46"
+      "price": 255.14,
+      "at": "12:49"
      }
     ],
     "flags": {
@@ -27,7 +27,7 @@
     },
     "plan": true,
     "broker": "Groww",
-    "sync": "pending"
+    "sync": "done"
    },
    {
     "symbol": "MUTHOOTFIN",
@@ -65,7 +65,7 @@
     "t1": 83.2,
     "t2": 84.6,
     "opened": "11:48",
-    "checked": "12:43",
+    "checked": "12:45",
     "realized": 0.0,
     "sells": [],
     "flags": {},
@@ -78,18 +78,18 @@
     "yahoo": "HINDALCO.NS",
     "qty": 104,
     "left": 104,
-    "entry": 963.7,
+    "entry": 959.0,
     "sl": 953.5,
     "t1": 970.0,
     "t2": 975.0,
     "opened": "12:47",
-    "checked": "12:43",
+    "checked": "12:45",
     "realized": 0.0,
     "sells": [],
     "flags": {},
     "plan": true,
     "broker": "Groww",
-    "sync": "pending"
+    "sync": "done"
    }
   ]
  },
@@ -101,6 +101,6 @@
   }
  },
  "menu": 10,
- "sync_request": "12:48",
- "sync_fired": "12:48"
+ "sync_request": null,
+ "sync_fired": null
 }
