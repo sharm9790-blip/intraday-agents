@@ -1,5 +1,5 @@
 {
- "offset": 572145762,
+ "offset": 572145763,
  "date": "2026-11-09",
  "trades": {
   "1322737291": [
@@ -13,7 +13,7 @@
     "t1": 254.6,
     "t2": 256.5,
     "opened": "10:36",
-    "checked": "11:44",
+    "checked": "11:45",
     "realized": 0.0,
     "sells": [],
     "flags": {
@@ -27,15 +27,21 @@
     "symbol": "MUTHOOTFIN",
     "yahoo": "MUTHOOTFIN.NS",
     "qty": 34,
-    "left": 34,
+    "left": 0,
     "entry": 2931.0,
     "sl": 2931.0,
     "t1": 2950.0,
     "t2": 2975.0,
     "opened": "11:17",
     "checked": "11:44",
-    "realized": 0.0,
-    "sells": [],
+    "realized": 210.79999999999382,
+    "sells": [
+     {
+      "qty": 34,
+      "price": 2937.2,
+      "at": "11:50"
+     }
+    ],
     "flags": {
      "t1": true
     },
@@ -48,18 +54,18 @@
     "yahoo": "IRFC.NS",
     "qty": 1223,
     "left": 1223,
-    "entry": 82.13,
+    "entry": 82.09,
     "sl": 81.2,
     "t1": 83.2,
     "t2": 84.6,
     "opened": "11:48",
-    "checked": "11:44",
+    "checked": "11:45",
     "realized": 0.0,
     "sells": [],
     "flags": {},
     "plan": true,
     "broker": "Groww",
-    "sync": "pending"
+    "sync": "done"
    }
   ]
  },
@@ -71,6 +77,6 @@
   }
  },
  "menu": 10,
- "sync_request": "11:49",
- "sync_fired": "11:49"
+ "sync_request": null,
+ "sync_fired": null
 }
