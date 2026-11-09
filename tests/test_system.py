@@ -150,6 +150,22 @@ class TestWatcherFlow(Base):
         self.assertIn('Remove TATASTEEL from "My Draft Basket"', t)
         self.assertEqual(self.get("watch.json")["trades"], 1)
 
+    def test_buy_now(self):
+        plan = dict(PLAN, entry_type="now", zone_low=183.4, zone_high=183.8, entry=183.6, max_entry=183.9)
+        self.put("plan.json", {"date": "2026-11-09", "verdict_id": "2026-11-09_1345", "go_count": 1, "plan": plan})
+        with open(os.path.join(self.dir, "latest_verdict.txt"), "w") as f:
+            f.write("🟢 <b>GO — TATASTEEL</b>")
+        self.rows = [(183.45, 183.7, 183.3, 183.6), (183.6, 184.5, 183.5, 184.4),
+                     (184.4, 186.0, 184.3, 185.9)]
+        self.at(13, 46)
+        w.main(self.dir)
+        self.assertIn("BUY NOW — TATASTEEL", self.texts())   # no wait for a green dip candle
+        self.assertEqual(self.get("watch.json")["trades"], 1)
+        bars = bars_from(self.start, self.rows)
+        r = replay.replay(dict(plan, start="13:45"), bars)
+        self.assertTrue(r["rules"]["bought"])
+        self.assertEqual(r["rules"]["steps"][0], "bought now 183.45")
+
     def test_cancel_at_deadline(self):
         self.go()
         self.rows = [(185, 185.5, 184.8, 185.2)] * 12

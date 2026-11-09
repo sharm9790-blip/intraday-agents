@@ -17,6 +17,7 @@ Rules:
 🕐 09:54 IST  ·  Confidence 5.5/10
 
 📥 Buy  <b>₹766.5</b>  (max ₹767)
+⚡ <b>BUY NOW</b> (entry_type now) or ⏳ <b>Wait for dip</b> (entry_type dip)
 🛑 Stop loss  <b>₹761.8</b>
 🎯 Target 1  <b>₹777</b>  (sell half)
 🎯 Target 2  <b>₹784</b>

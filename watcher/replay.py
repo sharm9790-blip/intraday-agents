@@ -78,6 +78,7 @@ def replay(p, bars):
     res = {"symbol": p["symbol"], "start": p["start"], "entry": p["entry"],
            "sl": p["sl"], "t1": p["t1"], "t2": p["t2"], "close": round(bars[-1][4], 2)}
     rule = ("cancelled", "no trigger")
+    buy_now = p.get("entry_type") == "now"
     for i, b in enumerate(bars):
         t = _m(b)
         if t < s:
@@ -85,9 +86,12 @@ def replay(p, bars):
         if t >= d:
             rule = ("cancelled", f"not triggered by {p['deadline']}")
             break
-        if (b[3] <= p["zone_high"] and b[4] > b[1] and b[4] > p["trigger_close_above"]
-                and b[4] <= p["max_entry"]):
-            rule = ("bought", i + 1)
+        if buy_now and p["zone_low"] <= b[1] <= p["max_entry"]:
+            rule = ("bought", i, b[1])          # bought at this candle's open
+            break
+        if (not buy_now and b[3] <= p["zone_high"] and b[4] > b[1]
+                and b[4] > p["trigger_close_above"] and b[4] <= p["max_entry"]):
+            rule = ("bought", i + 1, p["entry"])
             break
         if b[2] >= p["cancel_if_high_reaches"]:
             rule = ("cancelled", "ran up without the dip")
@@ -96,8 +100,9 @@ def replay(p, bars):
             rule = ("cancelled", "closed below cancel level")
             break
     if rule[0] == "bought" and rule[1] < len(bars):
-        pnl, steps = manage(bars, rule[1], p["entry"], p)
-        res["rules"] = {"pnl": pnl, "steps": steps, "bought": True}
+        pnl, steps = manage(bars, rule[1], rule[2], p)
+        res["rules"] = {"pnl": pnl, "steps": ([f"bought now {rule[2]:.2f}"] if buy_now else []) + steps,
+                        "bought": True}
     else:
         res["rules"] = {"pnl": 0, "steps": [rule[1] if rule[0] == "cancelled" else "no fill"]}
     fill = next((i for i, b in enumerate(bars) if s <= _m(b) < d and b[3] <= p["entry"]), None)
