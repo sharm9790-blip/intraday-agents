@@ -1,5 +1,5 @@
 {
- "offset": 572145761,
+ "offset": 572145762,
  "date": "2026-11-09",
  "trades": {
   "1322737291": [
@@ -13,7 +13,7 @@
     "t1": 254.6,
     "t2": 256.5,
     "opened": "10:36",
-    "checked": "11:40",
+    "checked": "11:44",
     "realized": 0.0,
     "sells": [],
     "flags": {
@@ -33,7 +33,7 @@
     "t1": 2950.0,
     "t2": 2975.0,
     "opened": "11:17",
-    "checked": "11:40",
+    "checked": "11:44",
     "realized": 0.0,
     "sells": [],
     "flags": {
@@ -42,6 +42,24 @@
     "plan": true,
     "broker": "Groww",
     "sync": "done"
+   },
+   {
+    "symbol": "IRFC",
+    "yahoo": "IRFC.NS",
+    "qty": 1223,
+    "left": 1223,
+    "entry": 82.13,
+    "sl": 81.2,
+    "t1": 83.2,
+    "t2": 84.6,
+    "opened": "11:48",
+    "checked": "11:44",
+    "realized": 0.0,
+    "sells": [],
+    "flags": {},
+    "plan": true,
+    "broker": "Groww",
+    "sync": "pending"
    }
   ]
  },
@@ -53,6 +71,6 @@
   }
  },
  "menu": 10,
- "sync_request": null,
- "sync_fired": null
+ "sync_request": "11:49",
+ "sync_fired": "11:49"
 }
