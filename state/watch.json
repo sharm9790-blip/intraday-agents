@@ -64,13 +64,16 @@
   "12:45 HINDALCO 964.60 VWAP \u20b9946.37 status waiting",
   "12:50 BANKBARODA 255.23 VWAP \u20b9252.95 status waiting",
   "12:50 IRFC 81.78 VWAP \u20b981.28 status in_zone",
-  "12:50 HINDALCO 962.80 VWAP \u20b9946.55 status waiting"
+  "12:50 HINDALCO 962.80 VWAP \u20b9946.55 status waiting",
+  "12:55 BANKBARODA 255.59 VWAP \u20b9253.02 status waiting",
+  "12:55 IRFC 81.87 VWAP \u20b981.29 status in_zone",
+  "12:55 HINDALCO 962.40 VWAP \u20b9946.75 status waiting"
  ],
  "health": {
   "ready": true,
   "pinger": true
  },
- "last_run": "12:50",
+ "last_run": "12:55",
  "fire_error": null,
  "last_fire": "12:00",
  "fired_at": null,
