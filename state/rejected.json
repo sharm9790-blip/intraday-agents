@@ -37,6 +37,10 @@
   "INDIANB": "13:50 flat since 10:00, R:R ~1",
   "TMCV": "13:50 dead range, R:R ~1",
   "LUPIN": "13:50 fading from 10:15 peak",
-  "RVNL": "13:50 spike retraced, same theme as IRFC"
+  "RVNL": "13:50 spike retraced, same theme as IRFC",
+  "LICI": "14:00 net R:R ~1.1, ADX 12; flips on 5-min close >399.5 with SL<=397.2, T1>=402.5",
+  "SOLARINDS": "14:00 daily downtrend, PCR 0.42, net R:R ~1.36",
+  "FEDERALBNK": "14:00 tight band 338-339.6, volume fading",
+  "CHOLAFIN": "14:00 weak +0.3%"
  }
 }
