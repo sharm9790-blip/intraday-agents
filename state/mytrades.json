@@ -9,14 +9,16 @@
     "qty": 396,
     "left": 396,
     "entry": 252.86,
-    "sl": 251.4,
+    "sl": 252.86,
     "t1": 254.6,
     "t2": 256.5,
     "opened": "10:36",
-    "checked": "11:30",
+    "checked": "11:35",
     "realized": 0.0,
     "sells": [],
-    "flags": {},
+    "flags": {
+     "t1": true
+    },
     "plan": true,
     "broker": "Groww",
     "sync": "done"
@@ -27,14 +29,16 @@
     "qty": 34,
     "left": 34,
     "entry": 2931.0,
-    "sl": 2912.0,
+    "sl": 2931.0,
     "t1": 2950.0,
     "t2": 2975.0,
     "opened": "11:17",
-    "checked": "11:30",
+    "checked": "11:35",
     "realized": 0.0,
     "sells": [],
-    "flags": {},
+    "flags": {
+     "t1": true
+    },
     "plan": true,
     "broker": "Groww",
     "sync": "done"
