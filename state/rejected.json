@@ -8,6 +8,11 @@
   "MOTHERSON": "10:10 entry missed at 164, dip plan blocked by risk check net R:R 1.50 <1.5; 165 CE wall, BB 165.9",
   "MANKIND": "10:10 no breakout, RSI 79, 2700 CE writing, fading vol; flips on 5-min close >=2705 on >70k vol",
   "ZYDUSLIFE": "10:25 at day high, net R:R 0.84-1.27, ATR 97% used; flips on dip to 1222-1224 holding 1218",
-  "PFC": "10:25 failed breakout 335.6, net R:R 1.0, supertrend down, 335 CE wall"
+  "PFC": "10:25 failed breakout 335.6, net R:R 1.0, supertrend down, 335 CE wall",
+  "TATAPOWER": "11:10 results 11-11, net R:R 0.8-1.1; flips on 5-min close >358.1 on >100k vol with T1>=362",
+  "PNB": "11:10 fading, no breakout, same PSU-bank factor as BANKBARODA",
+  "CANBK": "11:10 fading from 126.4 on cooling volume",
+  "UNIONBANK": "11:10 fading below 10:00 level",
+  "ABB": "11:10 RSI 82 overbought"
  }
 }

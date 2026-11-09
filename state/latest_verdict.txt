@@ -1,40 +1,41 @@
-🟢 <b>GO (dip) — BANKBARODA</b>
-🕐 10:25 IST  ·  Confidence 5/10
+🟢 <b>GO (dip) — MUTHOOTFIN</b>
+🕐 11:10 IST  ·  Confidence 5/10
 
-📥 Buy  <b>₹252.15</b>  (max ₹252.3)
-⏳ <b>Wait for dip</b> to ₹251.95–252.3
-🛑 Stop loss  <b>₹251.4</b>
-🎯 Target 1  <b>₹254.6</b>  (sell half)
-🎯 Target 2  <b>₹256.5</b>
-📦 Qty  <b>396</b> shares
+📥 Buy  <b>₹2,923</b>  (max ₹2,924)
+⏳ <b>Wait for dip</b> to ₹2,921–2,924
+🛑 Stop loss  <b>₹2,912</b>
+🎯 Target 1  <b>₹2,950</b>  (sell half)
+🎯 Target 2  <b>₹2,975</b>
+📦 Qty  <b>34</b> shares
 
 <b>✅ Buy only if</b>
-• Dips to ₹251.95–252.3
-• 5-min close holds above ₹251.95
-• Bounce shows buying volume
+• Dips to ₹2,921–2,924
+• Holds above VWAP ≈ ₹2,915
+• Nifty not breaking day low
 
 <b>❌ Cancel if</b>
-• Not filled by 13:30
-• Hits ₹254.2 before the dip
-• 5-min close below ₹251.9
+• Not filled by 13:00
+• Hits ₹2,950 before the dip
+• 5-min close below ₹2,912
 
 <b>💰 Risk vs reward</b>
-Max loss ≈ ₹377
-Net reward 2.4× the risk
+Max loss ≈ ₹454
+Reward 1.85× the risk
 
 <b>Why this stock</b>
-• PSU Bank index +2%
-• Above VWAP, daily uptrend
-• Results beat, no event today
+• +2.6% while Nifty -0.5%
+• Higher lows since 10:05
+• Above VWAP, PCR 1.17
 
 <b>⚠️ Caution</b>
-• Triple-tested ceiling ₹253.6
-• 255 and 260 call walls
-• At market net R:R only 1.1
+• Rejected 3× at ₹2,940–2,948
+• 2,950 call wall at T1
+• Volume fading, may not dip
+• BANKBARODA plan also live
 
 <b>Skipped</b>
-• ZYDUSLIFE — R:R below 1, extended
-• PFC — failed breakout, R:R 1.0
+• TATAPOWER — results 11 Nov
+• PNB, CANBK — fading
 
-📡 Watcher checks every 5 min
-<i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
+🔎 Next scan: 11:15 IST
+<i>Educational analysis, not SEBI-registered advice. Intraday is high risk; you place orders yourself.</i>
