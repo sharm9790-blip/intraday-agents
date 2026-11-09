@@ -126,6 +126,8 @@ class TestFire(unittest.TestCase):
         self.assertTrue(w.fire_debate(dt.datetime(2026, 11, 9, 9, 46, tzinfo=IST), 0, None, st))
         self.assertFalse(w.fire_debate(dt.datetime(2026, 11, 9, 9, 51, tzinfo=IST), 0, None, st))
         self.assertFalse(w.fire_debate(dt.datetime(2026, 11, 9, 14, 36, tzinfo=IST), 0, None, {}))
+        self.assertTrue(w.fire_debate(dt.datetime(2026, 11, 9, 14, 16, tzinfo=IST), 0, None, {}))
+        self.assertFalse(w.fire_debate(dt.datetime(2026, 11, 9, 14, 30, tzinfo=IST), 0, None, {}))
         self.assertFalse(w.fire_debate(dt.datetime(2026, 11, 9, 11, 0, tzinfo=IST), 3, None, {}))
 
 

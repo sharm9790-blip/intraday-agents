@@ -367,7 +367,9 @@ def weekly_report(state_dir, now):
 
 def fire_debate(now, trades, last_verdict_id, watch):
     """Start the cloud debate through the routine's API trigger every quarter hour,
-    09:45–14:30 IST. The routine has no schedule of its own, so this is the only
+    09:45–14:15 IST (last slot 14:15: a debate takes ~10-15 min and GOs must be in by
+    14:30, so a 14:30 scan could only ever say NO TRADE, and often started after the
+    routine's 14:35 cut-off and wrote nothing, setting off a false NO VERDICT alarm). The routine has no schedule of its own, so this is the only
     thing that starts debates. Called while fewer than MAX_LIVE plans are live. Returns True if it fired.
     """
     url = os.environ.get("CLAUDE_FIRE_URL")
@@ -377,7 +379,7 @@ def fire_debate(now, trades, last_verdict_id, watch):
     slot = f"{now.hour:02d}:{quarter:02d}"
     if not url or not token:
         return False
-    if not hhmm("09:45") <= minutes <= hhmm("14:34") or trades >= MAX_TRADES:
+    if not hhmm("09:45") <= minutes <= hhmm("14:29") or trades >= MAX_TRADES:
         return False
     if watch.get("last_fire") == slot:
         return False
@@ -538,7 +540,7 @@ def main(state_dir):
     waiting = sum(1 for e in live if e["status"] == "waiting")
     loss_stop = watch.get("day_pnl", 0) <= -DAY_LOSS_STOP
     full = trades + waiting >= MAX_TRADES or len(live) >= MAX_LIVE
-    late = minutes >= hhmm("14:40")  # last debate (14:30 slot) has reported
+    late = minutes >= hhmm("14:40")  # last debate (14:15 slot) has reported
     if not live:
         print("no live plan")
         if ((trades >= MAX_TRADES or late or loss_stop) and not watch.get("done_sent")
