@@ -285,7 +285,9 @@ class TestMultiPlan(Base):
                 {"symbol": "SBIN", "opened": "13:55", "qty": 10, "left": 0}]}})
             self.at(14, 5); w.main(self.dir)
             self.assertIn("SLOT FREED — SBIN", self.texts())
-            self.assertEqual([e["symbol"] for e in w.open_plans(self.get("watch.json"))], ["TATASTEEL", "PFC"])
+            wt = self.get("watch.json")
+            self.assertEqual([e["symbol"] for e in w.slots(wt)], ["TATASTEEL", "PFC"])
+            self.assertIn("SBIN", [e["symbol"] for e in w.open_plans(wt)], "paper tracking goes on")
             self.assertGreater(len(fired), k)
             # Groww positions closed for PFC (no SOLD message) also frees it, once
             self.put("positions.json", {"date": "2026-11-09", "positions": [
@@ -295,6 +297,21 @@ class TestMultiPlan(Base):
             self.assertEqual(self.texts().count("SLOT FREED — PFC"), 1)
         finally:
             w.fire_debate = orig
+
+
+class TestScore(Base):
+    def test_score_shows_today_live(self):
+        self.at(13, 0)
+        self.put("watch.json", {"date": "2026-11-09", "verdicts": 4, "trades": 1, "day_pnl": -94,
+                                "live": [{"symbol": "SBIN", "since": "10:25", "status": "closed",
+                                          "paper_result": -94}]})
+        self.put("mytrades.json", {"date": "2026-11-09", "trades": {"7": [
+            {"symbol": "SBIN", "qty": 10, "left": 0, "entry": 100.0, "realized": 50.0}]}})
+        t = "\n".join(mt.score_lines(self.dir, "7"))
+        self.assertIn("Today so far · 13:00", t)
+        self.assertIn("SBIN 10:25 🏁 closed −₹94", t)
+        self.assertIn("Your real P&amp;L today +₹50", t)
+        self.assertIn("first one comes at 15:45", t)
 
 
 class TestHealth(Base):

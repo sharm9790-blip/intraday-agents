@@ -453,7 +453,7 @@ def main(state_dir):
             reasons = list(rk["reasons"])
             if any(e["symbol"] == gp["symbol"] for e in open_plans(watch)):
                 reasons.append(f"{gp['symbol']} already has a live plan")
-            if len(open_plans(watch)) >= MAX_LIVE:
+            if len(slots(watch)) >= MAX_LIVE:
                 reasons.append(f"{MAX_LIVE} plans already live")
             if reasons:
                 lines += ["⛔ <b>BLOCKED — do not trade</b>", *["• " + esc(r) for r in reasons]]
@@ -466,10 +466,10 @@ def main(state_dir):
                 watch.setdefault("plans", []).append(p)
                 watch["live"].append({"symbol": gp["symbol"], "vid": vid, "plan": p,
                                       "status": "waiting", "since": start, "paper_booked": 0})
-                n = len(open_plans(watch))
+                n = len(slots(watch))
                 if n > 1:
                     lines += [f"📚 Live plans now: <b>{n}/{MAX_LIVE}</b> "
-                              f"({', '.join(esc(e['symbol']) for e in open_plans(watch))})"]
+                              f"({', '.join(esc(e['symbol']) for e in slots(watch))})"]
             lines += ["", *news.lines(nw)]
             if nw["level"] == "high" and not reasons:
                 lines += ["👉 Results/event day: skip, or half size"]
@@ -498,7 +498,7 @@ def main(state_dir):
         save(watch_path, watch)
 
     # 3) Keep scanning while there is room for another plan.
-    live = open_plans(watch)
+    live = slots(watch)
     trades = watch.get("trades", 0)  # plans that hit the buy trigger today
     waiting = sum(1 for e in live if e["status"] == "waiting")
     loss_stop = watch.get("day_pnl", 0) <= -DAY_LOSS_STOP
@@ -531,20 +531,20 @@ def free_sold(watch, mt, pos, today, now):
     scans can look for a new trade. Returns True if any plan was freed."""
     freed = []
     rows = {r.get("symbol"): r for r in (pos.get("positions") or [])} if pos.get("date") == today else {}
-    for e in open_plans(watch):
+    for e in slots(watch):
         mine = [t for ts in (mt.get("trades") or {}).values() for t in ts
                 if t.get("symbol") == e["symbol"] and (t.get("opened") or "") >= e["since"]]
         r = rows.get(e["symbol"])
         sold = ((mine and all(t.get("left", 1) <= 0 for t in mine))
                 or (r and r.get("buy_qty", 0) > 0 and r.get("sell_qty", 0) > 0 and r.get("net_qty", 1) == 0))
         if sold and not any(t.get("left", 0) > 0 for t in mine):
-            e["status"] = "closed"
-            e["user_sold"] = now.strftime("%H:%M")
+            e["user_sold"] = now.strftime("%H:%M")  # paper tracking goes on, slot is free
             freed.append(e["symbol"])
     if freed:
-        left = open_plans(watch)
+        left = slots(watch)
         telegram(card("🔓", f"SLOT FREED — {esc(', '.join(freed))}", [
-            "", "You sold it, so I stopped following that plan.",
+            "", "You sold it, so its slot is free for a new trade.",
+            "(I keep paper-tracking the plan quietly for the scorecard.)",
             f"📚 Live plans now: <b>{len(left)}/{MAX_LIVE}</b>"
             + (f" ({', '.join(esc(e['symbol']) for e in left)})" if left else ""),
             "🔎 Scans for a new trade resume (until 14:30, if the daily limits allow).",
@@ -553,7 +553,13 @@ def free_sold(watch, mt, pos, today, now):
 
 
 def open_plans(watch):
+    """Every plan still being tracked (alerts, paper result)."""
     return [e for e in watch.get("live", []) if e.get("status") in OPEN_STATES]
+
+
+def slots(watch):
+    """Open plans that still take a slot: not ones whose stock you already sold."""
+    return [e for e in open_plans(watch) if not e.get("user_sold")]
 
 
 def track(entry, now, watch):
@@ -694,10 +700,12 @@ def track(entry, now, watch):
         msg = msg.replace("\n\n" + FOOTER,
                           f"\n➖ Remove {sym} from \"My Draft Basket\"\n\n" + FOOTER)
     watch["log"].append(f"{t} {plan['symbol']} {price:.2f} VWAP {vw} status {status}")
-    if msg:
+    if entry.get("user_sold"):
+        pass  # you already sold: track quietly for the paper result, no alerts
+    elif msg:
         telegram(msg)
     elif now.minute % 15 < 5:
-        n = len(open_plans(watch))
+        n = len(slots(watch))
         telegram(card("📊", f"{sym}  ·  {t}" + (f"  ·  {n} live" if n > 1 else ""), [
             price_line,
             f"Status: {STATUS_LABEL.get(status, status)}",
