@@ -43,7 +43,7 @@ Reward 1.8× the risk
 2. 🔔 Price alert at ₹766.5
 3. After buying: SL-M at ₹761.8
 4. Sell 92 shares at ₹777
-5. Exit all by 15:10
+5. Exit all by 15:00
 
 <b>Why this stock</b>
 • Futures long build-up

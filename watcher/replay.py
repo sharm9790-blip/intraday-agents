@@ -2,7 +2,7 @@
 
 Three ways of taking each plan, all managed the same way afterwards
 (SL first if SL and target are in the same candle, 50% at T1 then SL to
-cost, rest at T2, everything out at 15:10, ~0.06% round-trip costs):
+cost, rest at T2, everything out at 15:00 (Groww squares off at 15:05), ~0.06% round-trip costs):
 
   rules  - the plan exactly as given (buy-trigger conditions and cancel rules)
   limit  - a plain limit buy at the entry price, no other conditions, until the deadline
@@ -11,6 +11,7 @@ cost, rest at T2, everything out at 15:10, ~0.06% round-trip costs):
            the SL on the rest moves up to T1 (tracked to see if it beats "market")
 """
 COST = 0.0006
+EXIT_BY = "15:00"
 
 
 def _m(b):
@@ -30,7 +31,7 @@ def manage(bars, i0, entry, p, lock=False):
     pnl = 0.0
     steps = []
     for b in bars[i0:]:
-        if _m(b) >= _hm(p.get("time_stop", "15:10")):
+        if _m(b) >= min(_hm(p.get("time_stop", EXIT_BY)), _hm(EXIT_BY)):
             pnl += left * (b[1] - entry)
             steps.append(f"{b[0]:%H:%M} time stop {b[1]:.2f}")
             left = 0
@@ -66,7 +67,7 @@ def targets(p, bars, cash=100000):
     e, t1, t2 = p["entry"], p["t1"], p["t2"]
     qty = int(cash // e)
     half = qty // 2
-    after = [b for b in bars if s <= _m(b) < _hm("15:10")]
+    after = [b for b in bars if s <= _m(b) < _hm(EXIT_BY)]
     hi = max((b[2] for b in after), default=0)
     filled = any(b[3] <= e for b in after if _m(b) < d)
     return {

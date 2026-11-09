@@ -51,7 +51,7 @@ Telegram bot  @sharmi_intraday_bot  ──▶  your phone
 | 09:45 | First debate (fired by the watcher). |
 | 09:45 – 14:30 | Debate every 15 min, all fired by the watcher through the routine's API trigger. |
 | 14:30 | No new entries after this (Judge rule); last fires. |
-| 15:10 | Time stop — exit any open position. |
+| 15:00 | Time stop — exit any open position. |
 | 15:30 | Watcher stops. |
 
 ---
@@ -169,14 +169,14 @@ If you rotate the bot token, update it here too. Off-hours, BOUGHT/SOLD reply
 - Capital ₹1,00,000, risk 1% per trade (₹1,000). Qty = floor(risk ÷ (entry − SL)), capped by intraday margin.
 - GO only if net R:R ≥ 1:1.5 to T1 after ~0.06% round-trip costs, SL at real structure, no high-severity Bear flag, before 14:30.
 - Book 50% at T1, move SL to cost, trail the rest to T2. No averaging down, no widening the stop.
-- Time stop 15:10. **Up to 3 plans live at once** (each ₹1,000 risk, position ≤ ₹1,00,000; MIS margin ≈ ₹20,000 each). Scans keep running while fewer than 3 are live, so a good trade isn't missed because another plan is still waiting.
+- Time stop 15:00. **Up to 3 plans live at once** (each ₹1,000 risk, position ≤ ₹1,00,000; MIS margin ≈ ₹20,000 each). Scans keep running while fewer than 3 are live, so a good trade isn't missed because another plan is still waiting.
 - **Daily loss stop:** once today's paper loss reaches ₹2,000, no new plans.
 - **Daily limit: 3 trades that actually hit the buy trigger.** Plans cancelled before entry don't count. After 3, the watcher sends 🏁 DONE FOR TODAY and stops firing debates.
 - Rejected symbols are remembered for the day (`state/rejected.json`) and skipped unless data clearly changed.
 
 Groww watchlist **"My Draft Basket"** (created 2026-11-07) holds today's planned stocks: each GO says ➕ add it, every cancel / exit alert says ➖ remove it. The watchlist only keeps the stock handy; quantities and prices stay in the Telegram message.
 
-What you do on each GO message: set the Groww price alert; after buying, immediately place SL-M and the T1 sell order; exit everything by 15:10.
+What you do on each GO message: set the Groww price alert; after buying, immediately place SL-M and the T1 sell order; exit everything by 15:00.
 
 ---
 
@@ -208,11 +208,11 @@ All commands are in the bot's **/ Menu** (registered with `setMyCommands`; `BOT_
 
 **📋 Live board:** while any trade is open, each person gets ONE pinned message listing all their open trades (price, P&L, distance to SL, next target, total), edited every 5 min — edits are silent, so the phone doesn't buzz. When all trades are closed it shows "✅ No open trades now".
 
-Loud alerts, only to the person who sent the trade: real risk check (≤ ₹1,000), 🔴 SL touched, 🎯 T1 (sell half, SL to cost), 🏁 T2, ↩️ back at cost, ⏳ 15:00, ⏰ 15:10 exit, 🧾 MY TRADES TODAY at 15:45.
+Loud alerts, only to the person who sent the trade: real risk check (≤ ₹1,000), 🔴 SL touched, 🎯 T1 (sell half, SL to cost), 🏁 T2, ↩️ back at cost, ⏳ 14:50, ⏰ 15:00 exit (Groww auto-squares-off at 15:05 for ₹50 + GST), 🧾 MY TRADES TODAY at 15:45.
 
 Size and stale-trade guards (`MAX_RISK`, `MAX_VALUE`, `STALE_MIN` in `mytrade.py`):
 - ⚠️ **TOO BIG**: on BOUGHT and after each Groww sync, if risk to SL is over ₹1,000, the position is over ₹5L (₹1L × ~5x margin), or qty is over 1.2× the plan. It says how many to sell to get back to ₹1,000 risk.
-- 😴 **NOT MOVING**: once per trade, after 75 min with T1 not reached and price still under 30% of the way from entry to T1 (before 15:00). Suggests exiting near cost or moving SL-M to cost.
+- 😴 **NOT MOVING**: once per trade, after 75 min with T1 not reached and price still under 30% of the way from entry to T1 (before 14:50). Suggests exiting near cost or moving SL-M to cost.
 - 🔓 **SLOT FREED**: when you've sold all of a live plan's stock (SOLD, or Groww shows it closed), the plan stops taking one of the 3 slots, so scans resume. It is still paper-tracked quietly (no alerts) for the scorecard.
 - `SCORE` starts with **Today so far**: every plan's status, paper P&L, and your real trades with booked P&L.
 
@@ -229,7 +229,7 @@ Each at most once: 🟢 **SYSTEM READY** at the first run from 09:15 (watcher, c
 
 ### 🧪 Tests and scripts
 
-- `tests/test_system.py` — offline tests (fake candles, clock, Telegram): risk, replay, firing window, buy→T1→T2 with paper lines, cancel, holiday, scorecard + paper account, health alerts, My Trade commands + Groww sync + 15:10 + summary, stats lesson. Run `python3 -m unittest discover -s tests -v`. GitHub runs them on every push (`tests.yml`); a ❌ means don't trust the change.
+- `tests/test_system.py` — offline tests (fake candles, clock, Telegram): risk, replay, firing window, buy→T1→T2 with paper lines, cancel, holiday, scorecard + paper account, health alerts, My Trade commands + Groww sync + 15:00 + summary, stats lesson. Run `python3 -m unittest discover -s tests -v`. GitHub runs them on every push (`tests.yml`); a ❌ means don't trust the change.
 - `scripts/deploy.sh "message"` — runs the tests, commits, pushes `main`, merges it into `claude/intraday-state`. Refuses to deploy if tests fail.
 - `scripts/check.sh` — secrets present, tests pass, state branch up to date, last watcher run, next year's holidays.
 
@@ -274,7 +274,7 @@ waiting ──deadline / ran to T1 without dip / close below cancel level──�
 in_zone ──SL touched──▶ closed (🔴)     in_zone ──early-exit close──▶ closed (⚠️)
 in_zone ──T1──▶ t1_hit (🎯 sell half, SL to cost)
 t1_hit ──T2──▶ closed (🏁)               t1_hit ──back to entry──▶ closed (↩️)
-in_zone / t1_hit at 15:10 ──▶ closed (⏰ TIME STOP)
+in_zone / t1_hit at 15:00 ──▶ closed (⏰ TIME STOP)
 ```
 
 A 📊 status card is sent on runs in the first 5 minutes of each quarter hour while a plan is live.
@@ -296,7 +296,7 @@ A 📊 status card is sent on runs in the first 5 minutes of each quarter hour w
 | 🔴 STOP LOSS HIT / ⚠️ EARLY EXIT / ↩️ BACK AT COST | Exit |
 | 🛡 CHECKS — SYMBOL | Right after each GO: code risk check (✅ passed with R:R, risk ₹, value, or ⛔ BLOCKED with reasons; 🧮 corrected qty) and a 24 h news check (✅ / 📰 / ⚠️ EVENT RISK) |
 | ❌ CANCELLED | Don't buy; delete the Groww alert |
-| ⏰ TIME STOP | Exit everything (15:10) |
+| ⏰ TIME STOP | Exit everything (15:00) |
 | 📈 Paper lines | In 🎯 T1 / 🔴 SL / 🏁 T2 / ↩️ / ⚠️ / ⏰ alerts: the paper result of the live trade (plan qty, before costs) |
 | 📒 SCORECARD | 15:45 on market days (needs the pinger to run until 15:55): per stock cash ₹1,00,000 ÷ entry = qty, 50% at T1 and rest at T2 with ✅/❌ for whether price reached entry / T1 / T2, target profit (before costs), high and close; then each of today's plans replayed on 5-min candles — by the plan's rules, as a plain limit order, and bought at once — with today's and the running paper P&L (`state/scorecard.json`) |
 | 🏁 DONE FOR TODAY | Sent once a day: when 3 bought trades are used, or at ~14:40 when scanning ends with no plan live |

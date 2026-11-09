@@ -28,6 +28,8 @@ PAUSED = set()  # chats that sent PAUSE today (broadcasts skip them)
 IST = timezone(timedelta(hours=5, minutes=30))
 FOOTER = "<i>Analysis only, not advice. You place orders yourself.</i>"
 OPEN_STATES = ("waiting", "in_zone", "t1_hit")
+EXIT_BY = "15:00"  # Groww auto-squares-off MIS at 15:05 (+₹50 fee), so be out first
+WARN_AT = "14:50"
 MAX_LIVE = 3        # plans followed at the same time
 MAX_TRADES = 3      # plans that may hit the buy trigger per day
 DAY_LOSS_STOP = 2000  # no new plans once today's paper loss reaches this (₹)
@@ -671,7 +673,7 @@ def track(entry, now, watch):
                 f"🕐 {t} IST", "", price_line, "",
                 f"👉 <b>Exit the rest</b> at {rs(plan['entry'])}. Half was booked at T1.",
             ])
-    ts = plan.get("time_stop", "15:10")
+    ts = min(plan.get("time_stop", EXIT_BY), EXIT_BY)
     if status in ("in_zone", "t1_hit") and minutes >= hhmm(ts):
         old_status = status
         status = "closed"
