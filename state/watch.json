@@ -8,13 +8,14 @@
   "10:35 BANKBARODA 252.77 VWAP \u20b9252.07 status waiting",
   "10:40 BANKBARODA 252.42 VWAP \u20b9252.08 status waiting",
   "10:45 BANKBARODA 252.10 VWAP \u20b9252.08 status waiting",
-  "10:50 BANKBARODA 252.64 VWAP \u20b9252.09 status waiting"
+  "10:50 BANKBARODA 252.64 VWAP \u20b9252.09 status waiting",
+  "10:55 BANKBARODA 252.88 VWAP \u20b9252.09 status waiting"
  ],
  "health": {
   "ready": true,
   "pinger": true
  },
- "last_run": "10:50",
+ "last_run": "10:55",
  "fire_error": null,
  "last_fire": "10:15",
  "fired_at": null,
