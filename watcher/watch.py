@@ -486,6 +486,11 @@ def main(state_dir):
     if minutes >= hhmm("15:50") and watch.get("scorecard_sent"):
         weekly_report(state_dir, now)
 
+    # 1c) You sold the stock of a live plan → that plan ends and its slot is free.
+    if free_sold(watch, mt if mt.get("date") == today else {},
+                 load(os.path.join(state_dir, "positions.json"), {}), today, now):
+        save(watch_path, watch)
+
     # 2) Follow every live plan.
     if hhmm("09:15") <= minutes <= hhmm("15:30"):
         for e in open_plans(watch):
@@ -518,6 +523,33 @@ def main(state_dir):
     if not full and not loss_stop:
         if fire_debate(now, trades + waiting, vid if plan_doc.get("date") == today else None, watch):
             save(watch_path, watch)
+
+
+def free_sold(watch, mt, pos, today, now):
+    """End each live plan whose stock you bought and have now fully sold (your
+    SOLD message in mytrades.json, or Groww positions showing it closed), so the
+    scans can look for a new trade. Returns True if any plan was freed."""
+    freed = []
+    rows = {r.get("symbol"): r for r in (pos.get("positions") or [])} if pos.get("date") == today else {}
+    for e in open_plans(watch):
+        mine = [t for ts in (mt.get("trades") or {}).values() for t in ts
+                if t.get("symbol") == e["symbol"] and (t.get("opened") or "") >= e["since"]]
+        r = rows.get(e["symbol"])
+        sold = ((mine and all(t.get("left", 1) <= 0 for t in mine))
+                or (r and r.get("buy_qty", 0) > 0 and r.get("sell_qty", 0) > 0 and r.get("net_qty", 1) == 0))
+        if sold and not any(t.get("left", 0) > 0 for t in mine):
+            e["status"] = "closed"
+            e["user_sold"] = now.strftime("%H:%M")
+            freed.append(e["symbol"])
+    if freed:
+        left = open_plans(watch)
+        telegram(card("🔓", f"SLOT FREED — {esc(', '.join(freed))}", [
+            "", "You sold it, so I stopped following that plan.",
+            f"📚 Live plans now: <b>{len(left)}/{MAX_LIVE}</b>"
+            + (f" ({', '.join(esc(e['symbol']) for e in left)})" if left else ""),
+            "🔎 Scans for a new trade resume (until 14:30, if the daily limits allow).",
+        ], footer=False))
+    return bool(freed)
 
 
 def open_plans(watch):
