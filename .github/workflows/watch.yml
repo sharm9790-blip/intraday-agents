@@ -6,6 +6,10 @@ on:
     # external pinger (cron-job.org) calling workflow_dispatch, Mon–Fri 09:15–15:30 IST.
     - cron: "*/30 3-10 * * 1-5"
   workflow_dispatch:
+  # A new verdict from the cloud debate goes out at once, not at the next 5-min run.
+  push:
+    branches: [claude/intraday-state]
+    paths: [state/plan.json]
 
 permissions:
   contents: write
