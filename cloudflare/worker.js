@@ -44,8 +44,16 @@ export default {
   },
   // Opening the worker's URL runs one check — handy for testing.
   // Add ?live=1 to run the live-price check even outside market hours.
+  // Add ?live=test to check the Groww login and one price call, any time (read-only).
   async fetch(request, env) {
-    const force = new URL(request.url).searchParams.get("live") === "1";
+    const mode = new URL(request.url).searchParams.get("live");
+    if (mode === "test") {
+      const r = await growwTest(env).catch((e) => ({ ok: false, error: String(e) }));
+      return new Response(JSON.stringify({ groww: r }, null, 2), {
+        headers: { "content-type": "application/json" },
+      });
+    }
+    const force = mode === "1";
     const [bot, prices] = await Promise.all([
       check(env), live(env, force).catch((e) => ({ ok: false, error: String(e) }))]);
     return new Response(JSON.stringify({ bot, live: prices }, null, 2), {
@@ -258,7 +266,10 @@ async function growwToken(env, fresh = false) {
     body: JSON.stringify(body),
   });
   const j = await r.json().catch(() => ({}));
-  if (!r.ok || !j.token) throw new Error(`Groww login ${r.status}`);
+  if (!r.ok || !j.token) {
+    const why = String((j.error && (j.error.message || j.error.code)) || j.message || "").slice(0, 160);
+    throw new Error(`Groww login ${r.status}${why ? ": " + why : ""}`);
+  }
   // Valid until Groww's expiry, else the next 06:00 IST; refresh 10 min early.
   let exp = Date.parse(j.expiry || "");
   if (!exp) {
@@ -281,6 +292,28 @@ async function ltp(token, symbols) {
   const out = {};
   for (const [k, v] of Object.entries(j.payload || {})) if (typeof v === "number") out[k.replace(/^NSE_/, "")] = v;
   return { auth: true, prices: out };
+}
+
+// Login + one LTP call for two big stocks. Shows which login method is set up and
+// whether it works; never returns the token or any secret.
+async function growwTest(env) {
+  const method = env.GROWW_API_KEY
+    ? (env.GROWW_API_SECRET ? "api key + secret" : env.GROWW_TOTP_SECRET ? "api key + TOTP" : "api key only (add TOTP secret)")
+    : env.GROWW_ACCESS_TOKEN ? "daily access token" : "none";
+  if (method === "none") return { ok: false, method, error: "no Groww secrets in Cloudflare" };
+  if (!env.STATE) return { ok: false, method, error: "KV binding STATE missing" };
+  let token;
+  try {
+    token = await growwToken(env, true);
+  } catch (e) {
+    return { ok: false, method, login: "failed", error: String(e.message || e) };
+  }
+  if (!token) return { ok: false, method, login: "failed", error: "secret missing for this method" };
+  const res = await ltp(token, ["SBIN", "RELIANCE"]).catch((e) => ({ error: String(e.message || e) }));
+  if (res.error) return { ok: false, method, login: "ok", prices: "failed", error: res.error };
+  if (!res.auth) return { ok: false, method, login: "ok", prices: "refused (401/403)" };
+  return { ok: true, method, login: "ok", prices: res.prices,
+           note: "Outside market hours these are the last closing prices." };
 }
 
 async function telegram(env, chat, text) {
