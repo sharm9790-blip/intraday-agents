@@ -156,59 +156,49 @@ Setup (dash.cloudflare.com, free account):
 5. Worker → Settings → Trigger events → Cron trigger `* * * * *`.
 6. Test: open the worker's URL — `{"ok": true, ...}`. Send HELP to the bot; reply in ~1 min.
 
-**⚡ Live price alerts (Groww API, every minute, read-only).** The same worker,
-Mon–Fri 09:15–15:30 IST, reads `state/watch.json` and `state/mytrades.json` from the
-state branch, gets the Groww last traded price for all live-plan and open-trade
-stocks in one call (`GET /v1/live-data/ltp`, limit 5,000/day; this uses ~375), and
-sends an alert the first time a price reaches a level: plan ⚡ IN BUY ZONE /
+**⚡ Live price alerts (INDmoney API, every minute, read-only, free).** The same
+worker, Mon–Fri 09:15–15:30 IST, reads `state/watch.json` and `state/mytrades.json`
+from the state branch, gets the INDmoney last traded price for all live-plan and
+open-trade stocks in one call (`GET /market/quotes/ltp`, limit 100,000/day; this uses
+~375), and sends an alert the first time a price reaches a level: plan ⚡ IN BUY ZONE /
 ⚡ RAN UP (cancel level) / ⚡ BELOW CANCEL LEVEL (to every chat not PAUSEd), and
 for your own open trades ⚡ SL LEVEL HIT / ⚡ T1 REACHED / ⚡ T2 REACHED. Each alert
 is sent once a day (KV `livesent:<date>`). The 5-min watcher still applies the plan
 rules on candle closes (🔔 BUY TRIGGER etc.) and keeps the scorecard, so a ⚡ alert
-is the early heads-up and the 5-min alert the confirmation. The only Groww calls
+is the early heads-up and the 5-min alert the confirmation. The only INDmoney calls
 are the login and the LTP endpoint: nothing places, changes or cancels orders.
 
-**Price source: INDmoney first (free), Groww second.** Groww's live-data API needs
-Groww's paid Trade API plan (₹499 + GST/month; the free trial excludes Live Data,
-so it answers 403 "Access forbidden"). INDmoney (INDstocks) API access is free and
-its price calls need no static IP (static IP is only for orders). INDmoney asks for
-NSE security ids (SBIN → `NSE_3045`): the watcher builds `state/nse_ids.json` from a
-public scrip master once a week (`watcher/nse_ids.py`).
+INDmoney (INDstocks) API access is free and its price calls need no static IP
+(static IP is only for orders). It asks for NSE security ids (SBIN → `NSE_3045`):
+the watcher builds `state/nse_ids.json` from a public scrip master once a week
+(`watcher/nse_ids.py`). Groww's Trade API was tried and removed (2026-11-10): its
+live data needs the paid plan (₹499 + GST/month; the free trial answers 403
+"Access forbidden"). Groww stays where you place orders, and the Groww connector
+still feeds the debate and the read-only position sync.
 
-INDmoney setup (you type the secrets in Cloudflare yourself; never paste them in chat):
-a. indstocks.com → API trading (access tokens page) → Claim Your API Access →
+Setup (you type the secrets in Cloudflare yourself; never paste them in chat):
+a. GitHub → Settings → Developer settings → the worker's fine-grained token →
+   **Contents: Read-only** (to read the state files) → Update.
+b. indstocks.com → API trading (access tokens page) → Claim Your API Access →
    **Setup TOTP**: scan the QR into your authenticator app and also copy the text
    secret shown with it. Note the **Client ID** shown after TOTP setup.
-b. Worker → Settings → Variables and Secrets → add as **Secrets**:
+c. Worker → Settings → Variables and Secrets → add as **Secrets** (then Deploy):
    `IND_CLIENT_ID`, `IND_MPIN` (your INDstocks MPIN), `IND_TOTP_SECRET` (the text
    secret). Or only `IND_ACCESS_TOKEN` (a token you generate; lasts 24 h).
-   The worker logs in itself about once a day (token cached 23.5 h). After a failed
-   login it waits 20 min before trying again, because INDmoney locks token
-   generation for 15 min after 5 wrong codes.
-c. Paste the new `cloudflare/worker.js` → Deploy → open `?live=test`: the
-   `"indmoney"` part shows `"login": "ok"` and SBIN / RELIANCE prices.
-MPIN + TOTP is a full login to your INDmoney account. INDmoney only accepts
-orders from a whitelisted static IP and this worker never calls an order endpoint,
-but treat these secrets like a password and revoke the API access if they leak.
-
-Groww setup (only if you buy Groww's Trade API plan):
-7. GitHub → Settings → Developer settings → your fine-grained token for the worker →
-   add **Contents: Read-only** (it needs to read the state files) → Update.
-8. Worker → Settings → Variables and Secrets → add, as **Secrets**, either
-   `GROWW_API_KEY` + `GROWW_API_SECRET`, or `GROWW_API_KEY` + `GROWW_TOTP_SECRET`
-   (the TOTP seed from Groww's Trading API page), or just `GROWW_ACCESS_TOKEN`
-   (the daily token; it expires at 06:00, so you'd paste it each morning).
-   The worker logs in itself and caches the token in KV until Groww's expiry.
-9. Paste the new `cloudflare/worker.js` → Deploy. Test: open the worker URL with
-   `?live=1` — `"live": {"ok": true, ...}` shows the stocks and Groww prices (or
-   `"watching": 0` when nothing is live). If Groww refuses the login you get one
+   The worker logs in itself about once a day (token cached 23.5 h). INDmoney allows
+   one login a minute; after "wait a minute" it pauses 90 s, after any other failed
+   login 20 min (INDmoney locks logins for 15 min after 5 wrong codes).
+d. Paste the new `cloudflare/worker.js` → Deploy → open the worker URL with
+   `?live=test` **once**: `"indmoney": {"ok": true, "login": "ok …", "prices": {…}}`
+   with SBIN / RELIANCE prices, plus `worker_version` and which secrets are set
+   (true/false only). `?live=1` runs the real check outside market hours
+   (`"watching": 0` when nothing is live). If prices fail in market hours you get one
    ⚠️ Live price alerts off message that day; the 5-min alerts keep working.
-   Check Groww any time (even with the market closed): open the worker URL with
-   `?live=test` — it logs in and gets SBIN + RELIANCE prices (read-only), showing
-   `"login": "ok"` and the prices, or the reason Groww refused.
-Treat the Groww keys like a password: Groww API keys can usually place orders.
-Regenerate them in Groww if they ever leak. Offline test of the alert logic:
-`jsc -m tests/worker_test.mjs` (macOS JavaScriptCore; `scripts/deploy.sh` runs it).
+MPIN + TOTP is a full login to your INDmoney account. INDmoney only accepts orders
+from a whitelisted static IP and this worker never calls an order endpoint, but
+treat these secrets like a password and revoke the API access if they leak.
+Offline test of the alert logic: `jsc -m tests/worker_test.mjs` (macOS
+JavaScriptCore; `scripts/deploy.sh` runs it).
 
 **INDmoney trades:** add `IND` at the end (`BOUGHT TATASTEEL 544 183.55 IND`,
 `SOLD TATASTEEL IND`). The INDmoney connector only gives market data (no orders or
