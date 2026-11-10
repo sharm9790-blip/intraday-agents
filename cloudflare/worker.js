@@ -41,7 +41,7 @@ const RETRY_AFTER_S = 600;
 const MAX_TRIES = 3;
 const GROWW = "https://api.groww.in";
 const IND = "https://api.indstocks.com";
-const VERSION = "2026-11-10b";  // shown by ?live=test so you can tell the new code is deployed
+const VERSION = "2026-11-10c";  // shown by ?live=test so you can tell the new code is deployed
 const OPEN = ["waiting", "in_zone", "t1_hit"];
 const IST_MS = 5.5 * 3600 * 1000;
 
@@ -320,7 +320,7 @@ function indConfigured(env) {
   return !!(env.IND_ACCESS_TOKEN || (env.IND_CLIENT_ID && env.IND_MPIN && env.IND_TOTP_SECRET));
 }
 
-async function indToken(env, fresh = false) {
+async function indToken(env, fresh = false, isTest = false) {
   if (env.IND_ACCESS_TOKEN && !env.IND_CLIENT_ID) return env.IND_ACCESS_TOKEN;
   if (!fresh) {
     const c = JSON.parse((await env.STATE.get("ind_token")) || "{}");
@@ -328,7 +328,9 @@ async function indToken(env, fresh = false) {
   }
   // INDmoney locks token generation for 15 min after 5 wrong TOTPs: after a failed
   // login, wait 20 min before trying again (never hammer it every minute).
-  if (await env.STATE.get("ind_login_wait")) throw new Error("INDmoney login failed recently; retrying after 20 min");
+  if (!isTest && (await env.STATE.get("ind_login_wait"))) {
+    throw new Error("INDmoney login failed recently; retrying after 20 min");
+  }
   const r = await fetch(`${IND}/generate/token`, {
     method: "POST",
     headers: { "x-api-key": env.IND_CLIENT_ID, "content-type": "application/json" },
@@ -337,8 +339,11 @@ async function indToken(env, fresh = false) {
   const j = await r.json().catch(() => ({}));
   const tok = j.token || (j.data && j.data.token);
   if (!r.ok || !tok) {
-    await env.STATE.put("ind_login_wait", "1", { expirationTtl: 1200 });
     const why = String(j.message || (j.error && (j.error.message || j.error)) || "").slice(0, 160);
+    // "wait a minute" = INDmoney's 1-token-per-60-s throttle, not a wrong code: short pause.
+    // Anything else (wrong MPIN/TOTP): 20 min, so 5 bad codes can never lock the account.
+    const throttled = /wait a minute|too many|429/i.test(why) || r.status === 429;
+    await env.STATE.put("ind_login_wait", "1", { expirationTtl: throttled ? 90 : 1200 });
     throw new Error(`INDmoney login ${r.status}${why ? ": " + why : ""}`);
   }
   await env.STATE.put("ind_token", JSON.stringify({ token: tok, exp: Date.now() + 23.5 * 3600000 }));
@@ -390,16 +395,19 @@ async function indLtp(env, token, symbols) {
 async function indTest(env) {
   const method = env.IND_CLIENT_ID ? "client id + MPIN + TOTP" : "pasted access token";
   if (!env.STATE) return { ok: false, method, error: "KV binding STATE missing" };
-  let token;
+  let token, login = "ok (saved token)";
   try {
-    token = await indToken(env, true);
+    const c = JSON.parse((await env.STATE.get("ind_token")) || "{}");
+    if (!(c.token && c.exp > Date.now())) { token = await indToken(env, true, true); login = "ok (new login)"; }
+    else token = c.token;
   } catch (e) {
-    return { ok: false, method, login: "failed", error: String(e.message || e) };
+    const wait = /wait a minute/i.test(String(e.message)) ? " → wait 2 minutes, then open ?live=test once" : "";
+    return { ok: false, method, login: "failed", error: String(e.message || e) + wait };
   }
-  const res = await indLtp(env, token, ["SBIN", "RELIANCE"]).catch((e) => ({ error: String(e.message || e) }));
-  if (res.error) return { ok: false, method, login: "ok", prices: "failed", error: res.error };
-  if (!res.auth) return { ok: false, method, login: "ok", prices: `refused (${res.status})`, says: res.why };
-  return { ok: true, method, login: "ok", prices: res.prices,
+  let res = await indLtp(env, token, ["SBIN", "RELIANCE"]).catch((e) => ({ error: String(e.message || e) }));
+  if (res.error) return { ok: false, method, login, prices: "failed", error: res.error };
+  if (!res.auth) return { ok: false, method, login, prices: `refused (${res.status})`, says: res.why };
+  return { ok: true, method, login, prices: res.prices,
            note: "Outside market hours these are the last closing prices." };
 }
 
