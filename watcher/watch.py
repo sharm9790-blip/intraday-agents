@@ -214,6 +214,7 @@ def order_block(plan, qty=None):
     return [
         "📝 <b>Your order</b> (tap a value to copy)",
         f'📲 <a href="{html.escape(groww_link(plan["symbol"]))}">Open {esc(plan["symbol"])} in Groww</a> › Buy',
+        f"or INDmoney › search <code>{esc(plan['symbol'])}</code> › Buy (tracked by itself)",
         "Intraday · Limit",
         f"Qty  <code>{q}</code>",
         f"Limit price  <code>{buy:g}</code>",

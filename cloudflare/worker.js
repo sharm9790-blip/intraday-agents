@@ -27,6 +27,12 @@
 //     IND_CLIENT_ID + IND_MPIN + IND_TOTP_SECRET   (TOTP login, code made here; token 24 h)
 //     IND_ACCESS_TOKEN                             (pasted token, valid 24 h)
 //   INDmoney needs NSE security ids: the watcher writes state/nse_ids.json weekly.
+//
+// 3) Your INDmoney trades, tracked by themselves (Mon–Fri 09:15–15:30 IST): every
+//    minute it reads your intraday equity positions (GET /portfolio/positions,
+//    read-only). When a buy or sell shows up, it starts mytrade.yml with the
+//    positions as input; mytrade.py then tracks the trade exactly like a BOUGHT /
+//    SOLD message (no message needed). Groww trades still use BOUGHT / SOLD.
 //   Without INDmoney secrets, part 2 is simply off. (Groww's live-data API needs its
 //   paid plan, so it was removed on 2026-11-10; Groww is still where you place orders.)
 
@@ -36,7 +42,7 @@ const STATE_BRANCH = "claude/intraday-state";
 const RETRY_AFTER_S = 600;
 const MAX_TRIES = 3;
 const IND = "https://api.indstocks.com";
-const VERSION = "2026-11-10d";  // shown by ?live=test so you can tell the new code is deployed
+const VERSION = "2026-11-10e";  // shown by ?live=test so you can tell the new code is deployed
 const OPEN = ["waiting", "in_zone", "t1_hit"];
 const IST_MS = 5.5 * 3600 * 1000;
 
@@ -339,8 +345,63 @@ async function indTest(env) {
   let res = await indLtp(env, token, ["SBIN", "RELIANCE"]).catch((e) => ({ error: String(e.message || e) }));
   if (res.error) return { ok: false, method, login, prices: "failed", error: res.error };
   if (!res.auth) return { ok: false, method, login, prices: `refused (${res.status})`, says: res.why };
-  return { ok: true, method, login, prices: res.prices,
+  let positions;
+  try {
+    const r = await fetch(`${IND}/portfolio/positions?segment=equity&product=intraday`, {
+      headers: { authorization: token, accept: "application/json" } });
+    const j = await r.json().catch(() => ({}));
+    positions = r.ok && String(j.status).toLowerCase() === "success"
+      ? `ok (${posSnapshot(j.data).length} intraday today)` : `failed (${r.status})`;
+  } catch (e) { positions = "failed"; }
+  return { ok: true, method, login, prices: res.prices, positions,
            note: "Outside market hours these are the last closing prices." };
+}
+
+// ---------- 3) INDmoney positions → trade tracker ----------
+const SYM_RE = /^[A-Z0-9&-]{1,20}$/;
+
+// Today's intraday equity positions, reduced to what the tracker needs. Sorted, so
+// the same positions always give the same string (a change = a new fill).
+export function posSnapshot(rows) {
+  const out = [];
+  for (const r of rows || []) {
+    const s = String(r.symbol || "").toUpperCase().replace(/-EQ$/, "");
+    const n = (x) => (typeof x === "number" && isFinite(x) ? x : Number(x) || 0);
+    if (!SYM_RE.test(s)) continue;
+    const bq = Math.trunc(n(r.buy_qty)), sq = Math.trunc(n(r.sell_qty));
+    if (bq <= 0 && sq <= 0) continue;
+    out.push({ s, bq, ba: n(r.buy_avg), sq, sa: n(r.sell_avg), nq: Math.trunc(n(r.net_qty)),
+               rp: Math.round(n(r.realized_profit) * 100) / 100 });
+  }
+  out.sort((a, b) => (a.s < b.s ? -1 : a.s > b.s ? 1 : 0));
+  return out;
+}
+
+async function indPositions(env, t) {
+  const token = await indToken(env);
+  const r = await fetch(`${IND}/portfolio/positions?segment=equity&product=intraday`, {
+    headers: { authorization: token, accept: "application/json" },
+  });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok || String(j.status).toLowerCase() !== "success") {
+    return { ok: false, error: `INDmoney positions ${r.status}` };
+  }
+  const snap = JSON.stringify(posSnapshot(j.data));
+  const key = `indpos:${t.date}`;
+  if ((await env.STATE.get(key)) === snap) return { ok: true, changed: false };
+  if (snap === "[]" && !(await env.STATE.get(key))) {   // nothing traded yet today
+    await env.STATE.put(key, snap, { expirationTtl: 2 * 86400 });
+    return { ok: true, changed: false };
+  }
+  const gh = await fetch(
+    `https://api.github.com/repos/${REPO}/actions/workflows/mytrade.yml/dispatches`, {
+      method: "POST",
+      headers: ghHeaders(env, "application/vnd.github+json"),
+      body: JSON.stringify({ ref: "main", inputs: { ind_positions: snap.slice(0, 60000) } }),
+    });
+  if (gh.status !== 204) return { ok: false, error: `GitHub dispatch ${gh.status}` };
+  await env.STATE.put(key, snap, { expirationTtl: 2 * 86400 });
+  return { ok: true, changed: true, positions: JSON.parse(snap).map((p) => p.s) };
 }
 
 // Prices for the watch list from INDmoney (free).
@@ -365,9 +426,12 @@ async function live(env, force = false) {
   if (!force && (t.weekday === 0 || t.weekday === 6 || t.mins < 555 || t.mins > 930)) {
     return { ok: true, off: "market closed" };
   }
+  // Your INDmoney fills first (never lets a problem here stop the price alerts).
+  const trades = await indPositions(env, t).catch((e) => ({ ok: false, error: String(e.message || e) }));
+
   const [watch, mt] = await Promise.all([readState(env, "watch.json"), readState(env, "mytrades.json")]);
   const list = watchList(watch, mt, t.date);
-  if (!list.symbols.length) return { ok: true, watching: 0 };
+  if (!list.symbols.length) return { ok: true, watching: 0, trades };
 
   let res;
   try {
@@ -382,7 +446,7 @@ async function live(env, force = false) {
       await telegram(env, ALLOWED[0], `⚠️ <b>Live price alerts off</b>\n${res.source} login or prices were refused. ` +
         "Open the worker URL with ?live=test to see why. The 5-min alerts still work.");
     }
-    return { ok: false, source: res.source, error: res.error || `${res.source} auth refused` };
+    return { ok: false, source: res.source, error: res.error || `${res.source} auth refused`, trades };
   }
 
   const sentKey = `livesent:${t.date}`;
@@ -391,5 +455,6 @@ async function live(env, force = false) {
   for (const a of alerts) for (const c of a.to) await telegram(env, c, a.text);
   if (alerts.length) await env.STATE.put(sentKey, JSON.stringify(sent), { expirationTtl: 2 * 86400 });
   return { ok: true, source: res.source, watching: list.symbols, prices: res.prices,
-           missing: res.missing && res.missing.length ? res.missing : undefined, sent: alerts.map((a) => a.key) };
+           missing: res.missing && res.missing.length ? res.missing : undefined, sent: alerts.map((a) => a.key),
+           trades };
 }

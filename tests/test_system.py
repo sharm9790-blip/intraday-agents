@@ -249,6 +249,7 @@ class TestMultiPlan(Base):
             self.assertIn("Limit price  <code>183.5</code>", t)     # copy-ready order values
             self.assertIn("SL-M sell", t)
             self.assertIn('<a href="https://groww.in/stocks/sbin">Open SBIN in Groww</a>', t)
+            self.assertIn("or INDmoney › search <code>SBIN</code>", t)
             self.assertIn("When that T1 sell fills: edit the SL-M to qty", t)  # no short after T1
             self.assertNotIn("BUY TRIGGER — TATASTEEL", t)
             self.at(14, 1); w.main(self.dir)
@@ -438,6 +439,43 @@ class TestMyTrade(Base):
     def run_at(self, h, m):
         self.at(h, m)
         mt.main(self.dir)
+
+    def ind(self, rows, h, m):
+        os.environ["IND_POSITIONS"] = json.dumps(rows)
+        try:
+            self.run_at(h, m)
+        finally:
+            os.environ.pop("IND_POSITIONS", None)
+
+    def test_indmoney_auto(self):
+        # INDmoney buy shows up → trade starts by itself with the plan's SL/T1 (owner chat)
+        self.ind([{"s": "TATASTEEL", "bq": 544, "ba": 183.6, "sq": 0, "sa": 0, "nq": 544, "rp": 0}], 10, 1)
+        tr = self.get("mytrades.json")["trades"]["111"][0]
+        self.assertEqual((tr["qty"], tr["left"], tr["entry"], tr["broker"]), (544, 544, 183.6, "INDmoney"))
+        self.assertIn("MY TRADE STARTED — TATASTEEL", self.texts())
+        self.assertIn("Picked up from INDmoney", self.texts())
+        n = len(self.sent)
+        self.run_at(10, 5)                                   # same data again: no repeat card
+        self.assertFalse(any("TATASTEEL" in t and "STARTED" in t for _, t in self.sent[n:]))
+        # half sold at T1 → part sold, SL to cost, INDmoney's realised P&L
+        self.ind([{"s": "TATASTEEL", "bq": 544, "ba": 183.6, "sq": 272, "sa": 185.0, "nq": 272, "rp": 380.8}], 10, 20)
+        tr = self.get("mytrades.json")["trades"]["111"][0]
+        self.assertEqual((tr["left"], tr["realized"], tr["sl"]), (272, 380.8, 183.6))
+        self.assertIn("PART SOLD — TATASTEEL", self.texts())
+        # BOUGHT … IND on the auto trade only sets levels, no duplicate
+        self.say(1, 111, "BOUGHT TATASTEEL 272 183.6 SL 183 T1 185 IND", 10, 22)
+        self.run_at(10, 25)
+        trs = self.get("mytrades.json")["trades"]["111"]
+        self.assertEqual(len(trs), 1)
+        self.assertIn("LEVELS SET — TATASTEEL", self.texts())
+        # rest sold → closed, slot logic sees left 0
+        self.ind([{"s": "TATASTEEL", "bq": 544, "ba": 183.6, "sq": 544, "sa": 185.5, "nq": 0, "rp": 1033.6}], 11, 0)
+        tr = self.get("mytrades.json")["trades"]["111"][0]
+        self.assertEqual((tr["left"], tr["realized"]), (0, 1033.6))
+        self.assertIn("TRADE CLOSED — TATASTEEL", self.texts())
+        # junk in the input is ignored, Groww trades untouched
+        self.ind([{"s": "<b>X</b>", "bq": 1}, "bad", {"s": "SBIN", "bq": "x"}], 11, 5)
+        self.assertEqual(len(self.get("mytrades.json")["trades"]["111"]), 1)
 
     def test_commands(self):
         self.say(1, 111, "BOUGHT TATASTEEL", 10, 1)

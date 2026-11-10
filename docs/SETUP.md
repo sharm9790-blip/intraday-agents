@@ -200,10 +200,19 @@ treat these secrets like a password and revoke the API access if they leak.
 Offline test of the alert logic: `jsc -m tests/worker_test.mjs` (macOS
 JavaScriptCore; `scripts/deploy.sh` runs it).
 
-**INDmoney trades:** add `IND` at the end (`BOUGHT TATASTEEL 544 183.55 IND`,
-`SOLD TATASTEEL IND`). The INDmoney connector only gives market data (no orders or
-positions), so these use your numbers and never ask Groww. Draft orders show an
-INDmoney line with the tap-to-copy symbol.
+**INDmoney trades are tracked by themselves (no message needed).** Every minute
+the worker reads your INDmoney intraday equity positions (`GET /portfolio/positions`,
+read-only, same INDmoney login as the prices). When a buy or sell appears it starts
+`mytrade.yml` with the positions as input (`ind_positions`, passed as an env var and
+checked field by field as data); `mytrade.py` `apply_ind()` saves them to
+`state/positions_ind.json` and opens / updates / closes the owner's trade from
+INDmoney's running totals: 🧾 MY TRADE STARTED (with plan SL/T1, risk check),
+PART SOLD (SL to cost, edit SL-M qty), TRADE CLOSED with INDmoney's realised P&L.
+Then the usual SL / T1 / T2 / 14:50 / 15:00 alerts follow, without "send SOLD".
+A stock that isn't today's plan has no SL: send `BOUGHT SYM QTY PRICE SL x IND` to set
+levels (it updates the INDmoney trade, no duplicate). Short-first trades are not
+followed. Groww trades work exactly as before (BOUGHT / SOLD + Groww sync). Order
+blocks keep the Groww link and add "or INDmoney › search SYM › Buy".
 
 If you rotate the bot token, update it here too. Off-hours, BOUGHT/SOLD reply
 "Market is closed"; HELP, PLAN, SCORE, MYTRADES work any time.
