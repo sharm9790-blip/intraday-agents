@@ -180,6 +180,9 @@ Extra setup (you type the secrets in Cloudflare yourself; never paste them in ch
    `?live=1` — `"live": {"ok": true, ...}` shows the stocks and Groww prices (or
    `"watching": 0` when nothing is live). If Groww refuses the login you get one
    ⚠️ Live price alerts off message that day; the 5-min alerts keep working.
+   Check Groww any time (even with the market closed): open the worker URL with
+   `?live=test` — it logs in and gets SBIN + RELIANCE prices (read-only), showing
+   `"login": "ok"` and the prices, or the reason Groww refused.
 Treat the Groww keys like a password: Groww API keys can usually place orders.
 Regenerate them in Groww if they ever leak. Offline test of the alert logic:
 `jsc -m tests/worker_test.mjs` (macOS JavaScriptCore; `scripts/deploy.sh` runs it).
