@@ -8,6 +8,11 @@ You tell the bot what you did in Groww:
     SOLD TATASTEEL 272 185.9              (part of it)
     MYTRADES                              (status)   ·   HELP
 
+INDmoney trades need no message: the Cloudflare worker reads your INDmoney
+intraday positions every minute (read-only) and starts this workflow with them
+(env IND_POSITIONS); apply_ind() opens, updates and closes the owner's trade from
+INDmoney's own buy / sell quantities, averages and realised P&L.
+
 For the account owner (first TELEGRAM_CHAT_ID), a plain BOUGHT / SOLD also asks
 the cloud routine (payload SYNC_POSITIONS) to read today's Groww positions,
 read-only; the real qty and average prices then replace the provisional ones.
@@ -39,7 +44,8 @@ HELP = "\n".join([
     "<code>BOUGHT TATASTEEL</code> — real qty/price from Groww",
     "<code>BOUGHT TATASTEEL 544 183.55</code> — your numbers",
     "<code>BOUGHT SBIN 100 812 SL 806 T1 824</code> — any stock",
-    "<code>BOUGHT TATASTEEL 544 183.55 IND</code> — bought on INDmoney",
+    "INDmoney trades: <b>nothing to send</b>, I see your buys and sells in ~1 min",
+    "<code>BOUGHT TATASTEEL 544 183.55 SL 182 IND</code> — set SL/T1 for an INDmoney stock",
     "<code>SOLD TATASTEEL</code> — all left · <code>SOLD TATASTEEL 272 185.9</code> — part",
     "<code>MYTRADES</code> — your open trades",
     "<code>ORDER GMK39038…</code> — check a Groww order by its id",
@@ -163,6 +169,113 @@ def apply_sync(st, state_dir, today):
             w.telegram(w.card("⚠️", f"TOO BIG — {w.esc(tr['symbol'])}", ["", *big, "",
                               "One bad candle here costs more than the whole plan allows."],
                               footer=False), to=chat)
+
+
+IND_SYM = re.compile(r"^[A-Z0-9&-]{1,20}$")
+
+
+def ind_positions(state_dir, today, now):
+    """INDmoney positions for today. A new snapshot comes in env IND_POSITIONS (from
+    the worker) and is saved to state/positions_ind.json; it is data only, checked
+    field by field. Returns [{s, bq, ba, sq, sa, nq, rp}]."""
+    path = os.path.join(state_dir, "positions_ind.json")
+    raw = os.environ.get("IND_POSITIONS") or ""
+    if raw:
+        try:
+            rows = json.loads(raw)
+        except ValueError:
+            rows = None
+        if isinstance(rows, list):
+            clean = []
+            for r in rows[:200]:
+                if not isinstance(r, dict) or not IND_SYM.match(str(r.get("s", "")).upper()):
+                    continue
+                try:
+                    clean.append({"s": str(r["s"]).upper(), "bq": max(int(r.get("bq") or 0), 0),
+                                  "ba": float(r.get("ba") or 0), "sq": max(int(r.get("sq") or 0), 0),
+                                  "sa": float(r.get("sa") or 0), "nq": int(r.get("nq") or 0),
+                                  "rp": float(r.get("rp") or 0)})
+                except (TypeError, ValueError):
+                    continue
+            w.save(path, {"date": today, "at": now.strftime("%H:%M"), "positions": clean})
+    doc = w.load(path, {})
+    return doc.get("positions", []) if doc.get("date") == today else []
+
+
+def apply_ind(st, state_dir, today, now):
+    """Open / update / close the owner's INDmoney trades from INDmoney's positions.
+    Uses the day's running totals (buy qty + avg, sell qty + avg, realised P&L), so it
+    is safe to run again on the same data. Groww trades are never touched."""
+    chat = owner_chat()
+    seen = st.setdefault("ind_seen", {})
+    for p in ind_positions(state_dir, today, now):
+        sym, bq, sq = p["s"], p["bq"], p["sq"]
+        if bq <= 0 or seen.get(sym) == [bq, sq]:
+            continue                       # short-first trades are not followed
+        before = seen.get(sym, [0, 0])
+        seen[sym] = [bq, sq]
+        mine = st["trades"].setdefault(chat, [])
+        tr = next((x for x in reversed(mine) if x["symbol"] == sym and x.get("broker") == "INDmoney"), None)
+        left = max(bq - sq, 0)
+        realized = p["rp"] if p["rp"] else (sq * (p["sa"] - p["ba"]) if sq else 0.0)
+        at = now.strftime("%H:%M")
+        if not tr:
+            plan = today_plan(state_dir, today, sym)
+            tr = {"symbol": sym, "yahoo": sym + ".NS", "qty": bq, "left": left, "entry": p["ba"],
+                  "sl": plan["sl"] if plan else None, "t1": plan["t1"] if plan else None,
+                  "t2": plan["t2"] if plan else None, "opened": at, "checked": at,
+                  "realized": realized, "sells": [], "flags": {}, "plan": bool(plan),
+                  "plan_qty": plan["qty"] if plan else None, "broker": "INDmoney", "auto_ind": True}
+            mine.append(tr)
+            lines = ["", f"Bought <b>{bq}</b> @ <b>{w.rs(p['ba'])}</b> (INDmoney avg)"]
+            if plan:
+                lines.append(f"Plan entry {w.rs(plan['entry'])}")
+            if tr["sl"]:
+                risk = bq * (p["ba"] - tr["sl"])
+                lines += [f"Real risk to SL {w.rs(tr['sl'])}: ₹{w.lakh(max(risk, 0))} "
+                          + ("✅" if risk <= MAX_RISK else "⚠️ over ₹1,000 — reduce qty"),
+                          *size_warn(bq, p["ba"], tr["sl"], tr["plan_qty"]), "",
+                          f"👉 Place <b>SL-M {left} @ {w.rs(tr['sl'])}</b> now"]
+                if tr["t1"]:
+                    lines.append(f"👉 Sell <b>{bq // 2} @ {w.rs(tr['t1'])}</b> (T1)")
+            else:
+                lines += ["", "⚠️ Not today's plan, so I don't know your SL.",
+                          f"Send <code>BOUGHT {w.esc(sym)} {bq} {p['ba']:g} SL PRICE IND</code> to add it."]
+            if sq:
+                lines.append(f"Sold <b>{sq}</b> @ <b>{w.rs(p['sa'])}</b> · P&amp;L {fmt_pnl(realized)}")
+            lines += ["", "📲 Picked up from INDmoney by itself.",
+                      "No need to send BOUGHT / SOLD: I see your INDmoney sells too."]
+            title = "MY TRADE STARTED" if left else "TRADE CLOSED"
+            if not left:
+                lines += ["", f"✅ <b>Trade closed: {fmt_pnl(realized)}</b> (INDmoney, before costs)"]
+            w.telegram(w.card("🧾", f"{title} — {w.esc(sym)}", lines, footer=False), to=chat)
+            continue
+        adopted = not tr.get("auto_ind")
+        tr.update(qty=bq, entry=p["ba"], left=left, realized=realized, auto_ind=True)
+        if sq > before[1]:
+            tr["sells"].append({"qty": sq - before[1], "price": p["sa"], "at": at})
+        lines = [""]
+        if adopted:
+            lines.append("🔄 Real numbers from INDmoney replace yours:")
+        if bq > before[0] and before[0]:
+            lines.append(f"➕ Bought more: now <b>{bq}</b> @ <b>{w.rs(p['ba'])}</b> avg")
+        else:
+            lines.append(f"Bought <b>{bq}</b> @ <b>{w.rs(p['ba'])}</b> (INDmoney avg)")
+        if sq:
+            lines.append(f"Sold <b>{sq}</b> @ <b>{w.rs(p['sa'])}</b> avg · P&amp;L {fmt_pnl(realized)}")
+        if left:
+            lines.append(f"Open now: <b>{left}</b>")
+            if sq > before[1] and (tr["flags"].get("t1") or sq >= bq // 2):
+                tr["sl"] = tr["entry"]
+                lines.append(f"👉 Edit SL-M: qty <b>{left}</b>, trigger cost <b>{w.rs(tr['entry'])}</b>")
+            big = size_warn(left, p["ba"], tr["sl"], tr.get("plan_qty")) if tr["sl"] else []
+            lines += big
+            title, icon = ("PART SOLD" if sq > before[1] else "SYNCED FROM INDMONEY"), "🧾"
+        else:
+            lines += ["", f"✅ <b>Trade closed: {fmt_pnl(realized)}</b> (INDmoney, before costs)",
+                      "👉 Cancel any leftover SL / target orders"]
+            title, icon = "TRADE CLOSED", "🧾"
+        w.telegram(w.card(icon, f"{title} — {w.esc(sym)}", lines, footer=False), to=chat)
 
 
 def get_updates(offset):
@@ -452,6 +565,14 @@ def handle(st, chat, text, when, state_dir, today):
     price = float(px) if px else round(mkt, 2)
     mine = st["trades"].setdefault(chat, [])
     if act.lower() in ("bought", "buy"):
+        auto = next((x for x in reversed(mine) if x["symbol"] == sym and x.get("auto_ind")
+                     and x["left"] > 0), None) if on_ind else None
+        if auto:                       # INDmoney already gave the fill: only add the levels
+            auto.update({k: float(v) for k, v in (("sl", sl), ("t1", t1), ("t2", t2)) if v})
+            return reply(w.card("🧾", f"LEVELS SET — {w.esc(sym)}", [
+                "", f"{auto['left']} @ {w.rs(auto['entry'])} (from INDmoney)",
+                f"🛑 SL {w.rs(auto['sl']) if auto['sl'] else '—'} · 🎯 T1 {w.rs(auto['t1']) if auto['t1'] else '—'}"
+                f" · T2 {w.rs(auto['t2']) if auto['t2'] else '—'}"], footer=False))
         plan = today_plan(state_dir, today, sym)
         q = int(qty) if qty else (int(plan["qty"] * st.get("risk", {}).get(chat, 1)) if plan else None)
         if not q:
@@ -469,8 +590,7 @@ def handle(st, chat, text, when, state_dir, today):
         mine.append(tr)
         lines = ["", f"Bought <b>{q}</b> @ <b>{w.rs(price)}</b>" + ("" if px else " (price now)")]
         if on_ind:
-            lines.append("📲 On INDmoney — I can't read INDmoney fills, so I use your numbers."
-                         + ("" if px else f"\nFor exact P&amp;L send <code>BOUGHT {w.esc(sym)} {q} PRICE IND</code>"))
+            lines.append("📲 On INDmoney — your real fill replaces these numbers within ~1 min.")
         elif chat == owner_chat() and not (qty and px):
             tr["sync"] = "pending"
             st["sync_request"] = datetime.now(w.IST).strftime("%H:%M")
@@ -568,9 +688,14 @@ def track(st, now):
         for tr in trades:
             if tr["left"] <= 0:
                 continue
-            say = lambda title, icon, lines: w.telegram(w.card(icon, f"{title} — {w.esc(tr['symbol'])}",
-                                                               [f"🕐 {now:%H:%M} IST", ""] + lines,
-                                                               footer=False), to=chat)
+            def say(title, icon, lines, tr=tr, chat=chat):
+                if tr.get("auto_ind"):  # INDmoney sells are seen by themselves
+                    lines = ["✅ No need to send SOLD: I see INDmoney sales myself"
+                             if x.startswith("Then send <code>SOLD") else x for x in lines]
+                    lines = [x.replace("(Groww squares off at 15:05 + ₹50 fee)",
+                                       "(before the broker's auto square-off fee)") for x in lines]
+                w.telegram(w.card(icon, f"{title} — {w.esc(tr['symbol'])}",
+                                  [f"🕐 {now:%H:%M} IST", ""] + lines, footer=False), to=chat)
             try:
                 bars, ltp = w.candles(tr["yahoo"])
             except Exception as e:
@@ -728,6 +853,7 @@ def main(state_dir):
         if fire_sync():
             st["sync_fired"] = st["sync_request"]
     apply_sync(st, state_dir, today)
+    apply_ind(st, state_dir, today, now)
     apply_orders(st, state_dir, today, now)
     if st.get("sync_request") and st.get("sync_fired") != st["sync_request"]:  # re-check asked above
         if fire_sync():

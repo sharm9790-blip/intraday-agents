@@ -5,6 +5,12 @@ name: my-trade
 # only when there is an open trade, a new message, or the 15:45 summary is due.
 on:
   workflow_dispatch:
+    inputs:
+      ind_positions:
+        description: "INDmoney intraday positions (JSON, sent by the Cloudflare worker)"
+        required: false
+        type: string
+        default: ""
 
 permissions:
   contents: write
@@ -29,6 +35,8 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           CLAUDE_FIRE_URL: ${{ secrets.CLAUDE_FIRE_URL }}
           CLAUDE_FIRE_TOKEN: ${{ secrets.CLAUDE_FIRE_TOKEN }}
+          # passed as an env var (never pasted into the script), read as data by mytrade.py
+          IND_POSITIONS: ${{ inputs.ind_positions }}
         run: cd watcher && python3 mytrade.py ../statebr/state
       - name: Save state
         run: |

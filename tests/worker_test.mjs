@@ -1,6 +1,6 @@
 // Offline test of the worker's pure logic. Run on macOS without Node:
 //   /System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Helpers/jsc -m tests/worker_test.mjs
-import { decide, watchList, istNow, base32, indCodes, indParse } from "../cloudflare/worker.js";
+import { decide, watchList, istNow, base32, indCodes, indParse, posSnapshot } from "../cloudflare/worker.js";
 
 let fails = 0;
 const ok = (c, msg) => { if (!c) { fails++; print("FAIL " + msg); } };
@@ -70,5 +70,12 @@ const ic = indCodes(["SBIN", "M&M", "NEWCO"], { SBIN: 3045, "M&M": 2031 });
 ok(JSON.stringify(Object.keys(ic.code)) === '["NSE_3045","NSE_2031"]' && ic.missing[0] === "NEWCO", "indCodes");
 const ip = indParse({ status: "success", data: { NSE_3045: { live_price: 792.5 }, NSE_2031: { live_price: 3100 }, NSE_9: { live_price: 1 } } }, ic.code);
 ok(ip.SBIN === 792.5 && ip["M&M"] === 3100 && Object.keys(ip).length === 2, "indParse " + JSON.stringify(ip));
+
+// INDmoney positions → stable snapshot; bad symbols and empty rows dropped
+const snap = posSnapshot([
+  { symbol: "SBIN", buy_qty: 100, buy_avg: 800.5, sell_qty: 50, sell_avg: 805, net_qty: 50, realized_profit: 225 },
+  { symbol: "bankindia-EQ", buy_qty: "701", buy_avg: "142.5", sell_qty: 0, net_qty: 701 },
+  { symbol: "<b>X</b>", buy_qty: 1 }, { symbol: "IRFC", buy_qty: 0, sell_qty: 0 }]);
+ok(snap.length === 2 && snap[0].s === "BANKINDIA" && snap[0].bq === 701 && snap[1].rp === 225, "posSnapshot " + JSON.stringify(snap));
 
 print(fails ? `${fails} FAILED` : "worker tests OK");
