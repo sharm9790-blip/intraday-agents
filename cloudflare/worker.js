@@ -41,6 +41,7 @@ const RETRY_AFTER_S = 600;
 const MAX_TRIES = 3;
 const GROWW = "https://api.groww.in";
 const IND = "https://api.indstocks.com";
+const VERSION = "2026-11-10b";  // shown by ?live=test so you can tell the new code is deployed
 const OPEN = ["waiting", "in_zone", "t1_hit"];
 const IST_MS = 5.5 * 3600 * 1000;
 
@@ -59,6 +60,9 @@ export default {
       if (env.GROWW_API_KEY || env.GROWW_ACCESS_TOKEN)
         out.groww = await growwTest(env).catch((e) => ({ ok: false, error: String(e) }));
       if (!Object.keys(out).length) out.error = "no INDmoney or Groww secrets in Cloudflare";
+      out.worker_version = VERSION;
+      out.indmoney_secrets = { IND_CLIENT_ID: !!env.IND_CLIENT_ID, IND_MPIN: !!env.IND_MPIN,
+                               IND_TOTP_SECRET: !!env.IND_TOTP_SECRET, IND_ACCESS_TOKEN: !!env.IND_ACCESS_TOKEN };
       return new Response(JSON.stringify(out, null, 2), {
         headers: { "content-type": "application/json" },
       });
