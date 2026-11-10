@@ -21,6 +21,7 @@ os.environ["CLAUDE_FIRE_TOKEN"] = "y"
 import health  # noqa: E402
 import mytrade as mt  # noqa: E402
 import news  # noqa: E402
+import nse_ids  # noqa: E402
 import recheck  # noqa: E402
 import replay  # noqa: E402
 import risk  # noqa: E402
@@ -118,6 +119,23 @@ class TestReplay(unittest.TestCase):
         pnl, steps = replay.manage(b, 0, 183.5, PLAN)
         self.assertEqual([s.split()[-1] for s in steps], ["T1", "T2"])
         self.assertGreater(pnl, 1500)
+
+
+class TestNseIds(unittest.TestCase):
+    def test_weekly_refresh(self):
+        store, calls = {}, []
+        orig = nse_ids.build
+        nse_ids.build = lambda: calls.append(1) or {"SBIN": 3045}
+        try:
+            save = lambda p, d: store.__setitem__(p, d)
+            load = lambda p, d: store.get(p, d)
+            t0 = dt.datetime(2026, 11, 10, tzinfo=dt.timezone.utc)
+            self.assertTrue(nse_ids.refresh("s", save, load, t0))           # missing → build
+            self.assertFalse(nse_ids.refresh("s", save, load, t0 + dt.timedelta(days=3)))
+            self.assertTrue(nse_ids.refresh("s", save, load, t0 + dt.timedelta(days=8)))
+            self.assertEqual(len(calls), 2)
+        finally:
+            nse_ids.build = orig
 
 
 class TestFire(unittest.TestCase):

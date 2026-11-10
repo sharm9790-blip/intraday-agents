@@ -1,6 +1,6 @@
 // Offline test of the worker's pure logic. Run on macOS without Node:
 //   /System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Helpers/jsc -m tests/worker_test.mjs
-import { decide, watchList, istNow, base32 } from "../cloudflare/worker.js";
+import { decide, watchList, istNow, base32, indCodes, indParse } from "../cloudflare/worker.js";
 
 let fails = 0;
 const ok = (c, msg) => { if (!c) { fails++; print("FAIL " + msg); } };
@@ -64,5 +64,11 @@ ok(a.length === 1 && a[0].text.includes("T2 REACHED — X") && a[0].text.include
 const e = watchList({ date: "d", live: [{ symbol: "A&B", vid: "z", status: "waiting", plan }] }, {}, "d");
 a = decide(e, { "A&B": 142.5 }, {}, "10:00", {});
 ok(a[0].text.includes("A&amp;B") && !a[0].text.includes("A&B"), "escape");
+
+// INDmoney: symbols → NSE_<id>, response back to symbols; unknown symbol skipped
+const ic = indCodes(["SBIN", "M&M", "NEWCO"], { SBIN: 3045, "M&M": 2031 });
+ok(JSON.stringify(Object.keys(ic.code)) === '["NSE_3045","NSE_2031"]' && ic.missing[0] === "NEWCO", "indCodes");
+const ip = indParse({ status: "success", data: { NSE_3045: { live_price: 792.5 }, NSE_2031: { live_price: 3100 }, NSE_9: { live_price: 1 } } }, ic.code);
+ok(ip.SBIN === 792.5 && ip["M&M"] === 3100 && Object.keys(ip).length === 2, "indParse " + JSON.stringify(ip));
 
 print(fails ? `${fails} FAILED` : "worker tests OK");

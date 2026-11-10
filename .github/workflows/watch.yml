@@ -35,6 +35,11 @@ jobs:
           else
             echo "no state branch yet"
           fi
+      - name: Refresh NSE stock ids (weekly, for INDmoney live prices)
+        if: steps.state.outputs.ok == 'true'
+        continue-on-error: true
+        timeout-minutes: 2
+        run: python3 watcher/nse_ids.py statebr/state
       - name: Run watcher
         if: steps.state.outputs.ok == 'true'
         env:
