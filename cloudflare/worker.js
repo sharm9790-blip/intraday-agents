@@ -10,12 +10,13 @@
 //
 // 2) ⚡ Live price alerts (Mon–Fri 09:15–15:30 IST): reads today's live plans
 //    (state/watch.json) and open trades (state/mytrades.json) from the state
-//    branch, gets the Groww last traded price for those stocks in ONE call to
-//    Groww's live-data LTP endpoint, and sends an alert the first time a price
-//    reaches a level (buy zone, cancel level, SL, T1, T2). The 5-min watcher still
-//    applies the plan rules (candle closes) and keeps the scorecard.
-//    READ ONLY: the only Groww calls are the login (access token) and
-//    /v1/live-data/ltp. Nothing here places, changes or cancels orders.
+//    branch, gets the last traded price for those stocks in ONE call (INDmoney's
+//    free /market/quotes/ltp, else Groww's /v1/live-data/ltp, which needs Groww's
+//    paid plan), and sends an alert the first time a price reaches a level (buy
+//    zone, cancel level, SL, T1, T2). The 5-min watcher still applies the plan
+//    rules (candle closes) and keeps the scorecard.
+//    READ ONLY: the only broker calls are the login (access token) and the LTP
+//    endpoint. Nothing here places, changes or cancels orders.
 //
 // Settings in the Cloudflare dashboard (Worker → Settings → Variables and Secrets):
 //   Secret  TELEGRAM_BOT_TOKEN   the bot token
@@ -27,7 +28,11 @@
 //     GROWW_API_KEY + GROWW_API_SECRET       (key + secret, checksum login)
 //     GROWW_API_KEY + GROWW_TOTP_SECRET      (key + TOTP seed, code made here)
 //     GROWW_ACCESS_TOKEN                     (pasted daily token, expires 06:00)
-//   Without Groww secrets, part 2 is simply off.
+//   INDmoney (INDstocks) login — free live prices, used first when set (all Secrets):
+//     IND_CLIENT_ID + IND_MPIN + IND_TOTP_SECRET   (TOTP login, code made here; token 24 h)
+//     IND_ACCESS_TOKEN                             (pasted token, valid 24 h)
+//   INDmoney needs NSE security ids: the watcher writes state/nse_ids.json weekly.
+//   Without INDmoney or Groww secrets, part 2 is simply off.
 
 const ALLOWED = ["1322737291", "6338805963"]; // chat ids that may give commands
 const REPO = "sharm9790-blip/intraday-agents";
@@ -35,6 +40,7 @@ const STATE_BRANCH = "claude/intraday-state";
 const RETRY_AFTER_S = 600;
 const MAX_TRIES = 3;
 const GROWW = "https://api.groww.in";
+const IND = "https://api.indstocks.com";
 const OPEN = ["waiting", "in_zone", "t1_hit"];
 const IST_MS = 5.5 * 3600 * 1000;
 
@@ -48,8 +54,12 @@ export default {
   async fetch(request, env) {
     const mode = new URL(request.url).searchParams.get("live");
     if (mode === "test") {
-      const r = await growwTest(env).catch((e) => ({ ok: false, error: String(e) }));
-      return new Response(JSON.stringify({ groww: r }, null, 2), {
+      const out = {};
+      if (indConfigured(env)) out.indmoney = await indTest(env).catch((e) => ({ ok: false, error: String(e) }));
+      if (env.GROWW_API_KEY || env.GROWW_ACCESS_TOKEN)
+        out.groww = await growwTest(env).catch((e) => ({ ok: false, error: String(e) }));
+      if (!Object.keys(out).length) out.error = "no INDmoney or Groww secrets in Cloudflare";
+      return new Response(JSON.stringify(out, null, 2), {
         headers: { "content-type": "application/json" },
       });
     }
@@ -301,6 +311,107 @@ async function ltp(token, symbols) {
   return { auth: true, prices: out };
 }
 
+// ---------- INDmoney (INDstocks) prices: free, read-only ----------
+function indConfigured(env) {
+  return !!(env.IND_ACCESS_TOKEN || (env.IND_CLIENT_ID && env.IND_MPIN && env.IND_TOTP_SECRET));
+}
+
+async function indToken(env, fresh = false) {
+  if (env.IND_ACCESS_TOKEN && !env.IND_CLIENT_ID) return env.IND_ACCESS_TOKEN;
+  if (!fresh) {
+    const c = JSON.parse((await env.STATE.get("ind_token")) || "{}");
+    if (c.token && c.exp > Date.now()) return c.token;
+  }
+  // INDmoney locks token generation for 15 min after 5 wrong TOTPs: after a failed
+  // login, wait 20 min before trying again (never hammer it every minute).
+  if (await env.STATE.get("ind_login_wait")) throw new Error("INDmoney login failed recently; retrying after 20 min");
+  const r = await fetch(`${IND}/generate/token`, {
+    method: "POST",
+    headers: { "x-api-key": env.IND_CLIENT_ID, "content-type": "application/json" },
+    body: JSON.stringify({ mpin: String(env.IND_MPIN), totp: await totp(env.IND_TOTP_SECRET) }),
+  });
+  const j = await r.json().catch(() => ({}));
+  const tok = j.token || (j.data && j.data.token);
+  if (!r.ok || !tok) {
+    await env.STATE.put("ind_login_wait", "1", { expirationTtl: 1200 });
+    const why = String(j.message || (j.error && (j.error.message || j.error)) || "").slice(0, 160);
+    throw new Error(`INDmoney login ${r.status}${why ? ": " + why : ""}`);
+  }
+  await env.STATE.put("ind_token", JSON.stringify({ token: tok, exp: Date.now() + 23.5 * 3600000 }));
+  return tok;
+}
+
+async function nseIds(env) {
+  const c = JSON.parse((await env.STATE.get("nse_ids")) || "{}");
+  if (c.ids && c.exp > Date.now()) return c.ids;
+  const doc = await readState(env, "nse_ids.json");
+  if (!doc.ids) throw new Error("state/nse_ids.json missing (the watcher builds it on its next run)");
+  await env.STATE.put("nse_ids", JSON.stringify({ ids: doc.ids, exp: Date.now() + 12 * 3600000 }));
+  return doc.ids;
+}
+
+export function indCodes(symbols, ids) {
+  const code = {}, missing = [];
+  for (const s of symbols) (ids[s] ? (code["NSE_" + ids[s]] = s) : missing.push(s));
+  return { code, missing };
+}
+
+export function indParse(j, code) {
+  const out = {};
+  for (const [k, v] of Object.entries((j && j.data) || {})) {
+    const px = v && (v.live_price ?? v.ltp);
+    if (code[k] && typeof px === "number") out[code[k]] = px;
+  }
+  return out;
+}
+
+async function indLtp(env, token, symbols) {
+  const { code, missing } = indCodes(symbols, await nseIds(env));
+  const keys = Object.keys(code);
+  if (!keys.length) return { auth: true, prices: {}, missing };
+  const r = await fetch(`${IND}/market/quotes/ltp?scrip-codes=${encodeURIComponent(keys.join(","))}`, {
+    headers: { authorization: token, accept: "application/json" },
+  });
+  if (r.status === 401 || r.status === 403) {
+    const body = await r.text().catch(() => "");
+    return { auth: false, status: r.status, why: body.replace(/\s+/g, " ").slice(0, 200) };
+  }
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok || String(j.status).toLowerCase() !== "success") {
+    throw new Error(`INDmoney LTP ${r.status} ${String(j.message || "").slice(0, 120)}`);
+  }
+  return { auth: true, prices: indParse(j, code), missing };
+}
+
+async function indTest(env) {
+  const method = env.IND_CLIENT_ID ? "client id + MPIN + TOTP" : "pasted access token";
+  if (!env.STATE) return { ok: false, method, error: "KV binding STATE missing" };
+  let token;
+  try {
+    token = await indToken(env, true);
+  } catch (e) {
+    return { ok: false, method, login: "failed", error: String(e.message || e) };
+  }
+  const res = await indLtp(env, token, ["SBIN", "RELIANCE"]).catch((e) => ({ error: String(e.message || e) }));
+  if (res.error) return { ok: false, method, login: "ok", prices: "failed", error: res.error };
+  if (!res.auth) return { ok: false, method, login: "ok", prices: `refused (${res.status})`, says: res.why };
+  return { ok: true, method, login: "ok", prices: res.prices,
+           note: "Outside market hours these are the last closing prices." };
+}
+
+// Prices for the watch list: INDmoney first (free), else Groww.
+async function getPrices(env, symbols) {
+  if (indConfigured(env)) {
+    let res = await indLtp(env, await indToken(env), symbols);
+    if (!res.auth && env.IND_CLIENT_ID) res = await indLtp(env, await indToken(env, true), symbols);
+    return { ...res, source: "INDmoney" };
+  }
+  let token = await growwToken(env);
+  let res = await ltp(token, symbols);
+  if (!res.auth && env.GROWW_API_KEY) res = await ltp(await growwToken(env, true), symbols);
+  return { ...res, source: "Groww" };
+}
+
 // Login + one LTP call for two big stocks. Shows which login method is set up and
 // whether it works; never returns the token or any secret.
 async function growwTest(env) {
@@ -334,7 +445,7 @@ async function telegram(env, chat, text) {
 }
 
 async function live(env, force = false) {
-  if (!env.GROWW_API_KEY && !env.GROWW_ACCESS_TOKEN) return { ok: true, off: "no Groww secrets" };
+  if (!indConfigured(env) && !env.GROWW_API_KEY && !env.GROWW_ACCESS_TOKEN) return { ok: true, off: "no price secrets" };
   if (!env.TELEGRAM_BOT_TOKEN || !env.GITHUB_TOKEN || !env.STATE) return { ok: false, error: "missing settings" };
   const t = istNow();
   if (!force && (t.weekday === 0 || t.weekday === 6 || t.mins < 555 || t.mins > 930)) {
@@ -344,20 +455,20 @@ async function live(env, force = false) {
   const list = watchList(watch, mt, t.date);
   if (!list.symbols.length) return { ok: true, watching: 0 };
 
-  let token = await growwToken(env);
-  let res = await ltp(token, list.symbols);
-  if (!res.auth && env.GROWW_API_KEY) {           // token expired early: log in again once
-    token = await growwToken(env, true);
-    res = await ltp(token, list.symbols);
+  let res;
+  try {
+    res = await getPrices(env, list.symbols);
+  } catch (e) {
+    res = { auth: false, error: String(e.message || e), source: indConfigured(env) ? "INDmoney" : "Groww" };
   }
   if (!res.auth) {
-    const flag = `growwfail:${t.date}`;
+    const flag = `pricefail:${t.date}`;
     if (!(await env.STATE.get(flag))) {
       await env.STATE.put(flag, "1", { expirationTtl: 86400 });
-      await telegram(env, ALLOWED[0], "⚠️ <b>Live price alerts off</b>\nGroww API login was refused. " +
-        "Check the Groww secrets in Cloudflare (Worker → Settings). The 5-min alerts still work.");
+      await telegram(env, ALLOWED[0], `⚠️ <b>Live price alerts off</b>\n${res.source} login or prices were refused. ` +
+        "Open the worker URL with ?live=test to see why. The 5-min alerts still work.");
     }
-    return { ok: false, error: "Groww auth refused" };
+    return { ok: false, source: res.source, error: res.error || `${res.source} auth refused` };
   }
 
   const sentKey = `livesent:${t.date}`;
@@ -365,5 +476,6 @@ async function live(env, force = false) {
   const alerts = decide(list, res.prices, sent, t.hm, mt);
   for (const a of alerts) for (const c of a.to) await telegram(env, c, a.text);
   if (alerts.length) await env.STATE.put(sentKey, JSON.stringify(sent), { expirationTtl: 2 * 86400 });
-  return { ok: true, watching: list.symbols, prices: res.prices, sent: alerts.map((a) => a.key) };
+  return { ok: true, source: res.source, watching: list.symbols, prices: res.prices,
+           missing: res.missing && res.missing.length ? res.missing : undefined, sent: alerts.map((a) => a.key) };
 }

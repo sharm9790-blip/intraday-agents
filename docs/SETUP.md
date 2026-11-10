@@ -168,7 +168,30 @@ rules on candle closes (🔔 BUY TRIGGER etc.) and keeps the scorecard, so a ⚡
 is the early heads-up and the 5-min alert the confirmation. The only Groww calls
 are the login and the LTP endpoint: nothing places, changes or cancels orders.
 
-Extra setup (you type the secrets in Cloudflare yourself; never paste them in chat):
+**Price source: INDmoney first (free), Groww second.** Groww's live-data API needs
+Groww's paid Trade API plan (₹499 + GST/month; the free trial excludes Live Data,
+so it answers 403 "Access forbidden"). INDmoney (INDstocks) API access is free and
+its price calls need no static IP (static IP is only for orders). INDmoney asks for
+NSE security ids (SBIN → `NSE_3045`): the watcher builds `state/nse_ids.json` from a
+public scrip master once a week (`watcher/nse_ids.py`).
+
+INDmoney setup (you type the secrets in Cloudflare yourself; never paste them in chat):
+a. indstocks.com → API trading (access tokens page) → Claim Your API Access →
+   **Setup TOTP**: scan the QR into your authenticator app and also copy the text
+   secret shown with it. Note the **Client ID** shown after TOTP setup.
+b. Worker → Settings → Variables and Secrets → add as **Secrets**:
+   `IND_CLIENT_ID`, `IND_MPIN` (your INDstocks MPIN), `IND_TOTP_SECRET` (the text
+   secret). Or only `IND_ACCESS_TOKEN` (a token you generate; lasts 24 h).
+   The worker logs in itself about once a day (token cached 23.5 h). After a failed
+   login it waits 20 min before trying again, because INDmoney locks token
+   generation for 15 min after 5 wrong codes.
+c. Paste the new `cloudflare/worker.js` → Deploy → open `?live=test`: the
+   `"indmoney"` part shows `"login": "ok"` and SBIN / RELIANCE prices.
+MPIN + TOTP is a full login to your INDmoney account. INDmoney only accepts
+orders from a whitelisted static IP and this worker never calls an order endpoint,
+but treat these secrets like a password and revoke the API access if they leak.
+
+Groww setup (only if you buy Groww's Trade API plan):
 7. GitHub → Settings → Developer settings → your fine-grained token for the worker →
    add **Contents: Read-only** (it needs to read the state files) → Update.
 8. Worker → Settings → Variables and Secrets → add, as **Secrets**, either
