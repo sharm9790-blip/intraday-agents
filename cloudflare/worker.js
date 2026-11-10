@@ -286,7 +286,14 @@ async function ltp(token, symbols) {
   const r = await fetch(`${GROWW}/v1/live-data/ltp?segment=CASH&exchange_symbols=${encodeURIComponent(q)}`, {
     headers: { authorization: `Bearer ${token}`, accept: "application/json", "x-api-version": "1.0" },
   });
-  if (r.status === 401 || r.status === 403) return { auth: false };
+  if (r.status === 401 || r.status === 403) {
+    // Keep Groww's reason (error text only; it never contains the token) for ?live=test.
+    const body = await r.text().catch(() => "");
+    let why = body;
+    try { const j = JSON.parse(body); why = (j.error && (j.error.message || j.error.code)) || j.message || body; } catch (e) {}
+    return { auth: false, status: r.status, why: String(why).replace(/\s+/g, " ").slice(0, 200),
+             server: r.headers.get("server") || "", ray: r.headers.get("cf-ray") ? "cloudflare" : "" };
+  }
   const j = await r.json().catch(() => ({}));
   if (!r.ok || j.status !== "SUCCESS") throw new Error(`Groww LTP ${r.status}`);
   const out = {};
@@ -311,7 +318,9 @@ async function growwTest(env) {
   if (!token) return { ok: false, method, login: "failed", error: "secret missing for this method" };
   const res = await ltp(token, ["SBIN", "RELIANCE"]).catch((e) => ({ error: String(e.message || e) }));
   if (res.error) return { ok: false, method, login: "ok", prices: "failed", error: res.error };
-  if (!res.auth) return { ok: false, method, login: "ok", prices: "refused (401/403)" };
+  if (!res.auth) return { ok: false, method, login: "ok", prices: `refused (${res.status})`,
+                          groww_says: res.why || "(empty)", server: res.server || undefined,
+                          blocked_by: res.ray || undefined };
   return { ok: true, method, login: "ok", prices: res.prices,
            note: "Outside market hours these are the last closing prices." };
 }
