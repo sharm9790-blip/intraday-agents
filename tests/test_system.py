@@ -192,9 +192,37 @@ class TestWatcherFlow(Base):
         self.at(14, 6); w.main(self.dir)
         self.at(14, 11); w.main(self.dir)
         wt = self.get("watch.json")
-        self.assertEqual(wt["trades"], 2, "both real buys count, plan or not")
+        self.assertEqual(wt["trades"], 1, "only TATASTEEL is still open")
+        self.assertEqual(wt["day_trades"], 2, "both real buys count today, plan or not")
         self.assertNotIn("SLOT FREED", self.texts())
         self.assertEqual([e["symbol"] for e in w.slots(wt)], ["TATASTEEL"])
+
+    def test_three_open_then_sell_frees(self):
+        fired = []
+        orig = w.fire_debate
+        w.fire_debate = lambda now, trades, vid, watch: fired.append(1) or False
+        try:
+            self.rows = [(185, 185.5, 184.8, 185.2)] * 40
+            hold = lambda *left: {"date": "2026-11-09", "trades": {"1": [
+                {"symbol": s, "opened": "10:00", "qty": 10, "left": l}
+                for s, l in zip(["A", "B", "C"], left)]}}
+            self.put("mytrades.json", hold(10, 10, 10))
+            self.at(11, 0); w.main(self.dir)
+            self.assertEqual(self.get("watch.json")["trades"], 3)
+            self.assertEqual(fired, [], "3 open → no scan")
+            self.put("mytrades.json", hold(0, 10, 10))   # first one filled and closed
+            self.at(11, 5); w.main(self.dir)
+            wt = self.get("watch.json")
+            self.assertEqual((wt["trades"], wt["day_trades"]), (2, 3))
+            self.assertEqual(len(fired), 1, "a slot is free → scan")
+            # daily safety cap: 6 stocks today, even with nothing open
+            self.put("mytrades.json", {"date": "2026-11-09", "trades": {"1": [
+                {"symbol": s, "opened": "10:00", "qty": 1, "left": 0} for s in "ABCDEF"]}})
+            self.at(11, 10); w.main(self.dir)
+            self.assertEqual(len(fired), 1, "6 today → no more scans")
+            self.assertIn("6 trades taken today", self.texts())
+        finally:
+            w.fire_debate = orig
 
     def test_open_order_counts_and_keeps_slot(self):
         self.go()
@@ -373,8 +401,8 @@ class TestMultiPlan(Base):
             wt = self.get("watch.json")
             self.assertEqual([e["symbol"] for e in w.slots(wt)], ["TATASTEEL", "PFC"])
             self.assertIn("SBIN", [e["symbol"] for e in w.open_plans(wt)], "paper tracking goes on")
-            self.assertEqual(wt["trades"], 1, "SBIN was really bought: it uses one of the 3")
-            self.assertEqual(len(fired), k, "1 bought + 2 waiting = 3 → no scan")
+            self.assertEqual((wt["trades"], wt["day_trades"]), (0, 1), "sold → not open, still 1 today")
+            self.assertGreater(len(fired), k, "0 open + 2 waiting → scan again")
             # Groww positions closed for PFC (no SOLD message) also frees it, once
             self.put("positions.json", {"date": "2026-11-09", "positions": [
                 {"symbol": "PFC", "buy_qty": 5, "sell_qty": 5, "net_qty": 0}]})
