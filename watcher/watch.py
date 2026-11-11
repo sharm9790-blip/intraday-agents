@@ -32,7 +32,8 @@ OPEN_STATES = ("waiting", "in_zone", "t1_hit")
 EXIT_BY = "15:00"  # Groww auto-squares-off MIS at 15:05 (+₹50 fee), so be out first
 WARN_AT = "14:50"
 MAX_LIVE = 3        # plans followed at the same time
-MAX_TRADES = 3      # trades you may actually buy per day (see count_trades)
+MAX_TRADES = 3      # trades open at the same time: held or BUY order pending (count_trades)
+MAX_DAY = 6         # safety cap: stocks bought / ordered per day in total
 MISS_GRACE = 15     # min after a buy trigger to see your buy before the plan's slot is freed
 DAY_LOSS_STOP = 2000  # no new plans once today's paper loss reaches this (₹)
 # NSE equity trading holidays on weekdays (add next year's list each December).
@@ -478,6 +479,8 @@ def main(state_dir):
             start = f"{v[:2]}:{v[2:]}"
             gp = plan_doc["plan"]
             rk = risk.check(gp, start, watch.get("trades", 0))
+            if watch.get("day_trades", 0) >= MAX_DAY:
+                rk["reasons"].append(f"{MAX_DAY} trades already taken today")
             nw = news.check(gp.get("name") or stock_name(gp["yahoo"]) or gp["symbol"])
             lines = [""]
             reasons = list(rk["reasons"])
@@ -551,18 +554,19 @@ def main(state_dir):
     taken = set(watch.get("taken", []))
     waiting = sum(1 for e in live if e["status"] == "waiting" and e["symbol"] not in taken)
     loss_stop = watch.get("day_pnl", 0) <= -DAY_LOSS_STOP
-    full = trades + waiting >= MAX_TRADES or len(live) >= MAX_LIVE
+    day_full = watch.get("day_trades", 0) >= MAX_DAY
+    full = trades + waiting >= MAX_TRADES or len(live) >= MAX_LIVE or day_full
     late = minutes >= hhmm("14:40")  # last debate (14:15 slot) has reported
     if not live:
         print("no live plan")
-        if ((trades >= MAX_TRADES or late or loss_stop) and not watch.get("done_sent")
+        if ((day_full or late or loss_stop) and not watch.get("done_sent")
                 and minutes <= hhmm("15:30")):
             why = ([f"Paper loss today {inr(watch['day_pnl'])}", "(daily loss stop), none live now."]
                    if loss_stop else
-                   [f"{MAX_TRADES} trades bought today", "(daily limit), none live now."]
-                   if trades >= MAX_TRADES else ["No new entries after 14:30.", "No plan live."])
+                   [f"{MAX_DAY} trades taken today", "(daily safety limit), none live now."]
+                   if day_full else ["No new entries after 14:30.", "No plan live."])
             telegram(card("🏁", f"DONE FOR TODAY · {now:%H:%M}", [
-                "", *why, f"Trades bought: {trades}", "",
+                "", *why, f"Trades today: {watch.get('day_trades', 0)}", "",
                 "🔕 No more scans today.", "🔎 Next scan: Mon–Fri 09:45 IST",
             ]))
             watch["done_sent"] = True
@@ -613,11 +617,19 @@ def bought_symbols(mt):
     return out
 
 
+def open_symbols(mt):
+    """Stocks you still hold some of today (any chat)."""
+    return {t["symbol"] for ts in (mt.get("trades") or {}).values() for t in ts
+            if t.get("symbol") and (t.get("left") or 0) > 0}
+
+
 def count_trades(watch, mt, now, ordered=frozenset()):
-    """Set watch["trades"] (the daily limit counter, also read by the cloud debate) to
-    the trades you really bought, not plans that merely hit their buy trigger:
-      * every stock you bought today counts once (bot plan or not), and so does
-        every stock with a BUY order placed in INDmoney but not filled yet (`ordered`);
+    """Set watch["trades"] (trades open now, max MAX_TRADES; also read by the cloud
+    debate) and watch["day_trades"] (today's total, max MAX_DAY). Only real trades count,
+    not plans that merely hit their buy trigger:
+      * open now = stocks you still hold + stocks with a BUY order placed in INDmoney
+        but not filled yet (`ordered`). Sell it all and its slot is free again;
+      * today's total = every stock you bought or ordered today, sold or not;
       * a triggered plan you haven't bought counts only for MISS_GRACE minutes
         (your fill can take a minute or two to show up). After that it is marked
         missed: its slot is freed and it is paper-tracked quietly. If you buy it
@@ -626,7 +638,7 @@ def count_trades(watch, mt, now, ordered=frozenset()):
     t = now.strftime("%H:%M")
     mins = now.hour * 60 + now.minute
     bought = bought_symbols(mt)
-    old = (watch.get("trades"), watch.get("taken"), [(e.get("missed"), e.get("triggered")) for e in watch.get("live", [])])
+    old = (watch.get("trades"), watch.get("day_trades"), watch.get("taken"), [(e.get("missed"), e.get("triggered")) for e in watch.get("live", [])])
     pending, freed = 0, []
     for e in watch.get("live", []):
         if e.get("status") not in ("in_zone", "t1_hit", "closed") or e.get("user_sold"):
@@ -646,9 +658,10 @@ def count_trades(watch, mt, now, ordered=frozenset()):
                     freed.append(e["symbol"])
             else:
                 pending += 1
-    taken = set(bought) | set(ordered)
+    taken = open_symbols(mt) | set(ordered)
     watch["taken"] = sorted(taken)
     watch["trades"] = len(taken) + pending
+    watch["day_trades"] = len(set(bought) | set(ordered)) + pending
     if freed:
         left = slots(watch)
         telegram(card("🔓", f"SLOT FREED — {esc(', '.join(freed))}", [
@@ -656,11 +669,11 @@ def count_trades(watch, mt, now, ordered=frozenset()):
             "so it doesn't count as a trade and its slot is free.",
             "(Bought it after all? It counts again by itself,",
             "and SL / target alerts for it still come.)",
-            f"📚 Trades bought today: <b>{watch['trades']}/{MAX_TRADES}</b>",
+            f"📚 Trades open now: <b>{watch['trades']}/{MAX_TRADES}</b>",
             f"📚 Live plans now: <b>{len(left)}/{MAX_LIVE}</b>"
             + (f" ({', '.join(esc(e['symbol']) for e in left)})" if left else ""),
         ], footer=False))
-    return freed or old != (watch.get("trades"), watch.get("taken"), [(e.get("missed"), e.get("triggered")) for e in watch.get("live", [])])
+    return freed or old != (watch.get("trades"), watch.get("day_trades"), watch.get("taken"), [(e.get("missed"), e.get("triggered")) for e in watch.get("live", [])])
 
 
 def open_plans(watch):
@@ -723,16 +736,21 @@ def track(entry, now, watch):
                 "👉 <b>Do not buy.</b> Delete the Groww price alert.",
                 "🔎 Next cloud scan will look for a new setup.",
             ])
-        elif trigger and watch.get("trades", 0) >= MAX_TRADES:
+        elif trigger and plan["symbol"] not in watch.get("taken", []) and (
+                watch.get("trades", 0) >= MAX_TRADES or watch.get("day_trades", 0) >= MAX_DAY):
             status = "cancelled"
+            full_why = (f"{MAX_TRADES} trades already open." if watch.get("trades", 0) >= MAX_TRADES
+                        else f"{MAX_DAY} trades already taken today.")
             msg = card("❌", f"SKIP — {sym}", [
-                f"🕐 {t} IST", "", f"{MAX_TRADES} trades already bought today.", price_line, "",
+                f"🕐 {t} IST", "", full_why, price_line, "",
                 "👉 <b>Do not buy.</b> Delete the Groww price alert.",
             ])
         elif trigger:
             status = "in_zone"
             entry["triggered"] = t
-            watch["trades"] = watch.get("trades", 0) + 1  # until count_trades sees your buy
+            if plan["symbol"] not in watch.get("taken", []):  # until count_trades sees your buy
+                watch["trades"] = watch.get("trades", 0) + 1
+                watch["day_trades"] = watch.get("day_trades", 0) + 1
             msg = card("🔔", f"{'BUY NOW' if buy_now else 'BUY TRIGGER'} — {sym}", [
                 f"🕐 {t} IST", "",
                 (f"✅ Price {rs(price)} is in the buy-now zone" if buy_now

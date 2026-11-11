@@ -34,7 +34,7 @@ def size(entry, sl, capital=CAPITAL, risk_pct=RISK_PCT):
     by_value = math.floor(capital * MAX_POSITION_X / entry)
     return max(0, min(by_risk, by_value))
 
-MAX_TRADES = 3  # bought trades per day (same as watch.MAX_TRADES)
+MAX_TRADES = 3  # trades open at once (same as watch.MAX_TRADES)
 
 
 def check(plan, verdict_time=None, trades_today=0, capital=CAPITAL, risk_pct=RISK_PCT):
@@ -62,7 +62,7 @@ def check(plan, verdict_time=None, trades_today=0, capital=CAPITAL, risk_pct=RIS
     if verdict_time and _hm(verdict_time) >= _hm(LAST_ENTRY):
         reasons.append(f"plan given after {LAST_ENTRY}")
     if trades_today >= MAX_TRADES:
-        reasons.append(f"{MAX_TRADES} trades already taken today")
+        reasons.append(f"{MAX_TRADES} trades already open")
     return {
         "status": "BLOCK" if reasons else "PASS",
         "reasons": reasons,
