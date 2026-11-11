@@ -18,6 +18,7 @@
   "COROMANDEL": "10:35 thin volume 105k",
   "SUNTV": "10:35 extended +7.7%, no clean stop",
   "IIFL": "10:35 extended +6.8%, illiquid for stop",
-  "RVNL": "11:05 net R:R 0.7 at T1, 220 CE wall 2.88M, circuit 221.87, results Nov 13; flips on 5-min close >220.5 only if 220 CE OI unwinds"
+  "RVNL": "11:05 net R:R 0.7 at T1, 220 CE wall 2.88M, circuit 221.87, results Nov 13; flips on 5-min close >220.5 only if 220 CE OI unwinds",
+  "HINDPETRO": "11:22 net R:R 0.78 to 400 pin, 400 CE 1.81M wall, falling highs, volume dried; flips on 5-min close >399.3 on >300k vol, or pullback hold 394.5-395"
  }
 }
