@@ -114,7 +114,7 @@
     "time_stop": "15:00",
     "start": "11:20"
    },
-   "status": "waiting",
+   "status": "in_zone",
    "since": "11:20",
    "paper_booked": 0
   }
@@ -169,14 +169,17 @@
   "11:35 TRENT 3228.70 VWAP \u20b93,197.81 status waiting",
   "11:40 AXISBANK 1355.20 VWAP \u20b91,341.35 status in_zone",
   "11:40 M&M 3433.50 VWAP \u20b93,408.67 status waiting",
-  "11:40 TRENT 3222.40 VWAP \u20b93,198.73 status waiting"
+  "11:40 TRENT 3222.40 VWAP \u20b93,198.73 status waiting",
+  "11:45 AXISBANK 1354.70 VWAP \u20b91,341.6 status in_zone",
+  "11:45 M&M 3434.00 VWAP \u20b93,409.16 status waiting",
+  "11:45 TRENT 3225.70 VWAP \u20b93,199.22 status in_zone"
  ],
  "health": {
   "ready": true,
   "down_groww": true,
   "pinger": true
  },
- "last_run": "11:40",
+ "last_run": "11:45",
  "fire_error": null,
  "last_fire": "11:15",
  "fired_at": null,
@@ -271,5 +274,5 @@
    "start": "11:20"
   }
  ],
- "trades": 1
+ "trades": 2
 }
