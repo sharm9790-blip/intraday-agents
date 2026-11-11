@@ -1,31 +1,11 @@
 {
  "date": "2026-11-11",
- "verdict_id": "2026-11-11_0950",
+ "verdict_id": "2026-11-11_1000",
  "go_count": 1,
  "connectors": {
   "groww": false,
   "indmoney": true,
   "investsights": true
  },
- "plan": {
-  "symbol": "AXISBANK",
-  "yahoo": "AXISBANK.NS",
-  "name": "Axis Bank",
-  "side": "long",
-  "entry_type": "dip",
-  "zone_low": 1338.5,
-  "zone_high": 1342.0,
-  "entry": 1340.0,
-  "max_entry": 1342.0,
-  "trigger_close_above": 1338.5,
-  "sl": 1331.5,
-  "t1": 1359.0,
-  "t2": 1380.0,
-  "qty": 74,
-  "deadline": "11:15",
-  "cancel_if_high_reaches": 1352.0,
-  "cancel_if_close_below": 1335.0,
-  "exit_if_close_below_after_entry": 1333.5,
-  "time_stop": "15:00"
- }
+ "plan": null
 }

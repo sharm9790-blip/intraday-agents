@@ -3,8 +3,9 @@
  "symbols": {
   "SBIN": "09:50 net R:R 0.94 at breakout, asks 62%, 1100 CE wall 63L, bank duplicate; flips on 5-min close >1069 on >600k vol with T1 1078, SL 1058",
   "HDFCBANK": "09:50 net R:R 0.83, SL 5pt inside noise, 820 CE 58L, RSI 74.8; flips on 5-min close >816 on >1M vol with T1 820",
-  "KALYANKJIL": "09:50 +9.5% extended, results status unconfirmed",
+  "KALYANKJIL": "10:00 results unconfirmed, +11% extended, net R:R 0.2 at 682; flips on dip 668-672 close >672 after results confirmed, SL 662, T1 689",
   "ICICIBANK": "09:50 flat at 52w high; flips on 5-min close >1616",
-  "BANKBARODA": "09:50 unanalysed, same bank factor"
+  "BANKBARODA": "10:00 net R:R 0.74, 270 CE wall, bank duplicate of AXISBANK; flips on pullback hold 266.2-266.5 SL 264.9 T1 269.8",
+  "INDIGO": "10:00 net R:R 1.1, breakout on fading volume, 5700 CE wall 4.5L; flips on 5-min close >5700 on >50k vol with T1 5760, SL 5672"
  }
 }

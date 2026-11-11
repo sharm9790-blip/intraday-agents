@@ -1,49 +1,21 @@
-🟢 <b>GO — AXISBANK</b>
-🕐 09:50 IST  ·  Confidence 5/10
+⚪ <b>NO TRADE — 10:00 IST</b>
 
-📥 Buy  <b>₹1,340</b>  (max ₹1,342)
-⏳ <b>Wait for dip</b> (near live)
-🛑 Stop loss  <b>₹1,331.5</b>
-🎯 Target 1  <b>₹1,359</b>  (sell half)
-🎯 Target 2  <b>₹1,380</b>
-📦 Qty  <b>74</b> shares
-📝 <b>Draft order</b> (you place it)
-Intraday · Limit · NSE
-Qty  <code>74</code>
-Buy limit  <code>1340</code>
-SL-M trigger  <code>1331.5</code>
-Sell half  <code>37</code> @ <code>1359</code>
-📲 groww.in/stocks/axis-bank-ltd
-📲 INDmoney: search <code>AXISBANK</code>
+📈 Nifty 25,367  (+1.29%)
+🏦 Bank Nifty 60,823  (+1.81%)
+Mood: narrow, bank-led rally
+VIX 17.6 and rising
 
-<b>✅ Buy only if</b>
-• Price in ₹1,338.5–1,342
-• 5-min candle holds above ₹1,338.5
-• Bank Nifty stays near highs
+⏳ AXISBANK plan still live
 
-<b>❌ Cancel if</b>
-• Not triggered by 11:15
-• Hits ₹1,352 before entry
-• 5-min close below ₹1,335
+<b>Why nothing passed</b>
+• INDIGO — 5,700 call wall, R:R 1.1
+• BANKBARODA — 270 call wall, R:R 0.7
+• KALYANKJIL — results unconfirmed
 
-<b>💰 Risk vs reward</b>
-Max loss ≈ ₹710 (risk check)
-Reward 1.9× the risk
-Exit all by 15:00
+<b>What flips it</b>
+• INDIGO: 5-min close above ₹5,700
+• BANKBARODA: dip to ₹266.2–266.5
 
-<b>Why this stock</b>
-• Bank Nifty +1.8%, Axis +2.4%
-• Above VWAP, OR high broken
-• Puts written, 1300 PE support
-
-<b>Caveats</b>
-• Narrow breadth, volume fading
-• 1,350–1,360 call walls
-• Do not chase the breakout
-
-<b>Skipped</b>
-• SBIN — net R:R 0.94
-• HDFCBANK — net R:R 0.83
-
-⚠️ Groww offline (data from INDmoney, InvestSights)
+⚠️ Groww offline — reconnect
+🔎 Next scan: 10:15 IST
 <i>Analysis only, not advice. You place orders yourself.</i>
