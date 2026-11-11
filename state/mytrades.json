@@ -13,7 +13,7 @@
     "t1": 1359.0,
     "t2": 1380.0,
     "opened": "09:54",
-    "checked": "13:25",
+    "checked": "13:26",
     "realized": 0.0,
     "sells": [],
     "flags": {
@@ -78,16 +78,22 @@
    {
     "symbol": "HINDPETRO",
     "yahoo": "HINDPETRO.NS",
-    "qty": 235,
-    "left": 235,
-    "entry": 400.1521276595745,
+    "qty": 53,
+    "left": 0,
+    "entry": 400.15212765957443,
     "sl": 398.9,
     "t1": 407.0,
     "t2": 410.0,
     "opened": "12:50",
     "checked": "13:25",
-    "realized": 0.0,
-    "sells": [],
+    "realized": -562.45,
+    "sells": [
+     {
+      "qty": 53,
+      "price": 397.7,
+      "at": "13:31"
+     }
+    ],
     "flags": {
      "sl_398.9": true
     },
@@ -120,8 +126,8 @@
    29
   ],
   "HINDPETRO": [
-   235,
-   0
+   53,
+   53
   ]
  }
 }
