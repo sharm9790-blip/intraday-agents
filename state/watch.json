@@ -116,7 +116,8 @@
    },
    "status": "in_zone",
    "since": "11:20",
-   "paper_booked": 0
+   "paper_booked": 0,
+   "user_sold": "12:45"
   },
   {
    "symbol": "HINDPETRO",
@@ -240,14 +241,17 @@
   "12:35 HINDPETRO 402.80 VWAP \u20b9398.06 status waiting",
   "12:40 AXISBANK 1345.70 VWAP \u20b91,344.94 status t1_hit",
   "12:40 TRENT 3232.30 VWAP \u20b93,205.18 status in_zone",
-  "12:40 HINDPETRO 401.65 VWAP \u20b9398.08 status waiting"
+  "12:40 HINDPETRO 401.65 VWAP \u20b9398.08 status waiting",
+  "12:45 AXISBANK 1347.50 VWAP \u20b91,344.96 status t1_hit",
+  "12:45 TRENT 3230.20 VWAP \u20b93,205.57 status in_zone",
+  "12:45 HINDPETRO 402.00 VWAP \u20b9398.11 status waiting"
  ],
  "health": {
   "ready": true,
   "down_groww": true,
   "pinger": true
  },
- "last_run": "12:40",
+ "last_run": "12:45",
  "fire_error": null,
  "last_fire": "12:15",
  "fired_at": null,
