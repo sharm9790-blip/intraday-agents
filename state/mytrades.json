@@ -6,16 +6,22 @@
    {
     "symbol": "AXISBANK",
     "yahoo": "AXISBANK.NS",
-    "qty": 74,
-    "left": 74,
+    "qty": 2,
+    "left": 0,
     "entry": 1340.0,
     "sl": 1340.0,
     "t1": 1359.0,
     "t2": 1380.0,
     "opened": "09:54",
     "checked": "15:00",
-    "realized": 0.0,
-    "sells": [],
+    "realized": -754.8,
+    "sells": [
+     {
+      "qty": 2,
+      "price": 1329.8,
+      "at": "15:05"
+     }
+    ],
     "flags": {
      "t1": true,
      "sl_1340.0": true,
@@ -137,14 +143,14 @@
  "boards": {
   "1322737291": {
    "id": 249,
-   "open": true
+   "open": false
   }
  },
  "menu": 10,
  "ind_seen": {
   "AXISBANK": [
-   74,
-   0
+   2,
+   2
   ],
   "KALYANKJIL": [
    148,
