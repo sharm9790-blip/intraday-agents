@@ -405,19 +405,31 @@ class TestHealth(Base):
 
     def test_connector_offline_and_back(self):
         flags, out = {}, []
-        doc = {"date": "2026-11-09", "connectors": {"groww": False, "indmoney": True}}
+        doc = {"date": "2026-11-09", "connectors": {"groww": False, "indmoney": False}}
         health.connectors(doc, "2026-11-09", flags, out.append)
         health.connectors(doc, "2026-11-09", flags, out.append)
-        self.assertEqual(len(out), 1, "warn once")
-        self.assertIn("GROWW OFFLINE", out[0])
+        self.assertEqual(len(out), 1, "warn once, and never for Groww")
+        self.assertIn("INDMONEY OFFLINE", out[0])
+        self.assertNotIn("Groww", out[0])
         self.assertIn("claude.ai/customize/connectors", out[0])
-        doc["connectors"]["groww"] = True
+        doc["connectors"].update(groww=True, indmoney=True)
         health.connectors(doc, "2026-11-09", flags, out.append)
         health.connectors(doc, "2026-11-09", flags, out.append)
         self.assertEqual(len(out), 2)
-        self.assertIn("Groww back", out[1])
-        health.connectors({"date": "2026-11-08", "connectors": {"groww": False}}, "2026-11-09", flags, out.append)
+        self.assertIn("INDmoney back", out[1])
+        health.connectors({"date": "2026-11-08", "connectors": {"indmoney": False}}, "2026-11-09", flags, out.append)
         self.assertEqual(len(out), 2, "old files ignored")
+
+    def test_verdict_drops_groww_offline(self):
+        txt = ("🟢 <b>GO</b>\n\n⚠️ Groww offline — reconnect\n\n"
+               "<i>Groww offline; INDmoney and InvestSights used.</i>\n"
+               "⚠️ Groww not connected\n📲 groww.in/stocks/trent-ltd\nOpen in Groww › Buy")
+        got = w.drop_groww_offline(txt)
+        self.assertNotIn("offline", got)
+        self.assertNotIn("not connected", got)
+        self.assertIn("groww.in/stocks/trent-ltd", got)
+        self.assertIn("Open in Groww", got)
+        self.assertNotIn("\n\n\n", got)
         self.assertIn("reconnect", mt.reconnect_hint("Groww connector needs authentication"))
         self.assertEqual(mt.reconnect_hint("order not found"), "")
 

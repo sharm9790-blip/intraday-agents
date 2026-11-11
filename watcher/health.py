@@ -6,8 +6,10 @@ Called by watch.py on every run (market days). Sends, at most once each:
   ⚠️ PINGER?        run started by GitHub's backup schedule instead of the pinger
   ⚠️ SCAN FAILED    the routine API trigger was refused (401/403/429…)
   ⚠️ NO VERDICT     a debate was fired but nothing arrived within 25 min
-  ⚠️ GROWW OFFLINE  the cloud run could not use a connector (sign-in expired…)
-  ✅ GROWW BACK     the next run after that could use it again
+  ⚠️ X OFFLINE      the cloud run could not use INDmoney / InvestSights
+  ✅ X BACK         the next run after that could use it again
+  (Groww is not alerted on: trades and live prices run on INDmoney now, and the
+   debate carries on without Groww, so its sign-in state is not worth a message.)
 """
 import os
 from datetime import datetime
@@ -19,6 +21,7 @@ def _m(hhmm):
 
 
 NAMES = {"groww": "Groww", "indmoney": "INDmoney", "investsights": "InvestSights"}
+SILENT = {"groww"}  # never alerted on (see docstring)
 FIX = "https://claude.ai/customize/connectors"
 
 
@@ -27,14 +30,14 @@ def connectors(doc, today, flags, send):
     if doc.get("date") != today:
         return
     for key, ok in (doc.get("connectors") or {}).items():
+        if key in SILENT:
+            continue
         name = NAMES.get(key, key)
         down = "down_" + key
         if ok is False and not flags.get(down):
             flags[down] = True
-            extra = ("\nUntil then BOUGHT/SOLD sync and ORDER\nchecks can't read Groww."
-                     if key == "groww" else "")
             send(f"⚠️ <b>{name.upper()} OFFLINE</b>\nThe cloud run couldn't use {name}\n"
-                 f"(sign-in probably expired). Scans go on\nwith the other connectors.{extra}\n"
+                 f"(sign-in probably expired). Scans go on\nwith the other connectors.\n"
                  f"👉 Reconnect: {FIX}")
         elif ok is True and flags.get(down):
             flags[down] = False
