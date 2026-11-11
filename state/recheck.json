@@ -14,6 +14,13 @@
    "level": 272.5,
    "kind": "flip level",
    "close": 273.12
+  },
+  "HINDPETRO": {
+   "at": "11:55",
+   "rejected_at": "11:22",
+   "level": 399.3,
+   "kind": "flip level",
+   "close": 400.85
   }
  }
 }
