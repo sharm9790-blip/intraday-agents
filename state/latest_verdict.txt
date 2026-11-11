@@ -1,38 +1,49 @@
-🟢 <b>GO (conditional) — BANKINDIA</b>
-🕐 14:20 IST  ·  Confidence 5/10
+🟢 <b>GO — AXISBANK</b>
+🕐 09:50 IST  ·  Confidence 5/10
 
-📥 Buy limit  <b>₹142.5</b>  (max ₹142.55)
-⏳ <b>Wait for dip</b> — no chasing
-🛑 Stop loss  <b>₹141.95</b>
-🎯 Target 1  <b>₹143.8</b>  (sell half)
-🎯 Target 2  <b>₹144.4</b>
-📦 Qty  <b>701</b> shares
+📥 Buy  <b>₹1,340</b>  (max ₹1,342)
+⏳ <b>Wait for dip</b> (near live)
+🛑 Stop loss  <b>₹1,331.5</b>
+🎯 Target 1  <b>₹1,359</b>  (sell half)
+🎯 Target 2  <b>₹1,380</b>
+📦 Qty  <b>74</b> shares
+📝 <b>Draft order</b> (you place it)
+Intraday · Limit · NSE
+Qty  <code>74</code>
+Buy limit  <code>1340</code>
+SL-M trigger  <code>1331.5</code>
+Sell half  <code>37</code> @ <code>1359</code>
+📲 groww.in/stocks/axis-bank-ltd
+📲 INDmoney: search <code>AXISBANK</code>
 
 <b>✅ Buy only if</b>
-• Dips to ₹142.45–142.55
-• Filled by 14:30 IST
+• Price in ₹1,338.5–1,342
+• 5-min candle holds above ₹1,338.5
+• Bank Nifty stays near highs
 
 <b>❌ Cancel if</b>
-• Not filled by 14:30
-• Trades below ₹142.2 first
-• Trades above ₹143.4 unfilled
+• Not triggered by 11:15
+• Hits ₹1,352 before entry
+• 5-min close below ₹1,335
 
 <b>💰 Risk vs reward</b>
-Max loss ≈ ₹466
-Profit ≈ ₹800 (T1)
-Reward 1.8× the risk
+Max loss ≈ ₹710 (risk check)
+Reward 1.9× the risk
+Exit all by 15:00
 
-<b>Why</b>
-• PSU banks +3%, futures long build-up
-• Dip entry near VWAP, T1 under fut high
+<b>Why this stock</b>
+• Bank Nifty +1.8%, Axis +2.4%
+• Above VWAP, OR high broken
+• Puts written, 1300 PE support
 
-<b>Caution</b>
-• Double top 143.3–143.8, 145 call wall
-• Same PSU factor as IRFC
-• Exit all by 15:10
+<b>Caveats</b>
+• Narrow breadth, volume fading
+• 1,350–1,360 call walls
+• Do not chase the breakout
 
 <b>Skipped</b>
-• RECLTD — net R:R 0.83, dead volume
+• SBIN — net R:R 0.94
+• HDFCBANK — net R:R 0.83
 
-📡 Watcher checks every 5 min
-<i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
+⚠️ Groww offline (data from INDmoney, InvestSights)
+<i>Analysis only, not advice. You place orders yourself.</i>
