@@ -1,4 +1,12 @@
 {
  "date": "2026-11-11",
- "symbols": {}
+ "symbols": {
+  "TRENT": {
+   "at": "11:00",
+   "rejected_at": "10:35",
+   "level": 3224.0,
+   "kind": "flip level",
+   "close": 3231.2
+  }
+ }
 }
