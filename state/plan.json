@@ -1,11 +1,31 @@
 {
  "date": "2026-11-11",
- "verdict_id": "2026-11-11_1050",
- "go_count": 2,
+ "verdict_id": "2026-11-11_1100",
+ "go_count": 3,
  "connectors": {
   "groww": false,
   "indmoney": true,
   "investsights": true
  },
- "plan": null
+ "plan": {
+  "symbol": "M&M",
+  "yahoo": "M&M.NS",
+  "name": "Mahindra & Mahindra",
+  "side": "long",
+  "entry_type": "dip",
+  "zone_low": 3414.0,
+  "zone_high": 3417.0,
+  "entry": 3417.0,
+  "max_entry": 3417.0,
+  "trigger_close_above": 3408.0,
+  "sl": 3403.0,
+  "t1": 3450.0,
+  "t2": 3498.0,
+  "qty": 29,
+  "deadline": "12:15",
+  "cancel_if_high_reaches": 3450.0,
+  "cancel_if_close_below": 3408.0,
+  "exit_if_close_below_after_entry": 3405.0,
+  "time_stop": "15:00"
+ }
 }

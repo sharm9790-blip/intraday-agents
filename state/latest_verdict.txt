@@ -1,25 +1,49 @@
-🔴 <b>NO TRADE</b>
-🕐 10:50 IST  ·  Confidence 8/10
+🟢 <b>GO — M&amp;M</b>
+🕐 11:05 IST  ·  Confidence 4.5/10
 
-Checked RVNL, SBIN, BANKBARODA,
-KALYANKJIL.
+📥 Buy  <b>₹3,417</b>  (max ₹3,417)
+⏳ <b>Wait for dip</b>
+🛑 Stop loss  <b>₹3,403</b>
+🎯 Target 1  <b>₹3,450</b>  (sell half)
+🎯 Target 2  <b>₹3,498</b>
+📦 Qty  <b>29</b> shares
+📝 <b>Draft order</b> (you place it)
+Intraday · Limit · NSE
+Qty  <code>29</code>
+Buy limit  <code>3417</code>
+SL-M trigger  <code>3403</code>
+Sell half  <code>14</code> @ <code>3450</code>
+📲 groww.in/stocks/mahindra-mahindra-ltd
+📲 INDmoney: search <code>M&amp;M</code>
 
-<b>❌ Why not</b>
-• RVNL: R:R 0.96, extended
-• SBIN: R:R 0.83, day-high buy
-• BANKBARODA: R:R 1.0, Stoch 100
-• KALYANKJIL: fading, no setup
-• 3 banks = AXISBANK trade again
+<b>✅ Buy only if</b>
+• Dips to ₹3,414–3,417
+• Holds above ₹3,408
+• Bounce candle volume rising
 
-<b>👀 Flips if</b>
-• SBIN 5-min close &gt;₹1073, vol &gt;1M
-• BANKBARODA close &gt;₹272.5
-• RVNL holds VWAP ₹211-212
+<b>❌ Cancel if</b>
+• Not filled by 12:15
+• Hits ₹3,450 before the dip
+• 5-min close below ₹3,408
 
-<b>ℹ️ Live AXISBANK</b>
-Keep as only bank bet.
-Cancel on close below ₹1338.
-Volume is thin.
+<b>💰 Risk vs reward</b>
+Max loss ≈ ₹490
+Profit ≈ ₹460 (T1 half) · ₹2,350 (T2)
+Net reward 1.8× the risk
 
-<i>Groww offline; INDmoney and InvestSights used.
-Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
+<b>Why this stock</b>
+• Auto leader, +4% vs Nifty +1.4%
+• Strong daily trend, ADX 42
+• 3,450 calls long build-up
+
+<b>Caution</b>
+• Rejected 3× at 3,424–3,429
+• Volume fading, RSI 74
+• Do not chase above ₹3,430
+
+<b>Skipped</b>
+• RVNL — 220 call wall, R:R 0.7
+• IRFC — 90 call wall
+
+⚠️ Groww not connected
+<i>Educational analysis, not SEBI-registered advice. You place orders yourself.</i>
