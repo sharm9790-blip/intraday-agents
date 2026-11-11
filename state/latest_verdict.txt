@@ -1,47 +1,25 @@
-🟢 <b>GO — KALYANKJIL</b>
-🕐 10:35 IST  ·  Confidence 5/10
+🔴 <b>NO TRADE</b>
+🕐 10:50 IST  ·  Confidence 8/10
 
-📥 Buy  <b>₹675</b>  (max ₹676.35)
-⚡ <b>BUY NOW</b>
-🛑 Stop loss  <b>₹669</b>
-🎯 Target 1  <b>₹688.5</b>  (sell half)
-🎯 Target 2  <b>₹699</b>
-📦 Qty  <b>148</b> shares
-📝 <b>Draft order</b> (you place it)
-Intraday · Limit · NSE
-Qty  <code>148</code>
-Buy limit  <code>675</code>
-SL-M trigger  <code>669</code>
-Sell half  <code>74</code> @ <code>688.5</code>
-📲 groww.in/stocks/kalyan-jewellers-india-ltd
-📲 INDmoney: search <code>KALYANKJIL</code>
+Checked RVNL, SBIN, BANKBARODA,
+KALYANKJIL.
 
-<b>✅ Buy only if</b>
-• Price ₹673.65–676.35
-• Still above VWAP ~₹670.5
-• Do not chase above ₹676.35
+<b>❌ Why not</b>
+• RVNL: R:R 0.96, extended
+• SBIN: R:R 0.83, day-high buy
+• BANKBARODA: R:R 1.0, Stoch 100
+• KALYANKJIL: fading, no setup
+• 3 banks = AXISBANK trade again
 
-<b>❌ Cancel if</b>
-• Not filled by 10:50
-• Hits ₹679.5 before fill
-• 5-min close below ₹671.5
+<b>👀 Flips if</b>
+• SBIN 5-min close &gt;₹1073, vol &gt;1M
+• BANKBARODA close &gt;₹272.5
+• RVNL holds VWAP ₹211-212
 
-<b>💰 Risk vs reward</b>
-Max loss ≈ ₹970
-Reward ~2× the risk (to T1)
+<b>ℹ️ Live AXISBANK</b>
+Keep as only bank bet.
+Cancel on close below ₹1338.
+Volume is thin.
 
-<b>After buying</b>
-• Exit if 5-min close below ₹670
-• Move SL to entry at T1
-• Exit all by 15:00
-
-<b>Why this stock</b>
-• Q2 PAT +64%, results out
-• Retest of VWAP held
-• Weak: volume fading, 700 call wall
-
-<b>Skipped</b>
-• TRENT — R:R 0.7, results miss
-
-📡 Watcher checks every 5 min
-<i>Analysis only, not advice. You place orders yourself.</i>
+<i>Groww offline; INDmoney and InvestSights used.
+Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>

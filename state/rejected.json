@@ -1,11 +1,11 @@
 {
  "date": "2026-11-11",
  "symbols": {
-  "SBIN": "09:50 net R:R 0.94 at breakout, asks 62%, 1100 CE wall 63L, bank duplicate; flips on 5-min close >1069 on >600k vol with T1 1078, SL 1058",
+  "SBIN": "10:50 net R:R 0.83, day-high entry on fading volume, 1080/1100 CE walls, bank duplicate; flips on 5-min close >1073 on >1M vol with T1 1079",
   "HDFCBANK": "09:50 net R:R 0.83, SL 5pt inside noise, 820 CE 58L, RSI 74.8; flips on 5-min close >816 on >1M vol with T1 820",
-  "KALYANKJIL": "10:18 net R:R 0.65 at 678.5, extended +36%, volume fading, 700 CE wall; flips on 5-min close >673 after retest 671-673 holds VWAP (SL 662.5, T1 689), or 5-min close >689 on >1.5M vol",
+  "KALYANKJIL": "10:50 no setup, lower highs on VWAP; flips on 5-min close >680.5 on rising volume",
   "ICICIBANK": "09:50 flat at 52w high; flips on 5-min close >1616",
-  "BANKBARODA": "10:00 net R:R 0.74, 270 CE wall, bank duplicate of AXISBANK; flips on pullback hold 266.2-266.5 SL 264.9 T1 269.8",
+  "BANKBARODA": "10:50 net R:R 1.0, Stoch 100, 35.8k sell wall 271.40, bank duplicate; flips on 5-min close >272.5 on rising volume",
   "INDIGO": "10:00 net R:R 1.1, breakout on fading volume, 5700 CE wall 4.5L; flips on 5-min close >5700 on >50k vol with T1 5760, SL 5672",
   "SWIGGY": "10:18 counter-trend bounce under 200 CE wall 76L, SL in noise; flips on 5-min close >200.4 on >1.2M vol",
   "TRENT": "10:35 net R:R 0.72 breakout, Q2 miss, climax-volume rejection, death cross; flips on 5-min close >3224 on >40k vol closing near high",
@@ -17,6 +17,7 @@
   "NTPC": "10:35 weak relative strength",
   "COROMANDEL": "10:35 thin volume 105k",
   "SUNTV": "10:35 extended +7.7%, no clean stop",
-  "IIFL": "10:35 extended +6.8%, illiquid for stop"
+  "IIFL": "10:35 extended +6.8%, illiquid for stop",
+  "RVNL": "10:50 net R:R 0.96, extended 2% over VWAP, rejected at 216.5, 220 CE wall; flips on pullback hold 211.2-212 VWAP SL 210.3 T1 216.5"
  }
 }
