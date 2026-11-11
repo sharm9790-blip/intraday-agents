@@ -1,49 +1,49 @@
-🟢 <b>GO — TRENT</b>
-🕐 11:22 IST  ·  Confidence 5/10
+🟢 <b>GO — HINDPETRO</b>
+🕐 12:25 IST  ·  Confidence 5/10
 
-📥 Buy  <b>₹3,226</b>  (max ₹3,228)
+📥 Buy  <b>₹401.3</b>  (max ₹401.5)
 ⏳ <b>Wait for dip</b> (small, near price)
-🛑 Stop loss  <b>₹3,212</b>
-🎯 Target 1  <b>₹3,256</b>  (sell half)
-🎯 Target 2  <b>₹3,285</b>
-📦 Qty  <b>30</b> shares
+🛑 Stop loss  <b>₹398.9</b>
+🎯 Target 1  <b>₹407</b>  (sell half)
+🎯 Target 2  <b>₹410</b>
+📦 Qty  <b>249</b> shares
 📝 <b>Draft order</b> (you place it)
 Intraday · Limit · NSE
-Qty  <code>30</code>
-Buy limit  <code>3226</code>
-SL-M trigger  <code>3212</code>
-Sell half  <code>15</code> @ <code>3256</code>
-📲 groww.in/stocks/trent-ltd
-📲 INDmoney: search <code>TRENT</code>
+Qty  <code>249</code>
+Buy limit  <code>401.3</code>
+SL-M trigger  <code>398.9</code>
+Sell half  <code>124</code> @ <code>407</code>
+📲 groww.in/stocks/hindustan-petroleum-corporation-ltd
+📲 INDmoney: search <code>HINDPETRO</code>
 
 <b>✅ Buy only if</b>
-• Dips to ₹3,222–3,227
-• Green 5-min close above ₹3,222
-• Not above ₹3,228
+• Dips to ₹400.5–401.5
+• Green 5-min close above ₹400.5
+• Not above ₹401.5
 
 <b>❌ Cancel if</b>
-• Not triggered by 11:50
-• Hits ₹3,262 before the dip
-• 5-min close below ₹3,214
+• Not triggered by 13:30
+• Hits ₹407 before the dip
+• 5-min close below ₹399
 
 <b>💰 Risk vs reward</b>
-Max loss ≈ ₹500 (+ costs)
-Profit ≈ ₹400 (T1 half) · ₹1,250 (T1+T2)
-Reward 1.65× the risk
+Max loss ≈ ₹680 (+ costs)
+Reward ≈ 2× the risk
 
 <b>Why this stock</b>
-• +3.5% vs Nifty +1.3%
-• Held 3216–3224 shelf, above VWAP
-• Put writing at 3200
+• Broke ₹399.3 on 12.6L volume
+• OMC Q2 profit +66%, crude down
+• 400 puts OI support, PCR 0.81
 
 <b>Watch out</b>
-• Ask wall 3250/3300 calls
-• Thin volume, 5-min RSI high
-• Narrow bank-led rally
+• Up 4.3%, stretched vs VWAP
+• Volume fading, 410 call wall
+• Two earlier breakouts failed
 
 <b>Skipped</b>
-• HINDPETRO — 400 call pin, R:R 0.78
+• SBIN — R:R 0.5, bank duplicate
+• BANKBARODA — distribution candle
 
-⚠️ Groww offline; INDmoney and InvestSights used
+⚠️ Groww offline, data from INDmoney + InvestSights
 📡 Watcher checks every 5 min
-<i>Educational analysis, not SEBI-registered advice. Intraday trading is high risk; you place and manage any order yourself.</i>
+<i>Educational analysis, not SEBI-registered advice. Intraday is high risk; you place orders yourself.</i>
