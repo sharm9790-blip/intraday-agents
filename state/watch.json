@@ -83,17 +83,18 @@
   "10:45 AXISBANK 1343.90 VWAP \u20b91,336.91 status in_zone",
   "10:49 AXISBANK 1343.90 VWAP \u20b91,337.22 status in_zone",
   "10:50 AXISBANK 1343.60 VWAP \u20b91,337.32 status in_zone",
-  "10:55 AXISBANK 1345.00 VWAP \u20b91,337.58 status in_zone"
+  "10:55 AXISBANK 1345.00 VWAP \u20b91,337.58 status in_zone",
+  "11:00 AXISBANK 1346.50 VWAP \u20b91,337.79 status in_zone"
  ],
  "health": {
   "ready": true,
   "down_groww": true,
   "pinger": true
  },
- "last_run": "10:55",
+ "last_run": "11:00",
  "fire_error": null,
- "last_fire": "10:45",
- "fired_at": "10:45",
+ "last_fire": "11:00",
+ "fired_at": "11:00",
  "verdicts": 5,
  "plans": [
   {
