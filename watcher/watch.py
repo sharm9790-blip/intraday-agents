@@ -457,7 +457,9 @@ def main(state_dir):
             watch.pop(k, None)
 
     mt_today = mt if mt.get("date") == today else {}
-    if count_trades(watch, mt_today, now):
+    ind = load(os.path.join(state_dir, "positions_ind.json"), {})
+    ordered = {o["s"] for o in ind.get("orders") or [] if o.get("s")} if ind.get("date") == today else set()
+    if count_trades(watch, mt_today, now, ordered):
         save(watch_path, watch)
 
     # 1) Forward a new verdict from the cloud debate.
@@ -542,11 +544,12 @@ def main(state_dir):
             ] + ["", "It was rejected earlier; the next scan looks at it again."], footer=False))
 
     # 3) Keep scanning while there is room for another plan.
-    count_trades(watch, mt_today, now)
+    count_trades(watch, mt_today, now, ordered)
     save(watch_path, watch)
     live = slots(watch)
-    trades = watch.get("trades", 0)  # trades you bought today (+ just-triggered plans)
-    waiting = sum(1 for e in live if e["status"] == "waiting")
+    trades = watch.get("trades", 0)  # bought / ordered today (+ just-triggered plans)
+    taken = set(watch.get("taken", []))
+    waiting = sum(1 for e in live if e["status"] == "waiting" and e["symbol"] not in taken)
     loss_stop = watch.get("day_pnl", 0) <= -DAY_LOSS_STOP
     full = trades + waiting >= MAX_TRADES or len(live) >= MAX_LIVE
     late = minutes >= hhmm("14:40")  # last debate (14:15 slot) has reported
@@ -610,10 +613,11 @@ def bought_symbols(mt):
     return out
 
 
-def count_trades(watch, mt, now):
+def count_trades(watch, mt, now, ordered=frozenset()):
     """Set watch["trades"] (the daily limit counter, also read by the cloud debate) to
     the trades you really bought, not plans that merely hit their buy trigger:
-      * every stock you bought today counts once (bot plan or not);
+      * every stock you bought today counts once (bot plan or not), and so does
+        every stock with a BUY order placed in INDmoney but not filled yet (`ordered`);
       * a triggered plan you haven't bought counts only for MISS_GRACE minutes
         (your fill can take a minute or two to show up). After that it is marked
         missed: its slot is freed and it is paper-tracked quietly. If you buy it
@@ -622,7 +626,7 @@ def count_trades(watch, mt, now):
     t = now.strftime("%H:%M")
     mins = now.hour * 60 + now.minute
     bought = bought_symbols(mt)
-    old = (watch.get("trades"), [(e.get("missed"), e.get("triggered")) for e in watch.get("live", [])])
+    old = (watch.get("trades"), watch.get("taken"), [(e.get("missed"), e.get("triggered")) for e in watch.get("live", [])])
     pending, freed = 0, []
     for e in watch.get("live", []):
         if e.get("status") not in ("in_zone", "t1_hit", "closed") or e.get("user_sold"):
@@ -630,7 +634,8 @@ def count_trades(watch, mt, now):
         if e.get("status") == "closed" and not e.get("triggered"):
             continue  # closed before this rule existed: leave as is
         trig = e.setdefault("triggered", t)
-        mine = e["symbol"] in bought and bought[e["symbol"]] >= e.get("since", "00:00")
+        mine = (e["symbol"] in ordered
+                or (e["symbol"] in bought and bought[e["symbol"]] >= e.get("since", "00:00")))
         if mine:
             if e.pop("missed", None):
                 print("missed plan bought after all", e["symbol"])
@@ -641,11 +646,13 @@ def count_trades(watch, mt, now):
                     freed.append(e["symbol"])
             else:
                 pending += 1
-    watch["trades"] = len(bought) + pending
+    taken = set(bought) | set(ordered)
+    watch["taken"] = sorted(taken)
+    watch["trades"] = len(taken) + pending
     if freed:
         left = slots(watch)
         telegram(card("🔓", f"SLOT FREED — {esc(', '.join(freed))}", [
-            "", f"Buy trigger hit, but no buy of it in {MISS_GRACE} min,",
+            "", f"Buy trigger hit, but no buy or open order of it in {MISS_GRACE} min,",
             "so it doesn't count as a trade and its slot is free.",
             "(Bought it after all? It counts again by itself,",
             "and SL / target alerts for it still come.)",
@@ -653,7 +660,7 @@ def count_trades(watch, mt, now):
             f"📚 Live plans now: <b>{len(left)}/{MAX_LIVE}</b>"
             + (f" ({', '.join(esc(e['symbol']) for e in left)})" if left else ""),
         ], footer=False))
-    return freed or old != (watch.get("trades"), [(e.get("missed"), e.get("triggered")) for e in watch.get("live", [])])
+    return freed or old != (watch.get("trades"), watch.get("taken"), [(e.get("missed"), e.get("triggered")) for e in watch.get("live", [])])
 
 
 def open_plans(watch):

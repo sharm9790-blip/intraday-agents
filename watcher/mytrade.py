@@ -177,14 +177,18 @@ IND_SYM = re.compile(r"^[A-Z0-9&-]{1,20}$")
 def ind_positions(state_dir, today, now):
     """INDmoney positions for today. A new snapshot comes in env IND_POSITIONS (from
     the worker) and is saved to state/positions_ind.json; it is data only, checked
-    field by field. Returns [{s, bq, ba, sq, sa, nq, rp}]."""
+    field by field. The snapshot is {"p": positions, "o": open BUY orders or null}
+    (an older worker sent the positions list alone). Returns [{s, bq, ba, sq, sa, nq, rp}];
+    the open orders [{s, q, p}] are saved for the watcher's trade count."""
     path = os.path.join(state_dir, "positions_ind.json")
     raw = os.environ.get("IND_POSITIONS") or ""
     if raw:
         try:
-            rows = json.loads(raw)
+            data = json.loads(raw)
         except ValueError:
-            rows = None
+            data = None
+        rows, orders = (data, None) if isinstance(data, list) else (
+            (data.get("p"), data.get("o")) if isinstance(data, dict) else (None, None))
         if isinstance(rows, list):
             clean = []
             for r in rows[:200]:
@@ -197,7 +201,21 @@ def ind_positions(state_dir, today, now):
                                   "rp": float(r.get("rp") or 0)})
                 except (TypeError, ValueError):
                     continue
-            w.save(path, {"date": today, "at": now.strftime("%H:%M"), "positions": clean})
+            old = w.load(path, {})
+            keep = old.get("orders", []) if old.get("date") == today else []
+            if isinstance(orders, list):
+                keep = []
+                for o in orders[:200]:
+                    if not isinstance(o, dict) or not IND_SYM.match(str(o.get("s", "")).upper()):
+                        continue
+                    try:
+                        q, px = int(o.get("q") or 0), float(o.get("p") or 0)
+                    except (TypeError, ValueError):
+                        continue
+                    if q > 0:
+                        keep.append({"s": str(o["s"]).upper(), "q": q, "p": px})
+            w.save(path, {"date": today, "at": now.strftime("%H:%M"), "positions": clean,
+                          "orders": keep})
     doc = w.load(path, {})
     return doc.get("positions", []) if doc.get("date") == today else []
 

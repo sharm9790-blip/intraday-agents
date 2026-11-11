@@ -196,6 +196,26 @@ class TestWatcherFlow(Base):
         self.assertNotIn("SLOT FREED", self.texts())
         self.assertEqual([e["symbol"] for e in w.slots(wt)], ["TATASTEEL"])
 
+    def test_open_order_counts_and_keeps_slot(self):
+        self.go()
+        self.rows = [(183.45, 183.7, 183.3, 183.6), (183.6, 184.5, 183.5, 184.4),
+                     (184.4, 185.0, 184.3, 184.8), (184.8, 185.0, 184.5, 184.9)]
+        # limit buy placed in INDmoney but not filled, plus an order for another stock
+        self.put("positions_ind.json", {"date": "2026-11-09", "positions": [], "orders": [
+            {"s": "TATASTEEL", "q": 544, "p": 183.5}, {"s": "PFC", "q": 10, "p": 400}]})
+        self.at(13, 46); w.main(self.dir)
+        self.at(13, 51); w.main(self.dir)
+        self.at(14, 6); w.main(self.dir)
+        wt = self.get("watch.json")
+        self.assertNotIn("SLOT FREED", self.texts(), "an open order is not a missed trade")
+        self.assertEqual(wt["trades"], 2)
+        self.assertEqual(wt["taken"], ["PFC", "TATASTEEL"])
+        # order cancelled, nothing bought → 15 min after the trigger it frees the slot
+        self.put("positions_ind.json", {"date": "2026-11-09", "positions": [], "orders": []})
+        self.at(14, 11); w.main(self.dir)
+        self.assertIn("SLOT FREED — TATASTEEL", self.texts())
+        self.assertEqual(self.get("watch.json")["trades"], 0)
+
     def test_missed_then_bought_counts_again(self):
         self.go()
         self.rows = [(183.45, 183.7, 183.3, 183.6), (183.6, 184.5, 183.5, 184.4),
@@ -496,6 +516,22 @@ class TestMyTrade(Base):
             self.run_at(h, m)
         finally:
             os.environ.pop("IND_POSITIONS", None)
+
+    def test_ind_orders_saved(self):
+        os.environ["IND_POSITIONS"] = json.dumps({"p": [], "o": [
+            {"s": "SBIN", "q": 10, "p": 800.5}, {"s": "<b>", "q": 1}, {"s": "PFC", "q": 0}]})
+        try:
+            self.run_at(10, 1)
+        finally:
+            os.environ.pop("IND_POSITIONS", None)
+        self.assertEqual(self.get("positions_ind.json")["orders"], [{"s": "SBIN", "q": 10, "p": 800.5}])
+        # order book unreadable this time (null) → keep the last list
+        os.environ["IND_POSITIONS"] = json.dumps({"p": [], "o": None})
+        try:
+            self.run_at(10, 2)
+        finally:
+            os.environ.pop("IND_POSITIONS", None)
+        self.assertEqual(self.get("positions_ind.json")["orders"], [{"s": "SBIN", "q": 10, "p": 800.5}])
 
     def test_indmoney_auto(self):
         # INDmoney buy shows up → trade starts by itself with the plan's SL/T1 (owner chat)

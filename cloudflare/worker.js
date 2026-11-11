@@ -42,7 +42,7 @@ const STATE_BRANCH = "claude/intraday-state";
 const RETRY_AFTER_S = 600;
 const MAX_TRIES = 3;
 const IND = "https://api.indstocks.com";
-const VERSION = "2026-11-10e";  // shown by ?live=test so you can tell the new code is deployed
+const VERSION = "2026-11-11a";  // shown by ?live=test so you can tell the new code is deployed
 const OPEN = ["waiting", "in_zone", "t1_hit"];
 const IST_MS = 5.5 * 3600 * 1000;
 
@@ -353,7 +353,9 @@ async function indTest(env) {
     positions = r.ok && String(j.status).toLowerCase() === "success"
       ? `ok (${posSnapshot(j.data).length} intraday today)` : `failed (${r.status})`;
   } catch (e) { positions = "failed"; }
-  return { ok: true, method, login, prices: res.prices, positions,
+  const orders = await indOrders(env, token).then((o) => `ok (${o.length} open buy orders)`)
+    .catch((e) => "failed: " + String(e.message || e));
+  return { ok: true, method, login, prices: res.prices, positions, orders,
            note: "Outside market hours these are the last closing prices." };
 }
 
@@ -377,6 +379,38 @@ export function posSnapshot(rows) {
   return out;
 }
 
+// Today's BUY orders that are placed but not (fully) filled yet, so the bot counts
+// them as taken slots. Read-only (GET /order-book). security_id → NSE symbol via the
+// same id list the prices use.
+const OPEN_ORDER = new Set(["QUEUED", "O-PENDING", "PENDING", "PROCESSING", "INITIATED",
+  "MODIFIED", "SL-PENDING", "PARTIALLY FILLED"]);
+export function openBuys(rows, ids) {
+  const sym = {};
+  for (const [s, id] of Object.entries(ids || {})) sym[String(id)] = s;
+  const n = (x) => Number(x) || 0;
+  const out = {};
+  for (const r of rows || []) {
+    if (String(r.txn_type).toUpperCase() !== "BUY") continue;
+    if (String(r.segment || "EQUITY").toUpperCase() !== "EQUITY") continue;
+    if (!OPEN_ORDER.has(String(r.status || "").toUpperCase())) continue;
+    const s = sym[String(r.security_id)];
+    const q = Math.trunc(n(r.requested_qty) - n(r.traded_qty));
+    if (!s || !SYM_RE.test(s) || q <= 0) continue;
+    if (!out[s]) out[s] = { s, q: 0, p: Math.round(n(r.requested_price) * 100) / 100 };
+    out[s].q += q;
+  }
+  return Object.values(out).sort((a, b) => (a.s < b.s ? -1 : a.s > b.s ? 1 : 0));
+}
+
+async function indOrders(env, token) {
+  const r = await fetch(`${IND}/order-book`, { headers: { authorization: token, accept: "application/json" } });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok || String(j.status).toLowerCase() !== "success") {
+    throw new Error(`INDmoney order book ${r.status} ${String(j.message || "").slice(0, 100)}`);
+  }
+  return openBuys(j.data, await nseIds(env));
+}
+
 async function indPositions(env, t) {
   const token = await indToken(env);
   const r = await fetch(`${IND}/portfolio/positions?segment=equity&product=intraday`, {
@@ -386,10 +420,12 @@ async function indPositions(env, t) {
   if (!r.ok || String(j.status).toLowerCase() !== "success") {
     return { ok: false, error: `INDmoney positions ${r.status}` };
   }
-  const snap = JSON.stringify(posSnapshot(j.data));
+  // open buy orders; null = couldn't read them (the tracker then keeps the last list)
+  const orders = await indOrders(env, token).catch((e) => { console.log(String(e.message || e)); return null; });
+  const snap = JSON.stringify({ p: posSnapshot(j.data), o: orders });
   const key = `indpos:${t.date}`;
   if ((await env.STATE.get(key)) === snap) return { ok: true, changed: false };
-  if (snap === "[]" && !(await env.STATE.get(key))) {   // nothing traded yet today
+  if (snap === '{"p":[],"o":[]}' && !(await env.STATE.get(key))) {   // nothing traded yet today
     await env.STATE.put(key, snap, { expirationTtl: 2 * 86400 });
     return { ok: true, changed: false };
   }
@@ -401,7 +437,8 @@ async function indPositions(env, t) {
     });
   if (gh.status !== 204) return { ok: false, error: `GitHub dispatch ${gh.status}` };
   await env.STATE.put(key, snap, { expirationTtl: 2 * 86400 });
-  return { ok: true, changed: true, positions: JSON.parse(snap).map((p) => p.s) };
+  const d = JSON.parse(snap);
+  return { ok: true, changed: true, positions: d.p.map((x) => x.s), open_orders: (d.o || []).map((x) => x.s) };
 }
 
 // Prices for the watch list from INDmoney (free).
