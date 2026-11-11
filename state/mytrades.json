@@ -1,9 +1,41 @@
 {
  "offset": 572145771,
- "date": "2026-11-10",
- "trades": {},
+ "date": "2026-11-11",
+ "trades": {
+  "1322737291": [
+   {
+    "symbol": "AXISBANK",
+    "yahoo": "AXISBANK.NS",
+    "qty": 74,
+    "left": 74,
+    "entry": 1340.0,
+    "sl": 1331.5,
+    "t1": 1359.0,
+    "t2": 1380.0,
+    "opened": "09:54",
+    "checked": "09:49",
+    "realized": 0.0,
+    "sells": [],
+    "flags": {},
+    "plan": true,
+    "plan_qty": 74,
+    "broker": "INDmoney",
+    "auto_ind": true
+   }
+  ]
+ },
  "summary_sent": false,
- "boards": {},
+ "boards": {
+  "1322737291": {
+   "id": 249,
+   "open": true
+  }
+ },
  "menu": 10,
- "ind_seen": {}
+ "ind_seen": {
+  "AXISBANK": [
+   74,
+   0
+  ]
+ }
 }
