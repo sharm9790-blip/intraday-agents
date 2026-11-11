@@ -1,6 +1,6 @@
 // Offline test of the worker's pure logic. Run on macOS without Node:
 //   /System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Helpers/jsc -m tests/worker_test.mjs
-import { decide, watchList, istNow, base32, indCodes, indParse, posSnapshot } from "../cloudflare/worker.js";
+import { decide, watchList, istNow, base32, indCodes, indParse, posSnapshot, openBuys } from "../cloudflare/worker.js";
 
 let fails = 0;
 const ok = (c, msg) => { if (!c) { fails++; print("FAIL " + msg); } };
@@ -77,5 +77,17 @@ const snap = posSnapshot([
   { symbol: "bankindia-EQ", buy_qty: "701", buy_avg: "142.5", sell_qty: 0, net_qty: 701 },
   { symbol: "<b>X</b>", buy_qty: 1 }, { symbol: "IRFC", buy_qty: 0, sell_qty: 0 }]);
 ok(snap.length === 2 && snap[0].s === "BANKINDIA" && snap[0].bq === 701 && snap[1].rp === 225, "posSnapshot " + JSON.stringify(snap));
+
+// INDmoney order book → open BUY orders by symbol (filled / cancelled / sell / F&O dropped)
+const ob = openBuys([
+  { txn_type: "BUY", segment: "EQUITY", status: "O-PENDING", security_id: "3045", requested_qty: 10, traded_qty: 0, requested_price: "800.5" },
+  { txn_type: "BUY", segment: "EQUITY", status: "PARTIALLY FILLED", security_id: "2031", requested_qty: 10, traded_qty: 4, requested_price: "3100" },
+  { txn_type: "BUY", segment: "EQUITY", status: "SUCCESS", security_id: "2885", requested_qty: 5, traded_qty: 5 },
+  { txn_type: "BUY", segment: "EQUITY", status: "CANCELLED", security_id: "2885", requested_qty: 5, traded_qty: 0 },
+  { txn_type: "SELL", segment: "EQUITY", status: "O-PENDING", security_id: "3045", requested_qty: 10, traded_qty: 0 },
+  { txn_type: "BUY", segment: "DERIVATIVE", status: "O-PENDING", security_id: "3045", requested_qty: 75, traded_qty: 0 },
+  { txn_type: "BUY", segment: "EQUITY", status: "O-PENDING", security_id: "999999", requested_qty: 1, traded_qty: 0 }],
+  { SBIN: 3045, "M&M": 2031, RELIANCE: 2885 });
+ok(JSON.stringify(ob) === '[{"s":"M&M","q":6,"p":3100},{"s":"SBIN","q":10,"p":800.5}]', "openBuys " + JSON.stringify(ob));
 
 print(fails ? `${fails} FAILED` : "worker tests OK");
