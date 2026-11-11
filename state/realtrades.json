@@ -35,6 +35,49 @@
      }
     ]
    }
+  },
+  "2026-11-11": {
+   "1322737291": {
+    "pnl": -454,
+    "trades": 5,
+    "list": [
+     {
+      "symbol": "AXISBANK",
+      "qty": 2,
+      "entry": 1340.0,
+      "pnl": -755,
+      "open": 0
+     },
+     {
+      "symbol": "KALYANKJIL",
+      "qty": 148,
+      "entry": 675.0,
+      "pnl": -888,
+      "open": 0
+     },
+     {
+      "symbol": "TRENT",
+      "qty": 29,
+      "entry": 3226.0,
+      "pnl": 116,
+      "open": 0
+     },
+     {
+      "symbol": "HINDPETRO",
+      "qty": 53,
+      "entry": 400.15212765957443,
+      "pnl": -562,
+      "open": 0
+     },
+     {
+      "symbol": "COROMANDEL",
+      "qty": 8,
+      "entry": 1931.9,
+      "pnl": 1636,
+      "open": 0
+     }
+    ]
+   }
   }
  }
 }
