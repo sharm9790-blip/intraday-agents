@@ -13,7 +13,7 @@
     "t1": 1359.0,
     "t2": 1380.0,
     "opened": "09:54",
-    "checked": "14:20",
+    "checked": "14:21",
     "realized": 0.0,
     "sells": [],
     "flags": {
@@ -105,16 +105,22 @@
    {
     "symbol": "COROMANDEL",
     "yahoo": "COROMANDEL.NS",
-    "qty": 47,
-    "left": 47,
+    "qty": 8,
+    "left": 0,
     "entry": 1931.9,
     "sl": 1931.9,
     "t1": 1968.0,
     "t2": 1990.0,
     "opened": "13:47",
     "checked": "14:20",
-    "realized": 0.0,
-    "sells": [],
+    "realized": 1635.7,
+    "sells": [
+     {
+      "qty": 8,
+      "price": 1966.6,
+      "at": "14:26"
+     }
+    ],
     "flags": {
      "t1": true
     },
@@ -151,8 +157,8 @@
    53
   ],
   "COROMANDEL": [
-   47,
-   0
+   8,
+   8
   ]
  }
 }
