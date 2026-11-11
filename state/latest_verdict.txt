@@ -1,21 +1,20 @@
-⚪ <b>NO TRADE — 10:00 IST</b>
+🔴 <b>NO TRADE — 10:15 scan</b>
+🕐 10:18 IST  ·  Confidence 7/10
 
-📈 Nifty 25,367  (+1.29%)
-🏦 Bank Nifty 60,823  (+1.81%)
-Mood: narrow, bank-led rally
-VIX 17.6 and rising
+<b>KALYANKJIL</b>
+• Up 11%, +36% in 8 days
+• Fading volume, 700 call wall
+• R:R 0.65 at ₹678.5 — too low
+• Flips on retest ₹671–673 hold,
+  5-min close above ₹673
+• Or close above ₹689 on volume
 
-⏳ AXISBANK plan still live
+<b>SWIGGY</b>
+• Bounce in a downtrend
+• 200 call wall 76L above
+• Flips on close above ₹200.4
 
-<b>Why nothing passed</b>
-• INDIGO — 5,700 call wall, R:R 1.1
-• BANKBARODA — 270 call wall, R:R 0.7
-• KALYANKJIL — results unconfirmed
-
-<b>What flips it</b>
-• INDIGO: 5-min close above ₹5,700
-• BANKBARODA: dip to ₹266.2–266.5
-
+📌 AXISBANK plan still live
 ⚠️ Groww offline — reconnect
-🔎 Next scan: 10:15 IST
-<i>Analysis only, not advice. You place orders yourself.</i>
+
+<i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
