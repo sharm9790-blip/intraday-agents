@@ -1,20 +1,47 @@
-🔴 <b>NO TRADE — 10:15 scan</b>
-🕐 10:18 IST  ·  Confidence 7/10
+🟢 <b>GO — KALYANKJIL</b>
+🕐 10:35 IST  ·  Confidence 5/10
 
-<b>KALYANKJIL</b>
-• Up 11%, +36% in 8 days
-• Fading volume, 700 call wall
-• R:R 0.65 at ₹678.5 — too low
-• Flips on retest ₹671–673 hold,
-  5-min close above ₹673
-• Or close above ₹689 on volume
+📥 Buy  <b>₹675</b>  (max ₹676.35)
+⚡ <b>BUY NOW</b>
+🛑 Stop loss  <b>₹669</b>
+🎯 Target 1  <b>₹688.5</b>  (sell half)
+🎯 Target 2  <b>₹699</b>
+📦 Qty  <b>148</b> shares
+📝 <b>Draft order</b> (you place it)
+Intraday · Limit · NSE
+Qty  <code>148</code>
+Buy limit  <code>675</code>
+SL-M trigger  <code>669</code>
+Sell half  <code>74</code> @ <code>688.5</code>
+📲 groww.in/stocks/kalyan-jewellers-india-ltd
+📲 INDmoney: search <code>KALYANKJIL</code>
 
-<b>SWIGGY</b>
-• Bounce in a downtrend
-• 200 call wall 76L above
-• Flips on close above ₹200.4
+<b>✅ Buy only if</b>
+• Price ₹673.65–676.35
+• Still above VWAP ~₹670.5
+• Do not chase above ₹676.35
 
-📌 AXISBANK plan still live
-⚠️ Groww offline — reconnect
+<b>❌ Cancel if</b>
+• Not filled by 10:50
+• Hits ₹679.5 before fill
+• 5-min close below ₹671.5
 
-<i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
+<b>💰 Risk vs reward</b>
+Max loss ≈ ₹970
+Reward ~2× the risk (to T1)
+
+<b>After buying</b>
+• Exit if 5-min close below ₹670
+• Move SL to entry at T1
+• Exit all by 15:00
+
+<b>Why this stock</b>
+• Q2 PAT +64%, results out
+• Retest of VWAP held
+• Weak: volume fading, 700 call wall
+
+<b>Skipped</b>
+• TRENT — R:R 0.7, results miss
+
+📡 Watcher checks every 5 min
+<i>Analysis only, not advice. You place orders yourself.</i>

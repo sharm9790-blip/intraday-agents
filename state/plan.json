@@ -1,11 +1,31 @@
 {
  "date": "2026-11-11",
- "verdict_id": "2026-11-11_1015",
- "go_count": 1,
+ "verdict_id": "2026-11-11_1030",
+ "go_count": 2,
  "connectors": {
   "groww": false,
   "indmoney": true,
   "investsights": true
  },
- "plan": null
+ "plan": {
+  "symbol": "KALYANKJIL",
+  "yahoo": "KALYANKJIL.NS",
+  "name": "Kalyan Jewellers",
+  "side": "long",
+  "entry_type": "now",
+  "zone_low": 673.65,
+  "zone_high": 676.35,
+  "entry": 675.0,
+  "max_entry": 676.35,
+  "trigger_close_above": 673.65,
+  "sl": 669.0,
+  "t1": 688.5,
+  "t2": 699.0,
+  "qty": 148,
+  "deadline": "10:50",
+  "cancel_if_high_reaches": 679.5,
+  "cancel_if_close_below": 671.5,
+  "exit_if_close_below_after_entry": 670.0,
+  "time_stop": "15:00"
+ }
 }

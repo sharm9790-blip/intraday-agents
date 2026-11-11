@@ -7,6 +7,16 @@
   "ICICIBANK": "09:50 flat at 52w high; flips on 5-min close >1616",
   "BANKBARODA": "10:00 net R:R 0.74, 270 CE wall, bank duplicate of AXISBANK; flips on pullback hold 266.2-266.5 SL 264.9 T1 269.8",
   "INDIGO": "10:00 net R:R 1.1, breakout on fading volume, 5700 CE wall 4.5L; flips on 5-min close >5700 on >50k vol with T1 5760, SL 5672",
-  "SWIGGY": "10:18 counter-trend bounce under 200 CE wall 76L, SL in noise; flips on 5-min close >200.4 on >1.2M vol"
+  "SWIGGY": "10:18 counter-trend bounce under 200 CE wall 76L, SL in noise; flips on 5-min close >200.4 on >1.2M vol",
+  "TRENT": "10:35 net R:R 0.72 breakout, Q2 miss, climax-volume rejection, death cross; flips on 5-min close >3224 on >40k vol closing near high",
+  "LT": "10:35 range-bound on VWAP, RSI 77; flips on 5-min close >4259 on rising volume",
+  "CGPOWER": "10:35 daily Supertrend down, weak RS; flips on fresh 5-min close above day high on rising volume",
+  "DIVISLAB": "10:35 reversed red -1.9%",
+  "LAURUSLABS": "10:35 reversed red -1.1%",
+  "BDL": "10:35 weak relative strength",
+  "NTPC": "10:35 weak relative strength",
+  "COROMANDEL": "10:35 thin volume 105k",
+  "SUNTV": "10:35 extended +7.7%, no clean stop",
+  "IIFL": "10:35 extended +6.8%, illiquid for stop"
  }
 }
