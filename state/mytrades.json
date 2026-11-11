@@ -13,7 +13,7 @@
     "t1": 1359.0,
     "t2": 1380.0,
     "opened": "09:54",
-    "checked": "11:20",
+    "checked": "11:23",
     "realized": 0.0,
     "sells": [],
     "flags": {},
@@ -46,6 +46,25 @@
     "plan_qty": 148,
     "broker": "INDmoney",
     "auto_ind": true
+   },
+   {
+    "symbol": "TRENT",
+    "yahoo": "TRENT.NS",
+    "qty": 29,
+    "left": 29,
+    "entry": 3226.0,
+    "sl": 3212.0,
+    "t1": 3256.0,
+    "t2": 3285.0,
+    "opened": "11:28",
+    "checked": "11:23",
+    "realized": 0.0,
+    "sells": [],
+    "flags": {},
+    "plan": true,
+    "plan_qty": 30,
+    "broker": "INDmoney",
+    "auto_ind": true
    }
   ]
  },
@@ -65,6 +84,10 @@
   "KALYANKJIL": [
    148,
    148
+  ],
+  "TRENT": [
+   29,
+   0
   ]
  }
 }
