@@ -181,14 +181,17 @@
   "11:55 TRENT 3228.60 VWAP \u20b93,200.26 status in_zone",
   "12:00 AXISBANK 1354.80 VWAP \u20b91,343.57 status t1_hit",
   "12:00 M&M 3445.70 VWAP \u20b93,411.34 status waiting",
-  "12:00 TRENT 3231.00 VWAP \u20b93,200.94 status in_zone"
+  "12:00 TRENT 3231.00 VWAP \u20b93,200.94 status in_zone",
+  "12:05 AXISBANK 1352.70 VWAP \u20b91,343.68 status t1_hit",
+  "12:05 M&M 3446.70 VWAP \u20b93,412.26 status waiting",
+  "12:05 TRENT 3228.60 VWAP \u20b93,201.37 status in_zone"
  ],
  "health": {
   "ready": true,
   "down_groww": true,
   "pinger": true
  },
- "last_run": "12:00",
+ "last_run": "12:05",
  "fire_error": null,
  "last_fire": "11:15",
  "fired_at": null,
