@@ -7,6 +7,13 @@
    "level": 1910.5,
    "kind": "day high",
    "close": 1914.9
+  },
+  "HINDPETRO": {
+   "at": "11:55",
+   "rejected_at": "11:22",
+   "level": 399.3,
+   "kind": "flip level",
+   "close": 400.85
   }
  }
 }
