@@ -154,6 +154,17 @@ def groww_link(symbol):
     return link
 
 
+GROWW_DOWN = re.compile(r"groww\b[^\n]{0,40}\b(offline|not connected|disconnected|unavailable|reconnect)",
+                        re.I)
+
+
+def drop_groww_offline(text):
+    """Remove the cloud's 'Groww offline / not connected' notes from a verdict: the
+    debate runs fine on INDmoney + InvestSights, so the line is just noise."""
+    out = [ln for ln in text.split("\n") if not GROWW_DOWN.search(ln)]
+    return re.sub(r"\n{3,}", "\n\n", "\n".join(out))
+
+
 def check_groww_links(text, symbol=None):
     """Fix the cloud's groww.in/stocks/<slug> links (the cloud can't reach groww.in to
     check its guess; GitHub can): a page that doesn't open is replaced by the real one
@@ -494,7 +505,7 @@ def main(state_dir):
         try:
             with open(os.path.join(state_dir, "latest_verdict.txt")) as f:
                 gp0 = plan_doc.get("plan") or {}
-                telegram(check_groww_links(f.read(), gp0.get("symbol")))
+                telegram(check_groww_links(drop_groww_offline(f.read()), gp0.get("symbol")))
         except FileNotFoundError:
             telegram(card("📋", f"New verdict {esc(vid)}", ["(verdict text missing)"]))
         watch["verdict_id"] = vid

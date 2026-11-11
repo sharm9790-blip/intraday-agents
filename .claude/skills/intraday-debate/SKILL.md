@@ -37,7 +37,7 @@ All state lives on the git branch `claude/intraday-state`. Work on that branch.
               "deadline": "10:45", "cancel_if_high_reaches": 777.0, "cancel_if_close_below": 764.0,
               "exit_if_close_below_after_entry": 763.5, "time_stop": "15:00"}
      ```
-     Always add `"connectors": {"groww": true, "indmoney": true, "investsights": true}` — `false` for any connector whose tools were missing, needed sign-in, or failed on every call this run (the watcher sends the user a one-time "OFFLINE — reconnect" alert).
+     Always add `"connectors": {"groww": true, "indmoney": true, "investsights": true}` — `false` for any connector whose tools were missing, needed sign-in, or failed on every call this run (the watcher sends a one-time "OFFLINE — reconnect" alert for INDmoney / InvestSights; Groww is not alerted on).
      Numbers only, no ₹ signs. `yahoo` = NSE symbol + `.NS` (M&M → `M&M.NS`). Also add `"name"`: the company name for news search (e.g. `"Tata Steel"`), and `"entry_type"`: `"now"` (the watcher alerts BUY NOW as soon as the price is between `zone_low` and `max_entry`) or `"dip"` (waits for a green 5-min close in the zone), as the Judge decided.
    - **Code checks before the verdict text (mandatory for every GO):**
      1. `python3 watcher/news.py "<company name>"` — if `level` is `high` (results, board meeting, SEBI/raid, F&O ban… in the last 24 h or today), the trade is **NO-GO** unless the event is already over and priced in; say which headline. The cloud sandbox blocks outside websites, so it normally prints `unknown`: then use InvestSights `get_stock_news` / `get_earnings_calendar` / `get_corporate_actions` for the same check.
@@ -47,5 +47,5 @@ All state lives on the git branch `claude/intraday-state`. Work on that branch.
 
 ## Rules
 - No agent places, modifies or cancels orders, and neither do you. Never call order, portfolio, holdings, positions, family, networth, watchlist or save_analysis tools.
-- If one connector (Groww / INDmoney / InvestSights) is unavailable, continue with the others and say so in the report and verdict.
+- If one connector (Groww / INDmoney / InvestSights) is unavailable, continue with the others and note it in the report. In `latest_verdict.txt`, never mention Groww being offline / not connected (the user trades on INDmoney; that line is noise). An INDmoney or InvestSights outage may get one short line.
 - Disclaimer (end of every report and verdict): `Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.`
