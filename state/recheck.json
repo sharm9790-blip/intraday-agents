@@ -1,13 +1,6 @@
 {
  "date": "2026-11-11",
  "symbols": {
-  "COROMANDEL": {
-   "at": "12:25",
-   "rejected_at": "10:35",
-   "level": 1910.5,
-   "kind": "day high",
-   "close": 1914.9
-  },
   "HINDPETRO": {
    "at": "11:55",
    "rejected_at": "11:22",
