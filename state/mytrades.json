@@ -73,6 +73,25 @@
     "plan_qty": 30,
     "broker": "INDmoney",
     "auto_ind": true
+   },
+   {
+    "symbol": "HINDPETRO",
+    "yahoo": "HINDPETRO.NS",
+    "qty": 235,
+    "left": 235,
+    "entry": 400.1521276595745,
+    "sl": 398.9,
+    "t1": 407.0,
+    "t2": 410.0,
+    "opened": "12:50",
+    "checked": "12:45",
+    "realized": 0.0,
+    "sells": [],
+    "flags": {},
+    "plan": true,
+    "plan_qty": 249,
+    "broker": "INDmoney",
+    "auto_ind": true
    }
   ]
  },
@@ -96,6 +115,10 @@
   "TRENT": [
    29,
    29
+  ],
+  "HINDPETRO": [
+   235,
+   0
   ]
  }
 }
