@@ -27,7 +27,7 @@
     "time_stop": "15:00",
     "start": "09:50"
    },
-   "status": "waiting",
+   "status": "in_zone",
    "since": "09:50",
    "paper_booked": 0
   }
@@ -37,13 +37,14 @@
   "09:50 AXISBANK 1339.80 VWAP \u20b91,335.14 status waiting",
   "09:55 AXISBANK 1337.00 VWAP \u20b91,335.34 status waiting",
   "10:00 AXISBANK 1338.70 VWAP \u20b91,335.41 status waiting",
-  "10:04 AXISBANK 1338.90 VWAP \u20b91,335.48 status waiting"
+  "10:04 AXISBANK 1338.90 VWAP \u20b91,335.48 status waiting",
+  "10:05 AXISBANK 1339.10 VWAP \u20b91,335.49 status in_zone"
  ],
  "health": {
   "ready": true,
   "down_groww": true
  },
- "last_run": "10:04",
+ "last_run": "10:05",
  "fire_error": null,
  "last_fire": "10:00",
  "fired_at": "10:00",
@@ -71,5 +72,6 @@
    "time_stop": "15:00",
    "start": "09:50"
   }
- ]
+ ],
+ "trades": 1
 }
