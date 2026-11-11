@@ -3,7 +3,7 @@
 `state/latest_verdict.txt` is sent to Telegram with `parse_mode=HTML` and read on a phone.
 
 Rules:
-- Only `<b>`, `<i>` and `<code>` tags. No tables, no markdown (`**`, `#`, `|`). The only link allowed is the Groww stock page in the draft-order block.
+- Only `<b>`, `<i>` and `<code>` tags. No tables, no markdown (`**`, `#`, `|`). No links (no Groww or other stock-page links).
 - Escape `&` as `&amp;`, `<` as `&lt;`, `>` as `&gt;` in any text (stock `M&M` → `M&amp;M`).
 - One fact per line, ≤ 34 characters where possible. Blank line between blocks.
 - Prices as `₹766.5`, Indian grouping for big numbers (`₹1,42,000` or `₹1.42L`).
@@ -38,8 +38,8 @@ Max loss ≈ ₹1,000
 Profit ≈ ₹835 (T1) · ₹2,460 (T2)
 Reward 1.8× the risk
 
-<b>📲 Set in Groww now</b>
-1. ➕ Add HDFCBANK to "My Draft Basket"
+<b>📲 Set in INDmoney now</b>
+1. 🔎 Search HDFCBANK
 2. 🔔 Price alert at ₹766.5
 3. After buying: SL-M at ₹761.8
 4. Sell 92 shares at ₹777
@@ -60,7 +60,7 @@ Reward 1.8× the risk
 
 ## Draft order block (every GO)
 
-Insert right after the `📦 Qty` line of the GO template. It is a ready-to-copy order for the user to place in Groww or INDmoney themselves; nothing is sent to either. `<code>` makes each value tap-to-copy in Telegram.
+Insert right after the `📦 Qty` line of the GO template. It is a ready-to-copy order for the user to place in INDmoney themselves; nothing is sent. `<code>` makes each value tap-to-copy in Telegram.
 
 ```
 ⚡ <b>HIGH CONFIDENCE 6.5/10</b>   ← this line only when confidence is 6/10 or higher
@@ -70,11 +70,10 @@ Qty  <code>185</code>
 Buy limit  <code>766.5</code>
 SL-M trigger  <code>761.8</code>
 Sell half  <code>92</code> @ <code>777</code>
-📲 groww.in/stocks/hdfc-bank-ltd
 📲 INDmoney: search <code>HDFCBANK</code>
 ```
 
-Groww link: `https://groww.in/stocks/<slug>`, slug = the company's full name in lowercase, hyphenated, ending `-ltd` (TATASTEEL → `tata-steel-ltd`, M&M → `mahindra-mahindra-ltd`, HDFCBANK → `hdfc-bank-ltd`). The cloud sandbox can't reach groww.in, so don't try to check it: give your best guess and include it. Some names have no `-ltd` (BANKINDIA → `bank-of-india`, PNB → `punjab-national-bank`); the GitHub watcher opens the link before forwarding and swaps a wrong one for the real page from Groww's search, and its CHECKS / BUY TRIGGER cards add a verified 📲 Open in Groww link too. Values are plain numbers (no ₹) so they paste cleanly. "Sell half" = half of Qty (rounded down) @ T1 price. INDmoney has no verifiable stock-page link, so give its line as the tap-to-copy NSE symbol only.
+No Groww link: the user places orders in INDmoney (the watcher deletes any groww.in line). Values are plain numbers (no ₹) so they paste cleanly. "Sell half" = half of Qty (rounded down) @ T1 price. Give the INDmoney line as the tap-to-copy NSE symbol only.
 
 ## NO TRADE template
 

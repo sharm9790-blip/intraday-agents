@@ -128,32 +128,6 @@ def candles(yahoo_symbol):
     return out, res["meta"].get("regularMarketPrice")
 
 
-GROWW_SEARCH = "https://groww.in/v1/api/search/v3/query/global/st_query?page=0&size=5&web=true&query="
-_LINKS = {}
-
-
-def groww_link(symbol):
-    """Groww stock page for an NSE symbol, from Groww's public search (the page name
-    is not always guessable: BANKINDIA → /stocks/bank-of-india, not bank-of-india-ltd).
-    Falls back to Groww's search page. Read-only; opening it places nothing."""
-    if symbol in _LINKS:
-        return _LINKS[symbol]
-    link = "https://groww.in/search?q=" + urllib.parse.quote(symbol)
-    try:
-        req = urllib.request.Request(GROWW_SEARCH + urllib.parse.quote(symbol),
-                                     headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=15) as r:
-            rows = (json.load(r).get("data") or {}).get("content") or []
-        hit = next((x for x in rows if x.get("entity_type") == "Stocks"
-                    and (x.get("nse_scrip_code") or "").upper() == symbol.upper()), None)
-        if hit and re.fullmatch(r"[a-z0-9-]+", hit.get("search_id") or ""):
-            link = "https://groww.in/stocks/" + hit["search_id"]
-    except Exception as e:
-        print("groww search failed", symbol, e)
-    _LINKS[symbol] = link
-    return link
-
-
 GROWW_DOWN = re.compile(r"groww\b[^\n]{0,40}\b(offline|not connected|disconnected|unavailable|reconnect)",
                         re.I)
 
@@ -165,30 +139,13 @@ def drop_groww_offline(text):
     return re.sub(r"\n{3,}", "\n\n", "\n".join(out))
 
 
+GROWW_LINK = re.compile(r"(?:https://)?groww\.in/stocks/", re.I)
+
+
 def check_groww_links(text, symbol=None):
-    """Fix the cloud's groww.in/stocks/<slug> links (the cloud can't reach groww.in to
-    check its guess; GitHub can): a page that doesn't open is replaced by the real one
-    for `symbol`, or the line is dropped if there is no symbol."""
-    out = []
-    for line in text.split("\n"):
-        m = re.search(r"(?:https://)?groww\.in/stocks/[a-z0-9-]+", line)
-        if m:
-            url = m.group(0) if m.group(0).startswith("https://") else "https://" + m.group(0)
-            try:
-                urllib.request.urlopen(urllib.request.Request(
-                    url, headers={"User-Agent": "Mozilla/5.0"}), timeout=15)
-            except urllib.error.HTTPError as e:
-                if e.code == 404:
-                    if not symbol:
-                        print("dropped broken Groww link", m.group(0))
-                        continue
-                    good = groww_link(symbol)
-                    print("fixed Groww link", m.group(0), "->", good)
-                    line = line.replace(m.group(0), good)
-            except Exception:
-                pass  # network trouble: keep the line rather than guess
-        out.append(line)
-    return "\n".join(out)
+    """Drop any Groww stock-page line the cloud still writes: orders go through
+    INDmoney now, so GO cards carry no Groww link."""
+    return "\n".join(ln for ln in text.split("\n") if not GROWW_LINK.search(ln))
 
 
 def stock_name(yahoo_symbol):
@@ -219,13 +176,12 @@ def plan_lines(plan):
 
 
 def order_block(plan, qty=None):
-    """Tap-to-copy order values for Groww (the user places the order; nothing is sent)."""
+    """Tap-to-copy order values (the user places the order in INDmoney; nothing is sent)."""
     q = qty or plan["qty"]
     buy = plan["entry"] if plan.get("entry_type") != "now" else plan["max_entry"]
     return [
         "📝 <b>Your order</b> (tap a value to copy)",
-        f'📲 <a href="{html.escape(groww_link(plan["symbol"]))}">Open {esc(plan["symbol"])} in Groww</a> › Buy',
-        f"or INDmoney › search <code>{esc(plan['symbol'])}</code> › Buy (tracked by itself)",
+        f"📲 INDmoney › search <code>{esc(plan['symbol'])}</code> › Buy (tracked by itself)",
         "Intraday · Limit",
         f"Qty  <code>{q}</code>",
         f"Limit price  <code>{buy:g}</code>",
