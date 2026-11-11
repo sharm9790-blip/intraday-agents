@@ -309,14 +309,16 @@
   "13:38 TRENT 3226.80 VWAP \u20b93,209.34 status in_zone",
   "13:38 COROMANDEL 1932.40 VWAP \u20b91,907.31 status waiting",
   "13:40 TRENT 3226.20 VWAP \u20b93,209.41 status in_zone",
-  "13:40 COROMANDEL 1933.00 VWAP \u20b91,907.32 status in_zone"
+  "13:40 COROMANDEL 1933.00 VWAP \u20b91,907.32 status in_zone",
+  "13:45 TRENT 3222.50 VWAP \u20b93,209.64 status in_zone",
+  "13:45 COROMANDEL 1933.40 VWAP \u20b91,907.49 status in_zone"
  ],
  "health": {
   "ready": true,
   "down_groww": true,
   "pinger": true
  },
- "last_run": "13:40",
+ "last_run": "13:45",
  "fire_error": null,
  "last_fire": "13:15",
  "fired_at": "13:25",
