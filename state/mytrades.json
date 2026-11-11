@@ -13,11 +13,12 @@
     "t1": 1359.0,
     "t2": 1380.0,
     "opened": "09:54",
-    "checked": "13:05",
+    "checked": "13:10",
     "realized": 0.0,
     "sells": [],
     "flags": {
-     "t1": true
+     "t1": true,
+     "sl_1340.0": true
     },
     "plan": true,
     "plan_qty": 74,
@@ -84,7 +85,7 @@
     "t1": 407.0,
     "t2": 410.0,
     "opened": "12:50",
-    "checked": "13:05",
+    "checked": "13:10",
     "realized": 0.0,
     "sells": [],
     "flags": {},
