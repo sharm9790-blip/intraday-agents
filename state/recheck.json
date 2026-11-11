@@ -1,4 +1,12 @@
 {
  "date": "2026-11-11",
- "symbols": {}
+ "symbols": {
+  "RVNL": {
+   "at": "10:50",
+   "rejected_at": "10:50",
+   "level": 216.53,
+   "kind": "day high",
+   "close": 216.98
+  }
+ }
 }
