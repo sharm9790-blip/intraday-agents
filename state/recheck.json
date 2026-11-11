@@ -1,26 +1,4 @@
 {
  "date": "2026-11-11",
- "symbols": {
-  "SBIN": {
-   "at": "11:35",
-   "rejected_at": "10:50",
-   "level": 1073.0,
-   "kind": "flip level",
-   "close": 1076.5
-  },
-  "BANKBARODA": {
-   "at": "11:30",
-   "rejected_at": "10:50",
-   "level": 272.5,
-   "kind": "flip level",
-   "close": 273.12
-  },
-  "HINDPETRO": {
-   "at": "11:55",
-   "rejected_at": "11:22",
-   "level": 399.3,
-   "kind": "flip level",
-   "close": 400.85
-  }
- }
+ "symbols": {}
 }

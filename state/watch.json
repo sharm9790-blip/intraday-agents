@@ -1,6 +1,6 @@
 {
  "date": "2026-11-11",
- "verdict_id": "2026-11-11_1120",
+ "verdict_id": "2026-11-11_1225",
  "live": [
   {
    "symbol": "AXISBANK",
@@ -117,6 +117,35 @@
    "status": "in_zone",
    "since": "11:20",
    "paper_booked": 0
+  },
+  {
+   "symbol": "HINDPETRO",
+   "vid": "2026-11-11_1225",
+   "plan": {
+    "symbol": "HINDPETRO",
+    "yahoo": "HINDPETRO.NS",
+    "name": "Hindustan Petroleum",
+    "side": "long",
+    "entry_type": "dip",
+    "zone_low": 400.5,
+    "zone_high": 401.5,
+    "entry": 401.3,
+    "max_entry": 401.5,
+    "trigger_close_above": 400.5,
+    "sl": 398.9,
+    "t1": 407.0,
+    "t2": 410.0,
+    "qty": 249,
+    "deadline": "13:30",
+    "cancel_if_high_reaches": 407.0,
+    "cancel_if_close_below": 399.0,
+    "exit_if_close_below_after_entry": 399.0,
+    "time_stop": "15:00",
+    "start": "12:25"
+   },
+   "status": "waiting",
+   "since": "12:25",
+   "paper_booked": 0
   }
  ],
  "log": [
@@ -190,18 +219,21 @@
   "12:10 TRENT 3232.20 VWAP \u20b93,202.57 status in_zone",
   "12:15 AXISBANK 1347.20 VWAP \u20b91,344.63 status t1_hit",
   "12:15 M&M 3439.50 VWAP \u20b93,413.61 status cancelled",
-  "12:15 TRENT 3228.00 VWAP \u20b93,203.02 status in_zone"
+  "12:15 TRENT 3228.00 VWAP \u20b93,203.02 status in_zone",
+  "12:19 AXISBANK 1350.50 VWAP \u20b91,344.81 status t1_hit",
+  "12:19 TRENT 3229.30 VWAP \u20b93,203.4 status in_zone",
+  "12:19 HINDPETRO 402.55 VWAP \u20b9396.97 status waiting"
  ],
  "health": {
   "ready": true,
   "down_groww": true,
   "pinger": true
  },
- "last_run": "12:15",
+ "last_run": "12:19",
  "fire_error": null,
  "last_fire": "12:15",
  "fired_at": "12:15",
- "verdicts": 7,
+ "verdicts": 8,
  "plans": [
   {
    "symbol": "AXISBANK",
@@ -290,6 +322,28 @@
    "exit_if_close_below_after_entry": 3212.0,
    "time_stop": "15:00",
    "start": "11:20"
+  },
+  {
+   "symbol": "HINDPETRO",
+   "yahoo": "HINDPETRO.NS",
+   "name": "Hindustan Petroleum",
+   "side": "long",
+   "entry_type": "dip",
+   "zone_low": 400.5,
+   "zone_high": 401.5,
+   "entry": 401.3,
+   "max_entry": 401.5,
+   "trigger_close_above": 400.5,
+   "sl": 398.9,
+   "t1": 407.0,
+   "t2": 410.0,
+   "qty": 249,
+   "deadline": "13:30",
+   "cancel_if_high_reaches": 407.0,
+   "cancel_if_close_below": 399.0,
+   "exit_if_close_below_after_entry": 399.0,
+   "time_stop": "15:00",
+   "start": "12:25"
   }
  ],
  "trades": 2
