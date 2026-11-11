@@ -1,49 +1,44 @@
-🟢 <b>GO — HINDPETRO</b>
-🕐 12:25 IST  ·  Confidence 5/10
+🟢 <b>GO — COROMANDEL</b>
+🕐 13:35 IST  ·  Confidence 5/10
 
-📥 Buy  <b>₹401.3</b>  (max ₹401.5)
-⏳ <b>Wait for dip</b> (small, near price)
-🛑 Stop loss  <b>₹398.9</b>
-🎯 Target 1  <b>₹407</b>  (sell half)
-🎯 Target 2  <b>₹410</b>
-📦 Qty  <b>249</b> shares
+📥 Buy  <b>₹1,933</b>  (max ₹1,934)
+⏳ <b>Wait for dip</b>
+🛑 Stop loss  <b>₹1,919.5</b>
+🎯 Target 1  <b>₹1,968</b>  (sell half)
+🎯 Target 2  <b>₹1,990</b>
+📦 Qty  <b>51</b> shares
 📝 <b>Draft order</b> (you place it)
 Intraday · Limit · NSE
-Qty  <code>249</code>
-Buy limit  <code>401.3</code>
-SL-M trigger  <code>398.9</code>
-Sell half  <code>124</code> @ <code>407</code>
-📲 groww.in/stocks/hindustan-petroleum-corporation-ltd
-📲 INDmoney: search <code>HINDPETRO</code>
+Qty  <code>51</code>
+Buy limit  <code>1933</code>
+SL-M trigger  <code>1919.5</code>
+Sell half  <code>25</code> @ <code>1968</code>
+📲 groww.in/stocks/coromandel-international-ltd
+📲 INDmoney: search <code>COROMANDEL</code>
 
 <b>✅ Buy only if</b>
-• Dips to ₹400.5–401.5
-• Green 5-min close above ₹400.5
-• Not above ₹401.5
+• Holds ₹1,928–1,933
+• 5-min close above ₹1,932
+• Trigger bar volume 2,000+
+• Nifty above 25,264
 
 <b>❌ Cancel if</b>
-• Not triggered by 13:30
-• Hits ₹407 before the dip
-• 5-min close below ₹399
+• Not triggered by 14:15
+• Hits ₹1,950 before entry
+• 5-min close below ₹1,927
 
 <b>💰 Risk vs reward</b>
-Max loss ≈ ₹680 (+ costs)
-Reward ≈ 2× the risk
-
-<b>Why this stock</b>
-• Broke ₹399.3 on 12.6L volume
-• OMC Q2 profit +66%, crude down
-• 400 puts OI support, PCR 0.81
-
-<b>Watch out</b>
-• Up 4.3%, stretched vs VWAP
-• Volume fading, 410 call wall
-• Two earlier breakouts failed
+Max loss ≈ ₹770
+Profit ≈ ₹1,780 (T1)
+Reward 2.2× the risk
+⚠️ Thin breakout, +14% in 8 days
+Skip T2 if volume fades
 
 <b>Skipped</b>
-• SBIN — R:R 0.5, bank duplicate
-• BANKBARODA — distribution candle
+• CANBK — 135 call wall
+• PNB — fading under 139
+• UNIONBANK — no breakout
 
-⚠️ Groww offline, data from INDmoney + InvestSights
+⚠️ Groww offline, using INDmoney + InvestSights
 📡 Watcher checks every 5 min
-<i>Educational analysis, not SEBI-registered advice. Intraday is high risk; you place orders yourself.</i>
+<i>Analysis only, not advice. You place orders yourself.</i>

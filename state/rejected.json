@@ -15,10 +15,13 @@
   "LAURUSLABS": "10:35 reversed red -1.1%",
   "BDL": "10:35 weak relative strength",
   "NTPC": "10:35 weak relative strength",
-  "COROMANDEL": "10:35 thin volume 105k",
   "SUNTV": "10:35 extended +7.7%, no clean stop",
   "IIFL": "10:35 extended +6.8%, illiquid for stop",
   "RVNL": "11:05 net R:R 0.7 at T1, 220 CE wall 2.88M, circuit 221.87, results Nov 13; flips on 5-min close >220.5 only if 220 CE OI unwinds",
-  "HINDPETRO": "11:22 net R:R 0.78 to 400 pin, 400 CE 1.81M wall, falling highs, volume dried; flips on 5-min close >399.3 on >300k vol, or pullback hold 394.5-395"
+  "HINDPETRO": "11:22 net R:R 0.78 to 400 pin, 400 CE 1.81M wall, falling highs, volume dried; flips on 5-min close >399.3 on >300k vol, or pullback hold 394.5-395",
+  "CANBK": "13:35 net R:R ~1.4, 135 CE wall 7.7M; flips on 5-min close >133.05 on rising volume",
+  "PNB": "13:35 fading under 52w high 139, 140 CE wall 9.7M, R:R <1; flips on 5-min close >139.2 on >1M vol",
+  "UNIONBANK": "13:35 faded from 202, no breakout structure; flips on 5-min close >202.1",
+  "GAIL": "13:35 tight range, thin volume, no edge"
  }
 }
