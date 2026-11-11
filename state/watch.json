@@ -3,6 +3,8 @@
  "verdict_id": null,
  "live": [],
  "log": [],
- "health": {},
- "last_run": "09:12"
+ "health": {
+  "ready": true
+ },
+ "last_run": "09:15"
 }
