@@ -13,12 +13,31 @@
     "t1": 1359.0,
     "t2": 1380.0,
     "opened": "09:54",
-    "checked": "10:35",
+    "checked": "10:36",
     "realized": 0.0,
     "sells": [],
     "flags": {},
     "plan": true,
     "plan_qty": 74,
+    "broker": "INDmoney",
+    "auto_ind": true
+   },
+   {
+    "symbol": "KALYANKJIL",
+    "yahoo": "KALYANKJIL.NS",
+    "qty": 148,
+    "left": 148,
+    "entry": 675.0,
+    "sl": 669.0,
+    "t1": 688.5,
+    "t2": 699.0,
+    "opened": "10:41",
+    "checked": "10:36",
+    "realized": 0.0,
+    "sells": [],
+    "flags": {},
+    "plan": true,
+    "plan_qty": 148,
     "broker": "INDmoney",
     "auto_ind": true
    }
@@ -35,6 +54,10 @@
  "ind_seen": {
   "AXISBANK": [
    74,
+   0
+  ],
+  "KALYANKJIL": [
+   148,
    0
   ]
  }
