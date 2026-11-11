@@ -53,15 +53,21 @@
     "symbol": "TRENT",
     "yahoo": "TRENT.NS",
     "qty": 29,
-    "left": 29,
+    "left": 0,
     "entry": 3226.0,
     "sl": 3212.0,
     "t1": 3256.0,
     "t2": 3285.0,
     "opened": "11:28",
     "checked": "12:35",
-    "realized": 0.0,
-    "sells": [],
+    "realized": 116.0,
+    "sells": [
+     {
+      "qty": 29,
+      "price": 3230.0,
+      "at": "12:40"
+     }
+    ],
     "flags": {},
     "plan": true,
     "plan_qty": 30,
@@ -89,7 +95,7 @@
   ],
   "TRENT": [
    29,
-   0
+   29
   ]
  }
 }
