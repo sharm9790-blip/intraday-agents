@@ -171,7 +171,45 @@ class TestWatcherFlow(Base):
         self.assertIn("TARGET 2 HIT", t)
         self.assertIn("+₹1,605", t)
         self.assertIn('Remove TATASTEEL from "My Draft Basket"', t)
-        self.assertEqual(self.get("watch.json")["trades"], 1)
+        # never bought: 15 min after the trigger it stops counting and frees its slot,
+        # but the target / SL cards still come, with a note
+        wt = self.get("watch.json")
+        self.assertEqual(wt["trades"], 0)
+        self.assertEqual(t.count("SLOT FREED — TATASTEEL"), 1)
+        self.assertIn("No buy of this seen", t[t.index("TARGET 2 HIT"):])
+        self.assertEqual(w.slots(wt), [])
+
+    def test_bought_trigger_keeps_counting(self):
+        self.go()
+        self.rows = [(183.45, 183.7, 183.3, 183.6), (183.6, 184.5, 183.5, 184.4),
+                     (184.4, 185.0, 184.3, 184.8), (184.8, 185.0, 184.5, 184.9)]
+        self.at(13, 46); w.main(self.dir)
+        self.at(13, 51); w.main(self.dir)
+        self.assertEqual(self.get("watch.json")["trades"], 1, "counts while your fill shows up")
+        self.put("mytrades.json", {"date": "2026-11-09", "trades": {"1": [
+            {"symbol": "TATASTEEL", "opened": "13:53", "qty": 544, "left": 544},
+            {"symbol": "KALYANKJIL", "opened": "10:41", "qty": 10, "left": 0}]}})
+        self.at(14, 6); w.main(self.dir)
+        self.at(14, 11); w.main(self.dir)
+        wt = self.get("watch.json")
+        self.assertEqual(wt["trades"], 2, "both real buys count, plan or not")
+        self.assertNotIn("SLOT FREED", self.texts())
+        self.assertEqual([e["symbol"] for e in w.slots(wt)], ["TATASTEEL"])
+
+    def test_missed_then_bought_counts_again(self):
+        self.go()
+        self.rows = [(183.45, 183.7, 183.3, 183.6), (183.6, 184.5, 183.5, 184.4),
+                     (184.4, 185.0, 184.3, 184.8), (184.8, 185.0, 184.5, 184.9)]
+        self.at(13, 46); w.main(self.dir)
+        self.at(13, 51); w.main(self.dir)
+        self.at(14, 6); w.main(self.dir)
+        self.assertEqual(self.get("watch.json")["trades"], 0)
+        self.put("mytrades.json", {"date": "2026-11-09", "trades": {"1": [
+            {"symbol": "TATASTEEL", "opened": "14:08", "qty": 544, "left": 544}]}})
+        self.at(14, 11); w.main(self.dir)
+        wt = self.get("watch.json")
+        self.assertEqual(wt["trades"], 1)
+        self.assertEqual([e["symbol"] for e in w.slots(wt)], ["TATASTEEL"])
 
     def test_buy_now(self):
         plan = dict(PLAN, entry_type="now", zone_low=183.4, zone_high=183.8, entry=183.6, max_entry=183.9)
@@ -315,7 +353,8 @@ class TestMultiPlan(Base):
             wt = self.get("watch.json")
             self.assertEqual([e["symbol"] for e in w.slots(wt)], ["TATASTEEL", "PFC"])
             self.assertIn("SBIN", [e["symbol"] for e in w.open_plans(wt)], "paper tracking goes on")
-            self.assertGreater(len(fired), k)
+            self.assertEqual(wt["trades"], 1, "SBIN was really bought: it uses one of the 3")
+            self.assertEqual(len(fired), k, "1 bought + 2 waiting = 3 → no scan")
             # Groww positions closed for PFC (no SOLD message) also frees it, once
             self.put("positions.json", {"date": "2026-11-09", "positions": [
                 {"symbol": "PFC", "buy_qty": 5, "sell_qty": 5, "net_qty": 0}]})
