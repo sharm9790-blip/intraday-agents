@@ -33,7 +33,8 @@
   }
  ],
  "log": [
-  "09:50 AXISBANK 1343.50 VWAP \u20b91,335.05 status waiting"
+  "09:50 AXISBANK 1343.50 VWAP \u20b91,335.05 status waiting",
+  "09:50 AXISBANK 1339.80 VWAP \u20b91,335.14 status waiting"
  ],
  "health": {
   "ready": true,
