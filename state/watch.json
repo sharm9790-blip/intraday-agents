@@ -123,14 +123,16 @@
   "11:15 AXISBANK 1348.40 VWAP \u20b91,338.26 status in_zone",
   "11:15 M&M 3427.80 VWAP \u20b93,406.19 status waiting",
   "11:16 AXISBANK 1349.70 VWAP \u20b91,338.39 status in_zone",
-  "11:16 M&M 3431.60 VWAP \u20b93,406.28 status waiting"
+  "11:16 M&M 3431.60 VWAP \u20b93,406.28 status waiting",
+  "11:20 AXISBANK 1352.00 VWAP \u20b91,339.62 status in_zone",
+  "11:20 M&M 3427.00 VWAP \u20b93,406.69 status waiting"
  ],
  "health": {
   "ready": true,
   "down_groww": true,
   "pinger": true
  },
- "last_run": "11:16",
+ "last_run": "11:20",
  "fire_error": null,
  "last_fire": "11:15",
  "fired_at": "11:15",
