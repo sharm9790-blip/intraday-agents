@@ -1,6 +1,6 @@
 {
  "date": "2026-11-11",
- "verdict_id": "2026-11-11_1100",
+ "verdict_id": "2026-11-11_1120",
  "live": [
   {
    "symbol": "AXISBANK",
@@ -88,6 +88,35 @@
    "status": "waiting",
    "since": "11:00",
    "paper_booked": 0
+  },
+  {
+   "symbol": "TRENT",
+   "vid": "2026-11-11_1120",
+   "plan": {
+    "symbol": "TRENT",
+    "yahoo": "TRENT.NS",
+    "name": "Trent",
+    "side": "long",
+    "entry_type": "dip",
+    "zone_low": 3222.0,
+    "zone_high": 3227.0,
+    "entry": 3226.0,
+    "max_entry": 3228.0,
+    "trigger_close_above": 3222.0,
+    "sl": 3212.0,
+    "t1": 3256.0,
+    "t2": 3285.0,
+    "qty": 30,
+    "deadline": "11:50",
+    "cancel_if_high_reaches": 3262.0,
+    "cancel_if_close_below": 3214.0,
+    "exit_if_close_below_after_entry": 3212.0,
+    "time_stop": "15:00",
+    "start": "11:20"
+   },
+   "status": "waiting",
+   "since": "11:20",
+   "paper_booked": 0
   }
  ],
  "log": [
@@ -125,7 +154,10 @@
   "11:16 AXISBANK 1349.70 VWAP \u20b91,338.39 status in_zone",
   "11:16 M&M 3431.60 VWAP \u20b93,406.28 status waiting",
   "11:20 AXISBANK 1352.00 VWAP \u20b91,339.62 status in_zone",
-  "11:20 M&M 3427.00 VWAP \u20b93,406.69 status waiting"
+  "11:20 M&M 3427.00 VWAP \u20b93,406.69 status waiting",
+  "11:20 AXISBANK 1351.20 VWAP \u20b91,339.62 status in_zone",
+  "11:20 M&M 3425.90 VWAP \u20b93,406.69 status waiting",
+  "11:20 TRENT 3228.80 VWAP \u20b93,196.26 status waiting"
  ],
  "health": {
   "ready": true,
@@ -136,7 +168,7 @@
  "fire_error": null,
  "last_fire": "11:15",
  "fired_at": "11:15",
- "verdicts": 6,
+ "verdicts": 7,
  "plans": [
   {
    "symbol": "AXISBANK",
@@ -203,6 +235,28 @@
    "exit_if_close_below_after_entry": 3405.0,
    "time_stop": "15:00",
    "start": "11:00"
+  },
+  {
+   "symbol": "TRENT",
+   "yahoo": "TRENT.NS",
+   "name": "Trent",
+   "side": "long",
+   "entry_type": "dip",
+   "zone_low": 3222.0,
+   "zone_high": 3227.0,
+   "entry": 3226.0,
+   "max_entry": 3228.0,
+   "trigger_close_above": 3222.0,
+   "sl": 3212.0,
+   "t1": 3256.0,
+   "t2": 3285.0,
+   "qty": 30,
+   "deadline": "11:50",
+   "cancel_if_high_reaches": 3262.0,
+   "cancel_if_close_below": 3214.0,
+   "exit_if_close_below_after_entry": 3212.0,
+   "time_stop": "15:00",
+   "start": "11:20"
   }
  ],
  "trades": 1
