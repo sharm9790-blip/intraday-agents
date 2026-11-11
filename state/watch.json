@@ -231,14 +231,17 @@
   "12:22 HINDPETRO 402.95 VWAP \u20b9397 status waiting",
   "12:25 AXISBANK 1347.80 VWAP \u20b91,344.87 status t1_hit",
   "12:25 TRENT 3228.30 VWAP \u20b93,203.84 status in_zone",
-  "12:25 HINDPETRO 402.70 VWAP \u20b9397.51 status waiting"
+  "12:25 HINDPETRO 402.70 VWAP \u20b9397.51 status waiting",
+  "12:30 AXISBANK 1346.60 VWAP \u20b91,344.91 status t1_hit",
+  "12:30 TRENT 3223.30 VWAP \u20b93,204.2 status in_zone",
+  "12:30 HINDPETRO 402.80 VWAP \u20b9397.54 status waiting"
  ],
  "health": {
   "ready": true,
   "down_groww": true,
   "pinger": true
  },
- "last_run": "12:25",
+ "last_run": "12:30",
  "fire_error": null,
  "last_fire": "12:15",
  "fired_at": "12:15",
