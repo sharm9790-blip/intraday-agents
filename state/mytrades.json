@@ -13,7 +13,7 @@
     "t1": 1359.0,
     "t2": 1380.0,
     "opened": "09:54",
-    "checked": "10:40",
+    "checked": "10:43",
     "realized": 0.0,
     "sells": [],
     "flags": {},
@@ -26,15 +26,21 @@
     "symbol": "KALYANKJIL",
     "yahoo": "KALYANKJIL.NS",
     "qty": 148,
-    "left": 148,
+    "left": 0,
     "entry": 675.0,
     "sl": 669.0,
     "t1": 688.5,
     "t2": 699.0,
     "opened": "10:41",
     "checked": "10:40",
-    "realized": 0.0,
-    "sells": [],
+    "realized": -888.0,
+    "sells": [
+     {
+      "qty": 148,
+      "price": 669.0,
+      "at": "10:48"
+     }
+    ],
     "flags": {},
     "plan": true,
     "plan_qty": 148,
@@ -58,7 +64,7 @@
   ],
   "KALYANKJIL": [
    148,
-   0
+   148
   ]
  }
 }
