@@ -13,7 +13,7 @@
     "t1": 1359.0,
     "t2": 1380.0,
     "opened": "09:54",
-    "checked": "13:40",
+    "checked": "13:42",
     "realized": 0.0,
     "sells": [],
     "flags": {
@@ -101,6 +101,25 @@
     "plan_qty": 249,
     "broker": "INDmoney",
     "auto_ind": true
+   },
+   {
+    "symbol": "COROMANDEL",
+    "yahoo": "COROMANDEL.NS",
+    "qty": 47,
+    "left": 47,
+    "entry": 1931.9,
+    "sl": 1919.5,
+    "t1": 1968.0,
+    "t2": 1990.0,
+    "opened": "13:47",
+    "checked": "13:42",
+    "realized": 0.0,
+    "sells": [],
+    "flags": {},
+    "plan": true,
+    "plan_qty": 51,
+    "broker": "INDmoney",
+    "auto_ind": true
    }
   ]
  },
@@ -128,6 +147,10 @@
   "HINDPETRO": [
    53,
    53
+  ],
+  "COROMANDEL": [
+   47,
+   0
   ]
  }
 }
