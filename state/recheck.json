@@ -1,0 +1,19 @@
+{
+ "date": "2026-11-11",
+ "symbols": {
+  "KALYANKJIL": {
+   "at": "09:50",
+   "rejected_at": "09:50",
+   "level": 678.6,
+   "kind": "day high",
+   "close": 685.15
+  },
+  "BANKBARODA": {
+   "at": "09:50",
+   "rejected_at": "09:50",
+   "level": 268.1,
+   "kind": "day high",
+   "close": 269.16
+  }
+ }
+}
