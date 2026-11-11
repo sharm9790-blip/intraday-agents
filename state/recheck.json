@@ -1,4 +1,12 @@
 {
  "date": "2026-11-11",
- "symbols": {}
+ "symbols": {
+  "BANKBARODA": {
+   "at": "11:30",
+   "rejected_at": "10:50",
+   "level": 272.5,
+   "kind": "flip level",
+   "close": 273.12
+  }
+ }
 }
