@@ -9,7 +9,24 @@
     "start": "11:45",
     "pnl": 1408
    }
+  ],
+  "2026-11-11": [
+   {
+    "symbol": "AXISBANK",
+    "start": "09:50",
+    "pnl": 644
+   },
+   {
+    "symbol": "TRENT",
+    "start": "11:20",
+    "pnl": -478
+   },
+   {
+    "symbol": "COROMANDEL",
+    "start": "13:35",
+    "pnl": 2298
+   }
   ]
  },
- "balance": 101408
+ "balance": 103872
 }

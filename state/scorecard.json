@@ -550,5 +550,334 @@
    "lock": 2441,
    "targets": 2260
   }
+ },
+ {
+  "date": "2026-11-11",
+  "plans": [
+   {
+    "symbol": "AXISBANK",
+    "start": "09:50",
+    "entry": 1340.0,
+    "qty": 74,
+    "sl": 1331.5,
+    "t1": 1359.0,
+    "t2": 1380.0,
+    "close": 1333.2,
+    "rules": {
+     "pnl": 644,
+     "steps": [
+      "11:50 T1",
+      "13:10 back at cost"
+     ],
+     "bought": true
+    },
+    "limit": {
+     "pnl": 644,
+     "steps": [
+      "09:50 filled",
+      "11:50 T1",
+      "13:10 back at cost"
+     ]
+    },
+    "price_at_plan": 1339.5,
+    "targets": {
+     "cash": 100000,
+     "qty": 74,
+     "half": 37,
+     "rest": 37,
+     "pf1": 703,
+     "pf2": 1480,
+     "total": 2183,
+     "t1_hit": true,
+     "t2_hit": false,
+     "entry_hit": true,
+     "high": 1360.0
+    },
+    "market": {
+     "pnl": 662,
+     "steps": [
+      "bought 1339.50",
+      "11:50 T1",
+      "13:10 back at cost"
+     ]
+    },
+    "lock": {
+     "pnl": 662,
+     "steps": [
+      "bought 1339.50",
+      "11:50 T1",
+      "13:10 back at cost"
+     ]
+    }
+   },
+   {
+    "symbol": "KALYANKJIL",
+    "start": "10:30",
+    "entry": 675.0,
+    "qty": 148,
+    "sl": 669.0,
+    "t1": 688.5,
+    "t2": 699.0,
+    "close": 662.0,
+    "rules": {
+     "pnl": 0,
+     "steps": [
+      "ran up without the dip"
+     ]
+    },
+    "limit": {
+     "pnl": -948,
+     "steps": [
+      "10:30 filled",
+      "10:45 SL"
+     ]
+    },
+    "price_at_plan": 677.3,
+    "targets": {
+     "cash": 100000,
+     "qty": 148,
+     "half": 74,
+     "rest": 74,
+     "pf1": 999,
+     "pf2": 1776,
+     "total": 2775,
+     "t1_hit": false,
+     "t2_hit": false,
+     "entry_hit": true,
+     "high": 679.9
+    },
+    "market": {
+     "pnl": -1289,
+     "steps": [
+      "bought 677.30",
+      "10:45 SL"
+     ]
+    },
+    "lock": {
+     "pnl": -1289,
+     "steps": [
+      "bought 677.30",
+      "10:45 SL"
+     ]
+    }
+   },
+   {
+    "symbol": "M&M",
+    "start": "11:00",
+    "entry": 3417.0,
+    "qty": 29,
+    "sl": 3403.0,
+    "t1": 3450.0,
+    "t2": 3498.0,
+    "close": 3419.5,
+    "rules": {
+     "pnl": 0,
+     "steps": [
+      "not triggered by 12:15"
+     ]
+    },
+    "limit": {
+     "pnl": 0,
+     "steps": [
+      "never filled"
+     ]
+    },
+    "price_at_plan": 3420.4,
+    "targets": {
+     "cash": 100000,
+     "qty": 29,
+     "half": 14,
+     "rest": 15,
+     "pf1": 462,
+     "pf2": 1215,
+     "total": 1677,
+     "t1_hit": false,
+     "t2_hit": false,
+     "entry_hit": false,
+     "high": 3449.0
+    },
+    "market": {
+     "pnl": -173,
+     "steps": [
+      "bought 3420.40",
+      "15:00 time stop 3416.50"
+     ]
+    },
+    "lock": {
+     "pnl": -173,
+     "steps": [
+      "bought 3420.40",
+      "15:00 time stop 3416.50"
+     ]
+    }
+   },
+   {
+    "symbol": "TRENT",
+    "start": "11:20",
+    "entry": 3226.0,
+    "qty": 30,
+    "sl": 3212.0,
+    "t1": 3256.0,
+    "t2": 3285.0,
+    "close": 3200.0,
+    "rules": {
+     "pnl": -478,
+     "steps": [
+      "13:55 SL"
+     ],
+     "bought": true
+    },
+    "limit": {
+     "pnl": -478,
+     "steps": [
+      "11:25 filled",
+      "13:55 SL"
+     ]
+    },
+    "price_at_plan": 3229.9,
+    "targets": {
+     "cash": 100000,
+     "qty": 30,
+     "half": 15,
+     "rest": 15,
+     "pf1": 450,
+     "pf2": 885,
+     "total": 1335,
+     "t1_hit": false,
+     "t2_hit": false,
+     "entry_hit": true,
+     "high": 3238.0
+    },
+    "market": {
+     "pnl": -595,
+     "steps": [
+      "bought 3229.90",
+      "13:55 SL"
+     ]
+    },
+    "lock": {
+     "pnl": -595,
+     "steps": [
+      "bought 3229.90",
+      "13:55 SL"
+     ]
+    }
+   },
+   {
+    "symbol": "HINDPETRO",
+    "start": "12:25",
+    "entry": 401.3,
+    "qty": 249,
+    "sl": 398.9,
+    "t1": 407.0,
+    "t2": 410.0,
+    "close": 397.65,
+    "rules": {
+     "pnl": 0,
+     "steps": [
+      "closed below cancel level"
+     ]
+    },
+    "limit": {
+     "pnl": -658,
+     "steps": [
+      "12:45 filled",
+      "13:15 SL"
+     ]
+    },
+    "price_at_plan": 402.8,
+    "targets": {
+     "cash": 100000,
+     "qty": 249,
+     "half": 124,
+     "rest": 125,
+     "pf1": 707,
+     "pf2": 1087,
+     "total": 1794,
+     "t1_hit": false,
+     "t2_hit": false,
+     "entry_hit": true,
+     "high": 403.4
+    },
+    "market": {
+     "pnl": -1031,
+     "steps": [
+      "bought 402.80",
+      "13:15 SL"
+     ]
+    },
+    "lock": {
+     "pnl": -1031,
+     "steps": [
+      "bought 402.80",
+      "13:15 SL"
+     ]
+    }
+   },
+   {
+    "symbol": "COROMANDEL",
+    "start": "13:35",
+    "entry": 1933.0,
+    "qty": 51,
+    "sl": 1919.5,
+    "t1": 1968.0,
+    "t2": 1990.0,
+    "close": 1991.0,
+    "rules": {
+     "pnl": 2298,
+     "steps": [
+      "14:20 T1",
+      "14:30 T2"
+     ],
+     "bought": true
+    },
+    "limit": {
+     "pnl": 2298,
+     "steps": [
+      "13:35 filled",
+      "14:20 T1",
+      "14:30 T2"
+     ]
+    },
+    "price_at_plan": 1932.7,
+    "targets": {
+     "cash": 100000,
+     "qty": 51,
+     "half": 25,
+     "rest": 26,
+     "pf1": 875,
+     "pf2": 1482,
+     "total": 2357,
+     "t1_hit": true,
+     "t2_hit": true,
+     "entry_hit": true,
+     "high": 2053.3
+    },
+    "market": {
+     "pnl": 2313,
+     "steps": [
+      "bought 1932.70",
+      "14:20 T1",
+      "14:30 T2"
+     ]
+    },
+    "lock": {
+     "pnl": 2313,
+     "steps": [
+      "bought 1932.70",
+      "14:20 T1",
+      "14:25 SL to T1",
+      "14:30 T2"
+     ]
+    }
+   }
+  ],
+  "totals": {
+   "rules": 2464,
+   "limit": 858,
+   "market": -113,
+   "lock": -113,
+   "targets": 3060
+  }
  }
 ]
