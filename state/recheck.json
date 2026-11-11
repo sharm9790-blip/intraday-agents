@@ -1,4 +1,12 @@
 {
  "date": "2026-11-11",
- "symbols": {}
+ "symbols": {
+  "KALYANKJIL": {
+   "at": "10:25",
+   "rejected_at": "10:18",
+   "level": 673.0,
+   "kind": "flip level",
+   "close": 677.6
+  }
+ }
 }
