@@ -27,10 +27,11 @@
     "time_stop": "15:00",
     "start": "09:58"
    },
-   "status": "in_zone",
+   "status": "closed",
    "since": "09:58",
    "paper_booked": 0,
-   "triggered": "11:25"
+   "triggered": "11:25",
+   "paper_result": -345
   },
   {
    "symbol": "KALYANKJIL",
@@ -172,14 +173,16 @@
   "11:35 KOTAKBANK 489.80 VWAP \u20b9490.85 status in_zone",
   "11:35 PETRONET 335.50 VWAP \u20b9334.3 status in_zone",
   "11:40 KOTAKBANK 489.10 VWAP \u20b9490.79 status in_zone",
-  "11:40 PETRONET 334.90 VWAP \u20b9334.33 status in_zone"
+  "11:40 PETRONET 334.90 VWAP \u20b9334.33 status in_zone",
+  "11:45 KOTAKBANK 489.10 VWAP \u20b9490.77 status closed",
+  "11:45 PETRONET 335.00 VWAP \u20b9334.33 status in_zone"
  ],
  "health": {
   "ready": true,
   "down_indmoney": false,
   "pinger": true
  },
- "last_run": "11:40",
+ "last_run": "11:45",
  "taken": [
   "KOTAKBANK",
   "PETRONET"
@@ -187,8 +190,8 @@
  "trades": 2,
  "day_trades": 2,
  "fire_error": null,
- "last_fire": "11:30",
- "fired_at": "11:30",
+ "last_fire": "11:45",
+ "fired_at": "11:45",
  "verdicts": 8,
  "plans": [
   {
@@ -279,5 +282,6 @@
    "time_stop": "15:00",
    "start": "11:30"
   }
- ]
+ ],
+ "day_pnl": -345
 }
