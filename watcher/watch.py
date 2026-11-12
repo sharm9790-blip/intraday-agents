@@ -304,6 +304,11 @@ def send_scorecard(state_dir, today, watch):
             "",
         ]
     lines += paper_account(state_dir, today, rows) + [""]
+    try:
+        import expectancy
+        lines += ["<b>🎯 Expectancy</b> (all days so far)"] + expectancy.lines(state_dir, short=True) + [""]
+    except Exception as e:  # never block the scorecard
+        print("expectancy failed", e)
     lines += [
         "<b>Today</b>",
         f"If all targets hit  +₹{lakh(tgt)}",
@@ -366,8 +371,15 @@ def weekly_report(state_dir, now):
         lines += ["", "<b>Why plans weren't bought</b>"] + [f"• {esc(k)} ×{v}" for k, v in s["cancels"].items()]
     lines += ["", "<i>Paper results from 5-min candles. One week is not enough to judge — keep collecting.</i>"]
     telegram(card("🗓", f"WEEKLY REPORT · {wk}", lines))
+    import expectancy
     for c, pnl in week_real.items():
         telegram(f"🧾 <b>Your real trades this week: {inr(pnl)}</b> (before costs)", to=c)
+    for c in {c for d in real.values() for c in d} or [None]:
+        try:
+            telegram(card("🎯", "EXPECTANCY · is the edge real?",
+                          [""] + expectancy.lines(state_dir, chat=c), footer=False), to=c)
+        except Exception as e:
+            print("expectancy failed", c, e)
     save(path, {"last": wk})
 
 

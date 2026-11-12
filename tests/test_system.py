@@ -472,6 +472,8 @@ class TestWatcherFlow(Base):
         self.at(15, 46)
         w.main(self.dir)
         self.assertIn("SCORECARD", self.texts())
+        self.assertIn("🎯 Expectancy", self.texts())
+        self.assertIn("too few to judge yet", self.texts())
         acc = self.get("paper.json")
         self.assertEqual(len(acc["days"]["2026-11-09"]), 1)
         self.assertGreater(acc["balance"], 100000)
@@ -899,6 +901,51 @@ class TestStats(unittest.TestCase):
                           "targets": {"entry_hit": False, "t1_hit": True, "t2_hit": False}}]}
         s = stats.summarize([day, day, day])
         self.assertIn("Lesson: entries are too far", stats.text(s))
+
+
+class TestExpectancy(unittest.TestCase):
+    def setUp(self):
+        import expectancy
+        self.e = expectancy
+        self.dir = tempfile.mkdtemp()
+
+    def plan(self, sym, pnl, bought=True, entry=100.0, sl=99.0, qty=100):
+        return {"symbol": sym, "entry": entry, "sl": sl, "qty": qty,
+                "rules": {"pnl": pnl, "bought": bought, "steps": ["x"]},
+                "market": {"pnl": pnl, "steps": ["bought"]}}
+
+    def test_metrics_and_verdicts(self):
+        tr = [{"pnl": 150, "risk": 100}, {"pnl": -100, "risk": 100}] * 15
+        m = self.e.metrics(tr)
+        self.assertEqual((m["n"], m["win_rate"], m["exp"], m["exp_r"], m["pf"]), (30, 50, 25, 0.25, 1.5))
+        self.assertEqual(m["streak"], 1)
+        self.assertEqual(self.e.verdict(m)[0], "scale")
+        self.assertEqual(self.e.verdict(self.e.metrics(tr[:10]))[0], "collecting")
+        self.assertEqual(self.e.verdict(self.e.metrics([{"pnl": -50, "risk": 100}] * 30))[0], "fix")
+        self.assertEqual(self.e.verdict(self.e.metrics([{"pnl": 120, "risk": 100}, {"pnl": -100, "risk": 100}] * 15))[0], "hold")
+
+    def test_paper_vs_real(self):
+        hist = [{"date": "2026-11-09", "plans": [self.plan("SBIN", 300), self.plan("TCS", 200),
+                                                 self.plan("INFY", 0, bought=False)],
+                 "totals": {"rules": 500, "limit": 0, "market": 500, "lock": 0, "targets": 0}}]
+        real = {"2026-11-09": {"7": {"pnl": 50, "trades": 2, "list": [
+            {"symbol": "SBIN", "qty": 100, "entry": 100.0, "pnl": 100, "open": 0},
+            {"symbol": "ITC", "qty": 10, "entry": 400.0, "pnl": -50, "open": 0}]}}}
+        with open(os.path.join(self.dir, "scorecard.json"), "w") as f:
+            json.dump(hist, f)
+        with open(os.path.join(self.dir, "realtrades.json"), "w") as f:
+            json.dump({"days": real}, f)
+        paper = self.e.paper_trades(hist)
+        self.assertEqual([p["symbol"] for p in paper], ["SBIN", "TCS"])
+        c = self.e.compare(paper, self.e.real_trades(real, hist, "7"))
+        self.assertEqual(c["gap"], 94 - 300)          # 100 − 0.06% costs (6) vs 300
+        self.assertEqual([p["symbol"] for p in c["skipped"]], ["TCS"])
+        self.assertEqual([t["symbol"] for t in c["extra"]], ["ITC"])
+        t = "\n".join(self.e.lines(self.dir, chat="7"))
+        self.assertIn("Plans you didn't take (1): paper +₹200", t)
+        self.assertIn("Trades that weren't a plan (1)", t)
+        self.assertIn("Verdict (your trades)", t)
+        self.assertIn("Expectancy", "\n".join(mt.score_lines(self.dir, "7")))
 
 
 if __name__ == "__main__":
