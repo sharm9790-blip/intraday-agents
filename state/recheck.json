@@ -1,6 +1,13 @@
 {
  "date": "2026-11-12",
  "symbols": {
+  "SBIN": {
+   "at": "12:55",
+   "rejected_at": "09:58",
+   "level": 1078.5,
+   "kind": "flip level",
+   "close": 1081.1
+  },
   "MOTILALOFS": {
    "at": "12:45",
    "rejected_at": "11:15",
