@@ -78,6 +78,42 @@
      }
     ]
    }
+  },
+  "2026-11-12": {
+   "1322737291": {
+    "pnl": -428,
+    "trades": 4,
+    "list": [
+     {
+      "symbol": "KOTAKBANK",
+      "qty": 203,
+      "entry": 490.80000000000007,
+      "pnl": -487,
+      "open": 0
+     },
+     {
+      "symbol": "PETRONET",
+      "qty": 194,
+      "entry": 335.3,
+      "pnl": -522,
+      "open": 0
+     },
+     {
+      "symbol": "LODHA",
+      "qty": 82,
+      "entry": 1219.5,
+      "pnl": 180,
+      "open": 0
+     },
+     {
+      "symbol": "ATHERENERG",
+      "qty": 16,
+      "entry": 1908.5,
+      "pnl": 400,
+      "open": 0
+     }
+    ]
+   }
   }
  }
 }
