@@ -36,21 +36,22 @@
   "09:54 KOTAKBANK 492.35 VWAP \u20b9489.69 status waiting",
   "09:55 KOTAKBANK 492.65 VWAP \u20b9489.71 status waiting",
   "10:00 KOTAKBANK 492.20 VWAP \u20b9489.86 status waiting",
-  "10:05 KOTAKBANK 492.45 VWAP \u20b9489.97 status waiting"
+  "10:05 KOTAKBANK 492.45 VWAP \u20b9489.97 status waiting",
+  "10:10 KOTAKBANK 492.15 VWAP \u20b9490.44 status waiting"
  ],
  "health": {
   "ready": true,
   "down_indmoney": false
  },
- "last_run": "10:05",
+ "last_run": "10:10",
  "taken": [
   "KOTAKBANK"
  ],
  "trades": 1,
  "day_trades": 1,
  "fire_error": null,
- "last_fire": "09:45",
- "fired_at": "09:45",
+ "last_fire": "10:00",
+ "fired_at": "10:10",
  "verdicts": 2,
  "plans": [
   {
