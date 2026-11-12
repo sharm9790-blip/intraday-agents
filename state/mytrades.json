@@ -59,15 +59,21 @@
     "symbol": "LODHA",
     "yahoo": "LODHA.NS",
     "qty": 82,
-    "left": 82,
+    "left": 0,
     "entry": 1219.5,
     "sl": 1211.5,
     "t1": 1240.0,
     "t2": 1255.0,
     "opened": "12:00",
     "checked": "14:40",
-    "realized": 0.0,
-    "sells": [],
+    "realized": 180.4,
+    "sells": [
+     {
+      "qty": 82,
+      "price": 1221.7,
+      "at": "14:48"
+     }
+    ],
     "flags": {
      "stale": true
     },
@@ -86,7 +92,7 @@
     "t1": 1940.0,
     "t2": 1960.0,
     "opened": "12:17",
-    "checked": "14:40",
+    "checked": "14:43",
     "realized": 0.0,
     "sells": [],
     "flags": {
@@ -118,7 +124,7 @@
   ],
   "LODHA": [
    82,
-   0
+   82
   ],
   "ATHERENERG": [
    52,
