@@ -21,6 +21,7 @@ from datetime import datetime, timedelta, timezone
 
 import health
 import news
+import premarket
 import recheck
 import risk
 
@@ -110,12 +111,13 @@ def card(icon, title, lines, footer=True):
     return "\n".join(out)
 
 
-def candles(yahoo_symbol):
-    """Today's 5-min candles as (time_ist, open, high, low, close, volume), last one may be forming."""
+def candles(yahoo_symbol, days="1d"):
+    """Today's 5-min candles as (time_ist, open, high, low, close, volume), last one may be forming.
+    days="5d" also returns the previous sessions (premarket gap / volume checks)."""
     url = (
         "https://query1.finance.yahoo.com/v8/finance/chart/"
         + urllib.parse.quote(yahoo_symbol)
-        + "?interval=5m&range=1d"
+        + "?interval=5m&range=" + days
     )
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
     with urllib.request.urlopen(req, timeout=20) as r:
@@ -390,12 +392,43 @@ def fire_debate(now, trades, last_verdict_id, watch):
         v = last_verdict_id.split("_")[-1]
         if 0 <= minutes - (int(v[:2]) * 60 + int(v[2:])) < 10:
             return False
+    if not post_fire(url, token, f"15-min scan, slot {slot} IST", watch):
+        return False
+    watch["last_fire"] = slot
+    watch["fired_at"] = now.strftime("%H:%M")
+    return True
+
+
+# Before the open: (key, from, to, routine text). Fired once each per day.
+PRE_FIRES = (("pre", "08:40", "08:59", "PREMARKET overnight scan"),
+             ("open", "09:05", "09:13", "PREOPEN check"))
+
+
+def fire_premarket(now, watch):
+    """Start the two premarket cloud runs (overnight list ~08:45, pre-open check ~09:08).
+    Needs the pinger to start the watcher from 08:40. Returns True if it fired."""
+    url = os.environ.get("CLAUDE_FIRE_URL")
+    token = os.environ.get("CLAUDE_FIRE_TOKEN")
+    if not url or not token or now.weekday() >= 5:
+        return False
+    minutes = now.hour * 60 + now.minute
+    done = watch.setdefault("pre_fired", [])
+    for key, a, b, text in PRE_FIRES:
+        if hhmm(a) <= minutes <= hhmm(b) and key not in done:
+            if post_fire(url, token, f"{text}, {now:%H:%M} IST", watch):
+                done.append(key)
+                return True
+    return False
+
+
+def post_fire(url, token, text, watch):
+    """POST to the routine's API trigger. False (and watch['fire_error']) on failure."""
     if os.environ.get("DRY_RUN"):
-        print("FIRE debate for slot", slot)
+        print("FIRE", text)
     else:
         req = urllib.request.Request(
             url,
-            data=json.dumps({"text": f"15-min scan, slot {slot} IST"}).encode(),
+            data=json.dumps({"text": text}).encode(),
             headers={
                 "Authorization": f"Bearer {token}",
                 "anthropic-beta": "experimental-cc-routine-2026-04-01",
@@ -414,10 +447,8 @@ def fire_debate(now, trades, last_verdict_id, watch):
             print("fire failed:", e)
             watch["fire_error"] = "network"
             return False
-        print("fired debate for slot", slot)
+        print("fired:", text)
     watch["fire_error"] = None
-    watch["last_fire"] = slot
-    watch["fired_at"] = now.strftime("%H:%M")
     return True
 
 
@@ -525,6 +556,13 @@ def main(state_dir):
                  load(os.path.join(state_dir, "positions.json"), {}), today, now):
         save(watch_path, watch)
 
+    # 1d) Premarket watchlist: forward it, start the pre-open runs, then from 09:20
+    #     turn a first-candle breakout into a live BUY NOW plan.
+    if premarket_step(state_dir, today, now, watch):
+        save(watch_path, watch)
+    if fire_premarket(now, watch):
+        save(watch_path, watch)
+
     # 2) Follow every live plan.
     if hhmm("09:15") <= minutes <= hhmm("15:30"):
         for e in open_plans(watch):
@@ -576,6 +614,79 @@ def main(state_dir):
     if not full and not loss_stop:
         if fire_debate(now, trades + waiting, vid if plan_doc.get("date") == today else None, watch):
             save(watch_path, watch)
+
+
+def premarket_step(state_dir, today, now, watch):
+    """Returns True if watch changed."""
+    doc = load(os.path.join(state_dir, "premarket.json"), {})
+    if doc.get("date") != today:
+        return False
+    changed = False
+    pid = doc.get("id")
+    if pid and pid != watch.get("pre_id"):
+        try:
+            with open(os.path.join(state_dir, "premarket_msg.txt")) as f:
+                telegram(check_groww_links(drop_groww_offline(f.read())))
+        except FileNotFoundError:
+            pass
+        watch["pre_id"] = pid
+        changed = True
+    minutes = now.hour * 60 + now.minute
+    if not hhmm(premarket.START) <= minutes <= hhmm(premarket.END) + 10:
+        return changed
+    done = watch.setdefault("pre_done", {})
+    t = f"{now:%H:%M}"
+    for s in doc.get("stocks") or []:
+        sym = s.get("symbol")
+        if not sym or s.get("keep") is False or sym in done:
+            continue
+        try:
+            bars, _ = candles(s["yahoo"], "5d")
+        except Exception as e:
+            print("premarket candles failed", sym, e)
+            continue
+        verdict, info = premarket.evaluate(s, bars, now)
+        if verdict == "wait":
+            continue
+        changed = True
+        if verdict == "drop":
+            done[sym] = info
+            continue
+        why = (f"🌅 Premarket pick: 5-min close {rs(info['close'])} above {rs(s['buy_above'])}"
+               + (f", volume {info['vol_x']}× usual" if info.get("vol_x") else ""))
+        live = slots(watch)
+        taken = set(watch.get("taken", []))
+        waiting = sum(1 for e in live if e["status"] == "waiting" and e["symbol"] not in taken)
+        reasons = []
+        if any(e["symbol"] == sym for e in open_plans(watch)):
+            reasons.append("already live")
+        if len(live) >= MAX_LIVE or watch.get("trades", 0) + waiting >= MAX_TRADES:
+            reasons.append(f"{MAX_TRADES} trades / plans already open")
+        if watch.get("day_trades", 0) >= MAX_DAY:
+            reasons.append(f"{MAX_DAY} trades already taken today")
+        p = premarket.to_plan(s, info["close"], t)
+        rk = risk.check(p, t, 0)
+        reasons += rk["reasons"]
+        if reasons:
+            done[sym] = "broke out, skipped: " + "; ".join(reasons)
+            telegram(card("🌅", f"PREMARKET SKIP — {esc(sym)}", [
+                f"🕐 {t} IST", "", esc(why), *["• " + esc(r) for r in reasons], "",
+                "👉 <b>Do not buy.</b>"]))
+            continue
+        p["qty"] = rk["qty"]
+        p["start"] = t
+        watch.setdefault("plans", []).append(p)
+        watch["live"].append({"symbol": sym, "vid": f"pre_{pid}", "plan": p, "status": "waiting",
+                              "since": t, "paper_booked": 0, "why": why})
+        done[sym] = f"breakout {info['at']} → BUY NOW plan"
+    if (minutes >= hhmm(premarket.END) and done and not watch.get("pre_summary")
+            and all(x.get("symbol") in done for x in doc.get("stocks") or [] if x.get("keep") is not False)):
+        watch["pre_summary"] = True
+        changed = True
+        telegram(card("🌅", f"PREMARKET LIST DONE · {t}", [""] + [
+            f"• <b>{esc(k)}</b>: {esc(v)}" for k, v in done.items()] + [
+            "", "🔎 Normal scans from 09:45."], footer=False))
+    return changed
 
 
 def free_sold(watch, mt, pos, today, now):
@@ -676,6 +787,30 @@ def count_trades(watch, mt, now, ordered=frozenset()):
     return freed or old != (watch.get("trades"), watch.get("day_trades"), watch.get("taken"), [(e.get("missed"), e.get("triggered")) for e in watch.get("live", [])])
 
 
+def chase_plan(plan, price, now, bars, watch):
+    """A dip plan whose price ran up without the dip: a BUY NOW plan at the live price
+    with the same SL / targets, or None if that fails the risk check (net R:R ≥ 1.5),
+    is too late, stretched (> 1.5% above VWAP) or already past max price."""
+    t = f"{now:%H:%M}"
+    if hhmm(t) >= hhmm(risk.LAST_ENTRY) or price >= plan["t1"]:
+        return None
+    vol = sum(b[5] for b in bars)
+    vwap = sum((b[2] + b[3] + b[4]) / 3 * b[5] for b in bars) / vol if vol else None
+    if vwap and price > vwap * 1.015:
+        return None
+    dl = min(hhmm(t) + 15, hhmm(risk.LAST_ENTRY))
+    p2 = {**plan, "entry_type": "now", "entry": round(price, 2),
+          "zone_low": round(price * 0.998, 2), "zone_high": round(price * 1.002, 2),
+          "max_entry": round(price * 1.002, 2), "trigger_close_above": round(price * 0.998, 2),
+          "deadline": f"{dl // 60:02d}:{dl % 60:02d}",
+          "cancel_if_high_reaches": max(plan["cancel_if_high_reaches"], plan["t1"])}
+    rk = risk.check(p2, t, 0)
+    if rk["status"] != "PASS":
+        return None
+    p2["qty"] = rk["qty"]
+    return p2
+
+
 def open_plans(watch):
     """Every plan still being tracked (alerts, paper result)."""
     return [e for e in watch.get("live", []) if e.get("status") in OPEN_STATES]
@@ -728,6 +863,15 @@ def track(entry, now, watch):
             cancel = f"Ran to {rs(plan['cancel_if_high_reaches'])} without the dip"
         elif any(b[4] < plan["cancel_if_close_below"] for b in new) and not trigger:
             cancel = f"5-min close below {rs(plan['cancel_if_close_below'])}"
+        rerouted = False
+        if cancel and not buy_now and price > plan["zone_high"] and not cancel.startswith("5-min close below"):
+            p2 = chase_plan(plan, price, now, bars, watch)
+            if p2:  # ran up without the dip, but buying here still pays ≥ 1.5× the risk
+                entry["plan"] = plan = p2
+                entry["rerouted"] = t
+                buy_now = rerouted = True
+                cancel = None
+                trigger = [(now, price, price, price, price, 0)]
         if cancel:
             status = "cancelled"
             msg = card("❌", f"CANCELLED — {sym}", [
@@ -753,6 +897,8 @@ def track(entry, now, watch):
                 watch["day_trades"] = watch.get("day_trades", 0) + 1
             msg = card("🔔", f"{'BUY NOW' if buy_now else 'BUY TRIGGER'} — {sym}", [
                 f"🕐 {t} IST", "",
+                *([esc(entry["why"])] if entry.get("why") else []),
+                *(["🔁 Ran up without the dip,", "but R:R from here is still ≥ 1.5"] if rerouted else []),
                 (f"✅ Price {rs(price)} is in the buy-now zone" if buy_now
                  else f"✅ Green 5-min close {rs(trigger[-1][4])}"),
                 price_line, "",
