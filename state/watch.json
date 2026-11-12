@@ -394,7 +394,7 @@
   "down_indmoney": false,
   "pinger": true
  },
- "last_run": "15:40",
+ "last_run": "15:45",
  "taken": [],
  "trades": 0,
  "day_trades": 4,
@@ -582,5 +582,6 @@
  ],
  "day_pnl": -1100,
  "done_sent": true,
- "pre_fired": []
+ "pre_fired": [],
+ "scorecard_sent": true
 }

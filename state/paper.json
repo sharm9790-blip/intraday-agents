@@ -26,7 +26,29 @@
     "start": "13:35",
     "pnl": 2298
    }
+  ],
+  "2026-11-12": [
+   {
+    "symbol": "KOTAKBANK",
+    "start": "09:58",
+    "pnl": -506
+   },
+   {
+    "symbol": "PETRONET",
+    "start": "11:30",
+    "pnl": -492
+   },
+   {
+    "symbol": "LODHA",
+    "start": "11:50",
+    "pnl": 55
+   },
+   {
+    "symbol": "ATHERENERG",
+    "start": "12:15",
+    "pnl": 169
+   }
   ]
  },
- "balance": 103872
+ "balance": 103098
 }
