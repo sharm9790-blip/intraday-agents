@@ -7,15 +7,21 @@
     "symbol": "KOTAKBANK",
     "yahoo": "KOTAKBANK.NS",
     "qty": 203,
-    "left": 203,
+    "left": 0,
     "entry": 490.80000000000007,
     "sl": 488.4,
     "t1": 496.5,
     "t2": 499.5,
     "opened": "11:12",
     "checked": "12:00",
-    "realized": 0.0,
-    "sells": [],
+    "realized": -487.2,
+    "sells": [
+     {
+      "qty": 203,
+      "price": 488.4,
+      "at": "12:06"
+     }
+    ],
     "flags": {},
     "plan": true,
     "plan_qty": 203,
@@ -32,7 +38,7 @@
     "t1": 338.5,
     "t2": 339.8,
     "opened": "11:32",
-    "checked": "12:00",
+    "checked": "12:01",
     "realized": 0.0,
     "sells": [],
     "flags": {},
@@ -51,7 +57,7 @@
     "t1": 1240.0,
     "t2": 1255.0,
     "opened": "12:00",
-    "checked": "12:00",
+    "checked": "12:01",
     "realized": 0.0,
     "sells": [],
     "flags": {},
@@ -73,7 +79,7 @@
  "ind_seen": {
   "KOTAKBANK": [
    203,
-   0
+   203
   ],
   "PETRONET": [
    298,
