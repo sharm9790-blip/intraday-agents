@@ -416,6 +416,11 @@ def score_lines(state_dir, chat=None):
     if mine:
         lines.append(f"🧾 Your real P&amp;L {w.inr(sum(x['pnl'] for x in mine))} "
                      f"({sum(x['trades'] for x in mine)} trades, {len(mine)} days)")
+    try:
+        import expectancy
+        lines += ["", "<b>🎯 Expectancy</b>"] + expectancy.lines(state_dir, chat=chat, short=True)
+    except Exception as e:
+        print("expectancy failed", e)
     return lines
 
 
