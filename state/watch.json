@@ -1,6 +1,6 @@
 {
  "date": "2026-11-12",
- "verdict_id": "2026-11-12_1355",
+ "verdict_id": "2026-11-12_1410",
  "live": [
   {
    "symbol": "KOTAKBANK",
@@ -212,6 +212,35 @@
    "status": "cancelled",
    "since": "13:30",
    "paper_booked": 0
+  },
+  {
+   "symbol": "SBIN",
+   "vid": "2026-11-12_1410",
+   "plan": {
+    "symbol": "SBIN",
+    "yahoo": "SBIN.NS",
+    "name": "State Bank of India",
+    "side": "long",
+    "entry_type": "dip",
+    "zone_low": 1081.0,
+    "zone_high": 1082.2,
+    "entry": 1082.0,
+    "max_entry": 1082.2,
+    "trigger_close_above": 1081.0,
+    "sl": 1079.7,
+    "t1": 1088.3,
+    "t2": 1095.0,
+    "qty": 92,
+    "deadline": "14:27",
+    "cancel_if_high_reaches": 1088.3,
+    "cancel_if_close_below": 1081.0,
+    "exit_if_close_below_after_entry": 1080.3,
+    "time_stop": "15:00",
+    "start": "14:10"
+   },
+   "status": "waiting",
+   "since": "14:10",
+   "paper_booked": 0
   }
  ],
  "log": [
@@ -338,14 +367,16 @@
   "13:50 ATHERENERG 1913.80 VWAP \u20b91,900.36 status in_zone",
   "13:55 ATHERENERG 1914.50 VWAP \u20b91,900.59 status in_zone",
   "14:00 ATHERENERG 1917.00 VWAP \u20b91,900.71 status in_zone",
-  "14:05 ATHERENERG 1921.40 VWAP \u20b91,901.28 status in_zone"
+  "14:05 ATHERENERG 1921.40 VWAP \u20b91,901.28 status in_zone",
+  "14:09 ATHERENERG 1920.60 VWAP \u20b91,901.56 status in_zone",
+  "14:09 SBIN 1085.00 VWAP \u20b91,078.04 status waiting"
  ],
  "health": {
   "ready": true,
   "down_indmoney": false,
   "pinger": true
  },
- "last_run": "14:05",
+ "last_run": "14:09",
  "taken": [
   "ATHERENERG",
   "LODHA"
@@ -355,7 +386,7 @@
  "fire_error": null,
  "last_fire": "14:00",
  "fired_at": "14:05",
- "verdicts": 12,
+ "verdicts": 13,
  "plans": [
   {
    "symbol": "KOTAKBANK",
@@ -510,6 +541,28 @@
    "exit_if_close_below_after_entry": 141.95,
    "time_stop": "15:00",
    "start": "13:30"
+  },
+  {
+   "symbol": "SBIN",
+   "yahoo": "SBIN.NS",
+   "name": "State Bank of India",
+   "side": "long",
+   "entry_type": "dip",
+   "zone_low": 1081.0,
+   "zone_high": 1082.2,
+   "entry": 1082.0,
+   "max_entry": 1082.2,
+   "trigger_close_above": 1081.0,
+   "sl": 1079.7,
+   "t1": 1088.3,
+   "t2": 1095.0,
+   "qty": 92,
+   "deadline": "14:27",
+   "cancel_if_high_reaches": 1088.3,
+   "cancel_if_close_below": 1081.0,
+   "exit_if_close_below_after_entry": 1080.3,
+   "time_stop": "15:00",
+   "start": "14:10"
   }
  ],
  "day_pnl": -1391

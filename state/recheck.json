@@ -1,19 +1,4 @@
 {
  "date": "2026-11-12",
- "symbols": {
-  "SBIN": {
-   "at": "13:45",
-   "rejected_at": "13:30",
-   "level": 1084.5,
-   "kind": "flip level",
-   "close": 1087.3
-  },
-  "PNB": {
-   "at": "12:45",
-   "rejected_at": "10:18",
-   "level": 141.2,
-   "kind": "flip level",
-   "close": 141.49
-  }
- }
+ "symbols": {}
 }
