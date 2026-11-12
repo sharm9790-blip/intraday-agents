@@ -1,6 +1,6 @@
 {
  "date": "2026-11-12",
- "verdict_id": "2026-11-12_0958",
+ "verdict_id": "2026-11-12_1018",
  "live": [
   {
    "symbol": "KOTAKBANK",
@@ -30,6 +30,35 @@
    "status": "waiting",
    "since": "09:58",
    "paper_booked": 0
+  },
+  {
+   "symbol": "KALYANKJIL",
+   "vid": "2026-11-12_1018",
+   "plan": {
+    "symbol": "KALYANKJIL",
+    "yahoo": "KALYANKJIL.NS",
+    "name": "Kalyan Jewellers",
+    "side": "long",
+    "entry_type": "dip",
+    "zone_low": 700.3,
+    "zone_high": 701.5,
+    "entry": 700.8,
+    "max_entry": 701.5,
+    "trigger_close_above": 700.3,
+    "sl": 694.5,
+    "t1": 716.0,
+    "t2": 726.0,
+    "qty": 142,
+    "deadline": "11:15",
+    "cancel_if_high_reaches": 706.8,
+    "cancel_if_close_below": 694.8,
+    "exit_if_close_below_after_entry": 694.8,
+    "time_stop": "15:00",
+    "start": "10:18"
+   },
+   "status": "waiting",
+   "since": "10:18",
+   "paper_booked": 0
   }
  ],
  "log": [
@@ -38,7 +67,9 @@
   "10:00 KOTAKBANK 492.20 VWAP \u20b9489.86 status waiting",
   "10:05 KOTAKBANK 492.45 VWAP \u20b9489.97 status waiting",
   "10:10 KOTAKBANK 492.15 VWAP \u20b9490.44 status waiting",
-  "10:15 KOTAKBANK 492.80 VWAP \u20b9490.59 status waiting"
+  "10:15 KOTAKBANK 492.80 VWAP \u20b9490.59 status waiting",
+  "10:15 KOTAKBANK 492.70 VWAP \u20b9490.59 status waiting",
+  "10:15 KALYANKJIL 705.00 VWAP \u20b9695.73 status waiting"
  ],
  "health": {
   "ready": true,
@@ -53,7 +84,7 @@
  "fire_error": null,
  "last_fire": "10:15",
  "fired_at": "10:15",
- "verdicts": 2,
+ "verdicts": 3,
  "plans": [
   {
    "symbol": "KOTAKBANK",
@@ -76,6 +107,28 @@
    "exit_if_close_below_after_entry": 489.0,
    "time_stop": "15:00",
    "start": "09:58"
+  },
+  {
+   "symbol": "KALYANKJIL",
+   "yahoo": "KALYANKJIL.NS",
+   "name": "Kalyan Jewellers",
+   "side": "long",
+   "entry_type": "dip",
+   "zone_low": 700.3,
+   "zone_high": 701.5,
+   "entry": 700.8,
+   "max_entry": 701.5,
+   "trigger_close_above": 700.3,
+   "sl": 694.5,
+   "t1": 716.0,
+   "t2": 726.0,
+   "qty": 142,
+   "deadline": "11:15",
+   "cancel_if_high_reaches": 706.8,
+   "cancel_if_close_below": 694.8,
+   "exit_if_close_below_after_entry": 694.8,
+   "time_stop": "15:00",
+   "start": "10:18"
   }
  ]
 }
