@@ -73,7 +73,8 @@ def check(now, watch, plan_doc, holidays, send):
         lines = [f"🟢 <b>SYSTEM READY · {now:%a %d %b}</b>", "",
                  "✅ Watcher running" + (" (pinger)" if event == "workflow_dispatch" else ""),
                  ("✅" if fire_ok else "❌") + " Cloud scan trigger",
-                 "🔎 First scan 09:45, then every 15 min"]
+                 "🌅 Premarket list 08:45 · pre-open 09:08",
+                 "🔎 Scans 09:45, then every 15 min"]
         if now.month == 12 and not any(h.startswith(str(now.year + 1)) for h in holidays):
             lines.append(f"⚠️ Add {now.year + 1} NSE holidays (watch.py)")
         send("\n".join(lines))

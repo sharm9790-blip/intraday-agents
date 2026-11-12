@@ -22,6 +22,7 @@ import health  # noqa: E402
 import mytrade as mt  # noqa: E402
 import news  # noqa: E402
 import nse_ids  # noqa: E402
+import premarket  # noqa: E402
 import recheck  # noqa: E402
 import replay  # noqa: E402
 import risk  # noqa: E402
@@ -66,9 +67,15 @@ class Base(unittest.TestCase):
 
         self.rows_by = {}
 
-        def fake_candles(sym):
+        self.bars_by = {}  # full 5-day bar lists (premarket tests)
+
+        def fake_candles(sym, days="1d"):
             now = CLOCK[0]
-            b = [x for x in bars_from(self.start, self.rows_by.get(sym, self.rows)) if x[0] <= now]
+            if sym in self.bars_by:
+                b = [x for x in self.bars_by[sym] if x[0] <= now
+                     and (days == "5d" or x[0].date() == now.date())]
+            else:
+                b = [x for x in bars_from(self.start, self.rows_by.get(sym, self.rows)) if x[0] <= now]
             return b, (b[-1][4] if b else None)
         w.candles = fake_candles
 
@@ -135,6 +142,106 @@ class TestNseIds(unittest.TestCase):
             self.assertEqual(len(calls), 2)
         finally:
             nse_ids.build = orig
+
+
+PRE = {"symbol": "KALYANKJIL", "yahoo": "KALYANKJIL.NS", "name": "Kalyan Jewellers",
+       "buy_above": 101.5, "zone_low": 101.5, "zone_high": 102.2, "entry": 101.6, "max_entry": 102.2,
+       "trigger_close_above": 101.5, "sl": 100.9, "t1": 104.5, "t2": 106.0, "qty": 900,
+       "deadline": "09:45", "cancel_if_high_reaches": 104.5, "cancel_if_close_below": 100.9,
+       "exit_if_close_below_after_entry": 101.0, "time_stop": "15:00", "keep": True}
+
+
+def day_bars(day, rows, h=9, m=15):
+    """rows: (open, high, low, close, volume) per 5-min candle from h:m on day."""
+    t0 = dt.datetime(2026, 11, day, h, m, tzinfo=IST)
+    return [(t0 + dt.timedelta(minutes=5 * i), *r) for i, r in enumerate(rows)]
+
+
+class TestPremarket(Base):
+    def setUp(self):
+        super().setUp()
+        prev = day_bars(6, [(99.5, 100, 99.4, 99.9, 1000), (99.9, 100.1, 99.8, 100.0, 800)])
+        self.bars_by["KALYANKJIL.NS"] = prev + day_bars(9, [
+            (101.0, 102.0, 100.9, 101.9, 2000), (101.9, 102.1, 101.7, 102.0, 1500)])
+        self.bars_by["HINDCOPPER.NS"] = prev + day_bars(9, [(105.0, 106, 104.5, 105.5, 5000)])
+        gap = {**PRE, "symbol": "HINDCOPPER", "yahoo": "HINDCOPPER.NS", "buy_above": 104,
+               "zone_low": 104, "entry": 104.1, "max_entry": 106.5, "zone_high": 106.5,
+               "sl": 103, "t1": 110, "t2": 112}
+        self.put("premarket.json", {"date": "2026-11-09", "stage": "preopen", "id": "2026-11-09_0910",
+                                    "stocks": [PRE, gap]})
+        with open(os.path.join(self.dir, "premarket_msg.txt"), "w") as f:
+            f.write("📋 <b>FINAL WATCHLIST</b>")
+
+    def test_fires_before_open(self):
+        st = {}
+        self.assertTrue(w.fire_premarket(dt.datetime(2026, 11, 9, 8, 45, tzinfo=IST), st))
+        self.assertFalse(w.fire_premarket(dt.datetime(2026, 11, 9, 8, 50, tzinfo=IST), st))
+        self.assertFalse(w.fire_premarket(dt.datetime(2026, 11, 9, 9, 1, tzinfo=IST), st))
+        self.assertTrue(w.fire_premarket(dt.datetime(2026, 11, 9, 9, 8, tzinfo=IST), st))
+        self.assertEqual(st["pre_fired"], ["pre", "open"])
+        self.assertFalse(w.fire_premarket(dt.datetime(2026, 11, 7, 8, 45, tzinfo=IST), {}))  # Saturday
+
+    def test_breakout_becomes_buy_now_and_gap_dropped(self):
+        self.at(9, 21)
+        w.main(self.dir)
+        t = self.texts()
+        self.assertIn("FINAL WATCHLIST", t)
+        self.assertIn("BUY NOW — KALYANKJIL", t)
+        self.assertIn("Premarket pick: 5-min close ₹101.9 above ₹101.5, volume 2.0× usual", t)
+        wt = self.get("watch.json")
+        self.assertEqual([e["symbol"] for e in w.slots(wt)], ["KALYANKJIL"])
+        self.assertIn("gap-up 5.0%", wt["pre_done"]["HINDCOPPER"])
+        self.at(9, 26)
+        w.main(self.dir)
+        self.assertEqual(self.texts().count("FINAL WATCHLIST"), 1, "watchlist sent once")
+        self.at(9, 41)
+        w.main(self.dir)
+        self.assertIn("PREMARKET LIST DONE", self.texts())
+
+    def test_evaluate_rules(self):
+        now = dt.datetime(2026, 11, 9, 9, 21, tzinfo=IST)
+        prev = day_bars(6, [(99.5, 100, 99.4, 100.0, 1000)])
+        weak = prev + day_bars(9, [(101.0, 102.0, 100.9, 101.9, 1100)])  # 1.1× volume only
+        self.assertEqual(premarket.evaluate(PRE, weak, now)[0], "wait")
+        self.assertEqual(premarket.evaluate(PRE, weak, now.replace(minute=40))[0], "drop")
+        far = prev + day_bars(9, [(101.0, 103.0, 100.9, 102.9, 3000)])
+        self.assertIn("don't chase", premarket.evaluate(PRE, far, now)[1])
+        ok = prev + day_bars(9, [(101.0, 102.0, 100.9, 101.9, 3000)])
+        self.assertEqual(premarket.evaluate(PRE, ok, now)[0], "buy")
+
+    def test_risk_cli_drops_bad_rr(self):
+        bad = {**PRE, "symbol": "X", "t1": 102.5}
+        self.put("pm.json", {"stocks": [PRE, bad]})
+        self.assertEqual(premarket.main(os.path.join(self.dir, "pm.json"), True), 0)
+        st = self.get("pm.json")["stocks"]
+        self.assertTrue(st[0]["keep"])
+        self.assertFalse(st[1]["keep"])
+        self.assertIn("R:R", st[1]["why"])
+
+
+class TestChase(Base):
+    def test_ran_up_dip_becomes_buy_now(self):
+        plan = {**PLAN, "t1": 187.0, "t2": 188.0, "deadline": "13:55", "cancel_if_high_reaches": 187.5}
+        self.put("plan.json", {"date": "2026-11-09", "verdict_id": "2026-11-09_1345", "go_count": 1,
+                               "plan": plan})
+        with open(os.path.join(self.dir, "latest_verdict.txt"), "w") as f:
+            f.write("🟢 <b>GO — TATASTEEL</b>")
+        self.rows = [(183.7, 183.9, 183.65, 183.85), (183.85, 184.0, 183.7, 183.9)]
+        self.at(13, 46); w.main(self.dir)
+        self.at(13, 56); w.main(self.dir)
+        t = self.texts()
+        self.assertNotIn("CANCELLED", t)
+        self.assertIn("BUY NOW — TATASTEEL", t)
+        self.assertIn("Ran up without the dip", t)
+
+    def test_ran_up_too_far_is_cancelled(self):
+        plan = {**PLAN, "deadline": "13:55"}  # T1 185.9: buying 184.4 gives R:R < 1.5
+        self.put("plan.json", {"date": "2026-11-09", "verdict_id": "2026-11-09_1345", "go_count": 1,
+                               "plan": plan})
+        self.rows = [(183.7, 184.2, 183.65, 184.1), (184.1, 184.5, 184.0, 184.4)]
+        self.at(13, 46); w.main(self.dir)
+        self.at(13, 56); w.main(self.dir)
+        self.assertIn("CANCELLED — TATASTEEL", self.texts())
 
 
 class TestFire(unittest.TestCase):

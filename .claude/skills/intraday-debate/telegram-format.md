@@ -105,3 +105,30 @@ Market data connectors not attached:
 👉 Attach them to the routine on claude.ai
 <i>Analysis only, not advice.</i>
 ```
+
+
+## Premarket templates (`state/premarket_msg.txt`)
+
+Overnight (~08:50) and final (~09:12, title `📋 <b>FINAL WATCHLIST · 09:12</b>`, add the gap per stock):
+
+```
+🌅 <b>PREMARKET WATCHLIST · 08:52</b>
+
+🌍 GIFT Nifty +0.4% · US up · crude flat
+📅 Results today: TCS (skipped)
+
+<b>1. KALYANKJIL</b>  (gap +1.8%)
+📥 Buy above <b>₹701</b> (max ₹705)
+🛑 SL ₹692  ·  🎯 ₹716 / ₹728
+📦 Qty <b>110</b>
+• Closed at high, 2× volume
+
+<b>2. ...</b>
+
+⏳ <b>Don't buy before 09:20.</b>
+🔔 The bot sends BUY NOW when the
+first 5-min candle closes above the
+level on good volume. Not by 09:40 → dropped.
+<i>Analysis only, not advice. You place orders yourself.</i>
+```
+Final list only: dropped stocks in one line each under `<b>Dropped</b>` (e.g. `• HINDCOPPER — gap +5.2%`).

@@ -3,13 +3,14 @@ name: intraday-watcher
 on:
   schedule:
     # Backup only: GitHub delays scheduled runs a lot. The 5-min cadence comes from an
-    # external pinger (cron-job.org) calling workflow_dispatch, Mon–Fri 09:15–15:30 IST.
+    # external pinger (cron-job.org) calling workflow_dispatch, Mon–Fri 08:40–15:30 IST
+    # (from 08:40 so the premarket runs fire at ~08:45 and ~09:08).
     - cron: "*/30 3-10 * * 1-5"
   workflow_dispatch:
   # A new verdict from the cloud debate goes out at once, not at the next 5-min run.
   push:
     branches: [claude/intraday-state]
-    paths: [state/plan.json]
+    paths: [state/plan.json, state/premarket.json]
 
 permissions:
   contents: write
