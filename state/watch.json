@@ -103,14 +103,17 @@
   "10:16 KALYANKJIL 704.55 VWAP \u20b9695.92 status waiting",
   "10:19 KOTAKBANK 492.20 VWAP \u20b9490.67 status waiting",
   "10:19 KALYANKJIL 705.85 VWAP \u20b9696.06 status waiting",
-  "10:19 ABCAPITAL 413.50 VWAP \u20b9410.24 status waiting"
+  "10:19 ABCAPITAL 413.50 VWAP \u20b9410.24 status waiting",
+  "10:20 KOTAKBANK 492.15 VWAP \u20b9490.68 status waiting",
+  "10:20 KALYANKJIL 705.10 VWAP \u20b9696.13 status waiting",
+  "10:20 ABCAPITAL 413.50 VWAP \u20b9410.28 status waiting"
  ],
  "health": {
   "ready": true,
   "down_indmoney": false,
   "pinger": true
  },
- "last_run": "10:19",
+ "last_run": "10:20",
  "taken": [
   "KALYANKJIL",
   "KOTAKBANK"
