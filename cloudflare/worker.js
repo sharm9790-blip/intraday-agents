@@ -52,7 +52,7 @@ const STATE_BRANCH = "claude/intraday-state";
 const RETRY_AFTER_S = 600;
 const MAX_TRIES = 3;
 const IND = "https://api.indstocks.com";
-const VERSION = "2026-11-13a";  // shown by ?live=test so you can tell the new code is deployed
+const VERSION = "2026-11-13b";  // shown by ?live=test so you can tell the new code is deployed
 const OPEN = ["waiting", "in_zone", "t1_hit"];
 const IST_MS = 5.5 * 3600 * 1000;
 
@@ -372,9 +372,17 @@ async function indTest(env) {
     positions = r.ok && String(j.status).toLowerCase() === "success"
       ? `ok (${posSnapshot(j.data).length} intraday today)` : `failed (${r.status})`;
   } catch (e) { positions = "failed"; }
-  const orders = await indOrders(env, token).then((o) => `ok (${o.length} open buy orders)`)
+  const orders = await indOrders(env, token)
+    .then((o) => `ok (${o.buys.length} open buy, ${o.sells.length} open sell/SL orders)`)
     .catch((e) => "failed: " + String(e.message || e));
-  return { ok: true, method, login, prices: res.prices, positions, orders,
+  const candles = await indCandles(env, ["SBIN"], 5).then((c) => {
+    if (!c.ok) return "failed: " + c.error;
+    const rows = c.candles.SBIN || [];
+    const last = rows.length ? new Date(rows[rows.length - 1][0] * 1000 + IST_MS).toISOString().slice(0, 16).replace("T", " ") : "-";
+    return `ok (SBIN ${rows.length} 5-min candles, last ${last} IST)`;
+  }).catch((e) => "failed: " + String(e.message || e));
+  return { ok: true, method, login, prices: res.prices, positions, orders, candles,
+           worker_key: !!env.WORKER_KEY,
            note: "Outside market hours these are the last closing prices." };
 }
 
