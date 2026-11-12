@@ -38,7 +38,7 @@
     "t1": 338.5,
     "t2": 339.8,
     "opened": "11:32",
-    "checked": "13:05",
+    "checked": "13:10",
     "realized": 0.0,
     "sells": [],
     "flags": {
@@ -59,10 +59,12 @@
     "t1": 1240.0,
     "t2": 1255.0,
     "opened": "12:00",
-    "checked": "13:05",
+    "checked": "13:10",
     "realized": 0.0,
     "sells": [],
-    "flags": {},
+    "flags": {
+     "stale": true
+    },
     "plan": true,
     "plan_qty": 82,
     "broker": "INDmoney",
@@ -78,7 +80,7 @@
     "t1": 1940.0,
     "t2": 1960.0,
     "opened": "12:17",
-    "checked": "13:05",
+    "checked": "13:10",
     "realized": 0.0,
     "sells": [],
     "flags": {},
