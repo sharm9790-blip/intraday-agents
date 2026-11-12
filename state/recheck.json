@@ -1,12 +1,4 @@
 {
  "date": "2026-11-12",
- "symbols": {
-  "BAJFINANCE": {
-   "at": "10:20",
-   "rejected_at": "09:58",
-   "level": 1111.0,
-   "kind": "flip level",
-   "close": 1113.25
-  }
- }
+ "symbols": {}
 }
