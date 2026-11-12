@@ -129,7 +129,8 @@
   "11:00 KOTAKBANK 492.65 VWAP \u20b9490.91 status waiting",
   "11:00 ABCAPITAL 416.35 VWAP \u20b9412.02 status cancelled",
   "11:05 KOTAKBANK 492.15 VWAP \u20b9490.95 status waiting",
-  "11:10 KOTAKBANK 490.95 VWAP \u20b9490.96 status waiting"
+  "11:10 KOTAKBANK 490.95 VWAP \u20b9490.96 status waiting",
+  "11:10 KOTAKBANK 490.85 VWAP \u20b9490.96 status waiting"
  ],
  "health": {
   "ready": true,
