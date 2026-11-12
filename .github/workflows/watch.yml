@@ -53,6 +53,8 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           CLAUDE_FIRE_URL: ${{ secrets.CLAUDE_FIRE_URL }}
           CLAUDE_FIRE_TOKEN: ${{ secrets.CLAUDE_FIRE_TOKEN }}
+          WORKER_URL: ${{ secrets.WORKER_URL }}    # optional: INDmoney 5-min candles via the worker
+          WORKER_KEY: ${{ secrets.WORKER_KEY }}    # (without them the watcher uses Yahoo, as before)
         run: python3 watcher/watch.py statebr/state
       - name: Save watcher state
         if: steps.state.outputs.ok == 'true'

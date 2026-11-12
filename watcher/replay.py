@@ -2,15 +2,18 @@
 
 Three ways of taking each plan, all managed the same way afterwards
 (SL first if SL and target are in the same candle, 50% at T1 then SL to
-cost, rest at T2, everything out at 15:00 (Groww squares off at 15:05), ~0.06% round-trip costs):
+cost, rest at T2, everything out at 15:00 (Groww squares off at 15:05), ~0.12% round trip =
+costs ~0.08% (brokerage, STT, exchange, GST, stamp) + ~0.04% slippage; 0.06% until 12 Nov 2026):
 
   rules  - the plan exactly as given (buy-trigger conditions and cancel rules)
   limit  - a plain limit buy at the entry price, no other conditions, until the deadline
   market - bought at market when the plan was given (chasing)
   lock   - same as market, plus one SL step: once price is halfway from T1 to T2,
            the SL on the rest moves up to T1 (tracked to see if it beats "market")
+  trail  - plan rules entry, but after T1 the rest has no T2: its SL trails 1 × the
+           5-min ATR under the highest close (tracked to see if winners should run)
 """
-COST = 0.0006
+COST = 0.0012
 EXIT_BY = "15:00"
 
 
@@ -23,13 +26,22 @@ def _hm(s):
     return int(h) * 60 + int(m)
 
 
-def manage(bars, i0, entry, p, lock=False):
+def _atr(bars, i0, p):
+    if p.get("atr5"):
+        return p["atr5"]
+    prev = bars[max(0, i0 - 12):i0] or bars[i0:i0 + 1]
+    return sum(b[2] - b[3] for b in prev) / len(prev) if prev else 0
+
+
+def manage(bars, i0, entry, p, lock=False, trail=False):
     q = p["qty"]
     half = q // 2
     sl = p["sl"]
     left = q
     pnl = 0.0
     steps = []
+    atr = _atr(bars, i0, p) if trail else 0
+    hc = 0.0
     for b in bars[i0:]:
         if _m(b) >= min(_hm(p.get("time_stop", EXIT_BY)), _hm(EXIT_BY)):
             pnl += left * (b[1] - entry)
@@ -46,6 +58,11 @@ def manage(bars, i0, entry, p, lock=False):
             left -= half
             sl = entry
             steps.append(f"{b[0]:%H:%M} T1")
+        if trail and left < q:
+            hc = max(hc, b[4])
+            if atr and hc - atr > sl:
+                sl = round(hc - atr, 2)
+            continue
         if left < q and b[2] >= p["t2"]:
             pnl += left * (p["t2"] - entry)
             steps.append(f"{b[0]:%H:%M} T2")
@@ -81,7 +98,8 @@ def targets(p, bars, cash=100000):
 def replay(p, bars):
     """p: a plan dict (plan.json format) plus "start" (HH:MM it was given)."""
     s, d = _hm(p["start"]), _hm(p["deadline"])
-    res = {"symbol": p["symbol"], "start": p["start"], "entry": p["entry"], "qty": p["qty"],
+    res = {"symbol": p["symbol"], "start": p["start"], "rules_v": p.get("rules_v"),
+           "sector": p.get("sector"), "entry": p["entry"], "qty": p["qty"],
            "sl": p["sl"], "t1": p["t1"], "t2": p["t2"], "close": round(bars[-1][4], 2)}
     rule = ("cancelled", "no trigger")
     buy_now = p.get("entry_type") == "now"
@@ -109,8 +127,11 @@ def replay(p, bars):
         pnl, steps = manage(bars, rule[1], rule[2], p)
         res["rules"] = {"pnl": pnl, "steps": ([f"bought now {rule[2]:.2f}"] if buy_now else []) + steps,
                         "bought": True}
+        pnl, steps = manage(bars, rule[1], rule[2], p, trail=True)
+        res["trail"] = {"pnl": pnl, "steps": steps}
     else:
         res["rules"] = {"pnl": 0, "steps": [rule[1] if rule[0] == "cancelled" else "no fill"]}
+        res["trail"] = {"pnl": 0, "steps": res["rules"]["steps"]}
     fill = next((i for i, b in enumerate(bars) if s <= _m(b) < d and b[3] <= p["entry"]), None)
     if fill is None:
         res["limit"] = {"pnl": 0, "steps": ["never filled"]}

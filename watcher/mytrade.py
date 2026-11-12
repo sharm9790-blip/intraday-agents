@@ -189,6 +189,7 @@ def ind_positions(state_dir, today, now):
             data = None
         rows, orders = (data, None) if isinstance(data, list) else (
             (data.get("p"), data.get("o")) if isinstance(data, dict) else (None, None))
+        xs = data.get("x") if isinstance(data, dict) else None
         if isinstance(rows, list):
             clean = []
             for r in rows[:200]:
@@ -214,10 +215,32 @@ def ind_positions(state_dir, today, now):
                         continue
                     if q > 0:
                         keep.append({"s": str(o["s"]).upper(), "q": q, "p": px})
+            sells = old.get("sells") if old.get("date") == today else None
+            if isinstance(xs, list):   # open SELL orders (SL / target) per symbol
+                sells = sorted({str(o.get("s", "")).upper() for o in xs[:200]
+                                if isinstance(o, dict) and IND_SYM.match(str(o.get("s", "")).upper())})
             w.save(path, {"date": today, "at": now.strftime("%H:%M"), "positions": clean,
-                          "orders": keep})
+                          "orders": keep, "sells": sells})
     doc = w.load(path, {})
     return doc.get("positions", []) if doc.get("date") == today else []
+
+
+def slip(plan, fill, qty, at):
+    """How far your fill was from the plan: ₹/share and ₹ total above the plan entry
+    (positive = paid more), and minutes after the plan / buy alert went out."""
+    since = plan.get("buy_at") or plan.get("start")
+    delay = w.hhmm(at) - w.hhmm(since) if since else None
+    per = round(fill - plan["entry"], 2)
+    return {"per_share": per, "rs": round(per * qty), "delay": delay, "plan_at": since}
+
+
+def slip_line(sl):
+    d = f"{sl['delay']} min after the alert" if sl.get("delay") is not None else "time unknown"
+    if sl["per_share"] > 0:
+        return f"⏱ {d} · paid ₹{sl['per_share']:g}/share above plan (₹{sl['rs']:,})"
+    if sl["per_share"] < 0:
+        return f"⏱ {d} · ✅ ₹{-sl['per_share']:g}/share better than plan"
+    return f"⏱ {d} · filled at the plan price"
 
 
 def apply_ind(st, state_dir, today, now):
@@ -244,10 +267,13 @@ def apply_ind(st, state_dir, today, now):
                   "t2": plan["t2"] if plan else None, "opened": at, "checked": at,
                   "realized": realized, "sells": [], "flags": {}, "plan": bool(plan),
                   "plan_qty": plan["qty"] if plan else None, "broker": "INDmoney", "auto_ind": True}
+            if plan:
+                tr["slip"] = slip(plan, p["ba"], bq, at)
             mine.append(tr)
             lines = ["", f"Bought <b>{bq}</b> @ <b>{w.rs(p['ba'])}</b> (INDmoney avg)"]
             if plan:
                 lines.append(f"Plan entry {w.rs(plan['entry'])}")
+                lines.append(slip_line(tr["slip"]))
             if tr["sl"]:
                 risk = bq * (p["ba"] - tr["sl"])
                 lines += [f"Real risk to SL {w.rs(tr['sl'])}: ₹{w.lakh(max(risk, 0))} "
@@ -809,7 +835,8 @@ def summary(st, state_dir=None):
         hist["days"][st["date"]] = {
             chat: {"pnl": round(sum(t["realized"] for t in trs)), "trades": len(trs),
                    "list": [{"symbol": t["symbol"], "qty": t["qty"], "entry": t["entry"],
-                             "pnl": round(t["realized"]), "open": t["left"]} for t in trs]}
+                             "pnl": round(t["realized"]), "open": t["left"],
+                             **({"slip": t["slip"]} if t.get("slip") else {})} for t in trs]}
             for chat, trs in st["trades"].items() if trs}
         w.save(path, hist)
     for chat, trades in st["trades"].items():

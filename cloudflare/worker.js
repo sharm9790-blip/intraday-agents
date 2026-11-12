@@ -33,6 +33,16 @@
 //    read-only). When a buy or sell shows up, it starts mytrade.yml with the
 //    positions as input; mytrade.py then tracks the trade exactly like a BOUGHT /
 //    SOLD message (no message needed). Groww trades still use BOUGHT / SOLD.
+//   It also reads today's open SELL orders (SL / target) from the same order book, so the
+//   watcher can nudge you when a bought trade has no SL order yet.
+//
+// 4) Dead-man alert: if the 5-min watcher hasn't run for 15+ min during market hours
+//    (state/watch.json "last_run"), you get one Telegram alert per gap.
+//
+// 5) 5-min candles for the watcher (read-only market data, GET /market/historical):
+//    GET <worker url>/?candles=SBIN,TCS&days=5 with header x-worker-key: <WORKER_KEY>
+//    (Secret WORKER_KEY here, and the same value as GitHub secret WORKER_KEY + WORKER_URL).
+//    Max 20 symbols per call, 5 per INDmoney request. Without WORKER_KEY it answers 403.
 //   Without INDmoney secrets, part 2 is simply off. (Groww's live-data API needs its
 //   paid plan, so it was removed on 2026-11-10; Groww is still where you place orders.)
 
@@ -42,7 +52,7 @@ const STATE_BRANCH = "claude/intraday-state";
 const RETRY_AFTER_S = 600;
 const MAX_TRIES = 3;
 const IND = "https://api.indstocks.com";
-const VERSION = "2026-11-11a";  // shown by ?live=test so you can tell the new code is deployed
+const VERSION = "2026-11-13a";  // shown by ?live=test so you can tell the new code is deployed
 const OPEN = ["waiting", "in_zone", "t1_hit"];
 const IST_MS = 5.5 * 3600 * 1000;
 
@@ -65,6 +75,15 @@ export default {
       return new Response(JSON.stringify(out, null, 2), {
         headers: { "content-type": "application/json" },
       });
+    }
+    const cq = new URL(request.url).searchParams.get("candles");
+    if (cq !== null) {
+      const ok = env.WORKER_KEY && request.headers.get("x-worker-key") === env.WORKER_KEY;
+      if (!ok) return new Response('{"ok":false,"error":"forbidden"}', { status: 403 });
+      const days = Math.min(Math.max(Number(new URL(request.url).searchParams.get("days")) || 1, 1), 7);
+      const out = await indCandles(env, cq.split(",").map((x) => x.trim().toUpperCase()).filter((x) => SYM_RE.test(x)).slice(0, 20), days)
+        .catch((e) => ({ ok: false, error: String(e.message || e) }));
+      return new Response(JSON.stringify(out), { headers: { "content-type": "application/json" } });
     }
     const force = mode === "1";
     const [bot, prices] = await Promise.all([
@@ -402,13 +421,95 @@ export function openBuys(rows, ids) {
   return Object.values(out).sort((a, b) => (a.s < b.s ? -1 : a.s > b.s ? 1 : 0));
 }
 
+// Today's open SELL orders (SL, SL-M, target limits) per symbol: [{s, q}].
+export function openSells(rows, ids) {
+  const sym = {};
+  for (const [s, id] of Object.entries(ids || {})) sym[String(id)] = s;
+  const n = (x) => Number(x) || 0;
+  const out = {};
+  for (const r of rows || []) {
+    if (String(r.txn_type).toUpperCase() !== "SELL") continue;
+    if (String(r.segment || "EQUITY").toUpperCase() !== "EQUITY") continue;
+    if (!OPEN_ORDER.has(String(r.status || "").toUpperCase())) continue;
+    const s = sym[String(r.security_id)];
+    const q = Math.trunc(n(r.requested_qty) - n(r.traded_qty));
+    if (!s || !SYM_RE.test(s) || q <= 0) continue;
+    if (!out[s]) out[s] = { s, q: 0 };
+    out[s].q += q;
+  }
+  return Object.values(out).sort((a, b) => (a.s < b.s ? -1 : a.s > b.s ? 1 : 0));
+}
+
 async function indOrders(env, token) {
   const r = await fetch(`${IND}/order-book`, { headers: { authorization: token, accept: "application/json" } });
   const j = await r.json().catch(() => ({}));
   if (!r.ok || String(j.status).toLowerCase() !== "success") {
     throw new Error(`INDmoney order book ${r.status} ${String(j.message || "").slice(0, 100)}`);
   }
-  return openBuys(j.data, await nseIds(env));
+  const ids = await nseIds(env);
+  return { buys: openBuys(j.data, ids), sells: openSells(j.data, ids) };
+}
+
+// ---------- 5) candles (read-only market data) ----------
+export function candleParse(j, code) {
+  const out = {};
+  for (const [k, v] of Object.entries((j && j.data) || {})) {
+    if (!code[k]) continue;
+    const rows = [];
+    for (const c of (v && v.candles) || []) {
+      const ts = Number(c.ts);
+      if (!ts || [c.o, c.h, c.l, c.c].some((x) => typeof x !== "number")) continue;
+      rows.push([ts > 1e12 ? Math.round(ts / 1000) : ts, c.o, c.h, c.l, c.c, Number(c.v) || 0]);
+    }
+    rows.sort((a, b) => a[0] - b[0]);
+    out[code[k]] = rows;
+  }
+  return out;
+}
+
+async function indCandles(env, symbols, days) {
+  if (!indConfigured(env)) return { ok: false, error: "no INDmoney secrets" };
+  const { code, missing } = indCodes(symbols, await nseIds(env));
+  const keys = Object.keys(code);
+  const end = Date.now() + 60000;
+  const start = days <= 1 ? Date.parse(istNow().date + "T09:00:00+05:30") : end - (days + 2) * 86400000;
+  let token = await indToken(env);
+  const candles = {};
+  for (let i = 0; i < keys.length; i += 5) {
+    const q = `${IND}/market/historical/5minute?scrip-codes=${encodeURIComponent(keys.slice(i, i + 5).join(","))}` +
+              `&start_time=${start}&end_time=${end}`;
+    let r = await fetch(q, { headers: { authorization: token, accept: "application/json" } });
+    if ((r.status === 401 || r.status === 403) && env.IND_CLIENT_ID) {
+      token = await indToken(env, true);
+      r = await fetch(q, { headers: { authorization: token, accept: "application/json" } });
+    }
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok || !(j.success === true || String(j.status).toLowerCase() === "success")) {
+      return { ok: false, error: `INDmoney historical ${r.status} ${String(j.message || "").slice(0, 100)}` };
+    }
+    Object.assign(candles, candleParse(j, code));
+  }
+  return { ok: true, source: "INDmoney", candles, missing };
+}
+
+// ---------- 4) dead-man ----------
+// Returns {key, text} when the watcher looks stopped, else null. Pure.
+export function deadMan(watch, t) {
+  if (t.weekday === 0 || t.weekday === 6 || t.mins < 565 || t.mins > 930) return null;  // 09:25–15:30
+  const today = watch && watch.date === t.date;
+  if (today && watch.holiday) return null;
+  const last = today ? watch.last_run : null;
+  if (!last) {
+    return t.mins >= 575 ? { key: `dead:${t.date}:none`, text: "⚠️ <b>WATCHER NOT RUNNING</b>\n" +
+      "No 5-min check has run today (09:35 IST and nothing yet).\n" +
+      "👉 Check cron-job.org and GitHub Actions (watch.yml)." } : null;
+  }
+  const [h, m] = String(last).split(":").map(Number);
+  const gap = t.mins - (h * 60 + m);
+  if (gap < 15 || h * 60 + m >= 930) return null;
+  return { key: `dead:${t.date}:${last}`, text: `⚠️ <b>WATCHER STOPPED?</b>\nLast 5-min check ${last} IST, ` +
+    `now ${t.hm} (${gap} min).\nBUY / SL alerts from the watcher are late; ⚡ live alerts still work.\n` +
+    "👉 Check cron-job.org and GitHub Actions (watch.yml)." };
 }
 
 async function indPositions(env, t) {
@@ -421,11 +522,11 @@ async function indPositions(env, t) {
     return { ok: false, error: `INDmoney positions ${r.status}` };
   }
   // open buy orders; null = couldn't read them (the tracker then keeps the last list)
-  const orders = await indOrders(env, token).catch((e) => { console.log(String(e.message || e)); return null; });
-  const snap = JSON.stringify({ p: posSnapshot(j.data), o: orders });
+  const ob = await indOrders(env, token).catch((e) => { console.log(String(e.message || e)); return null; });
+  const snap = JSON.stringify({ p: posSnapshot(j.data), o: ob ? ob.buys : null, x: ob ? ob.sells : null });
   const key = `indpos:${t.date}`;
   if ((await env.STATE.get(key)) === snap) return { ok: true, changed: false };
-  if (snap === '{"p":[],"o":[]}' && !(await env.STATE.get(key))) {   // nothing traded yet today
+  if (snap === '{"p":[],"o":[],"x":[]}' && !(await env.STATE.get(key))) {   // nothing traded yet today
     await env.STATE.put(key, snap, { expirationTtl: 2 * 86400 });
     return { ok: true, changed: false };
   }
@@ -467,6 +568,11 @@ async function live(env, force = false) {
   const trades = await indPositions(env, t).catch((e) => ({ ok: false, error: String(e.message || e) }));
 
   const [watch, mt] = await Promise.all([readState(env, "watch.json"), readState(env, "mytrades.json")]);
+  const dm = deadMan(watch, t);
+  if (dm && !(await env.STATE.get(dm.key))) {
+    await env.STATE.put(dm.key, "1", { expirationTtl: 86400 });
+    await telegram(env, ALLOWED[0], dm.text);
+  }
   const list = watchList(watch, mt, t.date);
   if (!list.symbols.length) return { ok: true, watching: 0, trades };
 

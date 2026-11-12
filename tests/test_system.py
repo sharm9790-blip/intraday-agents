@@ -30,6 +30,8 @@ import scan  # noqa: E402
 import stats  # noqa: E402
 import watch as w  # noqa: E402
 
+REAL_CANDLES = w.candles
+
 IST = w.IST
 CLOCK = [dt.datetime(2026, 11, 9, 10, 0, tzinfo=IST)]
 
@@ -72,7 +74,7 @@ class Base(unittest.TestCase):
         self._uni = scan.load_universe
         scan.load_universe = lambda d: {"stocks": {}}  # scanner off unless a test turns it on
 
-        def fake_candles(sym, days="1d"):
+        def fake_candles(sym, days="1d", *a):
             now = CLOCK[0]
             if sym in self.bars_by:
                 b = [x for x in self.bars_by[sym] if x[0] <= now
@@ -128,7 +130,7 @@ class TestReplay(unittest.TestCase):
                       [(183.5, 184, 183.3, 183.9), (183.9, 186, 183.8, 185.9), (185.9, 187.2, 185.8, 187)])
         pnl, steps = replay.manage(b, 0, 183.5, PLAN)
         self.assertEqual([s.split()[-1] for s in steps], ["T1", "T2"])
-        self.assertGreater(pnl, 1500)
+        self.assertGreater(pnl, 1400)
 
 
 class TestNseIds(unittest.TestCase):
@@ -462,6 +464,7 @@ class TestWatcherFlow(Base):
         CLOCK[0] = dt.datetime(2026, 11, 10, 10, 0, tzinfo=IST)
         w.main(self.dir)
         self.assertEqual(self.sent, [])
+        self.assertTrue(self.get("watch.json")["holiday"])   # worker dead-man stays quiet
 
     def test_scorecard_and_paper(self):
         self.go()
@@ -889,7 +892,7 @@ class TestLock(unittest.TestCase):
         pnl_l, steps_l = replay.manage(bars, 0, 100.0, p, lock=True)
         self.assertIn("10:05 SL to T1", steps_l)
         self.assertIn("10:10 locked T1", steps_l)
-        self.assertEqual(pnl_l, round(50 * 2 + 50 * 2 - 0.0006 * 100 * 100))   # rest sold at T1
+        self.assertEqual(pnl_l, round(50 * 2 + 50 * 2 - replay.COST * 100 * 100))   # rest sold at T1
         self.assertLess(pnl_m, pnl_l)                                         # plain rule rode it back down
 
 
@@ -938,7 +941,7 @@ class TestExpectancy(unittest.TestCase):
         paper = self.e.paper_trades(hist)
         self.assertEqual([p["symbol"] for p in paper], ["SBIN", "TCS"])
         c = self.e.compare(paper, self.e.real_trades(real, hist, "7"))
-        self.assertEqual(c["gap"], 94 - 300)          # 100 − 0.06% costs (6) vs 300
+        self.assertEqual(c["gap"], 92 - 300)          # 100 − 0.08% costs (8) vs 300
         self.assertEqual([p["symbol"] for p in c["skipped"]], ["TCS"])
         self.assertEqual([t["symbol"] for t in c["extra"]], ["ITC"])
         t = "\n".join(self.e.lines(self.dir, chat="7"))
@@ -947,6 +950,126 @@ class TestExpectancy(unittest.TestCase):
         self.assertIn("Verdict (your trades)", t)
         self.assertIn("Expectancy", "\n".join(mt.score_lines(self.dir, "7")))
 
+
+class TestGuard(Base):
+    def setUp(self):
+        super().setUp()
+        self._vix = w.vix_change
+        w.vix_change = lambda: None
+
+    def tearDown(self):
+        w.vix_change = self._vix
+        super().tearDown()
+
+    def watch(self):
+        return {"live": [{"symbol": "SBIN", "status": "waiting",
+                          "plan": {"symbol": "SBIN", "qty": 450, "entry": 100.0, "sl": 98.0}}]}
+
+    def test_sector_cap(self):
+        r = w.guard(self.watch(), {"symbol": "KOTAKBANK", "qty": 100, "entry": 100.0, "sl": 99.0},
+                    self.dir, "2026-11-09", 2.0)
+        self.assertTrue(any("Banks already open (SBIN)" in x for x in r), r)
+        p = {"symbol": "TCS", "qty": 450, "entry": 100.0, "sl": 98.0}
+        self.assertEqual(w.guard(self.watch(), p, self.dir, "2026-11-09", 2.0), [])
+        self.assertEqual(p["rules_v"], w.RULES_VERSION)
+
+    def test_heat_cap(self):
+        r = w.guard(self.watch(), {"symbol": "TCS", "qty": 600, "entry": 100.0, "sl": 98.0},
+                    self.dir, "2026-11-09", 2.0)
+        self.assertTrue(any("total risk to SL would be ₹2,100" in x for x in r), r)
+
+    def test_event_day_and_vix(self):
+        self.put("premarket.json", {"date": "2026-11-09", "events": ["RBI policy 10:00"]})
+        p = {"symbol": "TCS", "qty": 100, "entry": 100.0, "sl": 99.0}
+        self.assertTrue(any("event day (RBI policy" in x for x in w.guard({}, dict(p), self.dir, "2026-11-09", 1.8)))
+        self.assertEqual(w.guard({}, dict(p), self.dir, "2026-11-09", 2.1), [])
+        w.vix_change = lambda: 12.5
+        self.assertTrue(any("VIX up 12.5%" in x for x in w.guard({}, dict(p), self.dir, "2026-11-09", 2.1)))
+
+
+class TestSlNudge(Base):
+    def test_nudge_once(self):
+        ind = {"date": "2026-11-09", "sells": []}
+        mtd = {"trades": {"7": [{"symbol": "SBIN", "broker": "INDmoney", "left": 10, "sl": 98.0, "opened": "10:00"}]}}
+        wt = {}
+        self.assertFalse(w.sl_nudge(ind, mtd, "2026-11-09", w.hhmm("10:02"), wt))
+        self.assertTrue(w.sl_nudge(ind, mtd, "2026-11-09", w.hhmm("10:04"), wt))
+        self.assertIn("NO SL ORDER", self.texts())
+        self.assertEqual(self.sent[0][0], "7")
+        self.assertFalse(w.sl_nudge(ind, mtd, "2026-11-09", w.hhmm("10:09"), wt))
+        self.assertFalse(w.sl_nudge({"date": "2026-11-09", "sells": ["SBIN"]}, mtd, "2026-11-09", 610, {}))
+        self.assertFalse(w.sl_nudge({"date": "2026-11-09", "sells": None}, mtd, "2026-11-09", 610, {}))
+
+
+class TestTrail(unittest.TestCase):
+    def test_trail_lets_winner_run(self):
+        b = bars_from(dt.datetime(2026, 11, 9, 10, 0, tzinfo=IST),
+                      [(100, 102.1, 99.8, 102), (102, 104.5, 101.9, 104.4),
+                       (104.4, 106, 104, 105.8), (105.8, 106, 105, 105.5)])
+        p = {"qty": 100, "sl": 99.0, "t1": 102.0, "t2": 104.0, "time_stop": "15:10", "atr5": 1.0}
+        plain, _ = replay.manage(b, 0, 100.0, p)
+        trail, steps = replay.manage(b, 0, 100.0, p, trail=True)
+        self.assertEqual(plain, round(300 - replay.COST * 100 * 100))
+        self.assertEqual(trail, round(375 - replay.COST * 100 * 100))
+        self.assertEqual(steps[-1], "close 105.50")
+
+
+class TestCandleSource(unittest.TestCase):
+    def setUp(self):
+        self.saved = (w.ind_candles, w.yahoo_candles, w.urllib.request.urlopen)
+        os.environ.update(WORKER_URL="https://w.example", WORKER_KEY="k")
+
+    def tearDown(self):
+        w.ind_candles, w.yahoo_candles, w.urllib.request.urlopen = self.saved
+        for k in ("WORKER_URL", "WORKER_KEY"):
+            os.environ.pop(k, None)
+
+    def test_indmoney_then_yahoo_fallback(self):
+        calls = []
+        w.yahoo_candles = lambda s, d="1d": calls.append(("y", s)) or ([], None)
+        w.ind_candles = lambda s, d="1d": calls.append(("i", s)) or ([], None)
+        REAL_CANDLES("SBIN.NS")
+        REAL_CANDLES("SBIN.NS", "1d", False)     # scanner → Yahoo
+        REAL_CANDLES("^INDIAVIX", "5d")          # index → Yahoo
+        self.assertEqual(calls, [("i", "SBIN"), ("y", "SBIN.NS"), ("y", "^INDIAVIX")])
+
+        def boom(s, d="1d"):
+            raise RuntimeError("down")
+        calls.clear()
+        w.ind_candles = boom
+        REAL_CANDLES("SBIN.NS")
+        self.assertEqual(calls, [("y", "SBIN.NS")])
+
+    def test_worker_parse(self):
+        import io
+        now = int(w.datetime.now(IST).replace(hour=10, minute=0, second=0, microsecond=0).timestamp())
+        body = json.dumps({"ok": True, "candles": {"SBIN": [[now - 86400, 1, 2, 0.5, 1.5, 9],
+                                                            [now, 2, 3, 1, 2.5, 7]]}}).encode()
+        seen = []
+
+        def fake_open(req, timeout=0):
+            seen.append(req)
+            return io.BytesIO(body)
+        w.urllib.request.urlopen = fake_open
+        bars, ltp = self.saved[0]("SBIN", "1d")
+        self.assertEqual(len(bars), 1)           # only today's candles for "1d"
+        self.assertEqual(ltp, 2.5)
+        self.assertEqual(seen[0].get_header("X-worker-key"), "k")
+        bars, _ = self.saved[0]("SBIN", "5d")
+        self.assertEqual(len(bars), 2)
+
+
+class TestWalkForwardSlip(unittest.TestCase):
+    def test_walk_forward(self):
+        import expectancy
+        tr = [{"pnl": 100, "risk": 100}] * 10 + [{"pnl": -50, "risk": 100}] * 10
+        self.assertIn("edge fading", expectancy.walk_forward(tr))
+        self.assertIsNone(expectancy.walk_forward(tr[:10]))
+
+    def test_slip(self):
+        s = mt.slip({"entry": 100.0, "start": "10:00", "buy_at": "10:05"}, 100.5, 100, "10:12")
+        self.assertEqual(s, {"per_share": 0.5, "rs": 50, "delay": 7, "plan_at": "10:05"})
+        self.assertIn("paid ₹0.5/share above plan", mt.slip_line(s))
 
 if __name__ == "__main__":
     unittest.main()
