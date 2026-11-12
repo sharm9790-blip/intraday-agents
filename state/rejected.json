@@ -8,7 +8,7 @@
   "MOTILALOFS": "11:15 climax spike fading, net R:R 0.90 to 1224.7, 3rd financial; flips on 5-min close >1222 on rising volume",
   "HINDCOPPER": "09:58 gap up faded below open",
   "ITC": "09:58 gap fade, volume dried",
-  "PAYTM": "10:18 net R:R 0.89, 52wk high 1855.5 blocks; flips on 5-min close >1856 on >=120k vol",
+  "PAYTM": "12:15 net R:R 0.74 at live 1866.8 (0.45 on breakout), 1900 CE wall, volume fading; flips on 5-min close >1870 on >=150k vol with 1866 retest hold, or pullback fill 1856-1858 holding 1855.5",
   "ABCAPITAL": "11:35 net R:R 1.27, failed 10:55 breakout, 415/420 call walls, 2nd financial; flips on 5-min close >420.5 on >150k vol if BankNifty >=+1.5% or slot frees",
   "PNB": "10:18 net R:R 0.75, 140 CE wall 11.4M OI; flips on 5-min close >141.2 on >2M vol",
   "TMCV": "10:40 net R:R ~1.0, rejected 464.4 on climax vol, non-F&O; flips on 5-min close >465 on >=300k vol",

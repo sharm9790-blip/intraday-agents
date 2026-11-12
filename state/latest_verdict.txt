@@ -1,43 +1,41 @@
-🟢 <b>GO — LODHA</b>
-🕐 11:50 IST  ·  Confidence 5/10
+🟢 <b>GO — ATHERENERG</b>
+🕐 12:15 IST  ·  Confidence 5/10
 
-📥 Buy  <b>₹1,219.5</b>  (max ₹1,221.5)
-⏳ <b>Wait for dip</b> (zone is near live price)
-🛑 Stop loss  <b>₹1,211.5</b>
-🎯 Target 1  <b>₹1,240</b>  (sell half)
-🎯 Target 2  <b>₹1,255</b>
-📦 Qty  <b>82</b> shares
+📥 Buy  <b>₹1,909</b>  (max ₹1,912.8)
+⚡ <b>BUY NOW</b>
+🛑 Stop loss  <b>₹1,894</b>
+🎯 Target 1  <b>₹1,940</b>  (sell half)
+🎯 Target 2  <b>₹1,960</b>
+📦 Qty  <b>52</b> shares
 📝 <b>Draft order</b> (you place it)
 Intraday · Limit · NSE
-Qty  <code>82</code>
-Buy limit  <code>1219.5</code>
-SL-M trigger  <code>1211.5</code>
-Sell half  <code>41</code> @ <code>1240</code>
-📲 INDmoney: search <code>LODHA</code>
+Qty  <code>52</code>
+Buy limit  <code>1909</code>
+SL-M trigger  <code>1894</code>
+Sell half  <code>26</code> @ <code>1940</code>
+📲 INDmoney: search <code>ATHERENERG</code>
 
 <b>✅ Buy only if</b>
-• Price in ₹1,217–1,221.5
-• Holds above ₹1,216 on 5-min
+• Price in ₹1,905–1,912.8
+• 5-min close above ₹1,905.2
 
 <b>❌ Cancel if</b>
-• Not bought by 12:35
-• Hits ₹1,229 before buying
-• 5-min close below ₹1,213
-• After buying: close below ₹1,213
+• Not bought by 12:30
+• Hits ₹1,925 before buying
+• 5-min close below ₹1,898
+• After buying: close below ₹1,898
 
 <b>💰 Risk vs reward</b>
-Max loss ≈ ₹740 (82 sh)
-Profit ≈ ₹840 (T1) · ₹2,300 (T2)
-Reward 2.2× the risk
+Max loss ≈ ₹860
+Reward 1.8× the risk (to T1)
 
 <b>Why this stock</b>
-• Above VWAP, realty leading +4%
-• Puts written at 1,200–1,220
-• Weak: double top ₹1,227.8
+• Above VWAP, +2.2% vs Nifty flat
+• Higher lows, 52-wk high break
+• Weak: thin volume, short-cover
 
 <b>Skipped</b>
-• DATAPATTNS — reward below risk
-• GRANULES — failed pop
+• PAYTM — R:R 0.74 at live price
 
 📡 Watcher checks every 5 min
-<i>Analysis only, not advice. You place orders yourself.</i>
+<i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
