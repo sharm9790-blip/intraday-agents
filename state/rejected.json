@@ -7,6 +7,9 @@
   "BAJFINANCE": "09:58 gap fade on VWAP, lower highs; flips on 5-min close >1111",
   "MOTILALOFS": "09:58 chase, ATR 4.4%, stop too wide",
   "HINDCOPPER": "09:58 gap up faded below open",
-  "ITC": "09:58 gap fade, volume dried"
+  "ITC": "09:58 gap fade, volume dried",
+  "PAYTM": "10:18 net R:R 0.89, 52wk high 1855.5 blocks; flips on 5-min close >1856 on >=120k vol",
+  "ABCAPITAL": "10:18 financials overlap with KOTAKBANK, CPI risk; flips on 5-min close >413.9 on >=110k vol after 10:35 if BankNifty >=+1.5%",
+  "PNB": "10:18 net R:R 0.75, 140 CE wall 11.4M OI; flips on 5-min close >141.2 on >2M vol"
  }
 }

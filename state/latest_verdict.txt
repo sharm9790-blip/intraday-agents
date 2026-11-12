@@ -1,45 +1,45 @@
-🟢 <b>GO — KOTAKBANK</b>
-🕐 09:58 IST  ·  Confidence 5/10
+🟢 <b>GO — KALYANKJIL</b>
+🕐 10:18 IST  ·  Confidence 6/10
 
-📥 Buy  <b>₹490.6</b>  (max ₹491.2)
+📥 Buy  <b>₹700.8</b>  (max ₹701.5)
 ⏳ <b>Wait for dip</b>
-🛑 Stop loss  <b>₹488.4</b>
-🎯 Target 1  <b>₹496.5</b>  (sell half)
-🎯 Target 2  <b>₹499.5</b>
-📦 Qty  <b>203</b> shares
+🛑 Stop loss  <b>₹694.5</b>
+🎯 Target 1  <b>₹716</b>  (sell half)
+🎯 Target 2  <b>₹726</b>
+📦 Qty  <b>142</b> shares
+⚡ <b>HIGH CONFIDENCE 6/10</b>
 📝 <b>Draft order</b> (you place it)
 Intraday · Limit · NSE
-Qty  <code>203</code>
-Buy limit  <code>490.6</code>
-SL-M trigger  <code>488.4</code>
-Sell half  <code>101</code> @ <code>496.5</code>
-📲 INDmoney: search <code>KOTAKBANK</code>
+Qty  <code>142</code>
+Buy limit  <code>700.8</code>
+SL-M trigger  <code>694.5</code>
+Sell half  <code>71</code> @ <code>716</code>
+📲 INDmoney: search <code>KALYANKJIL</code>
 
 <b>✅ Buy only if</b>
-• Dips to ₹490–491.2
-• No fill before 10:35 (CPI 10:30)
-• 5-min bar holds above ₹490
-• Bank Nifty above 61,050
+• Dips to ₹700.3–701.5
+• Only after 10:35 candle closes
+• 5-min close holds above ₹700.3
+• Price above VWAP ~₹694.8
 
 <b>❌ Cancel if</b>
-• Not filled by 11:30
-• Hits ₹494.5 before the dip
-• 5-min close below ₹489.2
+• Not filled by 11:15
+• Runs above ₹706.8 without dip
+• 5-min close below ₹694.8
+• Nifty breaks day low
 
 <b>💰 Risk vs reward</b>
-Max loss ≈ ₹526
+Max loss ≈ ₹974
 Reward 2.1× the risk
-Exit all by 15:00
 
-<b>Why this stock</b>
-• Banks lead, fresh 52w high
-• Puts written at 485–495
-• CCI nod: Deutsche Bank deal
+<b>⚠️ Why wait</b>
+• CPI print at 10:30
+• Up 15% in 2 days
 
 <b>Skipped</b>
-• SBIN — 1080 call wall, R:R ~1
-• ETERNAL — R:R 0.7 if chased
+• PAYTM — 52-wk high blocks
+• ABCAPITAL — same sector as Kotak
+• PNB — 140 call wall
 
-⚠️ CPI at 10:30, RSI 75 overbought
 📡 Watcher checks every 5 min
-<i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
+<i>Analysis only, not advice. You place orders yourself.</i>
