@@ -213,14 +213,16 @@
   "11:55 PETRONET 335.60 VWAP \u20b9334.4 status in_zone",
   "11:55 LODHA 1221.00 VWAP \u20b91,205.77 status in_zone",
   "12:00 PETRONET 335.60 VWAP \u20b9334.42 status in_zone",
-  "12:00 LODHA 1220.00 VWAP \u20b91,206.15 status in_zone"
+  "12:00 LODHA 1220.00 VWAP \u20b91,206.15 status in_zone",
+  "12:05 PETRONET 335.40 VWAP \u20b9334.44 status in_zone",
+  "12:05 LODHA 1219.80 VWAP \u20b91,206.28 status in_zone"
  ],
  "health": {
   "ready": true,
   "down_indmoney": false,
   "pinger": true
  },
- "last_run": "12:00",
+ "last_run": "12:05",
  "taken": [
   "KOTAKBANK",
   "LODHA",
