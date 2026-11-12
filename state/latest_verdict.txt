@@ -1,46 +1,17 @@
-🟢 <b>GO — PNB</b>
-🕐 13:30 IST  ·  Confidence 5/10
+⚪ <b>NO TRADE — 13:55 IST</b>
 
-📥 Buy  <b>₹142.3</b>  (max ₹142.35)
-⏳ <b>Wait for dip</b> (limit order)
-🛑 Stop loss  <b>₹141.8</b>
-🎯 Target 1  <b>₹143.5</b>  (sell half)
-🎯 Target 2  <b>₹144.3</b>
-📦 Qty  <b>702</b> shares
-📝 <b>Draft order</b> (you place it)
-Intraday · Limit · NSE
-Qty  <code>702</code>
-Buy limit  <code>142.3</code>
-SL-M trigger  <code>141.8</code>
-Sell half  <code>351</code> @ <code>143.5</code>
-📲 INDmoney: search <code>PNB</code>
+📈 Nifty 25,254  (0.0%)
+🏦 Bank Nifty 61,444  (+1.1%)
+Mood: banks lead, index flat
 
-<b>✅ Buy only if</b>
-• Fills at ₹142.25–142.35
-• Nifty not breaking day low
+<b>Why nothing passed</b>
+• GRANULES — net R:R ~1.0-1.4
+• GRANULES — 849 supply, volume fading
+• UNIONBANK — 205 call wall, R:R 0.6
 
-<b>❌ Cancel if</b>
-• Not filled by 14:15
-• Hits ₹143.15 before the dip
-• 5-min close below ₹141.95
+<b>Flips to GO</b>
+• GRANULES: 5-min close above ₹850
+• UNIONBANK: close above ₹205.6
 
-<b>💰 Risk vs reward</b>
-Max loss ≈ ₹430
-Profit ≈ ₹420 (T1) · ₹1,120 (T2)
-Reward 1.8× the risk
-
-<b>Why this stock</b>
-• Bank Nifty +0.8%, PSU leader
-• 52-week high breakout
-• Put writing at 140–142
-
-<b>Skipped</b>
-• SBIN — same bank bet
-• PAYTM — 1900 call wall
-• MOTILALOFS — volume dead
-
-⚠️ Late day, day P&amp;L negative.
-Exit all by 15:00.
-
-📡 Watcher checks every 5 min
+🔎 Next scan: 14:00 IST (no entries after 14:30)
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
