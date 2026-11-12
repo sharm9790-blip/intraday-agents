@@ -1,6 +1,7 @@
 // Offline test of the worker's pure logic. Run on macOS without Node:
 //   /System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Helpers/jsc -m tests/worker_test.mjs
-import { decide, watchList, istNow, base32, indCodes, indParse, posSnapshot, openBuys } from "../cloudflare/worker.js";
+import { decide, watchList, istNow, base32, indCodes, indParse, posSnapshot, openBuys,
+  openSells, deadMan, candleParse } from "../cloudflare/worker.js";
 
 let fails = 0;
 const ok = (c, msg) => { if (!c) { fails++; print("FAIL " + msg); } };
@@ -89,5 +90,29 @@ const ob = openBuys([
   { txn_type: "BUY", segment: "EQUITY", status: "O-PENDING", security_id: "999999", requested_qty: 1, traded_qty: 0 }],
   { SBIN: 3045, "M&M": 2031, RELIANCE: 2885 });
 ok(JSON.stringify(ob) === '[{"s":"M&M","q":6,"p":3100},{"s":"SBIN","q":10,"p":800.5}]', "openBuys " + JSON.stringify(ob));
+
+// open SELL orders (SL pending) per symbol
+const sells = openSells([
+  { txn_type: "SELL", segment: "EQUITY", status: "SL-PENDING", security_id: 1, requested_qty: 10, traded_qty: 0 },
+  { txn_type: "SELL", segment: "EQUITY", status: "COMPLETE", security_id: 2, requested_qty: 5, traded_qty: 5 },
+  { txn_type: "BUY", segment: "EQUITY", status: "PENDING", security_id: 2, requested_qty: 5, traded_qty: 0 },
+], { SBIN: 1, TCS: 2 });
+ok(JSON.stringify(sells) === '[{"s":"SBIN","q":10}]', "openSells " + JSON.stringify(sells));
+
+// dead-man: 11:00 IST Monday, last run 10:40 → alert; 10:50 → fine; holiday → none
+const t11 = istNow(Date.UTC(2026, 10, 9, 5, 30));
+ok(deadMan({ date: "2026-11-09", last_run: "10:40" }, t11).key === "dead:2026-11-09:10:40", "dead-man gap");
+ok(deadMan({ date: "2026-11-09", last_run: "10:50" }, t11) === null, "dead-man ok");
+ok(deadMan({ date: "2026-11-09", holiday: true }, t11) === null, "dead-man holiday");
+ok(deadMan({ date: "2026-11-06", last_run: "15:25" }, t11).key.endsWith(":none"), "dead-man no run today");
+ok(deadMan({}, istNow(Date.UTC(2026, 10, 9, 3, 50))) === null, "dead-man before 09:25");
+
+// candles: seconds and ms timestamps, sorted, unknown codes skipped
+const cp = candleParse({ success: true, data: { NSE_1: { candles: [
+  { ts: 1762660800000, o: 2, h: 3, l: 1, c: 2.5, v: 9 }, { ts: 1762660500, o: 1, h: 2, l: 1, c: 2, v: 5 }] },
+  NSE_9: { candles: [{ ts: 1, o: 1, h: 1, l: 1, c: 1, v: 1 }] } } }, { NSE_1: "SBIN" });
+ok(JSON.stringify(Object.keys(cp)) === '["SBIN"]' && cp.SBIN[0][0] === 1762660500 && cp.SBIN[1][0] === 1762660800,
+   "candleParse " + JSON.stringify(cp));
+
 
 print(fails ? `${fails} FAILED` : "worker tests OK");

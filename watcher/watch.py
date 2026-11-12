@@ -36,6 +36,10 @@ WARN_AT = "14:50"
 MAX_LIVE = 3        # plans followed at the same time
 MAX_TRADES = 3      # trades open at the same time: held or BUY order pending (count_trades)
 MAX_DAY = 6         # safety cap: stocks bought / ordered per day in total
+RULES_VERSION = "2026-11-13"  # bump on any rule change; expectancy is split per version
+MAX_HEAT = 2000     # ₹: total risk to SL of plans waiting / bought at once (2% of ₹1 lakh)
+EVENT_RR = 2.0      # net R:R needed on event days (RBI, CPI, big results…)
+VIX_SPIKE = 10.0    # % India VIX up on the day → no new entries
 MISS_GRACE = 15     # min after a buy trigger to see your buy before the plan's slot is freed
 DAY_LOSS_STOP = 2000  # no new plans once today's paper loss reaches this (₹)
 # NSE equity trading holidays on weekdays (add next year's list each December).
@@ -112,9 +116,39 @@ def card(icon, title, lines, footer=True):
     return "\n".join(out)
 
 
-def candles(yahoo_symbol, days="1d"):
+def candles(yahoo_symbol, days="1d", fast=True):
     """Today's 5-min candles as (time_ist, open, high, low, close, volume), last one may be forming.
-    days="5d" also returns the previous sessions (premarket gap / volume checks)."""
+    days="5d" also returns the previous sessions (premarket gap / volume checks).
+    fast: NSE stocks come from INDmoney through the worker (WORKER_URL + WORKER_KEY,
+    read-only market data) when set, else / on any failure from Yahoo. The scanner
+    passes fast=False (234 stocks: Yahoo, so the INDmoney limits stay free for alerts)."""
+    if fast and yahoo_symbol.endswith(".NS") and os.environ.get("WORKER_URL") and os.environ.get("WORKER_KEY"):
+        try:
+            return ind_candles(yahoo_symbol[:-3], days)
+        except Exception as e:
+            print("INDmoney candles failed, using Yahoo:", yahoo_symbol, e)
+    return yahoo_candles(yahoo_symbol, days)
+
+
+def ind_candles(sym, days="1d"):
+    url = (os.environ["WORKER_URL"].rstrip("/") + "/?candles=" + urllib.parse.quote(sym)
+           + "&days=" + ("1" if days == "1d" else "7"))
+    req = urllib.request.Request(url, headers={"x-worker-key": os.environ["WORKER_KEY"],
+                                               "User-Agent": "intraday-watcher"})
+    with urllib.request.urlopen(req, timeout=20) as r:
+        doc = json.load(r)
+    rows = (doc.get("candles") or {}).get(sym) if doc.get("ok") else None
+    if not rows:
+        raise RuntimeError(doc.get("error") or "no candles")
+    out = [(datetime.fromtimestamp(ts, IST), o, h, l, c, v) for ts, o, h, l, c, v in rows]
+    if days == "1d":
+        out = [b for b in out if b[0].date() == datetime.now(IST).date()]
+    if not out:
+        raise RuntimeError("no candles today")
+    return out, out[-1][4]
+
+
+def yahoo_candles(yahoo_symbol, days="1d"):
     url = (
         "https://query1.finance.yahoo.com/v8/finance/chart/"
         + urllib.parse.quote(yahoo_symbol)
@@ -270,7 +304,7 @@ def send_scorecard(state_dir, today, watch):
             print("replay failed", p.get("symbol"), e)
     hist_path = os.path.join(state_dir, "scorecard.json")
     hist = [d for d in load(hist_path, []) if d.get("date") != today]
-    tot = {k: sum(r.get(k, {}).get("pnl", 0) for r in rows) for k in ("rules", "limit", "market", "lock")}
+    tot = {k: sum(r.get(k, {}).get("pnl", 0) for r in rows) for k in ("rules", "limit", "market", "lock", "trail")}
     tot["targets"] = sum(r["targets"]["pf1"] * r["targets"]["t1_hit"]
                          + r["targets"]["pf2"] * r["targets"]["t2_hit"] for r in rows)
     hist.append({"date": today, "plans": rows, "totals": tot})
@@ -300,7 +334,8 @@ def send_scorecard(state_dir, today, watch):
             ]
         lines += [
             f"Plan rules {inr(ru['pnl'])} · Limit {inr(r['limit']['pnl'])} · At once {inr(r['market']['pnl'])}",
-            f"At once + lock T1 {inr(r.get('lock', r['market'])['pnl'])}",
+            f"At once + lock T1 {inr(r.get('lock', r['market'])['pnl'])}"
+            + (f" · Trail after T1 {inr(r['trail']['pnl'])}" if r.get("trail") else ""),
             "",
         ]
     lines += paper_account(state_dir, today, rows) + [""]
@@ -317,6 +352,7 @@ def send_scorecard(state_dir, today, watch):
         f"Limit only  {inr(tot['limit'])}",
         f"Bought at once  {inr(tot['market'])}",
         f"At once + lock T1  {inr(tot['lock'])}",
+        f"Trail after T1  {inr(tot['trail'])}",
         "",
         f"<b>Running total · {len(hist)} day{'s' if len(hist) != 1 else ''}</b>",
         f"Targets reached  +₹{lakh(run['targets'])}",
@@ -326,8 +362,9 @@ def send_scorecard(state_dir, today, watch):
         f"At once + lock T1  {inr(run['lock'])}",
         "",
         "Lock T1 = once price is halfway from T1 to T2, SL on the rest moves to T1.",
+        "Trail = plan rules, but after T1 the rest trails 1× ATR under the high close (no T2).",
         "✅/❌ = price reached that level after the plan was given. Target profit is before costs.",
-        "<i>Replay on 5-min candles, ~0.06% costs, SL assumed first when SL and target share a candle. Paper results, not real trades.</i>",
+        "<i>Replay on 5-min candles, ~0.12% costs + slippage, SL assumed first when SL and target share a candle. Paper results, not real trades.</i>",
     ]
     telegram(card("📒", f"SCORECARD · {today}", lines))
 
@@ -490,6 +527,9 @@ def main(state_dir):
     today = now.strftime("%Y-%m-%d")
     if today in NSE_HOLIDAYS:
         print("NSE holiday", today)
+        wp = os.path.join(state_dir, "watch.json")
+        if load(wp, {}).get("date") != today:   # tells the worker's dead-man alert to stay quiet
+            save(wp, {"date": today, "holiday": True, "live": [], "log": []})
         return
     minutes = now.hour * 60 + now.minute
     plan_doc = load(os.path.join(state_dir, "plan.json"), {})
@@ -526,6 +566,11 @@ def main(state_dir):
     ordered = {o["s"] for o in ind.get("orders") or [] if o.get("s")} if ind.get("date") == today else set()
     if count_trades(watch, mt_today, now, ordered):
         save(watch_path, watch)
+    if sl_nudge(ind, mt_today, today, minutes, watch):
+        save(watch_path, watch)
+    pm_doc = load(os.path.join(state_dir, "premarket.json"), {})
+    if pm_doc.get("connectors"):   # 08:45 run: catch an expired connector before the open
+        health.connectors(pm_doc, today, watch.setdefault("health", {}), telegram)
 
     # 1) Forward a new verdict from the cloud debate.
     vid = plan_doc.get("verdict_id")
@@ -574,6 +619,10 @@ def main(state_dir):
                 reasons.append(f"{gp['symbol']} already has a live plan")
             if len(slots(watch)) >= MAX_LIVE:
                 reasons.append(f"{MAX_LIVE} plans already live")
+            if not reasons:
+                reasons += guard(watch, {**gp, "qty": rk["qty"]}, state_dir, today, rk["rr"])
+                gp["sector"] = scan.group(gp["symbol"], scan.load_universe(state_dir))
+                gp["rules_v"] = RULES_VERSION
             if reasons:
                 lines += ["⛔ <b>BLOCKED — do not trade</b>", *["• " + esc(r) for r in reasons]]
             else:
@@ -644,7 +693,7 @@ def main(state_dir):
     quarter = f"{now.hour:02d}:{now.minute // 15 * 15:02d}"
     if hhmm("09:40") <= minutes <= hhmm("14:25") and watch.get("scan_slot") != quarter:
         try:
-            cand = scan.run(state_dir, now, candles)
+            cand = scan.run(state_dir, now, lambda s, d="1d": candles(s, d, False))
             save(os.path.join(state_dir, "candidates.json"), cand)
             watch["scan_slot"] = quarter
             print("scan:", cand["mode"], [i["symbol"] for i in cand["items"]])
@@ -736,6 +785,10 @@ def premarket_step(state_dir, today, now, watch):
         p = premarket.to_plan(s, info["close"], t)
         rk = risk.check(p, t, 0)
         reasons += rk["reasons"]
+        if not reasons:
+            reasons += guard(watch, {**p, "qty": rk["qty"]}, state_dir, today, rk["rr"])
+            p["sector"] = scan.group(sym, scan.load_universe(state_dir))
+            p["rules_v"] = RULES_VERSION
         if reasons:
             done[sym] = "broke out, skipped: " + "; ".join(reasons)
             telegram(card("🌅", f"PREMARKET SKIP — {esc(sym)}", [
@@ -890,6 +943,92 @@ def slots(watch):
     return [e for e in open_plans(watch) if not e.get("user_sold") and not e.get("missed")]
 
 
+SL_NUDGE_MIN = 3  # minutes after your buy with no SL order seen → one reminder
+
+
+def sl_nudge(ind, mt, today, minutes, watch):
+    """Your INDmoney buy has no open SELL (SL) order after SL_NUDGE_MIN minutes → one
+    reminder per trade. Needs the worker's open-sell list (positions_ind.json "sells")."""
+    if ind.get("date") != today or not isinstance(ind.get("sells"), list) or not MARKET_OPEN(minutes):
+        return False
+    sells = set(ind["sells"])
+    done = watch.setdefault("sl_nudged", [])
+    changed = False
+    for chat, trs in (mt.get("trades") or {}).items():
+        for tr in trs:
+            if tr.get("broker") != "INDmoney" or tr.get("left", 0) <= 0 or not tr.get("sl"):
+                continue
+            key = f"{chat}:{tr['symbol']}:{tr.get('opened')}"
+            if key in done or tr["symbol"] in sells or minutes - hhmm(tr.get("opened", "00:00")) < SL_NUDGE_MIN:
+                continue
+            done.append(key)
+            changed = True
+            telegram(card("🛑", f"NO SL ORDER? — {esc(tr['symbol'])}", [
+                "", f"You hold <b>{tr['left']}</b> but INDmoney shows no open SELL / SL order.",
+                f"👉 Place <b>SL-M {tr['left']} @ {rs(tr['sl'])}</b> now", "",
+                "<i>If you just placed it, ignore this. One reminder per trade.</i>"], footer=False), to=chat)
+    return changed
+
+
+def MARKET_OPEN(minutes):
+    return hhmm("09:15") <= minutes <= hhmm("15:30")
+
+
+def events_today(state_dir, today):
+    """Event-day notes: watcher/events.json {"YYYY-MM-DD": "RBI policy"} (edit by hand)
+    plus "events" the premarket cloud run wrote in state/premarket.json."""
+    ev = []
+    fixed = load(os.path.join(os.path.dirname(os.path.abspath(__file__)), "events.json"), {})
+    if fixed.get(today):
+        ev.append(fixed[today])
+    pm = load(os.path.join(state_dir, "premarket.json"), {})
+    if pm.get("date") == today:
+        ev += [str(x)[:80] for x in pm.get("events") or [] if x]
+    return ev
+
+
+def vix_change():
+    """India VIX % change on the day (Yahoo ^INDIAVIX), None if unknown."""
+    try:
+        bars, ltp = candles("^INDIAVIX", "5d", False)
+        today = datetime.now(IST).date()
+        prev = [b for b in bars if b[0].date() < today]
+        now_px = ltp or (bars[-1][4] if bars else None)
+        return round((now_px / prev[-1][4] - 1) * 100, 1) if prev and now_px else None
+    except Exception as e:
+        print("VIX failed", e)
+        return None
+
+
+def guard(watch, plan, state_dir, today, rr=None):
+    """Portfolio rules on top of risk.py: one plan per sector group, total risk to SL
+    of open plans ≤ MAX_HEAT, R:R ≥ EVENT_RR on event days, no entries on a VIX spike.
+    Tags the plan with its sector and the rules version. Returns block reasons."""
+    reasons = []
+    uni = scan.load_universe(state_dir)
+    g = scan.group(plan["symbol"], uni)
+    plan["sector"] = g
+    plan["rules_v"] = RULES_VERSION
+    open_ = [e for e in slots(watch) if e["symbol"] != plan["symbol"]]
+    if g:
+        same = [e["symbol"] for e in open_ if (e["plan"].get("sector") or scan.group(e["symbol"], uni)) == g]
+        if same:
+            reasons.append(f"{g} already open ({', '.join(same)}): one per sector")
+    heat = sum(e["plan"]["qty"] * max(e["plan"]["entry"] - e["plan"]["sl"], 0)
+               for e in open_ if e["status"] in ("waiting", "in_zone"))
+    new = plan.get("qty", 0) * max(plan["entry"] - plan["sl"], 0)
+    if heat and heat + new > MAX_HEAT:
+        reasons.append(f"total risk to SL would be ₹{heat + new:,.0f} (max ₹{MAX_HEAT:,}): "
+                       "wait for a plan to reach T1 or close")
+    ev = events_today(state_dir, today)
+    if ev and rr is not None and rr < EVENT_RR:
+        reasons.append(f"event day ({'; '.join(ev)[:80]}): needs R:R ≥ {EVENT_RR:g}, plan has {rr}")
+    vx = vix_change()
+    if vx is not None and vx >= VIX_SPIKE:
+        reasons.append(f"India VIX up {vx:g}% today (fear spike): no new entries")
+    return reasons
+
+
 def track(entry, now, watch):
     """One 5-min check of one live plan: send alerts, update entry in place."""
     plan = entry["plan"]
@@ -961,6 +1100,7 @@ def track(entry, now, watch):
         elif trigger:
             status = "in_zone"
             entry["triggered"] = t
+            plan["buy_at"] = t
             if plan["symbol"] not in watch.get("taken", []):  # until count_trades sees your buy
                 watch["trades"] = watch.get("trades", 0) + 1
                 watch["day_trades"] = watch.get("day_trades", 0) + 1

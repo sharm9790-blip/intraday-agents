@@ -214,3 +214,25 @@ def atr5(bars, now, n=12):
     """Average 5-min range of today's last n closed candles (None if under 4)."""
     tb = [b for b in bars if b[0].date() == now.date() and b[0] + timedelta(minutes=5) <= now][-n:]
     return round(sum(b[2] - b[3] for b in tb) / len(tb), 2) if len(tb) >= 4 else None
+
+
+# Financial Services is a quarter of the universe; banks, NBFCs, insurers and brokers
+# move on different news, so they count as separate groups (sector cap, sub-sector rule).
+FIN_GROUPS = {
+    "Banks": "AUBANK AXISBANK BANDHANBNK BANKBARODA BANKINDIA CANBK FEDERALBNK HDFCBANK ICICIBANK "
+             "INDIANB INDUSINDBK KARURVYSYA KOTAKBANK PNB RBLBANK SBIN UNIONBANK IDFCFIRSTB YESBANK",
+    "Insurance": "HDFCLIFE ICICIGI ICICIPRULI LICI MFSL SBILIFE POLICYBZR GICRE NIACL STARHEALTH",
+    "Capital markets": "360ONE ANGELONE BSE CAMS CDSL HDFCAMC MCX MOTILALOFS NAM-INDIA GROWW KFINTECH NUVAMA",
+    "Fintech": "PAYTM PINELABS",
+}
+_FIN = {s: g for g, ss in FIN_GROUPS.items() for s in ss.split()}
+
+
+def group(sym, universe=None):
+    """Sector group for the one-per-sector cap: a financial sub-group, else the NSE industry."""
+    if sym in _FIN:
+        return _FIN[sym]
+    ind = ((universe or {}).get("stocks", {}).get(sym) or {}).get("ind")
+    if ind == "Financial Services":
+        return "NBFC / lenders"
+    return ind or None

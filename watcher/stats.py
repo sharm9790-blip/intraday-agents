@@ -25,7 +25,7 @@ def summarize(days):
     plans = [p for d in days for p in d.get("plans", [])]
     out = {"days": len(days), "plans": len(plans),
            "totals": {k: sum(d["totals"].get(k, 0) for d in days)
-                      for k in ("rules", "limit", "market", "lock", "targets")}}
+                      for k in ("rules", "limit", "market", "lock", "targets", "trail")}}
     if not plans:
         return out
     bought = [p for p in plans if p["rules"].get("bought")]

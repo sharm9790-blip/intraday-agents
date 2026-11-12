@@ -2,7 +2,8 @@
 
 Answers, from the trades so far:
   paper  every plan taken exactly by its rules (scorecard.json, costs included)
-  real   your own INDmoney trades (realtrades.json, ~0.06% costs taken off)
+  real   your own INDmoney trades (realtrades.json, ~0.08% costs taken off; your fills
+         already carry the slippage, paper adds ~0.04% for it in replay.py)
 
 Per side: trades, win rate, average win / loss, payoff, expectancy per trade in ₹ and
 in R (R = the plan's risk: qty × (entry − SL)), profit factor, max drawdown, worst losing
@@ -20,7 +21,8 @@ import os
 import sys
 
 CAPITAL = 100000
-COST = 0.0006
+COST = 0.0008
+HALVES_FROM = 20  # walk-forward check: first half vs second half once there are this many
 MIN_TRADES = 30
 
 
@@ -44,7 +46,7 @@ def paper_trades(hist, key="rules"):
                 continue
             risk = p.get("qty", 0) * (p.get("entry", 0) - p.get("sl", 0))
             out.append({"date": d["date"], "symbol": p["symbol"], "pnl": r.get("pnl", 0),
-                        "risk": round(risk) if risk > 0 else None})
+                        "risk": round(risk) if risk > 0 else None, "v": p.get("rules_v") or "before 13 Nov"})
     return out
 
 
@@ -60,7 +62,7 @@ def real_trades(real, hist, chat):
             risk = t["qty"] * (p["entry"] - p["sl"]) if p and p["entry"] > p["sl"] else None
             out.append({"date": day, "symbol": t["symbol"], "plan": bool(p),
                         "pnl": round(t["pnl"] - COST * t["entry"] * t["qty"]),
-                        "risk": round(risk) if risk else None})
+                        "risk": round(risk) if risk else None, "slip": t.get("slip")})
     return out
 
 
@@ -104,6 +106,37 @@ def verdict(m):
     if er >= 0.2 and (m["pf"] or 0) >= 1.3 and m["dd_pct"] < 6:
         return ("scale", "edge looks real: OK to scale one step (risk 1% → 1.25%)")
     return ("hold", "small positive edge: stay at ₹1 lakh / 1% risk and keep collecting")
+
+
+def walk_forward(trades):
+    """First half vs second half (time order): does the edge hold up out of sample?"""
+    if len(trades) < HALVES_FROM:
+        return None
+    h = len(trades) // 2
+    a, b = metrics(trades[:h]), metrics(trades[h:])
+    note = ("⚠️ edge fading: second half lost money" if a["exp"] > 0 >= b["exp"] else
+            "✅ edge holding in both halves" if a["exp"] > 0 and b["exp"] > 0 else "")
+    return f"Walk-forward: first {a['n']} {inr(a['exp'])}/trade · last {b['n']} {inr(b['exp'])}/trade" + (
+        f" — {note}" if note else "")
+
+
+def by_version(trades):
+    vs = {}
+    for t in trades:
+        vs.setdefault(t.get("v"), []).append(t)
+    if len(vs) < 2:
+        return []
+    return ["Per rules version: " + " · ".join(
+        f"{v}: {metrics(ts)['n']} trades {inr(metrics(ts)['exp'])}/trade" for v, ts in vs.items())]
+
+
+def slip_summary(real):
+    s = [t["slip"] for t in real if t.get("slip")]
+    if not s:
+        return []
+    d = [x["delay"] for x in s if x.get("delay") is not None]
+    return [f"Your fills vs alert ({len(s)}): avg {inr(round(sum(x['rs'] for x in s) / len(s)))} paid above plan"
+            + (f" · avg {round(sum(d) / len(d))} min after the alert" if d else "")]
 
 
 def compare(paper, real):
@@ -154,12 +187,20 @@ def lines(state_dir, chat=None, short=False):
         if mm["n"]:
             out.append(f"Bought at once instead: {inr(mm['exp'])}/trade over {mm['n']} "
                        + (f"({mm['exp_r']:+.2f}R)" if mm["exp_r"] is not None else ""))
+        tr = [{**t, "pnl": p.get("trail", {}).get("pnl", t["pnl"])}
+              for t, p in zip(paper, [p for d in hist for p in d.get("plans", []) if p.get("rules", {}).get("bought")])]
+        if any("trail" in p for d in hist for p in d.get("plans", [])):
+            out.append(f"Trail after T1 instead: {inr(metrics(tr)['exp'])}/trade")
+        out += by_version(paper)
+    wf = walk_forward(paper)
+    if wf:
+        out.append(wf)
     if chat:
         real = load(os.path.join(state_dir, "realtrades.json"), {}).get("days", {})
         rt = real_trades(real, hist, chat)
         if rt:
             mr = metrics(rt)
-            out += [""] + block("🧾 Your real trades (after ~0.06% costs)", mr)
+            out += [""] + block("🧾 Your real trades (after ~0.08% costs)", mr) + slip_summary(rt)
             c = compare(paper, rt)
             out += ["", "<b>Paper vs real</b>"]
             if c["pairs"]:
