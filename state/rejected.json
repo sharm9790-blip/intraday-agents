@@ -11,6 +11,8 @@
   "PAYTM": "10:18 net R:R 0.89, 52wk high 1855.5 blocks; flips on 5-min close >1856 on >=120k vol",
   "ABCAPITAL": "10:18 financials overlap with KOTAKBANK, CPI risk; flips on 5-min close >413.9 on >=110k vol after 10:35 if BankNifty >=+1.5%",
   "PNB": "10:18 net R:R 0.75, 140 CE wall 11.4M OI; flips on 5-min close >141.2 on >2M vol",
-  "TMCV": "10:40 net R:R ~1.0, rejected 464.4 on climax vol, non-F&O; flips on 5-min close >465 on >=300k vol"
+  "TMCV": "10:40 net R:R ~1.0, rejected 464.4 on climax vol, non-F&O; flips on 5-min close >465 on >=300k vol",
+  "OBEROIRLTY": "10:55 blocked by risk check, net R:R 1.49 at pullback 1815 (T1 1844 under 1845.7 Fib, 1840/1860/1880 call walls), +4.6% extended; flips on 5-min close >1826 on >40k vol with T1 >=1850 realistic, or dip hold 1812-1815 with SL 1798 and net R:R >=1.5",
+  "SAIL": "10:55 net R:R 0.86 to T1, failed 181.2 breakout, 180 call wall, FPO overhang; flips on 5-min close >181.6 on >1M vol, or pullback hold 179.4-179.6 above 179.16"
  }
 }

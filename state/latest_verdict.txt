@@ -1,23 +1,23 @@
-🔴 <b>NO TRADE — 10:40 IST</b>
+🔴 <b>NO TRADE — 10:55 IST</b>
 
 Kept 2 live plans:
 • KOTAKBANK (waiting)
 • ABCAPITAL (waiting)
 
 <b>Skipped</b>
-• BAJFINANCE — 3rd financial,
-  net R:R ~1.5 chasing, call
-  wall 1120–1130
-• TMCV — R:R ~1.0, rejected
-  at ₹464.4, not F&amp;O
+• OBEROIRLTY — ⛔ blocked by
+  risk check: net R:R 1.49
+  (dip 1815, T1 1844 under
+  call walls). Up 4.6%, extended
+• SAIL — net R:R 0.86, failed
+  breakout at ₹181.2, call wall 180
 
 <b>Flips to GO if</b>
-• BAJFINANCE: close above ₹1,115.2
-  on 250k+ vol, Bank Nifty +1.5%
-  or a financials slot frees
-• TMCV: close above ₹465 on 300k+
-
-⚠️ CPI actual not verified
+• OBEROIRLTY: close above ₹1,826
+  on 40k+ vol, or dip holds
+  ₹1,812–1,815 with better R:R
+• SAIL: close above ₹181.6
+  on 1M+ vol
 
 📡 Watcher checks every 5 min
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>

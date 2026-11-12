@@ -1,11 +1,17 @@
 {
  "date": "2026-11-12",
- "verdict_id": "2026-11-12_1040",
+ "verdict_id": "2026-11-12_1055",
  "go_count": 3,
  "connectors": {
   "groww": false,
   "indmoney": true,
   "investsights": true
  },
- "plan": null
+ "plan": null,
+ "blocked": {
+  "symbol": "OBEROIRLTY",
+  "reasons": [
+   "net R:R 1.49 below 1.5"
+  ]
+ }
 }
