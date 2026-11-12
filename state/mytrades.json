@@ -92,12 +92,13 @@
     "t1": 1940.0,
     "t2": 1960.0,
     "opened": "12:17",
-    "checked": "14:51",
+    "checked": "14:55",
     "realized": 0.0,
     "sells": [],
     "flags": {
      "stale": true,
-     "warn": true
+     "warn": true,
+     "exit": true
     },
     "plan": true,
     "plan_qty": 52,
