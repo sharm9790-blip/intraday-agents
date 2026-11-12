@@ -1,9 +1,41 @@
 {
  "offset": 572145773,
  "date": "2026-11-12",
- "trades": {},
+ "trades": {
+  "1322737291": [
+   {
+    "symbol": "KOTAKBANK",
+    "yahoo": "KOTAKBANK.NS",
+    "qty": 203,
+    "left": 203,
+    "entry": 490.80000000000007,
+    "sl": 488.4,
+    "t1": 496.5,
+    "t2": 499.5,
+    "opened": "11:12",
+    "checked": "11:07",
+    "realized": 0.0,
+    "sells": [],
+    "flags": {},
+    "plan": true,
+    "plan_qty": 203,
+    "broker": "INDmoney",
+    "auto_ind": true
+   }
+  ]
+ },
  "summary_sent": false,
- "boards": {},
+ "boards": {
+  "1322737291": {
+   "id": 517,
+   "open": true
+  }
+ },
  "menu": 10,
- "ind_seen": {}
+ "ind_seen": {
+  "KOTAKBANK": [
+   203,
+   0
+  ]
+ }
 }
