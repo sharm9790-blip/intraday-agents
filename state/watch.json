@@ -179,10 +179,11 @@
     "time_stop": "15:00",
     "start": "12:15"
    },
-   "status": "in_zone",
+   "status": "closed",
    "since": "12:15",
    "paper_booked": 0,
-   "triggered": "12:15"
+   "triggered": "12:15",
+   "paper_result": 291
   },
   {
    "symbol": "PNB",
@@ -385,14 +386,15 @@
   "14:45 ATHERENERG 1914.90 VWAP \u20b91,904.06 status in_zone",
   "14:50 ATHERENERG 1915.40 VWAP \u20b91,904.15 status in_zone",
   "14:55 ATHERENERG 1916.10 VWAP \u20b91,904.27 status in_zone",
-  "14:56 ATHERENERG 1917.90 VWAP \u20b91,904.3 status in_zone"
+  "14:56 ATHERENERG 1917.90 VWAP \u20b91,904.3 status in_zone",
+  "15:00 ATHERENERG 1914.60 VWAP \u20b91,904.48 status closed"
  ],
  "health": {
   "ready": true,
   "down_indmoney": false,
   "pinger": true
  },
- "last_run": "14:56",
+ "last_run": "15:00",
  "taken": [
   "ATHERENERG"
  ],
@@ -580,5 +582,6 @@
    "start": "14:10"
   }
  ],
- "day_pnl": -1391
+ "day_pnl": -1100,
+ "done_sent": true
 }
