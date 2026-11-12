@@ -170,14 +170,16 @@
   "11:31 KOTAKBANK 489.95 VWAP \u20b9490.9 status in_zone",
   "11:31 PETRONET 335.25 VWAP \u20b9334.28 status in_zone",
   "11:35 KOTAKBANK 489.80 VWAP \u20b9490.85 status in_zone",
-  "11:35 PETRONET 335.50 VWAP \u20b9334.3 status in_zone"
+  "11:35 PETRONET 335.50 VWAP \u20b9334.3 status in_zone",
+  "11:40 KOTAKBANK 489.10 VWAP \u20b9490.79 status in_zone",
+  "11:40 PETRONET 334.90 VWAP \u20b9334.33 status in_zone"
  ],
  "health": {
   "ready": true,
   "down_indmoney": false,
   "pinger": true
  },
- "last_run": "11:35",
+ "last_run": "11:40",
  "taken": [
   "KOTAKBANK",
   "PETRONET"
