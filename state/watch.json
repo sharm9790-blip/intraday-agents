@@ -238,7 +238,7 @@
     "time_stop": "15:00",
     "start": "14:10"
    },
-   "status": "waiting",
+   "status": "cancelled",
    "since": "14:10",
    "paper_booked": 0
   }
@@ -377,14 +377,16 @@
   "14:20 ATHERENERG 1924.00 VWAP \u20b91,902.61 status in_zone",
   "14:20 SBIN 1085.30 VWAP \u20b91,078.24 status waiting",
   "14:25 ATHERENERG 1923.80 VWAP \u20b91,902.89 status in_zone",
-  "14:25 SBIN 1085.55 VWAP \u20b91,078.32 status waiting"
+  "14:25 SBIN 1085.55 VWAP \u20b91,078.32 status waiting",
+  "14:30 ATHERENERG 1917.30 VWAP \u20b91,903.13 status in_zone",
+  "14:30 SBIN 1086.25 VWAP \u20b91,078.52 status cancelled"
  ],
  "health": {
   "ready": true,
   "down_indmoney": false,
   "pinger": true
  },
- "last_run": "14:25",
+ "last_run": "14:30",
  "taken": [
   "ATHERENERG",
   "LODHA",
@@ -394,7 +396,7 @@
  "day_trades": 5,
  "fire_error": null,
  "last_fire": "14:00",
- "fired_at": "14:05",
+ "fired_at": null,
  "verdicts": 13,
  "plans": [
   {
