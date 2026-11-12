@@ -373,14 +373,16 @@
   "14:10 ATHERENERG 1921.00 VWAP \u20b91,901.61 status in_zone",
   "14:10 SBIN 1084.80 VWAP \u20b91,078.05 status waiting",
   "14:15 ATHERENERG 1920.90 VWAP \u20b91,901.84 status in_zone",
-  "14:15 SBIN 1084.95 VWAP \u20b91,078.13 status waiting"
+  "14:15 SBIN 1084.95 VWAP \u20b91,078.13 status waiting",
+  "14:20 ATHERENERG 1924.00 VWAP \u20b91,902.61 status in_zone",
+  "14:20 SBIN 1085.30 VWAP \u20b91,078.24 status waiting"
  ],
  "health": {
   "ready": true,
   "down_indmoney": false,
   "pinger": true
  },
- "last_run": "14:15",
+ "last_run": "14:20",
  "taken": [
   "ATHERENERG",
   "LODHA",
