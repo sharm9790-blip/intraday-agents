@@ -335,14 +335,15 @@
   "13:41 ATHERENERG 1916.70 VWAP \u20b91,899.81 status in_zone",
   "13:45 ATHERENERG 1915.20 VWAP \u20b91,899.96 status in_zone",
   "13:49 ATHERENERG 1912.80 VWAP \u20b91,900.32 status in_zone",
-  "13:50 ATHERENERG 1913.80 VWAP \u20b91,900.36 status in_zone"
+  "13:50 ATHERENERG 1913.80 VWAP \u20b91,900.36 status in_zone",
+  "13:55 ATHERENERG 1914.50 VWAP \u20b91,900.59 status in_zone"
  ],
  "health": {
   "ready": true,
   "down_indmoney": false,
   "pinger": true
  },
- "last_run": "13:50",
+ "last_run": "13:55",
  "taken": [
   "ATHERENERG",
   "LODHA"
