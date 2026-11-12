@@ -330,14 +330,15 @@
   "13:30 ATHERENERG 1917.40 VWAP \u20b91,899.35 status in_zone",
   "13:30 PNB 142.90 VWAP \u20b9140.5 status waiting",
   "13:35 ATHERENERG 1917.50 VWAP \u20b91,899.58 status in_zone",
-  "13:35 PNB 143.18 VWAP \u20b9140.56 status cancelled"
+  "13:35 PNB 143.18 VWAP \u20b9140.56 status cancelled",
+  "13:40 ATHERENERG 1916.20 VWAP \u20b91,899.79 status in_zone"
  ],
  "health": {
   "ready": true,
   "down_indmoney": false,
   "pinger": true
  },
- "last_run": "13:35",
+ "last_run": "13:40",
  "taken": [
   "ATHERENERG",
   "LODHA",
