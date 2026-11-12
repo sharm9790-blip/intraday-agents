@@ -1,4 +1,12 @@
 {
  "date": "2026-11-12",
- "symbols": {}
+ "symbols": {
+  "PAYTM": {
+   "at": "12:30",
+   "rejected_at": "12:15",
+   "level": 1870.0,
+   "kind": "flip level",
+   "close": 1877.5
+  }
+ }
 }
