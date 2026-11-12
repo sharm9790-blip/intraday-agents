@@ -1,12 +1,4 @@
 {
  "date": "2026-11-12",
- "symbols": {
-  "ABCAPITAL": {
-   "at": "10:35",
-   "rejected_at": "10:18",
-   "level": 413.9,
-   "kind": "flip level",
-   "close": 415.45
-  }
- }
+ "symbols": {}
 }
