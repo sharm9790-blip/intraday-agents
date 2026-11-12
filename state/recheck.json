@@ -1,4 +1,12 @@
 {
  "date": "2026-11-12",
- "symbols": {}
+ "symbols": {
+  "GRANULES": {
+   "at": "13:25",
+   "rejected_at": "11:50",
+   "level": 833.0,
+   "kind": "flip level",
+   "close": 837.7
+  }
+ }
 }
