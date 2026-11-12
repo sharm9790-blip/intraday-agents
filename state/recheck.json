@@ -1,19 +1,12 @@
 {
- "date": "2026-11-11",
+ "date": "2026-11-12",
  "symbols": {
-  "TRENT": {
-   "at": "11:00",
-   "rejected_at": "10:35",
-   "level": 3224.0,
+  "BAJFINANCE": {
+   "at": "10:20",
+   "rejected_at": "09:58",
+   "level": 1111.0,
    "kind": "flip level",
-   "close": 3231.2
-  },
-  "HINDPETRO": {
-   "at": "11:55",
-   "rejected_at": "11:22",
-   "level": 399.3,
-   "kind": "flip level",
-   "close": 400.85
+   "close": 1113.25
   }
  }
 }
