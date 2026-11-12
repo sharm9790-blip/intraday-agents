@@ -19,6 +19,8 @@
   "BEL": "11:30 failed breakout at VWAP, 410 CE wall 7.28M; flips on 5-min close >405.5 on rising volume, VWAP held",
   "UNOMINDA": "11:30 net R:R 0.47 under 1400 call wall, RSI 78; flips on 5-min close >1400 on volume",
   "MEESHO": "11:30 non-F&O, +4.2% extended, R:R 1.14; flips on hold 257 then 5-min close >259.5",
-  "CDSL": "11:35 net R:R 0.87, 1460 call wall, double top 1461, volume faded; flips on 5-min close >1465 on >=100k vol"
+  "CDSL": "11:35 net R:R 0.87, 1460 call wall, double top 1461, volume faded; flips on 5-min close >1465 on >=100k vol",
+  "DATAPATTNS": "11:50 net R:R 1.14, earnings miss 6 Nov, daily Supertrend bearish, 4300 call wall; flips on 5-min close >4300 on >60k vol",
+  "GRANULES": "11:50 failed pop at 833 on 858k vol; flips on 5-min close >833 on volume"
  }
 }
