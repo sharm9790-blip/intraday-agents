@@ -259,7 +259,10 @@
   "12:20 ATHERENERG 1908.00 VWAP \u20b91,896.24 status in_zone",
   "12:25 PETRONET 335.05 VWAP \u20b9334.48 status in_zone",
   "12:25 LODHA 1216.00 VWAP \u20b91,206.79 status in_zone",
-  "12:25 ATHERENERG 1911.60 VWAP \u20b91,896.6 status in_zone"
+  "12:25 ATHERENERG 1911.60 VWAP \u20b91,896.6 status in_zone",
+  "12:25 PETRONET 335.05 VWAP \u20b9334.49 status in_zone",
+  "12:25 LODHA 1216.20 VWAP \u20b91,206.79 status in_zone",
+  "12:25 ATHERENERG 1911.50 VWAP \u20b91,896.6 status in_zone"
  ],
  "health": {
   "ready": true,
