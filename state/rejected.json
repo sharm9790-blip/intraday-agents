@@ -1,27 +1,12 @@
 {
- "date": "2026-11-11",
+ "date": "2026-11-12",
  "symbols": {
-  "SBIN": "12:25 flip unconfirmed, 12:10 high-vol rejection, R:R 0.5, bank duplicate; flips on 5-min close >1078 on rising volume",
-  "HDFCBANK": "09:50 net R:R 0.83, SL 5pt inside noise, 820 CE 58L, RSI 74.8; flips on 5-min close >816 on >1M vol with T1 820",
-  "KALYANKJIL": "10:50 no setup, lower highs on VWAP; flips on 5-min close >680.5 on rising volume",
-  "ICICIBANK": "09:50 flat at 52w high; flips on 5-min close >1616",
-  "BANKBARODA": "12:25 12:10 distribution candle 1.6M, R:R 0.4, bank duplicate; flips on 5-min close >275.7 on rising volume",
-  "INDIGO": "10:00 net R:R 1.1, breakout on fading volume, 5700 CE wall 4.5L; flips on 5-min close >5700 on >50k vol with T1 5760, SL 5672",
-  "SWIGGY": "10:18 counter-trend bounce under 200 CE wall 76L, SL in noise; flips on 5-min close >200.4 on >1.2M vol",
-  "TRENT": "10:35 net R:R 0.72 breakout, Q2 miss, climax-volume rejection, death cross; flips on 5-min close >3224 on >40k vol closing near high",
-  "LT": "10:35 range-bound on VWAP, RSI 77; flips on 5-min close >4259 on rising volume",
-  "CGPOWER": "10:35 daily Supertrend down, weak RS; flips on fresh 5-min close above day high on rising volume",
-  "DIVISLAB": "10:35 reversed red -1.9%",
-  "LAURUSLABS": "10:35 reversed red -1.1%",
-  "BDL": "10:35 weak relative strength",
-  "NTPC": "10:35 weak relative strength",
-  "SUNTV": "10:35 extended +7.7%, no clean stop",
-  "IIFL": "10:35 extended +6.8%, illiquid for stop",
-  "RVNL": "11:05 net R:R 0.7 at T1, 220 CE wall 2.88M, circuit 221.87, results Nov 13; flips on 5-min close >220.5 only if 220 CE OI unwinds",
-  "HINDPETRO": "11:22 net R:R 0.78 to 400 pin, 400 CE 1.81M wall, falling highs, volume dried; flips on 5-min close >399.3 on >300k vol, or pullback hold 394.5-395",
-  "CANBK": "13:35 net R:R ~1.4, 135 CE wall 7.7M; flips on 5-min close >133.05 on rising volume",
-  "PNB": "13:35 fading under 52w high 139, 140 CE wall 9.7M, R:R <1; flips on 5-min close >139.2 on >1M vol",
-  "UNIONBANK": "13:35 faded from 202, no breakout structure; flips on 5-min close >202.1",
-  "GAIL": "13:35 tight range, thin volume, no edge"
+  "SBIN": "09:58 R:R ~1 at live, 1080 CE wall, prior-day high 1077.95; flips on 5-min close >1078.5 after 10:35 on volume, or pullback hold 1071-1072",
+  "ETERNAL": "09:58 R:R 0.7 chased, supply 366-369.7; flips on 5-min close >367.3 on >300k vol after 10:35, or retest hold 364.5-365",
+  "ICICIBANK": "09:58 range 1583-1592.5, volume fading; flips on 5-min close >1592.5 on volume",
+  "BAJFINANCE": "09:58 gap fade on VWAP, lower highs; flips on 5-min close >1111",
+  "MOTILALOFS": "09:58 chase, ATR 4.4%, stop too wide",
+  "HINDCOPPER": "09:58 gap up faded below open",
+  "ITC": "09:58 gap fade, volume dried"
  }
 }

@@ -1,3 +1,31 @@
-{"date": "2026-11-12", "verdict_id": "2026-11-12_0945", "go_count": 0,
- "connectors": {"groww": false, "indmoney": false, "investsights": true},
- "plan": null}
+{
+ "date": "2026-11-12",
+ "verdict_id": "2026-11-12_0958",
+ "go_count": 1,
+ "connectors": {
+  "groww": false,
+  "indmoney": true,
+  "investsights": true
+ },
+ "plan": {
+  "symbol": "KOTAKBANK",
+  "yahoo": "KOTAKBANK.NS",
+  "name": "Kotak Mahindra Bank",
+  "side": "long",
+  "entry_type": "dip",
+  "zone_low": 490.0,
+  "zone_high": 491.2,
+  "entry": 490.6,
+  "max_entry": 491.2,
+  "trigger_close_above": 490.0,
+  "sl": 488.4,
+  "t1": 496.5,
+  "t2": 499.5,
+  "qty": 203,
+  "deadline": "11:30",
+  "cancel_if_high_reaches": 494.5,
+  "cancel_if_close_below": 489.2,
+  "exit_if_close_below_after_entry": 489.0,
+  "time_stop": "15:00"
+ }
+}

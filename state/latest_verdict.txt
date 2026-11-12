@@ -1,11 +1,45 @@
-⚪ <b>NO ANALYSIS — 09:45 IST</b>
+🟢 <b>GO — KOTAKBANK</b>
+🕐 09:58 IST  ·  Confidence 5/10
 
-Cloud run could not scan.
-Live 5-min data not available.
+📥 Buy  <b>₹490.6</b>  (max ₹491.2)
+⏳ <b>Wait for dip</b>
+🛑 Stop loss  <b>₹488.4</b>
+🎯 Target 1  <b>₹496.5</b>  (sell half)
+🎯 Target 2  <b>₹499.5</b>
+📦 Qty  <b>203</b> shares
+📝 <b>Draft order</b> (you place it)
+Intraday · Limit · NSE
+Qty  <code>203</code>
+Buy limit  <code>490.6</code>
+SL-M trigger  <code>488.4</code>
+Sell half  <code>101</code> @ <code>496.5</code>
+📲 INDmoney: search <code>KOTAKBANK</code>
 
-INDmoney not connected.
-InvestSights: end-of-day only.
+<b>✅ Buy only if</b>
+• Dips to ₹490–491.2
+• No fill before 10:35 (CPI 10:30)
+• 5-min bar holds above ₹490
+• Bank Nifty above 61,050
 
-No trade plan this slot.
+<b>❌ Cancel if</b>
+• Not filled by 11:30
+• Hits ₹494.5 before the dip
+• 5-min close below ₹489.2
 
+<b>💰 Risk vs reward</b>
+Max loss ≈ ₹526
+Reward 2.1× the risk
+Exit all by 15:00
+
+<b>Why this stock</b>
+• Banks lead, fresh 52w high
+• Puts written at 485–495
+• CCI nod: Deutsche Bank deal
+
+<b>Skipped</b>
+• SBIN — 1080 call wall, R:R ~1
+• ETERNAL — R:R 0.7 if chased
+
+⚠️ CPI at 10:30, RSI 75 overbought
+📡 Watcher checks every 5 min
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
