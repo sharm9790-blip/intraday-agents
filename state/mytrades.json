@@ -85,16 +85,22 @@
    {
     "symbol": "ATHERENERG",
     "yahoo": "ATHERENERG.NS",
-    "qty": 52,
-    "left": 52,
+    "qty": 16,
+    "left": 0,
     "entry": 1908.5,
     "sl": 1894.0,
     "t1": 1940.0,
     "t2": 1960.0,
     "opened": "12:17",
     "checked": "14:55",
-    "realized": 0.0,
-    "sells": [],
+    "realized": 400.4,
+    "sells": [
+     {
+      "qty": 16,
+      "price": 1916.2,
+      "at": "15:02"
+     }
+    ],
     "flags": {
      "stale": true,
      "warn": true,
@@ -111,7 +117,7 @@
  "boards": {
   "1322737291": {
    "id": 517,
-   "open": true
+   "open": false
   }
  },
  "menu": 10,
@@ -129,8 +135,8 @@
    82
   ],
   "ATHERENERG": [
-   52,
-   0
+   16,
+   16
   ]
  }
 }
