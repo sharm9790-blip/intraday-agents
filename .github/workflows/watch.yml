@@ -41,6 +41,11 @@ jobs:
         continue-on-error: true
         timeout-minutes: 2
         run: python3 watcher/nse_ids.py statebr/state
+      - name: Refresh liquid-stock universe (weekly, for the code scanner)
+        if: steps.state.outputs.ok == 'true' && github.event_name != 'push'
+        continue-on-error: true
+        timeout-minutes: 2
+        run: python3 watcher/scan.py --refresh statebr/state
       - name: Run watcher
         if: steps.state.outputs.ok == 'true'
         env:

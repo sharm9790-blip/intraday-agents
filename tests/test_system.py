@@ -26,6 +26,7 @@ import premarket  # noqa: E402
 import recheck  # noqa: E402
 import replay  # noqa: E402
 import risk  # noqa: E402
+import scan  # noqa: E402
 import stats  # noqa: E402
 import watch as w  # noqa: E402
 
@@ -68,6 +69,8 @@ class Base(unittest.TestCase):
         self.rows_by = {}
 
         self.bars_by = {}  # full 5-day bar lists (premarket tests)
+        self._uni = scan.load_universe
+        scan.load_universe = lambda d: {"stocks": {}}  # scanner off unless a test turns it on
 
         def fake_candles(sym, days="1d"):
             now = CLOCK[0]
@@ -81,6 +84,7 @@ class Base(unittest.TestCase):
 
     def tearDown(self):
         w.telegram = self._tg
+        scan.load_universe = self._uni
         shutil.rmtree(self.dir)
 
     def put(self, name, data):
@@ -242,6 +246,68 @@ class TestChase(Base):
         self.at(13, 46); w.main(self.dir)
         self.at(13, 56); w.main(self.dir)
         self.assertIn("CANCELLED — TATASTEEL", self.texts())
+
+
+def trend_bars(day, start_px, n, step=0.15, vol=1000, h=9, m=15):
+    """n rising 5-min candles: each closes `step` higher, lows rising."""
+    rows, px = [], start_px
+    for _ in range(n):
+        rows.append((px, px + step + 0.05, px - 0.05, px + step, vol))
+        px += step
+    return day_bars(day, rows, h, m)
+
+
+class TestScanner(Base):
+    def test_rank_mode_and_filters(self):
+        uni = {"stocks": {"AAA": {"fo": True, "tv": 500, "ind": "Banks"},
+                          "BBB": {"fo": False, "tv": 200, "ind": "FMCG"},
+                          "CCC": {"fo": True, "tv": 300, "ind": "IT"}}}
+        prev = lambda px: day_bars(6, [(px, px, px, px, 1000)] * 24)
+        self.bars_by = {
+            "^NSEI": prev(100) + trend_bars(9, 100.2, 24, 0.02),                 # Nifty +0.7%
+            "AAA.NS": prev(100) + trend_bars(9, 100.5, 24, 0.05, vol=3000),       # +1.7%, 3× volume
+            "BBB.NS": prev(100) + trend_bars(9, 108.0, 24, 0.05, vol=3000),       # non-F&O +9%: band risk
+            "CCC.NS": prev(100) + trend_bars(9, 100.5, 24, 0.05, vol=900),        # no volume surge
+        }
+        self.at(11, 15)
+        doc = scan.run(self.dir, CLOCK[0], w.candles, uni, workers=2)
+        self.assertEqual([i["symbol"] for i in doc["items"]], ["AAA"])
+        self.assertEqual(doc["mode"], "trend")
+        self.assertEqual(doc["items"][0]["vol_x"], 3.0)
+        self.assertTrue(scan.stock_trend(self.bars_by["AAA.NS"], CLOCK[0]))
+
+    def test_atr_stop_block(self):
+        r = risk.check({**PLAN, "atr5": 2.0}, "13:45")
+        self.assertEqual(r["status"], "BLOCK")
+        self.assertIn("inside normal 5-min noise", r["reasons"][0])
+        self.assertEqual(risk.check({**PLAN, "atr5": 1.0}, "13:45")["status"], "PASS")
+
+    def test_trend_day_turns_dip_into_buy_now(self):
+        plan = {**PLAN, "entry_type": "dip", "zone_low": 182.9, "zone_high": 183.2, "entry": 183.0,
+                "max_entry": 183.3, "trigger_close_above": 183.0, "sl": 182.4, "t1": 186.5, "t2": 187.5,
+                "cancel_if_close_below": 182.6, "exit_if_close_below_after_entry": 182.5,
+                "cancel_if_high_reaches": 187.0}
+        self.bars_by["TATASTEEL.NS"] = trend_bars(9, 182.0, 24, 0.06)          # 182 → 183.4, rising
+        self.put("candidates.json", {"date": "2026-11-09", "mode": "trend", "items": []})
+        self.put("plan.json", {"date": "2026-11-09", "verdict_id": "2026-11-09_1115", "go_count": 1,
+                               "plan": plan})
+        with open(os.path.join(self.dir, "latest_verdict.txt"), "w") as f:
+            f.write("🟢 <b>GO — TATASTEEL</b>")
+        self.at(11, 16)
+        w.main(self.dir)
+        t = self.texts()
+        self.assertIn("Trend day: BUY NOW", t)
+        e = self.get("watch.json")["live"][0]
+        self.assertEqual(e["plan"]["entry_type"], "now")
+        self.assertIn("BUY NOW — TATASTEEL", t)
+
+    def test_late_recheck_fires_once(self):
+        self.put("recheck.json", {"date": "2026-11-09", "symbols": {
+            "PAYTM": {"at": "14:20", "rejected_at": "13:30", "level": 1897, "kind": "flip level", "close": 1901}}})
+        st = {}
+        self.assertFalse(w.fire_late_recheck(dt.datetime(2026, 11, 9, 14, 12, tzinfo=IST), self.dir, "2026-11-09", st))
+        self.assertTrue(w.fire_late_recheck(dt.datetime(2026, 11, 9, 14, 21, tzinfo=IST), self.dir, "2026-11-09", st))
+        self.assertFalse(w.fire_late_recheck(dt.datetime(2026, 11, 9, 14, 22, tzinfo=IST), self.dir, "2026-11-09", st))
 
 
 class TestFire(unittest.TestCase):

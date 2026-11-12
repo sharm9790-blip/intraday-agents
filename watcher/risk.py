@@ -18,6 +18,7 @@ PCT_COST = 0.0004       # STT, exchange, GST, stamp as a fraction of price
 MIN_RR = 1.5            # net reward:risk to T1
 MAX_POSITION_X = 1.0    # position value cap = capital × this (1.0 = no leverage)
 LAST_ENTRY = "14:30"    # no fresh entries after this
+MIN_STOP_ATR = 0.7      # SL must be ≥ this × the 5-min ATR (`atr5` in the plan) below entry
 
 
 def _hm(s):
@@ -63,6 +64,10 @@ def check(plan, verdict_time=None, trades_today=0, capital=CAPITAL, risk_pct=RIS
         reasons.append(f"plan given after {LAST_ENTRY}")
     if trades_today >= MAX_TRADES:
         reasons.append(f"{MAX_TRADES} trades already open")
+    atr = plan.get("atr5")
+    if atr and e - sl < MIN_STOP_ATR * atr:
+        reasons.append(f"stop {e - sl:.2f} below entry is inside normal 5-min noise "
+                       f"(ATR {atr:g}; need ≥ {MIN_STOP_ATR * atr:.2f}): widen SL, smaller qty")
     return {
         "status": "BLOCK" if reasons else "PASS",
         "reasons": reasons,

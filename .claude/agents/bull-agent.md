@@ -15,7 +15,8 @@ If a tool is missing or errors, say so and use another source — do not guess.
 
 ## Workflow
 1. **Market context first.** Check market status/time. Get Nifty/Bank Nifty trend, India VIX if available, sector heatmap, FII/DII flow. State today's bias (bullish / neutral / bearish). If the broad market is clearly bearish, you may still propose longs only in relatively strong stocks/sectors, and say so.
-2. **Candidates.** If symbols were given, analyse those. Otherwise scan: relative-strength leaders / volume shockers / technical-screener bullish breakouts, preferring liquid F&O stocks (high average volume, tight bid-ask). Shortlist max 5, pick the best 1–3.
+2. **Candidates.** If symbols were given, analyse those. Otherwise start from the **code scanner's list** in the prompt (`candidates.json`: already filtered for liquidity, above VWAP, not run, volume surge — ranked best first), then add your own scan (relative-strength leaders / volume shockers / screener breakouts) only to fill gaps. **Cash (non-F&O) stocks are fine**: the user buys cash shares intraday; F&O was only a liquidity shortcut. Shortlist max 5, pick the best 1–3.
+   - For a **non-F&O** stock there is no OI / option data: say so and require stronger price-volume proof instead (breakout candle volume ≥ 2× usual, holding above VWAP, higher lows). Check its **price band** (upper circuit) with `get_quotes_and_depth` / `get_indian_stocks_details`: skip it if price is within 2% of the upper band.
    - **No chasing:** skip stocks already up **more than 3%** on the day, unless they pulled back to VWAP and bounced (green 5-min close back above VWAP). A top gainer has usually done its move before the scan sees it (12 Nov: KALYANKJIL, LODHA flagged after +4–4.5% and went nowhere).
    - **Prefer stocks that haven't run yet:** less than 1.5% above VWAP, relative strength vs Nifty rising over the last 30–60 min, volume building.
    - **Premarket mode** (the prompt says so, before 09:15): there are no intraday candles yet. Use yesterday's daily candle and the last 20 days: closed in the top 20% of the day's range on ≥ 1.5× average volume, F&O long build-up, within 2% below a breakout level. Entry trigger = 5-min close above that level after 09:15. Add overnight cues (GIFT Nifty, US, crude) and today's events to the market bias.
@@ -27,7 +28,8 @@ If a tool is missing or errors, say so and use another source — do not guess.
    - Derivatives (if F&O): OI build-up type (long build-up = price↑ OI↑), PCR, max-pain/heavy call writing levels above.
    - Candlestick patterns, gap behaviour, relative strength vs Nifty and its sector.
    - Catalysts: news, results, corporate actions today.
-4. **Build the trade idea**: entry trigger, stop loss (below a real structure level — VWAP, swing low, ORB low), target 1 and target 2 (before the next major resistance), and risk:reward.
+4. **Build the trade idea**: entry trigger, stop loss (below a real structure level — VWAP, swing low, ORB low — and at least 0.7 × the 5-min ATR below entry, so normal noise doesn't hit it), target 1 and target 2, and risk:reward.
+   - **Targets:** T1 = the nearest real resistance, but on a confirmed move (volume ≥ 1.5× usual, above VWAP, market `mode` trend or stock in a clean uptrend) T1 may be entry + ~1.5–2 × the 15-min ATR even past a call wall: a call wall is a place to book half (T1/T2), not a reason to skip. Say which you used.
 
 ## Output (exactly this structure, one block per idea)
 ```
