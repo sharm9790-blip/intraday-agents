@@ -9,7 +9,7 @@
   "HINDCOPPER": "09:58 gap up faded below open",
   "ITC": "09:58 gap fade, volume dried",
   "PAYTM": "10:18 net R:R 0.89, 52wk high 1855.5 blocks; flips on 5-min close >1856 on >=120k vol",
-  "ABCAPITAL": "10:18 financials overlap with KOTAKBANK, CPI risk; flips on 5-min close >413.9 on >=110k vol after 10:35 if BankNifty >=+1.5%",
+  "ABCAPITAL": "11:35 net R:R 1.27, failed 10:55 breakout, 415/420 call walls, 2nd financial; flips on 5-min close >420.5 on >150k vol if BankNifty >=+1.5% or slot frees",
   "PNB": "10:18 net R:R 0.75, 140 CE wall 11.4M OI; flips on 5-min close >141.2 on >2M vol",
   "TMCV": "10:40 net R:R ~1.0, rejected 464.4 on climax vol, non-F&O; flips on 5-min close >465 on >=300k vol",
   "OBEROIRLTY": "11:15 net R:R 1.09 to 1834, PCR 0.66, call walls 1840-1880; flips on 5-min close >1834 on above-avg volume",
@@ -18,6 +18,7 @@
   "PHOENIXLTD": "11:15 RSI 74, 2300 call wall, net R:R 1.18; flips on 5-min close >2275 on strong volume",
   "BEL": "11:30 failed breakout at VWAP, 410 CE wall 7.28M; flips on 5-min close >405.5 on rising volume, VWAP held",
   "UNOMINDA": "11:30 net R:R 0.47 under 1400 call wall, RSI 78; flips on 5-min close >1400 on volume",
-  "MEESHO": "11:30 non-F&O, +4.2% extended, R:R 1.14; flips on hold 257 then 5-min close >259.5"
+  "MEESHO": "11:30 non-F&O, +4.2% extended, R:R 1.14; flips on hold 257 then 5-min close >259.5",
+  "CDSL": "11:35 net R:R 0.87, 1460 call wall, double top 1461, volume faded; flips on 5-min close >1465 on >=100k vol"
  }
 }
