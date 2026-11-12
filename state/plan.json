@@ -1,31 +1,11 @@
 {
  "date": "2026-11-12",
- "verdict_id": "2026-11-12_1022",
+ "verdict_id": "2026-11-12_1040",
  "go_count": 3,
  "connectors": {
   "groww": false,
   "indmoney": true,
   "investsights": true
  },
- "plan": {
-  "symbol": "ABCAPITAL",
-  "yahoo": "ABCAPITAL.NS",
-  "name": "Aditya Birla Capital",
-  "side": "long",
-  "entry_type": "dip",
-  "zone_low": 410.8,
-  "zone_high": 412.0,
-  "entry": 411.5,
-  "max_entry": 412.0,
-  "trigger_close_above": 410.8,
-  "sl": 408.8,
-  "t1": 418.0,
-  "t2": 424.0,
-  "qty": 243,
-  "deadline": "11:30",
-  "cancel_if_high_reaches": 416.0,
-  "cancel_if_close_below": 409.8,
-  "exit_if_close_below_after_entry": 409.5,
-  "time_stop": "15:00"
- }
+ "plan": null
 }

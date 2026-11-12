@@ -4,12 +4,13 @@
   "SBIN": "09:58 R:R ~1 at live, 1080 CE wall, prior-day high 1077.95; flips on 5-min close >1078.5 after 10:35 on volume, or pullback hold 1071-1072",
   "ETERNAL": "09:58 R:R 0.7 chased, supply 366-369.7; flips on 5-min close >367.3 on >300k vol after 10:35, or retest hold 364.5-365",
   "ICICIBANK": "09:58 range 1583-1592.5, volume fading; flips on 5-min close >1592.5 on volume",
-  "BAJFINANCE": "09:58 gap fade on VWAP, lower highs; flips on 5-min close >1111",
+  "BAJFINANCE": "10:40 3rd financial (KOTAKBANK, ABCAPITAL live), net R:R ~1.5 chase, call wall 1120-1130; flips on 5-min close >1115.2 on >=250k vol with BankNifty >=+1.5%, or slot frees",
   "MOTILALOFS": "09:58 chase, ATR 4.4%, stop too wide",
   "HINDCOPPER": "09:58 gap up faded below open",
   "ITC": "09:58 gap fade, volume dried",
   "PAYTM": "10:18 net R:R 0.89, 52wk high 1855.5 blocks; flips on 5-min close >1856 on >=120k vol",
   "ABCAPITAL": "10:18 financials overlap with KOTAKBANK, CPI risk; flips on 5-min close >413.9 on >=110k vol after 10:35 if BankNifty >=+1.5%",
-  "PNB": "10:18 net R:R 0.75, 140 CE wall 11.4M OI; flips on 5-min close >141.2 on >2M vol"
+  "PNB": "10:18 net R:R 0.75, 140 CE wall 11.4M OI; flips on 5-min close >141.2 on >2M vol",
+  "TMCV": "10:40 net R:R ~1.0, rejected 464.4 on climax vol, non-F&O; flips on 5-min close >465 on >=300k vol"
  }
 }

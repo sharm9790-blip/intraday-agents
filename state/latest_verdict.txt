@@ -1,49 +1,23 @@
-🟢 <b>GO — ABCAPITAL</b>
-🕐 10:22 IST  ·  Confidence 5/10
+🔴 <b>NO TRADE — 10:40 IST</b>
 
-📥 Buy  <b>₹411.5</b>  (max ₹412)
-⏳ <b>Wait for dip</b>
-🛑 Stop loss  <b>₹408.8</b>
-🎯 Target 1  <b>₹418</b>  (sell half)
-🎯 Target 2  <b>₹424</b>
-📦 Qty  <b>243</b> shares
-📝 <b>Draft order</b> (you place it)
-Intraday · Limit · NSE
-Qty  <code>243</code>
-Buy limit  <code>411.5</code>
-SL-M trigger  <code>408.8</code>
-Sell half  <code>121</code> @ <code>418</code>
-📲 INDmoney: search <code>ABCAPITAL</code>
-
-<b>✅ Buy only if</b>
-• Dips to ₹410.8–412
-• Holds above VWAP ~₹410
-• Bank Nifty stays green
-
-<b>❌ Cancel if</b>
-• Not triggered by 11:30
-• Hits ₹416 before the dip
-• 5-min close below ₹409.8
-
-<b>💰 Risk vs reward</b>
-Max loss ≈ ₹740
-Profit ≈ ₹790 (T1) · ₹2,300 (T2)
-Reward 2× the risk
-
-<b>📲 Set in INDmoney now</b>
-1. 🔎 Search ABCAPITAL
-2. 🔔 Price alert at ₹411.5
-3. After buying: SL-M at ₹408.8
-4. Sell 121 shares at ₹418
-5. Exit all by 15:00
-
-<b>Why this stock</b>
-• Above VWAP, financials bid
-• Breakout skipped: walls 415/420
+Kept 2 live plans:
+• KOTAKBANK (waiting)
+• ABCAPITAL (waiting)
 
 <b>Skipped</b>
-• Note: KALYANKJIL (10:18 plan) is live; my review found net R:R 0.76 at breakout, overextended — treat with care
+• BAJFINANCE — 3rd financial,
+  net R:R ~1.5 chasing, call
+  wall 1120–1130
+• TMCV — R:R ~1.0, rejected
+  at ₹464.4, not F&amp;O
 
-⚠️ Correlated with live KOTAKBANK plan
+<b>Flips to GO if</b>
+• BAJFINANCE: close above ₹1,115.2
+  on 250k+ vol, Bank Nifty +1.5%
+  or a financials slot frees
+• TMCV: close above ₹465 on 300k+
+
+⚠️ CPI actual not verified
+
 📡 Watcher checks every 5 min
-<i>Analysis only, not advice. You place orders yourself.</i>
+<i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
