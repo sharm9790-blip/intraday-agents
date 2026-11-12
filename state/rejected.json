@@ -1,7 +1,6 @@
 {
  "date": "2026-11-12",
  "symbols": {
-  "SBIN": "13:30 duplicate bank bet with PNB, net R:R 1.3, 1100 CE wall 6.9M; flips on 5-min close >1084.5 on >800k vol, or pullback hold 1079.5-1080 if PNB plan dies",
   "ETERNAL": "09:58 R:R 0.7 chased, supply 366-369.7; flips on 5-min close >367.3 on >300k vol after 10:35, or retest hold 364.5-365",
   "ICICIBANK": "09:58 range 1583-1592.5, volume fading; flips on 5-min close >1592.5 on volume",
   "BAJFINANCE": "10:40 3rd financial (KOTAKBANK, ABCAPITAL live), net R:R ~1.5 chase, call wall 1120-1130; flips on 5-min close >1115.2 on >=250k vol with BankNifty >=+1.5%, or slot frees",
@@ -10,7 +9,7 @@
   "ITC": "09:58 gap fade, volume dried",
   "PAYTM": "13:30 net R:R 0.54, 1900 CE wall 2M OI; flips on 5-min close >1897 on >250k vol",
   "ABCAPITAL": "11:35 net R:R 1.27, failed 10:55 breakout, 415/420 call walls, 2nd financial; flips on 5-min close >420.5 on >150k vol if BankNifty >=+1.5% or slot frees",
-  "PNB": "10:18 net R:R 0.75, 140 CE wall 11.4M OI; flips on 5-min close >141.2 on >2M vol",
+  "PNB": "14:10 extended at 52w high, flat top 143.5-143.8, volume dried, 145 CE wall 10.4M, duplicate of SBIN; flips on 5-min close >143.9 on rising volume, PSU Bank above VWAP, before 14:30",
   "TMCV": "10:40 net R:R ~1.0, rejected 464.4 on climax vol, non-F&O; flips on 5-min close >465 on >=300k vol",
   "OBEROIRLTY": "11:15 net R:R 1.09 to 1834, PCR 0.66, call walls 1840-1880; flips on 5-min close >1834 on above-avg volume",
   "SAIL": "10:55 net R:R 0.86 to T1, failed 181.2 breakout, 180 call wall, FPO overhang; flips on 5-min close >181.6 on >1M vol, or pullback hold 179.4-179.6 above 179.16",

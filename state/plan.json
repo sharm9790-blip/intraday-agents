@@ -1,11 +1,31 @@
 {
  "date": "2026-11-12",
- "verdict_id": "2026-11-12_1355",
- "go_count": 7,
+ "verdict_id": "2026-11-12_1410",
+ "go_count": 8,
  "connectors": {
   "groww": false,
   "indmoney": true,
   "investsights": true
  },
- "plan": null
+ "plan": {
+  "symbol": "SBIN",
+  "yahoo": "SBIN.NS",
+  "name": "State Bank of India",
+  "side": "long",
+  "entry_type": "dip",
+  "zone_low": 1081.0,
+  "zone_high": 1082.2,
+  "entry": 1082.0,
+  "max_entry": 1082.2,
+  "trigger_close_above": 1081.0,
+  "sl": 1079.7,
+  "t1": 1088.3,
+  "t2": 1095.0,
+  "qty": 92,
+  "deadline": "14:27",
+  "cancel_if_high_reaches": 1088.3,
+  "cancel_if_close_below": 1081.0,
+  "exit_if_close_below_after_entry": 1080.3,
+  "time_stop": "15:00"
+ }
 }
