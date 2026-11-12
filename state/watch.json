@@ -117,14 +117,16 @@
   "10:40 KOTAKBANK 492.60 VWAP \u20b9490.8 status waiting",
   "10:40 ABCAPITAL 415.20 VWAP \u20b9411.28 status waiting",
   "10:40 KOTAKBANK 492.60 VWAP \u20b9490.8 status waiting",
-  "10:40 ABCAPITAL 415.20 VWAP \u20b9411.28 status waiting"
+  "10:40 ABCAPITAL 415.20 VWAP \u20b9411.28 status waiting",
+  "10:45 KOTAKBANK 492.40 VWAP \u20b9490.83 status waiting",
+  "10:45 ABCAPITAL 415.20 VWAP \u20b9411.5 status waiting"
  ],
  "health": {
   "ready": true,
   "down_indmoney": false,
   "pinger": true
  },
- "last_run": "10:40",
+ "last_run": "10:45",
  "taken": [
   "ABCAPITAL",
   "KOTAKBANK"
