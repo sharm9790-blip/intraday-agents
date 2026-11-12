@@ -1,6 +1,6 @@
 {
  "date": "2026-11-12",
- "verdict_id": "2026-11-12_1055",
+ "verdict_id": "2026-11-12_1115",
  "live": [
   {
    "symbol": "KOTAKBANK",
@@ -128,14 +128,15 @@
   "10:55 ABCAPITAL 415.55 VWAP \u20b9411.71 status waiting",
   "11:00 KOTAKBANK 492.65 VWAP \u20b9490.91 status waiting",
   "11:00 ABCAPITAL 416.35 VWAP \u20b9412.02 status cancelled",
-  "11:05 KOTAKBANK 492.15 VWAP \u20b9490.95 status waiting"
+  "11:05 KOTAKBANK 492.15 VWAP \u20b9490.95 status waiting",
+  "11:10 KOTAKBANK 490.95 VWAP \u20b9490.96 status waiting"
  ],
  "health": {
   "ready": true,
   "down_indmoney": false,
   "pinger": true
  },
- "last_run": "11:05",
+ "last_run": "11:10",
  "taken": [
   "KOTAKBANK"
  ],
@@ -144,7 +145,7 @@
  "fire_error": null,
  "last_fire": "11:00",
  "fired_at": "11:05",
- "verdicts": 6,
+ "verdicts": 7,
  "plans": [
   {
    "symbol": "KOTAKBANK",
