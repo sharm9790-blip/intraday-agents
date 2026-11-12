@@ -1,4 +1,26 @@
 {
  "date": "2026-11-12",
- "symbols": {}
+ "symbols": {
+  "MOTILALOFS": {
+   "at": "10:55",
+   "rejected_at": "09:58",
+   "level": 1218.8,
+   "kind": "day high",
+   "close": 1221.85
+  },
+  "ABCAPITAL": {
+   "at": "10:35",
+   "rejected_at": "10:18",
+   "level": 413.9,
+   "kind": "flip level",
+   "close": 415.45
+  },
+  "OBEROIRLTY": {
+   "at": "10:55",
+   "rejected_at": "10:55",
+   "level": 1826.0,
+   "kind": "flip level",
+   "close": 1830.1
+  }
+ }
 }

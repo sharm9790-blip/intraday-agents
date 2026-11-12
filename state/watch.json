@@ -85,7 +85,7 @@
     "time_stop": "15:00",
     "start": "10:22"
    },
-   "status": "waiting",
+   "status": "cancelled",
    "since": "10:22",
    "paper_booked": 0
   }
@@ -125,20 +125,21 @@
   "10:54 KOTAKBANK 492.00 VWAP \u20b9490.87 status waiting",
   "10:54 ABCAPITAL 415.50 VWAP \u20b9411.69 status waiting",
   "10:55 KOTAKBANK 492.00 VWAP \u20b9490.87 status waiting",
-  "10:55 ABCAPITAL 415.55 VWAP \u20b9411.71 status waiting"
+  "10:55 ABCAPITAL 415.55 VWAP \u20b9411.71 status waiting",
+  "11:00 KOTAKBANK 492.65 VWAP \u20b9490.91 status waiting",
+  "11:00 ABCAPITAL 416.35 VWAP \u20b9412.02 status cancelled"
  ],
  "health": {
   "ready": true,
   "down_indmoney": false,
   "pinger": true
  },
- "last_run": "10:55",
+ "last_run": "11:00",
  "taken": [
-  "ABCAPITAL",
   "KOTAKBANK"
  ],
- "trades": 2,
- "day_trades": 2,
+ "trades": 1,
+ "day_trades": 1,
  "fire_error": null,
  "last_fire": "10:45",
  "fired_at": "10:50",
