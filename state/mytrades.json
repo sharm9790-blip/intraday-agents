@@ -13,12 +13,31 @@
     "t1": 496.5,
     "t2": 499.5,
     "opened": "11:12",
-    "checked": "11:26",
+    "checked": "11:27",
     "realized": 0.0,
     "sells": [],
     "flags": {},
     "plan": true,
     "plan_qty": 203,
+    "broker": "INDmoney",
+    "auto_ind": true
+   },
+   {
+    "symbol": "PETRONET",
+    "yahoo": "PETRONET.NS",
+    "qty": 298,
+    "left": 298,
+    "entry": 335.3,
+    "sl": 333.8,
+    "t1": 338.5,
+    "t2": 339.8,
+    "opened": "11:32",
+    "checked": "11:27",
+    "realized": 0.0,
+    "sells": [],
+    "flags": {},
+    "plan": true,
+    "plan_qty": 298,
     "broker": "INDmoney",
     "auto_ind": true
    }
@@ -35,6 +54,10 @@
  "ind_seen": {
   "KOTAKBANK": [
    203,
+   0
+  ],
+  "PETRONET": [
+   298,
    0
   ]
  }
