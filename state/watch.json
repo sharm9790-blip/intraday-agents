@@ -1,10 +1,11 @@
 {
  "date": "2026-11-12",
- "verdict_id": null,
+ "verdict_id": "2026-11-12_0945",
  "live": [],
  "log": [],
  "health": {
-  "ready": true
+  "ready": true,
+  "down_indmoney": true
  },
  "last_run": "09:45",
  "taken": [],
@@ -12,5 +13,6 @@
  "day_trades": 0,
  "fire_error": null,
  "last_fire": "09:45",
- "fired_at": "09:45"
+ "fired_at": "09:45",
+ "verdicts": 1
 }
