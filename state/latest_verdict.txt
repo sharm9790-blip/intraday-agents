@@ -1,23 +1,26 @@
-🔴 <b>NO TRADE — 10:55 IST</b>
+🔎 <b>11:15 scan: NO TRADE</b>
 
-Kept 2 live plans:
-• KOTAKBANK (waiting)
-• ABCAPITAL (waiting)
+Checked: SHRIRAMFIN,
+MOTILALOFS, OBEROIRLTY,
+PHOENIXLTD.
 
-<b>Skipped</b>
-• OBEROIRLTY — ⛔ blocked by
-  risk check: net R:R 1.49
-  (dip 1815, T1 1844 under
-  call walls). Up 4.6%, extended
-• SAIL — net R:R 0.86, failed
-  breakout at ₹181.2, call wall 180
+❌ <b>Why none qualify</b>
+• SHRIRAMFIN: 2nd financial
+  beside KOTAKBANK; BankNifty
+  +0.8% (needs +1.5%).
+  Under 1001 SMA200 and
+  1000 call wall.
+• MOTILALOFS: spike fading,
+  net R:R 0.9
+• OBEROIRLTY: net R:R 1.1
+• PHOENIXLTD: RSI 74,
+  net R:R 1.2
 
-<b>Flips to GO if</b>
-• OBEROIRLTY: close above ₹1,826
-  on 40k+ vol, or dip holds
-  ₹1,812–1,815 with better R:R
-• SAIL: close above ₹181.6
-  on 1M+ vol
+👀 <b>Flips</b>
+SHRIRAMFIN 5-min close
+above 1004 on volume, if
+KOTAKBANK slot frees.
 
-📡 Watcher checks every 5 min
+✅ KOTAKBANK plan unchanged.
+
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>

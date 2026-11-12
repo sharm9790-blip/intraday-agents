@@ -5,14 +5,16 @@
   "ETERNAL": "09:58 R:R 0.7 chased, supply 366-369.7; flips on 5-min close >367.3 on >300k vol after 10:35, or retest hold 364.5-365",
   "ICICIBANK": "09:58 range 1583-1592.5, volume fading; flips on 5-min close >1592.5 on volume",
   "BAJFINANCE": "10:40 3rd financial (KOTAKBANK, ABCAPITAL live), net R:R ~1.5 chase, call wall 1120-1130; flips on 5-min close >1115.2 on >=250k vol with BankNifty >=+1.5%, or slot frees",
-  "MOTILALOFS": "09:58 chase, ATR 4.4%, stop too wide",
+  "MOTILALOFS": "11:15 climax spike fading, net R:R 0.90 to 1224.7, 3rd financial; flips on 5-min close >1222 on rising volume",
   "HINDCOPPER": "09:58 gap up faded below open",
   "ITC": "09:58 gap fade, volume dried",
   "PAYTM": "10:18 net R:R 0.89, 52wk high 1855.5 blocks; flips on 5-min close >1856 on >=120k vol",
   "ABCAPITAL": "10:18 financials overlap with KOTAKBANK, CPI risk; flips on 5-min close >413.9 on >=110k vol after 10:35 if BankNifty >=+1.5%",
   "PNB": "10:18 net R:R 0.75, 140 CE wall 11.4M OI; flips on 5-min close >141.2 on >2M vol",
   "TMCV": "10:40 net R:R ~1.0, rejected 464.4 on climax vol, non-F&O; flips on 5-min close >465 on >=300k vol",
-  "OBEROIRLTY": "10:55 blocked by risk check, net R:R 1.49 at pullback 1815 (T1 1844 under 1845.7 Fib, 1840/1860/1880 call walls), +4.6% extended; flips on 5-min close >1826 on >40k vol with T1 >=1850 realistic, or dip hold 1812-1815 with SL 1798 and net R:R >=1.5",
-  "SAIL": "10:55 net R:R 0.86 to T1, failed 181.2 breakout, 180 call wall, FPO overhang; flips on 5-min close >181.6 on >1M vol, or pullback hold 179.4-179.6 above 179.16"
+  "OBEROIRLTY": "11:15 net R:R 1.09 to 1834, PCR 0.66, call walls 1840-1880; flips on 5-min close >1834 on above-avg volume",
+  "SAIL": "10:55 net R:R 0.86 to T1, failed 181.2 breakout, 180 call wall, FPO overhang; flips on 5-min close >181.6 on >1M vol, or pullback hold 179.4-179.6 above 179.16",
+  "SHRIRAMFIN": "11:15 2nd financial beside KOTAKBANK, BankNifty +0.8% under 1.5%, SMA200 1001 + 1000 CE wall; flips on 5-min close >1004 on >100k vol if BankNifty >=+1.5% or slot frees",
+  "PHOENIXLTD": "11:15 RSI 74, 2300 call wall, net R:R 1.18; flips on 5-min close >2275 on strong volume"
  }
 }
