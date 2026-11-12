@@ -1,26 +1,44 @@
-🔎 <b>11:15 scan: NO TRADE</b>
+🟢 <b>GO — PETRONET</b>
+🕐 11:32 IST  ·  Confidence 5.5/10
 
-Checked: SHRIRAMFIN,
-MOTILALOFS, OBEROIRLTY,
-PHOENIXLTD.
+📥 Buy  <b>₹335.3</b>  (max ₹335.45)
+⚡ <b>BUY NOW</b>
+🛑 Stop loss  <b>₹333.8</b>
+🎯 Target 1  <b>₹338.5</b>  (sell half)
+🎯 Target 2  <b>₹339.8</b>
+📦 Qty  <b>298</b> shares
+📝 <b>Draft order</b> (you place it)
+Intraday · Limit · NSE
+Qty  <code>298</code>
+Buy limit  <code>335.3</code>
+SL-M trigger  <code>333.8</code>
+Sell half  <code>149</code> @ <code>338.5</code>
+📲 INDmoney: search <code>PETRONET</code>
 
-❌ <b>Why none qualify</b>
-• SHRIRAMFIN: 2nd financial
-  beside KOTAKBANK; BankNifty
-  +0.8% (needs +1.5%).
-  Under 1001 SMA200 and
-  1000 call wall.
-• MOTILALOFS: spike fading,
-  net R:R 0.9
-• OBEROIRLTY: net R:R 1.1
-• PHOENIXLTD: RSI 74,
-  net R:R 1.2
+<b>✅ Buy only if</b>
+• Price ₹334.65–335.45
+• 5-min close above ₹334.65
 
-👀 <b>Flips</b>
-SHRIRAMFIN 5-min close
-above 1004 on volume, if
-KOTAKBANK slot frees.
+<b>❌ Cancel if</b>
+• Not bought by 11:45
+• Hits ₹336.9 before buying
+• 5-min close below ₹333.9
+• After buying: close below ₹334
 
-✅ KOTAKBANK plan unchanged.
+<b>💰 Risk vs reward</b>
+Risk ≈ ₹527 (298 sh)
+Profit ≈ ₹950 (T1) · ₹1,340 (T2)
+Net reward 1.66× the risk
 
-<i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
+<b>Why this stock</b>
+• Above VWAP, 52-wk high zone
+• 335/340 calls built up
+• Weak: 2 rejections at ₹336.3
+
+<b>Skipped</b>
+• BEL — failed breakout, 410 wall
+• UNOMINDA — reward below risk
+• MEESHO — extended, R:R 1.1
+
+📡 Watcher checks every 5 min
+<i>Educational analysis, not SEBI-registered advice. Intraday is high risk; you place orders yourself.</i>

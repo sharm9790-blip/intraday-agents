@@ -1,11 +1,31 @@
 {
  "date": "2026-11-12",
- "verdict_id": "2026-11-12_1115",
- "go_count": 3,
+ "verdict_id": "2026-11-12_1130",
+ "go_count": 4,
  "connectors": {
   "groww": false,
   "indmoney": true,
   "investsights": true
  },
- "plan": null
+ "plan": {
+  "symbol": "PETRONET",
+  "yahoo": "PETRONET.NS",
+  "name": "Petronet LNG",
+  "side": "long",
+  "entry_type": "now",
+  "zone_low": 334.65,
+  "zone_high": 335.45,
+  "entry": 335.3,
+  "max_entry": 335.45,
+  "trigger_close_above": 334.65,
+  "sl": 333.8,
+  "t1": 338.5,
+  "t2": 339.8,
+  "qty": 298,
+  "deadline": "11:45",
+  "cancel_if_high_reaches": 336.9,
+  "cancel_if_close_below": 333.9,
+  "exit_if_close_below_after_entry": 334.0,
+  "time_stop": "15:00"
+ }
 }
