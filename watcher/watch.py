@@ -24,6 +24,7 @@ import news
 import premarket
 import recheck
 import risk
+import scan
 
 PAUSED = set()  # chats that sent PAUSE today (broadcasts skip them)
 
@@ -421,6 +422,26 @@ def fire_premarket(now, watch):
     return False
 
 
+def fire_late_recheck(now, state_dir, today, watch):
+    """A rejected stock that broke out after the last scan (14:15) used to be lost
+    (PAYTM 12 Nov, 14:20). One short re-check run, 14:16–14:22, only for those."""
+    url = os.environ.get("CLAUDE_FIRE_URL")
+    token = os.environ.get("CLAUDE_FIRE_TOKEN")
+    minutes = now.hour * 60 + now.minute
+    if not url or not token or not hhmm("14:16") <= minutes <= hhmm("14:22") or watch.get("late_fired"):
+        return False
+    rc = load(os.path.join(state_dir, "recheck.json"), {})
+    syms = [s for s, v in (rc.get("symbols") or {}).items()
+            if rc.get("date") == today and v.get("at", "") >= "14:10"]
+    if not syms:
+        return False
+    if not post_fire(url, token, f"RECHECK late breakout: {' '.join(syms)}, {now:%H:%M} IST", watch):
+        return False
+    watch["late_fired"] = now.strftime("%H:%M")
+    watch["fired_at"] = now.strftime("%H:%M")
+    return True
+
+
 def post_fire(url, token, text, watch):
     """POST to the routine's API trigger. False (and watch['fire_error']) on failure."""
     if os.environ.get("DRY_RUN"):
@@ -508,7 +529,29 @@ def main(state_dir):
         if plan_doc.get("plan"):
             v = vid.split("_")[-1]
             start = f"{v[:2]}:{v[2:]}"
-            gp = plan_doc["plan"]
+            gp = dict(plan_doc["plan"])
+            conv = []
+            try:
+                bars, ltp = candles(gp["yahoo"])
+            except Exception as e:
+                print("candles failed", e)
+                bars, ltp = [], None
+            a = scan.atr5(bars, now)
+            if a:
+                gp["atr5"] = a
+            # Trend day / stock trending and already above the dip zone: buy now instead
+            # of waiting for a dip that rarely comes (6–12 Nov: 13 of 24 dips never filled).
+            price = ltp if ltp is not None else (bars[-1][4] if bars else None)
+            mode = load(os.path.join(state_dir, "candidates.json"), {})
+            mode = mode.get("mode") if mode.get("date") == today else None
+            if (gp.get("entry_type") == "dip" and price and price > gp["zone_high"]
+                    and (mode == "trend" or scan.stock_trend(bars, now))):
+                p2 = chase_plan(gp, price, now, bars, watch)
+                if p2:
+                    gp = p2
+                    conv = ["📈 <b>Trend " + ("day" if mode == "trend" else "stock") + ": BUY NOW</b>",
+                            f"Price {rs(price)} is above the dip zone;",
+                            "buy here, same SL / targets (R:R still ≥ 1.5).", ""]
             rk = risk.check(gp, start, watch.get("trades", 0))
             if watch.get("day_trades", 0) >= MAX_DAY:
                 rk["reasons"].append(f"{MAX_DAY} trades already taken today")
@@ -526,7 +569,7 @@ def main(state_dir):
                           f"Risk ₹{rk['risk']:,} · Value ₹{rk['value']:,}"]
                 if abs(rk["qty"] - gp["qty"]) > 0.02 * max(gp["qty"], 1):
                     lines += [f"🧮 <b>Use qty {rk['qty']}</b> (not {gp['qty']})"]
-                lines += ["", *order_block(gp, rk["qty"])]
+                lines += ["", *conv, *order_block(gp, rk["qty"])]
                 p = {**gp, "qty": rk["qty"], "start": start}
                 watch.setdefault("plans", []).append(p)
                 watch["live"].append({"symbol": gp["symbol"], "vid": vid, "plan": p,
@@ -584,6 +627,18 @@ def main(state_dir):
                 f"{rs(rc[s]['level'])} at {rc[s]['at']} (rejected {rc[s]['rejected_at']})" for s in new
             ] + ["", "It was rejected earlier; the next scan looks at it again."], footer=False))
 
+    # 2c) Code scanner: rank the whole liquid universe once per quarter hour, just
+    #     before the debate fires, so the Bull starts from the best movers.
+    quarter = f"{now.hour:02d}:{now.minute // 15 * 15:02d}"
+    if hhmm("09:40") <= minutes <= hhmm("14:25") and watch.get("scan_slot") != quarter:
+        try:
+            cand = scan.run(state_dir, now, candles)
+            save(os.path.join(state_dir, "candidates.json"), cand)
+            watch["scan_slot"] = quarter
+            print("scan:", cand["mode"], [i["symbol"] for i in cand["items"]])
+        except Exception as e:  # never let this stop the watcher
+            print("scan failed", e)
+
     # 3) Keep scanning while there is room for another plan.
     count_trades(watch, mt_today, now, ordered)
     save(watch_path, watch)
@@ -613,6 +668,8 @@ def main(state_dir):
         print("live:", ", ".join(f"{e['symbol']} {e['status']}" for e in live))
     if not full and not loss_stop:
         if fire_debate(now, trades + waiting, vid if plan_doc.get("date") == today else None, watch):
+            save(watch_path, watch)
+        elif fire_late_recheck(now, state_dir, today, watch):
             save(watch_path, watch)
 
 

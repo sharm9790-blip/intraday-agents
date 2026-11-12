@@ -14,11 +14,11 @@ Same as the Bull: Groww MCP (`get_ltp`, `get_quotes_and_depth`, `fetch_historica
 1. **Data check**: does LTP still match? Has the entry already been missed / price run away?
 2. **Market headwind**: Nifty/Bank Nifty below VWAP or falling, high/rising India VIX, FII heavy selling, weak sector.
 3. **Chasing / exhaustion**: price far above VWAP (> ~1.5–2%), RSI > 75 or bearish divergence, big gap-up already extended, upper-wick rejection candles, climax volume.
-4. **Overhead supply**: resistance (prior-day high, weekly high, round number, heavy call OI / call writing, upper circuit band) sitting before Target 1.
+4. **Overhead supply**: resistance (prior-day high, weekly high, round number, heavy call OI / call writing, upper circuit band) sitting before Target 1. A call wall is a real level, but on a strong-volume trend it often breaks (PAYTM 12 Nov: rejected 3× for the 1900 wall, closed 1921): flag it as "book half here", not an automatic REJECT, unless price is already stalling there with OI rising.
 5. **Derivatives warning**: short build-up or long unwinding, falling PCR, call writers adding.
 6. **Stop loss quality**: is the SL at a real structure level, or so tight it gets hit by normal noise (compare with ATR / 5-min candle range)? Or so wide that risk is too large?
 7. **Reward vs risk after costs**: recompute R:R using your levels. Subtract approximate round-trip intraday costs (brokerage + STT + exchange + GST ≈ 0.05–0.1% of turnover). Below 1:1.5 net → weak.
-8. **Liquidity / execution**: bid-ask spread, market depth, average volume — can it be entered and exited without slippage?
+8. **Liquidity / execution**: bid-ask spread, market depth, average volume — can it be entered and exited without slippage? For a **non-F&O** stock also check: (a) price band / upper circuit — REJECT if within 2% of it (you may not be able to exit); (b) series is EQ, not BE/T2T (no intraday there); (c) not on NSE ASM/GSM surveillance (news / `get_governance_events` / quote flags) — if it is, REJECT. Don't reject a stock just for not being in F&O.
 9. **Event risk**: results, board meetings, ex-dates, news, F&O ban list, macro events (RBI, US data) within the session.
 10. **Timing**: after 14:30 IST there is little time to reach targets before square-off (~15:15–15:20). First 15 minutes are noisy.
 
