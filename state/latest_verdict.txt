@@ -1,21 +1,23 @@
-🔴 <b>NO TRADE — 13:30 scan</b>
-🕐 13:32 IST  ·  Confidence 8/10
+🔴 <b>NO TRADE — 13:45 scan</b>
+🕐 13:47 IST  ·  Confidence 8/10
 
-Market weak: Nifty -0.74%,
-near day low. Only 25% of
-stocks above VWAP.
+Market weak: Nifty -0.76%,
+near day low. Bank Nifty
+-0.9%. Only 16% of stocks
+above VWAP.
 
 <b>Skipped</b>
-• BHARTIARTL — net R:R 1.07
-  (needs 1.5), weak volume,
-  stuck under ₹2,121
-• All other scan names were
-  already rejected today
+• All scanner names already
+  rejected today
+• Top gainers are chases
+  (AMBER, GESHIP, BBOX,
+  ANURAS up 4-8%, no dip)
+• AEGISVOPAK — net R:R ~1.2
+  (needs 1.5)
 
 <b>Would flip on</b>
-• BHARTIARTL 5-min close above
-  ₹2,121.7 on 100k+ volume
-  and Nifty above 25,077
+• AEGISVOPAK 5-min close
+  above ₹285.9 on 2x volume
 
 📡 Watcher checks every 5 min
 <i>Educational analysis, not SEBI-registered advice. Intraday trading is high risk; you place orders yourself.</i>

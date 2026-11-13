@@ -34,6 +34,11 @@
   "FRACTAL": "13:00 double top 838, fading volume, ask-heavy; flips on 5-min close >838 on 2x volume",
   "BANKINDIA": "13:22 net R:R ~1.0-1.4 to T1 under 155 call wall 4.85M OI, volume faded 113-347k, ask-heavy; flips on 5-min close >155.1 on vol >=600k",
   "POWERINDIA": "13:22 distribution on volume below VWAP, results event unresolved, net R:R 1.3, 3 shares; flips on 5-min close >32100 on vol >=20k",
-  "BHARTIARTL": "13:32 net R:R 1.07 to T1 (1.33 blended), breakout under 2121 on 0.7x volume, RSI 68.6, weak Nifty; flips on 5-min close >2121.7 on vol >=100k with Nifty above 25077"
+  "BHARTIARTL": "13:32 net R:R 1.07 to T1 (1.33 blended), breakout under 2121 on 0.7x volume, RSI 68.6, weak Nifty; flips on 5-min close >2121.7 on vol >=100k with Nifty above 25077",
+  "AEGISVOPAK": "13:47 flat range, vol fading, ATR<1, net R:R ~1.2, +6.7% chase; flips on 5-min close >285.9 on 2x volume",
+  "GESHIP": "13:47 +5% grind at day high, ~2% above VWAP, no pullback; flips on VWAP pullback bounce",
+  "BBOX": "13:47 failed breakout 950, fading; flips on 5-min close >950 on 2x volume",
+  "ANURAS": "13:47 +4.7% at high on thin volume, ~3% above VWAP; flips on VWAP pullback bounce",
+  "AMBER": "13:47 +8.5% distribution look, far above VWAP; flips on VWAP pullback bounce"
  }
 }
