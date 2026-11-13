@@ -39,7 +39,7 @@
   "GESHIP": "13:47 +5% grind at day high, ~2% above VWAP, no pullback; flips on VWAP pullback bounce",
   "BBOX": "13:47 failed breakout 950, fading; flips on 5-min close >950 on 2x volume",
   "ANURAS": "13:47 +4.7% at high on thin volume, ~3% above VWAP; flips on VWAP pullback bounce",
-  "AMBER": "13:47 +8.5% distribution look, far above VWAP; flips on VWAP pullback bounce",
+  "AMBER": "14:23 bounce stalled under 6725, lower highs, volume 2k, net R:R ~0.8; flips on 5-min close >6725 on rising volume",
   "SOUTHBANK": "14:08 52-wk-high 62.57 rejected at 12:35, net R:R ~1.0 to T1, ask 60%; flips on 5-min close >62.60 on vol >=300k",
   "BSE": "14:08 failed breakout 3955 twice, net R:R ~0.9, 4000 call wall, ask 76%; flips on 5-min close >3960 on vol >=100k"
  }

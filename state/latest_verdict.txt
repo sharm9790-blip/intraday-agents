@@ -1,22 +1,18 @@
-🔴 <b>NO TRADE — 14:00 scan</b>
-🕐 14:08 IST  ·  Confidence 8/10
+<b>🔎 14:23 scan: NO TRADE</b>
 
-Market weak: Nifty -0.8%,
-only 19% of stocks above VWAP.
+Market weak: Nifty -0.9%,
+only 13% of stocks above VWAP.
 
-<b>Skipped</b>
-• SOUTHBANK — 62.57 high already
-  rejected, net R:R ~1.0
-• BSE — failed breakout 3955,
-  4000 call wall, net R:R ~0.9
-• All scanner names already
-  rejected today
+<b>AMBER</b> ❌
+Bounce stalled, lower highs,
+volume dried, R:R ~0.8.
 
-<b>Would flip on</b>
-• SOUTHBANK 5-min close above
-  ₹62.60 on 300k+ volume
-• BSE 5-min close above ₹3,960
-  on 100k+ volume
+<b>Others</b> ❌
+ANGELONE, POLICYBZR, MCX,
+BANKINDIA, POWERINDIA:
+none closed above flip level.
 
-📡 Watcher checks every 5 min
-<i>Educational analysis, not SEBI-registered advice. Intraday trading is high risk; you place orders yourself.</i>
+⏱ Too close to 14:30 cut-off
+for any new plan.
+
+<i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
