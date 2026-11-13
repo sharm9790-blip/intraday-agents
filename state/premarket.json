@@ -1,0 +1,37 @@
+{
+ "date": "2026-11-13",
+ "stage": "overnight",
+ "id": "2026-11-13_0855",
+ "connectors": {
+  "groww": false,
+  "indmoney": true,
+  "investsights": true
+ },
+ "cues": "FII +7,830cr, BankNifty +1.19% yday; CPI 6.09%, CRR hike; GIFT/US n/a",
+ "events": [],
+ "stocks": [
+  {
+   "symbol": "CDSL",
+   "yahoo": "CDSL.NS",
+   "name": "Central Depository Services (India)",
+   "side": "long",
+   "buy_above": 1461,
+   "zone_low": 1461,
+   "zone_high": 1466,
+   "trigger_close_above": 1461,
+   "entry": 1462.5,
+   "max_entry": 1466,
+   "sl": 1432,
+   "t1": 1520,
+   "t2": 1542,
+   "qty": 32,
+   "deadline": "09:45",
+   "cancel_if_high_reaches": 1520,
+   "cancel_if_close_below": 1450,
+   "exit_if_close_below_after_entry": 1440,
+   "time_stop": "15:00",
+   "keep": false,
+   "why": "risk check: net R:R 1.44 below 1.5"
+  }
+ ]
+}
