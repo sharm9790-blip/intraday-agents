@@ -46,7 +46,7 @@
   "ready": true,
   "pinger": true
  },
- "last_run": "11:10",
+ "last_run": "11:15",
  "taken": [],
  "trades": 0,
  "day_trades": 0,
@@ -57,9 +57,9 @@
  "fire_error": null,
  "pre_id": "2026-11-13_0906",
  "pre_done": {},
- "scan_slot": "11:00",
- "last_fire": "11:00",
- "fired_at": "11:00",
+ "scan_slot": "11:15",
+ "last_fire": "11:15",
+ "fired_at": "11:15",
  "verdicts": 5,
  "plans": [
   {
