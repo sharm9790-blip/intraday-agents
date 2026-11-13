@@ -6,16 +6,22 @@
    {
     "symbol": "WAAREEENER",
     "yahoo": "WAAREEENER.NS",
-    "qty": 38,
-    "left": 38,
+    "qty": 32,
+    "left": 0,
     "entry": 2608.0,
     "sl": 2599.0,
     "t1": 2632.0,
     "t2": 2660.0,
     "opened": "11:46",
     "checked": "11:50",
-    "realized": 0.0,
-    "sells": [],
+    "realized": -418.0,
+    "sells": [
+     {
+      "qty": 32,
+      "price": 2597.0,
+      "at": "11:59"
+     }
+    ],
     "flags": {},
     "plan": true,
     "plan_qty": 38,
@@ -34,14 +40,14 @@
  "boards": {
   "1322737291": {
    "id": 711,
-   "open": true
+   "open": false
   }
  },
  "menu": 10,
  "ind_seen": {
   "WAAREEENER": [
-   38,
-   0
+   32,
+   32
   ]
  }
 }
