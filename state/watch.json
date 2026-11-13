@@ -164,7 +164,7 @@
   "ready": true,
   "pinger": true
  },
- "last_run": "14:15",
+ "last_run": "14:20",
  "taken": [],
  "trades": 0,
  "day_trades": 2,
@@ -176,8 +176,8 @@
  "pre_id": "2026-11-13_0906",
  "pre_done": {},
  "scan_slot": "14:15",
- "last_fire": "14:00",
- "fired_at": "14:00",
+ "last_fire": "14:15",
+ "fired_at": "14:20",
  "verdicts": 17,
  "plans": [
   {

@@ -7,6 +7,13 @@
    "level": 3125.0,
    "kind": "flip level",
    "close": 3137.7
+  },
+  "ANURAS": {
+   "at": "14:15",
+   "rejected_at": "13:47",
+   "level": 1265.5,
+   "kind": "day high",
+   "close": 1268.7
   }
  }
 }
