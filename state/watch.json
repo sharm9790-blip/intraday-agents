@@ -78,13 +78,14 @@
   "11:40 WAAREEENER 2617.00 VWAP \u20b92,593.52 status waiting",
   "11:45 WAAREEENER 2610.00 VWAP \u20b92,594.12 status waiting",
   "11:50 WAAREEENER 2603.90 VWAP \u20b92,594.32 status waiting",
-  "11:51 WAAREEENER 2606.50 VWAP \u20b92,594.37 status waiting"
+  "11:51 WAAREEENER 2606.50 VWAP \u20b92,594.37 status waiting",
+  "11:55 WAAREEENER 2607.00 VWAP \u20b92,594.46 status waiting"
  ],
  "health": {
   "ready": true,
   "pinger": true
  },
- "last_run": "11:51",
+ "last_run": "11:55",
  "taken": [
   "WAAREEENER"
  ],
