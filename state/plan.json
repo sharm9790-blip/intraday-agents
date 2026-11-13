@@ -1,33 +1,11 @@
 {
  "date": "2026-11-13",
- "verdict_id": "2026-11-13_1235",
+ "verdict_id": "2026-11-13_1233",
  "go_count": 4,
  "connectors": {
   "groww": false,
   "indmoney": true,
   "investsights": true
  },
- "plan": {
-  "symbol": "IIFLCAPS",
-  "yahoo": "IIFLCAPS.NS",
-  "name": "IIFL Capital Services",
-  "side": "long",
-  "entry_type": "dip",
-  "zone_low": 358.6,
-  "zone_high": 359.4,
-  "entry": 359.0,
-  "max_entry": 359.4,
-  "trigger_close_above": 358.6,
-  "sl": 356.7,
-  "t1": 366.0,
-  "t2": 370.0,
-  "qty": 278,
-  "deadline": "13:45",
-  "cancel_if_high_reaches": 364.0,
-  "cancel_if_close_below": 357.5,
-  "exit_if_close_below_after_entry": 357.0,
-  "time_stop": "15:00",
-  "atr5": 1.86,
-  "sector": "Capital Markets"
- }
+ "plan": null
 }
