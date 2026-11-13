@@ -15,8 +15,10 @@
   "HINDUNILVR": "10:48 net R:R 1.05, 1435 ask at 1990, 2000 call wall; flips on 5-min close >1992 on rising volume",
   "ACUTAAS": "10:48 +3.2% chase, stop inside noise, thin volume; flips on VWAP pullback bounce then close >4132 on 2x volume",
   "OFSS": "11:00 net R:R 0.87, triple top 10130-10140 on fading volume, daily Supertrend down; flips on 5-min close >10150 on vol >=8k",
-  "COFORGE": "11:00 net R:R 1.2, volume fading, 2100 call wall 1.6M OI; flips on 5-min close >2076 on vol >=40k",
+  "COFORGE": "11:15 net R:R ~1.2 at dip, 2073.8 double top, 2100 call wall 15.4L; flips on 5-min close >2074 on vol >=30k",
   "MFSL": "11:00 flat range, no setup; flips on 5-min close >1394 on real volume",
-  "GVT&D": "11:00 +5.5% chase; flips on VWAP pullback bounce"
+  "GVT&D": "11:00 +5.5% chase; flips on VWAP pullback bounce",
+  "M&MFIN": "11:15 triple top 289.0-289.3, daily downtrend, net R:R 0.8; flips on 5-min close >289.4 on vol >=40k",
+  "PERSISTENT": "11:15 net R:R 0.9, 6100/6200 call walls, SL in noise; flips on 5-min close >6104 on 2x volume"
  }
 }
