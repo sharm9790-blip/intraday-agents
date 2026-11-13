@@ -1,47 +1,23 @@
-<b>🟢 GO w/ conditions — ENRIN</b>
-🕐 10:08 IST  ·  Confidence 6/10
-
-📥 Buy  <b>₹3,123</b>  (max ₹3,128)
-⏳ <b>Wait for dip</b>
-🛑 Stop loss  <b>₹3,090</b>
-🎯 Target 1  <b>₹3,190</b>  (sell half)
-🎯 Target 2  <b>₹3,256</b>
-📦 Qty  <b>28</b> shares
-📝 <b>Draft order</b> (you place it)
-Intraday · Limit · NSE
-Qty  <code>28</code>
-Buy limit  <code>3123</code>
-SL-M trigger  <code>3090</code>
-Sell half  <code>14</code> @ <code>3190</code>
-📲 INDmoney: search <code>ENRIN</code>
-
-<b>✅ Buy only if</b>
-• Dips to ₹3,118–3,128
-• Green 5-min close, above VWAP
-• Not a long-wick candle
-
-<b>❌ Cancel if</b>
-• Not filled by 13:30
-• Hits ₹3,150 before the dip
-• 5-min close below ₹3,095
-
-<b>💰 Risk vs reward</b>
-Max loss ≈ ₹1,000
-Profit ≈ ₹1,800 (T1) · ₹3,600 (T2)
-Reward 1.8× the risk
-
-<b>Why this stock</b>
-• +3.5% on day, above VWAP
-• Pullback entry only, no chase
-• Call wall 3150, so T1 is past it
-
-<b>Skipped</b>
-• PNB — 145 call wall, stalling
-• POLICYBZR — R:R 1.45
-• ABB — results today
+🔎 <b>Scan 10:27 — NO TRADE</b>
 
 Market choppy.
-Nifty 25,205 (-0.4%), BankNifty 61,074 (-0.7%).
+Nifty -0.37%, BankNifty -0.78%.
 
-📡 Watcher checks every 5 min
-<i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
+❌ <b>FORTIS</b>
+Net R:R 1.18 at trigger.
+Volume faded, 780 call wall.
+Flips: 5-min close &gt;772.8
+on vol ≥35k.
+
+❌ <b>CUMMINSIND</b>
+Downtrend, EMA20 4418.
+Net R:R 1.09.
+Flips: close &gt;4420, vol ≥40k.
+
+❌ <b>EICHERMOT</b>
+Results due today.
+Triple top 7623-7626.
+Flips: after results,
+close &gt;7627 on 2x vol.
+
+Educational analysis, not SEBI-registered advice. Intraday trading is high risk; you place and manage any order yourself.
