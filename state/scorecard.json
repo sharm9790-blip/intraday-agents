@@ -1305,5 +1305,256 @@
    "lock": 683,
    "targets": 1207
   }
+ },
+ {
+  "date": "2026-11-13",
+  "plans": [
+   {
+    "symbol": "ENRIN",
+    "start": "10:08",
+    "rules_v": "2026-11-13",
+    "sector": "Capital Goods",
+    "entry": 3123.0,
+    "qty": 28,
+    "sl": 3090.0,
+    "t1": 3190.0,
+    "t2": 3256.0,
+    "close": 3125.9,
+    "rules": {
+     "pnl": 0,
+     "steps": [
+      "ran up without the dip"
+     ]
+    },
+    "trail": {
+     "pnl": 0,
+     "steps": [
+      "ran up without the dip"
+     ]
+    },
+    "limit": {
+     "pnl": 0,
+     "steps": [
+      "never filled"
+     ]
+    },
+    "price_at_plan": 3144.8,
+    "targets": {
+     "cash": 100000,
+     "qty": 32,
+     "half": 16,
+     "rest": 16,
+     "pf1": 1072,
+     "pf2": 2128,
+     "total": 3200,
+     "t1_hit": true,
+     "t2_hit": false,
+     "entry_hit": false,
+     "high": 3222.3
+    },
+    "market": {
+     "pnl": 624,
+     "steps": [
+      "bought 3144.80",
+      "10:40 T1",
+      "15:00 time stop 3151.70"
+     ]
+    },
+    "lock": {
+     "pnl": 624,
+     "steps": [
+      "bought 3144.80",
+      "10:40 T1",
+      "15:00 time stop 3151.70"
+     ]
+    }
+   },
+   {
+    "symbol": "WAAREEENER",
+    "start": "11:36",
+    "rules_v": "2026-11-13",
+    "sector": "Capital Goods",
+    "entry": 2608.0,
+    "qty": 38,
+    "sl": 2599.0,
+    "t1": 2632.0,
+    "t2": 2660.0,
+    "close": 2546,
+    "rules": {
+     "pnl": 0,
+     "steps": [
+      "closed below cancel level"
+     ]
+    },
+    "trail": {
+     "pnl": 0,
+     "steps": [
+      "closed below cancel level"
+     ]
+    },
+    "limit": {
+     "pnl": -461,
+     "steps": [
+      "11:45 filled",
+      "11:55 SL"
+     ]
+    },
+    "price_at_plan": 2615.8,
+    "targets": {
+     "cash": 100000,
+     "qty": 38,
+     "half": 19,
+     "rest": 19,
+     "pf1": 456,
+     "pf2": 988,
+     "total": 1444,
+     "t1_hit": false,
+     "t2_hit": false,
+     "entry_hit": true,
+     "high": 2617.9
+    },
+    "market": {
+     "pnl": -758,
+     "steps": [
+      "bought 2615.80",
+      "11:55 SL"
+     ]
+    },
+    "lock": {
+     "pnl": -758,
+     "steps": [
+      "bought 2615.80",
+      "11:55 SL"
+     ]
+    }
+   },
+   {
+    "symbol": "BHARTIARTL",
+    "start": "12:15",
+    "rules_v": "2026-11-13",
+    "sector": "Telecommunication",
+    "entry": 2104.0,
+    "qty": 47,
+    "sl": 2098.0,
+    "t1": 2119.5,
+    "t2": 2130.0,
+    "close": 2106,
+    "rules": {
+     "pnl": 0,
+     "steps": [
+      "ran up without the dip"
+     ]
+    },
+    "trail": {
+     "pnl": 0,
+     "steps": [
+      "ran up without the dip"
+     ]
+    },
+    "limit": {
+     "pnl": 0,
+     "steps": [
+      "never filled"
+     ]
+    },
+    "price_at_plan": 2108.6,
+    "targets": {
+     "cash": 100000,
+     "qty": 47,
+     "half": 23,
+     "rest": 24,
+     "pf1": 356,
+     "pf2": 624,
+     "total": 980,
+     "t1_hit": true,
+     "t2_hit": false,
+     "entry_hit": false,
+     "high": 2122.9
+    },
+    "market": {
+     "pnl": 381,
+     "steps": [
+      "bought 2108.60",
+      "13:00 T1",
+      "15:00 time stop 2119.00"
+     ]
+    },
+    "lock": {
+     "pnl": 381,
+     "steps": [
+      "bought 2108.60",
+      "13:00 T1",
+      "15:00 time stop 2119.00"
+     ]
+    }
+   },
+   {
+    "symbol": "IIFLCAPS",
+    "start": "12:35",
+    "rules_v": "2026-11-13",
+    "sector": null,
+    "entry": 359.0,
+    "qty": 278,
+    "sl": 356.7,
+    "t1": 366.0,
+    "t2": 370.0,
+    "close": 353.55,
+    "rules": {
+     "pnl": 0,
+     "steps": [
+      "closed below cancel level"
+     ]
+    },
+    "trail": {
+     "pnl": 0,
+     "steps": [
+      "closed below cancel level"
+     ]
+    },
+    "limit": {
+     "pnl": -759,
+     "steps": [
+      "12:35 filled",
+      "12:35 SL"
+     ]
+    },
+    "price_at_plan": 359.25,
+    "targets": {
+     "cash": 100000,
+     "qty": 278,
+     "half": 139,
+     "rest": 139,
+     "pf1": 973,
+     "pf2": 1529,
+     "total": 2502,
+     "t1_hit": false,
+     "t2_hit": false,
+     "entry_hit": true,
+     "high": 359.45
+    },
+    "market": {
+     "pnl": -829,
+     "steps": [
+      "bought 359.25",
+      "12:35 SL"
+     ]
+    },
+    "lock": {
+     "pnl": -829,
+     "steps": [
+      "bought 359.25",
+      "12:35 SL"
+     ]
+    }
+   }
+  ],
+  "totals": {
+   "rules": 0,
+   "limit": -1220,
+   "market": -582,
+   "lock": -582,
+   "trail": 0,
+   "targets": 1428
+  }
  }
 ]
