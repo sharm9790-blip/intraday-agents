@@ -1,14 +1,18 @@
 {
  "date": "2026-11-13",
- "at": "11:35",
- "positions": [],
- "orders": [
+ "at": "11:46",
+ "positions": [
   {
    "s": "WAAREEENER",
-   "q": 38,
-   "p": 2608.0
+   "bq": 38,
+   "ba": 2608.0,
+   "sq": 0,
+   "sa": 0.0,
+   "nq": 38,
+   "rp": 0.0
   }
  ],
+ "orders": [],
  "sells": [
   "WAAREEENER"
  ]

@@ -1,9 +1,47 @@
 {
  "offset": 572145774,
  "date": "2026-11-13",
- "trades": {},
+ "trades": {
+  "1322737291": [
+   {
+    "symbol": "WAAREEENER",
+    "yahoo": "WAAREEENER.NS",
+    "qty": 38,
+    "left": 38,
+    "entry": 2608.0,
+    "sl": 2599.0,
+    "t1": 2632.0,
+    "t2": 2660.0,
+    "opened": "11:46",
+    "checked": "11:41",
+    "realized": 0.0,
+    "sells": [],
+    "flags": {},
+    "plan": true,
+    "plan_qty": 38,
+    "broker": "INDmoney",
+    "auto_ind": true,
+    "slip": {
+     "per_share": 0.0,
+     "rs": 0,
+     "delay": 10,
+     "plan_at": "11:36"
+    }
+   }
+  ]
+ },
  "summary_sent": false,
- "boards": {},
+ "boards": {
+  "1322737291": {
+   "id": 711,
+   "open": true
+  }
+ },
  "menu": 10,
- "ind_seen": {}
+ "ind_seen": {
+  "WAAREEENER": [
+   38,
+   0
+  ]
+ }
 }
