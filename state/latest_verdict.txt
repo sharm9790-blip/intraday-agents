@@ -1,18 +1,16 @@
-<b>🔎 14:23 scan: NO TRADE</b>
+<b>🔁 14:25 re-check: NO TRADE</b>
 
-Market weak: Nifty -0.9%,
-only 13% of stocks above VWAP.
+<b>ANURAS</b> ❌
+Broke 1265.5 to 1271 but
+already +5.4% on the day.
+Chase, ~2% above VWAP.
 
-<b>AMBER</b> ❌
-Bounce stalled, lower highs,
-volume dried, R:R ~0.8.
+Breakout volume thin
+(5.6k in last candle).
+Nifty -0.9%, weak market.
+Only ~1 hr left, tight room.
 
-<b>Others</b> ❌
-ANGELONE, POLICYBZR, MCX,
-BANKINDIA, POWERINDIA:
-none closed above flip level.
-
-⏱ Too close to 14:30 cut-off
-for any new plan.
+Would re-check on a
+VWAP pullback bounce.
 
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
