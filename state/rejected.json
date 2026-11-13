@@ -7,7 +7,7 @@
   "ENRIN": "09:49 chase at day high, net R:R 1.1, death cross; flips on 5-min close >3125 on 2x volume",
   "PNB": "10:08 stalled under 145 CE wall (13M OI), BankNifty -0.7%, R:R to wall 0.25; flips on 5-min close >145.35 on vol >=2.5M",
   "POLICYBZR": "10:08 net R:R 1.45, 1100 CE wall, fading volume; flips on 5-min close >1082 on vol >=150k then >1101",
-  "ABB": "10:08 results due today, 7000-7100 call wall, thin volume; flips on results out and 5-min close >7071 on 2x volume",
+  "ABB": "11:55 results due today (pending), 7100 tested 5x and rejected, net R:R ~1.0-1.4; flips on results out and 5-min close >7102 on vol >=15k",
   "CUMMINSIND": "10:27 downtrend, EMA20 4418 and 4400/4500 call walls, net R:R 1.09; flips on 5-min close >4420 on vol >=40k",
   "EICHERMOT": "10:27 results due today, triple top 7623-7626, thin volume, net R:R 1.06; flips on results out and 5-min close >7627 on 2x volume",
   "INDUSTOWER": "10:48 400 call wall 5.09M under T1 402.2, net R:R 1.27 even on breakout; flips on 5-min close >402.5 on 2x volume",
@@ -21,6 +21,7 @@
   "M&MFIN": "11:15 triple top 289.0-289.3, daily downtrend, net R:R 0.8; flips on 5-min close >289.4 on vol >=40k",
   "PERSISTENT": "11:15 net R:R 0.9, 6100/6200 call walls, SL in noise; flips on 5-min close >6104 on 2x volume",
   "LAURUSLABS": "11:36 net R:R 0.85, volume dead, 2440/2500 call walls; flips on 5-min close >2447 on 2x volume",
-  "WELCORP": "11:36 net R:R 0.65, triple rejection 2248, volume dried; flips on 5-min close >2248 on 2x volume"
+  "WELCORP": "11:36 net R:R 0.65, triple rejection 2248, volume dried; flips on 5-min close >2248 on 2x volume",
+  "NYKAA": "11:55 stalled under 52-wk high 366.7, 56% asks, net R:R ~1.1; flips on 5-min close >366.75 on vol >=150k"
  }
 }

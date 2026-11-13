@@ -1,43 +1,15 @@
-🟢 <b>GO — WAAREEENER</b>
-🕐 11:36 IST  ·  Confidence 4/10
+⚪ <b>NO TRADE — 11:55 IST</b>
 
-📥 Buy  <b>₹2,608</b>  (max ₹2,610)
-⏳ <b>Wait for dip</b>
-🛑 Stop loss  <b>₹2,599</b>
-🎯 Target 1  <b>₹2,632</b>  (sell half)
-🎯 Target 2  <b>₹2,660</b>
-📦 Qty  <b>38</b> shares
+📈 Nifty 25,154  (-0.6%)
+🏦 Bank Nifty 60,999  (-0.8%)
+Mood: weak, 31% stocks above VWAP
 
-<b>✅ Buy only if</b>
-• Dips to ₹2,606–2,610
-• Green 5-min close above ₹2,606
-• Nifty holds its day low
+<b>Why nothing passed</b>
+• ABB — results pending, 7100 rejected 5×
+• NYKAA — under 52-wk high, reward below risk
+• Rest — already rejected today
 
-<b>❌ Cancel if</b>
-• Not triggered by 13:30
-• Hits ₹2,640 before the dip
-• 5-min close below ₹2,596
+📌 WAAREEENER plan still live
 
-<b>💰 Risk vs reward</b>
-Max loss ≈ ₹422
-Reward 1.9× the risk (net)
-
-<b>📲 Set in INDmoney now</b>
-1. 🔎 Search WAAREEENER
-2. 🔔 Price alert at ₹2,608
-3. After buying: SL-M at ₹2,599
-4. Sell 19 shares at ₹2,632
-5. Exit all by 15:00
-
-<b>Why this stock</b>
-• +1.7% vs Nifty -0.5%
-• Higher lows, volume breakout
-• Call writers covering at 2600
-
-<b>Skipped</b>
-• LAURUSLABS — R:R 0.85
-• WELCORP — R:R 0.65
-
-⚠️ Choppy market, low conviction
-📡 Watcher checks every 5 min
-<i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
+🔎 Next scan: 12:00 IST
+<i>Analysis only, not advice. You place orders yourself.</i>

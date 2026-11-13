@@ -1,33 +1,11 @@
 {
  "date": "2026-11-13",
- "verdict_id": "2026-11-13_1136",
+ "verdict_id": "2026-11-13_1155",
  "go_count": 2,
  "connectors": {
   "groww": false,
   "indmoney": true,
   "investsights": true
  },
- "plan": {
-  "symbol": "WAAREEENER",
-  "yahoo": "WAAREEENER.NS",
-  "name": "Waaree Energies",
-  "side": "long",
-  "entry_type": "dip",
-  "zone_low": 2606.0,
-  "zone_high": 2610.0,
-  "entry": 2608.0,
-  "max_entry": 2610.0,
-  "trigger_close_above": 2606.0,
-  "sl": 2599.0,
-  "t1": 2632.0,
-  "t2": 2660.0,
-  "qty": 38,
-  "deadline": "13:30",
-  "cancel_if_high_reaches": 2640.0,
-  "cancel_if_close_below": 2596.0,
-  "exit_if_close_below_after_entry": 2596.0,
-  "time_stop": "15:00",
-  "atr5": 8.24,
-  "sector": "Capital Goods"
- }
+ "plan": null
 }
