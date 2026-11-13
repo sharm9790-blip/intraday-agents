@@ -31,6 +31,8 @@
   "ZETWERK": "12:45 results due today (pending), +19.6% in 8 sessions, 188.0-188.5 triple rejection, ask-heavy book, net R:R ~1.3; flips on results out and 5-min close >188.6 on vol >=150k",
   "PINELABS": "12:45 net R:R 1.44, 178.2-178.5 rejected twice, volume fading; flips on 5-min close >178.55 on 2x volume",
   "NAZARA": "12:45 +2.9% chase under 430.5 high, thin volume; flips on 5-min close >430.5 on volume",
-  "FRACTAL": "13:00 double top 838, fading volume, ask-heavy; flips on 5-min close >838 on 2x volume"
+  "FRACTAL": "13:00 double top 838, fading volume, ask-heavy; flips on 5-min close >838 on 2x volume",
+  "BANKINDIA": "13:22 net R:R ~1.0-1.4 to T1 under 155 call wall 4.85M OI, volume faded 113-347k, ask-heavy; flips on 5-min close >155.1 on vol >=600k",
+  "POWERINDIA": "13:22 distribution on volume below VWAP, results event unresolved, net R:R 1.3, 3 shares; flips on 5-min close >32100 on vol >=20k"
  }
 }
