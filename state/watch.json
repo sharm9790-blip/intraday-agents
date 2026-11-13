@@ -38,12 +38,14 @@
  "log": [
   "10:05 ENRIN 3136.20 VWAP \u20b93,107.39 status waiting",
   "10:10 ENRIN 3144.80 VWAP \u20b93,109.63 status waiting",
-  "10:15 ENRIN 3149.50 VWAP \u20b93,110.91 status waiting"
+  "10:15 ENRIN 3149.50 VWAP \u20b93,110.91 status waiting",
+  "10:17 ENRIN 3151.30 VWAP \u20b93,112.75 status waiting"
  ],
  "health": {
-  "ready": true
+  "ready": true,
+  "pinger": true
  },
- "last_run": "10:15",
+ "last_run": "10:17",
  "taken": [
   "ENRIN"
  ],
