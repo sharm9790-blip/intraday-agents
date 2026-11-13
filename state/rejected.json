@@ -33,6 +33,7 @@
   "NAZARA": "12:45 +2.9% chase under 430.5 high, thin volume; flips on 5-min close >430.5 on volume",
   "FRACTAL": "13:00 double top 838, fading volume, ask-heavy; flips on 5-min close >838 on 2x volume",
   "BANKINDIA": "13:22 net R:R ~1.0-1.4 to T1 under 155 call wall 4.85M OI, volume faded 113-347k, ask-heavy; flips on 5-min close >155.1 on vol >=600k",
-  "POWERINDIA": "13:22 distribution on volume below VWAP, results event unresolved, net R:R 1.3, 3 shares; flips on 5-min close >32100 on vol >=20k"
+  "POWERINDIA": "13:22 distribution on volume below VWAP, results event unresolved, net R:R 1.3, 3 shares; flips on 5-min close >32100 on vol >=20k",
+  "BHARTIARTL": "13:32 net R:R 1.07 to T1 (1.33 blended), breakout under 2121 on 0.7x volume, RSI 68.6, weak Nifty; flips on 5-min close >2121.7 on vol >=100k with Nifty above 25077"
  }
 }
