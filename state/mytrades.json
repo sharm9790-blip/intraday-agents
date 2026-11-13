@@ -37,16 +37,22 @@
    {
     "symbol": "IIFLCAPS",
     "yahoo": "IIFLCAPS.NS",
-    "qty": 278,
-    "left": 278,
+    "qty": 188,
+    "left": 0,
     "entry": 359.0,
     "sl": 356.7,
     "t1": 366.0,
     "t2": 370.0,
     "opened": "12:36",
     "checked": "12:31",
-    "realized": 0.0,
-    "sells": [],
+    "realized": -764.5,
+    "sells": [
+     {
+      "qty": 188,
+      "price": 356.25,
+      "at": "12:39"
+     }
+    ],
     "flags": {},
     "plan": true,
     "plan_qty": 278,
@@ -65,7 +71,7 @@
  "boards": {
   "1322737291": {
    "id": 711,
-   "open": true
+   "open": false
   }
  },
  "menu": 10,
@@ -75,8 +81,8 @@
    32
   ],
   "IIFLCAPS": [
-   278,
-   0
+   188,
+   188
   ]
  }
 }
