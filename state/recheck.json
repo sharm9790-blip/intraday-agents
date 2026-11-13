@@ -1,12 +1,12 @@
 {
- "date": "2026-11-12",
+ "date": "2026-11-13",
  "symbols": {
-  "PAYTM": {
-   "at": "14:20",
-   "rejected_at": "13:30",
-   "level": 1897.0,
+  "ENRIN": {
+   "at": "09:50",
+   "rejected_at": "09:49",
+   "level": 3125.0,
    "kind": "flip level",
-   "close": 1901.3
+   "close": 3137.7
   }
  }
 }
