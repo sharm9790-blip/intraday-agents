@@ -155,13 +155,14 @@
   "12:25 BHARTIARTL 2111.90 VWAP \u20b92,104.06 status cancelled",
   "12:28 IIFLCAPS 360.30 VWAP \u20b9354.96 status waiting",
   "12:30 IIFLCAPS 360.30 VWAP \u20b9354.98 status waiting",
-  "12:32 IIFLCAPS 360.30 VWAP \u20b9354.98 status waiting"
+  "12:32 IIFLCAPS 360.30 VWAP \u20b9354.98 status waiting",
+  "12:35 IIFLCAPS 359.40 VWAP \u20b9355.02 status waiting"
  ],
  "health": {
   "ready": true,
   "pinger": true
  },
- "last_run": "12:32",
+ "last_run": "12:35",
  "taken": [
   "IIFLCAPS"
  ],
