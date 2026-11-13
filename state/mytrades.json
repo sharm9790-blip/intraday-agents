@@ -33,6 +33,31 @@
      "delay": 10,
      "plan_at": "11:36"
     }
+   },
+   {
+    "symbol": "IIFLCAPS",
+    "yahoo": "IIFLCAPS.NS",
+    "qty": 278,
+    "left": 278,
+    "entry": 359.0,
+    "sl": 356.7,
+    "t1": 366.0,
+    "t2": 370.0,
+    "opened": "12:36",
+    "checked": "12:31",
+    "realized": 0.0,
+    "sells": [],
+    "flags": {},
+    "plan": true,
+    "plan_qty": 278,
+    "broker": "INDmoney",
+    "auto_ind": true,
+    "slip": {
+     "per_share": 0.0,
+     "rs": 0,
+     "delay": 1,
+     "plan_at": "12:35"
+    }
    }
   ]
  },
@@ -40,7 +65,7 @@
  "boards": {
   "1322737291": {
    "id": 711,
-   "open": false
+   "open": true
   }
  },
  "menu": 10,
@@ -48,6 +73,10 @@
   "WAAREEENER": [
    32,
    32
+  ],
+  "IIFLCAPS": [
+   278,
+   0
   ]
  }
 }
