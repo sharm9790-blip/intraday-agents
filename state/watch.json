@@ -3,8 +3,10 @@
  "verdict_id": null,
  "live": [],
  "log": [],
- "health": {},
- "last_run": "09:11",
+ "health": {
+  "ready": true
+ },
+ "last_run": "09:15",
  "taken": [],
  "trades": 0,
  "day_trades": 0,
