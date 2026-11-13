@@ -114,6 +114,40 @@
      }
     ]
    }
+  },
+  "2026-11-13": {
+   "1322737291": {
+    "pnl": -1182,
+    "trades": 2,
+    "list": [
+     {
+      "symbol": "WAAREEENER",
+      "qty": 32,
+      "entry": 2608.0,
+      "pnl": -418,
+      "open": 0,
+      "slip": {
+       "per_share": 0.0,
+       "rs": 0,
+       "delay": 10,
+       "plan_at": "11:36"
+      }
+     },
+     {
+      "symbol": "IIFLCAPS",
+      "qty": 188,
+      "entry": 359.0,
+      "pnl": -764,
+      "open": 0,
+      "slip": {
+       "per_share": 0.0,
+       "rs": 0,
+       "delay": 1,
+       "plan_at": "12:35"
+      }
+     }
+    ]
+   }
   }
  }
 }
