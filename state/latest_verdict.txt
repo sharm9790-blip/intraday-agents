@@ -1,15 +1,43 @@
-⚪ <b>NO TRADE — 11:15 IST</b>
+🟢 <b>GO — WAAREEENER</b>
+🕐 11:36 IST  ·  Confidence 4/10
 
-Market choppy, Nifty -0.5%
-Bank Nifty -0.9%
+📥 Buy  <b>₹2,608</b>  (max ₹2,610)
+⏳ <b>Wait for dip</b>
+🛑 Stop loss  <b>₹2,599</b>
+🎯 Target 1  <b>₹2,632</b>  (sell half)
+🎯 Target 2  <b>₹2,660</b>
+📦 Qty  <b>38</b> shares
+
+<b>✅ Buy only if</b>
+• Dips to ₹2,606–2,610
+• Green 5-min close above ₹2,606
+• Nifty holds its day low
+
+<b>❌ Cancel if</b>
+• Not triggered by 13:30
+• Hits ₹2,640 before the dip
+• 5-min close below ₹2,596
+
+<b>💰 Risk vs reward</b>
+Max loss ≈ ₹422
+Reward 1.9× the risk (net)
+
+<b>📲 Set in INDmoney now</b>
+1. 🔎 Search WAAREEENER
+2. 🔔 Price alert at ₹2,608
+3. After buying: SL-M at ₹2,599
+4. Sell 19 shares at ₹2,632
+5. Exit all by 15:00
+
+<b>Why this stock</b>
+• +1.7% vs Nifty -0.5%
+• Higher lows, volume breakout
+• Call writers covering at 2600
 
 <b>Skipped</b>
-• COFORGE — R:R 1.2, 2100 call wall
-  Flips on close &gt;₹2074, vol 30k+
-• M&amp;MFIN — triple top 289.3
-  Flips on close &gt;₹289.4, vol 40k+
-• PERSISTENT — R:R 0.9, call walls
-  Flips on close &gt;₹6104, 2x vol
+• LAURUSLABS — R:R 0.85
+• WELCORP — R:R 0.65
 
+⚠️ Choppy market, low conviction
 📡 Watcher checks every 5 min
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>

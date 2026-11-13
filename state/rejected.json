@@ -19,6 +19,8 @@
   "MFSL": "11:00 flat range, no setup; flips on 5-min close >1394 on real volume",
   "GVT&D": "11:00 +5.5% chase; flips on VWAP pullback bounce",
   "M&MFIN": "11:15 triple top 289.0-289.3, daily downtrend, net R:R 0.8; flips on 5-min close >289.4 on vol >=40k",
-  "PERSISTENT": "11:15 net R:R 0.9, 6100/6200 call walls, SL in noise; flips on 5-min close >6104 on 2x volume"
+  "PERSISTENT": "11:15 net R:R 0.9, 6100/6200 call walls, SL in noise; flips on 5-min close >6104 on 2x volume",
+  "LAURUSLABS": "11:36 net R:R 0.85, volume dead, 2440/2500 call walls; flips on 5-min close >2447 on 2x volume",
+  "WELCORP": "11:36 net R:R 0.65, triple rejection 2248, volume dried; flips on 5-min close >2248 on 2x volume"
  }
 }
