@@ -1,23 +1,22 @@
-🔴 <b>NO TRADE — 13:45 scan</b>
-🕐 13:47 IST  ·  Confidence 8/10
+🔴 <b>NO TRADE — 14:00 scan</b>
+🕐 14:08 IST  ·  Confidence 8/10
 
-Market weak: Nifty -0.76%,
-near day low. Bank Nifty
--0.9%. Only 16% of stocks
-above VWAP.
+Market weak: Nifty -0.8%,
+only 19% of stocks above VWAP.
 
 <b>Skipped</b>
+• SOUTHBANK — 62.57 high already
+  rejected, net R:R ~1.0
+• BSE — failed breakout 3955,
+  4000 call wall, net R:R ~0.9
 • All scanner names already
   rejected today
-• Top gainers are chases
-  (AMBER, GESHIP, BBOX,
-  ANURAS up 4-8%, no dip)
-• AEGISVOPAK — net R:R ~1.2
-  (needs 1.5)
 
 <b>Would flip on</b>
-• AEGISVOPAK 5-min close
-  above ₹285.9 on 2x volume
+• SOUTHBANK 5-min close above
+  ₹62.60 on 300k+ volume
+• BSE 5-min close above ₹3,960
+  on 100k+ volume
 
 📡 Watcher checks every 5 min
 <i>Educational analysis, not SEBI-registered advice. Intraday trading is high risk; you place orders yourself.</i>
