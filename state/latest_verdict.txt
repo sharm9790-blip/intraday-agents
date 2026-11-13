@@ -1,26 +1,22 @@
-🔎 <b>Scan 10:48 — NO TRADE</b>
+⚪ <b>NO TRADE — 11:00 scan</b>
+🕐 11:00 IST  ·  Confidence 7/10
 
-Market choppy.
-Nifty -0.34%, BankNifty -0.73%.
+Market choppy: Nifty -0.4%,
+Bank Nifty -0.7%.
 
-❌ <b>INDUSTOWER</b>
-400 call wall under target.
-Net R:R 1.27.
-Flips: close &gt;402.5, 2x vol.
+<b>Rejected</b>
+• OFSS — net R:R 0.87, triple top
+  at ₹10,140, volume fading
+• COFORGE — net R:R 1.2, volume
+  fading, 2,100 call wall
+• ENRIN — +5.4% chase
+• ABB — failed breakout, results today
 
-❌ <b>ATHERENERG</b>
-Double top 1958, RSI 74.
-Volume fading, net R:R 1.2.
-Flips: close &gt;1962, vol ≥60k.
+<b>Flips to GO</b>
+• OFSS: 5-min close above ₹10,150
+  on volume 8k+
+• COFORGE: close above ₹2,076
+  on volume 40k+
 
-❌ <b>HINDUNILVR</b>
-Net R:R 1.05.
-Ask 1990, call wall 2000.
-Flips: close &gt;1992, rising vol.
-
-❌ <b>ACUTAAS</b>
-+3.2% chase, thin volume.
-Flips: VWAP bounce, then
-close &gt;4132 on 2x vol.
-
-<i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
+📡 Watcher checks every 5 min
+<i>Educational analysis, not SEBI-registered advice. Intraday trading is high risk; you place orders yourself.</i>
