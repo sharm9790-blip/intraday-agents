@@ -1,16 +1,20 @@
-⚪ <b>NO TRADE — 12:33 IST</b>
+🔴 <b>NO TRADE — 12:45 IST</b>
+Weak tape: Nifty -0.78%
 
-📈 Nifty 25,117  (-0.7%)
-🏦 Bank Nifty 60,930  (-1.0%)
-Mood: weak, 21% above VWAP
+<b>Best idea: ZETWERK</b>
+• Results due today, not out
+• Up 19.6% in 8 sessions
+• ₹188–188.5 rejected 3 times
+• Ask-heavy book, dead volume
+• Net reward 1.3× risk (need 1.5)
 
-<b>Why nothing passed</b>
-• MCX — faded, below VWAP
-• MEESHO — flat, reward below risk
-• NETWEB — lower high, thin volume
-• Others up &gt;3% (no chase)
+<b>Skipped</b>
+• PINELABS — reward only 1.44×
+• NAZARA — chase, thin volume
+• BSE, RELIANCE — no setup
 
-📌 IIFLCAPS plan (12:35) still live
+🔁 Re-check ZETWERK only after
+results and a 5-min close above
+₹188.6 on big volume
 
-🔎 Next scan: 12:45 IST
-<i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
+<i>Analysis only, not advice. You place orders yourself.</i>

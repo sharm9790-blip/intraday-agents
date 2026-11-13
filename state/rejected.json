@@ -27,6 +27,9 @@
   "GROWW": "12:35 faded from 228.65 high, volume dry; flips on 5-min close >228.7 on 2x volume",
   "MCX": "12:33 faded from 3767 high, below VWAP, volume dried; flips on 5-min close >3710 on rising volume",
   "MEESHO": "12:33 tight range at VWAP, volume collapsed, R:R<1; flips on 5-min close >258.1 on vol >=500k",
-  "NETWEB": "12:33 lower high after spike, thin volume; flips on 5-min close >4272 on volume"
+  "NETWEB": "12:33 lower high after spike, thin volume; flips on 5-min close >4272 on volume",
+  "ZETWERK": "12:45 results due today (pending), +19.6% in 8 sessions, 188.0-188.5 triple rejection, ask-heavy book, net R:R ~1.3; flips on results out and 5-min close >188.6 on vol >=150k",
+  "PINELABS": "12:45 net R:R 1.44, 178.2-178.5 rejected twice, volume fading; flips on 5-min close >178.55 on 2x volume",
+  "NAZARA": "12:45 +2.9% chase under 430.5 high, thin volume; flips on 5-min close >430.5 on volume"
  }
 }
