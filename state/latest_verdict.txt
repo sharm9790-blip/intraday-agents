@@ -1,20 +1,17 @@
-🔴 <b>NO TRADE — 12:45 IST</b>
-Weak tape: Nifty -0.78%
+⚪ <b>NO TRADE — 13:00 IST</b>
 
-<b>Best idea: ZETWERK</b>
-• Results due today, not out
-• Up 19.6% in 8 sessions
-• ₹188–188.5 rejected 3 times
-• Ask-heavy book, dead volume
-• Net reward 1.3× risk (need 1.5)
+📈 Nifty 25,110  (-0.75%)
+🏦 Bank Nifty 60,966  (-0.9%)
+Mood: weak, 23% above VWAP
 
-<b>Skipped</b>
-• PINELABS — reward only 1.44×
-• NAZARA — chase, thin volume
-• BSE, RELIANCE — no setup
+<b>Why nothing passed</b>
+• MCX — reward below risk, volume dry
+• PNB — call wall, asks 68%
+• FRACTAL — double top 838
 
-🔁 Re-check ZETWERK only after
-results and a 5-min close above
-₹188.6 on big volume
+<b>Flips on</b>
+• MCX close above ₹3,770, vol 60k+
+• PNB close above ₹145.35, vol 2.5M+
 
+🔎 Next scan: 13:15 IST
 <i>Analysis only, not advice. You place orders yourself.</i>
