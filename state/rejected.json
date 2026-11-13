@@ -4,6 +4,9 @@
   "APOLLOHOSP": "09:49 blocked by risk check, net R:R 1.41 <1.5 at 8622; flips on 5-min close >8640 with SL held, or retest hold 8600-8606 above VWAP 8588",
   "ANGELONE": "09:49 350 CE wall OI 4.6M rising, volume fading, net R:R 1.44; flips on 5-min close >353.5 on >600k vol",
   "FORTIS": "09:49 entry missed, death cross, no catalyst, noise-safe R:R 0.9; flips on 5-min close >768 on rising volume",
-  "ENRIN": "09:49 chase at day high, net R:R 1.1, death cross; flips on 5-min close >3125 on 2x volume"
+  "ENRIN": "09:49 chase at day high, net R:R 1.1, death cross; flips on 5-min close >3125 on 2x volume",
+  "PNB": "10:08 stalled under 145 CE wall (13M OI), BankNifty -0.7%, R:R to wall 0.25; flips on 5-min close >145.35 on vol >=2.5M",
+  "POLICYBZR": "10:08 net R:R 1.45, 1100 CE wall, fading volume; flips on 5-min close >1082 on vol >=150k then >1101",
+  "ABB": "10:08 results due today, 7000-7100 call wall, thin volume; flips on results out and 5-min close >7071 on 2x volume"
  }
 }
