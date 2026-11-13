@@ -1,49 +1,23 @@
-🟢 <b>GO — SBIN</b>
-🕐 14:10 IST  ·  Confidence 5/10
+<b>🔎 Scan 09:49 — NO TRADE</b>
 
-📥 Buy  <b>₹1,082</b>  (max ₹1,082.2)
-⏳ <b>Wait for dip</b>
-🛑 Stop loss  <b>₹1,079.7</b>
-🎯 Target 1  <b>₹1,088.3</b>  (sell half)
-🎯 Target 2  <b>₹1,095</b>
-📦 Qty  <b>92</b> shares
-📝 <b>Draft order</b> (you place it)
-Intraday · Limit · NSE
-Qty  <code>92</code>
-Buy limit  <code>1082</code>
-SL-M trigger  <code>1079.7</code>
-Sell half  <code>46</code> @ <code>1088.3</code>
-📲 INDmoney: search <code>SBIN</code>
+Market choppy.
+Nifty -0.4%, BankNifty -0.7%.
 
-<b>✅ Buy only if</b>
-• Dips to ₹1,081–1,082.2
-• No 5-min close below ₹1,081
-• PSU Bank stays above VWAP
+<b>⛔ APOLLOHOSP</b>
+Judge: GO w/ conditions,
+but blocked by risk check:
+net R:R 1.41 (needs 1.5).
+Flips on 5-min close
+above 8640, or retest
+hold 8600-8606.
 
-<b>❌ Cancel if</b>
-• Not filled by 14:27
-• Hits ₹1,088.3 before the dip
-• 5-min close below ₹1,081
+<b>❌ ANGELONE</b>
+350 call wall, volume fading.
 
-<b>💰 Risk vs reward</b>
-Max loss ≈ ₹290
-Profit ≈ ₹250 (T1) · ₹810 (T2)
-Net reward 1.7× the risk
+<b>❌ FORTIS</b>
+Entry missed, death cross.
 
-<b>📲 Set in INDmoney now</b>
-1. 🔎 Search SBIN
-2. 🔔 Price alert at ₹1,082
-3. After buying: SL-M at ₹1,079.7
-4. Sell 46 shares at ₹1,088.3
-5. Exit all by 15:00
+<b>❌ ENRIN</b>
+Chase at day high, R:R 1.1.
 
-<b>Why this stock</b>
-• PSU Bank +1.5%, SBIN +2.2%
-• Above VWAP, higher lows
-• Qty capped by ₹1L capital
-
-<b>Skipped</b>
-• PNB — extended, 145 call wall
-
-📡 Watcher checks every 5 min
-<i>Analysis only, not advice. You place orders yourself.</i>
+<i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>

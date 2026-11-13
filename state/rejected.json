@@ -1,26 +1,9 @@
 {
- "date": "2026-11-12",
+ "date": "2026-11-13",
  "symbols": {
-  "ETERNAL": "09:58 R:R 0.7 chased, supply 366-369.7; flips on 5-min close >367.3 on >300k vol after 10:35, or retest hold 364.5-365",
-  "ICICIBANK": "09:58 range 1583-1592.5, volume fading; flips on 5-min close >1592.5 on volume",
-  "BAJFINANCE": "10:40 3rd financial (KOTAKBANK, ABCAPITAL live), net R:R ~1.5 chase, call wall 1120-1130; flips on 5-min close >1115.2 on >=250k vol with BankNifty >=+1.5%, or slot frees",
-  "MOTILALOFS": "13:30 volume dead 11-41k, 1260 CE ceiling; flips on 5-min close >1225.5 on candle vol >60k, not after 14:15",
-  "HINDCOPPER": "09:58 gap up faded below open",
-  "ITC": "09:58 gap fade, volume dried",
-  "PAYTM": "13:30 net R:R 0.54, 1900 CE wall 2M OI; flips on 5-min close >1897 on >250k vol",
-  "ABCAPITAL": "11:35 net R:R 1.27, failed 10:55 breakout, 415/420 call walls, 2nd financial; flips on 5-min close >420.5 on >150k vol if BankNifty >=+1.5% or slot frees",
-  "PNB": "14:10 extended at 52w high, flat top 143.5-143.8, volume dried, 145 CE wall 10.4M, duplicate of SBIN; flips on 5-min close >143.9 on rising volume, PSU Bank above VWAP, before 14:30",
-  "TMCV": "10:40 net R:R ~1.0, rejected 464.4 on climax vol, non-F&O; flips on 5-min close >465 on >=300k vol",
-  "OBEROIRLTY": "11:15 net R:R 1.09 to 1834, PCR 0.66, call walls 1840-1880; flips on 5-min close >1834 on above-avg volume",
-  "SAIL": "10:55 net R:R 0.86 to T1, failed 181.2 breakout, 180 call wall, FPO overhang; flips on 5-min close >181.6 on >1M vol, or pullback hold 179.4-179.6 above 179.16",
-  "SHRIRAMFIN": "11:15 2nd financial beside KOTAKBANK, BankNifty +0.8% under 1.5%, SMA200 1001 + 1000 CE wall; flips on 5-min close >1004 on >100k vol if BankNifty >=+1.5% or slot frees",
-  "PHOENIXLTD": "11:15 RSI 74, 2300 call wall, net R:R 1.18; flips on 5-min close >2275 on strong volume",
-  "BEL": "11:30 failed breakout at VWAP, 410 CE wall 7.28M; flips on 5-min close >405.5 on rising volume, VWAP held",
-  "UNOMINDA": "11:30 net R:R 0.47 under 1400 call wall, RSI 78; flips on 5-min close >1400 on volume",
-  "MEESHO": "11:30 non-F&O, +4.2% extended, R:R 1.14; flips on hold 257 then 5-min close >259.5",
-  "CDSL": "11:35 net R:R 0.87, 1460 call wall, double top 1461, volume faded; flips on 5-min close >1465 on >=100k vol",
-  "DATAPATTNS": "11:50 net R:R 1.14, earnings miss 6 Nov, daily Supertrend bearish, 4300 call wall; flips on 5-min close >4300 on >60k vol",
-  "GRANULES": "13:55 net R:R ~1.0-1.4, T1 849 on 2-3 Nov supply, double rejection 841.7, volume faded; flips on 5-min close >850 on >100k vol above VWAP",
-  "UNIONBANK": "13:55 net R:R ~0.6, 205 CE wall 5.8M + 52w high 205.49, RSI 75; flips on 5-min close >205.6 on rising volume"
+  "APOLLOHOSP": "09:49 blocked by risk check, net R:R 1.41 <1.5 at 8622; flips on 5-min close >8640 with SL held, or retest hold 8600-8606 above VWAP 8588",
+  "ANGELONE": "09:49 350 CE wall OI 4.6M rising, volume fading, net R:R 1.44; flips on 5-min close >353.5 on >600k vol",
+  "FORTIS": "09:49 entry missed, death cross, no catalyst, noise-safe R:R 0.9; flips on 5-min close >768 on rising volume",
+  "ENRIN": "09:49 chase at day high, net R:R 1.1, death cross; flips on 5-min close >3125 on 2x volume"
  }
 }
