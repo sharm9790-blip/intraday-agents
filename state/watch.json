@@ -73,13 +73,14 @@
   "10:15 ENRIN 3149.50 VWAP \u20b93,110.91 status waiting",
   "10:17 ENRIN 3151.30 VWAP \u20b93,112.75 status waiting",
   "10:20 ENRIN 3143.10 VWAP \u20b93,113.78 status cancelled",
-  "11:34 WAAREEENER 2617.20 VWAP \u20b92,593.15 status waiting"
+  "11:34 WAAREEENER 2617.20 VWAP \u20b92,593.15 status waiting",
+  "11:35 WAAREEENER 2617.20 VWAP \u20b92,593.2 status waiting"
  ],
  "health": {
   "ready": true,
   "pinger": true
  },
- "last_run": "11:34",
+ "last_run": "11:35",
  "taken": [],
  "trades": 0,
  "day_trades": 0,
