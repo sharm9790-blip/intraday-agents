@@ -1,15 +1,46 @@
-⚪ <b>NO TRADE — 11:55 IST</b>
+🟡 <b>GO (conditions) — BHARTIARTL</b>
+🕐 12:15 IST  ·  Confidence 5/10
 
-📈 Nifty 25,154  (-0.6%)
-🏦 Bank Nifty 60,999  (-0.8%)
-Mood: weak, 31% stocks above VWAP
+📥 Buy  <b>₹2,104</b>  (max ₹2,104.5)
+⏳ <b>Wait for dip</b> (retest of VWAP)
+🛑 Stop loss  <b>₹2,098</b>
+🎯 Target 1  <b>₹2,119.5</b>  (sell half)
+🎯 Target 2  <b>₹2,130</b>
+📦 Qty  <b>47</b> shares
+📝 <b>Draft order</b> (you place it)
+Intraday · Limit · NSE
+Qty  <code>47</code>
+Buy limit  <code>2104</code>
+SL-M trigger  <code>2098</code>
+Sell half  <code>23</code> @ <code>2119.5</code>
+📲 INDmoney: search <code>BHARTIARTL</code>
 
-<b>Why nothing passed</b>
-• ABB — results pending, 7100 rejected 5×
-• NYKAA — under 52-wk high, reward below risk
-• Rest — already rejected today
+<b>✅ Buy only if</b>
+• Dips to ₹2,103–2,104.5
+• Green 5-min close above ₹2,103
+• Nifty stays above 25,077
 
-📌 WAAREEENER plan still live
+<b>❌ Cancel if</b>
+• Not filled by 13:30
+• Hits ₹2,112 before the dip
+• 5-min close below ₹2,100
 
-🔎 Next scan: 12:00 IST
-<i>Analysis only, not advice. You place orders yourself.</i>
+<b>💰 Risk vs reward</b>
+Max loss ≈ ₹360
+Profit ≈ ₹350 (T1 half)
+Net reward 1.8× the risk
+
+<b>Why this stock</b>
+• +0.7% while Nifty -0.7%
+• Holds above VWAP 2,103
+• Breakout entry rejected (double top 2,114)
+
+<b>Watch out</b>
+• 2,120 call wall caps T1
+• Volume weak, market weak
+
+<b>Skipped</b>
+• CGCL — supply 250–252, R:R low
+
+📡 Watcher checks every 5 min
+<i>Educational analysis, not SEBI-registered advice. Intraday trading is high risk; you place and manage any order yourself.</i>

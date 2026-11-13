@@ -1,11 +1,33 @@
 {
  "date": "2026-11-13",
- "verdict_id": "2026-11-13_1155",
- "go_count": 2,
+ "verdict_id": "2026-11-13_1215",
+ "go_count": 3,
  "connectors": {
   "groww": false,
   "indmoney": true,
   "investsights": true
  },
- "plan": null
+ "plan": {
+  "symbol": "BHARTIARTL",
+  "yahoo": "BHARTIARTL.NS",
+  "name": "Bharti Airtel",
+  "side": "long",
+  "entry_type": "dip",
+  "zone_low": 2103.0,
+  "zone_high": 2104.5,
+  "entry": 2104.0,
+  "max_entry": 2104.5,
+  "trigger_close_above": 2103.0,
+  "sl": 2098.0,
+  "t1": 2119.5,
+  "t2": 2130.0,
+  "qty": 47,
+  "deadline": "13:30",
+  "cancel_if_high_reaches": 2112.0,
+  "cancel_if_close_below": 2100.0,
+  "exit_if_close_below_after_entry": 2100.0,
+  "time_stop": "15:00",
+  "atr5": 3.5,
+  "sector": "Telecom"
+ }
 }
