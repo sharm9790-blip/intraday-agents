@@ -7,6 +7,13 @@
    "level": 768.0,
    "kind": "flip level",
    "close": 771.45
+  },
+  "ABB": {
+   "at": "10:10",
+   "rejected_at": "10:08",
+   "level": 7071.0,
+   "kind": "flip level",
+   "close": 7090
   }
  }
 }
