@@ -1,8 +1,43 @@
 {
  "date": "2026-11-13",
- "verdict_id": "2026-11-13_0949",
- "live": [],
- "log": [],
+ "verdict_id": "2026-11-13_1008",
+ "live": [
+  {
+   "symbol": "ENRIN",
+   "vid": "2026-11-13_1008",
+   "plan": {
+    "symbol": "ENRIN",
+    "yahoo": "ENRIN.NS",
+    "name": "Siemens Energy India",
+    "side": "long",
+    "entry_type": "dip",
+    "zone_low": 3118.0,
+    "zone_high": 3128.0,
+    "entry": 3123.0,
+    "max_entry": 3128.0,
+    "trigger_close_above": 3118.0,
+    "sl": 3090.0,
+    "t1": 3190.0,
+    "t2": 3256.0,
+    "qty": 28,
+    "deadline": "13:30",
+    "cancel_if_high_reaches": 3150.0,
+    "cancel_if_close_below": 3095.0,
+    "exit_if_close_below_after_entry": 3100.0,
+    "time_stop": "15:00",
+    "atr5": 24.18,
+    "sector": "Capital Goods",
+    "rules_v": "2026-11-13",
+    "start": "10:08"
+   },
+   "status": "waiting",
+   "since": "10:08",
+   "paper_booked": 0
+  }
+ ],
+ "log": [
+  "10:05 ENRIN 3136.20 VWAP \u20b93,107.39 status waiting"
+ ],
  "health": {
   "ready": true
  },
@@ -20,5 +55,32 @@
  "scan_slot": "10:00",
  "last_fire": "10:00",
  "fired_at": "10:00",
- "verdicts": 1
+ "verdicts": 2,
+ "plans": [
+  {
+   "symbol": "ENRIN",
+   "yahoo": "ENRIN.NS",
+   "name": "Siemens Energy India",
+   "side": "long",
+   "entry_type": "dip",
+   "zone_low": 3118.0,
+   "zone_high": 3128.0,
+   "entry": 3123.0,
+   "max_entry": 3128.0,
+   "trigger_close_above": 3118.0,
+   "sl": 3090.0,
+   "t1": 3190.0,
+   "t2": 3256.0,
+   "qty": 28,
+   "deadline": "13:30",
+   "cancel_if_high_reaches": 3150.0,
+   "cancel_if_close_below": 3095.0,
+   "exit_if_close_below_after_entry": 3100.0,
+   "time_stop": "15:00",
+   "atr5": 24.18,
+   "sector": "Capital Goods",
+   "rules_v": "2026-11-13",
+   "start": "10:08"
+  }
+ ]
 }

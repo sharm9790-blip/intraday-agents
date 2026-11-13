@@ -7,13 +7,6 @@
    "level": 768.0,
    "kind": "flip level",
    "close": 771.45
-  },
-  "ENRIN": {
-   "at": "09:50",
-   "rejected_at": "09:49",
-   "level": 3125.0,
-   "kind": "flip level",
-   "close": 3137.7
   }
  }
 }
