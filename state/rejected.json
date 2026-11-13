@@ -9,6 +9,10 @@
   "POLICYBZR": "10:08 net R:R 1.45, 1100 CE wall, fading volume; flips on 5-min close >1082 on vol >=150k then >1101",
   "ABB": "10:08 results due today, 7000-7100 call wall, thin volume; flips on results out and 5-min close >7071 on 2x volume",
   "CUMMINSIND": "10:27 downtrend, EMA20 4418 and 4400/4500 call walls, net R:R 1.09; flips on 5-min close >4420 on vol >=40k",
-  "EICHERMOT": "10:27 results due today, triple top 7623-7626, thin volume, net R:R 1.06; flips on results out and 5-min close >7627 on 2x volume"
+  "EICHERMOT": "10:27 results due today, triple top 7623-7626, thin volume, net R:R 1.06; flips on results out and 5-min close >7627 on 2x volume",
+  "INDUSTOWER": "10:48 400 call wall 5.09M under T1 402.2, net R:R 1.27 even on breakout; flips on 5-min close >402.5 on 2x volume",
+  "ATHERENERG": "10:48 double top 1958, RSI 74, volume fading, net R:R 1.2; flips on 5-min close >1962 on vol >=60k",
+  "HINDUNILVR": "10:48 net R:R 1.05, 1435 ask at 1990, 2000 call wall; flips on 5-min close >1992 on rising volume",
+  "ACUTAAS": "10:48 +3.2% chase, stop inside noise, thin volume; flips on VWAP pullback bounce then close >4132 on 2x volume"
  }
 }
