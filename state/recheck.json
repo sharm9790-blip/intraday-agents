@@ -1,13 +1,6 @@
 {
  "date": "2026-11-13",
  "symbols": {
-  "FORTIS": {
-   "at": "10:00",
-   "rejected_at": "09:49",
-   "level": 768.0,
-   "kind": "flip level",
-   "close": 771.45
-  },
   "ENRIN": {
    "at": "09:50",
    "rejected_at": "09:49",
