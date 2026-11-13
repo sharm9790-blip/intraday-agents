@@ -1,6 +1,6 @@
 {
  "date": "2026-11-13",
- "verdict_id": "2026-11-13_1245",
+ "verdict_id": "2026-11-13_1300",
  "live": [
   {
    "symbol": "ENRIN",
@@ -164,7 +164,7 @@
   "ready": true,
   "pinger": true
  },
- "last_run": "13:00",
+ "last_run": "13:03",
  "taken": [],
  "trades": 0,
  "day_trades": 2,
@@ -178,7 +178,7 @@
  "scan_slot": "13:00",
  "last_fire": "13:00",
  "fired_at": "13:00",
- "verdicts": 12,
+ "verdicts": 13,
  "plans": [
   {
    "symbol": "ENRIN",
