@@ -1,7 +1,7 @@
 {
  "date": "2026-11-13",
- "stage": "overnight",
- "id": "2026-11-13_0855",
+ "stage": "preopen",
+ "id": "2026-11-13_0906",
  "connectors": {
   "groww": false,
   "indmoney": true,
@@ -31,7 +31,8 @@
    "exit_if_close_below_after_entry": 1440,
    "time_stop": "15:00",
    "keep": false,
-   "why": "risk check: net R:R 1.44 below 1.5"
+   "why": "risk check: net R:R 1.44 below 1.5",
+   "preopen": "n/a"
   }
  ]
 }
