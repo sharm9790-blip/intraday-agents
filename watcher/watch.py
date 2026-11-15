@@ -20,11 +20,13 @@ import urllib.request
 from datetime import datetime, timedelta, timezone
 
 import health
+import ind
 import news
 import premarket
 import recheck
 import risk
 import scan
+import shorts
 
 PAUSED = set()  # chats that sent PAUSE today (broadcasts skip them)
 
@@ -36,10 +38,13 @@ WARN_AT = "14:50"
 MAX_LIVE = 3        # plans followed at the same time
 MAX_TRADES = 3      # trades open at the same time: held or BUY order pending (count_trades)
 MAX_DAY = 6         # safety cap: stocks bought / ordered per day in total
-RULES_VERSION = "2026-11-13"  # bump on any rule change; expectancy is split per version
+RULES_VERSION = "2026-11-16"  # bump on any rule change; expectancy is split per version
 MAX_HEAT = 2000     # ₹: total risk to SL of plans waiting / bought at once (2% of ₹1 lakh)
 EVENT_RR = 2.0      # net R:R needed on event days (RBI, CPI, big results…)
 VIX_SPIKE = 10.0    # % India VIX up on the day → no new entries
+WEAK_ABOVE = 35     # % of stocks above VWAP below which the market counts as weak for longs
+WEAK_CONF = 6       # min Judge confidence (/10) for a long on a weak day
+WEAK_RS = 1.0       # stock must be ≥ this % better than Nifty on a weak day
 MISS_GRACE = 15     # min after a buy trigger to see your buy before the plan's slot is freed
 DAY_LOSS_STOP = 2000  # no new plans once today's paper loss reaches this (₹)
 # NSE equity trading holidays on weekdays (add next year's list each December).
@@ -116,13 +121,18 @@ def card(icon, title, lines, footer=True):
     return "\n".join(out)
 
 
+IND_ALLOW = set()   # NSE symbols that may use INDmoney candles this run (live plans, premarket, new GO)
+IND_CACHE = {}      # symbol → 5-day 5-min bars from INDmoney, fetched once per run in one batch
+
+
 def candles(yahoo_symbol, days="1d", fast=True):
     """Today's 5-min candles as (time_ist, open, high, low, close, volume), last one may be forming.
     days="5d" also returns the previous sessions (premarket gap / volume checks).
     fast: NSE stocks come from INDmoney through the worker (WORKER_URL + WORKER_KEY,
     read-only market data) when set, else / on any failure from Yahoo. The scanner
     passes fast=False (234 stocks: Yahoo, so the INDmoney limits stay free for alerts)."""
-    if fast and yahoo_symbol.endswith(".NS") and os.environ.get("WORKER_URL") and os.environ.get("WORKER_KEY"):
+    if (fast and yahoo_symbol.endswith(".NS") and yahoo_symbol[:-3] in IND_ALLOW
+            and os.environ.get("WORKER_URL") and os.environ.get("WORKER_KEY")):
         try:
             return ind_candles(yahoo_symbol[:-3], days)
         except Exception as e:
@@ -130,17 +140,34 @@ def candles(yahoo_symbol, days="1d", fast=True):
     return yahoo_candles(yahoo_symbol, days)
 
 
-def ind_candles(sym, days="1d"):
-    url = (os.environ["WORKER_URL"].rstrip("/") + "/?candles=" + urllib.parse.quote(sym)
-           + "&days=" + ("1" if days == "1d" else "7"))
+def ind_batch(symbols):
+    """One worker call for up to 20 symbols (the worker asks INDmoney 5 at a time, with
+    back-off on HTTP 429). Fills IND_CACHE; 13 Nov: one call per symbol hit the limit."""
+    want = sorted(s for s in symbols if s not in IND_CACHE)[:20]
+    if not want:
+        return
+    url = (os.environ["WORKER_URL"].rstrip("/") + "/?candles="
+           + urllib.parse.quote(",".join(want)) + "&days=5")
     req = urllib.request.Request(url, headers={"x-worker-key": os.environ["WORKER_KEY"],
                                                "User-Agent": "intraday-watcher"})
-    with urllib.request.urlopen(req, timeout=20) as r:
+    with urllib.request.urlopen(req, timeout=40) as r:
         doc = json.load(r)
-    rows = (doc.get("candles") or {}).get(sym) if doc.get("ok") else None
-    if not rows:
+    if not doc.get("ok"):
+        for s in want:
+            IND_CACHE[s] = None            # don't retry this run; Yahoo serves it
         raise RuntimeError(doc.get("error") or "no candles")
-    out = [(datetime.fromtimestamp(ts, IST), o, h, l, c, v) for ts, o, h, l, c, v in rows]
+    for s in want:
+        rows = (doc.get("candles") or {}).get(s)
+        IND_CACHE[s] = [(datetime.fromtimestamp(ts, IST), o, h, l, c, v)
+                        for ts, o, h, l, c, v in rows] if rows else None
+
+
+def ind_candles(sym, days="1d"):
+    if sym not in IND_CACHE:
+        ind_batch(IND_ALLOW | {sym})
+    out = IND_CACHE.get(sym)
+    if not out:
+        raise RuntimeError("no INDmoney candles")
     if days == "1d":
         out = [b for b in out if b[0].date() == datetime.now(IST).date()]
     if not out:
@@ -214,10 +241,27 @@ def plan_lines(plan):
     ]
 
 
-def order_block(plan, qty=None):
-    """Tap-to-copy order values (the user places the order in INDmoney; nothing is sent)."""
+def order_block(plan, qty=None, confirmed=False):
+    """Tap-to-copy order values (the user places the order in INDmoney; nothing is sent).
+    A dip plan is not bought until the 🔔 BUY TRIGGER (green 5-min close back above the
+    trigger): a buy limit placed in advance fills while the price is still falling
+    (13 Nov: WAAREEENER and IIFLCAPS filled on the way down, −₹1,182; the plan itself
+    never triggered). So before the trigger the card says wait; at the trigger it gives
+    the order with the limit at max entry."""
     q = qty or plan["qty"]
-    buy = plan["entry"] if plan.get("entry_type") != "now" else plan["max_entry"]
+    dip = plan.get("entry_type") != "now"
+    if dip and not confirmed:
+        return [
+            "📝 <b>Your order</b>",
+            "⏳ <b>Don't place the buy yet.</b> No limit order in advance:",
+            "it fills while the price is still falling.",
+            f"Wait for 🔔 <b>BUY TRIGGER</b> (green 5-min close back above "
+            f"<code>{plan.get('trigger_close_above', plan['entry']):g}</code>), then buy:",
+            f"Qty <code>{q}</code> · Limit <code>{plan['max_entry']:g}</code> · "
+            f"SL-M <code>{plan['sl']:g}</code> · T1 sell {q // 2} @ <code>{plan['t1']:g}</code>",
+            f"📲 INDmoney › search <code>{esc(plan['symbol'])}</code>",
+        ]
+    buy = plan["max_entry"]
     return [
         "📝 <b>Your order</b> (tap a value to copy)",
         f"📲 INDmoney › search <code>{esc(plan['symbol'])}</code> › Buy (tracked by itself)",
@@ -339,6 +383,16 @@ def send_scorecard(state_dir, today, watch):
             "",
         ]
     lines += paper_account(state_dir, today, rows) + [""]
+    try:
+        sp = os.path.join(state_dir, "shorts.json")
+        sd = load(sp, {})
+        res = shorts.close_day(sd, today, candles)
+        save(sp, sd)
+        sl = shorts.lines(sd, today, res, inr)
+        if sl:
+            lines += sl + [""]
+    except Exception as e:  # never block the scorecard
+        print("shorts failed", e)
     try:
         import expectancy
         lines += ["<b>🎯 Expectancy</b> (all days so far)"] + expectancy.lines(state_dir, short=True) + [""]
@@ -561,6 +615,12 @@ def main(state_dir):
         for k in ("status", "since", "qty_fix", "paper_booked"):
             watch.pop(k, None)
 
+    IND_CACHE.clear()
+    IND_ALLOW.clear()
+    IND_ALLOW.update(e["symbol"] for e in open_plans(watch))
+    pm = load(os.path.join(state_dir, "premarket.json"), {})
+    if pm.get("date") == today and hhmm("09:15") <= minutes <= hhmm("09:45"):
+        IND_ALLOW.update(s["symbol"] for s in pm.get("stocks") or [] if s.get("keep") is not False)
     mt_today = mt if mt.get("date") == today else {}
     ind = load(os.path.join(state_dir, "positions_ind.json"), {})
     ordered = {o["s"] for o in ind.get("orders") or [] if o.get("s")} if ind.get("date") == today else set()
@@ -587,6 +647,7 @@ def main(state_dir):
             v = vid.split("_")[-1]
             start = f"{v[:2]}:{v[2:]}"
             gp = dict(plan_doc["plan"])
+            IND_ALLOW.add(gp["symbol"])
             conv = []
             try:
                 bars, ltp = candles(gp["yahoo"])
@@ -619,6 +680,9 @@ def main(state_dir):
                 reasons.append(f"{gp['symbol']} already has a live plan")
             if len(slots(watch)) >= MAX_LIVE:
                 reasons.append(f"{MAX_LIVE} plans already live")
+            cd = load(os.path.join(state_dir, "candidates.json"), {})
+            if not reasons and cd.get("date") == today:
+                reasons += weak_rule(gp, cd, bars, now)
             if not reasons:
                 reasons += guard(watch, {**gp, "qty": rk["qty"]}, state_dir, today, rk["rr"])
                 gp["sector"] = scan.group(gp["symbol"], scan.load_universe(state_dir))
@@ -664,6 +728,7 @@ def main(state_dir):
     #     turn a first-candle breakout into a live BUY NOW plan.
     if premarket_step(state_dir, today, now, watch):
         save(watch_path, watch)
+    cues_step(state_dir, today, minutes, watch)   # before the 08:40 premarket fire
     if fire_premarket(now, watch):
         save(watch_path, watch)
 
@@ -697,6 +762,21 @@ def main(state_dir):
             save(os.path.join(state_dir, "candidates.json"), cand)
             watch["scan_slot"] = quarter
             print("scan:", cand["mode"], [i["symbol"] for i in cand["items"]])
+            sp = os.path.join(state_dir, "shorts.json")
+            sd = load(sp, {})
+            if shorts.record(sd, cand, now, today):   # paper test only, nothing is sent
+                save(sp, sd)
+            if ind.worker_on():
+                try:   # data pack for the cloud debate (INDmoney API, no connector needed)
+                    live_syms = [e["symbol"] for e in open_plans(watch)]
+                    IND_ALLOW.update(live_syms + [i["symbol"] for i in cand["items"][:ind.PACK_TOP]])
+                    uni = scan.load_universe(state_dir).get("stocks", {})
+                    pack = ind.build_pack(now, cand, live_syms, candles, NSE_HOLIDAYS,
+                                          {s: v.get("fo") for s, v in uni.items()})
+                    save(os.path.join(state_dir, "pack.json"), pack)
+                    print("pack:", [x["symbol"] for x in pack["stocks"]])
+                except Exception as e:
+                    print("pack failed", e)
         except Exception as e:  # never let this stop the watcher
             print("scan failed", e)
 
@@ -974,6 +1054,48 @@ def MARKET_OPEN(minutes):
     return hhmm("09:15") <= minutes <= hhmm("15:30")
 
 
+def cues_step(state_dir, today, minutes, watch):
+    """Overnight cues to state/cues.json at ~08:25 and again ~09:00 (Yahoo; no connector)."""
+    slot = "pre" if hhmm("08:25") <= minutes < hhmm("09:00") else (
+        "open" if hhmm("09:00") <= minutes <= hhmm("09:14") else None)
+    done = watch.setdefault("cues", [])
+    if not slot or slot in done:
+        return
+    try:
+        c = ind.build_cues(datetime.now(IST))
+        save(os.path.join(state_dir, "cues.json"), c)
+        print("cues:", c["line"])
+    except Exception as e:
+        print("cues failed", e)
+    done.append(slot)
+
+
+def weak_rule(plan, cand, bars, now):
+    """Weak market (scanner mode "weak" or < WEAK_ABOVE% of stocks above VWAP): dips keep
+    falling, so no DIP buys; a BUY NOW needs confidence ≥ WEAK_CONF, the stock ≥ WEAK_RS%
+    stronger than Nifty and in its own uptrend. (13 Nov, 13–31% above VWAP: both dip plans
+    that filled lost; the two that ran up without the dip reached T1.)"""
+    above = cand.get("above_vwap_pct")
+    if (cand.get("scanned") or 0) < 50:   # too few stocks priced to judge the market
+        return []
+    if not (cand.get("mode") == "weak" or (above is not None and above < WEAK_ABOVE)):
+        return []
+    tag = f"weak market ({above}% of stocks above VWAP)"
+    if plan.get("entry_type") != "now":
+        return [f"{tag}: no dip buys — dips keep falling on days like this"]
+    out = []
+    conf = plan.get("confidence")
+    if conf is not None and conf < WEAK_CONF:
+        out.append(f"{tag}: confidence {conf:g}/10 below {WEAK_CONF}")
+    st = scan.stats(bars, now) if bars else None
+    nifty = cand.get("nifty_pct") or 0
+    if st and st["pct"] - nifty < WEAK_RS:
+        out.append(f"{tag}: only {st['pct'] - nifty:+.1f}% vs Nifty (need +{WEAK_RS:g}%)")
+    if bars and not scan.stock_trend(bars, now):
+        out.append(f"{tag}: stock not in its own 5-min uptrend")
+    return out
+
+
 def events_today(state_dir, today):
     """Event-day notes: watcher/events.json {"YYYY-MM-DD": "RBI policy"} (edit by hand)
     plus "events" the premarket cloud run wrote in state/premarket.json."""
@@ -1085,7 +1207,8 @@ def track(entry, now, watch):
             msg = card("❌", f"CANCELLED — {sym}", [
                 f"🕐 {t} IST", "",
                 f"Reason: {cancel}", price_line, "",
-                "👉 <b>Do not buy.</b> Delete the Groww price alert.",
+                "👉 <b>Do not buy.</b> Cancel any buy order / price alert",
+                "you set for it in INDmoney.",
                 "🔎 Next cloud scan will look for a new setup.",
             ])
         elif trigger and plan["symbol"] not in watch.get("taken", []) and (
@@ -1095,7 +1218,7 @@ def track(entry, now, watch):
                         else f"{MAX_DAY} trades already taken today.")
             msg = card("❌", f"SKIP — {sym}", [
                 f"🕐 {t} IST", "", full_why, price_line, "",
-                "👉 <b>Do not buy.</b> Delete the Groww price alert.",
+                "👉 <b>Do not buy.</b> Cancel any buy order / price alert for it.",
             ])
         elif trigger:
             status = "in_zone"
@@ -1112,7 +1235,7 @@ def track(entry, now, watch):
                  else f"✅ Green 5-min close {rs(trigger[-1][4])}"),
                 price_line, "",
                 f"📥 Buy  <b>~{rs(plan['entry'])}</b>  (max {rs(plan['max_entry'])})",
-                *plan_lines(plan), "", *order_block(plan), "",
+                *plan_lines(plan), "", *order_block(plan, confirmed=True), "",
                 *news.lines(news.check(plan.get("name") or stock_name(plan["yahoo"]) or plan["symbol"], 6)),
                 "",
                 "👉 Place SL-M right after the fill.",

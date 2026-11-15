@@ -73,6 +73,9 @@ class Base(unittest.TestCase):
         self.bars_by = {}  # full 5-day bar lists (premarket tests)
         self._uni = scan.load_universe
         scan.load_universe = lambda d: {"stocks": {}}  # scanner off unless a test turns it on
+        import ind
+        self._cues = ind.build_cues
+        ind.build_cues = lambda now, fetch=None: {"date": now.strftime("%Y-%m-%d"), "line": "test", "items": {}}
 
         def fake_candles(sym, days="1d", *a):
             now = CLOCK[0]
@@ -87,6 +90,8 @@ class Base(unittest.TestCase):
     def tearDown(self):
         w.telegram = self._tg
         scan.load_universe = self._uni
+        import ind
+        ind.build_cues = self._cues
         shutil.rmtree(self.dir)
 
     def put(self, name, data):
@@ -509,7 +514,8 @@ class TestMultiPlan(Base):
             self.at(13, 56); w.main(self.dir)
             t = self.texts()
             self.assertIn("BUY TRIGGER — SBIN", t)
-            self.assertIn("Limit price  <code>183.5</code>", t)     # copy-ready order values
+            self.assertIn("Limit price  <code>183.75</code>", t)    # at the trigger: limit = max entry
+            self.assertIn("Don't place the buy yet", t)              # CHECKS card for a dip plan
             self.assertIn("SL-M sell", t)
             self.assertNotIn("groww", t.lower().replace("groww squares off", ""))
             self.assertIn("📲 INDmoney › search <code>SBIN</code>", t)
@@ -1018,11 +1024,13 @@ class TestCandleSource(unittest.TestCase):
     def setUp(self):
         self.saved = (w.ind_candles, w.yahoo_candles, w.urllib.request.urlopen)
         os.environ.update(WORKER_URL="https://w.example", WORKER_KEY="k")
+        w.IND_ALLOW.clear(); w.IND_ALLOW.add("SBIN"); w.IND_CACHE.clear()
 
     def tearDown(self):
         w.ind_candles, w.yahoo_candles, w.urllib.request.urlopen = self.saved
         for k in ("WORKER_URL", "WORKER_KEY"):
             os.environ.pop(k, None)
+        w.IND_ALLOW.clear(); w.IND_CACHE.clear()
 
     def test_indmoney_then_yahoo_fallback(self):
         calls = []
@@ -1057,6 +1065,10 @@ class TestCandleSource(unittest.TestCase):
         self.assertEqual(seen[0].get_header("X-worker-key"), "k")
         bars, _ = self.saved[0]("SBIN", "5d")
         self.assertEqual(len(bars), 2)
+        self.assertEqual(len(seen), 1)            # one batched worker call per run, then cache
+        w.yahoo_candles = lambda s, d="1d": ([], None)
+        REAL_CANDLES("PNB.NS")                     # not a live plan → never INDmoney
+        self.assertEqual(len(seen), 1)
 
 
 class TestWalkForwardSlip(unittest.TestCase):
@@ -1070,6 +1082,79 @@ class TestWalkForwardSlip(unittest.TestCase):
         s = mt.slip({"entry": 100.0, "start": "10:00", "buy_at": "10:05"}, 100.5, 100, "10:12")
         self.assertEqual(s, {"per_share": 0.5, "rs": 50, "delay": 7, "plan_at": "10:05"})
         self.assertIn("paid ₹0.5/share above plan", mt.slip_line(s))
+
+class TestWeakRule(unittest.TestCase):
+    def bars(self, closes, start=dt.datetime(2026, 11, 13, 9, 15, tzinfo=IST)):
+        return [(start + dt.timedelta(minutes=5 * i), c - 0.1, c + 0.2, c - 0.2, c, 1000)
+                for i, c in enumerate(closes)]
+
+    def test_weak_blocks_dip_and_weak_now(self):
+        cand = {"mode": "weak", "above_vwap_pct": 20, "nifty_pct": -0.8, "scanned": 230}
+        now = dt.datetime(2026, 11, 13, 10, 30, tzinfo=IST)
+        up = self.bars([100 + 0.1 * i for i in range(14)])
+        self.assertIn("no dip buys", w.weak_rule({"entry_type": "dip"}, cand, up, now)[0])
+        r = w.weak_rule({"entry_type": "now", "confidence": 5}, cand, up, now)
+        self.assertTrue(any("confidence 5/10" in x for x in r), r)
+        self.assertEqual(w.weak_rule({"entry_type": "dip"}, {**cand, "mode": "choppy", "above_vwap_pct": 50}, up, now), [])
+        self.assertEqual(w.weak_rule({"entry_type": "dip"}, {**cand, "scanned": 10}, up, now), [])
+
+
+class TestPackAndCues(unittest.TestCase):
+    def test_indicators(self):
+        import ind
+        start = dt.datetime(2026, 11, 12, 9, 15, tzinfo=IST)
+        prev = [(start + dt.timedelta(minutes=5 * i), 100, 101, 99, 100 + (i % 3) * 0.1, 1000) for i in range(75)]
+        t0 = dt.datetime(2026, 11, 13, 9, 15, tzinfo=IST)
+        today = [(t0 + dt.timedelta(minutes=5 * i), 100 + i * 0.2, 100.5 + i * 0.2, 99.8 + i * 0.2, 100.3 + i * 0.2, 2000)
+                 for i in range(12)]
+        x = ind.indicators(prev + today, t0 + dt.timedelta(minutes=60))
+        self.assertEqual(x["pdh"], 101)
+        self.assertGreater(x["rsi14"], 60)
+        self.assertGreater(x["vol_x"], 1.5)
+        self.assertEqual(x["orb15_high"], round(100.5 + 0.4, 2))
+        self.assertIn("ema50", x)
+
+    def test_chain_stats(self):
+        import ind
+        doc = {"expiry": "2026-11-24", "strikes": {
+            "95": {"ce": {"oi": 10, "previous_oi": 10}, "pe": {"oi": 900, "previous_oi": 500}},
+            "100": {"ce": {"oi": 300, "previous_oi": 200}, "pe": {"oi": 400, "previous_oi": 300}},
+            "105": {"ce": {"oi": 1200, "previous_oi": 1000}, "pe": {"oi": 50, "previous_oi": 50}}}}
+        c = ind.chain_stats(doc, 101)
+        self.assertEqual((c["call_wall"], c["put_floor"]), (105.0, 95.0))
+        self.assertEqual(c["pcr"], round(1350 / 1510, 2))
+        self.assertIn("supportive", c["read"])
+
+    def test_cues(self):
+        import ind
+        c = ind.build_cues(dt.datetime(2026, 11, 16, 8, 25, tzinfo=IST),
+                           fetch=lambda s: {"price": 1, "pct": -0.5 if s == "^GSPC" else 0.2, "time": "x"})
+        self.assertIn("S&P 500 -0.5%", c["line"])
+        self.assertEqual(c["items"]["Nikkei"]["kind"], "Asia live")
+
+
+class TestShorts(unittest.TestCase):
+    def test_record_and_replay(self):
+        import shorts
+        cand = {"mode": "weak", "above_vwap_pct": 20, "scanned": 230, "shorts": [
+            {"symbol": "TDPOWERSYS", "yahoo": "TDPOWERSYS.NS", "price": 100.0, "vwap": 100.5, "atr5": 0.5},
+            {"symbol": "SWIGGY", "yahoo": "SWIGGY.NS", "price": 50.0, "vwap": 50.1, "atr5": 0.2},
+            {"symbol": "CAMS", "yahoo": "CAMS.NS", "price": 40.0, "vwap": 40.1, "atr5": 0.1}]}
+        doc = {}
+        now = dt.datetime(2026, 11, 13, 11, 0, tzinfo=IST)
+        self.assertTrue(shorts.record(doc, cand, now, "2026-11-13"))
+        self.assertEqual([t["symbol"] for t in doc["open"]], ["TDPOWERSYS", "SWIGGY"])   # 2 per slot
+        t = doc["open"][0]
+        self.assertEqual((t["sl"], t["t1"]), (100.75, 98.88))
+        self.assertFalse(shorts.record(doc, {**cand, "mode": "choppy", "above_vwap_pct": 60}, now, "2026-11-13"))
+        start = dt.datetime(2026, 11, 13, 11, 0, tzinfo=IST)
+        falling = [(start + dt.timedelta(minutes=5 * i), 100 - 0.4 * i, 100.2 - 0.4 * i, 99.6 - 0.4 * i,
+                    99.7 - 0.4 * i, 1000) for i in range(12)]
+        r = shorts.replay_one(t, falling)
+        self.assertGreater(r["pnl"], 0)
+        self.assertIn("sold short", r["steps"][0])
+        self.assertIn("T1", " ".join(r["steps"]))
+        self.assertNotIn("-", " ".join(r["steps"][1:]).replace("time stop", ""))
 
 if __name__ == "__main__":
     unittest.main()

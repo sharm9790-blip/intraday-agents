@@ -40,8 +40,8 @@ Reward 1.8× the risk
 
 <b>📲 Set in INDmoney now</b>
 1. 🔎 Search HDFCBANK
-2. 🔔 Price alert at ₹766.5
-3. After buying: SL-M at ₹761.8
+2. 🔔 Price alert at ₹766.5 (no buy order yet)
+3. Buy only on 🔔 BUY TRIGGER, then SL-M at ₹761.8
 4. Sell 92 shares at ₹777
 5. Exit all by 15:00
 
@@ -62,12 +62,27 @@ Reward 1.8× the risk
 
 Insert right after the `📦 Qty` line of the GO template. It is a ready-to-copy order for the user to place in INDmoney themselves; nothing is sent. `<code>` makes each value tap-to-copy in Telegram.
 
+For a **DIP** plan (`entry_type` dip) the user must NOT place a buy limit in advance: it fills while the price is still falling, before the confirmation (13 Nov: −₹1,182 on two such fills; the plans themselves never triggered). Use:
+
 ```
 ⚡ <b>HIGH CONFIDENCE 6.5/10</b>   ← this line only when confidence is 6/10 or higher
 📝 <b>Draft order</b> (you place it)
+⏳ <b>Don't place the buy yet</b>
+Wait for 🔔 BUY TRIGGER (green
+5-min close back above 766)
+Then: Qty <code>185</code> · Limit <code>768</code>
+SL-M trigger  <code>761.8</code>
+Sell half  <code>92</code> @ <code>777</code>
+📲 INDmoney: search <code>HDFCBANK</code>
+```
+
+For a **BUY NOW** plan (`entry_type` now) the order can go in at once:
+
+```
+📝 <b>Draft order</b> (you place it)
 Intraday · Limit · NSE
 Qty  <code>185</code>
-Buy limit  <code>766.5</code>
+Buy limit  <code>768</code>   ← max_entry
 SL-M trigger  <code>761.8</code>
 Sell half  <code>92</code> @ <code>777</code>
 📲 INDmoney: search <code>HDFCBANK</code>

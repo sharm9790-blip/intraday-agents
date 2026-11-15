@@ -1,7 +1,7 @@
 // Offline test of the worker's pure logic. Run on macOS without Node:
 //   /System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Helpers/jsc -m tests/worker_test.mjs
 import { decide, watchList, istNow, base32, indCodes, indParse, posSnapshot, openBuys,
-  openSells, deadMan, candleParse } from "../cloudflare/worker.js";
+  openSells, deadMan, candleParse, quoteParse, chainTrim, expiryGuess } from "../cloudflare/worker.js";
 
 let fails = 0;
 const ok = (c, msg) => { if (!c) { fails++; print("FAIL " + msg); } };
@@ -114,5 +114,13 @@ const cp = candleParse({ success: true, data: { NSE_1: { candles: [
 ok(JSON.stringify(Object.keys(cp)) === '["SBIN"]' && cp.SBIN[0][0] === 1762660500 && cp.SBIN[1][0] === 1762660800,
    "candleParse " + JSON.stringify(cp));
 
+
+// full quotes, chain trim, expiry guess
+const qp = quoteParse({ data: { NSE_1: { live_price: 100, day_open: 99, day_high: 101, day_low: 98, prev_close: 97,
+  volume: 5, upper_circuit: 116, lower_circuit: 78, "52week_high": 120, "52week_low": 60 } } }, { NSE_1: "SBIN" });
+ok(qp.SBIN.ltp === 100 && qp.SBIN.upper_circuit === 116 && qp.SBIN.high_52w === 120, "quoteParse " + JSON.stringify(qp));
+const ct = chainTrim({ data: { underlying_ltp: 100, strikes: { "100": { ce: { oi: 5, previous_oi: 3, iv: 20, greeks: {} }, pe: null } } } });
+ok(ct.strikes["100"].ce.oi === 5 && ct.strikes["100"].pe === null && !("greeks" in ct.strikes["100"].ce), "chainTrim");
+ok(JSON.stringify(expiryGuess("2026-11-16")) === '["2026-11-24","2026-11-26","2026-12-29"]', "expiryGuess " + JSON.stringify(expiryGuess("2026-11-16")));
 
 print(fails ? `${fails} FAILED` : "worker tests OK");
