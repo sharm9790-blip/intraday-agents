@@ -2,7 +2,7 @@
 
 Three ways of taking each plan, all managed the same way afterwards
 (SL first if SL and target are in the same candle, 50% at T1 then SL to
-cost, rest at T2, everything out at 15:00 (Groww squares off at 15:05), ~0.12% round trip =
+cost, rest at T2, everything out at 15:00 (before the broker's auto square-off), ~0.12% round trip =
 costs ~0.08% (brokerage, STT, exchange, GST, stamp) + ~0.04% slippage; 0.06% until 12 Nov 2026):
 
   rules  - the plan exactly as given (buy-trigger conditions and cancel rules)

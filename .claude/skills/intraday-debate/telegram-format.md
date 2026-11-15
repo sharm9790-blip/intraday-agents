@@ -3,7 +3,7 @@
 `state/latest_verdict.txt` is sent to Telegram with `parse_mode=HTML` and read on a phone.
 
 Rules:
-- Only `<b>`, `<i>` and `<code>` tags. No tables, no markdown (`**`, `#`, `|`). No links (no Groww or other stock-page links).
+- Only `<b>`, `<i>` and `<code>` tags. No tables, no markdown (`**`, `#`, `|`). No links (no stock-page links).
 - Escape `&` as `&amp;`, `<` as `&lt;`, `>` as `&gt;` in any text (stock `M&M` → `M&amp;M`).
 - One fact per line, ≤ 34 characters where possible. Blank line between blocks.
 - Prices as `₹766.5`, Indian grouping for big numbers (`₹1,42,000` or `₹1.42L`).
@@ -88,7 +88,7 @@ Sell half  <code>92</code> @ <code>777</code>
 📲 INDmoney: search <code>HDFCBANK</code>
 ```
 
-No Groww link: the user places orders in INDmoney (the watcher deletes any groww.in line). Values are plain numbers (no ₹) so they paste cleanly. "Sell half" = half of Qty (rounded down) @ T1 price. Give the INDmoney line as the tap-to-copy NSE symbol only.
+No stock-page link: the user places orders in INDmoney. Values are plain numbers (no ₹) so they paste cleanly. "Sell half" = half of Qty (rounded down) @ T1 price. Give the INDmoney line as the tap-to-copy NSE symbol only.
 
 ## NO TRADE template
 
@@ -114,7 +114,7 @@ Mood: large caps up, midcaps weak
 ⚠️ <b>NO ANALYSIS — 11:45 IST</b>
 
 Market data connectors not attached:
-• Groww
+• INDmoney
 • InvestSights
 
 👉 Attach them to the routine on claude.ai

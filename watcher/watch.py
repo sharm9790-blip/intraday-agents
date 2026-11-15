@@ -35,7 +35,7 @@ PAUSED = set()  # chats that sent PAUSE today (broadcasts skip them)
 IST = timezone(timedelta(hours=5, minutes=30))
 FOOTER = "<i>Analysis only, not advice. You place orders yourself.</i>"
 OPEN_STATES = ("waiting", "in_zone", "t1_hit")
-EXIT_BY = "15:00"  # Groww auto-squares-off MIS at 15:05 (+₹50 fee), so be out first
+EXIT_BY = "15:00"  # out before the broker's intraday auto square-off (and its fee)
 WARN_AT = "14:50"
 MAX_LIVE = 3        # plans followed at the same time
 MAX_TRADES = 3      # trades open at the same time: held or BUY order pending (count_trades)
@@ -616,8 +616,6 @@ def main(state_dir):
     if mt.get("date") == today:
         PAUSED.update(mt.get("paused", []))
     health.check(now, watch, plan_doc, NSE_HOLIDAYS, telegram)
-    health.connectors(load(os.path.join(state_dir, "positions.json"), {}), today,
-                      watch.setdefault("health", {}), telegram)
     save(watch_path, watch)
 
     # 0) Live plans now live in watch["live"] (up to MAX_LIVE at once). Carry over a
@@ -740,8 +738,7 @@ def main(state_dir):
         weekly_report(state_dir, now)
 
     # 1c) You sold the stock of a live plan → that plan ends and its slot is free.
-    if free_sold(watch, mt_today,
-                 load(os.path.join(state_dir, "positions.json"), {}), today, now):
+    if free_sold(watch, mt_today, today, now):
         save(watch_path, watch)
 
     # 1d) Premarket watchlist: forward it, start the pre-open runs, then from 09:20
@@ -914,19 +911,15 @@ def premarket_step(state_dir, today, now, watch):
     return changed
 
 
-def free_sold(watch, mt, pos, today, now):
-    """End each live plan whose stock you bought and have now fully sold (your
-    SOLD message in mytrades.json, or Groww positions showing it closed), so the
-    scans can look for a new trade. Returns True if any plan was freed."""
+def free_sold(watch, mt, today, now):
+    """End each live plan whose stock you bought and have now fully sold (mytrades.json:
+    INDmoney sells picked up by themselves, or your SOLD message), so the scans can look
+    for a new trade. Returns True if any plan was freed."""
     freed = []
-    rows = {r.get("symbol"): r for r in (pos.get("positions") or [])} if pos.get("date") == today else {}
     for e in slots(watch):
         mine = [t for ts in (mt.get("trades") or {}).values() for t in ts
                 if t.get("symbol") == e["symbol"] and (t.get("opened") or "") >= e["since"]]
-        r = rows.get(e["symbol"])
-        sold = ((mine and all(t.get("left", 1) <= 0 for t in mine))
-                or (r and r.get("buy_qty", 0) > 0 and r.get("sell_qty", 0) > 0 and r.get("net_qty", 1) == 0))
-        if sold and not any(t.get("left", 0) > 0 for t in mine):
+        if mine and all(t.get("left", 1) <= 0 for t in mine):
             e["user_sold"] = now.strftime("%H:%M")  # paper tracking goes on, slot is free
             freed.append(e["symbol"])
     if freed:
@@ -943,7 +936,7 @@ def free_sold(watch, mt, pos, today, now):
 
 def bought_symbols(mt):
     """{symbol: earliest open time} of every real trade today (your BOUGHT messages,
-    INDmoney auto-tracking, Groww sync), any chat."""
+    INDmoney auto-tracking), any chat."""
     out = {}
     for ts in (mt.get("trades") or {}).values():
         for t in ts:
@@ -1397,9 +1390,6 @@ def track(entry, now, watch):
             watch["day_pnl"] = watch.get("day_pnl", 0) + res
             note = f"📈 Paper trade result: <b>{inr(res)}</b> (before costs)"
         msg = msg.replace("\n\n" + FOOTER, "\n" + note + "\n\n" + FOOTER)
-    if msg and status in ("closed", "cancelled"):
-        msg = msg.replace("\n\n" + FOOTER,
-                          f"\n➖ Remove {sym} from \"My Draft Basket\"\n\n" + FOOTER)
     watch["log"].append(f"{t} {plan['symbol']} {price:.2f} VWAP {vw} status {status}")
     if entry.get("user_sold"):
         pass  # you already sold: track quietly for the paper result, no alerts
