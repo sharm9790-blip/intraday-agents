@@ -123,4 +123,7 @@ const ct = chainTrim({ data: { underlying_ltp: 100, strikes: { "100": { ce: { oi
 ok(ct.strikes["100"].ce.oi === 5 && ct.strikes["100"].pe === null && !("greeks" in ct.strikes["100"].ce), "chainTrim");
 ok(JSON.stringify(expiryGuess("2026-11-16")) === '["2026-11-24","2026-11-26","2026-12-29"]', "expiryGuess " + JSON.stringify(expiryGuess("2026-11-16")));
 
+const ca = chainTrim({ data: { strikes: [{ strike_price: 1080, ce: { oi: 9 }, pe: { oi: 4 } }] } });
+ok(ca.strikes["1080"].ce.oi === 9 && ca.strikes["1080"].pe.oi === 4, "chainTrim array " + JSON.stringify(ca));
+
 print(fails ? `${fails} FAILED` : "worker tests OK");
