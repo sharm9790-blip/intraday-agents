@@ -56,7 +56,7 @@ const STATE_BRANCH = "claude/intraday-state";
 const RETRY_AFTER_S = 600;
 const MAX_TRIES = 3;
 const IND = "https://api.indstocks.com";
-const VERSION = "2026-11-16a";  // shown by ?live=test so you can tell the new code is deployed
+const VERSION = "2026-11-16b";  // shown by ?live=test so you can tell the new code is deployed
 const OPEN = ["waiting", "in_zone", "t1_hit"];
 const IST_MS = 5.5 * 3600 * 1000;
 
@@ -403,7 +403,8 @@ async function indTest(env) {
     ? `ok (SBIN ${q.quotes.SBIN.ltp}, circuit ${q.quotes.SBIN.lower_circuit}–${q.quotes.SBIN.upper_circuit})` : "failed: " + (q.error || "no data"))
     .catch((e) => "failed: " + String(e.message || e));
   const chain = await indChain(env, "SBIN", expiryGuess(istNow().date), 3).then((c) => c.ok
-    ? `ok (SBIN ${c.chain.expiry}, ${Object.keys(c.chain.strikes).length} strikes)` : "failed: " + c.error)
+    ? `ok (SBIN ${c.chain.expiry}, ${Object.keys(c.chain.strikes).length} strikes; expiries ${(c.expiries || []).join(",") || "?"})`
+    : `failed: ${c.error}; expiries ${(c.expiries || []).join(",") || "none"}; data keys ${(c.raw_keys || []).join(",") || "-"}`)
     .catch((e) => "failed: " + String(e.message || e));
   return { ok: true, method, login, prices: res.prices, positions, orders, candles, quotes, chain,
            worker_key: !!env.WORKER_KEY,
@@ -587,15 +588,33 @@ export function expiryGuess(today) {
   return out.slice(0, 3);
 }
 
+// Tolerant of both layouts: strikes as an object keyed by strike, or as an array of rows.
 export function chainTrim(j) {
   const d = (j && j.data) || {};
+  const src = d.strikes ?? d.option_chain ?? d.chain ?? (Array.isArray(d) ? d : {});
   const strikes = {};
-  for (const [k, v] of Object.entries(d.strikes || {})) {
-    const leg = (x) => (x ? { oi: x.oi ?? null, previous_oi: x.previous_oi ?? null, iv: x.iv ?? null,
-      last_price: x.last_price ?? null, volume: x.volume ?? null } : null);
-    strikes[k] = { ce: leg(v && v.ce), pe: leg(v && v.pe) };
+  const leg = (x) => (x ? { oi: x.oi ?? x.open_interest ?? null, previous_oi: x.previous_oi ?? x.prev_oi ?? null,
+    iv: x.iv ?? null, last_price: x.last_price ?? x.ltp ?? null, volume: x.volume ?? null } : null);
+  const rows = Array.isArray(src) ? src.map((x) => [x && (x.strike_price ?? x.strike ?? x.strikePrice), x])
+    : Object.entries(src || {});
+  for (const [k, v] of rows) {
+    if (k == null || !v) continue;
+    strikes[String(k)] = { ce: leg(v.ce ?? v.CE ?? v.call), pe: leg(v.pe ?? v.PE ?? v.put) };
   }
-  return { underlying_ltp: d.underlying_ltp ?? null, expiry: d.expiry ?? null, strikes };
+  return { underlying_ltp: d.underlying_ltp ?? null, expiry: d.expiry ?? null, strikes,
+           raw_keys: Object.keys(Array.isArray(d) ? { array: 1 } : d).slice(0, 12) };
+}
+
+// Upcoming F&O expiries for an underlying (GET /market/instruments/expiries), cached 12 h.
+async function indExpiries(env, sym) {
+  const key = `exp:${sym}`;
+  const c = JSON.parse((await env.STATE.get(key)) || "null");
+  if (c && c.exp > Date.now()) return c.list;
+  const { ok, j } = await indGet(env, `${IND}/market/instruments/expiries?underlying=${encodeURIComponent(sym)}&segment=DERIVATIVE`);
+  const today = istNow().date;
+  const list = ok && Array.isArray(j.data) ? j.data.filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d) && d >= today) : [];
+  if (list.length) await env.STATE.put(key, JSON.stringify({ list, exp: Date.now() + 12 * 3600000 }));
+  return list;
 }
 
 async function indChain(env, sym, expiries, strikes) {
@@ -603,15 +622,23 @@ async function indChain(env, sym, expiries, strikes) {
   const index = sym === "NIFTY" ? "40000001" : null;
   const id = index || (await nseIds(env))[sym];
   if (!id) return { ok: false, error: "unknown symbol" };
-  let last = "";
-  for (const e of expiries) {
+  const real = await indExpiries(env, sym).catch(() => []);
+  const tries = [...new Set([...real.slice(0, 2), ...expiries])].slice(0, 4);
+  let last = "", keys = null;
+  for (const e of tries) {
     const { r, j, ok } = await indGet(env, `${IND}/market/option-chain?exchange=NSE&segment=${index ? "INDEX" : "EQUITY"}` +
       `&underlying-scrip=${id}&expiry=${e}&strike_count=${strikes}`);
-    if (ok) return { ok: true, chain: { ...chainTrim(j), expiry: e } };
-    last = `${r.status} ${String(j.message || "").slice(0, 80)}`;
+    if (ok) {
+      const c = chainTrim(j);
+      if (Object.keys(c.strikes).length) return { ok: true, chain: { ...c, expiry: e }, expiries: real.slice(0, 4) };
+      keys = c.raw_keys;
+      last = `${e}: 0 strikes`;
+    } else {
+      last = `${e}: ${r.status} ${String(j.message || "").slice(0, 80)}`;
+    }
     await sleep(300);
   }
-  return { ok: false, error: "no chain for " + expiries.join("/") + ": " + last };
+  return { ok: false, error: `no chain (${last})`, expiries: real.slice(0, 4), raw_keys: keys };
 }
 
 // ---------- 4) dead-man ----------
