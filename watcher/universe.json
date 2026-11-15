@@ -1,251 +1,617 @@
 {
-"built": "2026-11-12",
-"min_turnover_cr": 100,
-"min_price": 100,
+"built": "2026-11-15",
+"min_turnover_cr": 25,
+"min_price": 50,
+"source": "all NSE EQ series",
 "stocks": {
 "360ONE": {
-"tv": 109,
+"tv": 108,
 "fo": true,
 "ind": "Financial Services"
 },
+"63MOONS": {
+"tv": 38,
+"fo": false,
+"ind": "Other"
+},
+"AARTIDRUGS": {
+"tv": 114,
+"fo": false,
+"ind": "Other"
+},
+"AARTIIND": {
+"tv": 43,
+"fo": false,
+"ind": "Chemicals"
+},
+"AARTIPHARM": {
+"tv": 63,
+"fo": false,
+"ind": "Healthcare"
+},
 "ABB": {
-"tv": 221,
+"tv": 235,
 "fo": true,
 "ind": "Capital Goods"
 },
 "ABCAPITAL": {
-"tv": 125,
+"tv": 130,
 "fo": true,
 "ind": "Financial Services"
 },
+"ABDL": {
+"tv": 35,
+"fo": false,
+"ind": "Fast Moving Consumer Goods"
+},
+"ABREL": {
+"tv": 42,
+"fo": false,
+"ind": "Realty"
+},
+"ACC": {
+"tv": 30,
+"fo": false,
+"ind": "Construction Materials"
+},
+"ACE": {
+"tv": 40,
+"fo": false,
+"ind": "Capital Goods"
+},
+"ACI": {
+"tv": 27,
+"fo": false,
+"ind": "Chemicals"
+},
+"ACMESOLAR": {
+"tv": 38,
+"fo": false,
+"ind": "Power"
+},
 "ACUTAAS": {
-"tv": 349,
+"tv": 356,
 "fo": false,
 "ind": "Healthcare"
 },
 "ADANIENSOL": {
-"tv": 222,
+"tv": 205,
 "fo": true,
 "ind": "Power"
 },
 "ADANIENT": {
-"tv": 346,
+"tv": 339,
 "fo": true,
 "ind": "Metals & Mining"
 },
 "ADANIGREEN": {
-"tv": 229,
+"tv": 234,
 "fo": true,
 "ind": "Power"
 },
 "ADANIPORTS": {
-"tv": 524,
+"tv": 526,
 "fo": true,
 "ind": "Services"
 },
 "ADANIPOWER": {
-"tv": 369,
+"tv": 345,
 "fo": true,
 "ind": "Power"
 },
 "AEGISLOG": {
-"tv": 231,
+"tv": 202,
 "fo": false,
 "ind": "Oil Gas & Consumable Fuels"
 },
+"AEQUS": {
+"tv": 116,
+"fo": false,
+"ind": "Capital Goods"
+},
+"AEROFLEX": {
+"tv": 285,
+"fo": false,
+"ind": "Capital Goods"
+},
+"AETHER": {
+"tv": 66,
+"fo": false,
+"ind": "Chemicals"
+},
+"AFFLE": {
+"tv": 65,
+"fo": false,
+"ind": "Information Technology"
+},
+"AGIIL": {
+"tv": 68,
+"fo": false,
+"ind": "Other"
+},
+"AIAENG": {
+"tv": 40,
+"fo": false,
+"ind": "Capital Goods"
+},
+"AJANTPHARM": {
+"tv": 61,
+"fo": false,
+"ind": "Healthcare"
+},
+"ALEMBICLTD": {
+"tv": 29,
+"fo": false,
+"ind": "Other"
+},
+"ALIVUS": {
+"tv": 63,
+"fo": false,
+"ind": "Other"
+},
+"ALKEM": {
+"tv": 87,
+"fo": true,
+"ind": "Healthcare"
+},
 "AMBER": {
-"tv": 122,
+"tv": 212,
 "fo": true,
 "ind": "Consumer Durables"
 },
 "AMBUJACEM": {
-"tv": 169,
+"tv": 171,
 "fo": true,
 "ind": "Construction Materials"
 },
+"ANANDRATHI": {
+"tv": 81,
+"fo": true,
+"ind": "Financial Services"
+},
 "ANANTRAJ": {
-"tv": 101,
+"tv": 100,
 "fo": false,
 "ind": "Realty"
 },
 "ANGELONE": {
-"tv": 206,
+"tv": 224,
 "fo": true,
 "ind": "Financial Services"
 },
+"ANTELOPUS": {
+"tv": 44,
+"fo": false,
+"ind": "Other"
+},
+"ANTHEM": {
+"tv": 42,
+"fo": false,
+"ind": "Healthcare"
+},
+"ANURAS": {
+"tv": 62,
+"fo": false,
+"ind": "Chemicals"
+},
+"AONESTEELS": {
+"tv": 34,
+"fo": false,
+"ind": "Other"
+},
 "APARINDS": {
-"tv": 310,
+"tv": 313,
 "fo": false,
 "ind": "Capital Goods"
 },
 "APLAPOLLO": {
-"tv": 158,
+"tv": 157,
 "fo": true,
 "ind": "Capital Goods"
 },
+"APLLTD": {
+"tv": 56,
+"fo": false,
+"ind": "Other"
+},
+"APOLLO": {
+"tv": 625,
+"fo": false,
+"ind": "Capital Goods"
+},
 "APOLLOHOSP": {
-"tv": 419,
+"tv": 421,
 "fo": true,
 "ind": "Healthcare"
 },
+"APOLLOTYRE": {
+"tv": 35,
+"fo": false,
+"ind": "Automobile and Auto Components"
+},
+"APTUS": {
+"tv": 85,
+"fo": false,
+"ind": "Financial Services"
+},
+"ARE&M": {
+"tv": 42,
+"fo": false,
+"ind": "Automobile and Auto Components"
+},
+"ARVIND": {
+"tv": 39,
+"fo": false,
+"ind": "Textiles"
+},
+"ASHOKA": {
+"tv": 41,
+"fo": false,
+"ind": "Construction"
+},
 "ASHOKLEY": {
-"tv": 315,
+"tv": 313,
 "fo": true,
 "ind": "Capital Goods"
 },
 "ASIANPAINT": {
-"tv": 262,
+"tv": 260,
 "fo": true,
 "ind": "Consumer Durables"
 },
+"ASTERDM": {
+"tv": 67,
+"fo": false,
+"ind": "Healthcare"
+},
+"ASTRAL": {
+"tv": 87,
+"fo": true,
+"ind": "Capital Goods"
+},
+"ASTRAMICRO": {
+"tv": 70,
+"fo": false,
+"ind": "Capital Goods"
+},
+"ATGL": {
+"tv": 29,
+"fo": false,
+"ind": "Oil Gas & Consumable Fuels"
+},
 "ATHERENERG": {
-"tv": 589,
+"tv": 594,
 "fo": true,
 "ind": "Automobile and Auto Components"
 },
+"ATUL": {
+"tv": 28,
+"fo": false,
+"ind": "Chemicals"
+},
 "AUBANK": {
-"tv": 246,
+"tv": 245,
 "fo": true,
 "ind": "Financial Services"
 },
+"AUGMONT": {
+"tv": 42,
+"fo": false,
+"ind": "Other"
+},
 "AUROPHARMA": {
-"tv": 220,
+"tv": 222,
 "fo": true,
 "ind": "Healthcare"
 },
+"AVALON": {
+"tv": 76,
+"fo": false,
+"ind": "Capital Goods"
+},
+"AVANTEL": {
+"tv": 39,
+"fo": false,
+"ind": "Other"
+},
+"AVANTIFEED": {
+"tv": 80,
+"fo": false,
+"ind": "Fast Moving Consumer Goods"
+},
+"AWFIS": {
+"tv": 30,
+"fo": false,
+"ind": "Other"
+},
+"AWL": {
+"tv": 43,
+"fo": false,
+"ind": "Fast Moving Consumer Goods"
+},
 "AXISBANK": {
-"tv": 939,
+"tv": 892,
 "fo": true,
 "ind": "Financial Services"
 },
 "AZAD": {
-"tv": 143,
+"tv": 139,
 "fo": false,
 "ind": "Capital Goods"
 },
 "BAJAJ-AUTO": {
-"tv": 366,
+"tv": 368,
 "fo": true,
 "ind": "Automobile and Auto Components"
 },
+"BAJAJCON": {
+"tv": 43,
+"fo": false,
+"ind": "Fast Moving Consumer Goods"
+},
+"BAJAJELEC": {
+"tv": 32,
+"fo": false,
+"ind": "Other"
+},
 "BAJAJFINSV": {
-"tv": 198,
+"tv": 194,
 "fo": true,
+"ind": "Financial Services"
+},
+"BAJAJHFL": {
+"tv": 28,
+"fo": false,
+"ind": "Financial Services"
+},
+"BAJAJHLDNG": {
+"tv": 47,
+"fo": false,
 "ind": "Financial Services"
 },
 "BAJFINANCE": {
-"tv": 1002,
+"tv": 1032,
 "fo": true,
 "ind": "Financial Services"
 },
+"BALAMINES": {
+"tv": 33,
+"fo": false,
+"ind": "Chemicals"
+},
+"BALKRISIND": {
+"tv": 60,
+"fo": false,
+"ind": "Automobile and Auto Components"
+},
+"BALRAMCHIN": {
+"tv": 77,
+"fo": false,
+"ind": "Fast Moving Consumer Goods"
+},
+"BALUFORGE": {
+"tv": 38,
+"fo": false,
+"ind": "Capital Goods"
+},
 "BANDHANBNK": {
-"tv": 171,
+"tv": 165,
 "fo": true,
 "ind": "Financial Services"
 },
 "BANKBARODA": {
-"tv": 304,
+"tv": 294,
 "fo": true,
 "ind": "Financial Services"
 },
 "BANKINDIA": {
-"tv": 137,
+"tv": 145,
 "fo": true,
 "ind": "Financial Services"
 },
+"BBOX": {
+"tv": 85,
+"fo": false,
+"ind": "Information Technology"
+},
 "BDL": {
-"tv": 134,
+"tv": 139,
 "fo": true,
 "ind": "Capital Goods"
+},
+"BECTORFOOD": {
+"tv": 25,
+"fo": false,
+"ind": "Fast Moving Consumer Goods"
 },
 "BEL": {
-"tv": 423,
+"tv": 418,
 "fo": true,
 "ind": "Capital Goods"
 },
+"BELRISE": {
+"tv": 59,
+"fo": false,
+"ind": "Automobile and Auto Components"
+},
+"BEML": {
+"tv": 98,
+"fo": false,
+"ind": "Capital Goods"
+},
+"BFUTILITIE": {
+"tv": 27,
+"fo": false,
+"ind": "Other"
+},
 "BHARATFORG": {
-"tv": 231,
+"tv": 238,
 "fo": true,
 "ind": "Automobile and Auto Components"
 },
 "BHARTIARTL": {
-"tv": 2111,
+"tv": 2123,
 "fo": true,
 "ind": "Telecommunication"
 },
+"BHARTIHEXA": {
+"tv": 29,
+"fo": false,
+"ind": "Telecommunication"
+},
 "BHEL": {
-"tv": 538,
+"tv": 467,
 "fo": true,
 "ind": "Capital Goods"
 },
 "BIOCON": {
-"tv": 121,
+"tv": 119,
 "fo": true,
 "ind": "Healthcare"
 },
+"BLS": {
+"tv": 35,
+"fo": false,
+"ind": "Consumer Services"
+},
+"BLSPOLY": {
+"tv": 744,
+"fo": false,
+"ind": "Other"
+},
+"BLUEJET": {
+"tv": 53,
+"fo": false,
+"ind": "Healthcare"
+},
+"BLUESTARCO": {
+"tv": 69,
+"fo": true,
+"ind": "Consumer Durables"
+},
+"BLUESTONE": {
+"tv": 48,
+"fo": false,
+"ind": "Consumer Durables"
+},
+"BONFIG": {
+"tv": 282,
+"fo": false,
+"ind": "Other"
+},
+"BOROLTD": {
+"tv": 45,
+"fo": false,
+"ind": "Other"
+},
 "BOSCHLTD": {
-"tv": 147,
+"tv": 149,
 "fo": true,
 "ind": "Automobile and Auto Components"
 },
 "BPCL": {
-"tv": 186,
+"tv": 187,
 "fo": true,
 "ind": "Oil Gas & Consumable Fuels"
 },
 "BRITANNIA": {
-"tv": 133,
+"tv": 129,
 "fo": true,
 "ind": "Fast Moving Consumer Goods"
 },
 "BSE": {
-"tv": 1329,
+"tv": 1336,
 "fo": true,
 "ind": "Financial Services"
 },
 "BSOFT": {
-"tv": 190,
+"tv": 188,
 "fo": false,
 "ind": "Information Technology"
 },
 "CAMS": {
-"tv": 120,
+"tv": 129,
 "fo": true,
 "ind": "Financial Services"
 },
 "CANBK": {
-"tv": 368,
+"tv": 350,
 "fo": true,
 "ind": "Financial Services"
+},
+"CARBORUNIV": {
+"tv": 27,
+"fo": false,
+"ind": "Capital Goods"
 },
 "CARTRADE": {
 "tv": 198,
 "fo": false,
 "ind": "Consumer Services"
 },
+"CASTROLIND": {
+"tv": 77,
+"fo": false,
+"ind": "Oil Gas & Consumable Fuels"
+},
 "CDSL": {
-"tv": 193,
+"tv": 210,
 "fo": true,
 "ind": "Financial Services"
 },
+"CEATLTD": {
+"tv": 34,
+"fo": false,
+"ind": "Automobile and Auto Components"
+},
+"CEMPRO": {
+"tv": 68,
+"fo": false,
+"ind": "Construction"
+},
+"CENTUM": {
+"tv": 25,
+"fo": false,
+"ind": "Capital Goods"
+},
+"CESC": {
+"tv": 26,
+"fo": false,
+"ind": "Power"
+},
 "CGCL": {
-"tv": 208,
+"tv": 218,
 "fo": false,
 "ind": "Financial Services"
 },
 "CGPOWER": {
-"tv": 329,
+"tv": 336,
 "fo": true,
 "ind": "Capital Goods"
 },
+"CHEMPLASTS": {
+"tv": 27,
+"fo": false,
+"ind": "Other"
+},
 "CHENNPETRO": {
-"tv": 352,
+"tv": 321,
 "fo": false,
 "ind": "Oil Gas & Consumable Fuels"
 },
+"CHOICEIN": {
+"tv": 45,
+"fo": false,
+"ind": "Financial Services"
+},
 "CHOLAFIN": {
-"tv": 335,
+"tv": 333,
 "fo": true,
+"ind": "Financial Services"
+},
+"CHOLAHLDNG": {
+"tv": 28,
+"fo": false,
 "ind": "Financial Services"
 },
 "CIPLA": {
@@ -253,158 +619,388 @@
 "fo": true,
 "ind": "Healthcare"
 },
+"CLEANMAX": {
+"tv": 36,
+"fo": false,
+"ind": "Power"
+},
 "COALINDIA": {
-"tv": 317,
+"tv": 311,
 "fo": true,
 "ind": "Oil Gas & Consumable Fuels"
 },
 "COCHINSHIP": {
-"tv": 153,
+"tv": 156,
 "fo": true,
 "ind": "Capital Goods"
 },
 "COFORGE": {
-"tv": 526,
+"tv": 516,
 "fo": true,
 "ind": "Information Technology"
 },
+"COHANCE": {
+"tv": 37,
+"fo": false,
+"ind": "Healthcare"
+},
+"COLPAL": {
+"tv": 86,
+"fo": true,
+"ind": "Fast Moving Consumer Goods"
+},
+"CONCOR": {
+"tv": 50,
+"fo": true,
+"ind": "Services"
+},
+"COROMANDEL": {
+"tv": 44,
+"fo": true,
+"ind": "Chemicals"
+},
 "CPPLUS": {
-"tv": 141,
+"tv": 128,
 "fo": false,
 "ind": "Capital Goods"
 },
+"CRAFTSMAN": {
+"tv": 60,
+"fo": false,
+"ind": "Automobile and Auto Components"
+},
+"CREDITACC": {
+"tv": 53,
+"fo": false,
+"ind": "Financial Services"
+},
 "CROMPTON": {
-"tv": 121,
+"tv": 115,
 "fo": true,
 "ind": "Consumer Durables"
 },
+"CUB": {
+"tv": 74,
+"fo": true,
+"ind": "Financial Services"
+},
 "CUMMINSIND": {
-"tv": 396,
+"tv": 413,
 "fo": true,
 "ind": "Capital Goods"
 },
 "CUPID": {
-"tv": 492,
+"tv": 527,
 "fo": false,
 "ind": "Fast Moving Consumer Goods"
 },
 "CYIENT": {
-"tv": 187,
+"tv": 184,
 "fo": false,
 "ind": "Information Technology"
 },
+"CYIENTDLM": {
+"tv": 62,
+"fo": false,
+"ind": "Other"
+},
+"DABUR": {
+"tv": 61,
+"fo": true,
+"ind": "Fast Moving Consumer Goods"
+},
+"DALBHARAT": {
+"tv": 38,
+"fo": false,
+"ind": "Construction Materials"
+},
 "DATAPATTNS": {
-"tv": 285,
+"tv": 294,
 "fo": true,
 "ind": "Capital Goods"
 },
+"DCBBANK": {
+"tv": 26,
+"fo": false,
+"ind": "Financial Services"
+},
+"DCXINDIA": {
+"tv": 57,
+"fo": false,
+"ind": "Other"
+},
+"DEEPA": {
+"tv": 67,
+"fo": false,
+"ind": "Other"
+},
+"DEEPAKFERT": {
+"tv": 35,
+"fo": false,
+"ind": "Chemicals"
+},
+"DEEPAKNTR": {
+"tv": 67,
+"fo": false,
+"ind": "Chemicals"
+},
 "DELHIVERY": {
-"tv": 133,
+"tv": 132,
 "fo": true,
 "ind": "Services"
 },
+"DELTACORP": {
+"tv": 34,
+"fo": false,
+"ind": "Other"
+},
+"DHOOTTRANS": {
+"tv": 120,
+"fo": false,
+"ind": "Other"
+},
+"DIACABS": {
+"tv": 46,
+"fo": false,
+"ind": "Capital Goods"
+},
 "DIVISLAB": {
-"tv": 881,
+"tv": 866,
 "fo": true,
 "ind": "Healthcare"
 },
 "DIXON": {
-"tv": 470,
+"tv": 473,
 "fo": true,
 "ind": "Consumer Durables"
 },
 "DLF": {
-"tv": 208,
+"tv": 211,
 "fo": true,
 "ind": "Realty"
 },
 "DMART": {
-"tv": 192,
+"tv": 184,
 "fo": true,
 "ind": "Consumer Services"
 },
 "DRREDDY": {
-"tv": 285,
+"tv": 284,
 "fo": true,
 "ind": "Healthcare"
 },
+"E2E": {
+"tv": 83,
+"fo": false,
+"ind": "Information Technology"
+},
+"EBGNG": {
+"tv": 92,
+"fo": false,
+"ind": "Information Technology"
+},
+"ECLERX": {
+"tv": 49,
+"fo": false,
+"ind": "Services"
+},
+"EDELALTS": {
+"tv": 193,
+"fo": false,
+"ind": "Other"
+},
+"EDELWEISS": {
+"tv": 55,
+"fo": false,
+"ind": "Financial Services"
+},
 "EICHERMOT": {
-"tv": 343,
+"tv": 347,
 "fo": true,
 "ind": "Automobile and Auto Components"
 },
+"ELECON": {
+"tv": 43,
+"fo": false,
+"ind": "Capital Goods"
+},
+"EMAMILTD": {
+"tv": 29,
+"fo": false,
+"ind": "Fast Moving Consumer Goods"
+},
+"EMCURE": {
+"tv": 61,
+"fo": false,
+"ind": "Healthcare"
+},
+"EMIL": {
+"tv": 33,
+"fo": false,
+"ind": "Consumer Services"
+},
+"EMMVEE": {
+"tv": 72,
+"fo": false,
+"ind": "Capital Goods"
+},
+"EMUDHRA": {
+"tv": 48,
+"fo": false,
+"ind": "Other"
+},
 "ENGINERSIN": {
-"tv": 151,
+"tv": 152,
 "fo": false,
 "ind": "Construction"
 },
 "ENRIN": {
-"tv": 147,
+"tv": 167,
 "fo": true,
 "ind": "Capital Goods"
 },
+"ENTERO": {
+"tv": 50,
+"fo": false,
+"ind": "Consumer Services"
+},
+"EQUITASBNK": {
+"tv": 125,
+"fo": false,
+"ind": "Financial Services"
+},
+"ESCORTS": {
+"tv": 27,
+"fo": false,
+"ind": "Capital Goods"
+},
+"ESDS": {
+"tv": 131,
+"fo": false,
+"ind": "Other"
+},
 "ETERNAL": {
-"tv": 959,
+"tv": 950,
 "fo": true,
 "ind": "Consumer Services"
 },
+"EUROPRATIK": {
+"tv": 39,
+"fo": false,
+"ind": "Other"
+},
 "EXIDEIND": {
-"tv": 109,
+"tv": 107,
 "fo": false,
 "ind": "Automobile and Auto Components"
 },
+"FACT": {
+"tv": 35,
+"fo": false,
+"ind": "Chemicals"
+},
+"FCL": {
+"tv": 70,
+"fo": false,
+"ind": "Other"
+},
 "FEDERALBNK": {
-"tv": 320,
+"tv": 315,
 "fo": true,
 "ind": "Financial Services"
 },
 "FINCABLES": {
-"tv": 141,
+"tv": 149,
 "fo": false,
 "ind": "Capital Goods"
 },
+"FIVESTAR": {
+"tv": 36,
+"fo": false,
+"ind": "Financial Services"
+},
+"FLUOROCHEM": {
+"tv": 47,
+"fo": false,
+"ind": "Chemicals"
+},
 "FORCEMOT": {
-"tv": 161,
+"tv": 162,
 "fo": true,
 "ind": "Automobile and Auto Components"
 },
 "FORTIS": {
-"tv": 107,
+"tv": 105,
 "fo": true,
 "ind": "Healthcare"
 },
 "FRACTAL": {
-"tv": 178,
+"tv": 180,
 "fo": false,
 "ind": "Information Technology"
 },
+"FSL": {
+"tv": 42,
+"fo": false,
+"ind": "Services"
+},
+"FUSIONCX": {
+"tv": 46,
+"fo": false,
+"ind": "Other"
+},
 "GABRIEL": {
-"tv": 108,
+"tv": 116,
 "fo": false,
 "ind": "Automobile and Auto Components"
 },
 "GAIL": {
-"tv": 172,
+"tv": 166,
 "fo": true,
 "ind": "Oil Gas & Consumable Fuels"
 },
 "GALLANTT": {
-"tv": 195,
+"tv": 192,
 "fo": false,
 "ind": "Capital Goods"
 },
+"GANDHAR": {
+"tv": 37,
+"fo": false,
+"ind": "Other"
+},
+"GCSL": {
+"tv": 27,
+"fo": false,
+"ind": "Other"
+},
+"GERMAN": {
+"tv": 26,
+"fo": false,
+"ind": "Other"
+},
 "GESHIP": {
-"tv": 124,
+"tv": 130,
 "fo": false,
 "ind": "Services"
 },
 "GLAND": {
-"tv": 151,
+"tv": 152,
+"fo": false,
+"ind": "Healthcare"
+},
+"GLASSWALL": {
+"tv": 37,
+"fo": false,
+"ind": "Other"
+},
+"GLAXO": {
+"tv": 28,
 "fo": false,
 "ind": "Healthcare"
 },
 "GLENMARK": {
-"tv": 231,
+"tv": 234,
 "fo": true,
 "ind": "Healthcare"
 },
@@ -413,33 +1009,78 @@
 "fo": false,
 "ind": "Metals & Mining"
 },
+"GMMPFAUDLR": {
+"tv": 26,
+"fo": false,
+"ind": "Other"
+},
 "GMRAIRPORT": {
 "tv": 118,
 "fo": true,
 "ind": "Services"
 },
-"GODREJCP": {
-"tv": 127,
+"GNFC": {
+"tv": 28,
+"fo": false,
+"ind": "Chemicals"
+},
+"GODFRYPHLP": {
+"tv": 61,
 "fo": true,
 "ind": "Fast Moving Consumer Goods"
 },
+"GODREJCP": {
+"tv": 125,
+"fo": true,
+"ind": "Fast Moving Consumer Goods"
+},
+"GODREJIND": {
+"tv": 77,
+"fo": false,
+"ind": "Diversified"
+},
 "GODREJPROP": {
-"tv": 130,
+"tv": 133,
 "fo": true,
 "ind": "Realty"
 },
+"GOKEX": {
+"tv": 29,
+"fo": false,
+"ind": "Textiles"
+},
+"GOODLUCK": {
+"tv": 33,
+"fo": false,
+"ind": "Other"
+},
 "GRANULES": {
-"tv": 122,
+"tv": 126,
 "fo": false,
 "ind": "Healthcare"
 },
+"GRAPHITE": {
+"tv": 63,
+"fo": false,
+"ind": "Capital Goods"
+},
 "GRASIM": {
-"tv": 179,
+"tv": 197,
 "fo": true,
 "ind": "Construction Materials"
 },
+"GRAVITA": {
+"tv": 27,
+"fo": false,
+"ind": "Metals & Mining"
+},
+"GREAVESCOT": {
+"tv": 54,
+"fo": false,
+"ind": "Capital Goods"
+},
 "GROWW": {
-"tv": 797,
+"tv": 789,
 "fo": false,
 "ind": "Financial Services"
 },
@@ -448,53 +1089,93 @@
 "fo": false,
 "ind": "Capital Goods"
 },
+"GRWRHITECH": {
+"tv": 63,
+"fo": false,
+"ind": "Capital Goods"
+},
+"GUJENERGY": {
+"tv": 32,
+"fo": false,
+"ind": "Other"
+},
 "GVT&D": {
-"tv": 346,
+"tv": 374,
 "fo": true,
 "ind": "Capital Goods"
 },
 "HAL": {
-"tv": 441,
+"tv": 444,
 "fo": true,
 "ind": "Capital Goods"
 },
+"HAPPYFORGE": {
+"tv": 31,
+"fo": false,
+"ind": "Capital Goods"
+},
 "HAVELLS": {
-"tv": 119,
+"tv": 114,
 "fo": true,
 "ind": "Consumer Durables"
 },
 "HBLENGINE": {
-"tv": 283,
+"tv": 284,
 "fo": false,
 "ind": "Capital Goods"
 },
 "HCLTECH": {
-"tv": 572,
+"tv": 524,
 "fo": true,
 "ind": "Information Technology"
 },
+"HDBFS": {
+"tv": 78,
+"fo": false,
+"ind": "Financial Services"
+},
 "HDFCAMC": {
-"tv": 231,
+"tv": 236,
 "fo": true,
 "ind": "Financial Services"
 },
 "HDFCBANK": {
-"tv": 2916,
+"tv": 2918,
 "fo": true,
 "ind": "Financial Services"
 },
 "HDFCLIFE": {
-"tv": 142,
+"tv": 145,
 "fo": true,
 "ind": "Financial Services"
+},
+"HDFIRE": {
+"tv": 105,
+"fo": false,
+"ind": "Other"
+},
+"HEGAM": {
+"tv": 93,
+"fo": false,
+"ind": "Capital Goods"
 },
 "HEROMOTOCO": {
 "tv": 309,
 "fo": true,
 "ind": "Automobile and Auto Components"
 },
+"HEROMOTORS": {
+"tv": 141,
+"fo": false,
+"ind": "Other"
+},
+"HEXT": {
+"tv": 35,
+"fo": false,
+"ind": "Information Technology"
+},
 "HINDALCO": {
-"tv": 514,
+"tv": 542,
 "fo": true,
 "ind": "Metals & Mining"
 },
@@ -504,52 +1185,117 @@
 "ind": "Metals & Mining"
 },
 "HINDPETRO": {
-"tv": 219,
+"tv": 218,
 "fo": true,
 "ind": "Oil Gas & Consumable Fuels"
 },
 "HINDUNILVR": {
-"tv": 324,
+"tv": 301,
 "fo": true,
 "ind": "Fast Moving Consumer Goods"
 },
 "HINDZINC": {
-"tv": 220,
+"tv": 219,
 "fo": true,
 "ind": "Metals & Mining"
+},
+"HONASA": {
+"tv": 60,
+"fo": false,
+"ind": "Fast Moving Consumer Goods"
 },
 "HSCL": {
 "tv": 147,
 "fo": false,
 "ind": "Chemicals"
 },
+"HUBTOWN": {
+"tv": 39,
+"fo": false,
+"ind": "Other"
+},
+"HUDCO": {
+"tv": 57,
+"fo": false,
+"ind": "Financial Services"
+},
 "HYUNDAI": {
-"tv": 158,
+"tv": 153,
 "fo": true,
 "ind": "Automobile and Auto Components"
 },
+"ICICIAMC": {
+"tv": 97,
+"fo": false,
+"ind": "Financial Services"
+},
 "ICICIBANK": {
-"tv": 2602,
+"tv": 2638,
 "fo": true,
 "ind": "Financial Services"
 },
 "ICICIGI": {
-"tv": 124,
+"tv": 112,
 "fo": true,
 "ind": "Financial Services"
 },
+"ICICILIFE": {
+"tv": 85,
+"fo": true,
+"ind": "Financial Services"
+},
+"ICIL": {
+"tv": 52,
+"fo": false,
+"ind": "Textiles"
+},
+"IDBI": {
+"tv": 84,
+"fo": false,
+"ind": "Financial Services"
+},
+"IDEAFORGE": {
+"tv": 25,
+"fo": false,
+"ind": "Other"
+},
+"IDFCFIRSTB": {
+"tv": 145,
+"fo": true,
+"ind": "Financial Services"
+},
+"IEX": {
+"tv": 45,
+"fo": true,
+"ind": "Financial Services"
+},
+"IFCI": {
+"tv": 105,
+"fo": false,
+"ind": "Financial Services"
+},
 "IGIL": {
-"tv": 111,
+"tv": 114,
 "fo": false,
 "ind": "Services"
 },
 "IIFL": {
-"tv": 240,
+"tv": 246,
 "fo": false,
 "ind": "Financial Services"
 },
+"IIFLCAPS": {
+"tv": 74,
+"fo": false,
+"ind": "Financial Services"
+},
+"INDGN": {
+"tv": 42,
+"fo": false,
+"ind": "Healthcare"
+},
 "INDHOTEL": {
-"tv": 544,
+"tv": 562,
 "fo": true,
 "ind": "Consumer Services"
 },
@@ -558,18 +1304,33 @@
 "fo": false,
 "ind": "Construction Materials"
 },
+"INDIAGLYCO": {
+"tv": 30,
+"fo": false,
+"ind": "Fast Moving Consumer Goods"
+},
 "INDIANB": {
 "tv": 164,
 "fo": true,
 "ind": "Financial Services"
 },
 "INDIGO": {
-"tv": 447,
+"tv": 449,
 "fo": true,
 "ind": "Services"
 },
+"INDOMIM": {
+"tv": 136,
+"fo": false,
+"ind": "Other"
+},
+"INDSWFTLAB": {
+"tv": 30,
+"fo": false,
+"ind": "Other"
+},
 "INDUSINDBK": {
-"tv": 266,
+"tv": 261,
 "fo": true,
 "ind": "Financial Services"
 },
@@ -579,157 +1340,507 @@
 "ind": "Telecommunication"
 },
 "INFY": {
-"tv": 1839,
+"tv": 1750,
 "fo": true,
 "ind": "Information Technology"
 },
+"INOXGREEN": {
+"tv": 26,
+"fo": false,
+"ind": "Other"
+},
+"INOXINDIA": {
+"tv": 28,
+"fo": false,
+"ind": "Capital Goods"
+},
+"INOXWIND": {
+"tv": 74,
+"fo": true,
+"ind": "Capital Goods"
+},
+"INTELLECT": {
+"tv": 44,
+"fo": false,
+"ind": "Information Technology"
+},
 "IOC": {
-"tv": 186,
+"tv": 185,
 "fo": true,
 "ind": "Oil Gas & Consumable Fuels"
 },
+"IOLCP": {
+"tv": 69,
+"fo": false,
+"ind": "Other"
+},
+"IPCALAB": {
+"tv": 55,
+"fo": false,
+"ind": "Healthcare"
+},
+"IRCON": {
+"tv": 34,
+"fo": false,
+"ind": "Construction"
+},
+"IRCTC": {
+"tv": 53,
+"fo": false,
+"ind": "Consumer Services"
+},
+"IREDA": {
+"tv": 88,
+"fo": true,
+"ind": "Financial Services"
+},
+"IRFC": {
+"tv": 114,
+"fo": true,
+"ind": "Financial Services"
+},
 "ITC": {
-"tv": 548,
+"tv": 534,
 "fo": true,
 "ind": "Fast Moving Consumer Goods"
 },
+"ITCHOTELS": {
+"tv": 83,
+"fo": false,
+"ind": "Consumer Services"
+},
+"ITI": {
+"tv": 95,
+"fo": false,
+"ind": "Telecommunication"
+},
+"IXIGO": {
+"tv": 101,
+"fo": false,
+"ind": "Consumer Services"
+},
+"IZMO": {
+"tv": 25,
+"fo": false,
+"ind": "Other"
+},
+"J&KBANK": {
+"tv": 51,
+"fo": false,
+"ind": "Financial Services"
+},
+"JAICORPLTD": {
+"tv": 90,
+"fo": false,
+"ind": "Other"
+},
+"JARO": {
+"tv": 30,
+"fo": false,
+"ind": "Other"
+},
+"JAYNECOIND": {
+"tv": 37,
+"fo": false,
+"ind": "Capital Goods"
+},
+"JINDALPOLY": {
+"tv": 36,
+"fo": false,
+"ind": "Other"
+},
+"JINDALSAW": {
+"tv": 47,
+"fo": false,
+"ind": "Capital Goods"
+},
 "JINDALSTEL": {
-"tv": 133,
+"tv": 132,
 "fo": true,
 "ind": "Metals & Mining"
 },
 "JIOFIN": {
-"tv": 327,
+"tv": 322,
 "fo": true,
 "ind": "Financial Services"
 },
+"JKCEMENT": {
+"tv": 26,
+"fo": false,
+"ind": "Construction Materials"
+},
+"JMFINANCIL": {
+"tv": 25,
+"fo": false,
+"ind": "Financial Services"
+},
+"JPL": {
+"tv": 3800,
+"fo": false,
+"ind": "Other"
+},
+"JSFB": {
+"tv": 32,
+"fo": false,
+"ind": "Financial Services"
+},
+"JSL": {
+"tv": 40,
+"fo": false,
+"ind": "Metals & Mining"
+},
+"JSWCEMENT": {
+"tv": 45,
+"fo": false,
+"ind": "Construction Materials"
+},
 "JSWENERGY": {
-"tv": 145,
+"tv": 127,
 "fo": true,
 "ind": "Power"
 },
+"JSWINFRA": {
+"tv": 65,
+"fo": false,
+"ind": "Services"
+},
 "JSWSTEEL": {
-"tv": 301,
+"tv": 294,
 "fo": true,
 "ind": "Metals & Mining"
 },
+"JTLIND": {
+"tv": 27,
+"fo": false,
+"ind": "Other"
+},
+"JUBLFOOD": {
+"tv": 96,
+"fo": true,
+"ind": "Consumer Services"
+},
+"JUBLINGREA": {
+"tv": 32,
+"fo": false,
+"ind": "Chemicals"
+},
+"JUSTDIAL": {
+"tv": 112,
+"fo": false,
+"ind": "Consumer Services"
+},
+"JWL": {
+"tv": 61,
+"fo": false,
+"ind": "Capital Goods"
+},
+"JYOTICNC": {
+"tv": 96,
+"fo": false,
+"ind": "Capital Goods"
+},
+"KAJARIACER": {
+"tv": 49,
+"fo": false,
+"ind": "Consumer Durables"
+},
 "KALYANKJIL": {
-"tv": 705,
+"tv": 768,
 "fo": true,
 "ind": "Consumer Durables"
 },
+"KANOHAR": {
+"tv": 281,
+"fo": false,
+"ind": "Other"
+},
+"KARAMTARA": {
+"tv": 30,
+"fo": false,
+"ind": "Other"
+},
 "KARURVYSYA": {
-"tv": 174,
+"tv": 172,
 "fo": true,
 "ind": "Financial Services"
 },
 "KAYNES": {
-"tv": 207,
+"tv": 211,
 "fo": true,
 "ind": "Capital Goods"
+},
+"KEC": {
+"tv": 95,
+"fo": false,
+"ind": "Construction"
 },
 "KEI": {
-"tv": 243,
+"tv": 244,
 "fo": true,
 "ind": "Capital Goods"
 },
-"KIRLOSENG": {
-"tv": 107,
-"fo": false,
-"ind": "Capital Goods"
-},
-"KOTAKBANK": {
-"tv": 1064,
+"KFINTECH": {
+"tv": 98,
 "fo": true,
 "ind": "Financial Services"
 },
+"KIMS": {
+"tv": 27,
+"fo": false,
+"ind": "Healthcare"
+},
+"KIRIINDUS": {
+"tv": 26,
+"fo": false,
+"ind": "Other"
+},
+"KIRLOSENG": {
+"tv": 110,
+"fo": false,
+"ind": "Capital Goods"
+},
+"KIRLPNU": {
+"tv": 26,
+"fo": false,
+"ind": "Capital Goods"
+},
+"KISSHT": {
+"tv": 40,
+"fo": false,
+"ind": "Financial Services"
+},
+"KMEW": {
+"tv": 52,
+"fo": false,
+"ind": "Services"
+},
+"KOTAKBANK": {
+"tv": 1035,
+"fo": true,
+"ind": "Financial Services"
+},
+"KPEL": {
+"tv": 25,
+"fo": false,
+"ind": "Other"
+},
+"KPIGREEN": {
+"tv": 111,
+"fo": false,
+"ind": "Power"
+},
 "KPITTECH": {
-"tv": 129,
+"tv": 119,
 "fo": true,
 "ind": "Information Technology"
 },
+"KPRMILL": {
+"tv": 35,
+"fo": false,
+"ind": "Textiles"
+},
+"KRBL": {
+"tv": 43,
+"fo": false,
+"ind": "Fast Moving Consumer Goods"
+},
+"KRISHANA": {
+"tv": 26,
+"fo": false,
+"ind": "Other"
+},
+"KRN": {
+"tv": 79,
+"fo": false,
+"ind": "Capital Goods"
+},
+"KROSS": {
+"tv": 92,
+"fo": false,
+"ind": "Other"
+},
+"KSHINTL": {
+"tv": 33,
+"fo": false,
+"ind": "Other"
+},
+"KTKBANK": {
+"tv": 78,
+"fo": false,
+"ind": "Financial Services"
+},
+"LALITHAA": {
+"tv": 85,
+"fo": false,
+"ind": "Other"
+},
+"LALPATHLAB": {
+"tv": 61,
+"fo": false,
+"ind": "Healthcare"
+},
 "LAURUSLABS": {
-"tv": 576,
+"tv": 590,
 "fo": true,
 "ind": "Healthcare"
 },
-"LENSKART": {
-"tv": 361,
+"LEMONTREE": {
+"tv": 53,
 "fo": false,
 "ind": "Consumer Services"
 },
+"LENSKART": {
+"tv": 357,
+"fo": false,
+"ind": "Consumer Services"
+},
+"LGEINDIA": {
+"tv": 88,
+"fo": false,
+"ind": "Consumer Durables"
+},
 "LICHSGFIN": {
-"tv": 123,
+"tv": 117,
 "fo": true,
 "ind": "Financial Services"
 },
 "LICI": {
-"tv": 325,
+"tv": 336,
 "fo": true,
 "ind": "Financial Services"
 },
+"LINDEINDIA": {
+"tv": 29,
+"fo": false,
+"ind": "Chemicals"
+},
+"LLOYDSENGG": {
+"tv": 82,
+"fo": false,
+"ind": "Capital Goods"
+},
+"LLOYDSME": {
+"tv": 59,
+"fo": false,
+"ind": "Metals & Mining"
+},
 "LODHA": {
-"tv": 161,
+"tv": 162,
 "fo": true,
 "ind": "Realty"
 },
+"LOTUSDEV": {
+"tv": 52,
+"fo": false,
+"ind": "Realty"
+},
 "LT": {
-"tv": 967,
+"tv": 966,
 "fo": true,
 "ind": "Construction"
 },
 "LTF": {
-"tv": 149,
+"tv": 148,
 "fo": true,
 "ind": "Financial Services"
 },
 "LTM": {
-"tv": 205,
+"tv": 197,
 "fo": true,
 "ind": "Information Technology"
 },
 "LTTS": {
-"tv": 269,
+"tv": 267,
 "fo": false,
 "ind": "Information Technology"
 },
+"LUMAXTECH": {
+"tv": 51,
+"fo": false,
+"ind": "Automobile and Auto Components"
+},
+"LUMINO": {
+"tv": 30,
+"fo": false,
+"ind": "Other"
+},
 "LUPIN": {
-"tv": 149,
+"tv": 144,
 "fo": true,
 "ind": "Healthcare"
 },
 "M&M": {
-"tv": 954,
+"tv": 944,
 "fo": true,
 "ind": "Automobile and Auto Components"
 },
 "M&MFIN": {
-"tv": 110,
+"tv": 116,
 "fo": false,
 "ind": "Financial Services"
 },
-"MANAPPURAM": {
-"tv": 136,
+"MAHABANK": {
+"tv": 149,
 "fo": true,
 "ind": "Financial Services"
+},
+"MAHLOG": {
+"tv": 38,
+"fo": false,
+"ind": "Other"
+},
+"MANAPPURAM": {
+"tv": 179,
+"fo": true,
+"ind": "Financial Services"
+},
+"MANINDS": {
+"tv": 55,
+"fo": false,
+"ind": "Other"
+},
+"MANIPALHOS": {
+"tv": 64,
+"fo": false,
+"ind": "Other"
 },
 "MANKIND": {
 "tv": 205,
 "fo": true,
 "ind": "Healthcare"
 },
+"MANORAMA": {
+"tv": 28,
+"fo": false,
+"ind": "Fast Moving Consumer Goods"
+},
 "MARICO": {
-"tv": 247,
+"tv": 242,
 "fo": true,
 "ind": "Fast Moving Consumer Goods"
 },
+"MARINE": {
+"tv": 58,
+"fo": false,
+"ind": "Other"
+},
+"MARKSANS": {
+"tv": 45,
+"fo": false,
+"ind": "Healthcare"
+},
+"MARSONS": {
+"tv": 83,
+"fo": false,
+"ind": "Other"
+},
 "MARUTI": {
-"tv": 672,
+"tv": 677,
 "fo": true,
 "ind": "Automobile and Auto Components"
 },
 "MAXHEALTH": {
-"tv": 333,
+"tv": 325,
 "fo": true,
 "ind": "Healthcare"
 },
@@ -738,135 +1849,330 @@
 "fo": true,
 "ind": "Capital Goods"
 },
+"MBEL": {
+"tv": 48,
+"fo": false,
+"ind": "Other"
+},
 "MCX": {
-"tv": 735,
+"tv": 773,
 "fo": true,
 "ind": "Financial Services"
 },
+"MEDANTA": {
+"tv": 42,
+"fo": false,
+"ind": "Healthcare"
+},
 "MEESHO": {
-"tv": 372,
+"tv": 299,
 "fo": false,
 "ind": "Consumer Services"
 },
 "MFSL": {
-"tv": 132,
+"tv": 143,
 "fo": true,
 "ind": "Financial Services"
 },
+"MIDHANI": {
+"tv": 44,
+"fo": false,
+"ind": "Capital Goods"
+},
+"MKJEWELS": {
+"tv": 89,
+"fo": false,
+"ind": "Other"
+},
+"MOBIKWIK": {
+"tv": 42,
+"fo": false,
+"ind": "Other"
+},
+"MOLBIO": {
+"tv": 178,
+"fo": false,
+"ind": "Other"
+},
+"MOMSBELIEF": {
+"tv": 37,
+"fo": false,
+"ind": "Other"
+},
+"MONEYVIEW": {
+"tv": 471,
+"fo": false,
+"ind": "Other"
+},
 "MOTHERSON": {
-"tv": 278,
+"tv": 277,
 "fo": true,
 "ind": "Automobile and Auto Components"
 },
 "MOTILALOFS": {
-"tv": 152,
+"tv": 158,
 "fo": true,
 "ind": "Financial Services"
 },
 "MPHASIS": {
-"tv": 217,
+"tv": 219,
 "fo": true,
 "ind": "Information Technology"
 },
+"MRF": {
+"tv": 52,
+"fo": false,
+"ind": "Automobile and Auto Components"
+},
 "MRPL": {
-"tv": 339,
+"tv": 326,
 "fo": false,
 "ind": "Oil Gas & Consumable Fuels"
 },
+"MSTCLTD": {
+"tv": 41,
+"fo": false,
+"ind": "Services"
+},
 "MTARTECH": {
-"tv": 180,
+"tv": 183,
 "fo": false,
 "ind": "Capital Goods"
 },
 "MUTHOOTFIN": {
-"tv": 224,
+"tv": 230,
 "fo": true,
 "ind": "Financial Services"
+},
+"MVELECTRO": {
+"tv": 156,
+"fo": false,
+"ind": "Other"
 },
 "NAM-INDIA": {
-"tv": 127,
+"tv": 128,
 "fo": true,
 "ind": "Financial Services"
 },
+"NATCOPHARM": {
+"tv": 50,
+"fo": false,
+"ind": "Healthcare"
+},
 "NATIONALUM": {
-"tv": 177,
+"tv": 181,
 "fo": true,
 "ind": "Metals & Mining"
 },
 "NAUKRI": {
-"tv": 174,
+"tv": 170,
 "fo": true,
 "ind": "Consumer Services"
 },
 "NAVINFLUOR": {
-"tv": 190,
+"tv": 201,
 "fo": true,
 "ind": "Chemicals"
 },
+"NAZARA": {
+"tv": 59,
+"fo": false,
+"ind": "Media Entertainment & Publication"
+},
+"NBCC": {
+"tv": 70,
+"fo": true,
+"ind": "Construction"
+},
+"NCC": {
+"tv": 29,
+"fo": false,
+"ind": "Construction"
+},
+"NEOGEN": {
+"tv": 41,
+"fo": false,
+"ind": "Chemicals"
+},
 "NESTLEIND": {
-"tv": 281,
+"tv": 257,
 "fo": true,
 "ind": "Fast Moving Consumer Goods"
 },
 "NETWEB": {
-"tv": 682,
+"tv": 683,
 "fo": false,
 "ind": "Information Technology"
 },
 "NEULANDLAB": {
-"tv": 112,
+"tv": 116,
 "fo": false,
 "ind": "Healthcare"
 },
-"NTPC": {
-"tv": 310,
+"NEWGEN": {
+"tv": 40,
+"fo": false,
+"ind": "Information Technology"
+},
+"NH": {
+"tv": 30,
+"fo": false,
+"ind": "Healthcare"
+},
+"NHPC": {
+"tv": 117,
 "fo": true,
 "ind": "Power"
 },
+"NLCINDIA": {
+"tv": 47,
+"fo": false,
+"ind": "Power"
+},
+"NMDC": {
+"tv": 123,
+"fo": true,
+"ind": "Metals & Mining"
+},
+"NTPC": {
+"tv": 300,
+"fo": true,
+"ind": "Power"
+},
+"NTPCGREEN": {
+"tv": 25,
+"fo": false,
+"ind": "Power"
+},
+"NUVAMA": {
+"tv": 57,
+"fo": false,
+"ind": "Financial Services"
+},
 "NYKAA": {
-"tv": 195,
+"tv": 199,
 "fo": true,
 "ind": "Consumer Services"
+},
+"OBEROIRLTY": {
+"tv": 68,
+"fo": true,
+"ind": "Realty"
 },
 "OFSS": {
 "tv": 189,
 "fo": true,
 "ind": "Information Technology"
 },
+"OIL": {
+"tv": 84,
+"fo": true,
+"ind": "Oil Gas & Consumable Fuels"
+},
+"OLECTRA": {
+"tv": 41,
+"fo": false,
+"ind": "Automobile and Auto Components"
+},
 "ONESOURCE": {
-"tv": 136,
+"tv": 139,
 "fo": false,
 "ind": "Healthcare"
 },
 "ONGC": {
-"tv": 296,
+"tv": 294,
 "fo": true,
 "ind": "Oil Gas & Consumable Fuels"
 },
+"OPTIEMUS": {
+"tv": 31,
+"fo": false,
+"ind": "Other"
+},
+"ORIENTELEC": {
+"tv": 61,
+"fo": false,
+"ind": "Other"
+},
+"PAGEIND": {
+"tv": 125,
+"fo": true,
+"ind": "Textiles"
+},
+"PAISALO": {
+"tv": 43,
+"fo": false,
+"ind": "Financial Services"
+},
+"PARACABLES": {
+"tv": 47,
+"fo": false,
+"ind": "Other"
+},
+"PARADEEP": {
+"tv": 45,
+"fo": false,
+"ind": "Chemicals"
+},
+"PARAGMILK": {
+"tv": 97,
+"fo": false,
+"ind": "Other"
+},
+"PARAS": {
+"tv": 103,
+"fo": false,
+"ind": "Capital Goods"
+},
+"PARASHLTH": {
+"tv": 131,
+"fo": false,
+"ind": "Other"
+},
 "PATANJALI": {
-"tv": 196,
+"tv": 197,
 "fo": true,
 "ind": "Fast Moving Consumer Goods"
 },
 "PAYTM": {
-"tv": 513,
+"tv": 521,
 "fo": true,
 "ind": "Financial Services"
 },
+"PDSL": {
+"tv": 35,
+"fo": false,
+"ind": "Textiles"
+},
 "PERSISTENT": {
-"tv": 460,
+"tv": 452,
 "fo": true,
 "ind": "Information Technology"
 },
+"PETRONET": {
+"tv": 104,
+"fo": true,
+"ind": "Oil Gas & Consumable Fuels"
+},
 "PFC": {
-"tv": 268,
+"tv": 259,
 "fo": true,
 "ind": "Financial Services"
 },
 "PFOCUS": {
-"tv": 120,
+"tv": 119,
 "fo": false,
 "ind": "Media Entertainment & Publication"
+},
+"PGEL": {
+"tv": 95,
+"fo": true,
+"ind": "Consumer Durables"
+},
+"PHOENIXLTD": {
+"tv": 92,
+"fo": true,
+"ind": "Realty"
 },
 "PIDILITIND": {
 "tv": 125,
@@ -874,287 +2180,927 @@
 "ind": "Chemicals"
 },
 "PIIND": {
-"tv": 200,
+"tv": 199,
 "fo": true,
 "ind": "Chemicals"
 },
 "PINELABS": {
-"tv": 234,
+"tv": 241,
+"fo": false,
+"ind": "Financial Services"
+},
+"PIRAMALFIN": {
+"tv": 80,
 "fo": false,
 "ind": "Financial Services"
 },
 "PNB": {
-"tv": 386,
+"tv": 417,
 "fo": true,
 "ind": "Financial Services"
 },
+"PNBHOUSING": {
+"tv": 88,
+"fo": true,
+"ind": "Financial Services"
+},
+"PNGJL": {
+"tv": 30,
+"fo": false,
+"ind": "Consumer Durables"
+},
+"PNGSREVA": {
+"tv": 45,
+"fo": false,
+"ind": "Other"
+},
 "POLICYBZR": {
-"tv": 286,
+"tv": 318,
 "fo": true,
 "ind": "Financial Services"
 },
 "POLYCAB": {
-"tv": 314,
+"tv": 283,
 "fo": true,
 "ind": "Capital Goods"
 },
 "POONAWALLA": {
-"tv": 156,
+"tv": 148,
 "fo": false,
 "ind": "Financial Services"
 },
 "POWERGRID": {
-"tv": 288,
+"tv": 277,
 "fo": true,
 "ind": "Power"
 },
 "POWERINDIA": {
-"tv": 437,
+"tv": 564,
 "fo": true,
 "ind": "Capital Goods"
 },
 "PPLPHARMA": {
-"tv": 269,
+"tv": 271,
 "fo": false,
 "ind": "Healthcare"
 },
+"PRAJIND": {
+"tv": 25,
+"fo": false,
+"ind": "Capital Goods"
+},
+"PREMIERENE": {
+"tv": 91,
+"fo": true,
+"ind": "Capital Goods"
+},
+"PRESTIGE": {
+"tv": 69,
+"fo": true,
+"ind": "Realty"
+},
+"PRICOLLTD": {
+"tv": 31,
+"fo": false,
+"ind": "Automobile and Auto Components"
+},
+"PRIVISCL": {
+"tv": 47,
+"fo": false,
+"ind": "Chemicals"
+},
+"PROTEAN": {
+"tv": 29,
+"fo": false,
+"ind": "Other"
+},
+"PTCIL": {
+"tv": 49,
+"fo": false,
+"ind": "Capital Goods"
+},
 "PVRINOX": {
-"tv": 137,
+"tv": 139,
 "fo": false,
 "ind": "Media Entertainment & Publication"
 },
+"PWL": {
+"tv": 88,
+"fo": false,
+"ind": "Consumer Services"
+},
+"QPOWER": {
+"tv": 50,
+"fo": false,
+"ind": "Capital Goods"
+},
 "RADICO": {
-"tv": 213,
+"tv": 216,
 "fo": true,
 "ind": "Fast Moving Consumer Goods"
 },
+"RAIN": {
+"tv": 83,
+"fo": false,
+"ind": "Chemicals"
+},
+"RATEGAIN": {
+"tv": 30,
+"fo": false,
+"ind": "Information Technology"
+},
+"RATNAVEER": {
+"tv": 133,
+"fo": false,
+"ind": "Other"
+},
+"RAYMOND": {
+"tv": 78,
+"fo": false,
+"ind": "Other"
+},
+"RAYMONDREL": {
+"tv": 32,
+"fo": false,
+"ind": "Other"
+},
+"RBA": {
+"tv": 47,
+"fo": false,
+"ind": "Consumer Services"
+},
 "RBLBANK": {
-"tv": 169,
+"tv": 158,
 "fo": true,
 "ind": "Financial Services"
 },
 "RECLTD": {
-"tv": 156,
+"tv": 149,
 "fo": true,
 "ind": "Financial Services"
 },
 "REDINGTON": {
-"tv": 189,
+"tv": 182,
 "fo": false,
 "ind": "Services"
 },
 "RELIANCE": {
-"tv": 2747,
+"tv": 2770,
 "fo": true,
 "ind": "Oil Gas & Consumable Fuels"
 },
+"RENTOMOJO": {
+"tv": 95,
+"fo": false,
+"ind": "Other"
+},
+"RITES": {
+"tv": 36,
+"fo": false,
+"ind": "Construction"
+},
+"RKFORGE": {
+"tv": 95,
+"fo": false,
+"ind": "Automobile and Auto Components"
+},
+"ROLEXRINGS": {
+"tv": 61,
+"fo": false,
+"ind": "Other"
+},
+"RPTECH": {
+"tv": 33,
+"fo": false,
+"ind": "Other"
+},
 "RRKABEL": {
-"tv": 129,
+"tv": 132,
 "fo": false,
 "ind": "Capital Goods"
 },
+"RUBICON": {
+"tv": 35,
+"fo": false,
+"ind": "Healthcare"
+},
 "RVNL": {
-"tv": 141,
+"tv": 148,
 "fo": true,
 "ind": "Construction"
 },
 "SAIL": {
-"tv": 257,
+"tv": 261,
 "fo": true,
 "ind": "Metals & Mining"
 },
 "SAILIFE": {
-"tv": 310,
+"tv": 322,
 "fo": false,
 "ind": "Healthcare"
+},
+"SAMBHV": {
+"tv": 41,
+"fo": false,
+"ind": "Other"
+},
+"SAMMAANCAP": {
+"tv": 89,
+"fo": false,
+"ind": "Financial Services"
+},
+"SANGHVIMOV": {
+"tv": 31,
+"fo": false,
+"ind": "Other"
 },
 "SANSERA": {
 "tv": 101,
 "fo": false,
 "ind": "Automobile and Auto Components"
 },
+"SAREGAMA": {
+"tv": 134,
+"fo": false,
+"ind": "Media Entertainment & Publication"
+},
+"SBC": {
+"tv": 89,
+"fo": false,
+"ind": "Other"
+},
+"SBCL": {
+"tv": 30,
+"fo": false,
+"ind": "Other"
+},
+"SBICARD": {
+"tv": 68,
+"fo": true,
+"ind": "Financial Services"
+},
+"SBIFUNDS": {
+"tv": 82,
+"fo": false,
+"ind": "Other"
+},
 "SBILIFE": {
-"tv": 234,
+"tv": 225,
 "fo": true,
 "ind": "Financial Services"
 },
 "SBIN": {
-"tv": 1412,
+"tv": 1442,
 "fo": true,
 "ind": "Financial Services"
+},
+"SCHAEFFLER": {
+"tv": 26,
+"fo": false,
+"ind": "Automobile and Auto Components"
+},
+"SCI": {
+"tv": 69,
+"fo": false,
+"ind": "Services"
+},
+"SEDEMAC": {
+"tv": 38,
+"fo": false,
+"ind": "Automobile and Auto Components"
+},
+"SENCO": {
+"tv": 43,
+"fo": false,
+"ind": "Consumer Durables"
+},
+"SENORES": {
+"tv": 46,
+"fo": false,
+"ind": "Healthcare"
+},
+"SETL": {
+"tv": 28,
+"fo": false,
+"ind": "Other"
+},
+"SFCTECH": {
+"tv": 326,
+"fo": false,
+"ind": "Other"
+},
+"SGFIN": {
+"tv": 38,
+"fo": false,
+"ind": "Other"
+},
+"SGMART": {
+"tv": 77,
+"fo": false,
+"ind": "Metals & Mining"
+},
+"SHADOWFAX": {
+"tv": 116,
+"fo": false,
+"ind": "Services"
+},
+"SHAILY": {
+"tv": 40,
+"fo": false,
+"ind": "Consumer Durables"
+},
+"SHAKTIPUMP": {
+"tv": 45,
+"fo": false,
+"ind": "Capital Goods"
+},
+"SHANKESH": {
+"tv": 28,
+"fo": false,
+"ind": "Other"
+},
+"SHANTIGOLD": {
+"tv": 83,
+"fo": false,
+"ind": "Other"
+},
+"SHARDAMOTR": {
+"tv": 25,
+"fo": false,
+"ind": "Other"
+},
+"SHAREINDIA": {
+"tv": 34,
+"fo": false,
+"ind": "Financial Services"
+},
+"SHILPAMED": {
+"tv": 87,
+"fo": false,
+"ind": "Healthcare"
+},
+"SHIPROCKET": {
+"tv": 31,
+"fo": false,
+"ind": "Other"
+},
+"SHOPERSTOP": {
+"tv": 49,
+"fo": false,
+"ind": "Other"
+},
+"SHREECEM": {
+"tv": 64,
+"fo": true,
+"ind": "Construction Materials"
+},
+"SHREEJISPG": {
+"tv": 91,
+"fo": false,
+"ind": "Services"
+},
+"SHRINGARMS": {
+"tv": 48,
+"fo": false,
+"ind": "Other"
 },
 "SHRIRAMFIN": {
 "tv": 559,
 "fo": true,
 "ind": "Financial Services"
 },
+"SHUKRAPHAR": {
+"tv": 59,
+"fo": false,
+"ind": "Other"
+},
+"SHYAMMETL": {
+"tv": 61,
+"fo": false,
+"ind": "Capital Goods"
+},
+"SIEMENS": {
+"tv": 96,
+"fo": true,
+"ind": "Capital Goods"
+},
+"SIGNATURE": {
+"tv": 31,
+"fo": false,
+"ind": "Realty"
+},
+"SIRCA": {
+"tv": 25,
+"fo": false,
+"ind": "Other"
+},
+"SJS": {
+"tv": 28,
+"fo": false,
+"ind": "Automobile and Auto Components"
+},
+"SJVN": {
+"tv": 51,
+"fo": false,
+"ind": "Power"
+},
+"SKIPPER": {
+"tv": 32,
+"fo": false,
+"ind": "Capital Goods"
+},
+"SKYGOLD": {
+"tv": 206,
+"fo": false,
+"ind": "Consumer Durables"
+},
+"SMLMAH": {
+"tv": 38,
+"fo": false,
+"ind": "Capital Goods"
+},
+"SMSPHARMA": {
+"tv": 37,
+"fo": false,
+"ind": "Other"
+},
+"SMT": {
+"tv": 175,
+"fo": false,
+"ind": "Other"
+},
+"SOBHA": {
+"tv": 28,
+"fo": false,
+"ind": "Realty"
+},
+"SOLARA": {
+"tv": 40,
+"fo": false,
+"ind": "Other"
+},
 "SOLARINDS": {
-"tv": 292,
+"tv": 290,
 "fo": true,
 "ind": "Chemicals"
 },
 "SONACOMS": {
-"tv": 284,
+"tv": 278,
 "fo": true,
 "ind": "Automobile and Auto Components"
+},
+"SONATSOFTW": {
+"tv": 35,
+"fo": false,
+"ind": "Information Technology"
+},
+"SOUTHBANK": {
+"tv": 132,
+"fo": false,
+"ind": "Financial Services"
+},
+"SPARC": {
+"tv": 50,
+"fo": false,
+"ind": "Healthcare"
+},
+"SRF": {
+"tv": 90,
+"fo": true,
+"ind": "Chemicals"
+},
+"SSRETAIL": {
+"tv": 182,
+"fo": false,
+"ind": "Other"
+},
+"SSWL": {
+"tv": 201,
+"fo": false,
+"ind": "Other"
+},
+"STAR": {
+"tv": 45,
+"fo": false,
+"ind": "Healthcare"
+},
+"STARHEALTH": {
+"tv": 26,
+"fo": false,
+"ind": "Financial Services"
+},
+"STEAMHOUSE": {
+"tv": 38,
+"fo": false,
+"ind": "Other"
+},
+"STYLEBAAZA": {
+"tv": 60,
+"fo": false,
+"ind": "Other"
+},
+"SUDEEPPHRM": {
+"tv": 30,
+"fo": false,
+"ind": "Chemicals"
 },
 "SUNPHARMA": {
 "tv": 419,
 "fo": true,
 "ind": "Healthcare"
 },
+"SUNTECK": {
+"tv": 36,
+"fo": false,
+"ind": "Realty"
+},
+"SUNTV": {
+"tv": 52,
+"fo": false,
+"ind": "Media Entertainment & Publication"
+},
+"SUPREMEIND": {
+"tv": 77,
+"fo": true,
+"ind": "Capital Goods"
+},
+"SUPRIYA": {
+"tv": 29,
+"fo": false,
+"ind": "Healthcare"
+},
 "SWIGGY": {
-"tv": 474,
+"tv": 484,
 "fo": true,
 "ind": "Consumer Services"
 },
+"SYMBIOTEC": {
+"tv": 140,
+"fo": false,
+"ind": "Other"
+},
 "SYNGENE": {
-"tv": 108,
+"tv": 107,
 "fo": false,
 "ind": "Healthcare"
 },
 "SYRMA": {
-"tv": 254,
+"tv": 253,
 "fo": true,
 "ind": "Capital Goods"
 },
+"TALBROAUTO": {
+"tv": 32,
+"fo": false,
+"ind": "Other"
+},
+"TANLA": {
+"tv": 103,
+"fo": false,
+"ind": "Information Technology"
+},
+"TARC": {
+"tv": 31,
+"fo": false,
+"ind": "Realty"
+},
 "TARIL": {
-"tv": 213,
+"tv": 94,
 "fo": false,
 "ind": "Capital Goods"
 },
+"TATACAP": {
+"tv": 91,
+"fo": false,
+"ind": "Financial Services"
+},
+"TATACHEM": {
+"tv": 83,
+"fo": false,
+"ind": "Chemicals"
+},
+"TATACOMM": {
+"tv": 102,
+"fo": false,
+"ind": "Telecommunication"
+},
 "TATACONSUM": {
-"tv": 197,
+"tv": 185,
 "fo": true,
 "ind": "Fast Moving Consumer Goods"
 },
 "TATAELXSI": {
-"tv": 207,
+"tv": 138,
 "fo": true,
 "ind": "Information Technology"
 },
 "TATAPOWER": {
-"tv": 201,
+"tv": 211,
 "fo": true,
 "ind": "Power"
 },
 "TATASTEEL": {
-"tv": 436,
+"tv": 430,
 "fo": true,
 "ind": "Metals & Mining"
 },
+"TATATECH": {
+"tv": 64,
+"fo": false,
+"ind": "Information Technology"
+},
 "TCS": {
-"tv": 1311,
+"tv": 1211,
 "fo": true,
 "ind": "Information Technology"
 },
 "TDPOWERSYS": {
-"tv": 348,
+"tv": 500,
 "fo": false,
 "ind": "Capital Goods"
 },
 "TECHM": {
-"tv": 738,
+"tv": 721,
 "fo": true,
 "ind": "Information Technology"
 },
+"TECHNOCRAF": {
+"tv": 105,
+"fo": false,
+"ind": "Other"
+},
+"TECHNOE": {
+"tv": 29,
+"fo": false,
+"ind": "Construction"
+},
+"TEGA": {
+"tv": 48,
+"fo": false,
+"ind": "Capital Goods"
+},
+"TEJASNET": {
+"tv": 46,
+"fo": false,
+"ind": "Telecommunication"
+},
+"TEMPSENS": {
+"tv": 74,
+"fo": false,
+"ind": "Other"
+},
+"TENNIND": {
+"tv": 40,
+"fo": false,
+"ind": "Automobile and Auto Components"
+},
+"TFCILTD": {
+"tv": 209,
+"fo": false,
+"ind": "Other"
+},
+"THANGAMAYL": {
+"tv": 34,
+"fo": false,
+"ind": "Consumer Durables"
+},
+"THELEELA": {
+"tv": 51,
+"fo": false,
+"ind": "Consumer Services"
+},
+"THERMAX": {
+"tv": 101,
+"fo": false,
+"ind": "Capital Goods"
+},
+"THYROCARE": {
+"tv": 34,
+"fo": false,
+"ind": "Healthcare"
+},
+"TI": {
+"tv": 29,
+"fo": false,
+"ind": "Fast Moving Consumer Goods"
+},
 "TIINDIA": {
-"tv": 124,
+"tv": 112,
 "fo": true,
 "ind": "Automobile and Auto Components"
 },
+"TIMETECHNO": {
+"tv": 47,
+"fo": false,
+"ind": "Capital Goods"
+},
+"TIMEX": {
+"tv": 36,
+"fo": false,
+"ind": "Consumer Durables"
+},
+"TIPSMUSIC": {
+"tv": 72,
+"fo": false,
+"ind": "Media Entertainment & Publication"
+},
+"TITAGARH": {
+"tv": 66,
+"fo": false,
+"ind": "Capital Goods"
+},
 "TITAN": {
-"tv": 445,
+"tv": 447,
 "fo": true,
 "ind": "Consumer Durables"
 },
 "TMCV": {
-"tv": 314,
+"tv": 317,
 "fo": false,
 "ind": "Capital Goods"
 },
 "TMPV": {
-"tv": 221,
+"tv": 225,
 "fo": true,
 "ind": "Automobile and Auto Components"
 },
+"TONBO": {
+"tv": 790,
+"fo": false,
+"ind": "Other"
+},
 "TORNTPHARM": {
-"tv": 157,
+"tv": 155,
 "fo": true,
 "ind": "Healthcare"
 },
+"TRANSRAILL": {
+"tv": 38,
+"fo": false,
+"ind": "Capital Goods"
+},
 "TRENT": {
-"tv": 304,
+"tv": 303,
 "fo": true,
 "ind": "Consumer Services"
 },
+"TRITURBINE": {
+"tv": 36,
+"fo": false,
+"ind": "Capital Goods"
+},
+"TTKPRESTIG": {
+"tv": 26,
+"fo": false,
+"ind": "Consumer Durables"
+},
 "TVSMOTOR": {
-"tv": 319,
+"tv": 325,
 "fo": true,
 "ind": "Automobile and Auto Components"
 },
+"UBL": {
+"tv": 53,
+"fo": false,
+"ind": "Fast Moving Consumer Goods"
+},
+"UJJIVANSFB": {
+"tv": 114,
+"fo": true,
+"ind": "Financial Services"
+},
 "ULTRACEMCO": {
-"tv": 342,
+"tv": 335,
 "fo": true,
 "ind": "Construction Materials"
 },
+"UNIMECH": {
+"tv": 43,
+"fo": false,
+"ind": "Capital Goods"
+},
 "UNIONBANK": {
-"tv": 350,
+"tv": 343,
 "fo": true,
 "ind": "Financial Services"
 },
 "UNITDSPR": {
-"tv": 117,
+"tv": 111,
 "fo": true,
 "ind": "Fast Moving Consumer Goods"
 },
 "UNOMINDA": {
-"tv": 143,
+"tv": 154,
 "fo": true,
 "ind": "Automobile and Auto Components"
 },
 "UPL": {
-"tv": 130,
+"tv": 128,
 "fo": true,
 "ind": "Chemicals"
 },
+"URBANCO": {
+"tv": 87,
+"fo": false,
+"ind": "Consumer Services"
+},
+"V2RETAIL": {
+"tv": 203,
+"fo": false,
+"ind": "Consumer Services"
+},
 "VAML": {
-"tv": 204,
+"tv": 197,
 "fo": false,
 "ind": "Metals & Mining"
 },
 "VBL": {
-"tv": 233,
+"tv": 232,
 "fo": true,
 "ind": "Fast Moving Consumer Goods"
 },
 "VEDL": {
-"tv": 272,
+"tv": 262,
 "fo": true,
 "ind": "Metals & Mining"
 },
+"VENUSPIPES": {
+"tv": 31,
+"fo": false,
+"ind": "Other"
+},
+"VGUARD": {
+"tv": 68,
+"fo": false,
+"ind": "Consumer Durables"
+},
+"VIKRAMSOLR": {
+"tv": 29,
+"fo": false,
+"ind": "Capital Goods"
+},
+"VIYASH": {
+"tv": 58,
+"fo": false,
+"ind": "Healthcare"
+},
+"VMM": {
+"tv": 95,
+"fo": true,
+"ind": "Consumer Services"
+},
+"VOLTAMP": {
+"tv": 25,
+"fo": false,
+"ind": "Capital Goods"
+},
 "VOLTAS": {
-"tv": 114,
+"tv": 116,
 "fo": true,
 "ind": "Consumer Durables"
+},
+"VRLLOG": {
+"tv": 62,
+"fo": false,
+"ind": "Other"
 },
 "WAAREEENER": {
 "tv": 222,
 "fo": true,
 "ind": "Capital Goods"
 },
+"WABAG": {
+"tv": 95,
+"fo": false,
+"ind": "Utilities"
+},
 "WELCORP": {
-"tv": 295,
+"tv": 298,
 "fo": false,
 "ind": "Capital Goods"
 },
 "WELSPUNLIV": {
-"tv": 257,
+"tv": 258,
 "fo": false,
 "ind": "Textiles"
 },
+"WESTLIFE": {
+"tv": 40,
+"fo": false,
+"ind": "Consumer Services"
+},
+"WHEELS": {
+"tv": 30,
+"fo": false,
+"ind": "Other"
+},
+"WHIRLPOOL": {
+"tv": 33,
+"fo": false,
+"ind": "Consumer Durables"
+},
 "WIPRO": {
-"tv": 393,
+"tv": 387,
 "fo": true,
 "ind": "Information Technology"
 },
@@ -1163,13 +3109,38 @@
 "fo": false,
 "ind": "Healthcare"
 },
+"WSTCSTPAPR": {
+"tv": 49,
+"fo": false,
+"ind": "Other"
+},
+"YATHARTH": {
+"tv": 33,
+"fo": false,
+"ind": "Healthcare"
+},
+"ZEEL": {
+"tv": 168,
+"fo": false,
+"ind": "Media Entertainment & Publication"
+},
 "ZENSARTECH": {
-"tv": 101,
+"tv": 95,
 "fo": false,
 "ind": "Information Technology"
 },
+"ZENTEC": {
+"tv": 87,
+"fo": false,
+"ind": "Capital Goods"
+},
+"ZETWERK": {
+"tv": 307,
+"fo": false,
+"ind": "Other"
+},
 "ZYDUSLIFE": {
-"tv": 209,
+"tv": 201,
 "fo": true,
 "ind": "Healthcare"
 }

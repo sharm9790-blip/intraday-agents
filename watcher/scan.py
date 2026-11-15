@@ -4,8 +4,8 @@ The AI debate only has time to look at a handful of stocks, so it used to scan
 ~10 F&O names itself and missed most movers (6–12 Nov: 45 of the 80 top
 gainers were never looked at). This ranks the whole liquid universe by code:
 
-  universe   watcher/universe.json (or a fresher state/universe.json): Nifty 500,
-             EQ series only (no T2T), 20-day turnover ≥ ₹100 cr, price ≥ ₹100.
+  universe   watcher/universe.json (or a fresher state/universe.json): every NSE stock in
+             the EQ series (no T2T), 20-day turnover ≥ ₹25 cr, price ≥ ₹50 (~628).
              F&O is NOT required (you buy cash shares); `fo` is kept as a tag.
   keep       above VWAP, ≤ 1.5% above VWAP (not run yet), up ≥ 0.3%, volume so far
              ≥ 1.2× usual for this time, and up ≤ 3% unless it pulled back to VWAP
@@ -118,7 +118,7 @@ def mode_of(nifty_pct, above, up=0):
     return "choppy"
 
 
-def run(state_dir, now, candles, universe=None, workers=16):
+def run(state_dir, now, candles, universe=None, workers=24):
     u = universe or load_universe(state_dir)
     stocks = u.get("stocks", {})
 
@@ -163,18 +163,35 @@ def run(state_dir, now, candles, universe=None, workers=16):
             "shorts": shorts[:5], "sectors": sectors}
 
 
-def build_universe(path, min_tv=100, min_px=100):
-    """Weekly: Nifty 500 (EQ series) + F&O list from NSE, 20-day turnover from Yahoo."""
+def build_universe(path, min_tv=25, min_px=50):
+    """Weekly: EVERY NSE EQ-series stock (not just the Nifty 500) with 20-day average
+    turnover ≥ min_tv ₹ crore and price ≥ ₹min_px (16 Nov: ~628 stocks; the old Nifty-500,
+    ₹100 cr, ₹100 list had 234 and missed liquid movers like CUPID / GABRIEL / SKYGOLD).
+    At ₹25 cr/day a ₹1 lakh order is ~0.004% of the day's value: getting in and out is not
+    the problem; below that spreads, circuits and operator moves start. Industry comes from
+    the Nifty Total Market / Nifty 500 lists when the stock is in them."""
     import csv
     import io
+    import urllib.parse
     hdr = {"User-Agent": "Mozilla/5.0"}
 
     def get(url):
         with urllib.request.urlopen(urllib.request.Request(url, headers=hdr), timeout=30) as r:
             return r.read().decode("utf-8", "replace")
 
-    n500 = list(csv.DictReader(io.StringIO(get(
-        "https://archives.nseindia.com/content/indices/ind_nifty500list.csv"))))
+    rows = list(csv.DictReader(io.StringIO(get(
+        "https://archives.nseindia.com/content/equities/EQUITY_L.csv"))))
+    sk = next(k for k in rows[0] if k.strip() == "SERIES")
+    eq = sorted({r["SYMBOL"].strip() for r in rows if r[sk].strip() == "EQ"})
+    ind = {}
+    for url in ("https://archives.nseindia.com/content/indices/ind_niftytotalmarket_list.csv",
+                "https://archives.nseindia.com/content/indices/ind_nifty500list.csv"):
+        try:
+            for r in csv.DictReader(io.StringIO(get(url))):
+                if r.get("Symbol") and r.get("Industry"):
+                    ind.setdefault(r["Symbol"].strip(), r["Industry"].strip())
+        except Exception as e:
+            print("industry list failed", url, e)
     fo = {r.split(",")[1].strip() for r in get(
         "https://nsearchives.nseindia.com/content/fo/fo_mktlots.csv").splitlines()[1:] if "," in r}
 
@@ -188,22 +205,20 @@ def build_universe(path, min_tv=100, min_px=100):
         except Exception:
             return sym, None
 
-    import urllib.parse
-    eq = [r for r in n500 if r.get("Series") == "EQ"]
-    with ThreadPoolExecutor(16) as ex:
-        tv = dict(ex.map(daily, [r["Symbol"] for r in eq]))
+    with ThreadPoolExecutor(24) as ex:
+        tv = dict(ex.map(daily, eq))
     out = {}
-    for r in eq:
-        t = tv.get(r["Symbol"])
+    for s in eq:
+        t = tv.get(s)
         if t and t[0] >= min_tv and t[1] >= min_px:
-            out[r["Symbol"]] = {"tv": round(t[0]), "fo": r["Symbol"] in fo, "ind": r["Industry"]}
-    if len(out) < 100:
+            out[s] = {"tv": round(t[0]), "fo": s in fo, "ind": ind.get(s, "Other")}
+    if len(out) < 200:
         raise SystemExit(f"universe too small ({len(out)}), keeping the old one")
     from datetime import date
     with open(path, "w") as f:
         json.dump({"built": date.today().isoformat(), "min_turnover_cr": min_tv, "min_price": min_px,
-                   "stocks": dict(sorted(out.items()))}, f, indent=0)
-    print("universe:", len(out), "stocks")
+                   "source": "all NSE EQ series", "stocks": dict(sorted(out.items()))}, f, indent=0)
+    print("universe:", len(out), "stocks,", sum(1 for v in out.values() if v["fo"]), "F&O")
 
 
 def refresh(state_dir, days=7):
@@ -265,4 +280,4 @@ def group(sym, universe=None):
     ind = ((universe or {}).get("stocks", {}).get(sym) or {}).get("ind")
     if ind == "Financial Services":
         return "NBFC / lenders"
-    return ind or None
+    return ind if ind and ind != "Other" else None   # unknown industry: no sector cap

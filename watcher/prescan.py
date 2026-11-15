@@ -140,9 +140,11 @@ def run(state_dir, asof, fetch=daily, universe=None, workers=16):
     # one sector should not take the whole list: at most 3 per sector group in the top
     out, per = [], {}
     for it in items:
-        if per.get(it["sector"], 0) >= 3:
+        g = it["sector"] if it["sector"] not in ("", "Other") else None
+        if g and per.get(g, 0) >= 3:
             continue
-        per[it["sector"]] = per.get(it["sector"], 0) + 1
+        if g:
+            per[g] = per.get(g, 0) + 1
         out.append(it)
     return {"date": asof.isoformat(), "built_at": datetime.now(IST).strftime("%H:%M"),
             "based_on": max((f["date"] for f in res.values() if f), default=None),
