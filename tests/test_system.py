@@ -31,6 +31,7 @@ import stats  # noqa: E402
 import watch as w  # noqa: E402
 
 REAL_CANDLES = w.candles
+HELP_TEXT = lambda: mt.HELP
 
 IST = w.IST
 CLOCK = [dt.datetime(2026, 11, 9, 10, 0, tzinfo=IST)]
@@ -355,7 +356,7 @@ class TestWatcherFlow(Base):
         self.assertIn("+₹653 booked", t)
         self.assertIn("TARGET 2 HIT", t)
         self.assertIn("+₹1,605", t)
-        self.assertIn('Remove TATASTEEL from "My Draft Basket"', t)
+        self.assertNotIn('Remove TATASTEEL from "My Draft Basket"', t)
         # never bought: 15 min after the trigger it stops counting and frees its slot,
         # but the target / SL cards still come, with a note
         wt = self.get("watch.json")
@@ -592,9 +593,10 @@ class TestMultiPlan(Base):
             self.assertIn("SBIN", [e["symbol"] for e in w.open_plans(wt)], "paper tracking goes on")
             self.assertEqual((wt["trades"], wt["day_trades"]), (0, 1), "sold → not open, still 1 today")
             self.assertGreater(len(fired), k, "0 open + 2 waiting → scan again")
-            # Groww positions closed for PFC (no SOLD message) also frees it, once
-            self.put("positions.json", {"date": "2026-11-09", "positions": [
-                {"symbol": "PFC", "buy_qty": 5, "sell_qty": 5, "net_qty": 0}]})
+            # PFC sold too (INDmoney sale picked up into mytrades) → also freed, once
+            self.put("mytrades.json", {"date": "2026-11-09", "trades": {"1": [
+                {"symbol": "SBIN", "opened": "13:55", "qty": 10, "left": 0},
+                {"symbol": "PFC", "opened": "14:05", "qty": 5, "left": 0}]}})
             self.at(14, 10); w.main(self.dir)
             self.at(14, 15); w.main(self.dir)
             self.assertEqual(self.texts().count("SLOT FREED — PFC"), 1)
@@ -705,8 +707,6 @@ class TestHealth(Base):
         self.assertIn("Open in Groww", got)
         self.assertNotIn("groww.in", w.check_groww_links(got))
         self.assertNotIn("\n\n\n", got)
-        self.assertIn("reconnect", mt.reconnect_hint("Groww connector needs authentication"))
-        self.assertEqual(mt.reconnect_hint("order not found"), "")
 
 
 class TestMyTrade(Base):
@@ -791,17 +791,13 @@ class TestMyTrade(Base):
         st = self.get("mytrades.json")
         self.assertNotIn("999", st["trades"])
         self.assertEqual(st["trades"]["222"][0]["qty"], 272)   # half size
-        self.assertEqual(st["trades"]["111"][0]["sync"], "pending")
+        self.assertNotIn("sync", st["trades"]["111"][0])        # no Groww lookups any more
+        self.assertFalse(st.get("sync_request"))
         self.assertIn("222", st["paused"])
         self.assertTrue(all(to in ("111", "222") for to, _ in self.sent))
         self.assertIn("Bot commands", self.texts())
-        # Groww sync replaces the owner's estimate
-        self.put("positions.json", {"date": "2026-11-09", "synced_at": "10:07", "positions": [
-            {"symbol": "TATASTEEL", "buy_qty": 544, "buy_avg": 183.62, "sell_qty": 0, "sell_avg": 0}]})
-        self.run_at(10, 10)
-        st = self.get("mytrades.json")
-        self.assertEqual(st["trades"]["111"][0]["entry"], 183.62)
-        self.assertIn("SYNCED FROM GROWW", self.texts())
+        self.assertNotIn("Groww", self.texts())
+        self.assertNotIn("ORDER", HELP_TEXT())
         self.say(7, 111, "SOLD TATASTEEL 544 185", 10, 12)
         self.run_at(10, 15)
         st = self.get("mytrades.json")
@@ -822,14 +818,10 @@ class TestMyTrade(Base):
         big = "\n".join(mt.size_warn(728, 957.66, 953.5, 104))
         self.assertIn("Sell <b>488</b> now and keep <b>240</b>", big)
         self.assertIn("7.0×", big)
-        # Groww shows far more shares than the plan → TOO BIG alert
-        self.say(1, 111, "BOUGHT TATASTEEL", 10, 1)
-        self.run_at(10, 5)
-        self.put("positions.json", {"date": "2026-11-09", "synced_at": "10:07", "positions": [
-            {"symbol": "TATASTEEL", "buy_qty": 4000, "buy_avg": 183.62, "sell_qty": 0, "sell_avg": 0}]})
-        self.run_at(10, 10)
+        # INDmoney shows far more shares than the plan → TOO BIG warning
+        self.ind([{"s": "TATASTEEL", "bq": 4000, "ba": 183.62, "sq": 0, "sa": 0, "nq": 4000, "rp": 0}], 10, 5)
         t = self.texts()
-        self.assertIn("TOO BIG — TATASTEEL", t)
+        self.assertIn("over the ₹1,000 limit", t)              # size warning on the trade card
         self.assertIn("needs more than your ₹1L margin", t)
         # held 75+ min with price barely above the buy → one NOT MOVING nudge
         self.assertNotIn("NOT MOVING", t)
@@ -843,7 +835,7 @@ class TestMyTrade(Base):
         st = self.get("mytrades.json")
         tr = st["trades"]["111"][0]
         self.assertEqual((tr["broker"], tr["qty"], tr["entry"]), ("INDmoney", 100, 183.5))
-        self.assertNotIn("sync", tr)                     # no Groww lookup for INDmoney
+        self.assertNotIn("sync", tr)
         self.assertFalse(st.get("sync_request"))
         self.say(2, 111, "SOLD TATASTEEL", 10, 7)
         self.run_at(10, 10)
@@ -851,34 +843,6 @@ class TestMyTrade(Base):
         self.assertEqual(st["trades"]["111"][0]["left"], 0)
         self.assertFalse(st.get("sync_request"))
         self.assertIn("On INDmoney", self.texts())
-
-    def test_order_check(self):
-        self.start = dt.datetime(2026, 11, 9, 10, 0, tzinfo=IST)
-        self.rows = [(183.4, 183.7, 183.3, 183.5)] * 6
-        self.say(1, 111, "ORDER gmk39038rdt", 10, 1)
-        self.say(2, 222, "ORDER GMK39038RDT", 10, 1)          # not the Groww account holder
-        self.run_at(10, 3)
-        self.assertEqual(self.get("order_requests.json")["ids"], ["GMK39038RDT"])
-        self.assertIn("only for the Groww account holder", self.texts())
-        sync = lambda t, state, filled, avg: (
-            self.put("positions.json", {"date": "2026-11-09", "synced_at": t, "positions": []}),
-            self.put("orders.json", {"date": "2026-11-09", "synced_at": t, "orders": [
-                {"id": "GMK39038RDT", "symbol": "TATASTEEL", "side": "BUY", "type": "LIMIT",
-                 "qty": 100, "filled_qty": filled, "price": 183.5, "avg_price": avg, "state": state}]}))
-        sync("10:05", "open", 0, None)
-        self.run_at(10, 8)
-        self.assertIn("ORDER OPEN — TATASTEEL", self.texts())
-        self.run_at(10, 14)                                    # 10 min later: asks Groww again
-        req = self.get("mytrades.json")["orders"]["GMK39038RDT"]["req"]
-        self.assertEqual(req, "10:14")
-        sync("10:16", "executed", 100, 183.52)
-        self.run_at(10, 18)
-        t = self.texts()
-        self.assertIn("ORDER EXECUTED — TATASTEEL", t)
-        self.assertIn("MY TRADE STARTED — TATASTEEL", t)       # tracking starts by itself
-        tr = self.get("mytrades.json")["trades"]["111"][0]
-        self.assertEqual((tr["qty"], tr["entry"]), (100, 183.52))
-        self.assertEqual(self.get("order_requests.json")["ids"], [])
 
     def test_market_closed(self):
         CLOCK[0] = dt.datetime(2026, 11, 7, 18, 0, tzinfo=IST)   # Saturday

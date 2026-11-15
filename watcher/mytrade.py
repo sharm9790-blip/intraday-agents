@@ -1,9 +1,9 @@
 """My Trade tracker: two-way Telegram bot for the orders you really place.
 
-You tell the bot what you did in Groww:
-    BOUGHT TATASTEEL                      (qty and SL/T1/T2 from today's plan, price = now)
+Your INDmoney trades are picked up by themselves (below). Messages are only needed to
+set levels or to log a trade the bot missed:
+    BOUGHT SBIN 100 812 SL 806 T1 824     (SL / targets, or a stock that is not today's plan)
     BOUGHT TATASTEEL 544 183.55           (your real qty and price)
-    BOUGHT SBIN 100 812 SL 806 T1 824     (a stock that is not today's plan)
     SOLD TATASTEEL                        (everything left, price = now)
     SOLD TATASTEEL 272 185.9              (part of it)
     MYTRADES                              (status)   ·   HELP
@@ -12,10 +12,6 @@ INDmoney trades need no message: the Cloudflare worker reads your INDmoney
 intraday positions every minute (read-only) and starts this workflow with them
 (env IND_POSITIONS); apply_ind() opens, updates and closes the owner's trade from
 INDmoney's own buy / sell quantities, averages and realised P&L.
-
-For the account owner (first TELEGRAM_CHAT_ID), a plain BOUGHT / SOLD also asks
-the cloud routine (payload SYNC_POSITIONS) to read today's Groww positions,
-read-only; the real qty and average prices then replace the provisional ones.
 
 Every 5 min (workflow mytrade.yml) it reads new messages, replies, and watches
 each open trade against YOUR price: SL, T1 (sell half, SL to cost), T2,
@@ -41,14 +37,10 @@ HELP = "\n".join([
     "🤖 <b>Bot commands</b>  (tap / or Menu)",
     "",
     "<b>Your trades</b>",
-    "<code>BOUGHT TATASTEEL</code> — real qty/price from Groww",
-    "<code>BOUGHT TATASTEEL 544 183.55</code> — your numbers",
-    "<code>BOUGHT SBIN 100 812 SL 806 T1 824</code> — any stock",
     "INDmoney trades: <b>nothing to send</b>, I see your buys and sells in ~1 min",
-    "<code>BOUGHT TATASTEEL 544 183.55 SL 182 IND</code> — set SL/T1 for an INDmoney stock",
+    "<code>BOUGHT SBIN 100 812 SL 806 T1 824</code> — set SL/T1 (or log a trade I missed)",
     "<code>SOLD TATASTEEL</code> — all left · <code>SOLD TATASTEEL 272 185.9</code> — part",
     "<code>MYTRADES</code> — your open trades",
-    "<code>ORDER GMK39038…</code> — check a Groww order by its id",
     "",
     "<b>Plan &amp; results</b>",
     "<code>PLAN</code> — resend today's latest verdict",
@@ -66,7 +58,6 @@ BOT_COMMANDS = [  # shown in Telegram's "/" menu
     ("bought", "I bought — e.g. /bought TATASTEEL"),
     ("sold", "I sold — e.g. /sold TATASTEEL"),
     ("mytrades", "My open trades and P&L"),
-    ("order", "Check a Groww order — /order ORDER_ID"),
     ("plan", "Resend today's latest verdict"),
     ("score", "Scorecard and paper account so far"),
     ("risk", "Size for today — /risk 0.5 or /risk 1"),
@@ -91,84 +82,9 @@ def allowed_chats():
 
 
 def owner_chat():
-    """The Groww account holder: first chat in TELEGRAM_CHAT_ID."""
+    """The INDmoney account holder: first chat in TELEGRAM_CHAT_ID."""
     ids = chat_ids()
     return ids[0] if ids else None
-
-
-def fire_sync():
-    """Ask the cloud routine to read today's Groww positions (read-only)."""
-    url, token = os.environ.get("CLAUDE_FIRE_URL"), os.environ.get("CLAUDE_FIRE_TOKEN")
-    if not url or not token:
-        return False
-    if os.environ.get("DRY_RUN"):
-        print("FIRE SYNC_POSITIONS")
-        return True
-    req = urllib.request.Request(url, data=json.dumps({"text": "SYNC_POSITIONS"}).encode(), headers={
-        "Authorization": f"Bearer {token}", "anthropic-beta": "experimental-cc-routine-2026-04-01",
-        "anthropic-version": "2023-06-01", "Content-Type": "application/json"}, method="POST")
-    try:
-        urllib.request.urlopen(req, timeout=30)
-        return True
-    except Exception as e:
-        print("sync fire failed", e)
-        return False
-
-
-def reconnect_hint(err):
-    """Extra line when the cloud run says Groww itself is not connected."""
-    e = (err or "").lower()
-    if any(k in e for k in ("auth", "connect", "missing", "not available", "sign")):
-        return "\n👉 Groww seems disconnected — reconnect at https://claude.ai/customize/connectors"
-    return ""
-
-
-def apply_sync(st, state_dir, today):
-    """Replace the owner's provisional numbers with Groww's real fills."""
-    req = st.get("sync_request")
-    pos = w.load(os.path.join(state_dir, "positions.json"), {})
-    if not req or pos.get("date") != today or (pos.get("synced_at") or "") < req:
-        return
-    chat = owner_chat()
-    rows = {p["symbol"].upper(): p for p in pos.get("positions", [])}
-    st["sync_request"] = None
-    st["sync_fired"] = None
-    for tr in st["trades"].get(chat, []):
-        if tr.get("sync") != "pending":
-            continue
-        tr["sync"] = "done"
-        p = rows.get(tr["symbol"])
-        if pos.get("error"):
-            w.telegram(f"⚠️ Groww sync failed ({w.esc(pos['error'][:60])}). "
-                       f"Using my estimate for <b>{w.esc(tr['symbol'])}</b>; send "
-                       f"<code>BOUGHT {w.esc(tr['symbol'])} QTY PRICE</code> to correct it."
-                       + reconnect_hint(pos["error"]), to=chat)
-            continue
-        if not p or not p.get("buy_qty"):
-            w.telegram(f"🔄 Groww shows no <b>{w.esc(tr['symbol'])}</b> buy yet — order not filled? "
-                       "I'll keep my estimate; send BOUGHT again once it fills.", to=chat)
-            continue
-        bq, ba = int(p["buy_qty"]), float(p["buy_avg"])
-        sq, sa = int(p.get("sell_qty") or 0), float(p.get("sell_avg") or 0)
-        tr.update(qty=bq, entry=ba, left=max(bq - sq, 0),
-                  realized=sq * (sa - ba) if sq else 0.0,
-                  sells=[{"qty": sq, "price": sa, "at": pos["synced_at"]}] if sq else [])
-        lines = ["", f"Bought <b>{bq}</b> @ <b>{w.rs(ba)}</b> (Groww avg)"]
-        if sq:
-            lines.append(f"Sold <b>{sq}</b> @ <b>{w.rs(sa)}</b> · P&amp;L {fmt_pnl(tr['realized'])}")
-        lines.append(f"Open now: <b>{tr['left']}</b>")
-        if tr["left"] and tr["sl"]:
-            risk = tr["left"] * (ba - tr["sl"])
-            lines.append(f"Real risk to SL {w.rs(tr['sl'])}: ₹{w.lakh(max(risk, 0))}"
-                         + (" ✅" if risk <= 1000 else " ⚠️ over ₹1,000"))
-        if not tr["left"]:
-            lines += ["", f"✅ <b>Trade closed: {fmt_pnl(tr['realized'])}</b> (before costs)"]
-        w.telegram(w.card("🔄", f"SYNCED FROM GROWW — {w.esc(tr['symbol'])}", lines, footer=False), to=chat)
-        big = size_warn(tr["left"], ba, tr["sl"], tr.get("plan_qty")) if tr["left"] else []
-        if big:
-            w.telegram(w.card("⚠️", f"TOO BIG — {w.esc(tr['symbol'])}", ["", *big, "",
-                              "One bad candle here costs more than the whole plan allows."],
-                              footer=False), to=chat)
 
 
 IND_SYM = re.compile(r"^[A-Z0-9&-]{1,20}$")
@@ -246,7 +162,7 @@ def slip_line(sl):
 def apply_ind(st, state_dir, today, now):
     """Open / update / close the owner's INDmoney trades from INDmoney's positions.
     Uses the day's running totals (buy qty + avg, sell qty + avg, realised P&L), so it
-    is safe to run again on the same data. Groww trades are never touched."""
+    is safe to run again on the same data."""
     chat = owner_chat()
     seen = st.setdefault("ind_seen", {})
     for p in ind_positions(state_dir, today, now):
@@ -450,80 +366,6 @@ def score_lines(state_dir, chat=None):
     return lines
 
 
-ORDER_ID = re.compile(r"^/?order(?:\s+([A-Za-z0-9-]{6,40}))?\s*$", re.I)
-FINAL = ("executed", "cancelled", "rejected", "notfound")
-RECHECK_MIN = 10
-MAX_CHECKS = 12  # ~2 hours of re-checks for an order still open
-
-
-def save_order_requests(st, state_dir, today):
-    """The ids the cloud should look up (read-only get_order_details)."""
-    ids = [i for i, o in st.get("orders", {}).items() if o.get("state") not in FINAL]
-    w.save(os.path.join(state_dir, "order_requests.json"), {"date": today, "ids": ids[-5:]})
-
-
-def ask_order(st, oid, state_dir, today):
-    o = st.setdefault("orders", {}).setdefault(oid, {"state": None, "checks": 0})
-    o["req"] = datetime.now(w.IST).strftime("%H:%M")
-    o["checks"] = o.get("checks", 0) + 1
-    st["sync_request"] = o["req"]
-    save_order_requests(st, state_dir, today)
-
-
-def apply_orders(st, state_dir, today, now):
-    """Report Groww order status; start/close tracking when an order is executed."""
-    doc = w.load(os.path.join(state_dir, "orders.json"), {})
-    chat = owner_chat()
-    if doc.get("date") == today:
-        found = {str(o.get("id")): o for o in doc.get("orders", [])}
-        for oid, o in st.get("orders", {}).items():
-            if not o.get("req") or o.get("seen") == o["req"] or (doc.get("synced_at") or "") < o["req"]:
-                continue
-            o["seen"] = o["req"]
-            r = found.get(oid)
-            if doc.get("error") or not r:
-                o["state"] = "notfound"
-                why = doc.get("error") or "Groww didn't find this order id"
-                w.telegram(f"⚠️ Order <code>{w.esc(oid)}</code>: {w.esc(why[:80])}.\n"
-                           "Check the id in Groww and send ORDER again."
-                           + reconnect_hint(doc.get("error")), to=chat)
-                continue
-            state = (r.get("state") or "").lower()
-            changed = state != o.get("state")
-            o["state"] = state
-            sym, side = (r.get("symbol") or "").upper(), (r.get("side") or "").upper()
-            qty, filled = int(r.get("qty") or 0), int(r.get("filled_qty") or 0)
-            px, avg = r.get("price"), r.get("avg_price")
-            icon = {"executed": "✅", "partial": "🟠", "open": "🟡",
-                    "cancelled": "⚪", "rejected": "❌"}.get(state, "❔")
-            lines = ["", f"{w.esc(side)} <b>{qty}</b> {w.esc(sym)} · {w.esc(r.get('type') or '')}"
-                     + (f" @ {w.rs(float(px))}" if px else ""),
-                     f"Filled <b>{filled}</b>/{qty}" + (f" @ <b>{w.rs(float(avg))}</b>" if avg and filled else "")]
-            if r.get("reason"):
-                lines.append(f"Reason: {w.esc(str(r['reason'])[:80])}")
-            if state in ("open", "partial"):
-                lines.append(f"I'll check again in {RECHECK_MIN} min.")
-            if changed or state not in ("open", "partial"):
-                w.telegram(w.card(icon, f"ORDER {state.upper() or '?'} — {w.esc(sym)}", lines, footer=False), to=chat)
-            if state == "executed" and sym and filled and avg:
-                mine = [x for x in st["trades"].get(chat, []) if x["symbol"] == sym and x["left"] > 0]
-                cmd = None
-                if side == "BUY" and not mine:
-                    cmd = f"BOUGHT {sym} {filled} {avg}"
-                elif side == "SELL" and mine:
-                    cmd = f"SOLD {sym} {min(filled, mine[-1]['left'])} {avg}"
-                if cmd and market_open(now):
-                    handle(st, chat, cmd, now, state_dir, today)
-    # orders still open: look again every RECHECK_MIN minutes during market hours
-    for oid, o in st.get("orders", {}).items():
-        if o.get("state") in ("open", "partial") and o.get("seen") == o.get("req") \
-                and market_open(now) and o.get("checks", 0) < MAX_CHECKS \
-                and now.hour * 60 + now.minute - w.hhmm(o["req"]) >= RECHECK_MIN:
-            ask_order(st, oid, state_dir, today)
-    if st.get("orders"):
-        save_order_requests(st, state_dir, today)  # drop orders that are done
-
-
 def trading_day(d):
     return d.weekday() < 5 and d.strftime("%Y-%m-%d") not in w.NSE_HOLIDAYS
 
@@ -551,16 +393,6 @@ def handle(st, chat, text, when, state_dir, today):
             return reply("📋 No verdict yet today.")
     if re.fullmatch(r"/?score", t, re.I):
         return reply(w.card("📒", "SCORE SO FAR", [""] + score_lines(state_dir, chat), footer=False))
-    mo = ORDER_ID.match(t)
-    if mo:
-        if chat != owner_chat():
-            return reply("🔒 Order checks work only for the Groww account holder.")
-        if not mo.group(1):
-            return reply("🔎 Send the Groww order id, e.g. <code>ORDER GMK39038RDT490CCVRO</code>\n"
-                         "Groww → Orders → tap the order → copy the Order ID.")
-        oid = mo.group(1).upper()
-        ask_order(st, oid, state_dir, today)
-        return reply(f"🔎 Checking order <code>{w.esc(oid)}</code> in Groww (read-only, 2–5 min)…")
     if re.fullmatch(r"/?pause", t, re.I):
         p = st.setdefault("paused", [])
         if chat not in p:
@@ -598,8 +430,7 @@ def handle(st, chat, text, when, state_dir, today):
     m = CMD.match(t)
     if not m:
         return reply("🤔 I didn't get that.\n\n" + HELP)
-    act, sym, qty, px, sl, t1, t2, broker = m.groups()
-    on_ind = (broker or "").lower() in ("ind", "indmoney")
+    act, sym, qty, px, sl, t1, t2, _broker = m.groups()   # trades are on INDmoney (the word is optional)
     if not market_open(when):
         return reply(f"🔒 Market is closed ({when:%a %H:%M} IST).\n"
                      "BOUGHT / SOLD work Mon–Fri 9:15–15:30 IST. HELP, PLAN, SCORE work any time.")
@@ -615,7 +446,7 @@ def handle(st, chat, text, when, state_dir, today):
     mine = st["trades"].setdefault(chat, [])
     if act.lower() in ("bought", "buy"):
         auto = next((x for x in reversed(mine) if x["symbol"] == sym and x.get("auto_ind")
-                     and x["left"] > 0), None) if on_ind else None
+                     and x["left"] > 0), None)
         if auto:                       # INDmoney already gave the fill: only add the levels
             auto.update({k: float(v) for k, v in (("sl", sl), ("t1", t1), ("t2", t2)) if v})
             return reply(w.card("🧾", f"LEVELS SET — {w.esc(sym)}", [
@@ -634,16 +465,11 @@ def handle(st, chat, text, when, state_dir, today):
             "opened": when.strftime("%H:%M"), "checked": when.strftime("%H:%M"),
             "realized": 0.0, "sells": [], "flags": {}, "plan": bool(plan),
             "plan_qty": plan["qty"] if plan else None,
-            "broker": "INDmoney" if on_ind else "Groww",
+            "broker": "INDmoney",
         }
         mine.append(tr)
         lines = ["", f"Bought <b>{q}</b> @ <b>{w.rs(price)}</b>" + ("" if px else " (price now)")]
-        if on_ind:
-            lines.append("📲 On INDmoney — your real fill replaces these numbers within ~1 min.")
-        elif chat == owner_chat() and not (qty and px):
-            tr["sync"] = "pending"
-            st["sync_request"] = datetime.now(w.IST).strftime("%H:%M")
-            lines.append("🔄 Getting your real fill from Groww (2–5 min)…")
+        lines.append("📲 On INDmoney — your real fill replaces these numbers within ~1 min.")
         if plan:
             lines.append(f"Plan entry {w.rs(plan['entry'])}")
         if tr["sl"]:
@@ -670,13 +496,8 @@ def handle(st, chat, text, when, state_dir, today):
     tr["left"] -= q
     tr["realized"] += pnl
     tr["sells"].append({"qty": q, "price": price, "at": when.strftime("%H:%M")})
-    if chat == owner_chat() and not (qty and px) and tr.get("broker") != "INDmoney":
-        tr["sync"] = "pending"
-        st["sync_request"] = datetime.now(w.IST).strftime("%H:%M")
     lines = ["", f"Sold <b>{q}</b> @ <b>{w.rs(price)}</b>" + ("" if px else " (price now)"),
              f"This sale {fmt_pnl(pnl)}"]
-    if tr.get("sync") == "pending":
-        lines.append("🔄 Checking the real sell price in Groww…")
     if tr["left"]:
         lines += [f"Still holding <b>{tr['left']}</b>", f"P&amp;L so far {fmt_pnl(tr['realized'])}"]
         if tr["flags"].get("t1") or q >= tr["qty"] // 2:
@@ -684,8 +505,7 @@ def handle(st, chat, text, when, state_dir, today):
             lines.append(f"👉 Move SL-M to cost <b>{w.rs(tr['entry'])}</b>")
         return reply(w.card("🧾", f"PART SOLD — {w.esc(sym)}", lines, footer=False))
     lines += ["", f"✅ <b>Trade closed: {fmt_pnl(tr['realized'])}</b> (before costs)",
-              "👉 Cancel any leftover SL / target orders",
-              f"➖ Remove {w.esc(sym)} from \"My Draft Basket\""]
+              "👉 Cancel any leftover SL / target orders"]
     return reply(w.card("🧾", f"TRADE CLOSED — {w.esc(sym)}", lines, footer=False))
 
 
@@ -741,8 +561,6 @@ def track(st, now):
                 if tr.get("auto_ind"):  # INDmoney sells are seen by themselves
                     lines = ["✅ No need to send SOLD: I see INDmoney sales myself"
                              if x.startswith("Then send <code>SOLD") else x for x in lines]
-                    lines = [x.replace("(Groww squares off at 15:05 + ₹50 fee)",
-                                       "(before the broker's auto square-off fee)") for x in lines]
                 w.telegram(w.card(icon, f"{title} — {w.esc(tr['symbol'])}",
                                   [f"🕐 {now:%H:%M} IST", ""] + lines, footer=False), to=chat)
             try:
@@ -800,7 +618,7 @@ def track(st, now):
             if mins >= w.hhmm(w.EXIT_BY) and not f.get("exit"):
                 f["exit"] = True
                 say("EXIT NOW", "⏰", [f"You still hold <b>{tr['left']}</b>", now_line, "",
-                                      f"👉 <b>Sell everything</b> — {w.EXIT_BY} rule (Groww squares off at 15:05 + ₹50 fee)",
+                                      f"👉 <b>Sell everything</b> — {w.EXIT_BY} rule (before the broker's auto square-off fee)",
                                       f"Then send <code>SOLD {w.esc(tr['symbol'])}</code>"])
             elif mins >= w.hhmm(w.WARN_AT) and not f.get("warn"):
                 f["warn"] = True
@@ -859,9 +677,7 @@ def summary(st, state_dir=None):
 def needed(state_dir):
     now = datetime.now(w.IST)
     st = load_state(state_dir, now.strftime("%Y-%m-%d"))
-    if open_trades(st) or st.get("sync_request"):
-        return True
-    if any(o.get("state") in ("open", "partial") for o in st.get("orders", {}).values()):
+    if open_trades(st):
         return True
     if any(st["trades"].values()) and not st["summary_sent"]:
         return True
@@ -899,21 +715,7 @@ def main(state_dir):
         except Exception as e:
             print("command failed", text[:40], e)
             w.telegram("⚠️ Couldn't process that. Try again or send HELP.", to=chat)
-    if st.get("sync_request") and st.get("sync_fired") != st["sync_request"]:
-        if fire_sync():
-            st["sync_fired"] = st["sync_request"]
-    apply_sync(st, state_dir, today)
     apply_ind(st, state_dir, today, now)
-    apply_orders(st, state_dir, today, now)
-    if st.get("sync_request") and st.get("sync_fired") != st["sync_request"]:  # re-check asked above
-        if fire_sync():
-            st["sync_fired"] = st["sync_request"]
-    if st.get("sync_fired") and not st.get("sync_warned") == st["sync_fired"] \
-            and now.hour * 60 + now.minute - w.hhmm(st["sync_fired"]) >= 15:
-        st["sync_warned"] = st["sync_fired"]
-        w.telegram("⚠️ <b>Groww sync is late</b> (asked at " + st["sync_fired"] + ").\n"
-                   "I'm using my estimate. Send <code>BOUGHT SYMBOL QTY PRICE</code> to set it exactly.",
-                   to=owner_chat())
     if st.get("menu") != len(BOT_COMMANDS) and not os.environ.get("DRY_RUN"):
         if tg("setMyCommands", {"commands": json.dumps(
                 [{"command": c, "description": d} for c, d in BOT_COMMANDS])}):
