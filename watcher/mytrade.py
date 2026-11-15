@@ -55,8 +55,8 @@ HELP = "\n".join([
     "Replies in ~1–2 min, any time. I never place orders.",
 ])
 BOT_COMMANDS = [  # shown in Telegram's "/" menu
-    ("bought", "I bought — e.g. /bought TATASTEEL"),
-    ("sold", "I sold — e.g. /sold TATASTEEL"),
+    ("bought", "Set SL/T1 or log a missed buy — /bought SBIN 100 812 SL 806"),
+    ("sold", "Log a sale I missed — /sold SBIN"),
     ("mytrades", "My open trades and P&L"),
     ("plan", "Resend today's latest verdict"),
     ("score", "Scorecard and paper account so far"),
@@ -415,11 +415,12 @@ def handle(st, chat, text, when, state_dir, today):
         return reply(f"⚖️ Size set to <b>{x}×</b> for today (max risk ≈ ₹{int(1000 * x):,}).{extra}\n"
                      "Used when you send BOUGHT without a quantity.")
     if re.fullmatch(r"/?(bought|buy|sold|sell)", t, re.I):
-        return reply("✍️ Add the stock, e.g. <code>BOUGHT TATASTEEL</code> or <code>SOLD TATASTEEL</code>")
+        return reply("✍️ Add the stock, e.g. <code>BOUGHT SBIN 100 812 SL 806 T1 824</code> or "
+                     "<code>SOLD SBIN</code>.\nINDmoney trades are picked up by themselves (~1 min).")
     if re.fullmatch(r"/?(mytrades|status|trades)", t, re.I):
         mine = [x for x in st["trades"].get(chat, []) if x["left"] > 0]
         if not mine:
-            return reply("🧾 No open trades. Send <code>BOUGHT SYMBOL</code> after you buy.")
+            return reply("🧾 No open trades. INDmoney buys show up here by themselves within ~1 min.")
         lines = []
         for x in mine:
             px, _, ltp = price_at(x["yahoo"], datetime.now(w.IST))
@@ -716,10 +717,11 @@ def main(state_dir):
             print("command failed", text[:40], e)
             w.telegram("⚠️ Couldn't process that. Try again or send HELP.", to=chat)
     apply_ind(st, state_dir, today, now)
-    if st.get("menu") != len(BOT_COMMANDS) and not os.environ.get("DRY_RUN"):
-        if tg("setMyCommands", {"commands": json.dumps(
-                [{"command": c, "description": d} for c, d in BOT_COMMANDS])}):
-            st["menu"] = len(BOT_COMMANDS)
+    menu = json.dumps([{"command": c, "description": d} for c, d in BOT_COMMANDS])
+    sig = str(sum(map(ord, menu)) % 1000003) + f":{len(BOT_COMMANDS)}"   # changes with any edit
+    if st.get("menu") != sig and not os.environ.get("DRY_RUN"):
+        if tg("setMyCommands", {"commands": menu}):
+            st["menu"] = sig
     if w.hhmm("09:15") <= now.hour * 60 + now.minute <= w.hhmm("15:30"):
         track(st, now)
     if now.hour * 60 + now.minute >= w.hhmm("15:45") and not st["summary_sent"] \
