@@ -228,6 +228,12 @@ def lines(state_dir, chat=None, short=False):
                         f"{inr(ms['exp'])}/trade · win rate {ms['win_rate']}% · total {inr(ms['total'])}"]
     except Exception as e:
         print("shorts expectancy failed", e)
+    od = load(os.path.join(state_dir, "opening.json"), {})
+    oh = [x["r"] for d in sorted(od.get("days", {})) for x in od["days"][d]]
+    if oh:
+        out += [f"👀 <b>Opening engine, paper test</b> · {len(oh)} trades · {sum(oh) / len(oh):+.2f}R/trade · "
+                f"win {100 * sum(1 for r in oh if r > 0) // len(oh)}% · total {inr(sum(oh) * 1000)} at ₹1,000 risk "
+                "(backtest 15 Oct–13 Nov: +0.75R/trade, 76% win)"]
     v = verdict(mp)
     out += ["", f"🎯 <b>Verdict (paper)</b>: {v[1]}"]
     if chat and mp_for_verdict is not mp and mp_for_verdict["n"]:

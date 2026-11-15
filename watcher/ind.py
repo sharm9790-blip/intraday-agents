@@ -166,10 +166,17 @@ def worker_on():
 
 
 def quotes(symbols):
+    """INDmoney full quotes, 100 symbols per worker call (the worker's limit)."""
     if not worker_on() or not symbols:
         return {}
-    d = _worker("quotes=" + urllib.parse.quote(",".join(symbols[:100])))
-    return d.get("quotes") or {} if d.get("ok") else {}
+    out = {}
+    for i in range(0, len(symbols), 100):
+        if i:
+            time.sleep(0.4)
+        d = _worker("quotes=" + urllib.parse.quote(",".join(symbols[i:i + 100])))
+        if d.get("ok"):
+            out.update(d.get("quotes") or {})
+    return out
 
 
 def chain(sym, exp_list):

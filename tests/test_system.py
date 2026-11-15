@@ -1190,5 +1190,66 @@ class TestPrescan(unittest.TestCase):
         self.assertTrue(it["new_high"])
         self.assertEqual(doc["scanned"], 3)
 
+class TestOpening(Base):
+    def mk(self, today_rows, prev_close=100.0, day=dt.date(2026, 11, 9)):
+        prev = [(dt.datetime(2026, 11, 6, 15, 25, tzinfo=IST), prev_close, prev_close, prev_close, prev_close, 1000)]
+        t0 = dt.datetime(day.year, day.month, day.day, 9, 15, tzinfo=IST)
+        return prev + [(t0 + dt.timedelta(minutes=5 * i), *r) for i, r in enumerate(today_rows)]
+
+    def test_check_rules(self):
+        import opening
+        now = dt.datetime(2026, 11, 9, 9, 30, tzinfo=IST)
+        good = self.mk([(100.5, 101.2, 100.4, 101.0, 30000), (101.0, 101.6, 100.9, 101.5, 30000),
+                        (101.5, 102.1, 101.4, 102.0, 40000)])
+        s = opening.check(good, now, 400000, 0.2)
+        self.assertIsNotNone(s)
+        self.assertEqual((s["pct"], s["gap"], s["vol_frac"]), (2.0, 0.5, 0.25))
+        self.assertIsNone(opening.check(good, now, 400000, -0.5))          # Nifty weak
+        self.assertIsNone(opening.check(good, now, 900000, 0.2))           # volume too low
+        gap = self.mk([(103.0, 103.4, 102.9, 103.2, 30000), (103.2, 103.5, 103.1, 103.4, 30000),
+                       (103.4, 103.6, 103.3, 103.5, 40000)])
+        self.assertIsNone(opening.check(gap, now, 100000, 0.2))            # gap 3% > 2.5%
+        p = opening.plan(s, 102.0)
+        self.assertEqual(p["sl"], round(102.0 - max(102.0 - max(100.4, s["vwap"] * 0.997), 0.408, 0.7 * s["atr5"]), 2))
+        self.assertAlmostEqual(p["t1"] - p["entry"], 1.5 * p["risk"], places=1)
+
+    def test_manage_early_exit_and_t1(self):
+        import opening
+        t0 = dt.datetime(2026, 11, 9, 9, 30, tzinfo=IST)
+        flat = [(t0 + dt.timedelta(minutes=5 * i), 100, 100.3, 99.8, 100.1, 1000) for i in range(30)]
+        p = {"entry": 100.0, "sl": 99.0, "t1": 101.5, "t2": 103.0, "risk": 1.0, "atr5": 0.5}
+        r, st = opening.manage(flat, 0, p)
+        self.assertIn("11:15 early exit", st[-1])
+        up = [(t0 + dt.timedelta(minutes=5 * i), 100 + i * 0.3, 100.4 + i * 0.3, 99.9 + i * 0.3, 100.3 + i * 0.3, 1000)
+              for i in range(15)]
+        r, st = opening.manage(up, 0, p)
+        self.assertIn("T1", " ".join(st))
+        self.assertIn("T2", " ".join(st))
+        self.assertAlmostEqual(r, 2.25 - opening.COST * 100, places=2)
+
+    def test_watcher_paper_step(self):
+        import opening
+        self.put("premarket_candidates.json", {"date": "2026-11-09", "avg_vol": {"AAA": 400000}})
+        scan.load_universe = lambda d: {"stocks": {"AAA": {"fo": True, "ind": "Power"}}}
+        rows = [(100.5, 101.2, 100.4, 101.0, 30000), (101.0, 101.6, 100.9, 101.5, 30000),
+                (101.5, 102.1, 101.4, 102.0, 40000)]
+        nifty = self.mk([(100, 100.2, 99.9, 100.1, 1)] * 3)
+        aaa = self.mk(rows)
+        self.bars_by = {"AAA.NS": aaa, "^NSEI": nifty}
+        CLOCK[0] = dt.datetime(2026, 11, 9, 9, 30, tzinfo=IST)
+        wt = {}
+        self.assertTrue(w.opening_step(self.dir, "2026-11-09", CLOCK[0], wt))
+        doc = self.get("opening.json")
+        self.assertEqual([t["symbol"] for t in doc["open"]], ["AAA"])
+        self.assertIn("PAPER TEST · OPENING — AAA", self.texts())
+        self.assertIn("don't trade this", self.texts())
+        self.assertFalse(w.opening_step(self.dir, "2026-11-09", CLOCK[0], wt))   # same slot once
+        t0 = dt.datetime(2026, 11, 9, 9, 30, tzinfo=IST)
+        later = aaa + [(t0 + dt.timedelta(minutes=5 * i), 102 + i * 0.2, 102.3 + i * 0.2, 101.9 + i * 0.2,
+                        102.2 + i * 0.2, 5000) for i in range(20)]
+        r = opening.replay(doc["open"][0], later)
+        self.assertGreater(r["r"], 0)
+        self.assertIn("bought", r["steps"][0])
+
 if __name__ == "__main__":
     unittest.main()

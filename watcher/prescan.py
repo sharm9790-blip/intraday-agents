@@ -95,7 +95,7 @@ def features(rows, asof):
         "new_high": d[4] >= h20,
         "ema20": _ema(c, 20), "ema50": _ema(c, 50), "rsi14": _rsi(c),
         "ret5": (c[-1] / c[-6] - 1) * 100, "ret20": (c[-1] / c[-21] - 1) * 100,
-        "atr_pct": atr / d[4] * 100, "atr": atr,
+        "atr_pct": atr / d[4] * 100, "atr": atr, "v20": v20,
     }
 
 
@@ -149,7 +149,9 @@ def run(state_dir, asof, fetch=daily, universe=None, workers=16):
     return {"date": asof.isoformat(), "built_at": datetime.now(IST).strftime("%H:%M"),
             "based_on": max((f["date"] for f in res.values() if f), default=None),
             "nifty_5d": round(nf["ret5"], 2), "nifty_20d": round(nf["ret20"], 2),
-            "scanned": sum(1 for f in res.values() if f), "passed": len(items), "items": out[:TOP]}
+            "scanned": sum(1 for f in res.values() if f), "passed": len(items), "items": out[:TOP],
+            # 20-day average daily volume of every stock: the opening engine's "volume so far vs a day"
+            "avg_vol": {s: round(f["v20"]) for s, f in res.items() if f and f.get("v20")}}
 
 
 if __name__ == "__main__":
