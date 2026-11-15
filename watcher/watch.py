@@ -21,6 +21,7 @@ from datetime import datetime, timedelta, timezone
 
 import health
 import ind
+import opening
 import news
 import premarket
 import prescan
@@ -385,6 +386,24 @@ def send_scorecard(state_dir, today, watch):
         ]
     lines += paper_account(state_dir, today, rows) + [""]
     try:
+        op = os.path.join(state_dir, "opening.json")
+        od = load(op, {})
+        ores = od.setdefault("days", {}).get(today, [])
+        if od.get("date") == today and od.get("open"):
+            ores = []
+            for t in od["open"]:
+                try:
+                    ores.append(opening.replay(t, candles(t["yahoo"])[0]))
+                except Exception as e:
+                    print("opening replay failed", t["symbol"], e)
+            od["days"][today], od["open"] = ores, []
+            save(op, od)
+        ol = opening.lines(od, ores, inr)
+        if ol:
+            lines += ol + [""]
+    except Exception as e:  # never block the scorecard
+        print("opening lines failed", e)
+    try:
         sp = os.path.join(state_dir, "shorts.json")
         sd = load(sp, {})
         res = shorts.close_day(sd, today, candles)
@@ -729,6 +748,8 @@ def main(state_dir):
     #     turn a first-candle breakout into a live BUY NOW plan.
     if premarket_step(state_dir, today, now, watch):
         save(watch_path, watch)
+    if opening_step(state_dir, today, now, watch):
+        save(watch_path, watch)
     cues_step(state_dir, today, minutes, watch)   # before the 08:40 premarket fire
     prescan_step(state_dir, today, minutes, watch)
     if fire_premarket(now, watch):
@@ -1071,6 +1092,57 @@ def prescan_step(state_dir, today, minutes, watch):
             print("prescan: only", doc["scanned"], "priced, retry next run")
     except Exception as e:
         print("prescan failed", e)
+
+
+def opening_step(state_dir, today, now, watch):
+    """09:20–09:40, every 5 min: the opening momentum engine, PAPER TEST ONLY (one week
+    from 16 Nov). Each pick gets a 👀 card clearly marked "don't trade this"; 15:45 replays
+    them into the scorecard. Backtest 15 Oct–13 Nov: 30 trades, 76% win, +0.75R a trade,
+    while buying 09:55 stocks already up ≥ 4.5% lost −0.32R a trade."""
+    slot = f"{now.hour:02d}:{now.minute // 5 * 5:02d}"
+    done = watch.setdefault("open_slots", [])
+    if slot not in opening.SLOTS or slot in done:
+        return False
+    done.append(slot)
+    path = os.path.join(state_dir, "opening.json")
+    doc = load(path, {})
+    if doc.get("date") != today:
+        doc["date"], doc["open"] = today, []
+    if len(doc["open"]) >= opening.PER_DAY:
+        return True
+    pc = load(os.path.join(state_dir, "premarket_candidates.json"), {})
+    avg = pc.get("avg_vol") if pc.get("date") == today else None
+    if not avg:
+        print("opening: no avg volumes from the 08:10 prescan")
+        return True
+    try:
+        nb, _ = candles("^NSEI", "5d", False)
+        prev = [b for b in nb if b[0].date() < now.date()]
+        tb = opening.today_bars(nb, now)
+        npct = (tb[-1][4] / prev[-1][4] - 1) * 100 if tb and prev else None
+        uni = scan.load_universe(state_dir)
+        syms = list(uni.get("stocks", {}))
+        try:
+            qs = ind.quotes(syms) if ind.worker_on() else None
+        except Exception as e:
+            print("opening quotes failed, scanning all on Yahoo:", e)
+            qs = None
+        picks = opening.live_slot(now, syms, avg, lambda s, d: candles(s, d, False), qs, npct,
+                                  {t["symbol"] for t in doc["open"]}, {t.get("group") for t in doc["open"]},
+                                  {s: scan.group(s, uni) for s in syms}, opening.PER_DAY - len(doc["open"]))
+    except Exception as e:
+        print("opening failed", e)
+        return True
+    for t in picks:
+        doc["open"].append(t)
+        telegram(card("👀", f"PAPER TEST · OPENING — {esc(t['symbol'])}", [
+            f"🕐 {t['at']} IST · up {t['pct']:+.1f}% (gap {t['gap']:+.1f}%) · volume {t['vol_frac']:.0%} of a day", "",
+            f"Paper buy ~{rs(t['entry'])} · SL {rs(t['sl'])} · T1 {rs(t['t1'])} · T2 {rs(t['t2'])}",
+            "Out by 11:15 if T1 not reached; after T1 the rest trails.", "",
+            "<b>Paper test only — don't trade this.</b>",
+            "<i>Testing the opening engine for a week; results in the 15:45 scorecard.</i>"], footer=False))
+    save(path, doc)
+    return True
 
 
 def cues_step(state_dir, today, minutes, watch):
