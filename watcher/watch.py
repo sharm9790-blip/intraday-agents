@@ -1146,8 +1146,9 @@ def opening_step(state_dir, today, now, watch):
 
 
 def cues_step(state_dir, today, minutes, watch):
-    """Overnight cues to state/cues.json at ~08:25 and again ~09:00 (Yahoo; no connector)."""
-    slot = "pre" if hhmm("08:25") <= minutes < hhmm("09:00") else (
+    """Overnight cues to state/cues.json at ~08:05 (first, before the 08:10 momentum scan)
+    and again ~09:00 (Yahoo; no connector)."""
+    slot = "pre" if hhmm("08:05") <= minutes < hhmm("09:00") else (
         "open" if hhmm("09:00") <= minutes <= hhmm("09:14") else None)
     done = watch.setdefault("cues", [])
     if not slot or slot in done:
