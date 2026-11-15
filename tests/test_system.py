@@ -76,6 +76,9 @@ class Base(unittest.TestCase):
         import ind
         self._cues = ind.build_cues
         ind.build_cues = lambda now, fetch=None: {"date": now.strftime("%Y-%m-%d"), "line": "test", "items": {}}
+        import prescan
+        self._prescan = prescan.run
+        prescan.run = lambda d, asof, **k: {"date": asof.isoformat(), "built_at": "08:10", "scanned": 0, "items": []}
 
         def fake_candles(sym, days="1d", *a):
             now = CLOCK[0]
@@ -92,6 +95,8 @@ class Base(unittest.TestCase):
         scan.load_universe = self._uni
         import ind
         ind.build_cues = self._cues
+        import prescan
+        prescan.run = self._prescan
         shutil.rmtree(self.dir)
 
     def put(self, name, data):
@@ -1155,6 +1160,35 @@ class TestShorts(unittest.TestCase):
         self.assertIn("sold short", r["steps"][0])
         self.assertIn("T1", " ".join(r["steps"]))
         self.assertNotIn("-", " ".join(r["steps"][1:]).replace("time stop", ""))
+
+
+class TestPrescan(unittest.TestCase):
+    def rows(self, n=80, start=100.0, step=0.4, last=None):
+        d0 = dt.date(2026, 7, 1)
+        out = []
+        for i in range(n):
+            c = start + step * i + (1.5 if i % 2 else -1.5)
+            out.append((d0 + dt.timedelta(days=i), c - 0.5, c + 1.5, c - 1.5, c, 1000))
+        if last:
+            out.append(last)
+        return out
+
+    def test_rank_and_filters(self):
+        import prescan
+        asof = dt.date(2026, 11, 20)
+        trend = self.rows(last=(dt.date(2026, 9, 20), 133, 135.5, 132.6, 135.3, 2500))
+        flat = self.rows(step=-0.1)          # drifting down: below its averages
+        hot = self.rows(step=1.5)            # straight up: RSI too high / 5-day too big
+        data = {"^NSEI": self.rows(step=0.1), "AAA.NS": trend, "BBB.NS": flat, "CCC.NS": hot}
+        uni = {"stocks": {"AAA": {"fo": True, "ind": "Capital Goods"}, "BBB": {"ind": "Power"},
+                          "CCC": {"ind": "Realty"}}}
+        doc = prescan.run("x", asof, fetch=lambda s: data[s], universe=uni)
+        self.assertEqual([i["symbol"] for i in doc["items"]], ["AAA"], doc)
+        it = doc["items"][0]
+        self.assertEqual(it["pdh"], 135.5)
+        self.assertGreater(it["vol_x20"], 2)
+        self.assertTrue(it["new_high"])
+        self.assertEqual(doc["scanned"], 3)
 
 if __name__ == "__main__":
     unittest.main()

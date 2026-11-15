@@ -23,6 +23,7 @@ import health
 import ind
 import news
 import premarket
+import prescan
 import recheck
 import risk
 import scan
@@ -729,6 +730,7 @@ def main(state_dir):
     if premarket_step(state_dir, today, now, watch):
         save(watch_path, watch)
     cues_step(state_dir, today, minutes, watch)   # before the 08:40 premarket fire
+    prescan_step(state_dir, today, minutes, watch)
     if fire_premarket(now, watch):
         save(watch_path, watch)
 
@@ -1052,6 +1054,23 @@ def sl_nudge(ind, mt, today, minutes, watch):
 
 def MARKET_OPEN(minutes):
     return hhmm("09:15") <= minutes <= hhmm("15:30")
+
+
+def prescan_step(state_dir, today, minutes, watch):
+    """08:10–08:39: rank the whole universe for today's premarket list (code, Yahoo daily),
+    so the 08:40 debate starts from the best momentum stocks, not ~5 it found itself."""
+    if not hhmm("08:10") <= minutes < hhmm("08:40") or watch.get("prescan"):
+        return
+    try:
+        doc = prescan.run(state_dir, datetime.now(IST).date())
+        if doc["scanned"] >= 100:
+            save(os.path.join(state_dir, "premarket_candidates.json"), doc)
+            watch["prescan"] = doc["built_at"]
+            print("prescan:", doc["passed"], "passed", [i["symbol"] for i in doc["items"]])
+        else:
+            print("prescan: only", doc["scanned"], "priced, retry next run")
+    except Exception as e:
+        print("prescan failed", e)
 
 
 def cues_step(state_dir, today, minutes, watch):
