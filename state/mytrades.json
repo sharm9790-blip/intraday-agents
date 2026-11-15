@@ -1,88 +1,9 @@
 {
  "offset": 572145775,
- "date": "2026-11-13",
- "trades": {
-  "1322737291": [
-   {
-    "symbol": "WAAREEENER",
-    "yahoo": "WAAREEENER.NS",
-    "qty": 32,
-    "left": 0,
-    "entry": 2608.0,
-    "sl": 2599.0,
-    "t1": 2632.0,
-    "t2": 2660.0,
-    "opened": "11:46",
-    "checked": "11:50",
-    "realized": -418.0,
-    "sells": [
-     {
-      "qty": 32,
-      "price": 2597.0,
-      "at": "11:59"
-     }
-    ],
-    "flags": {},
-    "plan": true,
-    "plan_qty": 38,
-    "broker": "INDmoney",
-    "auto_ind": true,
-    "slip": {
-     "per_share": 0.0,
-     "rs": 0,
-     "delay": 10,
-     "plan_at": "11:36"
-    }
-   },
-   {
-    "symbol": "IIFLCAPS",
-    "yahoo": "IIFLCAPS.NS",
-    "qty": 188,
-    "left": 0,
-    "entry": 359.0,
-    "sl": 356.7,
-    "t1": 366.0,
-    "t2": 370.0,
-    "opened": "12:36",
-    "checked": "12:31",
-    "realized": -764.5,
-    "sells": [
-     {
-      "qty": 188,
-      "price": 356.25,
-      "at": "12:39"
-     }
-    ],
-    "flags": {},
-    "plan": true,
-    "plan_qty": 278,
-    "broker": "INDmoney",
-    "auto_ind": true,
-    "slip": {
-     "per_share": 0.0,
-     "rs": 0,
-     "delay": 1,
-     "plan_at": "12:35"
-    }
-   }
-  ]
- },
- "summary_sent": true,
- "boards": {
-  "1322737291": {
-   "id": 711,
-   "open": false
-  }
- },
- "menu": 10,
- "ind_seen": {
-  "WAAREEENER": [
-   32,
-   32
-  ],
-  "IIFLCAPS": [
-   188,
-   188
-  ]
- }
+ "date": "2026-11-15",
+ "trades": {},
+ "summary_sent": false,
+ "boards": {},
+ "menu": "55095:9",
+ "ind_seen": {}
 }
