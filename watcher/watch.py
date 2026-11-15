@@ -29,6 +29,7 @@ import recheck
 import risk
 import scan
 import shorts
+import tables as T
 
 PAUSED = set()  # chats that sent PAUSE today (broadcasts skip them)
 
@@ -323,18 +324,15 @@ def paper_account(state_dir, today, rows):
     losses = sum(1 for p in trades if p < 0)
     chg = (bal / acc["start_balance"] - 1) * 100
     today_pnl = sum(t["pnl"] for t in acc["days"][today])
-    lines = [
-        f"<b>📈 Paper account</b> (plan rules, since {acc['start_date']})",
-        f"Balance <b>₹{lakh(bal)}</b>  ({chg:+.2f}%)",
-        f"Today {inr(today_pnl)} · {len(acc['days'][today])} trade{'s' if len(acc['days'][today]) != 1 else ''}",
-    ]
+    rows_ = [["Balance", f"{lakh(bal)}", f"{chg:+.2f}%"],
+             ["Today", T.num(today_pnl), f"{len(acc['days'][today])} trades"]]
     if trades:
-        lines += [
-            f"Trades {len(trades)} · Wins {wins} · Losses {losses} · Win rate {wins * 100 // len(trades)}%",
-            f"Biggest loss {inr(min(min(trades), 0))} · Max drawdown {dd * 100:.1f}%",
-        ]
-    else:
-        lines += ["No trades yet — no plan has hit its buy trigger."]
+        rows_ += [["All trades", str(len(trades)), f"{wins * 100 // len(trades)}% win"],
+                  ["Worst trade", T.num(min(min(trades), 0)), f"DD {dd * 100:.1f}%"]]
+    lines = [f"<b>📈 Paper account</b> (plan rules, since {acc['start_date']})",
+             T.table(["", "₹", ""], rows_, right={1, 2})]
+    if not trades:
+        lines.append("No trades yet — no plan has hit its buy trigger.")
     return lines
 
 
@@ -361,30 +359,26 @@ def send_scorecard(state_dir, today, watch):
     if not rows:
         n = watch.get("verdicts", 0)
         lines += [f"No GO plans today ({n} scan{'s' if n != 1 else ''}, all NO TRADE).", ""]
-    for r in rows:
-        ru = r["rules"]
-        mark = "✅" if ru["pnl"] > 0 else ("❌" if ru["pnl"] < 0 else "⚪")
-        lines += [
-            f"{mark} <b>{esc(r['symbol'])}</b> · {r['start']}",
-        ]
-        tg = r.get("targets")
-        if tg:
-            yn = lambda ok: "✅" if ok else "❌"
-            lines += [
-                f"Cash ₹{lakh(tg['cash'])} · Qty <b>{tg['qty']}</b>",
-                f"Entry {rs(r['entry'])} {yn(tg['entry_hit'])}",
-                f"T1 {rs(r['t1'])} · 50% ({tg['half']}) {yn(tg['t1_hit'])}  +₹{lakh(tg['pf1'])}",
-                f"T2 {rs(r['t2'])} · rest ({tg['rest']}) {yn(tg['t2_hit'])}  +₹{lakh(tg['pf2'])}",
-                f"Target profit <b>+₹{lakh(tg['total'])}</b>",
-                f"High {rs(tg['high'])} · Close {rs(r['close'])}",
-            ]
-        lines += [
-            f"Plan rules {inr(ru['pnl'])} · Limit {inr(r['limit']['pnl'])} · At once {inr(r['market']['pnl'])}",
-            f"At once + lock T1 {inr(r.get('lock', r['market'])['pnl'])}"
-            + (f" · Trail after T1 {inr(r['trail']['pnl'])}" if r.get("trail") else ""),
-            "",
-        ]
+    else:
+        yn = lambda ok: "Y" if ok else "-"
+        lines += ["<b>Plans</b> (₹, after costs)", T.table(
+            ["Plan", "Time", "Rules", "AtOnce"],
+            [[T.short(x["symbol"]), x["start"], T.num(x["rules"]["pnl"]), T.num(x["market"]["pnl"])] for x in rows],
+            total=["Total", "", T.num(tot["rules"]), T.num(tot["market"])]),
+            "<b>Price reached</b> (after the plan)", T.table(
+            ["Plan", "Entry", "T1", "T2", "High"],
+            [[T.short(x["symbol"]), yn(x["targets"]["entry_hit"]), yn(x["targets"]["t1_hit"]),
+              yn(x["targets"]["t2_hit"]), f"{x['targets']['high']:g}"] for x in rows if "targets" in x]), ""]
+    lines += ["<b>Ways to take the plans</b>", T.table(
+        ["Way", "Today", f"{len(hist)} days"],
+        [["Plan rules", T.num(tot["rules"]), T.num(run["rules"])],
+         ["Limit only", T.num(tot["limit"]), T.num(run["limit"])],
+         ["At once", T.num(tot["market"]), T.num(run["market"])],
+         ["Lock T1", T.num(tot["lock"]), T.num(run["lock"])],
+         ["Trail T1", T.num(tot["trail"]), T.num(sum(d["totals"].get("trail", 0) for d in hist))],
+         ["Targets*", T.num(tot["targets"]), T.num(run["targets"])]]), ""]
     lines += paper_account(state_dir, today, rows) + [""]
+    extra = []
     try:
         op = os.path.join(state_dir, "opening.json")
         od = load(op, {})
@@ -401,6 +395,7 @@ def send_scorecard(state_dir, today, watch):
         ol = opening.lines(od, ores, inr)
         if ol:
             lines += ol + [""]
+        extra.append(("opening", ores))
     except Exception as e:  # never block the scorecard
         print("opening lines failed", e)
     try:
@@ -411,6 +406,7 @@ def send_scorecard(state_dir, today, watch):
         sl = shorts.lines(sd, today, res, inr)
         if sl:
             lines += sl + [""]
+        extra.append(("shorts", res))
     except Exception as e:  # never block the scorecard
         print("shorts failed", e)
     try:
@@ -418,29 +414,49 @@ def send_scorecard(state_dir, today, watch):
         lines += ["<b>🎯 Expectancy</b> (all days so far)"] + expectancy.lines(state_dir, short=True) + [""]
     except Exception as e:  # never block the scorecard
         print("expectancy failed", e)
+    lines += scorecard_insights(rows, tot, dict(extra), load(os.path.join(state_dir, "candidates.json"), {}), today)
     lines += [
-        "<b>Today</b>",
-        f"If all targets hit  +₹{lakh(tgt)}",
-        f"Targets reached (✅ only)  +₹{lakh(tot['targets'])}",
-        f"Plan rules  {inr(tot['rules'])}",
-        f"Limit only  {inr(tot['limit'])}",
-        f"Bought at once  {inr(tot['market'])}",
-        f"At once + lock T1  {inr(tot['lock'])}",
-        f"Trail after T1  {inr(tot['trail'])}",
         "",
-        f"<b>Running total · {len(hist)} day{'s' if len(hist) != 1 else ''}</b>",
-        f"Targets reached  +₹{lakh(run['targets'])}",
-        f"Plan rules  {inr(run['rules'])}",
-        f"Limit only  {inr(run['limit'])}",
-        f"Bought at once  {inr(run['market'])}",
-        f"At once + lock T1  {inr(run['lock'])}",
-        "",
-        "Lock T1 = once price is halfway from T1 to T2, SL on the rest moves to T1.",
-        "Trail = plan rules, but after T1 the rest trails 1× ATR under the high close (no T2).",
-        "✅/❌ = price reached that level after the plan was given. Target profit is before costs.",
-        "<i>Replay on 5-min candles, ~0.12% costs + slippage, SL assumed first when SL and target share a candle. Paper results, not real trades.</i>",
+        "<i>At once = bought at market when the plan came. Lock T1 = SL to T1 halfway to T2. "
+        "Trail T1 = after T1 the rest trails 1× ATR. *Targets = levels the price really reached, before costs. "
+        "Replay on 5-min candles, ~0.12% costs + slippage. Paper results, not real trades.</i>",
     ]
     telegram(card("📒", f"SCORECARD · {today}", lines))
+
+
+def scorecard_insights(rows, tot, extra, cand, today):
+    """💡 lines worked out from today's numbers, so the card says what they mean."""
+    out = []
+    names = {"rules": "plan rules", "limit": "a plain limit order", "market": "buying at once",
+             "lock": "at once + lock T1", "trail": "trailing after T1"}
+    if rows:
+        best = max(names, key=lambda k: tot.get(k, 0))
+        if best != "rules" and tot[best] - tot["rules"] >= 300:
+            out.append(f"💡 Best way today: {names[best]} ({inr(tot[best])} vs plan rules {inr(tot['rules'])}).")
+        ran = [x["symbol"] for x in rows if "without the dip" in " ".join(x["rules"]["steps"])]
+        fell = [x["symbol"] for x in rows if "below cancel" in " ".join(x["rules"]["steps"])]
+        if ran:
+            hit = [x["symbol"] for x in rows if x["symbol"] in ran and x["targets"]["t1_hit"]]
+            out.append(f"💡 {len(ran)} dip plan(s) ran up without the dip"
+                       + (f"; {len(hit)} still reached T1 ({esc(', '.join(hit))})." if hit else "."))
+        if fell:
+            out.append(f"💡 {len(fell)} dip plan(s) kept falling ({esc(', '.join(fell))}): "
+                       "buying before the trigger would have lost.")
+        won = sum(1 for x in rows if x["rules"].get("bought") and x["rules"]["pnl"] > 0)
+        lost = sum(1 for x in rows if x["rules"].get("bought") and x["rules"]["pnl"] < 0)
+        if won or lost:
+            out.append(f"💡 Bought by the rules: {won} won, {lost} lost, {inr(tot['rules'])}.")
+    elif cand.get("date") == today:
+        out.append(f"💡 No GO: market {cand.get('mode', '?')}, {cand.get('above_vwap_pct', '?')}% of stocks "
+                   f"above VWAP at {cand.get('at', '?')}. Sitting out is fine.")
+    o = extra.get("opening") or []
+    if o:
+        tr = sum(x["r"] for x in o)
+        out.append(f"💡 Opening test: {len(o)} paper trade(s), {tr:+.2f}R ({inr(tr * 1000)} at ₹1,000 risk).")
+    sh = extra.get("shorts") or []
+    if sh:
+        out.append(f"💡 Short test: {len(sh)} paper short(s), {inr(sum(x['pnl'] for x in sh))}.")
+    return out
 
 
 def weekly_report(state_dir, now):
@@ -463,16 +479,28 @@ def weekly_report(state_dir, now):
     real = load(os.path.join(state_dir, "realtrades.json"), {}).get("days", {})
     t = s["totals"]
     lines = ["", f"Days {s['days']} · GO plans {s['plans']}"]
+    lines += ["<b>Day by day</b> (paper, ₹)", T.table(
+        ["Day", "Plans", "Rules", "AtOnce"],
+        [[datetime.strptime(d["date"], "%Y-%m-%d").strftime("%a %d"), str(len(d.get("plans", []))),
+          T.num(d["totals"].get("rules", 0)), T.num(d["totals"].get("market", 0))] for d in hist],
+        total=["Week", str(s["plans"]), T.num(t["rules"]), T.num(t["market"])])]
     if s["plans"]:
         n = s.get("with_targets") or 1
-        lines += [f"Bought by rules {s['bought']} · ✅ {s['wins']} · ❌ {s['losses']}",
-                  f"Entry reached {s['entry_fill']}/{n} · T1 {s['t1_hit']}/{n} · T2 {s['t2_hit']}/{n}"]
-    lines += ["", "<b>Week P&amp;L</b>",
-              f"Plan rules  {inr(t['rules'])}", f"Limit only  {inr(t['limit'])}",
-              f"Bought at once  {inr(t['market'])}", f"At once + lock T1  {inr(t['lock'])}",
-              f"Targets reached  +₹{lakh(t['targets'])}"]
+        lines += ["<b>How the plans went</b>", T.table(
+            ["", "Count", "of"],
+            [["Bought (rules)", str(s["bought"]), str(s["plans"])], ["  won", str(s["wins"]), str(s["bought"])],
+             ["  lost", str(s["losses"]), str(s["bought"])], ["Entry reached", str(s["entry_fill"]), str(n)],
+             ["T1 reached", str(s["t1_hit"]), str(n)], ["T2 reached", str(s["t2_hit"]), str(n)]])]
+    lines += ["<b>Week by way of taking the plans</b>", T.table(
+        ["Way", "₹"], [["Plan rules", T.num(t["rules"])], ["Limit only", T.num(t["limit"])],
+                       ["At once", T.num(t["market"])], ["Lock T1", T.num(t["lock"])],
+                       ["Trail T1", T.num(t.get("trail", 0))], ["Targets*", T.num(t["targets"])]])]
     if acc:
-        lines += ["", f"📈 Paper balance <b>₹{lakh(acc.get('balance', 0))}</b> (since {acc.get('start_date')})"]
+        lines += [f"📈 Paper balance <b>₹{lakh(acc.get('balance', 0))}</b> (since {acc.get('start_date')})"]
+    best = max(("rules", "limit", "market", "lock"), key=lambda k: t.get(k, 0))
+    if s["plans"] and best != "rules" and t[best] - t["rules"] >= 500:
+        lines.append(f"💡 This week {dict(limit='a plain limit order', market='buying at once', lock='at once + lock T1')[best]} "
+                     f"beat the plan rules by {inr(t[best] - t['rules'])}.")
     week_real = {}
     for day, chats in real.items():
         if datetime.strptime(day, "%Y-%m-%d").strftime("%G-W%V") == wk:
@@ -484,7 +512,8 @@ def weekly_report(state_dir, now):
     telegram(card("🗓", f"WEEKLY REPORT · {wk}", lines))
     import expectancy
     for c, pnl in week_real.items():
-        telegram(f"🧾 <b>Your real trades this week: {inr(pnl)}</b> (before costs)", to=c)
+        telegram(f"🧾 <b>Your real trades this week: {inr(pnl)}</b> (before costs) · "
+                 f"paper by the rules {inr(t['rules'])}", to=c)
     for c in {c for d in real.values() for c in d} or [None]:
         try:
             telegram(card("🎯", "EXPECTANCY · is the edge real?",

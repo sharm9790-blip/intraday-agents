@@ -661,18 +661,60 @@ def summary(st, state_dir=None):
     for chat, trades in st["trades"].items():
         if not trades:
             continue
-        lines = [""]
-        total = 0.0
-        for tr in trades:
-            total += tr["realized"]
-            sells = ", ".join(f"{s['qty']} @ {w.rs(s['price'])}" for s in tr["sells"])
-            lines += [f"<b>{w.esc(tr['symbol'])}</b> bought {tr['qty']} @ {w.rs(tr['entry'])}",
-                      f"Sold {sells}" if sells else "Not sold yet",
-                      f"Real P&amp;L {fmt_pnl(tr['realized'])}"
-                      + (f" · ⚠️ {tr['left']} still open?" if tr["left"] else ""), ""]
-        lines += [f"<b>Today real P&amp;L {fmt_pnl(total)}</b> (before costs)",
-                  "Compare with 📈 Paper account in the scorecard."]
-        w.telegram(w.card("🧾", "MY TRADES TODAY", lines, footer=False), to=chat)
+        w.telegram(w.card("🧾", "MY TRADES TODAY", day_lines(trades, state_dir, st["date"]), footer=False), to=chat)
+
+
+def day_lines(trades, state_dir, today):
+    """MY TRADES TODAY: your trades, your fills vs the alerts, and you vs the paper plan."""
+    import tables as T
+    total = sum(t["realized"] for t in trades)
+
+    def sold_avg(tr):
+        q = sum(x["qty"] for x in tr["sells"])
+        return f"{sum(x['qty'] * x['price'] for x in tr['sells']) / q:g}" if q else "open"
+    lines = ["", "<b>Your trades</b> (₹, before costs)", T.table(
+        ["Stock", "Qty", "Buy", "Sell", "P&L"],
+        [[T.short(t["symbol"], 9), str(t["qty"]), f"{t['entry']:g}", sold_avg(t), T.num(t["realized"])]
+         for t in trades], total=["Total", "", "", "", T.num(total)])]
+    open_ = [t["symbol"] for t in trades if t["left"]]
+    if open_:
+        lines.append(f"⚠️ Still open? {w.esc(', '.join(open_))}")
+    sl = [t for t in trades if t.get("slip")]
+    if sl:
+        lines += ["<b>Your fills vs the alert</b>", T.table(
+            ["Stock", "Late", "₹/sh", "₹"],
+            [[T.short(t["symbol"], 9), f"{t['slip']['delay']}m" if t["slip"].get("delay") is not None else "–",
+              f"{t['slip']['per_share']:+g}" if t["slip"]["per_share"] else "0", T.num(t["slip"]["rs"])]
+             for t in sl])]
+    wt = w.load(os.path.join(state_dir, "watch.json"), {}) if state_dir else {}
+    paper, untriggered = {}, []
+    if wt.get("date") == today:
+        bought = {t["symbol"] for t in trades}
+        untriggered = sorted({e["symbol"] for e in wt.get("live", [])
+                              if e["symbol"] in bought and not e.get("triggered") and e.get("plan", {}).get("entry_type") != "now"})
+        for e in wt.get("live", []):
+            if e.get("paper_result") is not None:
+                paper[e["symbol"]] = paper.get(e["symbol"], 0) + e["paper_result"]
+    both = [t for t in trades if t["symbol"] in paper]
+    if both:
+        lines += ["<b>You vs the paper plan</b>", T.table(
+            ["Stock", "Paper", "You"],
+            [[T.short(t["symbol"], 9), T.num(paper[t["symbol"]]), T.num(t["realized"])] for t in both])]
+        gap = sum(t["realized"] for t in both) - sum(paper[t["symbol"]] for t in both)
+        if abs(gap) >= 200:
+            lines.append(f"💡 On the same stocks you made {fmt_pnl(gap)} "
+                         + ("more than the plan." if gap > 0 else "less than the plan: check entries / exits."))
+    if untriggered:
+        lines.append(f"💡 {w.esc(', '.join(untriggered))}: you bought, but the plan never gave 🔔 BUY TRIGGER "
+                     "(the paper trade did not buy). Wait for the trigger card.")
+    off = [t for t in trades if t["symbol"] not in paper and not t.get("plan")]
+    if off:
+        lines.append(f"💡 {len(off)} trade(s) were not a bot plan: {fmt_pnl(sum(t['realized'] for t in off))}.")
+    late = [t["slip"]["delay"] for t in sl if t["slip"].get("delay") is not None]
+    if late and sum(late) / len(late) >= 5:
+        lines.append(f"💡 You bought on average {round(sum(late) / len(late))} min after the alert.")
+    lines.append(f"<b>Today real P&amp;L {fmt_pnl(total)}</b> (before costs)")
+    return lines
 
 
 def needed(state_dir):

@@ -17,6 +17,7 @@ trades you took that weren't a plan, and a verdict once there are MIN_TRADES tra
     python3 watcher/expectancy.py state [chat_id]
 """
 import json
+import tables as T
 import os
 import sys
 
@@ -162,31 +163,48 @@ def inr(x):
     return ("+" if x > 0 else "−" if x < 0 else "") + "₹" + f"{abs(x):,.0f}"
 
 
-def block(title, m):
-    if not m["n"]:
-        return [f"<b>{title}</b>: no trades yet"]
-    r = f" · {m['exp_r']:+.2f}R" if m["exp_r"] is not None else ""
-    return [
-        f"<b>{title}</b> · {m['n']} trades · total {inr(m['total'])}",
-        f"Win rate {m['win_rate']}% · avg win {inr(m['avg_win'])} · avg loss {inr(m['avg_loss'])}"
-        + (f" · payoff {m['payoff']}" if m["payoff"] else ""),
-        f"Expectancy <b>{inr(m['exp'])}/trade</b>{r}"
-        + (f" · profit factor {m['pf']}" if m["pf"] else ""),
-        f"Max drawdown {inr(-m['dd'])} ({m['dd_pct']}%) · worst losing run {m['streak']}",
-        f"At 2 trades/day ≈ {inr(m['month'])}/month on ₹1 lakh ({100 * m['month'] / CAPITAL:+.1f}%)",
-    ]
+def _cols(m):
+    """One table column of metrics for a side (paper / you / a test)."""
+    if not m or not m.get("n"):
+        return ["0", "–", "–", "–", "–", "–", "–", "–", "–"]
+    return [str(m["n"]), f"{m['win_rate']}%", T.num(m["avg_win"]), T.num(m["avg_loss"]),
+            T.num(m["exp"]), T.r(m["exp_r"]) if m["exp_r"] is not None else "–",
+            f"{m['pf']:g}" if m["pf"] else "–", f"{m['dd_pct']}%", T.num(m["month"])]
+
+
+ROWS = ["Trades", "Win rate", "Avg win", "Avg loss", "₹/trade", "R/trade", "Profit f.", "Max DD", "≈/month"]
+
+
+KEY = [0, 1, 4, 5, 7]   # trades, win rate, ₹/trade, R/trade, max DD: the daily scorecard's short table
+
+
+def side_by_side(named, rows=None):
+    """named: [(title, metrics)] → a metrics × sides table (≤ 3 sides fit a phone)."""
+    cols = [_cols(m) for _, m in named]
+    idx = rows or range(len(ROWS))
+    return T.table(["", *[t for t, _ in named]], [[ROWS[i], *[c[i] for c in cols]] for i in idx])
 
 
 def lines(state_dir, chat=None, short=False):
     hist = load(os.path.join(state_dir, "scorecard.json"), [])
     paper = paper_trades(hist)
     mp = metrics(paper)
-    out = block("📄 Paper (plan rules)", mp)
+    named = [("Paper", mp)]
+    rt, mr = [], None
+    if chat:
+        real = load(os.path.join(state_dir, "realtrades.json"), {}).get("days", {})
+        rt = real_trades(real, hist, chat)
+        if rt:
+            mr = metrics(rt)
+            named.append(("You", mr))
     if not short:
         mm = metrics(paper_trades(hist, "market"))
-        if mm["n"]:
-            out.append(f"Bought at once instead: {inr(mm['exp'])}/trade over {mm['n']} "
-                       + (f"({mm['exp_r']:+.2f}R)" if mm["exp_r"] is not None else ""))
+        if mm["n"] and len(named) < 3:
+            named.append(("AtOnce", mm))
+    out = ["Paper = every plan by its rules (costs incl.); You = your INDmoney trades (−0.08% costs)."
+           if mr else "Paper = every plan by its rules, costs included.",
+           side_by_side(named, KEY if short else None)]
+    if not short:
         tr = [{**t, "pnl": p.get("trail", {}).get("pnl", t["pnl"])}
               for t, p in zip(paper, [p for d in hist for p in d.get("plans", []) if p.get("rules", {}).get("bought")])]
         if any("trail" in p for d in hist for p in d.get("plans", [])):
@@ -195,50 +213,43 @@ def lines(state_dir, chat=None, short=False):
     wf = walk_forward(paper)
     if wf:
         out.append(wf)
-    if chat:
-        real = load(os.path.join(state_dir, "realtrades.json"), {}).get("days", {})
-        rt = real_trades(real, hist, chat)
-        if rt:
-            mr = metrics(rt)
-            out += [""] + block("🧾 Your real trades (after ~0.08% costs)", mr) + slip_summary(rt)
-            c = compare(paper, rt)
-            out += ["", "<b>Paper vs real</b>"]
-            if c["pairs"]:
-                out.append(f"Same trades ({len(c['pairs'])}): real {inr(sum(x['real'] for x in c['pairs']))}"
-                           f" vs paper {inr(sum(x['paper'] for x in c['pairs']))} → gap <b>{inr(c['gap'])}</b>"
-                           + (" (entries/exits cost you)" if c["gap"] < 0 else ""))
-                if not short:
-                    out += [f"• {x['date'][5:]} {x['symbol']}: paper {inr(x['paper'])} · real {inr(x['real'])}"
-                            for x in c["pairs"][-8:]]
-            if c["skipped"]:
-                out.append(f"Plans you didn't take ({len(c['skipped'])}): paper {inr(c['skipped_pnl'])}")
-            if c["extra"]:
-                out.append(f"Trades that weren't a plan ({len(c['extra'])}): {inr(c['extra_pnl'])}")
-            mp_for_verdict = mr
-        else:
-            mp_for_verdict = mp
-    else:
-        mp_for_verdict = mp
+    if rt:
+        out += slip_summary(rt)
+        c = compare(paper, rt)
+        out += ["", "<b>Paper vs real</b>"]
+        if c["pairs"]:
+            out.append(f"Same trades ({len(c['pairs'])}): real {inr(sum(x['real'] for x in c['pairs']))}"
+                       f" vs paper {inr(sum(x['paper'] for x in c['pairs']))} → gap <b>{inr(c['gap'])}</b>"
+                       + (" (entries/exits cost you)" if c["gap"] < 0 else ""))
+            if not short:
+                out.append(T.table(["Day", "Stock", "Paper", "You"],
+                                   [[x["date"][5:], T.short(x["symbol"], 9), T.num(x["paper"]), T.num(x["real"])]
+                                    for x in c["pairs"][-8:]], right={2, 3}))
+        if c["skipped"]:
+            out.append(f"Plans you didn't take ({len(c['skipped'])}): paper {inr(c['skipped_pnl'])}")
+        if c["extra"]:
+            out.append(f"Trades that weren't a plan ({len(c['extra'])}): {inr(c['extra_pnl'])}")
+    tests = []
     try:
         import shorts
         sh = shorts.history(load(os.path.join(state_dir, "shorts.json"), {}))
         if sh:
             ms = metrics(sh)
-            out += ["", f"🔻 <b>Short side, paper test</b> · {ms['n']}/{MIN_TRADES} trades · "
-                        f"{inr(ms['exp'])}/trade · win rate {ms['win_rate']}% · total {inr(ms['total'])}"]
+            tests.append(["Shorts", f"{ms['n']}/{MIN_TRADES}", f"{ms['win_rate']}%", T.num(ms["exp"])])
     except Exception as e:
         print("shorts expectancy failed", e)
     od = load(os.path.join(state_dir, "opening.json"), {})
     oh = [x["r"] for d in sorted(od.get("days", {})) for x in od["days"][d]]
     if oh:
-        out += [f"👀 <b>Opening engine, paper test</b> · {len(oh)} trades · {sum(oh) / len(oh):+.2f}R/trade · "
-                f"win {100 * sum(1 for r in oh if r > 0) // len(oh)}% · total {inr(sum(oh) * 1000)} at ₹1,000 risk "
-                "(backtest 15 Oct–13 Nov: +0.75R/trade, 76% win)"]
+        tests.append(["Opening", str(len(oh)), f"{100 * sum(1 for r in oh if r > 0) // len(oh)}%",
+                      T.num(sum(oh) / len(oh) * 1000)])
+    if tests:
+        out += ["", "<b>Paper tests</b> (not signals; opening backtest +₹750/trade, 76% win)",
+                T.table(["Test", "Trades", "Win", "₹/trade"], tests)]
     v = verdict(mp)
     out += ["", f"🎯 <b>Verdict (paper)</b>: {v[1]}"]
-    if chat and mp_for_verdict is not mp and mp_for_verdict["n"]:
-        vr = verdict(mp_for_verdict)
-        out.append(f"🎯 <b>Verdict (your trades)</b>: {vr[1]}")
+    if mr and mr["n"]:
+        out.append(f"🎯 <b>Verdict (your trades)</b>: {verdict(mr)[1]}")
     return out
 
 
@@ -246,4 +257,4 @@ if __name__ == "__main__":
     import re
     txt = "\n".join(lines(sys.argv[1] if len(sys.argv) > 1 else "state",
                           sys.argv[2] if len(sys.argv) > 2 else None))
-    print(re.sub(r"</?b>", "", txt))
+    print(re.sub(r"</?(b|pre|i)>", "", txt).replace("&amp;", "&"))

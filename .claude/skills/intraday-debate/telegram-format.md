@@ -3,7 +3,9 @@
 `state/latest_verdict.txt` is sent to Telegram with `parse_mode=HTML` and read on a phone.
 
 Rules:
-- Only `<b>`, `<i>` and `<code>` tags. No tables, no markdown (`**`, `#`, `|`). No links (no stock-page links).
+- Only `<b>`, `<i>`, `<code>` and `<pre>` tags. No markdown (`**`, `#`, `|`). No links (no stock-page links).
+- **Tables** = a `<pre>` block with columns lined up by spaces (monospace on the phone): at most **32 characters per line**, 3–5 short columns, symbols cut to 10 characters, numbers right-aligned, no ₹ inside the table (put "₹" in the heading line above it). Use a table whenever 2+ stocks are compared (watchlists, rejected list). The GO card itself stays as short lines.
+- End result messages (NO TRADE, watchlists) with **one 💡 line**: what the numbers mean today, in a few words.
 - Escape `&` as `&amp;`, `<` as `&lt;`, `>` as `&gt;` in any text (stock `M&M` → `M&amp;M`).
 - One fact per line, ≤ 34 characters where possible. Blank line between blocks.
 - Prices as `₹766.5`, Indian grouping for big numbers (`₹1,42,000` or `₹1.42L`).
@@ -100,9 +102,11 @@ No stock-page link: the user places orders in INDmoney. Values are plain numbers
 Mood: large caps up, midcaps weak
 
 <b>Why nothing passed</b>
-• M&amp;M — 3,300 call wall
-• TITAN — range already 2× ATR
-• DLF — reward below risk
+<pre>Stock      R:R  Reason
+M&amp;M       1.2  3,300 call wall
+TITAN      0.9  range 2× ATR
+DLF        1.3  reward &lt; risk</pre>
+💡 Large caps capped by call walls
 
 🔎 Next scan: 12:45 IST
 <i>Analysis only, not advice. You place orders yourself.</i>
@@ -132,13 +136,15 @@ Overnight (~08:50) and final (~09:12, title `📋 <b>FINAL WATCHLIST · 09:12</b
 🌍 GIFT Nifty +0.4% · US up · crude flat
 📅 Results today: TCS (skipped)
 
-<b>1. KALYANKJIL</b>  (gap +1.8%)
-📥 Buy above <b>₹701</b> (max ₹705)
-🛑 SL ₹692  ·  🎯 ₹716 / ₹728
-📦 Qty <b>110</b>
-• Closed at high, 2× volume
-
-<b>2. ...</b>
+<b>Watchlist</b> (₹; buy only above, never before 09:20)
+<pre>Stock      Above   SL   T1  Qty
+KALYANKJIL   701  692  716  110
+MCX         3768 3712 3840   17
+LICHSGFIN  592.5  585  603  133</pre>
+<b>Why</b>
+• KALYANKJIL — closed at high, 2× vol
+• MCX — 20-day high, F&amp;O long build-up
+💡 3 of 5 from financials: sector strong
 
 ⏳ <b>Don't buy before 09:20.</b>
 🔔 The bot sends BUY NOW when the
@@ -146,4 +152,4 @@ first 5-min candle closes above the
 level on good volume. Not by 09:40 → dropped.
 <i>Analysis only, not advice. You place orders yourself.</i>
 ```
-Final list only: dropped stocks in one line each under `<b>Dropped</b>` (e.g. `• HINDCOPPER — gap +5.2%`).
+Final list only: add a `Gap` column to the table, and dropped stocks under `<b>Dropped</b>` as a small table (`Stock  Gap  Reason`, e.g. `HINDCOPPER +5.2% gap > 4%`).
