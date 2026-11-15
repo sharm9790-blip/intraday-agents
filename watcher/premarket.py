@@ -10,7 +10,7 @@ a green candle closing above `buy_above` (but not above `max_entry`) on volume a
 VOL_X × that candle's usual volume → it becomes a live BUY NOW plan (risk-checked).
 
     python3 watcher/premarket.py state/premarket.json --write
-        cloud step: risk-check every stock at its worst entry (max_entry), fix qty,
+        cloud step: risk-check every stock at its planned entry (just above buy_above), fix qty,
         set keep=false with the reason on a BLOCK. Exit 0 if any stock is kept.
 """
 import json
@@ -86,8 +86,11 @@ def main(path, write=False):
     for s in doc.get("stocks") or []:
         if s.get("keep") is False:
             continue
-        worst = {**s, "entry": s["max_entry"], "zone_low": s["buy_above"], "deadline": "09:45"}
-        res = risk.check(worst, "09:15")
+        # Checked at the planned entry (just above the trigger), not the worst case: at
+        # max_entry CDSL failed on 13 Nov by 0.06 R. The 09:20 breakout is risk-checked
+        # again at its real close before any BUY NOW goes out.
+        plan = {**s, "entry": s.get("entry", s["buy_above"]), "zone_low": s["buy_above"], "deadline": "09:45"}
+        res = risk.check(plan, "09:15")
         print(s["symbol"], json.dumps(res))
         if res["status"] == "BLOCK":
             s["keep"] = False
