@@ -119,10 +119,14 @@ def lines(doc, today, res, inr):
     hist = history(doc)
     if not res and not hist:
         return []
+    import tables as T
     out = ["<b>🔻 Short side · paper test only</b> (not a signal)"]
-    for t in res:
-        out.append(f"{t['symbol']} {t['at']} · {inr(t['pnl'])} · " + " → ".join(t["steps"][-2:]))
-    if not res:
+    if res:
+        out.append(T.table(["Stock", "Time", "₹", "Exit"],
+                           [[T.short(t["symbol"], 9), t["at"], T.num(t["pnl"]),
+                             (t["steps"][-1].split(" ", 1)[1] if " " in t["steps"][-1] else t["steps"][-1])[:10]]
+                            for t in res], right={2}))
+    else:
         out.append("No weak-market short setups today.")
     tot = sum(h["pnl"] for h in hist)
     out.append(f"So far {len(hist)}/30 paper shorts · total {inr(tot)}"

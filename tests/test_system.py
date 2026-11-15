@@ -1215,5 +1215,33 @@ class TestOpening(Base):
         self.assertGreater(r["r"], 0)
         self.assertIn("bought", r["steps"][0])
 
+class TestTables(Base):
+    def test_table(self):
+        import tables as T
+        t = T.table(["Stock", "P&L"], [["M&M", T.num(1564)], ["SBIN", T.num(-420)]], total=["Total", T.num(1144)])
+        self.assertTrue(t.startswith("<pre>") and t.endswith("</pre>"))
+        self.assertIn("M&amp;M", t)
+        body = t[5:-6].replace("&amp;", "&").split("\n")
+        self.assertEqual(body[1], "M&M   +1,564")
+        self.assertEqual(body[2], "SBIN    -420")
+        self.assertTrue(body[3].startswith("─"))
+        self.assertEqual(T.num(0), "0")
+        self.assertEqual(T.short("WAAREEENERGIES"), "WAAREEENE…")
+
+    def test_my_trades_card(self):
+        self.put("watch.json", {"date": "2026-11-09", "live": [
+            {"symbol": "SBIN", "paper_result": 600}, {"symbol": "TCS", "paper_result": -100}]})
+        trades = [{"symbol": "SBIN", "qty": 100, "entry": 800.0, "left": 0, "realized": 100.0, "plan": True,
+                   "sells": [{"qty": 100, "price": 801.0}], "slip": {"delay": 9, "per_share": 0.5, "rs": 50}},
+                  {"symbol": "ITC", "qty": 50, "entry": 400.0, "left": 0, "realized": -300.0, "plan": False,
+                   "sells": [{"qty": 50, "price": 394.0}]}]
+        t = "\n".join(mt.day_lines(trades, self.dir, "2026-11-09"))
+        self.assertIn("<b>Your trades</b>", t)
+        self.assertIn("You vs the paper plan", t)
+        self.assertIn("less than the plan", t)               # 100 vs paper 600
+        self.assertIn("1 trade(s) were not a bot plan", t)
+        self.assertIn("9 min after the alert", t)
+        self.assertIn("Today real P&amp;L", t)
+
 if __name__ == "__main__":
     unittest.main()

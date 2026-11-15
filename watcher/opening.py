@@ -213,11 +213,15 @@ def lines(doc, res, inr):
     hist = [x for d in sorted(doc.get("days", {})) for x in doc["days"][d]]
     if not res and not hist:
         return []
+    import tables as T
     out = ["<b>👀 Opening engine · paper test</b> (not a signal)"]
-    for t in res:
-        out.append(f"{t['symbol']} {t['at']} · {t['r']:+.2f}R ({inr(t['r'] * 1000)} at ₹1,000 risk) · "
-                   + " → ".join(t["steps"][-2:]))
-    if not res:
+    if res:
+        out.append(T.table(["Stock", "Time", "R", "₹*", "Exit"],
+                           [[T.short(t["symbol"], 9), t["at"], T.r(t["r"]), T.num(t["r"] * 1000),
+                             (t["steps"][-1].split(" ", 1)[1] if " " in t["steps"][-1] else t["steps"][-1])[:10]]
+                            for t in res], right={2, 3}))
+        out.append("<i>*at ₹1,000 risk per trade</i>")
+    else:
         out.append("No opening signals today.")
     if hist:
         tot = sum(x["r"] for x in hist)
