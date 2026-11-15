@@ -219,6 +219,15 @@ def lines(state_dir, chat=None, short=False):
             mp_for_verdict = mp
     else:
         mp_for_verdict = mp
+    try:
+        import shorts
+        sh = shorts.history(load(os.path.join(state_dir, "shorts.json"), {}))
+        if sh:
+            ms = metrics(sh)
+            out += ["", f"🔻 <b>Short side, paper test</b> · {ms['n']}/{MIN_TRADES} trades · "
+                        f"{inr(ms['exp'])}/trade · win rate {ms['win_rate']}% · total {inr(ms['total'])}"]
+    except Exception as e:
+        print("shorts expectancy failed", e)
     v = verdict(mp)
     out += ["", f"🎯 <b>Verdict (paper)</b>: {v[1]}"]
     if chat and mp_for_verdict is not mp and mp_for_verdict["n"]:

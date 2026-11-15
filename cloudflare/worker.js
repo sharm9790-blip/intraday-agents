@@ -43,6 +43,10 @@
 //    GET <worker url>/?candles=SBIN,TCS&days=5 with header x-worker-key: <WORKER_KEY>
 //    (Secret WORKER_KEY here, and the same value as GitHub secret WORKER_KEY + WORKER_URL).
 //    Max 20 symbols per call, 5 per INDmoney request. Without WORKER_KEY it answers 403.
+//
+// 6) Data pack for the cloud debate (same key, read-only market data):
+//    ?quotes=SBIN,TCS        GET /market/quotes/full (price, day OHLC, volume, circuits, 52w)
+//    ?chain=SBIN&expiry=YYYY-MM-DD[,YYYY-MM-DD]   GET /market/option-chain (first expiry that works)
 //   Without INDmoney secrets, part 2 is simply off. (Groww's live-data API needs its
 //   paid plan, so it was removed on 2026-11-10; Groww is still where you place orders.)
 
@@ -52,7 +56,7 @@ const STATE_BRANCH = "claude/intraday-state";
 const RETRY_AFTER_S = 600;
 const MAX_TRIES = 3;
 const IND = "https://api.indstocks.com";
-const VERSION = "2026-11-13b";  // shown by ?live=test so you can tell the new code is deployed
+const VERSION = "2026-11-16a";  // shown by ?live=test so you can tell the new code is deployed
 const OPEN = ["waiting", "in_zone", "t1_hit"];
 const IST_MS = 5.5 * 3600 * 1000;
 
@@ -82,6 +86,19 @@ export default {
       if (!ok) return new Response('{"ok":false,"error":"forbidden"}', { status: 403 });
       const days = Math.min(Math.max(Number(new URL(request.url).searchParams.get("days")) || 1, 1), 7);
       const out = await indCandles(env, cq.split(",").map((x) => x.trim().toUpperCase()).filter((x) => SYM_RE.test(x)).slice(0, 20), days)
+        .catch((e) => ({ ok: false, error: String(e.message || e) }));
+      return new Response(JSON.stringify(out), { headers: { "content-type": "application/json" } });
+    }
+    const qq = new URL(request.url).searchParams.get("quotes");
+    const ch = new URL(request.url).searchParams.get("chain");
+    if (qq !== null || ch !== null) {
+      const ok = env.WORKER_KEY && request.headers.get("x-worker-key") === env.WORKER_KEY;
+      if (!ok) return new Response('{"ok":false,"error":"forbidden"}', { status: 403 });
+      const sp = new URL(request.url).searchParams;
+      const out = await (qq !== null
+        ? indQuotes(env, qq.split(",").map((x) => x.trim().toUpperCase()).filter((x) => SYM_RE.test(x)).slice(0, 100))
+        : indChain(env, ch.trim().toUpperCase(), String(sp.get("expiry") || "").split(",").filter((x) => /^\d{4}-\d{2}-\d{2}$/.test(x)).slice(0, 3),
+                   Math.min(Math.max(Number(sp.get("strikes")) || 8, 2), 15)))
         .catch((e) => ({ ok: false, error: String(e.message || e) }));
       return new Response(JSON.stringify(out), { headers: { "content-type": "application/json" } });
     }
@@ -200,13 +217,14 @@ export function decide(list, prices, sent, hm, mt) {
       if (px >= p.cancel_if_high_reaches) {
         add(k + "runup", everyone, "⚡", `RAN UP — ${s}`, [now,
           `Reached the cancel level ${rs(p.cancel_if_high_reaches)} without the dip.`, "",
-          "👉 <b>Don't chase.</b> If your limit order hasn't filled, cancel it."]);
+          "👉 <b>Don't chase.</b> Cancel any buy order you placed for it."]);
       } else if (px <= p.zone_high && px >= p.cancel_if_close_below) {
         add(k + "zone", everyone, "⚡", `IN BUY ZONE — ${s}`, [now,
           `📥 Zone ${rs(p.zone_low)}–${rs(p.zone_high)} · max ${rs(p.max_entry)}`,
           `🛑 SL ${rs(p.sl)} · 🎯 T1 ${rs(p.t1)}`, "",
-          "👉 A limit order at the entry can fill now.",
-          "The 5-min watcher confirms with 🔔 BUY TRIGGER on a green close."]);
+          "👉 <b>Don't buy yet.</b> Wait for 🔔 BUY TRIGGER",
+          "(green 5-min close back above the trigger).",
+          "No limit order in advance: it fills while the price is still falling."]);
       } else if (px < p.cancel_if_close_below) {
         add(k + "below", everyone, "⚡", `BELOW CANCEL LEVEL — ${s}`, [now,
           `Under ${rs(p.cancel_if_close_below)}. If a 5-min candle closes here the plan is cancelled.`, "",
@@ -381,7 +399,13 @@ async function indTest(env) {
     const last = rows.length ? new Date(rows[rows.length - 1][0] * 1000 + IST_MS).toISOString().slice(0, 16).replace("T", " ") : "-";
     return `ok (SBIN ${rows.length} 5-min candles, last ${last} IST)`;
   }).catch((e) => "failed: " + String(e.message || e));
-  return { ok: true, method, login, prices: res.prices, positions, orders, candles,
+  const quotes = await indQuotes(env, ["SBIN"]).then((q) => q.ok && q.quotes.SBIN
+    ? `ok (SBIN ${q.quotes.SBIN.ltp}, circuit ${q.quotes.SBIN.lower_circuit}–${q.quotes.SBIN.upper_circuit})` : "failed: " + (q.error || "no data"))
+    .catch((e) => "failed: " + String(e.message || e));
+  const chain = await indChain(env, "SBIN", expiryGuess(istNow().date), 3).then((c) => c.ok
+    ? `ok (SBIN ${c.chain.expiry}, ${Object.keys(c.chain.strikes).length} strikes)` : "failed: " + c.error)
+    .catch((e) => "failed: " + String(e.message || e));
+  return { ok: true, method, login, prices: res.prices, positions, orders, candles, quotes, chain,
            worker_key: !!env.WORKER_KEY,
            note: "Outside market hours these are the last closing prices." };
 }
@@ -486,9 +510,14 @@ async function indCandles(env, symbols, days) {
   for (let i = 0; i < keys.length; i += 5) {
     const q = `${IND}/market/historical/5minute?scrip-codes=${encodeURIComponent(keys.slice(i, i + 5).join(","))}` +
               `&start_time=${start}&end_time=${end}`;
+    if (i) await sleep(400);                       // gentle on INDmoney's rate limit
     let r = await fetch(q, { headers: { authorization: token, accept: "application/json" } });
     if ((r.status === 401 || r.status === 403) && env.IND_CLIENT_ID) {
       token = await indToken(env, true);
+      r = await fetch(q, { headers: { authorization: token, accept: "application/json" } });
+    }
+    for (let t = 1; r.status === 429 && t <= 2; t++) {   // too many requests: back off, retry
+      await sleep(1500 * t);
       r = await fetch(q, { headers: { authorization: token, accept: "application/json" } });
     }
     const j = await r.json().catch(() => ({}));
@@ -498,6 +527,91 @@ async function indCandles(env, symbols, days) {
     Object.assign(candles, candleParse(j, code));
   }
   return { ok: true, source: "INDmoney", candles, missing };
+}
+
+const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
+
+// ---------- 6) full quotes + option chain (read-only market data, for the data pack) ----------
+export function quoteParse(j, code) {
+  const out = {};
+  const n = (x) => (typeof x === "number" && isFinite(x) ? x : null);
+  for (const [k, v] of Object.entries((j && j.data) || {})) {
+    if (!code[k] || !v) continue;
+    out[code[k]] = { ltp: n(v.live_price ?? v.ltp), open: n(v.day_open), high: n(v.day_high), low: n(v.day_low),
+      prev_close: n(v.prev_close), pct: n(v.day_change_percentage), volume: n(v.volume),
+      upper_circuit: n(v.upper_circuit), lower_circuit: n(v.lower_circuit),
+      high_52w: n(v["52week_high"]), low_52w: n(v["52week_low"]) };
+  }
+  return out;
+}
+
+async function indGet(env, url) {
+  let token = await indToken(env);
+  let r = await fetch(url, { headers: { authorization: token, accept: "application/json" } });
+  if ((r.status === 401 || r.status === 403) && env.IND_CLIENT_ID) {
+    token = await indToken(env, true);
+    r = await fetch(url, { headers: { authorization: token, accept: "application/json" } });
+  }
+  for (let t = 1; r.status === 429 && t <= 2; t++) {
+    await sleep(1500 * t);
+    r = await fetch(url, { headers: { authorization: token, accept: "application/json" } });
+  }
+  const j = await r.json().catch(() => ({}));
+  return { r, j, ok: r.ok && (j.success === true || String(j.status).toLowerCase() === "success") };
+}
+
+async function indQuotes(env, symbols) {
+  if (!indConfigured(env)) return { ok: false, error: "no INDmoney secrets" };
+  const { code, missing } = indCodes(symbols, await nseIds(env));
+  const keys = Object.keys(code);
+  if (!keys.length) return { ok: true, quotes: {}, missing };
+  const { r, j, ok } = await indGet(env, `${IND}/market/quotes/full?scrip-codes=${encodeURIComponent(keys.join(","))}`);
+  if (!ok) return { ok: false, error: `INDmoney quotes ${r.status} ${String(j.message || "").slice(0, 100)}` };
+  return { ok: true, quotes: quoteParse(j, code), missing };
+}
+
+// Likely monthly expiries: last Tuesday (NSE since Sep 2025) then last Thursday, this month and next.
+export function expiryGuess(today) {
+  const out = [];
+  const [y0, m0] = today.split("-").map(Number);
+  for (let k = 0; k < 2; k++) {
+    const y = y0 + Math.floor((m0 - 1 + k) / 12), m = ((m0 - 1 + k) % 12) + 1;
+    const last = new Date(Date.UTC(y, m, 0));
+    for (const wd of [2, 4]) {
+      const d = new Date(last);
+      d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() - wd + 7) % 7));
+      const iso = d.toISOString().slice(0, 10);
+      if (iso >= today && !out.includes(iso)) out.push(iso);
+    }
+  }
+  return out.slice(0, 3);
+}
+
+export function chainTrim(j) {
+  const d = (j && j.data) || {};
+  const strikes = {};
+  for (const [k, v] of Object.entries(d.strikes || {})) {
+    const leg = (x) => (x ? { oi: x.oi ?? null, previous_oi: x.previous_oi ?? null, iv: x.iv ?? null,
+      last_price: x.last_price ?? null, volume: x.volume ?? null } : null);
+    strikes[k] = { ce: leg(v && v.ce), pe: leg(v && v.pe) };
+  }
+  return { underlying_ltp: d.underlying_ltp ?? null, expiry: d.expiry ?? null, strikes };
+}
+
+async function indChain(env, sym, expiries, strikes) {
+  if (!indConfigured(env)) return { ok: false, error: "no INDmoney secrets" };
+  const index = sym === "NIFTY" ? "40000001" : null;
+  const id = index || (await nseIds(env))[sym];
+  if (!id) return { ok: false, error: "unknown symbol" };
+  let last = "";
+  for (const e of expiries) {
+    const { r, j, ok } = await indGet(env, `${IND}/market/option-chain?exchange=NSE&segment=${index ? "INDEX" : "EQUITY"}` +
+      `&underlying-scrip=${id}&expiry=${e}&strike_count=${strikes}`);
+    if (ok) return { ok: true, chain: { ...chainTrim(j), expiry: e } };
+    last = `${r.status} ${String(j.message || "").slice(0, 80)}`;
+    await sleep(300);
+  }
+  return { ok: false, error: "no chain for " + expiries.join("/") + ": " + last };
 }
 
 // ---------- 4) dead-man ----------

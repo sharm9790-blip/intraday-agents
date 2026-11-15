@@ -74,7 +74,7 @@ def manage(bars, i0, entry, p, lock=False, trail=False):
     if left:
         pnl += left * (bars[-1][4] - entry)
         steps.append(f"close {bars[-1][4]:.2f}")
-    return round(pnl - COST * entry * q), steps
+    return round(pnl - COST * abs(entry) * q), steps
 
 
 def targets(p, bars, cash=100000):

@@ -74,6 +74,7 @@ def stats(bars, now):
         "last30": round((price / tb[-7][4] - 1) * 100, 2) if len(tb) >= 7 else 0.0,
         "atr5": round(sum(b[2] - b[3] for b in last) / len(last), 2),
         "bounced": bool(vwap and min(b[3] for b in tb[-6:]) <= vwap * 1.003 and price >= vwap),
+        "rejected": bool(vwap and max(b[2] for b in tb[-6:]) >= vwap * 0.997 and price < vwap),
         "day_high": round(max(b[2] for b in tb), 2),
     }
 
@@ -85,6 +86,21 @@ def keep(st, fo):
         return False
     return (0 <= st["vwap_dist"] <= MAX_VWAP_DIST and st["pct"] >= 0.3 and st["vol_x"] >= MIN_VOL_X
             and (st["pct"] <= NO_CHASE or st["bounced"]))
+
+
+def keep_short(st, fo):
+    """Short side (paper test only): F&O stocks (no price-band trap), below VWAP but not
+    more than 1.5% under it, down ≥ 0.3%, volume ≥ 1.2× usual, falling in the last 30 min,
+    down ≤ 3% unless it bounced up to VWAP and got rejected (no chasing a fall)."""
+    if not fo or not st or st["vwap_dist"] is None or st["vol_x"] is None:
+        return False
+    return (-MAX_VWAP_DIST <= st["vwap_dist"] < 0 and st["pct"] <= -0.3 and st["vol_x"] >= MIN_VOL_X
+            and st["last30"] < 0 and (st["pct"] >= -NO_CHASE or st.get("rejected")))
+
+
+def score_short(st, nifty_pct):
+    return round(min(nifty_pct - st["pct"], 4) + 1.5 * math.log2(max(st["vol_x"], 0.5))
+                 - 3 * st["last30"], 2)
 
 
 def score(st, nifty_pct):
@@ -128,9 +144,23 @@ def run(state_dir, now, candles, universe=None, workers=16):
                           "sector": info.get("ind", ""), "turnover_cr": info.get("tv"),
                           "score": score(st, nifty_pct or 0), **st})
     items.sort(key=lambda x: -x["score"])
+    shorts = []
+    for s, st in got.items():
+        info = stocks[s]
+        if keep_short(st, info.get("fo")):
+            shorts.append({"symbol": s, "yahoo": s + ".NS", "sector": info.get("ind", ""),
+                           "score": score_short(st, nifty_pct or 0), **st})
+    shorts.sort(key=lambda x: -x["score"])
+    sec = {}
+    for s, st in got.items():
+        sec.setdefault(group(s, u) or "Other", []).append(st)
+    sectors = sorted(({"group": g, "n": len(v), "avg_pct": round(sum(x["pct"] for x in v) / len(v), 2),
+                       "above_vwap_pct": round(100 * sum(1 for x in v if x["price"] > x["vwap"]) / len(v))}
+                      for g, v in sec.items() if len(v) >= 3), key=lambda x: -x["avg_pct"])
     return {"date": now.strftime("%Y-%m-%d"), "at": now.strftime("%H:%M"),
             "mode": mode_of(nifty_pct, above, up), "nifty_pct": nifty_pct,
-            "above_vwap_pct": above, "up_pct": up, "scanned": len(got), "items": items[:TOP]}
+            "above_vwap_pct": above, "up_pct": up, "scanned": len(got), "items": items[:TOP],
+            "shorts": shorts[:5], "sectors": sectors}
 
 
 def build_universe(path, min_tv=100, min_px=100):
