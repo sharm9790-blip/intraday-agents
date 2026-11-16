@@ -1,13 +1,18 @@
-⚪ <b>NO TRADE — 12:58 IST</b>
+⚪ <b>NO TRADE — 13:15 IST</b>
 Choppy day · 32% above VWAP
 
 <pre>Stock      Why
-TATACONSUM R:R 1.2, 1120 wall
-PARAGMILK  2.2% over VWAP
+63MOONS    R:R 1.2, dead volume
+FORTIS     +4.8%, 800CE wall
+JSL        no volume, R:R &lt;1
+CHEMPLASTS 76% asks, 249 cap
+DALBHARAT  illiquid, R:R 1.2
 </pre>
-🔁 TATACONSUM flips on 5-min
-close above ₹1,121, 1120CE OI
-falling, vol 1.5x
+🔁 63MOONS flips on 5-min close
+above ₹944.95, vol 10k+
+
+🔁 FORTIS flips on close above
+₹802.5, 800CE OI falling
 
 📌 KARURVYSYA plan still live
 
