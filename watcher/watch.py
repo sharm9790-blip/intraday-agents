@@ -410,6 +410,16 @@ def send_scorecard(state_dir, today, watch):
     except Exception as e:  # never block the scorecard
         print("shorts failed", e)
     try:
+        nl = load(os.path.join(state_dir, "nifty_paper.json"), {})
+        nt = [t for t in nl.get("trades", []) if t.get("date") == today and t.get("status") == "closed"]
+        if nt:
+            lines += ["<b>🧪 Nifty options · paper test</b> (not a signal)", T.table(
+                ["Contract", "Side", "₹"], [[T.short(t.get("contract", "?"), 14), t.get("side", "?"),
+                                             T.num(t["pnl"])] for t in nt]), ""]
+        extra.append(("nifty", nt))
+    except Exception as e:  # never block the scorecard
+        print("nifty lines failed", e)
+    try:
         import expectancy
         lines += ["<b>🎯 Expectancy</b> (all days so far)"] + expectancy.lines(state_dir, short=True) + [""]
     except Exception as e:  # never block the scorecard
@@ -453,6 +463,9 @@ def scorecard_insights(rows, tot, extra, cand, today):
     if o:
         tr = sum(x["r"] for x in o)
         out.append(f"💡 Opening test: {len(o)} paper trade(s), {tr:+.2f}R ({inr(tr * 1000)} at ₹1,000 risk).")
+    nt = extra.get("nifty") or []
+    if nt:
+        out.append(f"💡 Nifty options test: {len(nt)} paper trade(s) today, {inr(sum(t['pnl'] for t in nt))} after costs.")
     sh = extra.get("shorts") or []
     if sh:
         out.append(f"💡 Short test: {len(sh)} paper short(s), {inr(sum(x['pnl'] for x in sh))}.")
@@ -774,6 +787,8 @@ def main(state_dir):
     #     turn a first-candle breakout into a live BUY NOW plan.
     if premarket_step(state_dir, today, now, watch):
         save(watch_path, watch)
+    if nifty_step(state_dir, today, watch):   # Nifty options paper verdicts (no plans, no orders)
+        save(watch_path, watch)
     if opening_step(state_dir, today, now, watch):
         save(watch_path, watch)
     cues_step(state_dir, today, minutes, watch)   # before the 08:40 premarket fire
@@ -867,6 +882,26 @@ def main(state_dir):
                 save(watch_path, watch)
         except Exception as ex:   # 16 Nov: a bad verdict id here crashed every run 13:45–14:25
             print("fire failed", repr(ex))
+
+
+def nifty_step(state_dir, today, watch):
+    """Forward a new Nifty options PAPER verdict (nifty-options-debate skill). Returns True
+    if watch changed. Isolated on purpose: any error here never touches the stock plans."""
+    try:
+        doc = load(os.path.join(state_dir, "nifty_plan.json"), {})
+        vid = doc.get("verdict_id")
+        if doc.get("date") != today or not vid or vid == watch.get("nifty_id"):
+            return False
+        try:
+            with open(os.path.join(state_dir, "nifty_verdict.txt")) as f:
+                telegram(f.read())
+        except FileNotFoundError:
+            pass
+        watch["nifty_id"] = vid
+        return True
+    except Exception as e:
+        print("nifty_step failed", e)
+        return False
 
 
 def premarket_step(state_dir, today, now, watch):
