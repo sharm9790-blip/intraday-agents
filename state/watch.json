@@ -101,13 +101,14 @@
   "12:45 KARURVYSYA 393.55 VWAP \u20b9390.15 status in_zone",
   "12:50 KARURVYSYA 393.90 VWAP \u20b9390.24 status in_zone",
   "12:53 KARURVYSYA 394.00 VWAP \u20b9390.26 status in_zone",
-  "12:55 KARURVYSYA 394.25 VWAP \u20b9390.28 status in_zone"
+  "12:55 KARURVYSYA 394.25 VWAP \u20b9390.28 status in_zone",
+  "13:00 KARURVYSYA 393.70 VWAP \u20b9390.32 status in_zone"
  ],
  "health": {
   "ready": true,
   "pinger": true
  },
- "last_run": "12:55",
+ "last_run": "13:00",
  "taken": [],
  "trades": 0,
  "day_trades": 0,
@@ -135,7 +136,7 @@
   "LICHSGFIN": "no breakout above 592.5 by 09:40"
  },
  "pre_summary": true,
- "scan_slot": "12:45",
+ "scan_slot": "13:00",
  "last_fire": "12:45",
  "fired_at": "12:50",
  "verdicts": 12,
