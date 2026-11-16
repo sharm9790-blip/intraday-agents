@@ -86,14 +86,17 @@
   "10:55 FORTIS 787.70 VWAP \u20b9784.14 status waiting",
   "11:00 FORTIS 791.60 VWAP \u20b9784.43 status cancelled",
   "12:04 KARURVYSYA 392.20 VWAP \u20b9388.72 status in_zone",
-  "12:05 KARURVYSYA 392.60 VWAP \u20b9388.75 status in_zone"
+  "12:05 KARURVYSYA 392.60 VWAP \u20b9388.75 status in_zone",
+  "12:10 KARURVYSYA 393.65 VWAP \u20b9389.06 status in_zone"
  ],
  "health": {
   "ready": true,
   "pinger": true
  },
- "last_run": "12:05",
- "taken": [],
+ "last_run": "12:10",
+ "taken": [
+  "KARURVYSYA"
+ ],
  "trades": 1,
  "day_trades": 1,
  "open_slots": [
@@ -178,5 +181,6 @@
    "start": "12:05",
    "buy_at": "12:04"
   }
- ]
+ ],
+ "sl_nudged": []
 }
