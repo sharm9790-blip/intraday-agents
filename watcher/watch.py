@@ -542,8 +542,8 @@ def fire_debate(now, trades, last_verdict_id, watch):
     if watch.get("last_fire") == slot:
         return False
     if last_verdict_id:  # a debate finished in the last 10 min: wait for the next slot
-        v = last_verdict_id.split("_")[-1]
-        if 0 <= minutes - (int(v[:2]) * 60 + int(v[2:])) < 10:
+        v = risk.vid_hm(last_verdict_id)
+        if v and 0 <= minutes - hhmm(v) < 10:
             return False
     if not post_fire(url, token, f"15-min scan, slot {slot} IST", watch):
         return False
@@ -653,7 +653,7 @@ def main(state_dir):
         watch["live"] = []
         p = plan_doc.get("plan") if plan_doc.get("date") == today else None
         if p and watch.get("status") in OPEN_STATES:
-            v = (watch.get("verdict_id") or "_0000").split("_")[-1]
+            v = (risk.vid_hm(watch.get("verdict_id")) or "00:00").replace(":", "")
             watch["live"].append({
                 "symbol": p["symbol"], "vid": watch.get("verdict_id"),
                 "plan": {**p, "qty": watch.get("qty_fix") or p["qty"]},
@@ -669,11 +669,12 @@ def main(state_dir):
     if pm.get("date") == today and hhmm("09:15") <= minutes <= hhmm("09:45"):
         IND_ALLOW.update(s["symbol"] for s in pm.get("stocks") or [] if s.get("keep") is not False)
     mt_today = mt if mt.get("date") == today else {}
-    ind = load(os.path.join(state_dir, "positions_ind.json"), {})
-    ordered = {o["s"] for o in ind.get("orders") or [] if o.get("s")} if ind.get("date") == today else set()
+    # (not called "ind": that name is the data-pack module; shadowing it broke the pack on 16 Nov)
+    ind_pos = load(os.path.join(state_dir, "positions_ind.json"), {})
+    ordered = {o["s"] for o in ind_pos.get("orders") or [] if o.get("s")} if ind_pos.get("date") == today else set()
     if count_trades(watch, mt_today, now, ordered):
         save(watch_path, watch)
-    if sl_nudge(ind, mt_today, today, minutes, watch):
+    if sl_nudge(ind_pos, mt_today, today, minutes, watch):
         save(watch_path, watch)
     pm_doc = load(os.path.join(state_dir, "premarket.json"), {})
     if pm_doc.get("connectors"):   # 08:45 run: catch an expired connector before the open
@@ -691,8 +692,7 @@ def main(state_dir):
         watch["verdict_id"] = vid
         watch["verdicts"] = watch.get("verdicts", 0) + 1
         if plan_doc.get("plan"):
-            v = vid.split("_")[-1]
-            start = f"{v[:2]}:{v[2:]}"
+            start = risk.vid_hm(vid) or now.strftime("%H:%M")
             gp = dict(plan_doc["plan"])
             IND_ALLOW.add(gp["symbol"])
             conv = []
@@ -784,7 +784,10 @@ def main(state_dir):
     # 2) Follow every live plan.
     if hhmm("09:15") <= minutes <= hhmm("15:30"):
         for e in open_plans(watch):
-            track(e, now, watch)
+            try:   # one bad plan must never stop the others' SL / T1 alerts
+                track(e, now, watch)
+            except Exception as ex:
+                print("track failed", e.get("symbol"), repr(ex))
         save(watch_path, watch)
 
     # 2b) Rejected stocks that broke out since → the next debate re-checks them.
@@ -857,10 +860,13 @@ def main(state_dir):
     else:
         print("live:", ", ".join(f"{e['symbol']} {e['status']}" for e in live))
     if not full and not loss_stop:
-        if fire_debate(now, trades + waiting, vid if plan_doc.get("date") == today else None, watch):
-            save(watch_path, watch)
-        elif fire_late_recheck(now, state_dir, today, watch):
-            save(watch_path, watch)
+        try:
+            if fire_debate(now, trades + waiting, vid if plan_doc.get("date") == today else None, watch):
+                save(watch_path, watch)
+            elif fire_late_recheck(now, state_dir, today, watch):
+                save(watch_path, watch)
+        except Exception as ex:   # 16 Nov: a bad verdict id here crashed every run 13:45–14:25
+            print("fire failed", repr(ex))
 
 
 def premarket_step(state_dir, today, now, watch):
@@ -1071,12 +1077,12 @@ def slots(watch):
 SL_NUDGE_MIN = 3  # minutes after your buy with no SL order seen → one reminder
 
 
-def sl_nudge(ind, mt, today, minutes, watch):
+def sl_nudge(ind_pos, mt, today, minutes, watch):
     """Your INDmoney buy has no open SELL (SL) order after SL_NUDGE_MIN minutes → one
     reminder per trade. Needs the worker's open-sell list (positions_ind.json "sells")."""
-    if ind.get("date") != today or not isinstance(ind.get("sells"), list) or not MARKET_OPEN(minutes):
+    if ind_pos.get("date") != today or not isinstance(ind_pos.get("sells"), list) or not MARKET_OPEN(minutes):
         return False
-    sells = set(ind["sells"])
+    sells = set(ind_pos["sells"])
     done = watch.setdefault("sl_nudged", [])
     changed = False
     for chat, trs in (mt.get("trades") or {}).items():
@@ -1444,5 +1450,27 @@ def track(entry, now, watch):
     watch["log"] = watch["log"][-200:]
 
 
+def crash_alert(state_dir, ex):
+    """Any crash → one Telegram alert per error per day (owner), so it is never silent."""
+    import traceback
+    traceback.print_exc()
+    key = f"{datetime.now(IST):%Y-%m-%d} {type(ex).__name__}: {str(ex)[:80]}"
+    path = os.path.join(state_dir, "errors.json")
+    seen = load(path, {})
+    if key in seen:
+        return
+    seen = {k: v for k, v in seen.items() if k[:10] == key[:10]}
+    seen[key] = datetime.now(IST).strftime("%H:%M")
+    save(path, seen)
+    owner = (os.environ.get("TELEGRAM_CHAT_ID") or "").split(",")[0].strip() or None
+    telegram(f"⚠️ <b>WATCHER ERROR</b> {datetime.now(IST):%H:%M}\n<code>{esc(key[11:])}</code>\n"
+             "Plan alerts may be missing until it is fixed.\n👉 Tell Claude.", to=owner)
+
+
 if __name__ == "__main__":
-    main(sys.argv[1] if len(sys.argv) > 1 else "state")
+    _sd = sys.argv[1] if len(sys.argv) > 1 else "state"
+    try:
+        main(_sd)
+    except Exception as _ex:
+        crash_alert(_sd, _ex)
+        raise

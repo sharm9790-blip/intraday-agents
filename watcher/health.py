@@ -92,8 +92,9 @@ def check(now, watch, plan_doc, holidays, send):
     fired = watch.get("fired_at")
     if fired and mins - _m(fired) >= 25:
         vid = plan_doc.get("verdict_id") or ""
-        vt = vid.split("_")[-1] if plan_doc.get("date") == today else ""
-        got = vt and f"{vt[:2]}:{vt[2:]}" >= fired
+        import risk
+        vt = risk.vid_hm(vid) if plan_doc.get("date") == today else None
+        got = bool(vt and vt >= fired)
         key = "noverdict_" + fired
         if not got and key not in flags:
             flags[key] = True
