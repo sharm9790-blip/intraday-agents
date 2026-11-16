@@ -1,10 +1,16 @@
 {
  "date": "2026-11-16",
- "verdict_id": "2026-11-16_1215",
+ "verdict_id": "2026-11-16_1236",
  "go_count": 2,
  "connectors": {
   "indmoney": true,
   "investsights": true
  },
- "plan": null
+ "plan": null,
+ "blocked": {
+  "symbol": "TATACONSUM",
+  "reasons": [
+   "net R:R 1.50 below 1.5"
+  ]
+ }
 }

@@ -22,6 +22,9 @@
   "BOROLTD": "11:28 +6.8% chase, double top 334-334.4, volume dying, net R:R ~1.14; flips on 5-min close >334.6 on 1.5x volume with T1>=340",
   "ETERNAL": "11:45 net R:R ~0.9, 52wk high 372.1 + 370CE wall + 89k offer; flips on 5-min close >372.5 on 2x volume",
   "QPOWER": "12:05 spiky, risk 8/10, capital goods weak; flips on 5-min close >1557 on vol >=15k with T1>=1575",
-  "PARAGMILK": "12:15 net R:R 1.4, ask-heavy book, volume fading; flips on 5-min close >337.05 on vol >=60k with bids >50% and T1>=344"
+  "PARAGMILK": "12:36 late chase, asks 61%, R:R 1.25; flips on 5-min close >340 with bids >50% and T1 netting >=1.5",
+  "APOLLOHOSP": "12:36 net R:R ~1.4 at live, 8800CE wall, volume fading; flips on 5-min green close >8725 after a touch of 8725-8730 (SL 8704, T1 8796)",
+  "NH": "12:36 double top 1901-1902, volume gone, net R:R ~1.15; flips on 5-min close >1902 on >=1.5x volume with T1 netting >=1.5",
+  "TATACONSUM": "12:36 blocked by risk check, net R:R 1.50 (<1.5) on pullback plan, call walls 1110/1120; flips on 5-min green close >1104 after a touch of 1104-1106 with SL 1098.8, T1 >=1120, or close >1114.5 on vol >=25k"
  }
 }
