@@ -4,7 +4,8 @@
  "live": [],
  "log": [],
  "health": {
-  "ready": true
+  "ready": true,
+  "pinger": true
  },
  "last_run": "09:25",
  "taken": [],
