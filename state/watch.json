@@ -7,7 +7,7 @@
   "ready": true,
   "pinger": true
  },
- "last_run": "09:35",
+ "last_run": "09:40",
  "taken": [],
  "trades": 0,
  "day_trades": 0,
@@ -15,7 +15,8 @@
   "09:20",
   "09:25",
   "09:30",
-  "09:35"
+  "09:35",
+  "09:40"
  ],
  "cues": [
   "pre",
@@ -29,6 +30,10 @@
  "fire_error": null,
  "pre_id": "2026-11-16_0907",
  "pre_done": {
-  "TIPSMUSIC": "fell below SL 803.5"
- }
+  "TIPSMUSIC": "fell below SL 803.5",
+  "NYKAA": "no breakout above 366.7 by 09:40",
+  "LICHSGFIN": "no breakout above 592.5 by 09:40"
+ },
+ "pre_summary": true,
+ "scan_slot": "09:30"
 }
