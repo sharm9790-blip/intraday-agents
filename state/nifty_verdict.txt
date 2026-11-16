@@ -1,0 +1,22 @@
+🧪 <b>PAPER</b> · Nifty options
+⚪ <b>NO TRADE — 12:37 IST</b>
+
+📈 Nifty 25,259 (+0.46%) · VIX 15.5
+🧱 Calls 25,300 · Puts 25,200
+PCR 1.02 · Expiry 17 Nov (1 day)
+
+<b>Why not</b>
+• Inside opening range
+• 25,337 and 25,301 rejected
+• Call and put writing both rising
+• Decay ~30% of ATM per day
+💡 Range day: buyers lose to decay
+
+<b>Would flip if</b>
+• CE: 5-min close &gt; 25,338
+• PE: 5-min close &lt; 25,190
+• Only before 14:00, R:R ≥ 1.5
+
+🔎 Next check: 13:15 IST
+📊 Paper record: 0 trades
+<i>Paper trade only, not advice.</i>
