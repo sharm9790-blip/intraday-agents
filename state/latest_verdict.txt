@@ -1,16 +1,22 @@
-<b>🔁 14:25 re-check: NO TRADE</b>
+<b>🔎 09:50 scan: NO TRADE</b>
 
-<b>ANURAS</b> ❌
-Broke 1265.5 to 1271 but
-already +5.4% on the day.
-Chase, ~2% above VWAP.
+Choppy market. Nifty +0.6%
+but only 42% of stocks
+above VWAP. Weak Asia cues.
 
-Breakout volume thin
-(5.6k in last candle).
-Nifty -0.9%, weak market.
-Only ~1 hr left, tight room.
+<b>BHARTIARTL</b> ❌
++3% at 52-wk high, volume
+fading, net R:R 1.3.
+Re-check: dip to 2165 holds,
+then close above 2168.
 
-Would re-check on a
-VWAP pullback bounce.
+<b>PIDILITIND</b> ❌
+Volume fading, weak sector.
+<b>MAXHEALTH</b> ❌
++4% chase, call walls.
+<b>TATACOMM</b> ❌
+Thin volume, R:R 1.1.
+<b>PPLPHARMA</b> ❌
+R:R about 1.0.
 
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
