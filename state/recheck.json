@@ -1,4 +1,12 @@
 {
  "date": "2026-11-16",
- "symbols": {}
+ "symbols": {
+  "APOLLOHOSP": {
+   "at": "13:20",
+   "rejected_at": "12:36",
+   "level": 8725.0,
+   "kind": "flip level",
+   "close": 8750.0
+  }
+ }
 }
