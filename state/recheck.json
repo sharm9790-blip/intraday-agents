@@ -1,19 +1,4 @@
 {
  "date": "2026-11-16",
- "symbols": {
-  "PARAGMILK": {
-   "at": "12:40",
-   "rejected_at": "12:36",
-   "level": 340.0,
-   "kind": "flip level",
-   "close": 340.88
-  },
-  "TATACONSUM": {
-   "at": "12:40",
-   "rejected_at": "12:36",
-   "level": 1104.0,
-   "kind": "flip level",
-   "close": 1110.6
-  }
- }
+ "symbols": {}
 }
