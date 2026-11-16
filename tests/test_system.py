@@ -1243,5 +1243,31 @@ class TestTables(Base):
         self.assertIn("9 min after the alert", t)
         self.assertIn("Today real P&amp;L", t)
 
+class TestRobust16Nov(Base):
+    def test_vid_hm(self):
+        self.assertEqual(risk.vid_hm("2026-11-16_1335b"), "13:35")
+        self.assertEqual(risk.vid_hm("2026-11-16_0950"), "09:50")
+        self.assertIsNone(risk.vid_hm("pre_x"))
+        self.assertIsNone(risk.vid_hm(None))
+
+    def test_suffix_verdict_id_does_not_crash(self):
+        self.at(13, 45)
+        self.put("plan.json", {"date": "2026-11-09", "verdict_id": "2026-11-09_1335b", "plan": None})
+        self.put("watch.json", {"date": "2026-11-09", "verdict_id": "2026-11-09_1335b", "live": [], "log": []})
+        w.main(self.dir)                          # used to raise ValueError in fire_debate
+
+    def test_pack_built_with_worker(self):
+        import ind
+        saved = (ind.worker_on, ind.build_pack)
+        ind.worker_on = lambda: True
+        ind.build_pack = lambda now, cand, live, candles, hol, fo: {"date": "2026-11-09", "at": "10:00", "stocks": []}
+        try:
+            self.put("positions_ind.json", {"date": "2026-11-09", "positions": [], "orders": []})
+            self.at(10, 0)
+            w.main(self.dir)
+            self.assertEqual(self.get("pack.json")["at"], "10:00")   # 16 Nov: 'dict' has no worker_on
+        finally:
+            ind.worker_on, ind.build_pack = saved
+
 if __name__ == "__main__":
     unittest.main()

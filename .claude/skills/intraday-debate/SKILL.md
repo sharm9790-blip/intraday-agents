@@ -35,6 +35,7 @@ All state lives on the git branch `claude/intraday-state`. Work on that branch.
      {"date": "YYYY-MM-DD", "verdict_id": "YYYY-MM-DD_HHMM", "go_count": 0,
       "plan": null}
      ```
+     `verdict_id` is ALWAYS exactly `YYYY-MM-DD_HHMM` (digits only, IST time of writing). If that id is already used today, use the next minute — never add letters or suffixes (`_1335b` crashed the watcher on 16 Nov).
      or, if the Judge gave GO / GO WITH CONDITIONS (top pick only), `go_count` + 1 and
      ```json
      "plan": {"symbol": "HDFCBANK", "yahoo": "HDFCBANK.NS", "side": "long",

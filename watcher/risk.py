@@ -21,6 +21,13 @@ LAST_ENTRY = "14:30"    # no fresh entries after this
 MIN_STOP_ATR = 0.7      # SL must be ≥ this × the 5-min ATR (`atr5` in the plan) below entry
 
 
+def vid_hm(vid):
+    """'YYYY-MM-DD_HHMM' (any suffix tolerated, e.g. '_1335b' on 16 Nov) → 'HH:MM', else None."""
+    import re
+    m = re.search(r"_(\d{2})(\d{2})", str(vid or ""))
+    return f"{m.group(1)}:{m.group(2)}" if m else None
+
+
 def _hm(s):
     h, m = str(s).split(":")
     return int(h) * 60 + int(m)
@@ -86,8 +93,7 @@ def main(path, write=False):
         print("no plan")
         return 0
     vid = doc.get("verdict_id", "")
-    vt = vid.split("_")[-1] if "_" in vid else None
-    res = check(plan, f"{vt[:2]}:{vt[2:]}" if vt else None)
+    res = check(plan, vid_hm(vid))
     print(json.dumps(res))
     if write:
         if res["status"] == "BLOCK":
