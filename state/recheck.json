@@ -1,12 +1,4 @@
 {
  "date": "2026-11-16",
- "symbols": {
-  "MAXHEALTH": {
-   "at": "09:50",
-   "rejected_at": "09:50",
-   "level": 976.0,
-   "kind": "flip level",
-   "close": 987.85
-  }
- }
+ "symbols": {}
 }
