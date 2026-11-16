@@ -1,4 +1,12 @@
 {
  "date": "2026-11-16",
- "symbols": {}
+ "symbols": {
+  "PARAGMILK": {
+   "at": "12:20",
+   "rejected_at": "12:15",
+   "level": 337.05,
+   "kind": "flip level",
+   "close": 338.91
+  }
+ }
 }
