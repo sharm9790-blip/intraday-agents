@@ -1,20 +1,18 @@
-⚪ <b>NO TRADE — 13:35 IST</b>
-Choppy day · 32% above VWAP
+⚪ <b>NO TRADE — 13:35 scan</b>
+🕐 IST  ·  Choppy day
 
-<pre>Stock      Why
-LICHSGFIN  net R:R 1.0, 1 burst
-APOLLOHOSP net R:R 0.8, triple top
-TATACONSUM 1120 wall, R:R 0.6
-NH         thin volume
-</pre>
-🔁 LICHSGFIN flips on 5-min close
-above ₹604.5, vol 100k+
+<b>Skipped</b>
+<pre>Stock   Why        (₹)
+ABDL    conf 4, thin  776
+MONEYVIEW 78% asks     59
+KOTAKBANK 500CE wall  494
+PNB     below VWAP    144</pre>
 
-🔁 APOLLOHOSP flips on close
-above ₹8775, vol 12k+
+<b>ABDL flips on</b>
+• 5-min close above ₹779.5
+• Volume ≥ 30k, above VWAP
 
-📌 KARURVYSYA plan still live
+💡 Only 28% stocks above VWAP; no clean setup.
 
-💡 No setup clears R:R 1.5. Sit out.
-
+📡 Watcher checks every 5 min
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>

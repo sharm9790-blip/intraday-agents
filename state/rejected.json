@@ -31,6 +31,10 @@
   "JSL": "13:15 volume near zero, ask-heavy, net R:R <1",
   "CHEMPLASTS": "13:15 block volume, 76% asks, 249.4 cap, net R:R <1.5",
   "DALBHARAT": "13:15 illiquid prints, flat range, gross R:R 1.2",
-  "LICHSGFIN": "13:35 net R:R 1.0, single volume burst, 600CE wall; flips on 5-min close >604.5 on vol >=100k with 600CE OI not rising"
+  "LICHSGFIN": "13:35 net R:R 1.0, single volume burst, 600CE wall; flips on 5-min close >604.5 on vol >=100k with 600CE OI not rising",
+  "ABDL": "13:35 conf 4<6 weak day, thin one-burst pop, 63% asks, net R:R ~1.0-1.3; flips on 5-min close >779.5 on vol >=30k, above VWAP, T1>=789 netting >=1.5",
+  "MONEYVIEW": "13:35 78% asks, net R:R ~1.0, no breakout; flips on 5-min close >60.2 on 2x vol",
+  "KOTAKBANK": "13:35 500CE wall 6.2M, net R:R <1; flips on 5-min close >498 on 3x vol with 500CE OI shedding",
+  "PNB": "13:35 below VWAP, 70% asks; flips on 5-min close >146.9 on 1.5x vol"
  }
 }
