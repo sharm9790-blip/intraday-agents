@@ -1,22 +1,14 @@
-🧪 <b>PAPER</b> · Nifty options
-⚪ <b>NO TRADE — 13:35 IST</b>
+🧪 <b>PAPER</b> · Nifty day report
 
-📈 Nifty 25,244 (+0.40%) · VIX 15.5
-🧱 Calls 25,300 · Puts 25,200
-PCR 1.03 · Expiry 17 Nov (1 day)
+<b>Today</b>
+No paper trades (all NO TRADE)
+Last check 13:35: range day,
+writing on both sides
 
-<b>Why not</b>
-• Inside opening range
-• 25,337 and 25,301 rejected
-• Writing rising both sides
-• Decay ~37% of ATM per day
-💡 Range day: buyers lose to decay
+<b>Last 20 days</b> (after costs)
+Trades 0 · Win rate –
+Net ₹0 · Profit factor –
+Not filled: 0
 
-<b>Would flip if</b>
-• CE: 5-min close &gt; 25,338
-• 25300 CE OI falling, volume 3×
-• Only before 14:00, R:R ≥ 1.5
-
-🔎 Next check: 13:55 IST
-📊 Paper record: 0 trades
-<i>Paper trade only, not advice.</i>
+💡 No trades yet: too early to judge
+<i>Paper trade for testing only, not SEBI-registered investment advice. Options trading is high risk.</i>
