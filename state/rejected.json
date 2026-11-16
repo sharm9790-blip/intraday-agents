@@ -23,13 +23,14 @@
   "ETERNAL": "11:45 net R:R ~0.9, 52wk high 372.1 + 370CE wall + 89k offer; flips on 5-min close >372.5 on 2x volume",
   "QPOWER": "12:05 spiky, risk 8/10, capital goods weak; flips on 5-min close >1557 on vol >=15k with T1>=1575",
   "PARAGMILK": "12:58 no-go: 2.2% above VWAP, asks 60%, dip barred on weak day; flips on 5-min close >343 on bids >50% and T1 netting >=1.5",
-  "APOLLOHOSP": "12:36 net R:R ~1.4 at live, 8800CE wall, volume fading; flips on 5-min green close >8725 after a touch of 8725-8730 (SL 8704, T1 8796)",
+  "APOLLOHOSP": "13:35 net R:R 0.8, triple top 8754-8760, volume dried; flips on 5-min close >8775 on vol >=12k with T1>=8830",
   "NH": "12:36 double top 1901-1902, volume gone, net R:R ~1.15; flips on 5-min close >1902 on >=1.5x volume with T1 netting >=1.5",
   "TATACONSUM": "12:58 no-go: net R:R ~1.23 to T1 1126, 1120CE wall 296k, +3.3% chase, conf 5<6 weak day; flips on 5-min close >1121 with 1120CE OI falling, vol >=1.5x, SL ~1112.5, T1 >=1138",
   "63MOONS": "13:15 net R:R ~1.2, volume dead, ask-heavy; flips on 5-min close >944.95 on vol >=10k with T1>=957",
   "FORTIS": "13:15 +4.8% chase, 800CE wall OI 1.19M, net R:R ~0.85; flips on 5-min close >802.5 on vol >=60k with 800CE OI falling, T1>=814",
   "JSL": "13:15 volume near zero, ask-heavy, net R:R <1",
   "CHEMPLASTS": "13:15 block volume, 76% asks, 249.4 cap, net R:R <1.5",
-  "DALBHARAT": "13:15 illiquid prints, flat range, gross R:R 1.2"
+  "DALBHARAT": "13:15 illiquid prints, flat range, gross R:R 1.2",
+  "LICHSGFIN": "13:35 net R:R 1.0, single volume burst, 600CE wall; flips on 5-min close >604.5 on vol >=100k with 600CE OI not rising"
  }
 }
