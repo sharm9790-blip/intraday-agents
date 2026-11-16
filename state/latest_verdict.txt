@@ -1,25 +1,23 @@
-🔴 <b>NO TRADE — 10:40 scan</b>
+🔴 <b>NO TRADE — 10:55 scan</b>
 
 Market choppy
-Nifty +0.4%
-Only 28% stocks above VWAP
+Nifty +0.3%
+Only 26% stocks above VWAP
 
 <b>Checked</b>
 <pre>Stock   NetRR  Why
-NAZARA   0.9   thin, overhang
-PPLPHARMA 0.8  same sector FORTIS
-ITC      1.0   300 call wall
-RAYMOND  0.8   weak volume
-PIDILITIND 1.1 call walls</pre>
+BALKRISIND 0.8 thin, ask-heavy
+BHARTIHEXA 0.9 +3% chase
+TATACHEM 0.7  volume fading</pre>
 
 ⏳ FORTIS plan still waiting
 (dip 785–786.5)
 
 <b>Flip levels</b>
-• ITC close above ₹297.5
-• NAZARA close above ₹435.3
-• PIDILITIND close above ₹1,581
+• BALKRISIND close above ₹2,338
+• BHARTIHEXA close above ₹1,726
+• TATACHEM close above ₹618
 
-💡 Breadth weak, every setup under 1.5× net reward. Wait.
+💡 Weak breadth, no setup reaches 1.5× net reward. Wait.
 
 <i>Educational analysis, not SEBI advice. You place orders yourself.</i>

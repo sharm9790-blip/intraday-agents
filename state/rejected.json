@@ -12,6 +12,9 @@
   "KPRMILL": "10:17 +3.15% chase, 3 fails at 1195-1197.7, thin book, SL ~1 ATR; flips on 5-min close >1198 on 2x volume",
   "ATHERENERG": "10:17 volume fading, 3 fails at 2017-2021.5, 1763 offer at 2013, net R:R 1.4; flips on 5-min close >2022 on >=1.5x volume",
   "NAZARA": "10:40 breakout net R:R 0.9, thin small cap, 306 allotment overhang; flips on 5-min close >435.3 with T1>=443 on 1.5x volume",
-  "RAYMOND": "10:40 net R:R 0.79, weak volume; flips on 5-min close >1200 holding"
+  "RAYMOND": "10:40 net R:R 0.79, weak volume; flips on 5-min close >1200 holding",
+  "BALKRISIND": "10:55 net R:R 0.84, thin volume, ask-heavy; flips on 5-min close >2338 on vol >4k with T1>=2365",
+  "BHARTIHEXA": "10:55 +3.2% chase, net R:R 0.94; flips on 5-min close >1726 on vol >10k with T1>=1755",
+  "TATACHEM": "10:55 net R:R 0.70, volume fading; flips on 5-min close >618 on 1.5x volume with T1>=632"
  }
 }
