@@ -1,47 +1,65 @@
 {
  "date": "2026-11-16",
- "at": "09:45",
+ "at": "10:00",
  "mode": "choppy",
- "nifty_pct": 0.61,
- "above_vwap_pct": 42,
- "up_pct": 36,
+ "nifty_pct": 0.7,
+ "above_vwap_pct": 53,
+ "up_pct": 40,
  "scanned": 628,
  "items": [
   {
-   "symbol": "DEEPAKFERT",
-   "yahoo": "DEEPAKFERT.NS",
+   "symbol": "SGFIN",
+   "yahoo": "SGFIN.NS",
    "fo": false,
-   "sector": "Chemicals",
-   "turnover_cr": 35,
-   "score": 11.76,
-   "price": 1354.0,
-   "pct": 7.46,
-   "vwap": 1347.49,
-   "vwap_dist": 0.48,
-   "vol_x": 36.05,
-   "last30": 0.0,
-   "atr5": 27.23,
+   "sector": "Other",
+   "turnover_cr": 38,
+   "score": 22.12,
+   "price": 731.4,
+   "pct": 4.74,
+   "vwap": 721.62,
+   "vwap_dist": 1.36,
+   "vol_x": 2.75,
+   "last30": 5.31,
+   "atr5": 8.82,
    "bounced": true,
    "rejected": false,
-   "day_high": 1369.4
+   "day_high": 738.0
   },
   {
-   "symbol": "PFOCUS",
-   "yahoo": "PFOCUS.NS",
+   "symbol": "BOROLTD",
+   "yahoo": "BOROLTD.NS",
    "fo": false,
-   "sector": "Media Entertainment & Publication",
-   "turnover_cr": 119,
-   "score": 10.02,
-   "price": 287.6,
-   "pct": 6.54,
-   "vwap": 286.93,
-   "vwap_dist": 0.23,
-   "vol_x": 16.13,
-   "last30": 0.0,
-   "atr5": 5.39,
+   "sector": "Other",
+   "turnover_cr": 45,
+   "score": 17.63,
+   "price": 331.05,
+   "pct": 6.28,
+   "vwap": 327.51,
+   "vwap_dist": 1.08,
+   "vol_x": 50.88,
+   "last30": 1.71,
+   "atr5": 3.83,
    "bounced": true,
    "rejected": false,
-   "day_high": 292.75
+   "day_high": 331.95
+  },
+  {
+   "symbol": "GOKEX",
+   "yahoo": "GOKEX.NS",
+   "fo": false,
+   "sector": "Textiles",
+   "turnover_cr": 29,
+   "score": 14.66,
+   "price": 713.0,
+   "pct": 5.63,
+   "vwap": 706.06,
+   "vwap_dist": 0.98,
+   "vol_x": 5.67,
+   "last30": 2.3,
+   "atr5": 9.04,
+   "bounced": true,
+   "rejected": false,
+   "day_high": 716.75
   },
   {
    "symbol": "MAXHEALTH",
@@ -49,35 +67,107 @@
    "fo": true,
    "sector": "Healthcare",
    "turnover_cr": 325,
-   "score": 7.87,
-   "price": 982.25,
-   "pct": 3.71,
-   "vwap": 973.23,
-   "vwap_dist": 0.93,
-   "vol_x": 9.08,
-   "last30": 0.0,
-   "atr5": 7.61,
+   "score": 14.22,
+   "price": 988.85,
+   "pct": 4.41,
+   "vwap": 978.05,
+   "vwap_dist": 1.1,
+   "vol_x": 8.26,
+   "last30": 1.98,
+   "atr5": 6.68,
    "bounced": true,
    "rejected": false,
-   "day_high": 985.7
+   "day_high": 990.5
   },
   {
-   "symbol": "TATACOMM",
-   "yahoo": "TATACOMM.NS",
+   "symbol": "SGMART",
+   "yahoo": "SGMART.NS",
    "fo": false,
-   "sector": "Telecommunication",
-   "turnover_cr": 102,
-   "score": 5.51,
-   "price": 1815.2,
-   "pct": 2.39,
-   "vwap": 1799.84,
-   "vwap_dist": 0.85,
-   "vol_x": 5.6,
-   "last30": 0.0,
-   "atr5": 16.42,
+   "sector": "Metals & Mining",
+   "turnover_cr": 77,
+   "score": 14.0,
+   "price": 1002.05,
+   "pct": 6.57,
+   "vwap": 991.33,
+   "vwap_dist": 1.08,
+   "vol_x": 6.79,
+   "last30": 1.95,
+   "atr5": 10.97,
    "bounced": true,
    "rejected": false,
-   "day_high": 1820.4
+   "day_high": 1010.25
+  },
+  {
+   "symbol": "M&MFIN",
+   "yahoo": "M&MFIN.NS",
+   "fo": false,
+   "sector": "Financial Services",
+   "turnover_cr": 116,
+   "score": 12.49,
+   "price": 294.7,
+   "pct": 2.74,
+   "vwap": 291.9,
+   "vwap_dist": 0.96,
+   "vol_x": 2.44,
+   "last30": 2.84,
+   "atr5": 2.23,
+   "bounced": true,
+   "rejected": false,
+   "day_high": 296.15
+  },
+  {
+   "symbol": "SMT",
+   "yahoo": "SMT.NS",
+   "fo": false,
+   "sector": "Other",
+   "turnover_cr": 175,
+   "score": 12.14,
+   "price": 567.7,
+   "pct": 6.32,
+   "vwap": 561.91,
+   "vwap_dist": 1.03,
+   "vol_x": 16.28,
+   "last30": 0.7,
+   "atr5": 10.84,
+   "bounced": true,
+   "rejected": false,
+   "day_high": 577.65
+  },
+  {
+   "symbol": "AONESTEELS",
+   "yahoo": "AONESTEELS.NS",
+   "fo": false,
+   "sector": "Other",
+   "turnover_cr": 34,
+   "score": 11.3,
+   "price": 466.2,
+   "pct": 3.38,
+   "vwap": 463.13,
+   "vwap_dist": 0.66,
+   "vol_x": 1.8,
+   "last30": 2.45,
+   "atr5": 7.0,
+   "bounced": true,
+   "rejected": false,
+   "day_high": 473.05
+  },
+  {
+   "symbol": "IFCI",
+   "yahoo": "IFCI.NS",
+   "fo": false,
+   "sector": "Financial Services",
+   "turnover_cr": 105,
+   "score": 11.16,
+   "price": 62.65,
+   "pct": 0.71,
+   "vwap": 61.98,
+   "vwap_dist": 1.07,
+   "vol_x": 1.83,
+   "last30": 3.28,
+   "atr5": 0.59,
+   "bounced": true,
+   "rejected": false,
+   "day_high": 63.55
   },
   {
    "symbol": "PPLPHARMA",
@@ -85,71 +175,17 @@
    "fo": false,
    "sector": "Healthcare",
    "turnover_cr": 271,
-   "score": 5.42,
-   "price": 252.4,
-   "pct": 3.21,
-   "vwap": 249.91,
-   "vwap_dist": 1.0,
-   "vol_x": 3.68,
-   "last30": 0.0,
-   "atr5": 3.19,
+   "score": 10.35,
+   "price": 252.65,
+   "pct": 3.32,
+   "vwap": 250.71,
+   "vwap_dist": 0.77,
+   "vol_x": 3.92,
+   "last30": 1.59,
+   "atr5": 2.47,
    "bounced": true,
    "rejected": false,
-   "day_high": 252.97
-  },
-  {
-   "symbol": "DALBHARAT",
-   "yahoo": "DALBHARAT.NS",
-   "fo": false,
-   "sector": "Construction Materials",
-   "turnover_cr": 38,
-   "score": 5.06,
-   "price": 1515.0,
-   "pct": 1.0,
-   "vwap": 1506.13,
-   "vwap_dist": 0.59,
-   "vol_x": 8.65,
-   "last30": 0.0,
-   "atr5": 11.95,
-   "bounced": true,
-   "rejected": false,
-   "day_high": 1520.0
-  },
-  {
-   "symbol": "BHARTIARTL",
-   "yahoo": "BHARTIARTL.NS",
-   "fo": true,
-   "sector": "Telecommunication",
-   "turnover_cr": 2123,
-   "score": 4.8,
-   "price": 2166.9,
-   "pct": 2.89,
-   "vwap": 2154.86,
-   "vwap_dist": 0.56,
-   "vol_x": 3.21,
-   "last30": 0.0,
-   "atr5": 9.95,
-   "bounced": true,
-   "rejected": false,
-   "day_high": 2169.7
-  },
-  {
-   "symbol": "ATHERENERG",
-   "yahoo": "ATHERENERG.NS",
-   "fo": true,
-   "sector": "Automobile and Auto Components",
-   "turnover_cr": 594,
-   "score": 4.76,
-   "price": 1998.5,
-   "pct": 2.75,
-   "vwap": 1989.48,
-   "vwap_dist": 0.45,
-   "vol_x": 3.36,
-   "last30": 0.0,
-   "atr5": 17.67,
-   "bounced": true,
-   "rejected": false,
-   "day_high": 2003.6
+   "day_high": 253.35
   },
   {
    "symbol": "BHARTIHEXA",
@@ -157,212 +193,241 @@
    "fo": false,
    "sector": "Telecommunication",
    "turnover_cr": 29,
-   "score": 4.75,
-   "price": 1704.9,
-   "pct": 2.95,
-   "vwap": 1682.41,
-   "vwap_dist": 1.34,
-   "vol_x": 3.05,
-   "last30": 0.0,
-   "atr5": 14.97,
+   "score": 10.26,
+   "price": 1705.6,
+   "pct": 3.0,
+   "vwap": 1691.7,
+   "vwap_dist": 0.82,
+   "vol_x": 3.35,
+   "last30": 1.78,
+   "atr5": 12.84,
    "bounced": true,
    "rejected": false,
-   "day_high": 1707.8
+   "day_high": 1713.0
   },
   {
-   "symbol": "APLAPOLLO",
-   "yahoo": "APLAPOLLO.NS",
+   "symbol": "ITC",
+   "yahoo": "ITC.NS",
    "fo": true,
-   "sector": "Capital Goods",
-   "turnover_cr": 157,
-   "score": 4.72,
-   "price": 2307.6,
-   "pct": 2.49,
-   "vwap": 2289.56,
-   "vwap_dist": 0.79,
-   "vol_x": 3.71,
-   "last30": 0.0,
-   "atr5": 13.92,
+   "sector": "Fast Moving Consumer Goods",
+   "turnover_cr": 534,
+   "score": 9.67,
+   "price": 291.9,
+   "pct": 2.42,
+   "vwap": 289.45,
+   "vwap_dist": 0.84,
+   "vol_x": 2.68,
+   "last30": 1.94,
+   "atr5": 1.46,
    "bounced": true,
    "rejected": false,
-   "day_high": 2312.0
-  },
-  {
-   "symbol": "AJANTPHARM",
-   "yahoo": "AJANTPHARM.NS",
-   "fo": false,
-   "sector": "Healthcare",
-   "turnover_cr": 61,
-   "score": 4.66,
-   "price": 3385.5,
-   "pct": 3.09,
-   "vwap": 3351.67,
-   "vwap_dist": 1.01,
-   "vol_x": 2.74,
-   "last30": 0.0,
-   "atr5": 27.88,
-   "bounced": true,
-   "rejected": false,
-   "day_high": 3389.9
-  },
-  {
-   "symbol": "PIDILITIND",
-   "yahoo": "PIDILITIND.NS",
-   "fo": true,
-   "sector": "Chemicals",
-   "turnover_cr": 125,
-   "score": 4.66,
-   "price": 1562.3,
-   "pct": 2.4,
-   "vwap": 1550.46,
-   "vwap_dist": 0.76,
-   "vol_x": 3.76,
-   "last30": 0.0,
-   "atr5": 8.73,
-   "bounced": true,
-   "rejected": false,
-   "day_high": 1565.0
+   "day_high": 292.3
   }
  ],
- "shorts": [],
- "sectors": [
+ "shorts": [
   {
-   "group": "Media Entertainment & Publication",
-   "n": 7,
-   "avg_pct": 1.45,
-   "above_vwap_pct": 57
+   "symbol": "PREMIERENE",
+   "yahoo": "PREMIERENE.NS",
+   "sector": "Capital Goods",
+   "score": 6.35,
+   "price": 871.0,
+   "pct": -2.78,
+   "vwap": 877.47,
+   "vwap_dist": -0.74,
+   "vol_x": 1.24,
+   "last30": -0.8,
+   "atr5": 4.42,
+   "bounced": false,
+   "rejected": true,
+   "day_high": 891.0
   },
+  {
+   "symbol": "AMBER",
+   "yahoo": "AMBER.NS",
+   "sector": "Consumer Durables",
+   "score": 6.15,
+   "price": 6394.0,
+   "pct": -5.58,
+   "vwap": 6455.28,
+   "vwap_dist": -0.95,
+   "vol_x": 1.55,
+   "last30": -0.4,
+   "atr5": 65.28,
+   "bounced": false,
+   "rejected": true,
+   "day_high": 6659.5
+  },
+  {
+   "symbol": "PATANJALI",
+   "yahoo": "PATANJALI.NS",
+   "sector": "Fast Moving Consumer Goods",
+   "score": 5.71,
+   "price": 413.3,
+   "pct": -1.83,
+   "vwap": 415.17,
+   "vwap_dist": -0.45,
+   "vol_x": 3.39,
+   "last30": -0.18,
+   "atr5": 4.08,
+   "bounced": false,
+   "rejected": true,
+   "day_high": 424.0
+  },
+  {
+   "symbol": "SYRMA",
+   "yahoo": "SYRMA.NS",
+   "sector": "Capital Goods",
+   "score": 3.46,
+   "price": 1472.2,
+   "pct": -2.12,
+   "vwap": 1475.08,
+   "vwap_dist": -0.2,
+   "vol_x": 1.22,
+   "last30": -0.07,
+   "atr5": 10.4,
+   "bounced": false,
+   "rejected": true,
+   "day_high": 1501.5
+  }
+ ],
+ "sectors": [
   {
    "group": "Textiles",
    "n": 7,
-   "avg_pct": 0.86,
-   "above_vwap_pct": 43
+   "avg_pct": 1.28,
+   "above_vwap_pct": 57
   },
   {
-   "group": "Healthcare",
-   "n": 50,
-   "avg_pct": 0.66,
-   "above_vwap_pct": 76
+   "group": "Media Entertainment & Publication",
+   "n": 7,
+   "avg_pct": 1.2,
+   "above_vwap_pct": 43
   },
   {
    "group": "Banks",
    "n": 18,
-   "avg_pct": 0.6,
-   "above_vwap_pct": 39
-  },
-  {
-   "group": "Telecommunication",
-   "n": 6,
-   "avg_pct": 0.5,
-   "above_vwap_pct": 67
+   "avg_pct": 1.06,
+   "above_vwap_pct": 83
   },
   {
    "group": "Construction Materials",
    "n": 9,
-   "avg_pct": 0.43,
+   "avg_pct": 0.71,
    "above_vwap_pct": 89
+  },
+  {
+   "group": "Healthcare",
+   "n": 50,
+   "avg_pct": 0.64,
+   "above_vwap_pct": 70
+  },
+  {
+   "group": "Telecommunication",
+   "n": 6,
+   "avg_pct": 0.44,
+   "above_vwap_pct": 83
   },
   {
    "group": "Insurance",
    "n": 7,
-   "avg_pct": 0.29,
-   "above_vwap_pct": 100
+   "avg_pct": 0.42,
+   "above_vwap_pct": 86
   },
   {
    "group": "Consumer Services",
    "n": 26,
-   "avg_pct": 0.11,
-   "above_vwap_pct": 42
+   "avg_pct": 0.2,
+   "above_vwap_pct": 46
   },
   {
    "group": "Automobile and Auto Components",
    "n": 34,
-   "avg_pct": -0.12,
-   "above_vwap_pct": 35
-  },
-  {
-   "group": "Capital markets",
-   "n": 12,
-   "avg_pct": -0.23,
-   "above_vwap_pct": 25
-  },
-  {
-   "group": "Chemicals",
-   "n": 27,
-   "avg_pct": -0.28,
-   "above_vwap_pct": 33
+   "avg_pct": 0.11,
+   "above_vwap_pct": 65
   },
   {
    "group": "NBFC / lenders",
    "n": 53,
-   "avg_pct": -0.31,
-   "above_vwap_pct": 57
+   "avg_pct": 0.04,
+   "above_vwap_pct": 66
   },
   {
    "group": "Oil Gas & Consumable Fuels",
    "n": 14,
-   "avg_pct": -0.34,
-   "above_vwap_pct": 43
+   "avg_pct": -0.07,
+   "above_vwap_pct": 79
   },
   {
-   "group": "Information Technology",
-   "n": 29,
-   "avg_pct": -0.55,
-   "above_vwap_pct": 34
+   "group": "Capital markets",
+   "n": 12,
+   "avg_pct": -0.15,
+   "above_vwap_pct": 17
   },
   {
-   "group": "Metals & Mining",
-   "n": 17,
-   "avg_pct": -0.57,
-   "above_vwap_pct": 29
+   "group": "Chemicals",
+   "n": 27,
+   "avg_pct": -0.26,
+   "above_vwap_pct": 37
   },
   {
    "group": "Fast Moving Consumer Goods",
    "n": 28,
-   "avg_pct": -0.58,
-   "above_vwap_pct": 61
+   "avg_pct": -0.4,
+   "above_vwap_pct": 64
+  },
+  {
+   "group": "Information Technology",
+   "n": 29,
+   "avg_pct": -0.49,
+   "above_vwap_pct": 38
+  },
+  {
+   "group": "Metals & Mining",
+   "n": 17,
+   "avg_pct": -0.5,
+   "above_vwap_pct": 53
   },
   {
    "group": "Services",
    "n": 16,
-   "avg_pct": -0.71,
-   "above_vwap_pct": 50
-  },
-  {
-   "group": "Realty",
-   "n": 13,
-   "avg_pct": -0.88,
-   "above_vwap_pct": 31
-  },
-  {
-   "group": "Consumer Durables",
-   "n": 22,
-   "avg_pct": -1.0,
-   "above_vwap_pct": 23
+   "avg_pct": -0.62,
+   "above_vwap_pct": 69
   },
   {
    "group": "Power",
    "n": 15,
-   "avg_pct": -1.07,
-   "above_vwap_pct": 53
+   "avg_pct": -0.8,
+   "above_vwap_pct": 67
   },
   {
    "group": "Construction",
    "n": 11,
-   "avg_pct": -1.25,
-   "above_vwap_pct": 27
+   "avg_pct": -0.91,
+   "above_vwap_pct": 55
   },
   {
    "group": "Other",
    "n": 117,
-   "avg_pct": -1.26,
-   "above_vwap_pct": 25
+   "avg_pct": -0.92,
+   "above_vwap_pct": 41
+  },
+  {
+   "group": "Consumer Durables",
+   "n": 22,
+   "avg_pct": -0.95,
+   "above_vwap_pct": 36
+  },
+  {
+   "group": "Realty",
+   "n": 13,
+   "avg_pct": -0.96,
+   "above_vwap_pct": 15
   },
   {
    "group": "Capital Goods",
    "n": 86,
-   "avg_pct": -1.44,
-   "above_vwap_pct": 41
+   "avg_pct": -1.32,
+   "above_vwap_pct": 48
   }
  ]
 }
