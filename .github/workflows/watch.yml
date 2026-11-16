@@ -10,7 +10,7 @@ on:
   # A new verdict from the cloud debate goes out at once, not at the next 5-min run.
   push:
     branches: [claude/intraday-state]
-    paths: [state/plan.json, state/premarket.json]
+    paths: [state/plan.json, state/premarket.json, state/nifty_plan.json]
 
 permissions:
   contents: write

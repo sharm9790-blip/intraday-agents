@@ -1269,5 +1269,18 @@ class TestRobust16Nov(Base):
         finally:
             ind.worker_on, ind.build_pack = saved
 
+class TestNiftyInCards(unittest.TestCase):
+    def test_nifty_paper_row(self):
+        import expectancy
+        d = tempfile.mkdtemp()
+        with open(os.path.join(d, "nifty_paper.json"), "w") as f:
+            json.dump({"trades": [{"date": "2026-11-17", "status": "closed", "pnl": 1800, "side": "CE",
+                                   "contract": "NIFTY 18 NOV 24500 CE"},
+                                  {"date": "2026-11-17", "status": "not_filled", "pnl": 0, "side": "PE"}]}, f)
+        t = "\n".join(expectancy.lines(d))
+        self.assertIn("Nifty opt", t)
+        self.assertIn("+1,800", t)
+        shutil.rmtree(d)
+
 if __name__ == "__main__":
     unittest.main()
