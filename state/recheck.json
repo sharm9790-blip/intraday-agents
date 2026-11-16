@@ -1,12 +1,4 @@
 {
  "date": "2026-11-16",
- "symbols": {
-  "TATACOMM": {
-   "at": "12:05",
-   "rejected_at": "12:05",
-   "level": 1833.0,
-   "kind": "flip level",
-   "close": 1848.0
-  }
- }
+ "symbols": {}
 }
