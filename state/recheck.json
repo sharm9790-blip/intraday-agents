@@ -1,6 +1,13 @@
 {
  "date": "2026-11-16",
  "symbols": {
+  "MAXHEALTH": {
+   "at": "11:30",
+   "rejected_at": "10:03",
+   "level": 1000.0,
+   "kind": "flip level",
+   "close": 1004.5
+  },
   "TATACHEM": {
    "at": "11:05",
    "rejected_at": "10:55",
