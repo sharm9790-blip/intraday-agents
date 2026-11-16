@@ -1,26 +1,15 @@
 {
- "date": "2026-11-13",
- "at": "12:39",
- "positions": [
+ "date": "2026-11-16",
+ "at": "12:06",
+ "positions": [],
+ "orders": [
   {
-   "s": "IIFLCAPS",
-   "bq": 188,
-   "ba": 359.0,
-   "sq": 188,
-   "sa": 356.25,
-   "nq": 0,
-   "rp": -764.5
-  },
-  {
-   "s": "WAAREEENER",
-   "bq": 32,
-   "ba": 2608.0,
-   "sq": 32,
-   "sa": 2597.0,
-   "nq": 0,
-   "rp": -418.0
+   "s": "KARURVYSYA",
+   "q": 255,
+   "p": 392.2
   }
  ],
- "orders": [],
- "sells": []
+ "sells": [
+  "KARURVYSYA"
+ ]
 }
