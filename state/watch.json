@@ -1,13 +1,49 @@
 {
  "date": "2026-11-16",
- "verdict_id": "2026-11-16_1003",
- "live": [],
- "log": [],
+ "verdict_id": "2026-11-16_1017",
+ "live": [
+  {
+   "symbol": "FORTIS",
+   "vid": "2026-11-16_1017",
+   "plan": {
+    "symbol": "FORTIS",
+    "yahoo": "FORTIS.NS",
+    "name": "Fortis Healthcare",
+    "side": "long",
+    "entry_type": "dip",
+    "confidence": 5,
+    "atr5": 4.56,
+    "zone_low": 785.0,
+    "zone_high": 786.5,
+    "entry": 786.0,
+    "max_entry": 786.5,
+    "trigger_close_above": 785.0,
+    "sl": 780.5,
+    "t1": 797.0,
+    "t2": 801.0,
+    "qty": 127,
+    "deadline": "11:00",
+    "cancel_if_high_reaches": 797.0,
+    "cancel_if_close_below": 782.0,
+    "exit_if_close_below_after_entry": 781.5,
+    "time_stop": "15:00",
+    "sector": "Healthcare",
+    "rules_v": "2026-11-16",
+    "start": "10:17"
+   },
+   "status": "waiting",
+   "since": "10:17",
+   "paper_booked": 0
+  }
+ ],
+ "log": [
+  "10:19 FORTIS 788.15 VWAP \u20b9782.95 status waiting"
+ ],
  "health": {
   "ready": true,
   "pinger": true
  },
- "last_run": "10:15",
+ "last_run": "10:19",
  "taken": [],
  "trades": 0,
  "day_trades": 0,
@@ -38,5 +74,33 @@
  "scan_slot": "10:15",
  "last_fire": "10:15",
  "fired_at": "10:15",
- "verdicts": 2
+ "verdicts": 3,
+ "plans": [
+  {
+   "symbol": "FORTIS",
+   "yahoo": "FORTIS.NS",
+   "name": "Fortis Healthcare",
+   "side": "long",
+   "entry_type": "dip",
+   "confidence": 5,
+   "atr5": 4.56,
+   "zone_low": 785.0,
+   "zone_high": 786.5,
+   "entry": 786.0,
+   "max_entry": 786.5,
+   "trigger_close_above": 785.0,
+   "sl": 780.5,
+   "t1": 797.0,
+   "t2": 801.0,
+   "qty": 127,
+   "deadline": "11:00",
+   "cancel_if_high_reaches": 797.0,
+   "cancel_if_close_below": 782.0,
+   "exit_if_close_below_after_entry": 781.5,
+   "time_stop": "15:00",
+   "sector": "Healthcare",
+   "rules_v": "2026-11-16",
+   "start": "10:17"
+  }
+ ]
 }
