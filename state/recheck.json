@@ -1,26 +1,4 @@
 {
  "date": "2026-11-16",
- "symbols": {
-  "PIDILITIND": {
-   "at": "10:00",
-   "rejected_at": "09:50",
-   "level": 1559.0,
-   "kind": "flip level",
-   "close": 1562.3
-  },
-  "PPLPHARMA": {
-   "at": "10:25",
-   "rejected_at": "09:50",
-   "level": 253.1,
-   "kind": "flip level",
-   "close": 253.72
-  },
-  "ITC": {
-   "at": "10:15",
-   "rejected_at": "10:03",
-   "level": 292.35,
-   "kind": "flip level",
-   "close": 293.0
-  }
- }
+ "symbols": {}
 }
