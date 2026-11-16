@@ -1,6 +1,6 @@
 {
  "date": "2026-11-16",
- "at": "08:05",
+ "at": "09:00",
  "items": {
   "S&P 500": {
    "price": 7561.67,
@@ -21,39 +21,39 @@
    "kind": "US close"
   },
   "Nikkei": {
-   "price": 60227.98,
-   "pct": -1.5,
-   "time": "16 Nov 07:50",
+   "price": 60182.5,
+   "pct": -1.57,
+   "time": "16 Nov 08:05",
    "kind": "Asia live"
   },
   "Hang Seng": {
-   "price": 23852.06,
-   "pct": 0.91,
-   "time": "16 Nov 07:50",
+   "price": 23851.29,
+   "pct": 0.9,
+   "time": "16 Nov 08:45",
    "kind": "Asia live"
   },
   "Kospi": {
-   "price": 5168.76,
-   "pct": -2.3,
-   "time": "16 Nov 07:45",
+   "price": 5151.5,
+   "pct": -2.63,
+   "time": "16 Nov 08:40",
    "kind": "Asia live"
   },
   "Brent": {
-   "price": 95.15,
-   "pct": -0.72,
-   "time": "16 Nov 07:54",
+   "price": 94.78,
+   "pct": -1.11,
+   "time": "16 Nov 08:48",
    "kind": "crude"
   },
   "WTI": {
-   "price": 88.11,
-   "pct": -0.51,
-   "time": "16 Nov 07:55",
+   "price": 87.87,
+   "pct": -0.78,
+   "time": "16 Nov 08:50",
    "kind": "crude"
   },
   "USD/INR": {
-   "price": 94.23,
-   "pct": 0.21,
-   "time": "16 Nov 07:48",
+   "price": 94.24,
+   "pct": 0.22,
+   "time": "16 Nov 09:00",
    "kind": "currency"
   },
   "India VIX": {
@@ -69,6 +69,6 @@
    "kind": "prev close"
   }
  },
- "line": "S&P 500 -0.4% \u00b7 Nasdaq -0.9% \u00b7 Dow +0.1% \u00b7 Nikkei -1.5% \u00b7 Hang Seng +0.9% \u00b7 Kospi -2.3% \u00b7 Brent -0.7% \u00b7 WTI -0.5% \u00b7 USD/INR +0.2% \u00b7 India VIX -6.8% \u00b7 Nifty -0.6%",
+ "line": "S&P 500 -0.4% \u00b7 Nasdaq -0.9% \u00b7 Dow +0.1% \u00b7 Nikkei -1.6% \u00b7 Hang Seng +0.9% \u00b7 Kospi -2.6% \u00b7 Brent -1.1% \u00b7 WTI -0.8% \u00b7 USD/INR +0.2% \u00b7 India VIX -6.8% \u00b7 Nifty -0.6%",
  "note": "GIFT Nifty is not available from this source; read the gap from Asia live + US close, then the 09:08 pre-open price."
 }
