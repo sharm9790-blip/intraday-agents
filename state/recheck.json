@@ -1,26 +1,4 @@
 {
  "date": "2026-11-16",
- "symbols": {
-  "MAXHEALTH": {
-   "at": "11:30",
-   "rejected_at": "10:03",
-   "level": 1000.0,
-   "kind": "flip level",
-   "close": 1004.5
-  },
-  "TATACHEM": {
-   "at": "11:05",
-   "rejected_at": "10:55",
-   "level": 618.0,
-   "kind": "flip level",
-   "close": 621.0
-  },
-  "KIMS": {
-   "at": "11:15",
-   "rejected_at": "11:10",
-   "level": 753.5,
-   "kind": "flip level",
-   "close": 759.7
-  }
- }
+ "symbols": {}
 }
