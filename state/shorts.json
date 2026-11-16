@@ -22,6 +22,17 @@
    "qty": 1587,
    "sector": "Capital Goods",
    "at": "10:30"
+  },
+  {
+   "symbol": "PREMIERENE",
+   "yahoo": "PREMIERENE.NS",
+   "price": 864.6,
+   "sl": 873.64,
+   "t1": 851.04,
+   "t2": 842.0,
+   "qty": 110,
+   "sector": "Capital Goods",
+   "at": "10:45"
   }
  ]
 }
