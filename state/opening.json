@@ -1,4 +1,20 @@
 {
  "date": "2026-11-16",
- "open": []
+ "open": [
+  {
+   "symbol": "APTUS",
+   "yahoo": "APTUS.NS",
+   "at": "09:25",
+   "group": "NBFC / lenders",
+   "pct": 1.29,
+   "gap": -0.55,
+   "vol_frac": 0.21,
+   "entry": 178.52,
+   "sl": 176.23,
+   "t1": 181.96,
+   "t2": 185.4,
+   "risk": 2.29,
+   "atr5": 3.2750015258789062
+  }
+ ]
 }
