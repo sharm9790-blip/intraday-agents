@@ -1,10 +1,33 @@
 {
  "date": "2026-11-16",
- "verdict_id": "2026-11-16_1145",
- "go_count": 1,
+ "verdict_id": "2026-11-16_1205",
+ "go_count": 2,
  "connectors": {
   "indmoney": true,
   "investsights": true
  },
- "plan": null
+ "plan": {
+  "symbol": "KARURVYSYA",
+  "yahoo": "KARURVYSYA.NS",
+  "name": "Karur Vysya Bank",
+  "side": "long",
+  "entry_type": "now",
+  "confidence": 6,
+  "atr5": 0.99,
+  "zone_low": 391.0,
+  "zone_high": 392.3,
+  "entry": 391.8,
+  "max_entry": 392.3,
+  "trigger_close_above": 391.0,
+  "sl": 389.4,
+  "t1": 398.0,
+  "t2": 400.0,
+  "qty": 255,
+  "deadline": "12:20",
+  "cancel_if_high_reaches": 398.0,
+  "cancel_if_close_below": 389.9,
+  "exit_if_close_below_after_entry": 389.8,
+  "time_stop": "15:00",
+  "sector": "Banks"
+ }
 }

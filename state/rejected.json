@@ -4,12 +4,12 @@
   "BHARTIARTL": "09:50 +3.05% at 52-wk high, no VWAP pullback, volume fading, net R:R 1.3 at live; flips on 5-min close >2168 after a dip to <=2165 holds, or close >2175 on vol >=250k",
   "PIDILITIND": "10:40 call walls 1560/1580/1600, net R:R 1.1; flips on 5-min close >1581 with 1580 calls shedding",
   "PPLPHARMA": "10:40 net R:R 0.82, same sector as live FORTIS; flips on 5-min close >253.95 on 1.5x volume with T1>=258.5",
-  "TATACOMM": "09:50 thin volume and depth, net R:R ~1.1; flips on 5-min close >1822 on 2x volume",
+  "TATACOMM": "12:05 net R:R 0.4 at live, single-candle breakout, thin depth; flips on dip hold 1812-1816 or 5-min close >1833 on vol >=15k with T1>=1848",
   "MAXHEALTH": "11:45 +6.2% chase, 1.8% above VWAP, net R:R 1.46 to realistic T1, SMA200 1009 + call walls; flips on VWAP retest 988-992 bounce, or 5-min close >1010 on >=200k vol with T1 1020",
   "M&MFIN": "10:03 SL<0.7xATR, net R:R ~1.4, 1-candle move, 292-293.4 rejected 3x; flips on 5-min close >296.3 on vol >100k",
   "ITC": "10:40 net R:R ~1.0, 300CE wall, call OI +98% at 297.5; flips on 5-min close >297.5 with call OI unwinding",
   "IFCI": "10:03 ask-heavy depth, weak; flips on 5-min close >63.6 on 2x volume",
-  "KPRMILL": "10:17 +3.15% chase, 3 fails at 1195-1197.7, thin book, SL ~1 ATR; flips on 5-min close >1198 on 2x volume",
+  "KPRMILL": "12:05 net R:R 1.29, one-burst volume, ask-heavy; flips on 5-min close >1204 on vol >=15k with T1>=1214",
   "ATHERENERG": "10:17 volume fading, 3 fails at 2017-2021.5, 1763 offer at 2013, net R:R 1.4; flips on 5-min close >2022 on >=1.5x volume",
   "NAZARA": "10:40 breakout net R:R 0.9, thin small cap, 306 allotment overhang; flips on 5-min close >435.3 with T1>=443 on 1.5x volume",
   "RAYMOND": "10:40 net R:R 0.79, weak volume; flips on 5-min close >1200 holding",
@@ -21,6 +21,6 @@
   "AARTIPHARM": "11:28 net R:R ~1.14, 1023.8 cap rejected 3x, 3 lower closes; flips on 5-min close >1018 on vol >=25k with T1>=1038",
   "BOROLTD": "11:28 +6.8% chase, double top 334-334.4, volume dying, net R:R ~1.14; flips on 5-min close >334.6 on 1.5x volume with T1>=340",
   "ETERNAL": "11:45 net R:R ~0.9, 52wk high 372.1 + 370CE wall + 89k offer; flips on 5-min close >372.5 on 2x volume",
-  "QPOWER": "11:45 thin volume fading, no vol proof; flips on 5-min close >1540 on 2x volume"
+  "QPOWER": "12:05 spiky, risk 8/10, capital goods weak; flips on 5-min close >1557 on vol >=15k with T1>=1575"
  }
 }
