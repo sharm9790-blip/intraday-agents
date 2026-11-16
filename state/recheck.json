@@ -7,6 +7,13 @@
    "level": 1559.0,
    "kind": "flip level",
    "close": 1562.3
+  },
+  "ITC": {
+   "at": "10:15",
+   "rejected_at": "10:03",
+   "level": 292.35,
+   "kind": "flip level",
+   "close": 293.0
   }
  }
 }
