@@ -1,4 +1,12 @@
 {
  "date": "2026-11-16",
- "symbols": {}
+ "symbols": {
+  "TATACHEM": {
+   "at": "11:05",
+   "rejected_at": "10:55",
+   "level": 618.0,
+   "kind": "flip level",
+   "close": 621.0
+  }
+ }
 }
