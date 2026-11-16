@@ -7,7 +7,7 @@
   "ready": true,
   "pinger": true
  },
- "last_run": "09:40",
+ "last_run": "09:45",
  "taken": [],
  "trades": 0,
  "day_trades": 0,
@@ -35,5 +35,7 @@
   "LICHSGFIN": "no breakout above 592.5 by 09:40"
  },
  "pre_summary": true,
- "scan_slot": "09:30"
+ "scan_slot": "09:45",
+ "last_fire": "09:45",
+ "fired_at": "09:45"
 }
