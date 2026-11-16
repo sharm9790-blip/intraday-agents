@@ -7,6 +7,13 @@
    "level": 618.0,
    "kind": "flip level",
    "close": 621.0
+  },
+  "KIMS": {
+   "at": "11:15",
+   "rejected_at": "11:10",
+   "level": 753.5,
+   "kind": "flip level",
+   "close": 759.7
   }
  }
 }
