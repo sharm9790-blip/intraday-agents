@@ -38,13 +38,14 @@
  ],
  "log": [
   "10:19 FORTIS 788.15 VWAP \u20b9782.95 status waiting",
-  "10:20 FORTIS 787.80 VWAP \u20b9782.97 status waiting"
+  "10:20 FORTIS 787.80 VWAP \u20b9782.97 status waiting",
+  "10:25 FORTIS 789.15 VWAP \u20b9783.31 status waiting"
  ],
  "health": {
   "ready": true,
   "pinger": true
  },
- "last_run": "10:20",
+ "last_run": "10:25",
  "taken": [],
  "trades": 0,
  "day_trades": 0,
