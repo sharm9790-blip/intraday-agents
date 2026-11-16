@@ -4,7 +4,7 @@
  "live": [],
  "log": [],
  "health": {},
- "last_run": "08:40",
+ "last_run": "08:43",
  "taken": [],
  "trades": 0,
  "day_trades": 0,
@@ -16,5 +16,6 @@
   "pre"
  ],
  "prescan": "08:10",
- "fire_error": null
+ "fire_error": null,
+ "pre_id": "2026-11-16_0852"
 }
