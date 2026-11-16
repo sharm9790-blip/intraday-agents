@@ -1,6 +1,6 @@
 {
  "date": "2026-11-16",
- "verdict_id": "2026-11-16_1215",
+ "verdict_id": "2026-11-16_1236",
  "live": [
   {
    "symbol": "FORTIS",
@@ -93,13 +93,14 @@
   "12:20 KARURVYSYA 393.90 VWAP \u20b9389.58 status in_zone",
   "12:25 KARURVYSYA 393.85 VWAP \u20b9389.67 status in_zone",
   "12:30 KARURVYSYA 394.15 VWAP \u20b9389.96 status in_zone",
-  "12:30 KARURVYSYA 394.15 VWAP \u20b9389.96 status in_zone"
+  "12:30 KARURVYSYA 394.15 VWAP \u20b9389.96 status in_zone",
+  "12:35 KARURVYSYA 393.60 VWAP \u20b9390.06 status in_zone"
  ],
  "health": {
   "ready": true,
   "pinger": true
  },
- "last_run": "12:30",
+ "last_run": "12:35",
  "taken": [
   "KARURVYSYA"
  ],
@@ -132,7 +133,7 @@
  "scan_slot": "12:30",
  "last_fire": "12:30",
  "fired_at": "12:30",
- "verdicts": 10,
+ "verdicts": 11,
  "plans": [
   {
    "symbol": "FORTIS",
