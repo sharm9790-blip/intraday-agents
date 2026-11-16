@@ -1,12 +1,12 @@
 {
- "date": "2026-11-13",
+ "date": "2026-11-16",
  "symbols": {
-  "ENRIN": {
+  "MAXHEALTH": {
    "at": "09:50",
-   "rejected_at": "09:49",
-   "level": 3125.0,
+   "rejected_at": "09:50",
+   "level": 976.0,
    "kind": "flip level",
-   "close": 3137.7
+   "close": 987.85
   }
  }
 }
