@@ -774,6 +774,8 @@ def main(state_dir):
     #     turn a first-candle breakout into a live BUY NOW plan.
     if premarket_step(state_dir, today, now, watch):
         save(watch_path, watch)
+    if nifty_step(state_dir, today, watch):   # Nifty options paper verdicts (no plans, no orders)
+        save(watch_path, watch)
     if opening_step(state_dir, today, now, watch):
         save(watch_path, watch)
     cues_step(state_dir, today, minutes, watch)   # before the 08:40 premarket fire
@@ -861,6 +863,26 @@ def main(state_dir):
             save(watch_path, watch)
         elif fire_late_recheck(now, state_dir, today, watch):
             save(watch_path, watch)
+
+
+def nifty_step(state_dir, today, watch):
+    """Forward a new Nifty options PAPER verdict (nifty-options-debate skill). Returns True
+    if watch changed. Isolated on purpose: any error here never touches the stock plans."""
+    try:
+        doc = load(os.path.join(state_dir, "nifty_plan.json"), {})
+        vid = doc.get("verdict_id")
+        if doc.get("date") != today or not vid or vid == watch.get("nifty_id"):
+            return False
+        try:
+            with open(os.path.join(state_dir, "nifty_verdict.txt")) as f:
+                telegram(f.read())
+        except FileNotFoundError:
+            pass
+        watch["nifty_id"] = vid
+        return True
+    except Exception as e:
+        print("nifty_step failed", e)
+        return False
 
 
 def premarket_step(state_dir, today, now, watch):
