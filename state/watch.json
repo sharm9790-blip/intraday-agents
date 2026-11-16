@@ -113,13 +113,15 @@
   "13:30 KARURVYSYA 393.40 VWAP \u20b9390.55 status in_zone",
   "13:33 KARURVYSYA 393.15 VWAP \u20b9390.56 status in_zone",
   "13:35 KARURVYSYA 393.35 VWAP \u20b9390.57 status in_zone",
-  "13:40 KARURVYSYA 394.00 VWAP \u20b9390.59 status in_zone"
+  "13:40 KARURVYSYA 394.00 VWAP \u20b9390.59 status in_zone",
+  "14:30 KARURVYSYA 390.80 VWAP \u20b9390.69 status in_zone"
  ],
  "health": {
   "ready": true,
-  "pinger": true
+  "pinger": true,
+  "gap_13:40": true
  },
- "last_run": "13:40",
+ "last_run": "14:30",
  "taken": [],
  "trades": 0,
  "day_trades": 0,
@@ -149,7 +151,7 @@
  "pre_summary": true,
  "scan_slot": "13:30",
  "last_fire": "13:30",
- "fired_at": "13:30",
+ "fired_at": null,
  "verdicts": 15,
  "plans": [
   {

@@ -1,4 +1,19 @@
 {
  "date": "2026-11-16",
- "symbols": {}
+ "symbols": {
+  "BOROLTD": {
+   "at": "13:50",
+   "rejected_at": "11:28",
+   "level": 334.6,
+   "kind": "flip level",
+   "close": 335.95
+  },
+  "LICHSGFIN": {
+   "at": "14:20",
+   "rejected_at": "13:35",
+   "level": 604.5,
+   "kind": "flip level",
+   "close": 606.0
+  }
+ }
 }
