@@ -1,0 +1,27 @@
+{
+ "date": "2026-11-16",
+ "open": [
+  {
+   "symbol": "TMPV",
+   "yahoo": "TMPV.NS",
+   "price": 265.65,
+   "sl": 267.44,
+   "t1": 262.96,
+   "t2": 261.17,
+   "qty": 376,
+   "sector": "Automobile and Auto Components",
+   "at": "10:30"
+  },
+  {
+   "symbol": "INOXWIND",
+   "yahoo": "INOXWIND.NS",
+   "price": 58.52,
+   "sl": 59.15,
+   "t1": 57.58,
+   "t2": 56.95,
+   "qty": 1587,
+   "sector": "Capital Goods",
+   "at": "10:30"
+  }
+ ]
+}
