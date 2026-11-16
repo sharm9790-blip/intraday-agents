@@ -1556,5 +1556,139 @@
    "trail": 0,
    "targets": 1428
   }
+ },
+ {
+  "date": "2026-11-16",
+  "plans": [
+   {
+    "symbol": "FORTIS",
+    "start": "10:17",
+    "rules_v": "2026-11-16",
+    "sector": "Healthcare",
+    "entry": 786.0,
+    "qty": 127,
+    "sl": 780.5,
+    "t1": 797.0,
+    "t2": 801.0,
+    "close": 801.0,
+    "rules": {
+     "pnl": 0,
+     "steps": [
+      "not triggered by 11:00"
+     ]
+    },
+    "trail": {
+     "pnl": 0,
+     "steps": [
+      "not triggered by 11:00"
+     ]
+    },
+    "limit": {
+     "pnl": 0,
+     "steps": [
+      "never filled"
+     ]
+    },
+    "price_at_plan": 788.5,
+    "targets": {
+     "cash": 100000,
+     "qty": 127,
+     "half": 63,
+     "rest": 64,
+     "pf1": 693,
+     "pf2": 960,
+     "total": 1653,
+     "t1_hit": true,
+     "t2_hit": true,
+     "entry_hit": false,
+     "high": 802.25
+    },
+    "market": {
+     "pnl": 1215,
+     "steps": [
+      "bought 788.50",
+      "11:30 T1",
+      "12:50 T2"
+     ]
+    },
+    "lock": {
+     "pnl": 959,
+     "steps": [
+      "bought 788.50",
+      "11:30 T1",
+      "11:30 SL to T1",
+      "11:45 locked T1"
+     ]
+    }
+   },
+   {
+    "symbol": "KARURVYSYA",
+    "start": "12:05",
+    "rules_v": "2026-11-16",
+    "sector": "Banks",
+    "entry": 391.8,
+    "qty": 255,
+    "sl": 389.4,
+    "t1": 398.0,
+    "t2": 400.0,
+    "close": 392.0,
+    "rules": {
+     "pnl": -388,
+     "steps": [
+      "bought now 392.20",
+      "15:00 time stop 391.15"
+     ],
+     "bought": true
+    },
+    "trail": {
+     "pnl": -388,
+     "steps": [
+      "15:00 time stop 391.15"
+     ]
+    },
+    "limit": {
+     "pnl": 0,
+     "steps": [
+      "never filled"
+     ]
+    },
+    "price_at_plan": 392.2,
+    "targets": {
+     "cash": 100000,
+     "qty": 255,
+     "half": 127,
+     "rest": 128,
+     "pf1": 787,
+     "pf2": 1050,
+     "total": 1837,
+     "t1_hit": false,
+     "t2_hit": false,
+     "entry_hit": false,
+     "high": 395.6
+    },
+    "market": {
+     "pnl": -388,
+     "steps": [
+      "bought 392.20",
+      "15:00 time stop 391.15"
+     ]
+    },
+    "lock": {
+     "pnl": -388,
+     "steps": [
+      "bought 392.20",
+      "15:00 time stop 391.15"
+     ]
+    }
+   }
+  ],
+  "totals": {
+   "rules": -388,
+   "limit": 0,
+   "market": 827,
+   "lock": 571,
+   "trail": -388,
+   "targets": 1653
+  }
  }
 ]

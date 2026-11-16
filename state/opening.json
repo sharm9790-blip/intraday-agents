@@ -1,35 +1,48 @@
 {
  "date": "2026-11-16",
- "open": [
-  {
-   "symbol": "APTUS",
-   "yahoo": "APTUS.NS",
-   "at": "09:25",
-   "group": "NBFC / lenders",
-   "pct": 1.29,
-   "gap": -0.55,
-   "vol_frac": 0.21,
-   "entry": 178.52,
-   "sl": 176.23,
-   "t1": 181.96,
-   "t2": 185.4,
-   "risk": 2.29,
-   "atr5": 3.2750015258789062
-  },
-  {
-   "symbol": "PIDILITIND",
-   "yahoo": "PIDILITIND.NS",
-   "at": "09:35",
-   "group": "Chemicals",
-   "pct": 2.19,
-   "gap": 0.52,
-   "vol_frac": 0.24,
-   "entry": 1559.1,
-   "sl": 1543.77,
-   "t1": 1582.09,
-   "t2": 1605.08,
-   "risk": 15.33,
-   "atr5": 10.649993896484375
-  }
- ]
+ "open": [],
+ "days": {
+  "2026-11-16": [
+   {
+    "symbol": "APTUS",
+    "yahoo": "APTUS.NS",
+    "at": "09:25",
+    "group": "NBFC / lenders",
+    "pct": 1.29,
+    "gap": -0.55,
+    "vol_frac": 0.21,
+    "entry": 178.42,
+    "sl": 176.23,
+    "t1": 181.96,
+    "t2": 185.4,
+    "risk": 2.29,
+    "atr5": 3.2750015258789062,
+    "r": -1.09,
+    "steps": [
+     "09:25 bought 178.42",
+     "10:20 SL"
+    ]
+   },
+   {
+    "symbol": "PIDILITIND",
+    "yahoo": "PIDILITIND.NS",
+    "at": "09:35",
+    "group": "Chemicals",
+    "pct": 2.19,
+    "gap": 0.52,
+    "vol_frac": 0.24,
+    "entry": 1559.3,
+    "sl": 1543.77,
+    "t1": 1582.09,
+    "t2": 1605.08,
+    "risk": 15.33,
+    "atr5": 10.649993896484375,
+    "r": -0.21,
+    "steps": [
+     "09:35 bought 1559.30",
+     "11:15 early exit 1557.90"
+    ]
+   }
+  ]
+ }
 }
