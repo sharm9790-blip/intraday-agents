@@ -1,25 +1,16 @@
-⚪ <b>NO TRADE — 12:36 IST</b>
+⚪ <b>NO TRADE — 12:58 IST</b>
+Choppy day · 32% above VWAP
 
-Live: KARURVYSYA (in zone)
-Hold plan: SL ₹389.4, T1 ₹398
+<pre>Stock      Why
+TATACONSUM R:R 1.2, 1120 wall
+PARAGMILK  2.2% over VWAP
+</pre>
+🔁 TATACONSUM flips on 5-min
+close above ₹1,121, 1120CE OI
+falling, vol 1.5x
 
-⛔ <b>TATACONSUM blocked by risk check</b>
-Net R:R 1.50, needs above 1.5
+📌 KARURVYSYA plan still live
 
-<b>Rejected</b>
-<pre>Stock       Why
-TATACONSUM  R:R 1.5, call wall
-APOLLOHOSP  R:R 1.4, vol fading
-NH          double top, R:R 1.15
-PARAGMILK   asks 61%, R:R 1.25</pre>
-
-<b>Flips on</b>
-• TATACONSUM green close &gt;₹1104
-  after dip to 1104–1106, SL 1098.8
-• APOLLOHOSP green close &gt;₹8725
-  after dip to 8725–8730
-• NH close &gt;₹1902, vol 1.5x
-
-💡 Choppy day, 36% above VWAP — no clean setup.
+💡 Weak tape, no clean setup. Sit out.
 
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
