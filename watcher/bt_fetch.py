@@ -56,7 +56,13 @@ def main(out, weeks=104, n=40):
             res = get(syms[i:i + 20], a.isoformat(), b.isoformat())
             if res is None:
                 continue
+            lo = int(time.mktime(time.strptime(a.isoformat(), "%Y-%m-%d"))) - 86400
+            hi = int(time.mktime(time.strptime(b.isoformat(), "%Y-%m-%d"))) + 2 * 86400
             for s, rows in res.items():
+                bad = [r[0] for r in rows if not lo <= r[0] <= hi]
+                if bad:
+                    sys.exit(f"worker returned candles outside {a}..{b}: the Cloudflare worker is older than "
+                             "2026-11-17a (no from/to support). Paste cloudflare/worker.js and run again.")
                 for r in rows:
                     data.setdefault(s, {})[r[0]] = r
                 got += len(rows)
