@@ -1,42 +1,20 @@
-🟢 <b>GO — KARURVYSYA</b>
-🕐 12:05 IST  ·  Confidence 6/10
+⚪ <b>NO TRADE — 12:15 IST</b>
 
-📥 Buy  <b>₹391.8</b>  (max ₹392.3)
-⚡ <b>BUY NOW</b>
-🛑 Stop loss  <b>₹389.4</b>
-🎯 Target 1  <b>₹398</b>  (sell half)
-🎯 Target 2  <b>₹400</b>
-📦 Qty  <b>255</b> shares
+Live: KARURVYSYA (in zone)
+Hold plan: SL ₹389.4, T1 ₹398
 
-⚡ <b>HIGH CONFIDENCE 6/10</b>
-📝 <b>Draft order</b> (you place it)
-Qty <code>255</code> · Limit <code>392.3</code>
-SL-M trigger  <code>389.4</code>
-Sell half  <code>127</code> @ <code>398</code>
-📲 INDmoney: search <code>KARURVYSYA</code>
+<b>Rejected</b>
+<pre>Stock       Why
+TATACOMM    +4.1% chase
+PARAGMILK   R:R 1.4
+VAML/ARVIND ask-heavy, R:R ~1
+APLAPOLLO   2300 call wall</pre>
 
-<b>✅ Buy only if</b>
-• Price ₹391–392.3
-• Bank Nifty holds above VWAP
+<b>Flips on</b>
+• TATACOMM close &gt;₹1850, vol 30k+
+• or VWAP dip 1810–18, then &gt;1822
+• PARAGMILK close &gt;₹337.05, vol 60k+
 
-<b>❌ Cancel if</b>
-• Not bought by 12:20
-• Hits ₹398 first
-• 5-min close below ₹389.9
+💡 Choppy day, 41% above VWAP — no clean setup.
 
-<b>💰 Risk vs reward</b>
-Max loss ≈ ₹700
-Reward 2.2× the risk
-
-<b>Why this stock</b>
-• At 52-wk high, above VWAP
-• Higher lows since 11:10
-• Call OI build, FII buying
-
-<b>Skipped</b>
-• KPRMILL — R:R 1.3, thin
-• TATACOMM — R:R 0.4 at live
-• QPOWER — spiky, risky
-
-📡 Watcher checks every 5 min
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
