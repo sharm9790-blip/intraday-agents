@@ -1,29 +1,14 @@
-🌅 <b>PREMARKET WATCHLIST · 08:52</b>
+✅ <b>FINAL WATCHLIST · 09:07</b>
 
-🌍 US down, Asia weak, crude ₹95
-📅 No key events today
+Pre-open prices n/a, list unchanged.
 
-<b>Watchlist</b> (₹; buy only above, never before 09:20)
 <pre>Stock      Above   SL   T1  Qty
 TIPSMUSIC    820  803 851   54
 NYKAA      366.7  361 378  153
 LICHSGFIN  592.5  584 610   97</pre>
-<b>Why</b>
-• TIPSMUSIC — 91% close, new high
-• NYKAA — F&amp;O liquid, new high
-• LICHSGFIN — F&amp;O, 20-day high
-
-<b>Dropped</b>
-<pre>Stock      Reason
-APOLLO     8% spike, ATR 6%
-MCX        RSI 69, R:R low
-CENTUM     illiquid
-EDELWEISS  wick top, climax vol
-KRBL       weak close</pre>
-💡 Weak cues: only 3 of 8 survived
 
 ⏳ <b>Don't buy before 09:20.</b>
-🔔 The bot sends BUY NOW when the
-first 5-min candle closes above the
-level on 1.5× volume. Final list ~09:12.
+🔔 The bot sends BUY NOW on a green
+5-min close above the level on
+1.5× volume. Gap &gt; 4% is dropped.
 <i>Analysis only, not advice. You place orders yourself.</i>

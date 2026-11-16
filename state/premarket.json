@@ -1,7 +1,7 @@
 {
  "date": "2026-11-16",
- "stage": "overnight",
- "id": "2026-11-16_0852",
+ "stage": "preopen",
+ "id": "2026-11-16_0907",
  "connectors": {
   "indmoney": true,
   "investsights": true
@@ -31,7 +31,8 @@
    "time_stop": "15:00",
    "keep": true,
    "why": "91% close, new high, least extended",
-   "atr": 30.95
+   "atr": 30.95,
+   "preopen": "n/a"
   },
   {
    "symbol": "NYKAA",
@@ -55,7 +56,8 @@
    "time_stop": "15:00",
    "keep": true,
    "why": "F&O liquid, 85% close, new high",
-   "atr": 11.15
+   "atr": 11.15,
+   "preopen": "n/a"
   },
   {
    "symbol": "LICHSGFIN",
@@ -79,7 +81,8 @@
    "time_stop": "15:00",
    "keep": true,
    "why": "F&O, new 20d high, NBFC peers strong",
-   "atr": 17.55
+   "atr": 17.55,
+   "preopen": "n/a"
   }
  ]
 }
