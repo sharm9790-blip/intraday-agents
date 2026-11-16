@@ -1,23 +1,16 @@
-🔴 <b>NO TRADE — 10:55 scan</b>
+🔴 <b>NO TRADE</b>
+🕐 11:10 IST · choppy market
 
-Market choppy
-Nifty +0.3%
-Only 26% stocks above VWAP
+<b>TATACONSUM</b>
+⛔ blocked by risk check
+Net R:R 1.33 (needs 1.5)
+Judge said GO, conf 5/10
 
-<b>Checked</b>
-<pre>Stock   NetRR  Why
-BALKRISIND 0.8 thin, ask-heavy
-BHARTIHEXA 0.9 +3% chase
-TATACHEM 0.7  volume fading</pre>
+<pre>Stock     Why        Flips&gt;
+CYIENTDLM LTASM,vol  894.5
+KIMS      +3%,R:R1.4 753.5
+TATACONS. R:R 1.33   1105</pre>
 
-⏳ FORTIS plan still waiting
-(dip 785–786.5)
+💡 Nifty +0.4% but only 23% stocks above VWAP. No clean setup now.
 
-<b>Flip levels</b>
-• BALKRISIND close above ₹2,338
-• BHARTIHEXA close above ₹1,726
-• TATACHEM close above ₹618
-
-💡 Weak breadth, no setup reaches 1.5× net reward. Wait.
-
-<i>Educational analysis, not SEBI advice. You place orders yourself.</i>
+<i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>

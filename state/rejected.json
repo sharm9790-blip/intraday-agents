@@ -15,6 +15,8 @@
   "RAYMOND": "10:40 net R:R 0.79, weak volume; flips on 5-min close >1200 holding",
   "BALKRISIND": "10:55 net R:R 0.84, thin volume, ask-heavy; flips on 5-min close >2338 on vol >4k with T1>=2365",
   "BHARTIHEXA": "10:55 +3.2% chase, net R:R 0.94; flips on 5-min close >1726 on vol >10k with T1>=1755",
-  "TATACHEM": "10:55 net R:R 0.70, volume fading; flips on 5-min close >618 on 1.5x volume with T1>=632"
+  "TATACHEM": "10:55 net R:R 0.70, volume fading; flips on 5-min close >618 on 1.5x volume with T1>=632",
+  "CYIENTDLM": "11:10 LTASM Stage I, volume collapsed, T1 under 894.3 high, net R:R ~1.25; flips on 5-min close >894.5 on vol >=10k with T1>=905",
+  "KIMS": "11:10 +3% chase, stalling, T1 R:R 1.37; flips on 5-min close >753.5 on vol >15k with T1>=765"
  }
 }
