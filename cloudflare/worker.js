@@ -43,6 +43,7 @@
 //    GET <worker url>/?candles=SBIN,TCS&days=5 with header x-worker-key: <WORKER_KEY>
 //    (Secret WORKER_KEY here, and the same value as GitHub secret WORKER_KEY + WORKER_URL).
 //    Max 20 symbols per call, 5 per INDmoney request. Without WORKER_KEY it answers 403.
+//    For backtests: &from=YYYY-MM-DD&to=YYYY-MM-DD instead of &days (a past window of ≤ 7 days).
 //
 // 6) Data pack for the cloud debate (same key, read-only market data):
 //    ?quotes=SBIN,TCS        GET /market/quotes/full (price, day OHLC, volume, circuits, 52w)
@@ -56,7 +57,7 @@ const STATE_BRANCH = "claude/intraday-state";
 const RETRY_AFTER_S = 600;
 const MAX_TRIES = 3;
 const IND = "https://api.indstocks.com";
-const VERSION = "2026-11-16b";  // shown by ?live=test so you can tell the new code is deployed
+const VERSION = "2026-11-17a";  // shown by ?live=test so you can tell the new code is deployed
 const OPEN = ["waiting", "in_zone", "t1_hit"];
 const IST_MS = 5.5 * 3600 * 1000;
 
@@ -84,8 +85,16 @@ export default {
     if (cq !== null) {
       const ok = env.WORKER_KEY && request.headers.get("x-worker-key") === env.WORKER_KEY;
       if (!ok) return new Response('{"ok":false,"error":"forbidden"}', { status: 403 });
-      const days = Math.min(Math.max(Number(new URL(request.url).searchParams.get("days")) || 1, 1), 7);
-      const out = await indCandles(env, cq.split(",").map((x) => x.trim().toUpperCase()).filter((x) => SYM_RE.test(x)).slice(0, 20), days)
+      const sp0 = new URL(request.url).searchParams;
+      const days = Math.min(Math.max(Number(sp0.get("days")) || 1, 1), 7);
+      // optional past window for backtests: from=YYYY-MM-DD&to=YYYY-MM-DD (IST, at most 7 days)
+      const fr = sp0.get("from"), to = sp0.get("to");
+      let win = null;
+      if (fr && to && /^\d{4}-\d{2}-\d{2}$/.test(fr) && /^\d{4}-\d{2}-\d{2}$/.test(to)) {
+        const a = Date.parse(fr + "T09:00:00+05:30"), b = Date.parse(to + "T15:31:00+05:30");
+        if (b > a && b - a <= 8 * 86400000) win = [a, b];
+      }
+      const out = await indCandles(env, cq.split(",").map((x) => x.trim().toUpperCase()).filter((x) => SYM_RE.test(x)).slice(0, 20), days, win)
         .catch((e) => ({ ok: false, error: String(e.message || e) }));
       return new Response(JSON.stringify(out), { headers: { "content-type": "application/json" } });
     }
@@ -500,12 +509,12 @@ export function candleParse(j, code) {
   return out;
 }
 
-async function indCandles(env, symbols, days) {
+async function indCandles(env, symbols, days, win = null) {
   if (!indConfigured(env)) return { ok: false, error: "no INDmoney secrets" };
   const { code, missing } = indCodes(symbols, await nseIds(env));
   const keys = Object.keys(code);
-  const end = Date.now() + 60000;
-  const start = days <= 1 ? Date.parse(istNow().date + "T09:00:00+05:30") : end - (days + 2) * 86400000;
+  const end = win ? win[1] : Date.now() + 60000;
+  const start = win ? win[0] : days <= 1 ? Date.parse(istNow().date + "T09:00:00+05:30") : end - (days + 2) * 86400000;
   let token = await indToken(env);
   const candles = {};
   for (let i = 0; i < keys.length; i += 5) {
