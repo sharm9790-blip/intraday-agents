@@ -1,10 +1,17 @@
 🔴 <b>NO TRADE</b>
-🕐 11:28 IST · choppy market
+🕐 11:45 IST · choppy market
 
-<pre>Stock     Why        Flips&gt;
-AARTIPHAR R:R 1.1    1018
-BOROLTD   +6.8%,top  334.6</pre>
+<b>MAXHEALTH</b> +6.2%, chase
+R:R 1.46, SMA200 + call walls
+Flips: VWAP 988-992 bounce
+or close &gt;1010 on volume
 
-💡 Nifty +0.3%, few stocks above VWAP. No clean setup now.
+<b>ETERNAL</b> R:R 0.9
+Flips: close &gt;372.5
+
+TATACHEM, KIMS failed re-flip.
+
+💡 Nifty +0.3%, 21% above VWAP.
+No clean setup now.
 
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>

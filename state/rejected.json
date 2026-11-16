@@ -5,7 +5,7 @@
   "PIDILITIND": "10:40 call walls 1560/1580/1600, net R:R 1.1; flips on 5-min close >1581 with 1580 calls shedding",
   "PPLPHARMA": "10:40 net R:R 0.82, same sector as live FORTIS; flips on 5-min close >253.95 on 1.5x volume with T1>=258.5",
   "TATACOMM": "09:50 thin volume and depth, net R:R ~1.1; flips on 5-min close >1822 on 2x volume",
-  "MAXHEALTH": "10:03 +4% chase, 1000CE wall, R:R<1; flips on 5-min close >1000 on volume",
+  "MAXHEALTH": "11:45 +6.2% chase, 1.8% above VWAP, net R:R 1.46 to realistic T1, SMA200 1009 + call walls; flips on VWAP retest 988-992 bounce, or 5-min close >1010 on >=200k vol with T1 1020",
   "M&MFIN": "10:03 SL<0.7xATR, net R:R ~1.4, 1-candle move, 292-293.4 rejected 3x; flips on 5-min close >296.3 on vol >100k",
   "ITC": "10:40 net R:R ~1.0, 300CE wall, call OI +98% at 297.5; flips on 5-min close >297.5 with call OI unwinding",
   "IFCI": "10:03 ask-heavy depth, weak; flips on 5-min close >63.6 on 2x volume",
@@ -15,10 +15,12 @@
   "RAYMOND": "10:40 net R:R 0.79, weak volume; flips on 5-min close >1200 holding",
   "BALKRISIND": "10:55 net R:R 0.84, thin volume, ask-heavy; flips on 5-min close >2338 on vol >4k with T1>=2365",
   "BHARTIHEXA": "10:55 +3.2% chase, net R:R 0.94; flips on 5-min close >1726 on vol >10k with T1>=1755",
-  "TATACHEM": "10:55 net R:R 0.70, volume fading; flips on 5-min close >618 on 1.5x volume with T1>=632",
+  "TATACHEM": "11:45 failed re-flip, below 618 on fading volume, ask-heavy; flips on 5-min close >622.1 on 1.5x vol",
   "CYIENTDLM": "11:10 LTASM Stage I, volume collapsed, T1 under 894.3 high, net R:R ~1.25; flips on 5-min close >894.5 on vol >=10k with T1>=905",
-  "KIMS": "11:10 +3% chase, stalling, T1 R:R 1.37; flips on 5-min close >753.5 on vol >15k with T1>=765",
+  "KIMS": "11:45 distribution on red candle, +3.5% chase; flips on 5-min close >764 holding 753.5",
   "AARTIPHARM": "11:28 net R:R ~1.14, 1023.8 cap rejected 3x, 3 lower closes; flips on 5-min close >1018 on vol >=25k with T1>=1038",
-  "BOROLTD": "11:28 +6.8% chase, double top 334-334.4, volume dying, net R:R ~1.14; flips on 5-min close >334.6 on 1.5x volume with T1>=340"
+  "BOROLTD": "11:28 +6.8% chase, double top 334-334.4, volume dying, net R:R ~1.14; flips on 5-min close >334.6 on 1.5x volume with T1>=340",
+  "ETERNAL": "11:45 net R:R ~0.9, 52wk high 372.1 + 370CE wall + 89k offer; flips on 5-min close >372.5 on 2x volume",
+  "QPOWER": "11:45 thin volume fading, no vol proof; flips on 5-min close >1540 on 2x volume"
  }
 }
