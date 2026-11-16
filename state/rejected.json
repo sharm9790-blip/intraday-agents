@@ -2,14 +2,16 @@
  "date": "2026-11-16",
  "symbols": {
   "BHARTIARTL": "09:50 +3.05% at 52-wk high, no VWAP pullback, volume fading, net R:R 1.3 at live; flips on 5-min close >2168 after a dip to <=2165 holds, or close >2175 on vol >=250k",
-  "PIDILITIND": "09:50 volume fading, Chemicals weak, relief bounce, net R:R ~1.1-1.5; flips on 5-min close >1559 after retest <=1555 holds",
-  "PPLPHARMA": "09:50 net R:R ~1.0 at 52-wk high 253, data unverified; flips on 5-min close >253.1 on 2x volume with T1 >=260",
+  "PIDILITIND": "10:40 call walls 1560/1580/1600, net R:R 1.1; flips on 5-min close >1581 with 1580 calls shedding",
+  "PPLPHARMA": "10:40 net R:R 0.82, same sector as live FORTIS; flips on 5-min close >253.95 on 1.5x volume with T1>=258.5",
   "TATACOMM": "09:50 thin volume and depth, net R:R ~1.1; flips on 5-min close >1822 on 2x volume",
   "MAXHEALTH": "10:03 +4% chase, 1000CE wall, R:R<1; flips on 5-min close >1000 on volume",
   "M&MFIN": "10:03 SL<0.7xATR, net R:R ~1.4, 1-candle move, 292-293.4 rejected 3x; flips on 5-min close >296.3 on vol >100k",
-  "ITC": "10:03 net R:R 1.1, 300CE wall 8.6M, ask-heavy; flips on 5-min close >292.35 with R:R>=1.5",
+  "ITC": "10:40 net R:R ~1.0, 300CE wall, call OI +98% at 297.5; flips on 5-min close >297.5 with call OI unwinding",
   "IFCI": "10:03 ask-heavy depth, weak; flips on 5-min close >63.6 on 2x volume",
   "KPRMILL": "10:17 +3.15% chase, 3 fails at 1195-1197.7, thin book, SL ~1 ATR; flips on 5-min close >1198 on 2x volume",
-  "ATHERENERG": "10:17 volume fading, 3 fails at 2017-2021.5, 1763 offer at 2013, net R:R 1.4; flips on 5-min close >2022 on >=1.5x volume"
+  "ATHERENERG": "10:17 volume fading, 3 fails at 2017-2021.5, 1763 offer at 2013, net R:R 1.4; flips on 5-min close >2022 on >=1.5x volume",
+  "NAZARA": "10:40 breakout net R:R 0.9, thin small cap, 306 allotment overhang; flips on 5-min close >435.3 with T1>=443 on 1.5x volume",
+  "RAYMOND": "10:40 net R:R 0.79, weak volume; flips on 5-min close >1200 holding"
  }
 }

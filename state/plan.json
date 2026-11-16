@@ -1,32 +1,10 @@
 {
  "date": "2026-11-16",
- "verdict_id": "2026-11-16_1017",
+ "verdict_id": "2026-11-16_1040",
  "go_count": 1,
  "connectors": {
   "indmoney": true,
   "investsights": true
  },
- "plan": {
-  "symbol": "FORTIS",
-  "yahoo": "FORTIS.NS",
-  "name": "Fortis Healthcare",
-  "side": "long",
-  "entry_type": "dip",
-  "confidence": 5,
-  "atr5": 4.19,
-  "zone_low": 785.0,
-  "zone_high": 786.5,
-  "entry": 786.0,
-  "max_entry": 786.5,
-  "trigger_close_above": 785.0,
-  "sl": 780.5,
-  "t1": 797.0,
-  "t2": 801.0,
-  "qty": 127,
-  "deadline": "11:00",
-  "cancel_if_high_reaches": 797.0,
-  "cancel_if_close_below": 782.0,
-  "exit_if_close_below_after_entry": 781.5,
-  "time_stop": "15:00"
- }
+ "plan": null
 }
