@@ -17,6 +17,8 @@
   "BHARTIHEXA": "10:55 +3.2% chase, net R:R 0.94; flips on 5-min close >1726 on vol >10k with T1>=1755",
   "TATACHEM": "10:55 net R:R 0.70, volume fading; flips on 5-min close >618 on 1.5x volume with T1>=632",
   "CYIENTDLM": "11:10 LTASM Stage I, volume collapsed, T1 under 894.3 high, net R:R ~1.25; flips on 5-min close >894.5 on vol >=10k with T1>=905",
-  "KIMS": "11:10 +3% chase, stalling, T1 R:R 1.37; flips on 5-min close >753.5 on vol >15k with T1>=765"
+  "KIMS": "11:10 +3% chase, stalling, T1 R:R 1.37; flips on 5-min close >753.5 on vol >15k with T1>=765",
+  "AARTIPHARM": "11:28 net R:R ~1.14, 1023.8 cap rejected 3x, 3 lower closes; flips on 5-min close >1018 on vol >=25k with T1>=1038",
+  "BOROLTD": "11:28 +6.8% chase, double top 334-334.4, volume dying, net R:R ~1.14; flips on 5-min close >334.6 on 1.5x volume with T1>=340"
  }
 }

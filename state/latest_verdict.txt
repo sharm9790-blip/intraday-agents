@@ -1,16 +1,10 @@
 🔴 <b>NO TRADE</b>
-🕐 11:10 IST · choppy market
-
-<b>TATACONSUM</b>
-⛔ blocked by risk check
-Net R:R 1.33 (needs 1.5)
-Judge said GO, conf 5/10
+🕐 11:28 IST · choppy market
 
 <pre>Stock     Why        Flips&gt;
-CYIENTDLM LTASM,vol  894.5
-KIMS      +3%,R:R1.4 753.5
-TATACONS. R:R 1.33   1105</pre>
+AARTIPHAR R:R 1.1    1018
+BOROLTD   +6.8%,top  334.6</pre>
 
-💡 Nifty +0.4% but only 23% stocks above VWAP. No clean setup now.
+💡 Nifty +0.3%, few stocks above VWAP. No clean setup now.
 
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
