@@ -8,6 +8,8 @@
   "MAXHEALTH": "10:03 +4% chase, 1000CE wall, R:R<1; flips on 5-min close >1000 on volume",
   "M&MFIN": "10:03 SL<0.7xATR, net R:R ~1.4, 1-candle move, 292-293.4 rejected 3x; flips on 5-min close >296.3 on vol >100k",
   "ITC": "10:03 net R:R 1.1, 300CE wall 8.6M, ask-heavy; flips on 5-min close >292.35 with R:R>=1.5",
-  "IFCI": "10:03 ask-heavy depth, weak; flips on 5-min close >63.6 on 2x volume"
+  "IFCI": "10:03 ask-heavy depth, weak; flips on 5-min close >63.6 on 2x volume",
+  "KPRMILL": "10:17 +3.15% chase, 3 fails at 1195-1197.7, thin book, SL ~1 ATR; flips on 5-min close >1198 on 2x volume",
+  "ATHERENERG": "10:17 volume fading, 3 fails at 2017-2021.5, 1763 offer at 2013, net R:R 1.4; flips on 5-min close >2022 on >=1.5x volume"
  }
 }

@@ -1,16 +1,43 @@
-⚪ <b>NO TRADE — 10:03 IST</b>
+🟢 <b>GO — FORTIS</b>
+🕐 10:17 IST  ·  Confidence 5/10
 
-📈 Nifty +0.7%
-Mood: choppy, 53% above VWAP
-Banks lead, IT/metals weak
+📥 Buy  <b>₹786</b>  (max ₹786.5)
+⏳ <b>Wait for dip</b>
+🛑 Stop loss  <b>₹780.5</b>
+🎯 Target 1  <b>₹797</b>  (sell half)
+🎯 Target 2  <b>₹801</b>
+📦 Qty  <b>127</b> shares
+📝 <b>Draft order</b> (you place it)
+⏳ <b>Don't place the buy yet</b>
+Wait for 🔔 BUY TRIGGER (green
+5-min close above 785)
+Then: Qty <code>127</code> · Limit <code>786.5</code>
+SL-M trigger  <code>780.5</code>
+Sell half  <code>63</code> @ <code>797</code>
+📲 INDmoney: search <code>FORTIS</code>
 
-<b>Why nothing passed</b>
-<pre>Stock      R:R  Reason
-M&amp;MFIN    1.4  SL too tight, 1 candle
-ITC        1.1  300 call wall
-MAXHEALTH  0.7  +4% chase, 1000 wall
-IFCI       -    ask-heavy depth</pre>
-💡 M&amp;MFIN flips on close &gt;296.3
+<b>✅ Buy only if</b>
+• Dips to ₹785–786.5
+• Holds above VWAP ₹782.5
 
-🔎 Next scan: 10:15 IST
+<b>❌ Cancel if</b>
+• Not triggered by 11:00
+• Hits ₹797 before the dip
+• 5-min close below ₹782
+• 5-min close above ₹792, no fill
+
+<b>💰 Risk vs reward</b>
+Max loss ≈ ₹780 (+ costs)
+Reward 1.7× the risk
+
+<b>Why this stock</b>
+• +3.2%, above VWAP, higher lows
+• Volume 2.4× usual
+• 800 call wall caps upside
+
+<b>Skipped</b>
+• KPRMILL — 3 fails at 1197, thin
+• ATHERENERG — volume fading
+
+📡 Watcher checks every 5 min
 <i>Analysis only, not advice. You place orders yourself.</i>
