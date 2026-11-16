@@ -1,4 +1,12 @@
 {
  "date": "2026-11-16",
- "symbols": {}
+ "symbols": {
+  "QPOWER": {
+   "at": "11:45",
+   "rejected_at": "11:45",
+   "level": 1540.0,
+   "kind": "flip level",
+   "close": 1545.9
+  }
+ }
 }
