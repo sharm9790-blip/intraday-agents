@@ -1,0 +1,28 @@
+# One-off: download ~2 years of 5-min candles (INDmoney, read-only, via the worker) for a
+# backtest basket and keep them as a run artifact. Started by hand (Actions → Run workflow).
+name: backtest-data
+on:
+  workflow_dispatch:
+    inputs:
+      weeks:
+        description: "Weeks of history to fetch"
+        default: "104"
+      stocks:
+        description: "Most liquid F&O stocks in the basket"
+        default: "40"
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch candles
+        env:
+          WORKER_URL: ${{ secrets.WORKER_URL }}
+          WORKER_KEY: ${{ secrets.WORKER_KEY }}
+        run: python3 watcher/bt_fetch.py btdata ${{ inputs.weeks }} ${{ inputs.stocks }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: btdata
+          path: btdata
+          retention-days: 14
