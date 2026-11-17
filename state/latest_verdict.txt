@@ -1,16 +1,39 @@
-⚪ <b>NO TRADE — 11:48 IST</b>
+🟡 <b>GO WITH CONDITIONS — 12:04 IST</b>
 
-📈 Nifty +0.64%
-Mood: 46% above VWAP, US -2%
-Live: HBLENGINE (below zone, watch SL)
+📈 Nifty +0.76%
+Mood: 47% above VWAP, US -2%
 
-<b>Why nothing passed</b>
-<pre>Stock      Reason
-BSE        R:R ~1.05, 4000 wall
-GROWW      R:R ~0.95, 52wk high
-YATHARTH   R:R ~1.1, RSI 70
-GANDHAR    R:R &lt;1, thin</pre>
+<b>WELSPUNLIV</b> (Textiles)
+Entry type: DIP · conf 5/10
+Zone 259.6–260.3
+SL 258.6
+T1 263.6 · T2 267.2
+📦 Qty 384
+📝 <b>Draft order</b> (you place it)
+⏳ <b>Don't place the buy yet</b>
+Wait for 🔔 BUY TRIGGER (green
+5-min close back above 259.7)
+Then: Qty <code>384</code> · Limit <code>260.3</code>
+SL-M trigger  <code>258.6</code>
+Sell half  <code>192</code> @ <code>263.6</code>
+📲 INDmoney: search <code>WELSPUNLIV</code>
 
-💡 Flip: BSE close &gt;4010 or VWAP 3969 bounce; GROWW VWAP 231 hold
+<b>❌ Cancel if</b>
+• Not filled by 13:30
+• Hits 263.64 before the dip
+• 5-min close below 258.9
+
+<b>💰 Risk vs reward</b>
+Max loss ≈ ₹618
+Reward ≈ 2.1× the risk
+
+<b>Why</b>
+• Vol 4× usual, above VWAP
+• Weak edge: MACD -, sector soft
+
+<b>Skipped</b>
+• APTUS — R:R 1.2
+• QPOWER — R:R 1.0
+• KPIGREEN — dead-cat bounce
 
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
