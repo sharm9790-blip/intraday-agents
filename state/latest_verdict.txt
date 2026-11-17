@@ -1,16 +1,17 @@
-⚪ <b>NO TRADE — 11:16 IST</b>
+⚪ <b>NO TRADE — 11:34 IST</b>
 
-📈 Nifty +0.53%
-Mood: 49% above VWAP, US -2%
-Live: HBLENGINE (rolling over, watch SL)
+📈 Nifty +0.58%
+Mood: 39% above VWAP, US -2%
+Live: HBLENGINE (below zone, watch SL)
 
 <b>Why nothing passed</b>
 <pre>Stock       Reason
-ASIANPAINT  +3.3%, RSI 79, R:R 1.27
-GLASSWALL   +4%, ask-heavy, R:R 1.4
-ANGELONE    +7%, no pullback
-TI          +5.7%, thin volume</pre>
+GANDHAR     R:R 0.9-1.3, thin
+TI          R:R ~1.0, weak FMCG
+SIGNATURE   R:R &lt;1
+ANGELONE    +7.7%, no pullback
+MBEL        illiquid</pre>
 
-💡 Flip: ASIANPAINT dip to VWAP ~2632-2636 + green bounce
+💡 Flip: GANDHAR VWAP hold ~268 + green close; ANGELONE hold 370-371
 
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>

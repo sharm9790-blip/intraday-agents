@@ -6,10 +6,10 @@
   "MVELECTRO": "09:48 not in pack, net R:R ~0.9, no-news 10% run yesterday; flips on 5-min close >859 on 1.5x vol with T1>=880",
   "OPTIEMUS": "11:00 reversed below 862, faded; flips on 5-min close >870.5 on volume",
   "LUMAXTECH": "09:48 net R:R <1 under 52wk high 2503; flips on 5-min close >2504 on 2x vol with T1>=2570",
-  "ANGELONE": "10:50 +5.6% chase, not in pack, SEBI F&O margin risk, fill ~40%; flips on 5-min close >364.5 after pullback 363.5-364.5 with net R:R>=1.5",
+  "ANGELONE": "11:34 +7.7% chase, no pullback; flips on hold 370-371 green close, or 5-min close >375.6 on volume",
   "CANBK": "10:03 up 3.2% RSI88, ran through trigger, net R:R ~0.9; flips on 5-min close >137.0 on 1.5x vol with T1>=138.5, or VWAP bounce 135.6-135.8",
   "BLUESTARCO": "10:03 thin liquidity, weak sector, net R:R ~1.3; flips on 5-min close >1663 on 2x vol with T1>=1700, or pullback hold 1640-1645",
-  "SIGNATURE": "10:20 +5% RSI80 thin, no catalyst; flips on 5-min close >804.5 on 2x vol, or VWAP hold 794-795 green close",
+  "SIGNATURE": "11:34 R:R <1; flips on 5-min close >818 on 2x vol with T1>=835",
   "AARTIPHARM": "10:20 52wk high 1047 at T1, weak sector; flips on 5-min close >1048 on volume, or VWAP bounce 1021 with T1<=1040",
   "PNB": "10:20 +3.8% above no-chase, net R:R ~1.2 at live price, conf 4<6; flips on 5-min close >151.7 on 1.5x vol, or VWAP bounce 149.2-149.6",
   "SOBHA": "11:00 +4.7% thin, SL inside 1 ATR, dip unlikely; flips on 5-min close >1317 on volume, or pullback 1297-1300 hold then close >1303",
@@ -17,9 +17,11 @@
   "BALAMINES": "10:50 SL inside 1 ATR, T1 at day high, net R:R 1.3; flips on 5-min close >1990 with retest hold on volume",
   "IXIGO": "11:00 +6.2% no-chase, net R:R ~1.3, ask-heavy; flips on 5-min close >179.6 on volume with T1>=183, or VWAP retest 175.3 hold",
   "KPIGREEN": "11:00 +4.9% vol_x 1.26, weak sector, double top; flips on 5-min close >316.6 on 2x vol, or dip 310.7-311.5 hold",
-  "TI": "11:00 RSI78 +4.4% weak FMCG; flips on VWAP pullback hold with close above swing high",
+  "TI": "11:34 R:R ~1.0, weak FMCG; flips on 5-min close >545.3 on volume with T1>=553, or VWAP hold 535-536",
   "SHADOWFAX": "11:00 failed 304 breakout, MACD neg, net R:R 1.45; flips on 5-min close >304.5 on volume",
   "ASIANPAINT": "11:15 +3.3% RSI79, net R:R 1.27, weak sector; flips on pullback to VWAP 2632-2636 + green 5-min bounce",
-  "GLASSWALL": "11:15 +4% no pullback, 70% ask book, SL on noise, net R:R 1.4; flips on 5-min close >272.1 on 2x vol"
+  "GLASSWALL": "11:15 +4% no pullback, 70% ask book, SL on noise, net R:R 1.4; flips on 5-min close >272.1 on 2x vol",
+  "GANDHAR": "11:34 R:R 0.9-1.3, conf 5<6, day value ~7.9cr thin; flips on VWAP hold ~268 green 5-min close with net R:R>=1.5 to 273.5",
+  "MBEL": "11:34 illiquid; flips on traded value >=15cr with confirmed breakout"
  }
 }
