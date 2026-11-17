@@ -21,13 +21,6 @@
    "level": 190.0,
    "kind": "flip level",
    "close": 191.31
-  },
-  "HYUNDAI": {
-   "at": "12:40",
-   "rejected_at": "12:18",
-   "level": 2144.5,
-   "kind": "flip level",
-   "close": 2149.0
   }
  }
 }
