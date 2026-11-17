@@ -11,6 +11,8 @@
   "BLUESTARCO": "10:03 thin liquidity, weak sector, net R:R ~1.3; flips on 5-min close >1663 on 2x vol with T1>=1700, or pullback hold 1640-1645",
   "SIGNATURE": "10:20 +5% RSI80 thin, no catalyst; flips on 5-min close >804.5 on 2x vol, or VWAP hold 794-795 green close",
   "AARTIPHARM": "10:20 52wk high 1047 at T1, weak sector; flips on 5-min close >1048 on volume, or VWAP bounce 1021 with T1<=1040",
-  "PNB": "10:20 +3.8% above no-chase, net R:R ~1.2 at live price, conf 4<6; flips on 5-min close >151.7 on 1.5x vol, or VWAP bounce 149.2-149.6"
+  "PNB": "10:20 +3.8% above no-chase, net R:R ~1.2 at live price, conf 4<6; flips on 5-min close >151.7 on 1.5x vol, or VWAP bounce 149.2-149.6",
+  "SOBHA": "10:34 trigger failed at 1299.6, ask-heavy, net R:R 0.73 to day high; flips on 5-min close >1313 on >=10k shares with T1>=1335",
+  "GERMAN": "10:34 red candle below trigger, thin turnover ~5.7cr, ask 81%, net R:R ~1.3; flips on 5-min close >111.8 on 2x vol with T1>=113.4, or VWAP bounce 110.5-110.6"
  }
 }

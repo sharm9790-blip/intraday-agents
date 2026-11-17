@@ -1,19 +1,20 @@
 🔴 <b>NO TRADE — 15-min scan</b>
-🕐 10:20 IST · mode trend
+🕐 10:34 IST · mode trend
 
 <b>Why nothing</b>
-• Leaders up 3-5%, RSI 75-80
-• PNB: net R:R ~1.2 at live price
-• AARTIPHARM: 52-wk high at T1
-• SIGNATURE: thin, no catalyst
+• SOBHA: trigger failed 1299.6,
+  R:R 0.73 to day high
+• GERMAN: red candle, thin,
+  ask-heavy, R:R ~1.3
+• ANGELONE: +4.3% chase, R:R 1.4
+• Others RSI 78-87, R:R ~1.0
 • US cues weak (Nasdaq -2.5%)
 
 <pre>Stock    Flip above
-PNB      151.7*
-SIGNATURE 804.5
-AARTIPHARM 1048</pre>
-* or VWAP bounce 149.2-149.6
+SOBHA    1313
+GERMAN   111.8
+ANGELONE pullback 357-359</pre>
 
-💡 Waiting for a VWAP pullback or a volume breakout.
+💡 Waiting for a volume breakout or a VWAP pullback.
 
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
