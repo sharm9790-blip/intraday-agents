@@ -8,6 +8,13 @@
    "kind": "flip level",
    "close": 376.6
   },
+  "KPIGREEN": {
+   "at": "11:40",
+   "rejected_at": "11:00",
+   "level": 316.6,
+   "kind": "flip level",
+   "close": 317.9
+  },
   "GANDHAR": {
    "at": "11:35",
    "rejected_at": "11:34",
