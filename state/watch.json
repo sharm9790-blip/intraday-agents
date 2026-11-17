@@ -1,6 +1,6 @@
 {
  "date": "2026-11-17",
- "verdict_id": "2026-11-17_1218",
+ "verdict_id": "2026-11-17_1236",
  "live": [
   {
    "symbol": "HBLENGINE",
@@ -65,10 +65,11 @@
     "start": "12:04",
     "buy_at": "12:30"
    },
-   "status": "in_zone",
+   "status": "closed",
    "since": "12:04",
    "paper_booked": 0,
-   "triggered": "12:30"
+   "triggered": "12:30",
+   "paper_result": -538
   }
  ],
  "log": [
@@ -102,13 +103,14 @@
   "12:25 WELSPUNLIV 260.06 VWAP \u20b9259.39 status waiting",
   "12:26 WELSPUNLIV 260.17 VWAP \u20b9259.39 status waiting",
   "12:30 WELSPUNLIV 260.15 VWAP \u20b9259.39 status in_zone",
-  "12:33 WELSPUNLIV 258.68 VWAP \u20b9259.38 status in_zone"
+  "12:33 WELSPUNLIV 258.68 VWAP \u20b9259.38 status in_zone",
+  "12:34 WELSPUNLIV 258.54 VWAP \u20b9259.38 status closed"
  ],
  "health": {
   "ready": true,
   "pinger": true
  },
- "last_run": "12:33",
+ "last_run": "12:34",
  "taken": [],
  "trades": 1,
  "day_trades": 1,
@@ -138,7 +140,7 @@
  "scan_slot": "12:30",
  "last_fire": "12:30",
  "fired_at": "12:30",
- "verdicts": 11,
+ "verdicts": 12,
  "plans": [
   {
    "symbol": "HBLENGINE",
@@ -192,5 +194,6 @@
    "rules_v": "2026-11-16",
    "start": "12:04"
   }
- ]
+ ],
+ "day_pnl": -538
 }
