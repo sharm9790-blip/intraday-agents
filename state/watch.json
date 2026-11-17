@@ -101,13 +101,14 @@
   "12:20 WELSPUNLIV 260.80 VWAP \u20b9259.38 status waiting",
   "12:25 WELSPUNLIV 260.06 VWAP \u20b9259.39 status waiting",
   "12:26 WELSPUNLIV 260.17 VWAP \u20b9259.39 status waiting",
-  "12:30 WELSPUNLIV 260.15 VWAP \u20b9259.39 status in_zone"
+  "12:30 WELSPUNLIV 260.15 VWAP \u20b9259.39 status in_zone",
+  "12:33 WELSPUNLIV 258.68 VWAP \u20b9259.38 status in_zone"
  ],
  "health": {
   "ready": true,
   "pinger": true
  },
- "last_run": "12:30",
+ "last_run": "12:33",
  "taken": [],
  "trades": 1,
  "day_trades": 1,
@@ -129,7 +130,7 @@
  "prescan": "08:10",
  "fire_error": null,
  "pre_id": "2026-11-17_0908",
- "nifty_id": "2026-11-17_1132",
+ "nifty_id": "2026-11-17_1232",
  "pre_done": {
   "KPRMILL": "ran past max entry 1225.2, don't chase"
  },
