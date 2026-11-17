@@ -21,6 +21,13 @@
    "level": 15.0,
    "kind": "flip level",
    "close": 297.65
+  },
+  "SBIFUNDS": {
+   "at": "14:25",
+   "rejected_at": "13:22",
+   "level": 530.5,
+   "kind": "flip level",
+   "close": 531.6
   }
  }
 }
