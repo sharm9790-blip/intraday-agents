@@ -1,40 +1,6 @@
 {
  "date": "2026-11-17",
- "open": [
-  {
-   "symbol": "KEI",
-   "yahoo": "KEI.NS",
-   "price": 3912.3,
-   "sl": 3957.36,
-   "t1": 3844.71,
-   "t2": 3799.65,
-   "qty": 22,
-   "sector": "Capital Goods",
-   "at": "12:30"
-  },
-  {
-   "symbol": "WIPRO",
-   "yahoo": "WIPRO.NS",
-   "price": 191.68,
-   "sl": 192.45,
-   "t1": 190.53,
-   "t2": 189.76,
-   "qty": 521,
-   "sector": "Information Technology",
-   "at": "12:30"
-  },
-  {
-   "symbol": "COALINDIA",
-   "yahoo": "COALINDIA.NS",
-   "price": 389.8,
-   "sl": 391.9,
-   "t1": 386.65,
-   "t2": 384.55,
-   "qty": 256,
-   "sector": "Oil Gas & Consumable Fuels",
-   "at": "12:45"
-  }
- ],
+ "open": [],
  "days": {
   "2026-11-16": [
    {
@@ -88,6 +54,60 @@
      "10:50 sold short 859.15",
      "11:10 T1",
      "11:55 T2"
+    ]
+   }
+  ],
+  "2026-11-17": [
+   {
+    "symbol": "KEI",
+    "yahoo": "KEI.NS",
+    "price": 3912.3,
+    "sl": 3957.36,
+    "t1": 3844.71,
+    "t2": 3799.65,
+    "qty": 22,
+    "sector": "Capital Goods",
+    "at": "12:30",
+    "entry": 3900.0,
+    "pnl": 1083,
+    "steps": [
+     "12:35 sold short 3900.00",
+     "15:00 time stop 3846.10"
+    ]
+   },
+   {
+    "symbol": "WIPRO",
+    "yahoo": "WIPRO.NS",
+    "price": 191.68,
+    "sl": 192.45,
+    "t1": 190.53,
+    "t2": 189.76,
+    "qty": 521,
+    "sector": "Information Technology",
+    "at": "12:30",
+    "entry": 191.81,
+    "pnl": 213,
+    "steps": [
+     "12:35 sold short 191.81",
+     "13:05 T1",
+     "13:40 back at cost"
+    ]
+   },
+   {
+    "symbol": "COALINDIA",
+    "yahoo": "COALINDIA.NS",
+    "price": 389.8,
+    "sl": 391.9,
+    "t1": 386.65,
+    "t2": 384.55,
+    "qty": 256,
+    "sector": "Oil Gas & Consumable Fuels",
+    "at": "12:45",
+    "entry": 390.0,
+    "pnl": -440,
+    "steps": [
+     "12:50 sold short 390.00",
+     "15:00 time stop 391.25"
     ]
    }
   ]

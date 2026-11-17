@@ -1690,5 +1690,137 @@
    "trail": -388,
    "targets": 1653
   }
+ },
+ {
+  "date": "2026-11-17",
+  "plans": [
+   {
+    "symbol": "HBLENGINE",
+    "start": "10:50",
+    "rules_v": "2026-11-16",
+    "sector": "Capital Goods",
+    "entry": 806.0,
+    "qty": 124,
+    "sl": 801.5,
+    "t1": 817.0,
+    "t2": 826.0,
+    "close": 785.85,
+    "rules": {
+     "pnl": 0,
+     "steps": [
+      "closed below cancel level"
+     ]
+    },
+    "trail": {
+     "pnl": 0,
+     "steps": [
+      "closed below cancel level"
+     ]
+    },
+    "limit": {
+     "pnl": -678,
+     "steps": [
+      "11:05 filled",
+      "11:50 SL"
+     ]
+    },
+    "price_at_plan": 812.7,
+    "targets": {
+     "cash": 100000,
+     "qty": 124,
+     "half": 62,
+     "rest": 62,
+     "pf1": 682,
+     "pf2": 1240,
+     "total": 1922,
+     "t1_hit": false,
+     "t2_hit": false,
+     "entry_hit": true,
+     "high": 812.7
+    },
+    "market": {
+     "pnl": -1510,
+     "steps": [
+      "bought 812.70",
+      "11:50 SL"
+     ]
+    },
+    "lock": {
+     "pnl": -1510,
+     "steps": [
+      "bought 812.70",
+      "11:50 SL"
+     ]
+    }
+   },
+   {
+    "symbol": "WELSPUNLIV",
+    "start": "12:04",
+    "rules_v": "2026-11-16",
+    "sector": "Textiles",
+    "entry": 260.0,
+    "qty": 384,
+    "sl": 258.6,
+    "t1": 263.6,
+    "t2": 267.2,
+    "close": 266.18,
+    "rules": {
+     "pnl": -657,
+     "steps": [
+      "12:30 SL"
+     ],
+     "bought": true
+    },
+    "trail": {
+     "pnl": -657,
+     "steps": [
+      "12:30 SL"
+     ]
+    },
+    "limit": {
+     "pnl": -657,
+     "steps": [
+      "12:30 filled",
+      "12:30 SL"
+     ]
+    },
+    "price_at_plan": 261.13,
+    "targets": {
+     "cash": 100000,
+     "qty": 384,
+     "half": 192,
+     "rest": 192,
+     "pf1": 691,
+     "pf2": 1382,
+     "total": 2074,
+     "t1_hit": true,
+     "t2_hit": false,
+     "entry_hit": true,
+     "high": 264.0
+    },
+    "market": {
+     "pnl": -1092,
+     "steps": [
+      "bought 261.13",
+      "12:30 SL"
+     ]
+    },
+    "lock": {
+     "pnl": -1092,
+     "steps": [
+      "bought 261.13",
+      "12:30 SL"
+     ]
+    }
+   }
+  ],
+  "totals": {
+   "rules": -657,
+   "limit": -1335,
+   "market": -2602,
+   "lock": -2602,
+   "trail": -657,
+   "targets": 691
+  }
  }
 ]
