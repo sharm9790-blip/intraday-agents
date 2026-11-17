@@ -9,7 +9,7 @@
   "ANGELONE": "12:04 up 8.7% near circuit, no pullback; flips on 5-min close >379.5 on volume",
   "CANBK": "10:03 up 3.2% RSI88, ran through trigger, net R:R ~0.9; flips on 5-min close >137.0 on 1.5x vol with T1>=138.5, or VWAP bounce 135.6-135.8",
   "BLUESTARCO": "10:03 thin liquidity, weak sector, net R:R ~1.3; flips on 5-min close >1663 on 2x vol with T1>=1700, or pullback hold 1640-1645",
-  "SIGNATURE": "12:04 thin volume, repeated resistance 818-821; flips on 5-min close >822 on 2x vol",
+  "SIGNATURE": "13:53 +8% chase, thin volume; flips on pullback hold 822-824 with T1 836",
   "AARTIPHARM": "10:20 52wk high 1047 at T1, weak sector; flips on 5-min close >1048 on volume, or VWAP bounce 1021 with T1<=1040",
   "PNB": "10:20 +3.8% above no-chase, net R:R ~1.2 at live price, conf 4<6; flips on 5-min close >151.7 on 1.5x vol, or VWAP bounce 149.2-149.6",
   "SOBHA": "11:00 +4.7% thin, SL inside 1 ATR, dip unlikely; flips on 5-min close >1317 on volume, or pullback 1297-1300 hold then close >1303",
@@ -45,9 +45,10 @@
   "CAMS": "13:22 fading below VWAP, lower highs; flips on 5-min close above VWAP 757 on rising volume",
   "TMCV": "13:22 net R:R ~0.9 under day high; flips on 5-min close >448.6 on volume with T1>=454",
   "BANKINDIA": "13:36 +4% chase under 160 call wall, net R:R ~0.8; flips on 5-min close >160.3 on 1.5x vol with T1>=163",
-  "MAHABANK": "13:36 at 52wk high under 95 call wall, net R:R ~1.1; flips on 5-min close >95.3 on 1.5x vol with T1>=96.8",
+  "MAHABANK": "13:53 +3.9% over no-chase, 96 call wall, stop inside noise, net R:R<1.5; flips on 5-min close >96.00 on >500k vol before 14:15, or pullback hold 94.70-94.90",
   "HAPPYFORGE": "13:36 spike faded, flat EMAs, R:R 0.6; flips on 5-min close >1930 on 1.5-2x vol",
   "VAML": "13:36 393-397 range, rejected at 397, R:R 0.85; flips on 5-min close >397.5 on 1.5x vol",
-  "HONASA": "13:36 below VWAP, thin, R:R 0.9; flips on VWAP reclaim held on 5-min close with 1.5x vol"
+  "HONASA": "13:36 below VWAP, thin, R:R 0.9; flips on VWAP reclaim held on 5-min close with 1.5x vol",
+  "LICHSGFIN": "13:53 RSI79.5, net R:R ~0.9; flips on 5-min close >625 on volume, or pullback hold 612-613"
  }
 }
