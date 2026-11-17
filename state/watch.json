@@ -1,6 +1,6 @@
 {
  "date": "2026-11-17",
- "verdict_id": "2026-11-17_1148",
+ "verdict_id": "2026-11-17_1204",
  "live": [
   {
    "symbol": "HBLENGINE",
@@ -34,6 +34,39 @@
    "status": "cancelled",
    "since": "10:50",
    "paper_booked": 0
+  },
+  {
+   "symbol": "WELSPUNLIV",
+   "vid": "2026-11-17_1204",
+   "plan": {
+    "symbol": "WELSPUNLIV",
+    "yahoo": "WELSPUNLIV.NS",
+    "name": "Welspun Living",
+    "side": "long",
+    "zone_low": 259.6,
+    "zone_high": 260.3,
+    "entry": 260.0,
+    "max_entry": 260.3,
+    "trigger_close_above": 259.7,
+    "sl": 258.6,
+    "t1": 263.6,
+    "t2": 267.2,
+    "qty": 384,
+    "deadline": "13:30",
+    "cancel_if_high_reaches": 263.64,
+    "cancel_if_close_below": 258.9,
+    "exit_if_close_below_after_entry": 258.9,
+    "time_stop": "15:00",
+    "entry_type": "dip",
+    "confidence": 5,
+    "atr5": 0.88,
+    "sector": "Textiles",
+    "rules_v": "2026-11-16",
+    "start": "12:04"
+   },
+   "status": "waiting",
+   "since": "12:04",
+   "paper_booked": 0
   }
  ],
  "log": [
@@ -57,13 +90,14 @@
   "11:45 HBLENGINE 803.80 VWAP \u20b9805.85 status waiting",
   "11:48 HBLENGINE 802.55 VWAP \u20b9805.84 status waiting",
   "11:50 HBLENGINE 802.55 VWAP \u20b9805.83 status waiting",
-  "11:55 HBLENGINE 801.50 VWAP \u20b9805.8 status cancelled"
+  "11:55 HBLENGINE 801.50 VWAP \u20b9805.8 status cancelled",
+  "12:04 WELSPUNLIV 260.71 VWAP \u20b9259.34 status waiting"
  ],
  "health": {
   "ready": true,
   "pinger": true
  },
- "last_run": "12:00",
+ "last_run": "12:04",
  "taken": [],
  "trades": 0,
  "day_trades": 0,
@@ -93,7 +127,7 @@
  "scan_slot": "12:00",
  "last_fire": "12:00",
  "fired_at": "12:00",
- "verdicts": 9,
+ "verdicts": 10,
  "plans": [
   {
    "symbol": "HBLENGINE",
@@ -120,6 +154,32 @@
    "sector": "Capital Goods",
    "rules_v": "2026-11-16",
    "start": "10:50"
+  },
+  {
+   "symbol": "WELSPUNLIV",
+   "yahoo": "WELSPUNLIV.NS",
+   "name": "Welspun Living",
+   "side": "long",
+   "zone_low": 259.6,
+   "zone_high": 260.3,
+   "entry": 260.0,
+   "max_entry": 260.3,
+   "trigger_close_above": 259.7,
+   "sl": 258.6,
+   "t1": 263.6,
+   "t2": 267.2,
+   "qty": 384,
+   "deadline": "13:30",
+   "cancel_if_high_reaches": 263.64,
+   "cancel_if_close_below": 258.9,
+   "exit_if_close_below_after_entry": 258.9,
+   "time_stop": "15:00",
+   "entry_type": "dip",
+   "confidence": 5,
+   "atr5": 0.88,
+   "sector": "Textiles",
+   "rules_v": "2026-11-16",
+   "start": "12:04"
   }
  ]
 }

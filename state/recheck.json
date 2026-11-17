@@ -1,27 +1,6 @@
 {
  "date": "2026-11-17",
  "symbols": {
-  "ANGELONE": {
-   "at": "11:35",
-   "rejected_at": "11:34",
-   "level": 375.6,
-   "kind": "flip level",
-   "close": 376.6
-  },
-  "SIGNATURE": {
-   "at": "11:55",
-   "rejected_at": "11:34",
-   "level": 818.0,
-   "kind": "flip level",
-   "close": 821.0
-  },
-  "KPIGREEN": {
-   "at": "11:40",
-   "rejected_at": "11:00",
-   "level": 316.6,
-   "kind": "flip level",
-   "close": 317.9
-  },
   "GANDHAR": {
    "at": "11:35",
    "rejected_at": "11:34",
