@@ -1,6 +1,29 @@
 {
- "date": "2026-11-16",
- "open": [],
+ "date": "2026-11-17",
+ "open": [
+  {
+   "symbol": "KEI",
+   "yahoo": "KEI.NS",
+   "price": 3912.3,
+   "sl": 3957.36,
+   "t1": 3844.71,
+   "t2": 3799.65,
+   "qty": 22,
+   "sector": "Capital Goods",
+   "at": "12:30"
+  },
+  {
+   "symbol": "WIPRO",
+   "yahoo": "WIPRO.NS",
+   "price": 191.68,
+   "sl": 192.45,
+   "t1": 190.53,
+   "t2": 189.76,
+   "qty": 521,
+   "sector": "Information Technology",
+   "at": "12:30"
+  }
+ ],
  "days": {
   "2026-11-16": [
    {
