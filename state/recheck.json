@@ -1,13 +1,6 @@
 {
  "date": "2026-11-17",
  "symbols": {
-  "GLASSWALL": {
-   "at": "12:05",
-   "rejected_at": "11:15",
-   "level": 272.1,
-   "kind": "flip level",
-   "close": 273.16
-  },
   "GANDHAR": {
    "at": "11:35",
    "rejected_at": "11:34",
