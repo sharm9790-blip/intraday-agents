@@ -31,7 +31,7 @@
   "MOBIKWIK": "12:04 wide risk vs ATR, no structure; flips on 5-min close >234 on volume",
   "HYUNDAI": "13:00 +3.1% no-chase, net R:R ~1.1, volume faded; flips on VWAP hold 2130-2135 + 5-min close >2143 on rising volume, or close >2152 on 1.5x vol with T1>=2185",
   "DELHIVERY": "12:18 +4.5% no-chase, failed 465.8, fading vol, net R:R 0.8-1.3; flips on 5-min close >466 on 1.5x vol with T1>=476",
-  "BECTORFOOD": "12:35 net R:R ~1.1, one-candle spike, day high 227.23 under T1, FMCG weak; flips on 5-min close >227.3 on 1.5x vol with VWAP held",
+  "BECTORFOOD": "14:05 +3.5% no-chase, thin-volume drift, ask-heavy, R:R ~1; flips on 5-min close >228.1 on 1.5x vol with VWAP held",
   "KARURVYSYA": "12:35 net R:R 0.87, 400 CE wall at T1, 397.6 rejected 5x; flips on 5-min close >398.5 on 1.5x vol",
   "SBCL": "12:35 illiquid ~11cr, single-digit depth, spike-fade; flips on 5-min close >1025 with turnover >=25cr and vol 2x",
   "JINDALSAW": "13:00 RS only +0.7% vs Nifty, net R:R ~1.3 breakout, dips barred on weak breadth; flips on 5-min close >265.3 on 1.5x vol with net R:R>=1.5",
@@ -49,6 +49,7 @@
   "HAPPYFORGE": "13:36 spike faded, flat EMAs, R:R 0.6; flips on 5-min close >1930 on 1.5-2x vol",
   "VAML": "13:36 393-397 range, rejected at 397, R:R 0.85; flips on 5-min close >397.5 on 1.5x vol",
   "HONASA": "13:36 below VWAP, thin, R:R 0.9; flips on VWAP reclaim held on 5-min close with 1.5x vol",
-  "LICHSGFIN": "13:53 RSI79.5, net R:R ~0.9; flips on 5-min close >625 on volume, or pullback hold 612-613"
+  "LICHSGFIN": "13:53 RSI79.5, net R:R ~0.9; flips on 5-min close >625 on volume, or pullback hold 612-613",
+  "ADANIENT": "14:05 conf 5<6, R:R ~1.25 to T1, fading vol; flips on 5-min close >2725 on >=60k vol before 14:25 with T1>=2755"
  }
 }

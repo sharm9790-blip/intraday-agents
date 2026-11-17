@@ -1,20 +1,17 @@
-🔴 <b>NO TRADE — 13:53 scan</b>
+⚪ <b>NO TRADE — 14:07 scan</b>
 
 <b>Looked at</b>
 <pre>Stock       Why not
-MAHABANK    +3.9%, 96 wall
-LICHSGFIN   RSI 79, R:R .9
-SIGNATURE   +8% chase
-GLASSWALL   +7% chase
-HAPPYFORGE  no direction</pre>
+ADANIENT    conf 5, R:R 1.25
+BECTORFOOD  +3.5%, thin vol
+IXIGO       +6% chase
+HYUNDAI     MACD neg, wall</pre>
 
 <b>🔁 Flips on</b>
-• MAHABANK close &gt;₹96, 500k vol
-• MAHABANK dip hold ₹94.7–94.9
-• LICHSGFIN close &gt;₹625
-• LICHSGFIN dip hold ₹612–613
+• ADANIENT close &gt;₹2725, vol 60k+
+• BECTORFOOD close &gt;₹228.1, 1.5× vol
 
-💡 Only 25% stocks above VWAP.
-Choppy, day −₹538. Sit out.
+💡 Choppy: 28% above VWAP.
+Little time left. Sit out.
 
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
