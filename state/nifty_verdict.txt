@@ -1,17 +1,15 @@
-🧪 <b>PAPER</b> · Nifty options
-⚪ <b>NO TRADE — 13:32 IST</b>
+🧪 <b>PAPER</b> · Nifty day report
 
-📈 Nifty 25,390 (+0.4%) · VIX ~15.7
-🧱 Calls 25,500 · Puts 25,300
-PCR 1.04 · Max pain ~25,400
+<b>Today</b>
+No paper trades (all NO TRADE)
+Weekly expiry day: no-trade rule
+Last check 13:32: range day,
+writing on both sides
 
-<b>Why not</b>
-• Weekly expiry day (rule)
-• Rejected at 25,500, fell 150 pts
-• Writing on both sides = range
-💡 Expiry theta eats buyers;
-PCR fell 1.70 → 1.04 in 1 hour
+<b>Last 20 days</b> (after costs)
+Trades 0 · Win rate –
+Net ₹0 · Profit factor –
+Not filled: 0
 
-🔎 Next check: 18 Nov 09:32 IST
-📊 Paper record: 0 trades
+💡 No trades yet: too early to judge
 <i>Paper trade for testing only, not SEBI-registered investment advice. Options trading is high risk.</i>
