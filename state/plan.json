@@ -1,33 +1,10 @@
 {
  "date": "2026-11-17",
- "verdict_id": "2026-11-17_1204",
+ "verdict_id": "2026-11-17_1218",
  "go_count": 2,
  "connectors": {
   "indmoney": true,
   "investsights": true
  },
- "plan": {
-  "symbol": "WELSPUNLIV",
-  "yahoo": "WELSPUNLIV.NS",
-  "name": "Welspun Living",
-  "side": "long",
-  "zone_low": 259.6,
-  "zone_high": 260.3,
-  "entry": 260.0,
-  "max_entry": 260.3,
-  "trigger_close_above": 259.7,
-  "sl": 258.6,
-  "t1": 263.6,
-  "t2": 267.2,
-  "qty": 384,
-  "deadline": "13:30",
-  "cancel_if_high_reaches": 263.64,
-  "cancel_if_close_below": 258.9,
-  "exit_if_close_below_after_entry": 258.9,
-  "time_stop": "15:00",
-  "entry_type": "dip",
-  "confidence": 5,
-  "atr5": 0.88,
-  "sector": "Textiles"
- }
+ "plan": null
 }

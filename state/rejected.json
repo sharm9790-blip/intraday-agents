@@ -20,7 +20,7 @@
   "TI": "11:34 R:R ~1.0, weak FMCG; flips on 5-min close >545.3 on volume with T1>=553, or VWAP hold 535-536",
   "SHADOWFAX": "11:00 failed 304 breakout, MACD neg, net R:R 1.45; flips on 5-min close >304.5 on volume",
   "ASIANPAINT": "11:15 +3.3% RSI79, net R:R 1.27, weak sector; flips on pullback to VWAP 2632-2636 + green 5-min bounce",
-  "GLASSWALL": "11:15 +4% no pullback, 70% ask book, SL on noise, net R:R 1.4; flips on 5-min close >272.1 on 2x vol",
+  "GLASSWALL": "12:18 +7.4% no-chase after 12:10 spike; flips on pullback hold 272-273 green 5-min close with volume",
   "GANDHAR": "11:34 R:R 0.9-1.3, conf 5<6, day value ~7.9cr thin; flips on VWAP hold ~268 green 5-min close with net R:R>=1.5 to 273.5",
   "MBEL": "11:34 illiquid; flips on traded value >=15cr with confirmed breakout",
   "BSE": "11:48 net R:R ~1.05, 4000 call wall OI 1.48M, ask-heavy book; flips on 5-min close >4010 with 4000 call OI falling, or VWAP bounce 3969",
@@ -28,6 +28,8 @@
   "YATHARTH": "11:48 net R:R ~1.1, RSI70, MACD neg; flips on VWAP/EMA21 1107 bounce or close >1120 with MACD positive",
   "APTUS": "12:04 net R:R ~1.2, volume collapsed after spike; flips on 5-min close >190 on 1.5x vol",
   "QPOWER": "12:04 net R:R ~1.0, RSI73 no volume; flips on 5-min close >1590 on 2x vol",
-  "MOBIKWIK": "12:04 wide risk vs ATR, no structure; flips on 5-min close >234 on volume"
+  "MOBIKWIK": "12:04 wide risk vs ATR, no structure; flips on 5-min close >234 on volume",
+  "HYUNDAI": "12:18 range 2124-2135, twice rejected 2140-2144, thin vol, CE OI 5x PE, net R:R 1.3; flips on 5-min close >2144.5 on 1.5x vol with T1>=2160, or bounce hold 2125-2126",
+  "DELHIVERY": "12:18 +4.5% no-chase, failed 465.8, fading vol, net R:R 0.8-1.3; flips on 5-min close >466 on 1.5x vol with T1>=476"
  }
 }
