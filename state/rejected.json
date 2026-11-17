@@ -50,6 +50,10 @@
   "VAML": "13:36 393-397 range, rejected at 397, R:R 0.85; flips on 5-min close >397.5 on 1.5x vol",
   "HONASA": "13:36 below VWAP, thin, R:R 0.9; flips on VWAP reclaim held on 5-min close with 1.5x vol",
   "LICHSGFIN": "13:53 RSI79.5, net R:R ~0.9; flips on 5-min close >625 on volume, or pullback hold 612-613",
-  "ADANIENT": "14:05 conf 5<6, R:R ~1.25 to T1, fading vol; flips on 5-min close >2725 on >=60k vol before 14:25 with T1>=2755"
+  "ADANIENT": "14:05 conf 5<6, R:R ~1.25 to T1, fading vol; flips on 5-min close >2725 on >=60k vol before 14:25 with T1>=2755",
+  "UPL": "14:22 R:R ~1.1 conf 4; flips on 5-min close >568.5 on 2x vol with T1>=578",
+  "PRICOLLTD": "14:22 faded 2% off high, thin",
+  "GMRAIRPORT": "14:22 dead range",
+  "KRBL": "14:22 thin, drifting"
  }
 }

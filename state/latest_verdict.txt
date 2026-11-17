@@ -1,17 +1,17 @@
-⚪ <b>NO TRADE — 14:07 scan</b>
+⚪ <b>NO TRADE — 14:22 scan</b>
 
 <b>Looked at</b>
 <pre>Stock       Why not
-ADANIENT    conf 5, R:R 1.25
-BECTORFOOD  +3.5%, thin vol
-IXIGO       +6% chase
-HYUNDAI     MACD neg, wall</pre>
+UPL         R:R 1.1, conf 4
+PRICOLLTD   faded 2% off high
+GMRAIRPORT  dead range
+KRBL        thin, drifting
+IXIGO etc   +4-7% chase</pre>
 
 <b>🔁 Flips on</b>
-• ADANIENT close &gt;₹2725, vol 60k+
-• BECTORFOOD close &gt;₹228.1, 1.5× vol
+• UPL close &gt;₹568.5, vol 90k+, T1 ₹578+
 
-💡 Choppy: 28% above VWAP.
-Little time left. Sit out.
+💡 Choppy: 27% above VWAP.
+Late slot, no setup. Sit out.
 
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
