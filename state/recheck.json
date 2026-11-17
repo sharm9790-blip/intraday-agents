@@ -1,26 +1,4 @@
 {
  "date": "2026-11-17",
- "symbols": {
-  "ANGELONE": {
-   "at": "10:50",
-   "rejected_at": "10:50",
-   "level": 364.5,
-   "kind": "flip level",
-   "close": 368.0
-  },
-  "SIGNATURE": {
-   "at": "10:20",
-   "rejected_at": "10:20",
-   "level": 804.5,
-   "kind": "flip level",
-   "close": 812.25
-  },
-  "TI": {
-   "at": "11:10",
-   "rejected_at": "11:00",
-   "level": 539.55,
-   "kind": "day high",
-   "close": 542.5
-  }
- }
+ "symbols": {}
 }
