@@ -1,13 +1,6 @@
 {
  "date": "2026-11-17",
  "symbols": {
-  "OPTIEMUS": {
-   "at": "10:45",
-   "rejected_at": "09:48",
-   "level": 862.0,
-   "kind": "flip level",
-   "close": 865.65
-  },
   "ANGELONE": {
    "at": "10:50",
    "rejected_at": "10:50",
