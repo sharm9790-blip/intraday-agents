@@ -1,6 +1,13 @@
 {
  "date": "2026-11-17",
  "symbols": {
+  "SIGNATURE": {
+   "at": "14:20",
+   "rejected_at": "13:53",
+   "level": 831.95,
+   "kind": "day high",
+   "close": 834.65
+  },
   "GANDHAR": {
    "at": "11:35",
    "rejected_at": "11:34",
