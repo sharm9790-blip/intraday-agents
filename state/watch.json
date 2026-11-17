@@ -48,13 +48,14 @@
   "11:18 HBLENGINE 805.65 VWAP \u20b9805.95 status waiting",
   "11:20 HBLENGINE 805.90 VWAP \u20b9805.95 status waiting",
   "11:20 HBLENGINE 805.90 VWAP \u20b9805.95 status waiting",
-  "11:25 HBLENGINE 805.05 VWAP \u20b9805.94 status waiting"
+  "11:25 HBLENGINE 805.05 VWAP \u20b9805.94 status waiting",
+  "11:30 HBLENGINE 802.30 VWAP \u20b9805.89 status waiting"
  ],
  "health": {
   "ready": true,
   "pinger": true
  },
- "last_run": "11:25",
+ "last_run": "11:30",
  "taken": [],
  "trades": 0,
  "day_trades": 0,
@@ -81,9 +82,9 @@
   "KPRMILL": "ran past max entry 1225.2, don't chase"
  },
  "pre_summary": true,
- "scan_slot": "11:15",
- "last_fire": "11:15",
- "fired_at": "11:15",
+ "scan_slot": "11:30",
+ "last_fire": "11:30",
+ "fired_at": "11:30",
  "verdicts": 7,
  "plans": [
   {
