@@ -52,13 +52,14 @@
   "11:30 HBLENGINE 802.30 VWAP \u20b9805.89 status waiting",
   "11:33 HBLENGINE 804.40 VWAP \u20b9805.88 status waiting",
   "11:34 HBLENGINE 804.45 VWAP \u20b9805.87 status waiting",
-  "11:35 HBLENGINE 804.15 VWAP \u20b9805.87 status waiting"
+  "11:35 HBLENGINE 804.15 VWAP \u20b9805.87 status waiting",
+  "11:40 HBLENGINE 803.05 VWAP \u20b9805.86 status waiting"
  ],
  "health": {
   "ready": true,
   "pinger": true
  },
- "last_run": "11:35",
+ "last_run": "11:40",
  "taken": [],
  "trades": 0,
  "day_trades": 0,
