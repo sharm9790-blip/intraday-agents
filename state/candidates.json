@@ -1,10 +1,10 @@
 {
  "date": "2026-11-17",
- "at": "09:40",
+ "at": "09:45",
  "mode": "choppy",
- "nifty_pct": 0.15,
- "above_vwap_pct": 60,
- "up_pct": 73,
+ "nifty_pct": 0.22,
+ "above_vwap_pct": 65,
+ "up_pct": 75,
  "scanned": 628,
  "items": [
   {
@@ -13,17 +13,17 @@
    "fo": false,
    "sector": "Capital Goods",
    "turnover_cr": 28,
-   "score": 11.38,
-   "price": 2022.0,
-   "pct": 6.42,
-   "vwap": 2015.94,
-   "vwap_dist": 0.3,
-   "vol_x": 30.28,
+   "score": 11.87,
+   "price": 2031.0,
+   "pct": 6.89,
+   "vwap": 2021.32,
+   "vwap_dist": 0.48,
+   "vol_x": 37.97,
    "last30": 0.0,
-   "atr5": 37.02,
+   "atr5": 37.98,
    "bounced": true,
    "rejected": false,
-   "day_high": 2045.0
+   "day_high": 2052.8
   },
   {
    "symbol": "GREAVESCOT",
@@ -31,14 +31,14 @@
    "fo": false,
    "sector": "Capital Goods",
    "turnover_cr": 54,
-   "score": 10.27,
-   "price": 245.57,
-   "pct": 7.65,
-   "vwap": 243.71,
-   "vwap_dist": 0.76,
-   "vol_x": 18.14,
+   "score": 10.02,
+   "price": 245.91,
+   "pct": 7.8,
+   "vwap": 243.86,
+   "vwap_dist": 0.84,
+   "vol_x": 16.15,
    "last30": 0.0,
-   "atr5": 5.84,
+   "atr5": 5.3,
    "bounced": true,
    "rejected": false,
    "day_high": 249.15
@@ -49,17 +49,17 @@
    "fo": true,
    "sector": "Financial Services",
    "turnover_cr": 98,
-   "score": 8.98,
-   "price": 978.45,
-   "pct": 4.28,
-   "vwap": 973.86,
-   "vwap_dist": 0.47,
-   "vol_x": 9.97,
+   "score": 9.1,
+   "price": 981.7,
+   "pct": 4.63,
+   "vwap": 975.35,
+   "vwap_dist": 0.65,
+   "vol_x": 10.54,
    "last30": 0.0,
-   "atr5": 12.54,
+   "atr5": 11.53,
    "bounced": true,
    "rejected": false,
-   "day_high": 984.0
+   "day_high": 984.65
   },
   {
    "symbol": "LUMAXTECH",
@@ -67,35 +67,53 @@
    "fo": false,
    "sector": "Automobile and Auto Components",
    "turnover_cr": 51,
-   "score": 8.5,
-   "price": 2448.6,
-   "pct": 6.31,
-   "vwap": 2425.09,
-   "vwap_dist": 0.97,
-   "vol_x": 8.01,
+   "score": 8.53,
+   "price": 2429.7,
+   "pct": 5.49,
+   "vwap": 2426.19,
+   "vwap_dist": 0.14,
+   "vol_x": 8.12,
    "last30": 0.0,
-   "atr5": 42.32,
+   "atr5": 39.92,
    "bounced": true,
    "rejected": false,
    "day_high": 2465.2
   },
   {
-   "symbol": "BECTORFOOD",
-   "yahoo": "BECTORFOOD.NS",
+   "symbol": "GERMAN",
+   "yahoo": "GERMAN.NS",
    "fo": false,
-   "sector": "Fast Moving Consumer Goods",
-   "turnover_cr": 25,
-   "score": 7.76,
-   "price": 224.58,
-   "pct": 2.17,
-   "vwap": 224.14,
-   "vwap_dist": 0.2,
-   "vol_x": 14.21,
+   "sector": "Other",
+   "turnover_cr": 26,
+   "score": 8.33,
+   "price": 111.7,
+   "pct": 4.61,
+   "vwap": 110.47,
+   "vwap_dist": 1.11,
+   "vol_x": 7.39,
    "last30": 0.0,
-   "atr5": 2.13,
+   "atr5": 2.12,
    "bounced": true,
    "rejected": false,
-   "day_high": 227.04
+   "day_high": 112.88
+  },
+  {
+   "symbol": "OPTIEMUS",
+   "yahoo": "OPTIEMUS.NS",
+   "fo": false,
+   "sector": "Other",
+   "turnover_cr": 31,
+   "score": 8.1,
+   "price": 850.4,
+   "pct": 4.21,
+   "vwap": 848.68,
+   "vwap_dist": 0.2,
+   "vol_x": 6.68,
+   "last30": 0.0,
+   "atr5": 13.52,
+   "bounced": true,
+   "rejected": false,
+   "day_high": 860.15
   },
   {
    "symbol": "SGFIN",
@@ -103,53 +121,17 @@
    "fo": false,
    "sector": "Other",
    "turnover_cr": 38,
-   "score": 7.7,
-   "price": 771.15,
-   "pct": 4.17,
-   "vwap": 760.54,
-   "vwap_dist": 1.4,
-   "vol_x": 5.53,
+   "score": 7.57,
+   "price": 773.0,
+   "pct": 4.42,
+   "vwap": 763.04,
+   "vwap_dist": 1.31,
+   "vol_x": 5.21,
    "last30": 0.0,
-   "atr5": 10.43,
+   "atr5": 9.63,
    "bounced": true,
    "rejected": false,
-   "day_high": 772.1
-  },
-  {
-   "symbol": "GLASSWALL",
-   "yahoo": "GLASSWALL.NS",
-   "fo": false,
-   "sector": "Other",
-   "turnover_cr": 37,
-   "score": 7.47,
-   "price": 268.35,
-   "pct": 4.7,
-   "vwap": 267.26,
-   "vwap_dist": 0.41,
-   "vol_x": 4.98,
-   "last30": 0.0,
-   "atr5": 4.86,
-   "bounced": true,
-   "rejected": false,
-   "day_high": 271.9
-  },
-  {
-   "symbol": "SHRINGARMS",
-   "yahoo": "SHRINGARMS.NS",
-   "fo": false,
-   "sector": "Other",
-   "turnover_cr": 48,
-   "score": 7.06,
-   "price": 315.5,
-   "pct": 5.77,
-   "vwap": 312.07,
-   "vwap_dist": 1.1,
-   "vol_x": 4.11,
-   "last30": 0.0,
-   "atr5": 5.17,
-   "bounced": true,
-   "rejected": false,
-   "day_high": 315.5
+   "day_high": 775.9
   },
   {
    "symbol": "IREDA",
@@ -157,212 +139,230 @@
    "fo": true,
    "sector": "Financial Services",
    "turnover_cr": 88,
-   "score": 6.93,
-   "price": 121.28,
-   "pct": 4.6,
-   "vwap": 120.51,
-   "vwap_dist": 0.64,
-   "vol_x": 3.87,
+   "score": 7.24,
+   "price": 121.97,
+   "pct": 5.19,
+   "vwap": 120.81,
+   "vwap_dist": 0.96,
+   "vol_x": 4.47,
    "last30": 0.0,
-   "atr5": 1.82,
+   "atr5": 1.72,
    "bounced": true,
    "rejected": false,
-   "day_high": 122.15
+   "day_high": 122.3
   },
   {
-   "symbol": "HONASA",
-   "yahoo": "HONASA.NS",
+   "symbol": "IXIGO",
+   "yahoo": "IXIGO.NS",
    "fo": false,
-   "sector": "Fast Moving Consumer Goods",
-   "turnover_cr": 60,
-   "score": 6.66,
-   "price": 521.45,
-   "pct": 4.03,
-   "vwap": 518.24,
-   "vwap_dist": 0.62,
-   "vol_x": 3.62,
+   "sector": "Consumer Services",
+   "turnover_cr": 101,
+   "score": 6.45,
+   "price": 171.31,
+   "pct": 3.57,
+   "vwap": 169.13,
+   "vwap_dist": 1.29,
+   "vol_x": 4.19,
    "last30": 0.0,
-   "atr5": 5.83,
+   "atr5": 1.59,
    "bounced": true,
    "rejected": false,
-   "day_high": 523.7
+   "day_high": 171.31
   },
   {
-   "symbol": "SJS",
-   "yahoo": "SJS.NS",
+   "symbol": "MVELECTRO",
+   "yahoo": "MVELECTRO.NS",
    "fo": false,
-   "sector": "Automobile and Auto Components",
-   "turnover_cr": 28,
-   "score": 6.16,
-   "price": 2126.0,
-   "pct": 1.23,
-   "vwap": 2123.41,
-   "vwap_dist": 0.12,
-   "vol_x": 10.47,
+   "sector": "Other",
+   "turnover_cr": 156,
+   "score": 6.34,
+   "price": 847.4,
+   "pct": 1.22,
+   "vwap": 843.63,
+   "vwap_dist": 0.45,
+   "vol_x": 11.81,
    "last30": 0.0,
-   "atr5": 9.52,
+   "atr5": 13.68,
    "bounced": true,
    "rejected": false,
-   "day_high": 2128.9
+   "day_high": 858.7
   },
   {
-   "symbol": "BLUESTARCO",
-   "yahoo": "BLUESTARCO.NS",
-   "fo": true,
-   "sector": "Consumer Durables",
-   "turnover_cr": 69,
-   "score": 5.93,
-   "price": 1639.1,
-   "pct": 0.93,
-   "vwap": 1627.77,
-   "vwap_dist": 0.7,
-   "vol_x": 10.8,
+   "symbol": "MARSONS",
+   "yahoo": "MARSONS.NS",
+   "fo": false,
+   "sector": "Other",
+   "turnover_cr": 83,
+   "score": 5.84,
+   "price": 170.11,
+   "pct": 4.11,
+   "vwap": 168.99,
+   "vwap_dist": 0.66,
+   "vol_x": 2.46,
    "last30": 0.0,
-   "atr5": 14.86,
+   "atr5": 2.9,
    "bounced": true,
    "rejected": false,
-   "day_high": 1643.1
+   "day_high": 172.45
+  },
+  {
+   "symbol": "CENTUM",
+   "yahoo": "CENTUM.NS",
+   "fo": false,
+   "sector": "Capital Goods",
+   "turnover_cr": 25,
+   "score": 5.69,
+   "price": 4489.0,
+   "pct": 4.23,
+   "vwap": 4465.3,
+   "vwap_dist": 0.53,
+   "vol_x": 2.18,
+   "last30": 0.0,
+   "atr5": 49.5,
+   "bounced": true,
+   "rejected": false,
+   "day_high": 4498.0
   }
  ],
  "shorts": [],
  "sectors": [
   {
-   "group": "Capital markets",
-   "n": 12,
-   "avg_pct": 1.87,
-   "above_vwap_pct": 83
-  },
-  {
    "group": "Realty",
    "n": 13,
-   "avg_pct": 1.72,
+   "avg_pct": 2.17,
    "above_vwap_pct": 100
+  },
+  {
+   "group": "Capital markets",
+   "n": 12,
+   "avg_pct": 1.91,
+   "above_vwap_pct": 83
   },
   {
    "group": "Automobile and Auto Components",
    "n": 34,
    "avg_pct": 1.43,
-   "above_vwap_pct": 62
+   "above_vwap_pct": 65
   },
   {
    "group": "Other",
    "n": 117,
-   "avg_pct": 1.23,
-   "above_vwap_pct": 70
+   "avg_pct": 1.34,
+   "above_vwap_pct": 72
   },
   {
    "group": "Textiles",
    "n": 7,
-   "avg_pct": 1.06,
-   "above_vwap_pct": 71
-  },
-  {
-   "group": "Banks",
-   "n": 18,
-   "avg_pct": 0.88,
-   "above_vwap_pct": 50
-  },
-  {
-   "group": "Fast Moving Consumer Goods",
-   "n": 28,
-   "avg_pct": 0.83,
-   "above_vwap_pct": 39
-  },
-  {
-   "group": "Construction",
-   "n": 11,
-   "avg_pct": 0.83,
-   "above_vwap_pct": 64
+   "avg_pct": 1.12,
+   "above_vwap_pct": 86
   },
   {
    "group": "Services",
    "n": 16,
-   "avg_pct": 0.81,
-   "above_vwap_pct": 56
+   "avg_pct": 1.03,
+   "above_vwap_pct": 69
+  },
+  {
+   "group": "Banks",
+   "n": 18,
+   "avg_pct": 0.96,
+   "above_vwap_pct": 67
+  },
+  {
+   "group": "Construction",
+   "n": 11,
+   "avg_pct": 0.95,
+   "above_vwap_pct": 73
   },
   {
    "group": "Media Entertainment & Publication",
    "n": 7,
-   "avg_pct": 0.79,
+   "avg_pct": 0.93,
    "above_vwap_pct": 100
-  },
-  {
-   "group": "Consumer Durables",
-   "n": 22,
-   "avg_pct": 0.77,
-   "above_vwap_pct": 36
   },
   {
    "group": "Consumer Services",
    "n": 26,
-   "avg_pct": 0.72,
-   "above_vwap_pct": 62
+   "avg_pct": 0.88,
+   "above_vwap_pct": 69
+  },
+  {
+   "group": "Fast Moving Consumer Goods",
+   "n": 28,
+   "avg_pct": 0.79,
+   "above_vwap_pct": 36
   },
   {
    "group": "Chemicals",
    "n": 27,
-   "avg_pct": 0.68,
-   "above_vwap_pct": 33
+   "avg_pct": 0.77,
+   "above_vwap_pct": 52
+  },
+  {
+   "group": "Consumer Durables",
+   "n": 22,
+   "avg_pct": 0.74,
+   "above_vwap_pct": 50
   },
   {
    "group": "Capital Goods",
    "n": 86,
-   "avg_pct": 0.63,
-   "above_vwap_pct": 64
+   "avg_pct": 0.73,
+   "above_vwap_pct": 70
   },
   {
    "group": "NBFC / lenders",
    "n": 53,
-   "avg_pct": 0.45,
-   "above_vwap_pct": 53
-  },
-  {
-   "group": "Healthcare",
-   "n": 50,
-   "avg_pct": 0.31,
-   "above_vwap_pct": 56
+   "avg_pct": 0.62,
+   "above_vwap_pct": 66
   },
   {
    "group": "Metals & Mining",
    "n": 17,
-   "avg_pct": 0.29,
-   "above_vwap_pct": 82
-  },
-  {
-   "group": "Construction Materials",
-   "n": 9,
-   "avg_pct": 0.25,
-   "above_vwap_pct": 56
+   "avg_pct": 0.5,
+   "above_vwap_pct": 76
   },
   {
    "group": "Power",
    "n": 15,
-   "avg_pct": 0.18,
-   "above_vwap_pct": 27
+   "avg_pct": 0.35,
+   "above_vwap_pct": 53
+  },
+  {
+   "group": "Construction Materials",
+   "n": 9,
+   "avg_pct": 0.32,
+   "above_vwap_pct": 67
+  },
+  {
+   "group": "Healthcare",
+   "n": 50,
+   "avg_pct": 0.24,
+   "above_vwap_pct": 40
   },
   {
    "group": "Oil Gas & Consumable Fuels",
    "n": 14,
-   "avg_pct": 0.17,
-   "above_vwap_pct": 50
+   "avg_pct": 0.19,
+   "above_vwap_pct": 57
   },
   {
    "group": "Information Technology",
    "n": 29,
-   "avg_pct": 0.0,
-   "above_vwap_pct": 76
+   "avg_pct": 0.06,
+   "above_vwap_pct": 72
   },
   {
    "group": "Insurance",
    "n": 7,
-   "avg_pct": -0.27,
-   "above_vwap_pct": 29
+   "avg_pct": 0.03,
+   "above_vwap_pct": 57
   },
   {
    "group": "Telecommunication",
    "n": 6,
-   "avg_pct": -0.33,
-   "above_vwap_pct": 17
+   "avg_pct": -0.24,
+   "above_vwap_pct": 50
   }
  ]
 }
