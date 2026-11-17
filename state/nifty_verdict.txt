@@ -1,16 +1,16 @@
 🧪 <b>PAPER</b> · Nifty options
-⚪ <b>NO TRADE — 11:32 IST</b>
+⚪ <b>NO TRADE — 12:32 IST</b>
 
-📈 Nifty 25,446 (+0.6%) · VIX ~15.7
+📈 Nifty 25,492 (+0.8%) · VIX ~15.7
 🧱 Calls 25,500 · Puts 25,400
-PCR 1.59 · Expiry today
+PCR 1.70 · Expiry today 14:00
 
 <b>Why not</b>
 • Weekly expiry day (rule)
-• SL −47%, outside 15–35%
-• Net R:R ~1:1, needs 1.5
-💡 Trend up, but 25,500 wall caps
-and time value hits 0 by close
+• Pinned under 25,500 call wall
+• Theta ~₹32/hr on ATM CE
+💡 Trend up, but no close above
+25,500 and decay wins by 14:00
 
 🔎 Next check: 18 Nov 09:32 IST
 📊 Paper record: 0 trades
