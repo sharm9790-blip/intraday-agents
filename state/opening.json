@@ -1,6 +1,37 @@
 {
  "date": "2026-11-17",
- "open": [],
+ "open": [
+  {
+   "symbol": "TMPV",
+   "yahoo": "TMPV.NS",
+   "at": "09:25",
+   "group": "Automobile and Auto Components",
+   "pct": 2.1,
+   "gap": 0.04,
+   "vol_frac": 0.35,
+   "entry": 267.9,
+   "sl": 265.5,
+   "t1": 271.5,
+   "t2": 275.09,
+   "risk": 2.4,
+   "atr5": 3.4250030517578125
+  },
+  {
+   "symbol": "BELRISE",
+   "yahoo": "BELRISE.NS",
+   "at": "09:25",
+   "group": "Automobile and Auto Components",
+   "pct": 1.33,
+   "gap": 0.45,
+   "vol_frac": 0.65,
+   "entry": 238.32,
+   "sl": 235.73,
+   "t1": 242.2,
+   "t2": 246.09,
+   "risk": 2.59,
+   "atr5": 3.5300064086914062
+  }
+ ],
  "days": {
   "2026-11-16": [
    {
