@@ -91,13 +91,14 @@
   "11:48 HBLENGINE 802.55 VWAP \u20b9805.84 status waiting",
   "11:50 HBLENGINE 802.55 VWAP \u20b9805.83 status waiting",
   "11:55 HBLENGINE 801.50 VWAP \u20b9805.8 status cancelled",
-  "12:04 WELSPUNLIV 260.71 VWAP \u20b9259.34 status waiting"
+  "12:04 WELSPUNLIV 260.71 VWAP \u20b9259.34 status waiting",
+  "12:05 WELSPUNLIV 261.11 VWAP \u20b9259.35 status waiting"
  ],
  "health": {
   "ready": true,
   "pinger": true
  },
- "last_run": "12:04",
+ "last_run": "12:05",
  "taken": [],
  "trades": 0,
  "day_trades": 0,
