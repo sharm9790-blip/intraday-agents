@@ -1,17 +1,18 @@
-🔴 <b>NO TRADE — 13:08 scan</b>
+🔴 <b>NO TRADE — 13:22 scan</b>
 
 <b>Looked at</b>
 <pre>Stock     Why not
-ITCHOTELS flat, R:R 1.3
-CEMPRO    spike, RSI 84
-RAYMONDREL lost VWAP
-AETHER    stuck on VWAP
-DIXON     R:R 1.1</pre>
+SBIFUNDS  R:R 1.3, weak vol
+APTUS     failed 192.5
+TMCV      R:R 0.9
+SGFIN     one-spike, R:R 1.1
+CAMS      fading below VWAP</pre>
 
 <b>🔁 Flips on</b>
-• ITCHOTELS close &gt;₹181, vol &gt;100k
-• CEMPRO close &gt;₹1356, 2× vol
+• SBIFUNDS close &gt;₹530.5, 2× vol
+• APTUS close &gt;₹192.5, 1.5× vol
+• TMCV close &gt;₹448.6 on volume
 
-💡 Only 29% stocks above VWAP. Weak breadth, no dips, sit out.
+💡 Only 19% stocks above VWAP. Choppy, sit out.
 
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
