@@ -14,6 +14,13 @@
    "level": 15.0,
    "kind": "flip level",
    "close": 297.65
+  },
+  "BECTORFOOD": {
+   "at": "13:55",
+   "rejected_at": "12:35",
+   "level": 227.3,
+   "kind": "flip level",
+   "close": 227.85
   }
  }
 }
