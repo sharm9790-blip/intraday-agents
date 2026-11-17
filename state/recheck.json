@@ -1,6 +1,13 @@
 {
  "date": "2026-11-17",
  "symbols": {
+  "SIGNATURE": {
+   "at": "13:40",
+   "rejected_at": "12:04",
+   "level": 822.0,
+   "kind": "flip level",
+   "close": 824.2
+  },
   "GANDHAR": {
    "at": "11:35",
    "rejected_at": "11:34",
@@ -14,6 +21,13 @@
    "level": 15.0,
    "kind": "flip level",
    "close": 297.65
+  },
+  "MAHABANK": {
+   "at": "13:40",
+   "rejected_at": "13:36",
+   "level": 95.3,
+   "kind": "flip level",
+   "close": 95.72
   }
  }
 }
