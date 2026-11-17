@@ -18,6 +18,8 @@
   "IXIGO": "11:00 +6.2% no-chase, net R:R ~1.3, ask-heavy; flips on 5-min close >179.6 on volume with T1>=183, or VWAP retest 175.3 hold",
   "KPIGREEN": "11:00 +4.9% vol_x 1.26, weak sector, double top; flips on 5-min close >316.6 on 2x vol, or dip 310.7-311.5 hold",
   "TI": "11:00 RSI78 +4.4% weak FMCG; flips on VWAP pullback hold with close above swing high",
-  "SHADOWFAX": "11:00 failed 304 breakout, MACD neg, net R:R 1.45; flips on 5-min close >304.5 on volume"
+  "SHADOWFAX": "11:00 failed 304 breakout, MACD neg, net R:R 1.45; flips on 5-min close >304.5 on volume",
+  "ASIANPAINT": "11:15 +3.3% RSI79, net R:R 1.27, weak sector; flips on pullback to VWAP 2632-2636 + green 5-min bounce",
+  "GLASSWALL": "11:15 +4% no pullback, 70% ask book, SL on noise, net R:R 1.4; flips on 5-min close >272.1 on 2x vol"
  }
 }
