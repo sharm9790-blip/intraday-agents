@@ -1,16 +1,16 @@
 🧪 <b>PAPER</b> · Nifty options
-⚪ <b>NO TRADE — 09:32 IST</b>
+⚪ <b>NO TRADE — 10:32 IST</b>
 
-📈 Nifty 25,327 (+0.1%) · VIX 15.7
-🧱 Calls 25,400 · Puts 25,300
-PCR 1.05 · Expiry today 14:00
+📈 Nifty 25,388 (+0.4%) · VIX ~15.7
+🧱 Calls 25,500 · Puts 25,300
+PCR 1.49 · Expiry today
 
 <b>Why not</b>
 • Weekly expiry day (rule)
-• Mid opening range 25,267–358
-• Straddle writing at 25,300/350
-💡 ATM CE loses ₹49 decay by 14:00
+• Breakout into 25,400 call wall
+• Net R:R ~1.4 at trigger
+💡 ₹42 time value gone by close
 
-🔎 Next check: 18 Nov 09:35 IST
+🔎 Next check: 18 Nov 09:45 IST
 📊 Paper record: 0 trades
 <i>Paper trade for testing only, not SEBI-registered investment advice. Options trading is high risk.</i>
