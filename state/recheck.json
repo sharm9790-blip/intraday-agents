@@ -8,6 +8,13 @@
    "kind": "flip level",
    "close": 376.6
   },
+  "SIGNATURE": {
+   "at": "11:55",
+   "rejected_at": "11:34",
+   "level": 818.0,
+   "kind": "flip level",
+   "close": 821.0
+  },
   "KPIGREEN": {
    "at": "11:40",
    "rejected_at": "11:00",
