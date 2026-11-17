@@ -1,14 +1,20 @@
-🧪 <b>PAPER</b> · Nifty day report
+🧪 <b>PAPER</b> · Nifty premarket
+🌍 Asia −1.2% · US −1.9% · VIX 15.7
+🛢 Brent −4.4% · INR firmer
+📅 Weekly expiry today (17 Nov)
 
-<b>Today</b>
-No paper trades (all NO TRADE)
-Last check 13:35: range day,
-writing on both sides
+<pre>Level        Nifty
+Call wall    25,500
+Calls        25,300
+Yday high    25,338
+Yday close   25,291
+Put floor    25,200
+Yday low     25,172
+Big puts     25,000</pre>
+PCR 0.94 · Max pain 25,250
 
-<b>Last 20 days</b> (after costs)
-Trades 0 · Win rate –
-Net ₹0 · Profit factor –
-Not filled: 0
+💡 Bias: gap-down risk from US/Asia;
+25,200 puts first test. Expiry day
+→ no paper trade today (rule).
 
-💡 No trades yet: too early to judge
 <i>Paper trade for testing only, not SEBI-registered investment advice. Options trading is high risk.</i>
