@@ -1,20 +1,22 @@
-🔴 <b>NO TRADE — 12:18 IST</b>
+🔴 <b>NO TRADE — 12:36 IST</b>
 
-📈 Nifty +0.81%
-Mood: 43% above VWAP, US -2%
+📈 Nifty +0.77%
+Mood: 31% above VWAP, US -2%
 
-<b>HYUNDAI</b> ❌
-Range 2124-2135, rejected 2140+
-Net R:R 1.3
-Flips: close &gt;2144.5 on volume
+<b>BECTORFOOD</b> ❌
+One-candle spike, R:R ~1.1
+Flips: close &gt;227.3 on volume
 
-<b>DELHIVERY</b> ❌
-+4.5%, failed 465.8, vol fading
-Net R:R 0.8-1.3
-Flips: close &gt;466 on volume
+<b>KARURVYSYA</b> ❌
+400 call wall, R:R 0.9
+Flips: close &gt;398.5 on volume
+
+<b>SBCL</b> ❌
+Illiquid, spike faded
+Flips: close &gt;1025, turnover 25cr+
 
 ⏳ WELSPUNLIV plan still live
-(waiting for dip, zone 259.6–260.3)
+(in zone 259.6–260.3)
 
 💡 Choppy tape, no clean setup. Sitting out.
 
