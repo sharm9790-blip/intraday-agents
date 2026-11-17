@@ -1,7 +1,7 @@
 {
  "date": "2026-11-17",
- "stage": "overnight",
- "id": "2026-11-17_0850",
+ "stage": "preopen",
+ "id": "2026-11-17_0908",
  "connectors": {
   "indmoney": true,
   "investsights": true
@@ -31,7 +31,8 @@
    "time_stop": "15:00",
    "keep": true,
    "why": "vol 1.8x, new high, least stretched",
-   "atr": 46.08
+   "atr": 46.08,
+   "preopen": "n/a"
   },
   {
    "symbol": "GMRAIRPORT",
