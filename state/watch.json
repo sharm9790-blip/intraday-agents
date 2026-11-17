@@ -69,7 +69,8 @@
    "since": "12:04",
    "paper_booked": 0,
    "triggered": "12:30",
-   "paper_result": -538
+   "paper_result": -538,
+   "missed": "12:45"
   }
  ],
  "log": [
@@ -110,10 +111,10 @@
   "ready": true,
   "pinger": true
  },
- "last_run": "12:40",
+ "last_run": "12:45",
  "taken": [],
- "trades": 1,
- "day_trades": 1,
+ "trades": 0,
+ "day_trades": 0,
  "open_slots": [
   "09:20",
   "09:25",
@@ -137,7 +138,7 @@
   "KPRMILL": "ran past max entry 1225.2, don't chase"
  },
  "pre_summary": true,
- "scan_slot": "12:30",
+ "scan_slot": "12:45",
  "last_fire": "12:30",
  "fired_at": "12:30",
  "verdicts": 12,

@@ -22,6 +22,17 @@
    "qty": 521,
    "sector": "Information Technology",
    "at": "12:30"
+  },
+  {
+   "symbol": "COALINDIA",
+   "yahoo": "COALINDIA.NS",
+   "price": 389.8,
+   "sl": 391.9,
+   "t1": 386.65,
+   "t2": 384.55,
+   "qty": 256,
+   "sector": "Oil Gas & Consumable Fuels",
+   "at": "12:45"
   }
  ],
  "days": {
