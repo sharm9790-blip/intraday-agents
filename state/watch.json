@@ -1,6 +1,6 @@
 {
  "date": "2026-11-17",
- "verdict_id": "2026-11-17_1101",
+ "verdict_id": "2026-11-17_1116",
  "live": [
   {
    "symbol": "HBLENGINE",
@@ -44,13 +44,14 @@
   "11:04 HBLENGINE 809.00 VWAP \u20b9805.93 status waiting",
   "11:05 HBLENGINE 807.40 VWAP \u20b9805.94 status waiting",
   "11:10 HBLENGINE 806.75 VWAP \u20b9805.95 status waiting",
-  "11:15 HBLENGINE 806.40 VWAP \u20b9805.95 status waiting"
+  "11:15 HBLENGINE 806.40 VWAP \u20b9805.95 status waiting",
+  "11:18 HBLENGINE 805.65 VWAP \u20b9805.95 status waiting"
  ],
  "health": {
   "ready": true,
   "pinger": true
  },
- "last_run": "11:15",
+ "last_run": "11:18",
  "taken": [],
  "trades": 0,
  "day_trades": 0,
@@ -80,7 +81,7 @@
  "scan_slot": "11:15",
  "last_fire": "11:15",
  "fired_at": "11:15",
- "verdicts": 6,
+ "verdicts": 7,
  "plans": [
   {
    "symbol": "HBLENGINE",
