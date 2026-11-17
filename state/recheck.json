@@ -8,6 +8,13 @@
    "kind": "flip level",
    "close": 865.65
   },
+  "ANGELONE": {
+   "at": "10:50",
+   "rejected_at": "10:50",
+   "level": 364.5,
+   "kind": "flip level",
+   "close": 368.0
+  },
   "SIGNATURE": {
    "at": "10:20",
    "rejected_at": "10:20",
