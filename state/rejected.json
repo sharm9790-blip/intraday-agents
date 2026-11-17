@@ -34,6 +34,11 @@
   "BECTORFOOD": "12:35 net R:R ~1.1, one-candle spike, day high 227.23 under T1, FMCG weak; flips on 5-min close >227.3 on 1.5x vol with VWAP held",
   "KARURVYSYA": "12:35 net R:R 0.87, 400 CE wall at T1, 397.6 rejected 5x; flips on 5-min close >398.5 on 1.5x vol",
   "SBCL": "12:35 illiquid ~11cr, single-digit depth, spike-fade; flips on 5-min close >1025 with turnover >=25cr and vol 2x",
-  "JINDALSAW": "13:00 RS only +0.7% vs Nifty, net R:R ~1.3 breakout, dips barred on weak breadth; flips on 5-min close >265.3 on 1.5x vol with net R:R>=1.5"
+  "JINDALSAW": "13:00 RS only +0.7% vs Nifty, net R:R ~1.3 breakout, dips barred on weak breadth; flips on 5-min close >265.3 on 1.5x vol with net R:R>=1.5",
+  "ITCHOTELS": "13:08 flat range, RSI51 MACD neg, T1 on rejected wick, net R:R ~1.3; flips on 5-min close >181.0 on vol >100k with net R:R>=1.5",
+  "CEMPRO": "13:08 +4% no-news illiquid spike, RSI~84, ASM unverified; flips on 5-min close >1356 on 2x vol with ASM clear",
+  "RAYMONDREL": "13:08 lost VWAP, lower highs, volume fading; flips on 5-min close above VWAP 604 on 1.5x vol",
+  "AETHER": "13:08 stuck on VWAP 1672 tiny volume; flips on green 5-min close >1681 on volume",
+  "DIXON": "13:08 range 13100-13220, R:R ~1.1; flips on 5-min close >13225 on volume"
  }
 }
