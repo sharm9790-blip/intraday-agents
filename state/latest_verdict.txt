@@ -1,45 +1,17 @@
-🟢 <b>GO — HBLENGINE</b>
-🕐 10:50 IST  ·  Confidence 5/10
+⚪ <b>NO TRADE — 11:00 IST</b>
 
-📥 Buy  <b>₹806</b>  (max ₹807.5)
-⏳ <b>Wait for dip</b>
-🛑 Stop loss  <b>₹801.5</b>
-🎯 Target 1  <b>₹817</b>  (sell half)
-🎯 Target 2  <b>₹826</b>
-📦 Qty  <b>124</b> shares
+📈 Nifty +0.45%
+Mood: 49% above VWAP, US -2%
+Live: HBLENGINE (keep, SL to VWAP)
 
-📝 <b>Draft order</b> (you place it)
-⏳ <b>Don't place the buy yet</b>
-Wait for 🔔 BUY TRIGGER (green
-5-min close at/above 805)
-Then: Qty <code>124</code> · Limit <code>807.5</code>
-SL-M trigger  <code>801.5</code>
-Sell half  <code>62</code> @ <code>817</code>
-📲 INDmoney: search <code>HBLENGINE</code>
+<b>Why nothing passed</b>
+<pre>Stock      Reason
+IXIGO      +6.2%, R:R 1.3
+SOBHA      +4.7%, thin, dip
+KPIGREEN   vol 1.3x, dbl top
+TI         RSI 78, weak FMCG
+SHADOWFAX  failed 304, R:R 1.45</pre>
 
-<b>✅ Buy only if</b>
-• Dips to ₹805–807 (VWAP)
-• Green 5-min close above ₹805
-• Nifty not breaking day low
+💡 Everything already ran &gt;4%; wait for VWAP dips
 
-<b>❌ Cancel if</b>
-• Not triggered by 12:00
-• Hits ₹817 before the dip
-• 5-min close below ₹801.5
-
-<b>💰 Risk vs reward</b>
-Max loss ≈ ₹640
-Profit ≈ ₹1,360 (T1) · ₹2,480 (T2)
-Reward 2.0× the risk
-
-<b>Why this stock</b>
-• Broke 2-hr base, vol 1.8×
-• VWAP, EMA9, ORB high at zone
-
-<b>Skipped</b>
-• ANGELONE — +5.6%, unverified
-• BALAMINES — SL inside ATR
-
-⚠️ Choppy day, US cues weak
-📡 Watcher checks every 5 min
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
