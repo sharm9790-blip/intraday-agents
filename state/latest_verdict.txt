@@ -1,21 +1,18 @@
 🔴 <b>NO TRADE — 15-min scan</b>
-🕐 09:48 IST · mode choppy
+🕐 10:03 IST · mode trend
 
 <b>Why nothing</b>
-• 5 stocks checked, all up 4-6%
-• Net R:R under 1.5 on breakouts
-• Call walls just above targets
-• RSI 72-90, risk-off US cues
+• 3 stocks checked, all RSI 80+
+• Net R:R under 1.5 after costs
+• ANGELONE: 52-wk high at entry
+• CANBK ran through its trigger
 
 <pre>₹ Stock   Flip above
-IREDA    125.2*
-KFINTECH 1001
-MVELECTRO 859
-OPTIEMUS 862
-LUMAXTECH 2504</pre>
-* or VWAP hold 120.8-121.3,
-  then close above 121.5
+ANGELONE 360.5
+CANBK    137.0*
+BLUESTARCO 1663</pre>
+* or VWAP bounce 135.6-135.8
 
-💡 Overextended tape, no clean entry. Waiting for a pullback or a real breakout.
+💡 Strong tape but every leader is stretched. Waiting for a pullback or a volume breakout.
 
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
