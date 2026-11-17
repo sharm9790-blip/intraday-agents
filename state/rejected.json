@@ -6,13 +6,14 @@
   "MVELECTRO": "09:48 not in pack, net R:R ~0.9, no-news 10% run yesterday; flips on 5-min close >859 on 1.5x vol with T1>=880",
   "OPTIEMUS": "09:48 volume fading, net R:R ~0.95; flips on 5-min close >862 on 1.5x vol with T1>=885",
   "LUMAXTECH": "09:48 net R:R <1 under 52wk high 2503; flips on 5-min close >2504 on 2x vol with T1>=2570",
-  "ANGELONE": "10:03 52wk high 360.45 at trigger, SEBI F&O margin news, ask-heavy, net R:R ~1.2; flips on 5-min close >360.5 on 1.5x vol with T1>=366.5, or pullback hold 355-355.5",
+  "ANGELONE": "10:50 +5.6% chase, not in pack, SEBI F&O margin risk, fill ~40%; flips on 5-min close >364.5 after pullback 363.5-364.5 with net R:R>=1.5",
   "CANBK": "10:03 up 3.2% RSI88, ran through trigger, net R:R ~0.9; flips on 5-min close >137.0 on 1.5x vol with T1>=138.5, or VWAP bounce 135.6-135.8",
   "BLUESTARCO": "10:03 thin liquidity, weak sector, net R:R ~1.3; flips on 5-min close >1663 on 2x vol with T1>=1700, or pullback hold 1640-1645",
   "SIGNATURE": "10:20 +5% RSI80 thin, no catalyst; flips on 5-min close >804.5 on 2x vol, or VWAP hold 794-795 green close",
   "AARTIPHARM": "10:20 52wk high 1047 at T1, weak sector; flips on 5-min close >1048 on volume, or VWAP bounce 1021 with T1<=1040",
   "PNB": "10:20 +3.8% above no-chase, net R:R ~1.2 at live price, conf 4<6; flips on 5-min close >151.7 on 1.5x vol, or VWAP bounce 149.2-149.6",
   "SOBHA": "10:34 trigger failed at 1299.6, ask-heavy, net R:R 0.73 to day high; flips on 5-min close >1313 on >=10k shares with T1>=1335",
-  "GERMAN": "10:34 red candle below trigger, thin turnover ~5.7cr, ask 81%, net R:R ~1.3; flips on 5-min close >111.8 on 2x vol with T1>=113.4, or VWAP bounce 110.5-110.6"
+  "GERMAN": "10:34 red candle below trigger, thin turnover ~5.7cr, ask 81%, net R:R ~1.3; flips on 5-min close >111.8 on 2x vol with T1>=113.4, or VWAP bounce 110.5-110.6",
+  "BALAMINES": "10:50 SL inside 1 ATR, T1 at day high, net R:R 1.3; flips on 5-min close >1990 with retest hold on volume"
  }
 }
