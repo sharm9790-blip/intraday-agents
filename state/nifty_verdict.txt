@@ -1,16 +1,17 @@
 🧪 <b>PAPER</b> · Nifty options
-⚪ <b>NO TRADE — 10:32 IST</b>
+⚪ <b>NO TRADE — 11:32 IST</b>
 
-📈 Nifty 25,388 (+0.4%) · VIX ~15.7
-🧱 Calls 25,500 · Puts 25,300
-PCR 1.49 · Expiry today
+📈 Nifty 25,446 (+0.6%) · VIX ~15.7
+🧱 Calls 25,500 · Puts 25,400
+PCR 1.59 · Expiry today
 
 <b>Why not</b>
 • Weekly expiry day (rule)
-• Breakout into 25,400 call wall
-• Net R:R ~1.4 at trigger
-💡 ₹42 time value gone by close
+• SL −47%, outside 15–35%
+• Net R:R ~1:1, needs 1.5
+💡 Trend up, but 25,500 wall caps
+and time value hits 0 by close
 
-🔎 Next check: 18 Nov 09:45 IST
+🔎 Next check: 18 Nov 09:32 IST
 📊 Paper record: 0 trades
 <i>Paper trade for testing only, not SEBI-registered investment advice. Options trading is high risk.</i>
