@@ -2,7 +2,7 @@
  "date": "2026-11-18",
  "symbols": {
   "PVRINOX": "10:19 RSI88, one spike candle, fading vol, net R:R 1.2; flips on 5-min close >1740 on 60k+ vol",
-  "URBANCO": "09:50 net R:R 0.9; flips on 5-min close >167 on 2x vol, or VWAP hold 164",
+  "URBANCO": "10:40 up 4.5% chase, LTP net R:R 0.75, dip banned on weak day; flips on 5-min close >170.6 on 1.5x vol",
   "GLENMARK": "09:50 RSI78, 2700 call wall, net R:R 1.25; flips on 5-min close >2672 with call OI unwinding",
   "WESTLIFE": "09:50 net R:R 0.9 thin; flips on 5-min close >682.5 on 2x vol",
   "VRLLOG": "09:50 net R:R 1.0, T1 at day high; flips on 5-min close >350.2 on 2x vol",
@@ -15,6 +15,11 @@
   "RATNAVEER": "10:19 vol 1.3x, over 3%; flips on 5-min close >375 on 2x vol",
   "INOXINDIA": "10:19 up 6% extended; flips on 5-min close >2127 on 2x vol",
   "MTARTECH": "10:19 vol 0.9x; flips on 5-min close >5918 on 2x vol",
-  "INDIAGLYCO": "10:19 weak breakout, tiny volume"
+  "INDIAGLYCO": "10:19 weak breakout, tiny volume",
+  "IXIGO": "10:40 net R:R 1.0 into pdh 179.5; flips on 5-min close >179.5 on 1.5x vol",
+  "CRAFTSMAN": "10:40 too thin (9.5k shares), dip only; flips on close >11375 on 2x vol with depth",
+  "PAISALO": "10:40 no setup; flips on 5-min close >76 on vol",
+  "MAHABANK": "10:40 no setup; flips on 5-min close >97 on vol",
+  "HONASA": "10:40 no setup; flips on 5-min close >535 on vol"
  }
 }

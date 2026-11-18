@@ -1,18 +1,17 @@
-🔴 <b>NO TRADE — 10:19 IST</b>
+🔴 <b>NO TRADE — 10:40 IST</b>
 
-Market choppy. Nifty -0.4%.
-Only 46% of stocks above VWAP.
+Market weak. Nifty -0.5%.
+Only 34% of stocks above VWAP.
 
-<pre>Stock    Why not    Flips &gt;
-PVRINOX  RSI88,fade  1740
-BIOCON   sector,OI   367
-IIFL     up 6%      682
-IREDA    RSI81      122
-TI       thin R:R   541.5
+<pre>Stock     Why not     Flips &gt;
+URBANCO   up 4.5%     170.6
+IXIGO     R:R 1.0     179.5
+CRAFTSMAN too thin    11375
+PAISALO   no setup    76
+MAHABANK  no setup    97
+HONASA    no setup    535
 </pre>
 
-⏳ WOCKPHARMA (10:05) still pending.
-
-💡 Spikes on fading volume, no clean 1.5× setups.
+💡 Dip entries banned on weak days.
 
 <i>Analysis only, not advice. You place orders yourself.</i>
