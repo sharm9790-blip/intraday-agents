@@ -1,6 +1,13 @@
 {
  "date": "2026-11-18",
  "symbols": {
+  "JSFB": {
+   "at": "12:10",
+   "rejected_at": "12:05",
+   "level": 430.0,
+   "kind": "flip level",
+   "close": 432.0
+  },
   "IEX": {
    "at": "12:00",
    "rejected_at": "11:32",
