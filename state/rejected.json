@@ -43,6 +43,8 @@
   "360ONE": "12:43 net R:R 1.1-1.2, 1220 call wall",
   "GCSL": "13:00 no pack data, weak tape, no confirmed setup",
   "SIGNATURE": "13:13 RSI76 thin-base burst, net R:R 1.0 at market, dip banned; flips on 5-min close >862.5 on 2x vol, net R:R>=1.5",
-  "NEOGEN": "13:35 net R:R ~0.9, T1 under 2869-2875 resistance, thin liquidity, weak tape; flips on 5-min close >2832 on 2x vol with Nifty above VWAP"
+  "NEOGEN": "13:35 net R:R ~0.9, T1 under 2869-2875 resistance, thin liquidity, weak tape; flips on 5-min close >2832 on 2x vol with Nifty above VWAP",
+  "JTLIND": "13:52 dip banned on weak day, net R:R ~1.0 at market, conf 5, price mismatch; flips on 5-min close >76.65 on 1.5x vol above VWAP with T1>=77.5",
+  "RAYMONDREL": "13:52 vol 1.4x, no catalyst, R1 629 cap; flips on 5-min close >631 on 2x vol"
  }
 }

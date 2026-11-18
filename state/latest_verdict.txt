@@ -1,17 +1,19 @@
-🔴 <b>NO TRADE — 13:36 IST</b>
+🔴 <b>NO TRADE — 13:52 IST</b>
 
-Weak tape: Nifty -0.88%
-Only 21% stocks above VWAP
+Weak tape: Nifty -0.85%
+Only 25% stocks above VWAP
 
-<b>NEOGEN</b> ❌
-Net R:R ~0.9, T1 under
-₹2,869-2,875 resistance,
-thin volume.
+<b>JTLIND</b> ❌
+Net R:R ~1.0 at market,
+dip plan banned on weak day.
 Flips: 5-min close above
-₹2,832 on 2x volume
+₹76.65 on 1.5x volume
 
-Other scan names were already
-rejected earlier today.
+<b>RAYMONDREL</b> ❌
+Volume only 1.4x, no news,
+cap at ₹629-631.
+Flips: close above ₹631
+on 2x volume
 
 💡 Weak day, no clean setup. Staying flat is fine.
 
