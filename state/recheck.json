@@ -1,12 +1,26 @@
 {
  "date": "2026-11-18",
  "symbols": {
+  "URBANCO": {
+   "at": "14:20",
+   "rejected_at": "11:15",
+   "level": 171.7,
+   "kind": "flip level",
+   "close": 172.8
+  },
   "GLENMARK": {
    "at": "14:05",
    "rejected_at": "09:50",
    "level": 2672.0,
    "kind": "flip level",
    "close": 2678.5
+  },
+  "RAYMONDREL": {
+   "at": "14:20",
+   "rejected_at": "13:52",
+   "level": 631.0,
+   "kind": "flip level",
+   "close": 632.5
   }
  }
 }
