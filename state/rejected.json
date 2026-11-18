@@ -42,6 +42,7 @@
   "SHOPERSTOP": "12:43 illiquid pump, 44k shares/day, RSI82",
   "360ONE": "12:43 net R:R 1.1-1.2, 1220 call wall",
   "GCSL": "13:00 no pack data, weak tape, no confirmed setup",
-  "SIGNATURE": "13:13 RSI76 thin-base burst, net R:R 1.0 at market, dip banned; flips on 5-min close >862.5 on 2x vol, net R:R>=1.5"
+  "SIGNATURE": "13:13 RSI76 thin-base burst, net R:R 1.0 at market, dip banned; flips on 5-min close >862.5 on 2x vol, net R:R>=1.5",
+  "NEOGEN": "13:35 net R:R ~0.9, T1 under 2869-2875 resistance, thin liquidity, weak tape; flips on 5-min close >2832 on 2x vol with Nifty above VWAP"
  }
 }
