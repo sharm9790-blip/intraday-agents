@@ -8,7 +8,7 @@
   "ready": true,
   "pinger": true
  },
- "last_run": "12:10",
+ "last_run": "12:15",
  "taken": [],
  "trades": 0,
  "day_trades": 0,
@@ -37,7 +37,7 @@
   "PRESTIGE": "fell below SL 1671.76"
  },
  "pre_summary": true,
- "scan_slot": "12:00",
+ "scan_slot": "12:15",
  "last_fire": "12:00",
  "fired_at": "12:00",
  "verdicts": 9
