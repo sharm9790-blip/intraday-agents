@@ -689,9 +689,13 @@ def main(state_dir):
         save(watch_path, watch)
     if sl_nudge(ind_pos, mt_today, today, minutes, watch):
         save(watch_path, watch)
+    # Connector health: the latest cloud run of today decides (premarket.json before the first
+    # debate, plan.json after it). Using only premarket.json kept a morning "false" alive all
+    # day, so the "back" alert never came (18 Nov).
     pm_doc = load(os.path.join(state_dir, "premarket.json"), {})
-    if pm_doc.get("connectors"):   # 08:45 run: catch an expired connector before the open
-        health.connectors(pm_doc, today, watch.setdefault("health", {}), telegram)
+    conn_doc = plan_doc if plan_doc.get("date") == today and plan_doc.get("connectors") else pm_doc
+    if conn_doc.get("connectors"):
+        health.connectors(conn_doc, today, watch.setdefault("health", {}), telegram)
 
     # 1) Forward a new verdict from the cloud debate.
     vid = plan_doc.get("verdict_id")

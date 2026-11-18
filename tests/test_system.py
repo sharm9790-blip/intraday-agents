@@ -680,6 +680,12 @@ class TestHealth(Base):
         health.check(dt.datetime(2026, 11, 9, 10, 30, tzinfo=IST), watch, {}, w.NSE_HOLIDAYS, out.append)
         self.assertEqual(len(out), n, "alerts must not repeat")
 
+    def test_connector_null_is_not_offline(self):
+        out, flags = [], {}
+        health.connectors({"date": "2026-11-09", "connectors": {"indmoney": None, "investsights": True}},
+                          "2026-11-09", flags, out.append)
+        self.assertEqual(out, [])
+
     def test_connector_offline_and_back(self):
         flags, out = {}, []
         doc = {"date": "2026-11-09", "connectors": {"groww": False, "indmoney": False}}
