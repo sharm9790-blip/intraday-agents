@@ -1,26 +1,14 @@
-🧪 <b>PAPER</b> · Nifty options
-⚪ <b>NO TRADE — 13:35 IST</b>
+🧪 <b>PAPER</b> · Nifty day report
 
-📈 Nifty 25,160 (−0.90%) · VIX 15.5
-🧱 Calls 25,300 · Puts 25,000
-PCR 0.78 · Day low 25,142
+<b>Today</b>
+No paper trades (all NO TRADE)
+Nifty −0.9%, boxed 25,140–25,200
+PE R:R &lt; 1.5; stood down 14:07
 
-<b>Why not</b>
-• 13:30 close 25,160, not below;
-  day low 25,142 still holds
-• Put writers adding below price
-  (25,150 PE +279%, 25,200 kept)
-• 25200 PE R:R ~1.45 &lt; 1.5
-• 4 supports before 25,000 wall
-💡 Downtrend, but stuck in a box
+<b>Last 20 days</b> (after costs)
+Trades 0 · Win rate –
+Net ₹0 · Profit factor –
+Not filled: 0
 
-<b>Flips to PE if</b> (by 14:07)
-• 5-min close &lt; 25,140 on volume
-• 25,150/25,200 put OI cut
-• SL 25,200, T1 25,050, ₹ ≤ 200
-
-<b>After 14:07</b>
-• Stand down for the day
-
-🔎 Next check: next scheduled run
-<i>Paper trade only, not advice.</i>
+💡 No trades yet: too early to judge
+<i>Paper trade for testing only, not SEBI-registered investment advice. Options trading is high risk.</i>
