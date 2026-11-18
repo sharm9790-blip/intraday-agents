@@ -40,6 +40,7 @@
   "TRENT": "12:25 weak-day, net R:R 0.8 at T1, RSI74; flips on 5-min close >3240 on 1.5x vol, net R:R>=1.5",
   "KOTAKBANK": "12:43 breakout failed 5x at 503.05, net R:R 1.0-1.17 to T1, weak banks; flips on 5-min close >503.1 on 300k+ vol, SL 500, T1>=508",
   "SHOPERSTOP": "12:43 illiquid pump, 44k shares/day, RSI82",
-  "360ONE": "12:43 net R:R 1.1-1.2, 1220 call wall"
+  "360ONE": "12:43 net R:R 1.1-1.2, 1220 call wall",
+  "GCSL": "13:00 no pack data, weak tape, no confirmed setup"
  }
 }

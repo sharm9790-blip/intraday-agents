@@ -1,16 +1,12 @@
-🔴 <b>NO TRADE — 12:43 IST</b>
-Weak tape: Nifty -0.68%
-Only 26% stocks above VWAP
+🔴 <b>NO TRADE — 13:00 IST</b>
+Weak tape: Nifty -0.79%
+Only 21% stocks above VWAP
 
-<pre>₹        Why
-KOTAKBANK R:R 1.0-1.2
-IEX      4x rejected 117.3
-SHOPERSTOP illiquid</pre>
+Every scanner leader already
+rejected today. No new setup
+clears R:R 1.5.
 
-🔁 Closest: KOTAKBANK
+🔁 Watching: KOTAKBANK
 Flips on 5-min close above ₹503.1
-on 300k+ vol, SL 500, T1 508+
-
-💡 Weak market, no setup clears R:R 1.5.
 
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
