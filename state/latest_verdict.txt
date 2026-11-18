@@ -1,21 +1,45 @@
-⚪ <b>NO TRADE — 09:45 scan</b>
+🟢 <b>GO — WOCKPHARMA</b>
+🕐 10:05 IST  ·  Confidence 6/10
 
-<b>Looked at</b>
-<pre>Stock       Why not
-PVRINOX     vol 1.3x, R:R 0.9
-URBANCO     R:R 0.9
-GLENMARK    RSI78, 2700 wall
-WESTLIFE    R:R 0.9, thin
-VRLLOG      R:R 1.0, T1 at high</pre>
+📥 Buy  <b>₹2059</b>  (max ₹2060.5)
+⚡ <b>BUY NOW</b>
+🛑 Stop loss  <b>₹2038</b>
+🎯 Target 1  <b>₹2100</b>  (sell half)
+🎯 Target 2  <b>₹2125</b>
+📦 Qty  <b>43</b> shares
 
-<b>🔁 Flips on</b>
-• PVRINOX close &gt;₹1701, vol 2x
-• URBANCO close &gt;₹167, vol 2x
-• GLENMARK close &gt;₹2672
-• WESTLIFE close &gt;₹682.5
-• VRLLOG close &gt;₹350.2, vol 2x
+⚡ <b>HIGH CONFIDENCE 6/10</b>
+📝 <b>Draft order</b> (you place it)
+Intraday · Limit · NSE
+Qty  <code>43</code>
+Buy limit  <code>2060.5</code>
+SL-M trigger  <code>2038</code>
+Sell half  <code>21</code> @ <code>2100</code>
+📲 INDmoney: search <code>WOCKPHARMA</code>
 
-💡 Weak: Nifty -0.6%, 8% above
-VWAP. No dip plans. Sit out.
+<b>✅ Buy only if</b>
+• Price ₹2055–2060.5
+• 5-min not closed below ₹2052
 
+<b>❌ Cancel if</b>
+• Not filled by 10:23
+• Runs above ₹2060.5 (no chase)
+• 5-min close below ₹2052
+
+<b>💰 Risk vs reward</b>
+Max loss ≈ ₹1,000
+Reward 1.7× the risk
+Exit early: 5-min close below VWAP ₹2042
+
+<b>Why this stock</b>
+• Broke opening high on 3× volume
+• Up 2.5% while Nifty −0.4%
+• Healthcare sector holding
+
+<b>Skipped</b>
+• CHENNPETRO — no volume, R:R 1.46
+• MRPL — RSI 75, R:R 1.27
+
+⚠️ Weak market day, trade carefully
+📡 Watcher checks every 5 min
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>

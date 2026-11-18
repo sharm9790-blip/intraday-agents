@@ -1,2 +1,32 @@
-{"date": "2026-11-18", "verdict_id": "2026-11-18_0950", "go_count": 0, "plan": null,
- "connectors": {"indmoney": true, "investsights": true}}
+{
+ "date": "2026-11-18",
+ "verdict_id": "2026-11-18_1005",
+ "go_count": 1,
+ "plan": {
+  "symbol": "WOCKPHARMA",
+  "yahoo": "WOCKPHARMA.NS",
+  "name": "Wockhardt",
+  "side": "long",
+  "zone_low": 2055.0,
+  "zone_high": 2060.5,
+  "entry": 2059.0,
+  "max_entry": 2060.5,
+  "trigger_close_above": 2055.0,
+  "sl": 2038.0,
+  "t1": 2100.0,
+  "t2": 2125.0,
+  "qty": 43,
+  "deadline": "10:23",
+  "cancel_if_high_reaches": 2100.0,
+  "cancel_if_close_below": 2052.0,
+  "exit_if_close_below_after_entry": 2042.0,
+  "time_stop": "15:00",
+  "entry_type": "now",
+  "confidence": 6,
+  "atr5": 17.6
+ },
+ "connectors": {
+  "indmoney": true,
+  "investsights": true
+ }
+}

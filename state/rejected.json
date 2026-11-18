@@ -5,6 +5,8 @@
   "URBANCO": "09:50 net R:R 0.9; flips on 5-min close >167 on 2x vol, or VWAP hold 164",
   "GLENMARK": "09:50 RSI78, 2700 call wall, net R:R 1.25; flips on 5-min close >2672 with call OI unwinding",
   "WESTLIFE": "09:50 net R:R 0.9 thin; flips on 5-min close >682.5 on 2x vol",
-  "VRLLOG": "09:50 net R:R 1.0, T1 at day high; flips on 5-min close >350.2 on 2x vol"
+  "VRLLOG": "09:50 net R:R 1.0, T1 at day high; flips on 5-min close >350.2 on 2x vol",
+  "CHENNPETRO": "10:05 vol 1.13x, net R:R 1.46; flips on 5-min close >1452 on 2x vol with Nifty above VWAP",
+  "MRPL": "10:05 RSI75, vol 1.0x, net R:R 1.27; flips on 5-min close >179.5 on 2x vol"
  }
 }
