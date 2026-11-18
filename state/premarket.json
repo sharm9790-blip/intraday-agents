@@ -1,7 +1,7 @@
 {
  "date": "2026-11-18",
- "stage": "overnight",
- "id": "2026-11-18_0856",
+ "stage": "preopen",
+ "id": "2026-11-18_0907",
  "connectors": {
   "indmoney": false,
   "investsights": true
@@ -30,7 +30,8 @@
    "time_stop": "15:00",
    "keep": true,
    "conviction": 6,
-   "why": "PDH breakout, 2.2x vol, F&O liquid"
+   "why": "PDH breakout, 2.2x vol, F&O liquid",
+   "preopen": "n/a"
   },
   {
    "symbol": "KFINTECH",
@@ -53,7 +54,8 @@
    "time_stop": "15:00",
    "keep": true,
    "conviction": 6,
-   "why": "PDH break, 2.4x vol, above 20d high"
+   "why": "PDH break, 2.4x vol, above 20d high",
+   "preopen": "n/a"
   },
   {
    "symbol": "PRESTIGE",
@@ -76,7 +78,9 @@
    "time_stop": "15:00",
    "keep": true,
    "conviction": 5,
-   "why": "Near high above 20d high; realty rate risk"
+   "why": "Near high above 20d high; realty rate risk",
+   "preopen": "n/a"
   }
- ]
+ ],
+ "preopen": "n/a"
 }
