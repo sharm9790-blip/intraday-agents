@@ -1,4 +1,12 @@
 {
  "date": "2026-11-18",
- "symbols": {}
+ "symbols": {
+  "NAVINFLUOR": {
+   "at": "11:35",
+   "rejected_at": "11:15",
+   "level": 10100.0,
+   "kind": "flip level",
+   "close": 10120.5
+  }
+ }
 }
