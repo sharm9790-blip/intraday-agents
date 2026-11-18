@@ -1,6 +1,37 @@
 {
  "date": "2026-11-18",
- "open": [],
+ "open": [
+  {
+   "symbol": "ANGELONE",
+   "yahoo": "ANGELONE.NS",
+   "at": "09:25",
+   "group": "Capital markets",
+   "pct": 3.32,
+   "gap": 0.83,
+   "vol_frac": 0.42,
+   "entry": 361.4,
+   "sl": 357.48,
+   "t1": 367.28,
+   "t2": 373.16,
+   "risk": 3.92,
+   "atr5": 5.600006103515625
+  },
+  {
+   "symbol": "CDSL",
+   "yahoo": "CDSL.NS",
+   "at": "09:25",
+   "group": "Capital markets",
+   "pct": 1.47,
+   "gap": -0.19,
+   "vol_frac": 0.23,
+   "entry": 1460.9,
+   "sl": 1449.28,
+   "t1": 1478.33,
+   "t2": 1495.76,
+   "risk": 11.62,
+   "atr5": 16.60003662109375
+  }
+ ],
  "days": {
   "2026-11-16": [
    {
