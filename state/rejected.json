@@ -25,13 +25,14 @@
   "SUNTV": "10:57 breakout fired, RSI82, net R:R 0.5; flips on 5-min close >683.6 on rising vol",
   "GAIL": "10:57 190 call wall 6.2M OI, PCR 0.48, net R:R 0.9; flips on 5-min close >193.5 with call OI unwinding",
   "BLSPOLY": "10:57 results unannounced today; flips on 5-min close >288.2 on 2x vol after results",
-  "NAVINFLUOR": "11:15 10100 call wall, PCR 0.26, vol 1.1x; flips on 5-min close >10100 on 2x vol with call OI unwinding",
+  "NAVINFLUOR": "11:45 rolled below 10100, call OI build; flips on 5-min close >10130 on 2x vol with call OI unwinding",
   "EMIL": "11:15 spike faded, vol collapsed, pdh 141.4 caps",
   "GLASSWALL": "11:32 chase +3%, net R:R 1.3, ASM unchecked; flips on 5-min close >283.7 on 1.5x vol with T1>=294",
   "CIPLA": "11:32 RSI85, results board meeting today, net R:R 1.26; flips on 5-min close >1480 after results",
   "EXIDEIND": "11:32 net R:R 1.07 pinned at R1, weak Auto; flips on 5-min close >393.5 on 1.5x vol",
   "SMLMAH": "11:32 near upper circuit, thin vol",
   "JSFB": "11:32 unverified, no setup; flips on 5-min close >427.5 on 2x vol",
-  "IEX": "11:32 ATR too thin for R:R"
+  "IEX": "11:32 ATR too thin for R:R",
+  "BALUFORGE": "11:45 block-print volume, failed ORB at 542, net R:R 1.15, weak sector; flips on 5-min close >543 on 20k+ shares twice, Nifty above VWAP"
  }
 }

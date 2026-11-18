@@ -1,14 +1,14 @@
-🔴 <b>NO TRADE — 11:32 IST</b>
+🔴 <b>NO TRADE — 11:45 IST</b>
 
-Market weak. Nifty -0.43%.
-Only 37% of stocks above VWAP.
+Market weak. Nifty -0.51%.
+Only 29% of stocks above VWAP.
 
 <pre>Stock     Why not     Flips &gt;
-GLASSWALL chase R:R1.3  283.7
-CIPLA     RSI85 results 1480
-EXIDEIND  R:R 1.07    393.5
+BALUFORGE block vol   543x2
+NAVINFLUOR call OI    10130
+CIPLA     results     1480
 </pre>
 
-💡 Bull ideas failed Bear/Judge rules.
+💡 No confirmed breakout on real volume.
 
 <i>Educational analysis, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
