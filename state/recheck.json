@@ -7,6 +7,13 @@
    "level": 2672.0,
    "kind": "flip level",
    "close": 2678.5
+  },
+  "SUNTV": {
+   "at": "14:10",
+   "rejected_at": "10:57",
+   "level": 683.6,
+   "kind": "flip level",
+   "close": 685.5
   }
  }
 }
