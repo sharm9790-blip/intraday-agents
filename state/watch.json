@@ -4,11 +4,13 @@
  "live": [],
  "log": [],
  "health": {},
- "last_run": "08:00",
+ "last_run": "08:05",
  "taken": [],
  "trades": 0,
  "day_trades": 0,
  "open_slots": [],
- "cues": [],
+ "cues": [
+  "pre"
+ ],
  "pre_fired": []
 }
