@@ -1,14 +1,25 @@
-🔔 <b>FINAL WATCHLIST · 09:08</b>
+🌅 <b>PREMARKET WATCHLIST · 08:56</b>
 
-No pre-open price data available.
-Gap-down open likely (US -2%).
+🌍 US -1% (Dow -1.6%) · Asia soft
+🛢 Brent 92.6 · VIX 15.5 · FIIs buying
+⚠️ Soft open likely
+📅 No results/events today
 
-<pre>Stock      Above   SL   T1  Qty
-KPRMILL     1218 1202 1250   53</pre>
-• KPRMILL — 1.8× vol, 20-day high
+<b>Watchlist</b> (₹; buy only above)
+<pre>Stock      Above    SL    T1 Qty
+GMRAIRPORT 105.3 103.6 108.6 526
+KFINTECH    985  966.5 1022  48
+PRESTIGE   1704 1672  1769   27</pre>
+<b>Why</b>
+• GMRAIRPORT — 2.2× vol, new high
+• KFINTECH — 2.4× vol, 20-day high
+• PRESTIGE — near high, realty rate risk
+
+❌ Dropped: AARTIPHARM, SGFIN, SANSERA,
+WELSPUNLIV, ICIL (stretched/stale/no vol)
 
 ⏳ <b>Don't buy before 09:20.</b>
-🔔 BUY NOW only on a green 5-min close
-above the level on 1.5× volume.
-Not by 09:40 → dropped.
-<i>Educational analysis from market data, not SEBI-registered investment advice. You place and manage any order yourself.</i>
+🔔 Bot sends BUY NOW on a green 5-min
+close above level on volume. Not by
+09:40 → dropped. Final list ~09:12.
+<i>Analysis only, not advice. You place orders yourself.</i>
