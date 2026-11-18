@@ -1,6 +1,29 @@
 {
- "date": "2026-11-17",
- "open": [],
+ "date": "2026-11-18",
+ "open": [
+  {
+   "symbol": "HINDZINC",
+   "yahoo": "HINDZINC.NS",
+   "price": 532.15,
+   "sl": 534.97,
+   "t1": 527.92,
+   "t2": 525.1,
+   "qty": 187,
+   "sector": "Metals & Mining",
+   "at": "10:00"
+  },
+  {
+   "symbol": "LICHSGFIN",
+   "yahoo": "LICHSGFIN.NS",
+   "price": 611.3,
+   "sl": 615.66,
+   "t1": 604.76,
+   "t2": 600.4,
+   "qty": 163,
+   "sector": "Financial Services",
+   "at": "10:00"
+  }
+ ],
  "days": {
   "2026-11-16": [
    {
