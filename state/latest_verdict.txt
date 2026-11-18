@@ -1,16 +1,15 @@
-🔴 <b>NO TRADE — 12:05 IST</b>
-Weak tape: Nifty -0.55%
-Only 26% stocks above VWAP
+🔴 <b>NO TRADE — 12:26 IST</b>
+Weak tape: Nifty -0.56%
+Only 28% stocks above VWAP
 
 <pre>₹        Why
-SYRMA    spike faded, R:R 1.2
-UJJIVANSFB R:R 0.7 to T1
-UPL      560 call wall
+TRENT    R:R 0.8, RSI 74
+IEX      R:R 1.25, thin ATR
 JSFB     illiquid</pre>
 
-🔁 Closest: SYRMA
-Flips on 5-min close above ₹1,474
-on 40k+ volume
+🔁 Closest: TRENT
+Flips on 5-min close above ₹3,240
+on 1.5x volume, R:R 1.5+
 
 💡 Weak market, no setup clears R:R 1.5.
 
