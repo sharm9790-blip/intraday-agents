@@ -1,33 +1,12 @@
 {
- "date": "2026-11-17",
+ "date": "2026-11-18",
  "symbols": {
-  "SIGNATURE": {
-   "at": "14:20",
-   "rejected_at": "13:53",
-   "level": 831.95,
-   "kind": "day high",
-   "close": 834.65
-  },
-  "GANDHAR": {
-   "at": "11:35",
-   "rejected_at": "11:34",
-   "level": 1.5,
+  "PVRINOX": {
+   "at": "10:00",
+   "rejected_at": "09:50",
+   "level": 1701.0,
    "kind": "flip level",
-   "close": 270.0
-  },
-  "MBEL": {
-   "at": "11:35",
-   "rejected_at": "11:34",
-   "level": 15.0,
-   "kind": "flip level",
-   "close": 297.65
-  },
-  "SBIFUNDS": {
-   "at": "14:25",
-   "rejected_at": "13:22",
-   "level": 530.5,
-   "kind": "flip level",
-   "close": 531.6
+   "close": 1730.0
   }
  }
 }
