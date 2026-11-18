@@ -25,13 +25,13 @@
   "SUNTV": "10:57 breakout fired, RSI82, net R:R 0.5; flips on 5-min close >683.6 on rising vol",
   "GAIL": "10:57 190 call wall 6.2M OI, PCR 0.48, net R:R 0.9; flips on 5-min close >193.5 with call OI unwinding",
   "BLSPOLY": "10:57 results unannounced today; flips on 5-min close >288.2 on 2x vol after results",
-  "NAVINFLUOR": "11:45 rolled below 10100, call OI build; flips on 5-min close >10130 on 2x vol with call OI unwinding",
+  "NAVINFLUOR": "13:20 weak-day dip banned, +3.6% chase, vol fading, net R:R ~1.0 at market, call walls 10200/10300; flips on 5-min close >10184 on 1.5x vol, net R:R>=1.5 to T1>10200",
   "EMIL": "11:15 spike faded, vol collapsed, pdh 141.4 caps",
   "GLASSWALL": "11:32 chase +3%, net R:R 1.3, ASM unchecked; flips on 5-min close >283.7 on 1.5x vol with T1>=294",
   "CIPLA": "11:32 RSI85, results board meeting today, net R:R 1.26; flips on 5-min close >1480 after results",
   "EXIDEIND": "11:32 net R:R 1.07 pinned at R1, weak Auto; flips on 5-min close >393.5 on 1.5x vol",
   "SMLMAH": "11:32 near upper circuit, thin vol",
-  "JSFB": "12:25 illiquid; flips on 5-min close >430 with real volume",
+  "JSFB": "13:20 sold off to 425, illiquid; flips on 5-min close >433.5 with real volume",
   "IEX": "12:43 rejected 4x at 117.2-117.3, vol fading, book 38/62, RSI73; flips on 5-min close >117.3 on 150k+ vol",
   "BALUFORGE": "11:45 block-print volume, failed ORB at 542, net R:R 1.15, weak sector; flips on 5-min close >543 on 20k+ shares twice, Nifty above VWAP",
   "SYRMA": "12:05 two-candle spike, vol faded, call wall 1500, net R:R 1.1-1.3; flips on 5-min close >1474 on 40k+ vol",
@@ -41,6 +41,7 @@
   "KOTAKBANK": "12:43 breakout failed 5x at 503.05, net R:R 1.0-1.17 to T1, weak banks; flips on 5-min close >503.1 on 300k+ vol, SL 500, T1>=508",
   "SHOPERSTOP": "12:43 illiquid pump, 44k shares/day, RSI82",
   "360ONE": "12:43 net R:R 1.1-1.2, 1220 call wall",
-  "GCSL": "13:00 no pack data, weak tape, no confirmed setup"
+  "GCSL": "13:00 no pack data, weak tape, no confirmed setup",
+  "SIGNATURE": "13:20 RSI76 thin-base burst, net R:R 1.0 at market, dip banned; flips on 5-min close >862.5 on 2x vol, net R:R>=1.5"
  }
 }

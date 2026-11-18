@@ -1,12 +1,19 @@
-🔴 <b>NO TRADE — 13:00 IST</b>
-Weak tape: Nifty -0.79%
-Only 21% stocks above VWAP
+🔴 <b>NO TRADE — 13:20 IST</b>
 
-Every scanner leader already
-rejected today. No new setup
-clears R:R 1.5.
+Weak tape: Nifty -0.78%
+Only 24% stocks above VWAP
 
-🔁 Watching: KOTAKBANK
-Flips on 5-min close above ₹503.1
+<b>NAVINFLUOR</b> ❌
++3.6% chase, volume fading,
+dip banned on weak day,
+net R:R ~1.0 at market.
+Flips: 5-min close above
+₹10,184 on 1.5x volume
+
+<b>SIGNATURE</b> ❌
+RSI 76, thin-base spike,
+net R:R ~1.0.
+Flips: 5-min close above
+₹862.5 on 2x volume
 
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
