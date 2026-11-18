@@ -1,15 +1,14 @@
-🔴 <b>NO TRADE — 11:15 IST</b>
+🔴 <b>NO TRADE — 11:32 IST</b>
 
-Market weak. Nifty -0.64%.
-Only 32% of stocks above VWAP.
+Market weak. Nifty -0.43%.
+Only 37% of stocks above VWAP.
 
 <pre>Stock     Why not     Flips &gt;
-URBANCO   R:R 0.9     171.7
-NAVINFLUOR call wall  10100
-SUNTV     R:R 0.5     683.8
-IIFL      chase       682
+GLASSWALL chase R:R1.3  283.7
+CIPLA     RSI85 results 1480
+EXIDEIND  R:R 1.07    393.5
 </pre>
 
-💡 Bull found no setup. Dips banned.
+💡 Bull ideas failed Bear/Judge rules.
 
-<i>Educational analysis, not SEBI-registered advice. Intraday trading is high risk; you place and manage any order yourself.</i>
+<i>Educational analysis, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
