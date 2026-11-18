@@ -22,6 +22,17 @@
    "qty": 163,
    "sector": "Financial Services",
    "at": "10:00"
+  },
+  {
+   "symbol": "MANAPPURAM",
+   "yahoo": "MANAPPURAM.NS",
+   "price": 283.55,
+   "sl": 286.18,
+   "t1": 279.61,
+   "t2": 276.98,
+   "qty": 352,
+   "sector": "Financial Services",
+   "at": "10:30"
   }
  ],
  "days": {
