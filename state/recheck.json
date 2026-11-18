@@ -1,12 +1,4 @@
 {
  "date": "2026-11-18",
- "symbols": {
-  "PVRINOX": {
-   "at": "10:00",
-   "rejected_at": "09:50",
-   "level": 1701.0,
-   "kind": "flip level",
-   "close": 1730.0
-  }
- }
+ "symbols": {}
 }
