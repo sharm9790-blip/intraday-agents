@@ -1,20 +1,22 @@
-🔴 <b>NO TRADE — 13:52 IST</b>
+🔴 <b>NO TRADE — 14:08 IST</b>
 
-Weak tape: Nifty -0.85%
-Only 25% stocks above VWAP
+Choppy tape: Nifty -0.59%
+Only 41% stocks above VWAP
 
 <b>JTLIND</b> ❌
-Net R:R ~1.0 at market,
-dip plan banned on weak day.
-Flips: 5-min close above
-₹76.65 on 1.5x volume
+One block print, volume fading.
+Net R:R 1.4 on retest, 0.8 now.
+Flips: close above ₹77.8
+on 2x fresh volume
 
-<b>RAYMONDREL</b> ❌
-Volume only 1.4x, no news,
-cap at ₹629-631.
-Flips: close above ₹631
-on 2x volume
+<b>ACMESOLAR</b> ❌
+RSI 77, net R:R 0.45 to T1.
+Flips: close above ₹416.1
+on 1.5x volume
 
-💡 Weak day, no clean setup. Staying flat is fine.
+<b>INOXINDIA</b> ❌
+Up 8%, no pullback, fading.
+
+💡 Weak day, no setup clears 1.5 R:R. Staying flat is fine.
 
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
