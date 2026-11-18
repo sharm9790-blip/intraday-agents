@@ -1,10 +1,2 @@
-{
- "date": "2026-11-17",
- "verdict_id": "2026-11-17_1423",
- "go_count": 2,
- "plan": null,
- "connectors": {
-  "indmoney": true,
-  "investsights": true
- }
-}
+{"date": "2026-11-18", "verdict_id": "2026-11-18_0950", "go_count": 0, "plan": null,
+ "connectors": {"indmoney": true, "investsights": true}}

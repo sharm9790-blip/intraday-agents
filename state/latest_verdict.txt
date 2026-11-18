@@ -1,17 +1,21 @@
-⚪ <b>NO TRADE — 14:22 scan</b>
+⚪ <b>NO TRADE — 09:45 scan</b>
 
 <b>Looked at</b>
 <pre>Stock       Why not
-UPL         R:R 1.1, conf 4
-PRICOLLTD   faded 2% off high
-GMRAIRPORT  dead range
-KRBL        thin, drifting
-IXIGO etc   +4-7% chase</pre>
+PVRINOX     vol 1.3x, R:R 0.9
+URBANCO     R:R 0.9
+GLENMARK    RSI78, 2700 wall
+WESTLIFE    R:R 0.9, thin
+VRLLOG      R:R 1.0, T1 at high</pre>
 
 <b>🔁 Flips on</b>
-• UPL close &gt;₹568.5, vol 90k+, T1 ₹578+
+• PVRINOX close &gt;₹1701, vol 2x
+• URBANCO close &gt;₹167, vol 2x
+• GLENMARK close &gt;₹2672
+• WESTLIFE close &gt;₹682.5
+• VRLLOG close &gt;₹350.2, vol 2x
 
-💡 Choppy: 27% above VWAP.
-Late slot, no setup. Sit out.
+💡 Weak: Nifty -0.6%, 8% above
+VWAP. No dip plans. Sit out.
 
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
