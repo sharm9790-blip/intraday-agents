@@ -1,22 +1,26 @@
 🧪 <b>PAPER</b> · Nifty options
-⚪ <b>NO TRADE — 09:35 IST</b>
+⚪ <b>NO TRADE — 10:35 IST</b>
 
-📈 Nifty 25,296 (−0.4%) · VIX 15.5
-🧱 Calls 25,500 · Puts 25,000
-PCR 0.98 · Max pain 25,400
+📈 Nifty 25,249 (−0.55%) · VIX 15.5
+🧱 Calls 25,300 · Puts 25,200
+PCR 0.91 · Day low 25,206
 
 <b>Why not</b>
-• Inside opening range
-  25,282–25,391
-• Call and put writing both
-  rising at 25,250–25,400
-• 25300 PE idea: net R:R 1.2
-  (needs 1.5)
-💡 Range day: buyers lose to decay
+• Below VWAP but stuck
+  25,206–25,321 for 50 min
+• Writers adding at 25,200 puts
+  and 25,250 both sides (pin)
+• 25300 PE bleeding with spot
+  flat; IV easing
+💡 Breakdown not confirmed yet
 
 <b>Flips to PE if</b>
-• 5-min close &lt; 25,267
-• Put writers 25,250/25,200 exit
+• 5-min close &lt; 25,200
+  below VWAP
+• 25,200 put writers exit
 
-🔎 Next check: 10:00 IST
+<b>On hold if</b>
+• 5-min close &gt; 25,290 (VWAP)
+
+🔎 Next check: 11:05 IST
 <i>Paper trade only, not advice.</i>
