@@ -2,7 +2,7 @@
  "date": "2026-11-18",
  "symbols": {
   "PVRINOX": "10:19 RSI88, one spike candle, fading vol, net R:R 1.2; flips on 5-min close >1740 on 60k+ vol",
-  "URBANCO": "10:40 up 4.5% chase, LTP net R:R 0.75, dip banned on weak day; flips on 5-min close >170.6 on 1.5x vol",
+  "URBANCO": "11:15 +5.5% chase, 2.4% above VWAP, vol fading, QIP overhang, net R:R 0.9; flips on 5-min close >171.7 on 1.5x vol",
   "GLENMARK": "09:50 RSI78, 2700 call wall, net R:R 1.25; flips on 5-min close >2672 with call OI unwinding",
   "WESTLIFE": "09:50 net R:R 0.9 thin; flips on 5-min close >682.5 on 2x vol",
   "VRLLOG": "09:50 net R:R 1.0, T1 at day high; flips on 5-min close >350.2 on 2x vol",
@@ -24,6 +24,8 @@
   "AWL": "10:57 net R:R 1.17, vol fading, dip banned; flips on 5-min close >171.9 on 1.5x vol with T1>=176",
   "SUNTV": "10:57 breakout fired, RSI82, net R:R 0.5; flips on 5-min close >683.6 on rising vol",
   "GAIL": "10:57 190 call wall 6.2M OI, PCR 0.48, net R:R 0.9; flips on 5-min close >193.5 with call OI unwinding",
-  "BLSPOLY": "10:57 results unannounced today; flips on 5-min close >288.2 on 2x vol after results"
+  "BLSPOLY": "10:57 results unannounced today; flips on 5-min close >288.2 on 2x vol after results",
+  "NAVINFLUOR": "11:15 10100 call wall, PCR 0.26, vol 1.1x; flips on 5-min close >10100 on 2x vol with call OI unwinding",
+  "EMIL": "11:15 spike faded, vol collapsed, pdh 141.4 caps"
  }
 }
