@@ -1,16 +1,16 @@
-<b>🔍 14:23 scan: NO TRADE</b>
+<b>🔁 14:24 re-check: NO TRADE</b>
 
-Debate not run in full.
-Too late: it would end after
-14:30 (no entry window left).
+MTARTECH, SUNTV crossed their
+flip levels, but:
 
-Tape: weak day
-Nifty -0.56%, 39% above VWAP.
+• No live pack data to confirm
+  volume or depth
+• Weak tape: Nifty -0.56%,
+  39% above VWAP
+• Entry window ends 14:30,
+  no room for R:R 1.5
+• SUNTV was RSI 82, R:R 0.5
 
-Top scanner names all rejected
-earlier today (URBANCO, GLENMARK,
-SYRMA, ACMESOLAR, AWL...).
-
-No new setup. Stay flat.
+Stay flat.
 
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
