@@ -1,4 +1,12 @@
 {
  "date": "2026-11-18",
- "symbols": {}
+ "symbols": {
+  "URBANCO": {
+   "at": "10:50",
+   "rejected_at": "10:40",
+   "level": 170.6,
+   "kind": "flip level",
+   "close": 170.95
+  }
+ }
 }
