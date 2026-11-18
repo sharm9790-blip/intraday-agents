@@ -1,17 +1,17 @@
-🔴 <b>NO TRADE — 10:40 IST</b>
+🔴 <b>NO TRADE — 10:57 IST</b>
 
-Market weak. Nifty -0.5%.
-Only 34% of stocks above VWAP.
+Market weak. Nifty -0.65%.
+Only 24% of stocks above VWAP.
 
 <pre>Stock     Why not     Flips &gt;
-URBANCO   up 4.5%     170.6
-IXIGO     R:R 1.0     179.5
-CRAFTSMAN too thin    11375
-PAISALO   no setup    76
-MAHABANK  no setup    97
-HONASA    no setup    535
+AWL       R:R 1.2     171.9
+SUNTV     R:R 0.5     683.6
+GAIL      call wall   193.5
+BLSPOLY   results     288.2
+URBANCO   R:R 1.0     170.6
+RATNAVEER no setup    376
 </pre>
 
-💡 Dip entries banned on weak days.
+💡 No setup passes R:R 1.5 today. Dips banned.
 
-<i>Analysis only, not advice. You place orders yourself.</i>
+<i>Educational analysis, not SEBI-registered advice. Intraday trading is high risk; you place and manage any order yourself.</i>

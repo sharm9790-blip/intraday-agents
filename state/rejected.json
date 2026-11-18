@@ -20,6 +20,10 @@
   "CRAFTSMAN": "10:40 too thin (9.5k shares), dip only; flips on close >11375 on 2x vol with depth",
   "PAISALO": "10:40 no setup; flips on 5-min close >76 on vol",
   "MAHABANK": "10:40 no setup; flips on 5-min close >97 on vol",
-  "HONASA": "10:40 no setup; flips on 5-min close >535 on vol"
+  "HONASA": "10:40 no setup; flips on 5-min close >535 on vol",
+  "AWL": "10:57 net R:R 1.17, vol fading, dip banned; flips on 5-min close >171.9 on 1.5x vol with T1>=176",
+  "SUNTV": "10:57 breakout fired, RSI82, net R:R 0.5; flips on 5-min close >683.6 on rising vol",
+  "GAIL": "10:57 190 call wall 6.2M OI, PCR 0.48, net R:R 0.9; flips on 5-min close >193.5 with call OI unwinding",
+  "BLSPOLY": "10:57 results unannounced today; flips on 5-min close >288.2 on 2x vol after results"
  }
 }
