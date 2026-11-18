@@ -1,6 +1,13 @@
 {
  "date": "2026-11-18",
  "symbols": {
+  "NAVINFLUOR": {
+   "at": "12:55",
+   "rejected_at": "11:45",
+   "level": 10130.0,
+   "kind": "flip level",
+   "close": 10165.5
+  },
   "JSFB": {
    "at": "12:25",
    "rejected_at": "12:25",
