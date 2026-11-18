@@ -1,25 +1,26 @@
 🧪 <b>PAPER</b> · Nifty options
-⚪ <b>NO TRADE — 11:32 IST</b>
+⚪ <b>NO TRADE — 12:32 IST</b>
 
-📈 Nifty 25,261 (−0.50%) · VIX 15.5
-🧱 Calls 25,300 · Puts 25,200
-PCR 0.86 · Day low 25,206
+📈 Nifty 25,202 (−0.73%) · VIX 15.5
+🧱 Calls 25,300 · Puts 25,000
+PCR 0.83 · Day low 25,194
 
 <b>Why not</b>
-• Range 25,206–25,322 since 09:40,
-  chopping around VWAP 25,273
-• 25,215 held 3 times
-• Writers adding both sides
-  (25,250 CE / 25,200 PE)
-• PE R:R ~1.1 &lt; 1.5; IV easing
-💡 Range day: buyers lose to decay
+• Testing 25,200, no 5-min
+  close &lt; 25,190 yet
+• Dips to 25,206–25,216 held 6×
+• PE R:R ~1.3 &lt; 1.5; supports
+  at 25,172 / 25,143 / 25,100
+• 25,200 put OI not cut
+💡 Breakdown expected, not proven
 
-<b>Flips to PE if</b>
+<b>Flips to PE if</b> (by 13:30)
 • 5-min close &lt; 25,190 on volume
 • 25,200 put writers exit
+• 25200 PE ≤ ₹180, R:R ≥ 1.5
 
-<b>On hold if</b>
-• 5-min close &gt; 25,290 (VWAP)
+<b>Stay out if</b>
+• 5-min close &gt; 25,240
 
-🔎 Next check: 12:32 IST
+🔎 Next check: 13:32 IST
 <i>Paper trade only, not advice.</i>
