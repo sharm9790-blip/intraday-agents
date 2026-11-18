@@ -1,45 +1,18 @@
-🟢 <b>GO — WOCKPHARMA</b>
-🕐 10:05 IST  ·  Confidence 6/10
+🔴 <b>NO TRADE — 10:19 IST</b>
 
-📥 Buy  <b>₹2059</b>  (max ₹2060.5)
-⚡ <b>BUY NOW</b>
-🛑 Stop loss  <b>₹2038</b>
-🎯 Target 1  <b>₹2100</b>  (sell half)
-🎯 Target 2  <b>₹2125</b>
-📦 Qty  <b>43</b> shares
+Market choppy. Nifty -0.4%.
+Only 46% of stocks above VWAP.
 
-⚡ <b>HIGH CONFIDENCE 6/10</b>
-📝 <b>Draft order</b> (you place it)
-Intraday · Limit · NSE
-Qty  <code>43</code>
-Buy limit  <code>2060.5</code>
-SL-M trigger  <code>2038</code>
-Sell half  <code>21</code> @ <code>2100</code>
-📲 INDmoney: search <code>WOCKPHARMA</code>
+<pre>Stock    Why not    Flips &gt;
+PVRINOX  RSI88,fade  1740
+BIOCON   sector,OI   367
+IIFL     up 6%      682
+IREDA    RSI81      122
+TI       thin R:R   541.5
+</pre>
 
-<b>✅ Buy only if</b>
-• Price ₹2055–2060.5
-• 5-min not closed below ₹2052
+⏳ WOCKPHARMA (10:05) still pending.
 
-<b>❌ Cancel if</b>
-• Not filled by 10:23
-• Runs above ₹2060.5 (no chase)
-• 5-min close below ₹2052
+💡 Spikes on fading volume, no clean 1.5× setups.
 
-<b>💰 Risk vs reward</b>
-Max loss ≈ ₹1,000
-Reward 1.7× the risk
-Exit early: 5-min close below VWAP ₹2042
-
-<b>Why this stock</b>
-• Broke opening high on 3× volume
-• Up 2.5% while Nifty −0.4%
-• Healthcare sector holding
-
-<b>Skipped</b>
-• CHENNPETRO — no volume, R:R 1.46
-• MRPL — RSI 75, R:R 1.27
-
-⚠️ Weak market day, trade carefully
-📡 Watcher checks every 5 min
-<i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
+<i>Analysis only, not advice. You place orders yourself.</i>
