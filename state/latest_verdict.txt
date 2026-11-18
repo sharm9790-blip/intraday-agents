@@ -1,14 +1,17 @@
-🔴 <b>NO TRADE — 11:45 IST</b>
+🔴 <b>NO TRADE — 12:05 IST</b>
+Weak tape: Nifty -0.55%
+Only 26% stocks above VWAP
 
-Market weak. Nifty -0.51%.
-Only 29% of stocks above VWAP.
+<pre>₹        Why
+SYRMA    spike faded, R:R 1.2
+UJJIVANSFB R:R 0.7 to T1
+UPL      560 call wall
+JSFB     illiquid</pre>
 
-<pre>Stock     Why not     Flips &gt;
-BALUFORGE block vol   543x2
-NAVINFLUOR call OI    10130
-CIPLA     results     1480
-</pre>
+🔁 Closest: SYRMA
+Flips on 5-min close above ₹1,474
+on 40k+ volume
 
-💡 No confirmed breakout on real volume.
+💡 Weak market, no setup clears R:R 1.5.
 
-<i>Educational analysis, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
+<i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>

@@ -31,8 +31,11 @@
   "CIPLA": "11:32 RSI85, results board meeting today, net R:R 1.26; flips on 5-min close >1480 after results",
   "EXIDEIND": "11:32 net R:R 1.07 pinned at R1, weak Auto; flips on 5-min close >393.5 on 1.5x vol",
   "SMLMAH": "11:32 near upper circuit, thin vol",
-  "JSFB": "11:32 unverified, no setup; flips on 5-min close >427.5 on 2x vol",
+  "JSFB": "12:05 illiquid, thin book, R:R 0.7; flips on 5-min close >430 on 2x vol",
   "IEX": "11:32 ATR too thin for R:R",
-  "BALUFORGE": "11:45 block-print volume, failed ORB at 542, net R:R 1.15, weak sector; flips on 5-min close >543 on 20k+ shares twice, Nifty above VWAP"
+  "BALUFORGE": "11:45 block-print volume, failed ORB at 542, net R:R 1.15, weak sector; flips on 5-min close >543 on 20k+ shares twice, Nifty above VWAP",
+  "SYRMA": "12:05 two-candle spike, vol faded, call wall 1500, net R:R 1.1-1.3; flips on 5-min close >1474 on 40k+ vol",
+  "UJJIVANSFB": "12:05 flat range, T1 net R:R 0.68; flips on 5-min close >62.5 on 300k+ vol",
+  "UPL": "12:05 2.7M call wall 560, blended R:R 1.4; flips on 5-min close >560.5 on 150k+ vol"
  }
 }
