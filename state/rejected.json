@@ -32,11 +32,14 @@
   "EXIDEIND": "11:32 net R:R 1.07 pinned at R1, weak Auto; flips on 5-min close >393.5 on 1.5x vol",
   "SMLMAH": "11:32 near upper circuit, thin vol",
   "JSFB": "12:25 illiquid; flips on 5-min close >430 with real volume",
-  "IEX": "12:25 net R:R 1.25, vol fading; flips on retest hold >116.9 with vol, SL 116.60",
+  "IEX": "12:43 rejected 4x at 117.2-117.3, vol fading, book 38/62, RSI73; flips on 5-min close >117.3 on 150k+ vol",
   "BALUFORGE": "11:45 block-print volume, failed ORB at 542, net R:R 1.15, weak sector; flips on 5-min close >543 on 20k+ shares twice, Nifty above VWAP",
   "SYRMA": "12:05 two-candle spike, vol faded, call wall 1500, net R:R 1.1-1.3; flips on 5-min close >1474 on 40k+ vol",
   "UJJIVANSFB": "12:05 flat range, T1 net R:R 0.68; flips on 5-min close >62.5 on 300k+ vol",
   "UPL": "12:05 2.7M call wall 560, blended R:R 1.4; flips on 5-min close >560.5 on 150k+ vol",
-  "TRENT": "12:25 weak-day, net R:R 0.8 at T1, RSI74; flips on 5-min close >3240 on 1.5x vol, net R:R>=1.5"
+  "TRENT": "12:25 weak-day, net R:R 0.8 at T1, RSI74; flips on 5-min close >3240 on 1.5x vol, net R:R>=1.5",
+  "KOTAKBANK": "12:43 breakout failed 5x at 503.05, net R:R 1.0-1.17 to T1, weak banks; flips on 5-min close >503.1 on 300k+ vol, SL 500, T1>=508",
+  "SHOPERSTOP": "12:43 illiquid pump, 44k shares/day, RSI82",
+  "360ONE": "12:43 net R:R 1.1-1.2, 1220 call wall"
  }
 }
