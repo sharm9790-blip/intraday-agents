@@ -1,18 +1,22 @@
-🧪 <b>PAPER</b> · Nifty premarket
-🌍 Asia mixed (Nikkei −0.7%, HSI −0.5%, Kospi +0.5%) · US down (S&amp;P −1.0%, Dow −1.6%) · VIX 15.5
-🛢 Brent −0.6% · ₹ firmer · Gap est: mild gap-down (−0.2% to −0.5%)
-📅 Event: no major Nifty event (M3 data 11:30) · CPI 6.1% / RBI tightening talk in background
+🧪 <b>PAPER</b> · Nifty options
+⚪ <b>NO TRADE — 09:35 IST</b>
 
-<pre>Level        Nifty
-Call wall    25,500
-Yday high    25,501
-Max pain     25,400
-Yday close   25,387
-Yday low     25,267
-Put floor    25,000</pre>
-🐂 Bull: 5-day higher lows, PCR 1.09, puts written 25,300–25,500, ₹/crude supportive
-🐻 Bear: weak US close, 25,500 call wall capped yday high, 25,200–25,500 range = chop risk
-💡 Bias: neutral to mild down at open; range 25,200–25,500. Wait for 09:30
-Expiry 23 Nov (Mon) · lot 65
+📈 Nifty 25,296 (−0.4%) · VIX 15.5
+🧱 Calls 25,500 · Puts 25,000
+PCR 0.98 · Max pain 25,400
 
+<b>Why not</b>
+• Inside opening range
+  25,282–25,391
+• Call and put writing both
+  rising at 25,250–25,400
+• 25300 PE idea: net R:R 1.2
+  (needs 1.5)
+💡 Range day: buyers lose to decay
+
+<b>Flips to PE if</b>
+• 5-min close &lt; 25,267
+• Put writers 25,250/25,200 exit
+
+🔎 Next check: 10:00 IST
 <i>Paper trade only, not advice.</i>
