@@ -1,40 +1,6 @@
 {
  "date": "2026-11-18",
- "open": [
-  {
-   "symbol": "HINDZINC",
-   "yahoo": "HINDZINC.NS",
-   "price": 532.15,
-   "sl": 534.97,
-   "t1": 527.92,
-   "t2": 525.1,
-   "qty": 187,
-   "sector": "Metals & Mining",
-   "at": "10:00"
-  },
-  {
-   "symbol": "LICHSGFIN",
-   "yahoo": "LICHSGFIN.NS",
-   "price": 611.3,
-   "sl": 615.66,
-   "t1": 604.76,
-   "t2": 600.4,
-   "qty": 163,
-   "sector": "Financial Services",
-   "at": "10:00"
-  },
-  {
-   "symbol": "MANAPPURAM",
-   "yahoo": "MANAPPURAM.NS",
-   "price": 283.55,
-   "sl": 286.18,
-   "t1": 279.61,
-   "t2": 276.98,
-   "qty": 352,
-   "sector": "Financial Services",
-   "at": "10:30"
-  }
- ],
+ "open": [],
  "days": {
   "2026-11-16": [
    {
@@ -142,6 +108,59 @@
     "steps": [
      "12:50 sold short 390.00",
      "15:00 time stop 391.25"
+    ]
+   }
+  ],
+  "2026-11-18": [
+   {
+    "symbol": "HINDZINC",
+    "yahoo": "HINDZINC.NS",
+    "price": 532.15,
+    "sl": 534.97,
+    "t1": 527.92,
+    "t2": 525.1,
+    "qty": 187,
+    "sector": "Metals & Mining",
+    "at": "10:00",
+    "entry": 532.6,
+    "pnl": -563,
+    "steps": [
+     "10:05 sold short 532.60",
+     "10:10 SL"
+    ]
+   },
+   {
+    "symbol": "LICHSGFIN",
+    "yahoo": "LICHSGFIN.NS",
+    "price": 611.3,
+    "sl": 615.66,
+    "t1": 604.76,
+    "t2": 600.4,
+    "qty": 163,
+    "sector": "Financial Services",
+    "at": "10:00",
+    "entry": 611.75,
+    "pnl": -757,
+    "steps": [
+     "10:05 sold short 611.75",
+     "10:05 SL"
+    ]
+   },
+   {
+    "symbol": "MANAPPURAM",
+    "yahoo": "MANAPPURAM.NS",
+    "price": 283.55,
+    "sl": 286.18,
+    "t1": 279.61,
+    "t2": 276.98,
+    "qty": 352,
+    "sector": "Financial Services",
+    "at": "10:30",
+    "entry": 284.0,
+    "pnl": 443,
+    "steps": [
+     "10:35 sold short 284.00",
+     "15:00 time stop 282.40"
     ]
    }
   ]
