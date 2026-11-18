@@ -1,4 +1,12 @@
 {
  "date": "2026-11-18",
- "symbols": {}
+ "symbols": {
+  "JSFB": {
+   "at": "11:50",
+   "rejected_at": "11:32",
+   "level": 427.5,
+   "kind": "flip level",
+   "close": 429.5
+  }
+ }
 }
