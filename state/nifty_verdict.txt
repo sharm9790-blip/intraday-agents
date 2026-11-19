@@ -1,21 +1,23 @@
 🧪 <b>PAPER</b> · Nifty options
-⚪ <b>NO TRADE — 11:37 IST</b>
+⚪ <b>NO TRADE — 12:36 IST</b>
 
-📈 Nifty 25,335 (+0.42%) · VIX 15.5
-🧱 Calls 25,400 · Puts 25,300
-PCR 1.15 · Max pain 25,250
+📈 Nifty 25,368 (+0.56%) · VIX 15.5
+🧱 Calls 25,400/25,500 · Puts 25,200
+PCR 1.27 · Max pain ~25,300
 
 <b>Why not</b>
-• 3 failed pushes at 25,342
-• PDH 25,391 + 25,400 wall close
-• 25350 CE net R:R 1.49 (need 1.5)
-• Calls written at 25,350
+• Still under PDH 25,391
+• 25,400 CE OI flat, not covering
+• Calls written at 25,350 (+28%)
+• CE R:R passes only in thin band
+• Volume fading into highs
 
-💡 Uptrend, but no breakout yet
-&gt; 25,391 + 25,400 CE covering
-  → 25400 CE watch (SL 25,350)
-Inside 25,295–345 → stay out
+💡 Uptrend, breakout not confirmed
+5m close 25,400–415 + 25,400
+  CE OI −5% + vol ≥90k
+  → 25400 CE (SL 25,345)
+Inside 25,334–391 → stay out
 
-🔎 Next check: 12:35 IST
+🔎 Next check: 13:35 IST
 📊 Paper record: 0 trades
 <i>Paper trade for testing only, not SEBI-registered investment advice. Options trading is high risk.</i>
