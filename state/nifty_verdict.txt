@@ -1,14 +1,25 @@
-🧪 <b>PAPER</b> · Nifty day report
+🧪 <b>PAPER</b> · Nifty premarket
+🌍 Asia −0.7% · US mixed · VIX 15.5
+🛢 Brent −2.7% (helps India)
+📅 Event: none major today
+⚠️ Hormuz, Fed, yields in focus
 
-<b>Today</b>
-No paper trades (all NO TRADE)
-Nifty −0.9%, boxed 25,140–25,200
-PE R:R &lt; 1.5; stood down 14:07
+<pre>Level        Nifty
+Call wall    25,500
+Yday high    25,391
+Max pain     25,250
+Yday close   25,228
+Yday low     25,142
+Put floor    25,000</pre>
+PCR 0.86 · Expiry 23 Nov
 
-<b>Last 20 days</b> (after costs)
-Trades 0 · Win rate –
-Net ₹0 · Profit factor –
-Not filled: 0
+🐂 Bull: put floor 25,000 strong,
+crude falling, FPI inflows
+🐻 Bear: lower high, Asia/Dow
+weak, calls written 25,300+
 
-💡 No trades yet: too early to judge
+💡 Bias: flat-to-weak open; wait
+for 09:30, below 25,142 → PE watch,
+above 25,300 → CE watch
+
 <i>Paper trade for testing only, not SEBI-registered investment advice. Options trading is high risk.</i>
