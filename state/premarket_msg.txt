@@ -1,22 +1,16 @@
-🌅 <b>PREMARKET WATCHLIST · 08:58</b>
+📋 <b>FINAL WATCHLIST · 09:09</b>
 
-🌍 Dow -1.1% · HSI -1.6%
-Nasdaq +0.4% · Brent -2.7%
-⚠️ Flat-to-soft open likely
-📅 No major events today
+⚠️ No pre-open price data
+(last quote = yesterday's close).
+List unchanged; the bot drops
+gaps &gt; 4% at 09:20.
 
-<b>Watchlist</b> (₹; buy only above, never before 09:20)
 <pre>Stock    Above   SL   T1  Qty
 URBANCO 173.95 170.5 180.5 260</pre>
-<b>Why</b>
-• URBANCO — 7.3× vol, closed near high
-💡 1 of 15 kept: weak cues, rest
-stale / extended / thin volume.
 Skip if it opens above ~176.
 
 ⏳ <b>Don't buy before 09:20.</b>
-🔔 The bot sends BUY NOW when the
-first 5-min candle closes above the
-level on good volume. Not by 09:40 → dropped.
-Final list follows ~09:12.
+🔔 BUY NOW comes only after a green
+5-min close above the level on
+good volume. Not by 09:40 → dropped.
 <i>Analysis only, not advice. You place orders yourself.</i>

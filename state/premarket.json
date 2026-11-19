@@ -1,10 +1,10 @@
 {
  "date": "2026-11-19",
- "stage": "overnight",
- "id": "2026-11-19_0858",
+ "stage": "preopen",
+ "id": "2026-11-19_0909",
  "connectors": {
-  "indmoney": null,
-  "investsights": true
+  "indmoney": true,
+  "investsights": null
  },
  "cues": "Dow -1.1%, HSI -1.6%, Nasdaq +0.4%, Brent -2.7%, VIX 15.5, FII buying; flat-to-soft open",
  "events": [],
@@ -32,7 +32,9 @@
    "time_stop": "15:00",
    "keep": true,
    "confidence": 5,
-   "why": "Fresh breakout, 7.3x vol, skip if opens above ~176"
+   "why": "Fresh breakout, 7.3x vol, skip if opens above ~176",
+   "preopen": "n/a"
   }
- ]
+ ],
+ "preopen": "n/a"
 }
