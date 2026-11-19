@@ -18,8 +18,8 @@ crude falling, FPI inflows
 🐻 Bear: lower high, Asia/Dow
 weak, calls written 25,300+
 
-💡 Bias: flat-to-weak open; wait
-for 09:30, below 25,142 → PE watch,
-above 25,300 → CE watch
+💡 Bias: flat-to-weak, wait 09:30
+&lt; 25,142 → PE watch
+&gt; 25,300 → CE watch
 
 <i>Paper trade for testing only, not SEBI-registered investment advice. Options trading is high risk.</i>
