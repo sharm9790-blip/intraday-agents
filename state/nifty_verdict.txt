@@ -1,25 +1,19 @@
-🧪 <b>PAPER</b> · Nifty premarket
-🌍 Asia −0.7% · US mixed · VIX 15.5
-🛢 Brent −2.7% (helps India)
-📅 Event: none major today
-⚠️ Hormuz, Fed, yields in focus
+🧪 <b>PAPER</b> · Nifty options
+⚪ <b>NO TRADE — 09:36 IST</b>
 
-<pre>Level        Nifty
-Call wall    25,500
-Yday high    25,391
-Max pain     25,250
-Yday close   25,228
-Yday low     25,142
-Put floor    25,000</pre>
-PCR 0.86 · Expiry 23 Nov
+📈 Nifty 25,167 (−0.24%) · VIX 15.5
+🧱 Calls 25,200 · Puts 25,000
+PCR 0.83 · Max pain 25,250
 
-🐂 Bull: put floor 25,000 strong,
-crude falling, FPI inflows
-🐻 Bear: lower high, Asia/Dow
-weak, calls written 25,300+
+<b>Why not</b>
+• Dip to 25,105 rejected, back at VWAP
+• PE R:R 1.27 (need 1.5)
+• Puts written 25,100–25,150
 
-💡 Bias: flat-to-weak, wait 09:30
-&lt; 25,142 → PE watch
-&gt; 25,300 → CE watch
+💡 Fall then snap-back = chop
+&lt; 25,100 → PE watch
+&gt; 25,256 → CE watch
 
+🔎 Next check: 10:00 IST
+📊 Paper record: 0 trades
 <i>Paper trade for testing only, not SEBI-registered investment advice. Options trading is high risk.</i>
