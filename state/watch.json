@@ -1,47 +1,14 @@
 {
- "date": "2026-11-18",
- "verdict_id": "2026-11-18_1424",
+ "date": "2026-11-19",
+ "verdict_id": null,
  "live": [],
  "log": [],
- "health": {
-  "down_indmoney": false,
-  "ready": true,
-  "pinger": true
- },
- "last_run": "16:56",
+ "health": {},
+ "last_run": "08:00",
  "taken": [],
  "trades": 0,
  "day_trades": 0,
- "open_slots": [
-  "09:20",
-  "09:25",
-  "09:30",
-  "09:35",
-  "09:40"
- ],
- "cues": [
-  "pre",
-  "open"
- ],
- "pre_fired": [
-  "pre",
-  "open"
- ],
- "prescan": "08:10",
- "fire_error": null,
- "pre_id": "2026-11-18_0907",
- "nifty_id": "2026-11-18_1513_eod",
- "pre_done": {
-  "GMRAIRPORT": "ran past max entry 105.89, don't chase",
-  "KFINTECH": "fell below SL 966.47",
-  "PRESTIGE": "fell below SL 1671.76"
- },
- "pre_summary": true,
- "scan_slot": "14:15",
- "last_fire": "14:15",
- "fired_at": null,
- "verdicts": 18,
- "late_fired": "14:21",
- "done_sent": true,
- "scorecard_sent": true
+ "open_slots": [],
+ "cues": [],
+ "pre_fired": []
 }
