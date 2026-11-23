@@ -1,15 +1,21 @@
-🧪 <b>PAPER</b> · Nifty day report
+🧪 <b>PAPER</b> · Nifty premarket
+🌍 Global cues stale (19 Nov)
+📰 GIFT Nifty: higher open (news)
+📊 VIX 17.27 (+7.2%) · PCR 1.69
+📅 <b>Weekly expiry today</b>
+📅 Holiday tomorrow (24 Nov)
+📅 India PMI data today
 
-<b>Today</b>
-No paper trades (all NO TRADE)
-Nifty +1.07% · 25,497 near high
-Boxed 25,334–391 at 13:37,
-then rallied; no GO was given
+<pre>Level        Nifty
+Call wall    26,000
+Yday high    25,809
+Yday close   25,801
+Max pain     25,650
+Put floor    25,500
+Yday low     25,345</pre>
+💡 Bias: up after +1.1% close at
+the high; 26,000 calls cap it.
+Expiry-day decay + VIX up: wait
+for 09:30, small size only.
 
-<b>Last 20 days</b> (after costs)
-Trades 0 · Win rate –
-Net ₹0 · Profit factor –
-Not filled: 0
-
-💡 No trades yet: too early to judge
-<i>Paper trade for testing only, not SEBI-registered investment advice. Options trading is high risk.</i>
+<i>Paper trade only, not advice.</i>
