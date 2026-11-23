@@ -22,6 +22,17 @@
    "qty": 236,
    "sector": "Capital Goods",
    "at": "10:34"
+  },
+  {
+   "symbol": "IEX",
+   "yahoo": "IEX.NS",
+   "price": 110.2,
+   "sl": 111.61,
+   "t1": 108.09,
+   "t2": 106.68,
+   "qty": 709,
+   "sector": "Financial Services",
+   "at": "10:46"
   }
  ],
  "days": {
