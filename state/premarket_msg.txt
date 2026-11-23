@@ -1,16 +1,18 @@
-📋 <b>FINAL WATCHLIST · 09:09</b>
+🌅 <b>PREMARKET WATCHLIST · 08:50</b>
 
-⚠️ No pre-open price data
-(last quote = yesterday's close).
-List unchanged; the bot drops
-gaps &gt; 4% at 09:20.
+🌍 US sharply down (S&amp;P -3.7%,
+Nasdaq -5.3%), Nikkei -5.1%,
+Kospi -5.5%, HSI -1.6%
+India VIX 17.3 (+7.5%)
 
-<pre>Stock    Above   SL   T1  Qty
-URBANCO 173.95 170.5 180.5 260</pre>
-Skip if it opens above ~176.
+<b>No long watchlist today.</b>
+• Overnight cues are heavily
+  risk-off: gap-down likely
+• Momentum list is stale (19 Nov)
+  and no fresh data for today
+• Long breakouts fail on such days
 
-⏳ <b>Don't buy before 09:20.</b>
-🔔 BUY NOW comes only after a green
-5-min close above the level on
-good volume. Not by 09:40 → dropped.
+⏳ Final check ~09:12 with pre-open
+prices. Stay flat unless the open
+steadies.
 <i>Analysis only, not advice. You place orders yourself.</i>

@@ -1,40 +1,12 @@
 {
- "date": "2026-11-19",
- "stage": "preopen",
- "id": "2026-11-19_0909",
+ "date": "2026-11-23",
+ "stage": "overnight",
+ "id": "2026-11-23_0850",
  "connectors": {
-  "indmoney": true,
+  "indmoney": null,
   "investsights": null
  },
- "cues": "Dow -1.1%, HSI -1.6%, Nasdaq +0.4%, Brent -2.7%, VIX 15.5, FII buying; flat-to-soft open",
+ "cues": "S&P -3.7%, Nasdaq -5.3%, Nikkei -5.1%, Kospi -5.5%, HSI -1.6%, VIX 17.3 (+7.5%); heavy gap-down risk",
  "events": [],
- "stocks": [
-  {
-   "symbol": "URBANCO",
-   "yahoo": "URBANCO.NS",
-   "name": "Urban Company",
-   "side": "long",
-   "entry_type": "now",
-   "buy_above": 173.95,
-   "zone_low": 173.95,
-   "trigger_close_above": 173.95,
-   "entry": 174.12,
-   "zone_high": 174.9,
-   "max_entry": 174.9,
-   "sl": 170.5,
-   "t1": 180.5,
-   "t2": 183.5,
-   "qty": 260,
-   "deadline": "09:45",
-   "cancel_if_high_reaches": 180.5,
-   "cancel_if_close_below": 172.7,
-   "exit_if_close_below_after_entry": 171.8,
-   "time_stop": "15:00",
-   "keep": true,
-   "confidence": 5,
-   "why": "Fresh breakout, 7.3x vol, skip if opens above ~176",
-   "preopen": "n/a"
-  }
- ],
- "preopen": "n/a"
+ "stocks": []
 }
