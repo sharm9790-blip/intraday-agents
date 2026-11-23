@@ -1,12 +1,4 @@
 {
  "date": "2026-11-23",
- "symbols": {
-  "INTELLECT": {
-   "at": "11:30",
-   "rejected_at": "10:40",
-   "level": 572.0,
-   "kind": "flip level",
-   "close": 574.65
-  }
- }
+ "symbols": {}
 }
