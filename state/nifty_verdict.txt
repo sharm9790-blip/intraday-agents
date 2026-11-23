@@ -1,16 +1,16 @@
 🧪 <b>PAPER</b> · Nifty options
-⚪ <b>NO TRADE — 09:34 IST</b>
+⚪ <b>NO TRADE — 10:32 IST</b>
 
-📈 Nifty 25,670 −0.5% · VIX 17.3
-🧱 Calls 25,900 · Puts 25,500
-PCR 0.99 · ATM writing 25,700
+📈 Nifty 25,608 −0.7% · VIX 17.3
+🧱 Calls 25,700 · Puts 25,500
+PCR 0.83 · Range 25,580–25,700
 
 <b>Why not</b>
 • Weekly expiry today: blocked
-• Gap-up reversed, −325 pts
-• Net R:R to T1 only 0.74
-• Put floor 25,600/25,500 below
+• Writers boxing 25,500–25,700
+• Stop &gt;50% of premium
+• Net R:R ~1.1, below 1.5
 💡 Expiry pin + decay: no buys
 
-🔎 Next check: next run
+🔎 Next check: 25 Nov, 1 Dec expiry
 <i>Paper trade only, not advice.</i>
