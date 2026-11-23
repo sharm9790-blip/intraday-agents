@@ -1,40 +1,6 @@
 {
  "date": "2026-11-23",
- "open": [
-  {
-   "symbol": "FEDERALBNK",
-   "yahoo": "FEDERALBNK.NS",
-   "price": 365.4,
-   "sl": 368.09,
-   "t1": 361.37,
-   "t2": 358.67,
-   "qty": 273,
-   "sector": "Financial Services",
-   "at": "10:34"
-  },
-  {
-   "symbol": "BHEL",
-   "yahoo": "BHEL.NS",
-   "price": 422.5,
-   "sl": 425.8,
-   "t1": 417.55,
-   "t2": 414.25,
-   "qty": 236,
-   "sector": "Capital Goods",
-   "at": "10:34"
-  },
-  {
-   "symbol": "IEX",
-   "yahoo": "IEX.NS",
-   "price": 110.2,
-   "sl": 111.61,
-   "t1": 108.09,
-   "t2": 106.68,
-   "qty": 709,
-   "sector": "Financial Services",
-   "at": "10:46"
-  }
- ],
+ "open": [],
  "days": {
   "2026-11-16": [
    {
@@ -195,6 +161,59 @@
     "steps": [
      "10:35 sold short 284.00",
      "15:00 time stop 282.40"
+    ]
+   }
+  ],
+  "2026-11-23": [
+   {
+    "symbol": "FEDERALBNK",
+    "yahoo": "FEDERALBNK.NS",
+    "price": 365.4,
+    "sl": 368.09,
+    "t1": 361.37,
+    "t2": 358.67,
+    "qty": 273,
+    "sector": "Financial Services",
+    "at": "10:34",
+    "entry": 366.0,
+    "pnl": -690,
+    "steps": [
+     "10:40 sold short 366.00",
+     "11:10 SL"
+    ]
+   },
+   {
+    "symbol": "BHEL",
+    "yahoo": "BHEL.NS",
+    "price": 422.5,
+    "sl": 425.8,
+    "t1": 417.55,
+    "t2": 414.25,
+    "qty": 236,
+    "sector": "Capital Goods",
+    "at": "10:34",
+    "entry": 423.3,
+    "pnl": -710,
+    "steps": [
+     "10:40 sold short 423.30",
+     "11:25 SL"
+    ]
+   },
+   {
+    "symbol": "IEX",
+    "yahoo": "IEX.NS",
+    "price": 110.2,
+    "sl": 111.61,
+    "t1": 108.09,
+    "t2": 106.68,
+    "qty": 709,
+    "sector": "Financial Services",
+    "at": "10:46",
+    "entry": 109.96,
+    "pnl": 530,
+    "steps": [
+     "10:55 sold short 109.96",
+     "15:00 time stop 109.08"
     ]
    }
   ]
