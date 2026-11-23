@@ -1,15 +1,15 @@
 🧪 <b>PAPER</b> · Nifty options
-⚪ <b>NO TRADE — 12:32 IST</b>
+⚪ <b>NO TRADE — 13:33 IST</b>
 
-📈 Nifty 25,511 −1.12% · VIX 17.3
-🧱 Calls 25,600 · Puts 25,500
-PCR 0.69 · Day low 25,491
+📈 Nifty 25,463 −1.31% · VIX 17.3
+🧱 Calls 25,500 · Puts 25,400
+PCR 0.68 · Day low 25,440
 
 <b>Why not</b>
 • Weekly expiry today: blocked
-• 25,491 break failed, chop
-• Put floor 25,500 / 25,400
-• Stop −81% · R:R ~1.0
+• No close below 25,440 yet
+• Put wall 25,400 at target
+• Net R:R ~0.7 from ₹83 entry
 💡 Expiry decay: no buys today
 
 🔎 Next check: 25 Nov, 1 Dec expiry
