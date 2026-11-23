@@ -1,19 +1,4 @@
 {
  "date": "2026-11-23",
- "symbols": {
-  "INTELLECT": {
-   "at": "12:55",
-   "rejected_at": "12:37",
-   "level": 586.5,
-   "kind": "flip level",
-   "close": 588.0
-  },
-  "TORNTPHARM": {
-   "at": "12:30",
-   "rejected_at": "12:15",
-   "level": 4830.0,
-   "kind": "flip level",
-   "close": 4842.0
-  }
- }
+ "symbols": {}
 }
