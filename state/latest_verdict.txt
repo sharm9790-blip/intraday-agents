@@ -1,0 +1,20 @@
+🔴 <b>NO TRADE — 11:30 scan</b>
+
+Weak tape: Nifty -0.72%,
+37% of stocks above VWAP.
+US/Asia fell 4-5% overnight.
+
+<pre>₹            Why
+SHRIRAMFIN   conf 5, R:R 1.4
+LALPATHLAB   ceiling 2073, R:R&lt;1</pre>
+
+<b>SHRIRAMFIN flips if</b>
+• 5-min close above ₹1008
+  on 1.5x volume, and
+• stays above VWAP ₹996
+
+Stay flat for now.
+
+💡 Expiry day, call wall 1020, no chase.
+
+<i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
