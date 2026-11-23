@@ -14,6 +14,11 @@
   "GRAPHITE": "13:43 RSI73, vol_x 1.4, chase; flips on 5-min close >787 on 1.5x vol",
   "COHANCE": "13:43 MACD neg, R:R 0.8; flips on 5-min close >475.5 on 1.5x vol",
   "PTCIL": "13:43 RSI79, thin-print spike; flips on 5-min close >24550 on 1.5x vol",
-  "KPITTECH": "13:43 net R:R 0.9; flips on 5-min close >536 on 2x vol"
+  "KPITTECH": "13:43 net R:R 0.9; flips on 5-min close >536 on 2x vol",
+  "GUJENERGY": "14:04 ORB break faded, dip banned weak day, Power -1.5%; flips on 5-min close >232.75 on 1.5x vol, VWAP rising",
+  "MPHASIS": "14:04 net R:R 1.4, conf 5, expiry day; flips on 5-min close >2490 on 1.5x vol, R:R>=1.5",
+  "LGEINDIA": "14:04 dip plan banned weak day, conf 5, weak sector; flips on 5-min close >1804.5 on 1.5x vol",
+  "SCHAEFFLER": "14:04 no data, thin, R:R 1.2",
+  "RRKABEL": "14:04 pulled off high, R:R 1.2"
  }
 }
