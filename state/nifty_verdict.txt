@@ -1,15 +1,15 @@
 🧪 <b>PAPER</b> · Nifty options
-⚪ <b>NO TRADE — 10:32 IST</b>
+⚪ <b>NO TRADE — 11:33 IST</b>
 
-📈 Nifty 25,608 −0.7% · VIX 17.3
+📈 Nifty 25,608 −0.75% · VIX 17.3
 🧱 Calls 25,700 · Puts 25,500
-PCR 0.83 · Range 25,580–25,700
+PCR 0.77 · Range 25,514–25,665
 
 <b>Why not</b>
 • Weekly expiry today: blocked
-• Writers boxing 25,500–25,700
-• Stop &gt;50% of premium
-• Net R:R ~1.1, below 1.5
+• Pinned: writers on both sides
+• Straddle ₹142 decays to 0
+• No break of 25,500 / 25,665
 💡 Expiry pin + decay: no buys
 
 🔎 Next check: 25 Nov, 1 Dec expiry
