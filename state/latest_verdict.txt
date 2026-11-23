@@ -1,16 +1,22 @@
-<b>🔁 14:24 re-check: NO TRADE</b>
+🔴 <b>NO TRADE — 10:40 scan</b>
 
-MTARTECH, SUNTV crossed their
-flip levels, but:
+Weak tape: Nifty -0.73%,
+25% of stocks above VWAP.
+US/Asia fell 4-5% overnight.
 
-• No live pack data to confirm
-  volume or depth
-• Weak tape: Nifty -0.56%,
-  39% above VWAP
-• Entry window ends 14:30,
-  no room for R:R 1.5
-• SUNTV was RSI 82, R:R 0.5
+<pre>₹        Why
+TECHM    +3.2%, RSI76, R:R 1.35
+INTELLECT thin, R:R under 1
+TCS      +4.9%, RSI82, wall 2500</pre>
 
-Stay flat.
+<b>TECHM flips if</b>
+• 5-min close above ₹1808.7
+  on 2x volume, or
+• VWAP ₹1789 holds, then
+  close above ₹1797
+
+Stay flat for now.
+
+💡 Only IT is strong; expiry day, no chase.
 
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
