@@ -2,6 +2,8 @@
  "date": "2026-11-23",
  "symbols": {
   "TECHM": "10:40 +3.2% chase, RSI76, expiry day, net R:R 1.35 at market, conf 5 weak day; flips on 5-min close >1808.7 on 2x vol, or VWAP 1789 hold then close >1797, net R:R>=1.5",
-  "INTELLECT": "10:40 thin 46cr, R:R<1 from LTP, stalls at 571.45; flips on 5-min close >572 on 3x vol above VWAP"
+  "INTELLECT": "10:40 thin 46cr, R:R<1 from LTP, stalls at 571.45; flips on 5-min close >572 on 3x vol above VWAP",
+  "SHRIRAMFIN": "11:38 conf 5 weak day, dip banned, net R:R 1.4 at market, expiry call wall 1020; flips on 5-min close >1008 on 1.5x vol, R:R>=1.5",
+  "LALPATHLAB": "11:38 triple-tested ceiling 2073, 52wk high 2079, volume faded, R:R<1; flips on 5-min close >2079 on 15k+ vol"
  }
 }
