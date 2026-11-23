@@ -1,6 +1,29 @@
 {
- "date": "2026-11-18",
- "open": [],
+ "date": "2026-11-23",
+ "open": [
+  {
+   "symbol": "FEDERALBNK",
+   "yahoo": "FEDERALBNK.NS",
+   "price": 365.4,
+   "sl": 368.09,
+   "t1": 361.37,
+   "t2": 358.67,
+   "qty": 273,
+   "sector": "Financial Services",
+   "at": "10:34"
+  },
+  {
+   "symbol": "BHEL",
+   "yahoo": "BHEL.NS",
+   "price": 422.5,
+   "sl": 425.8,
+   "t1": 417.55,
+   "t2": 414.25,
+   "qty": 236,
+   "sector": "Capital Goods",
+   "at": "10:34"
+  }
+ ],
  "days": {
   "2026-11-16": [
    {
