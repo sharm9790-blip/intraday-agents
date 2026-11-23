@@ -1,34 +1,20 @@
 {
- "date": "2026-11-19",
+ "date": "2026-11-23",
  "verdict_id": null,
  "live": [],
  "log": [],
- "health": {
-  "ready": true,
-  "pinger": true
- },
- "last_run": "09:30",
+ "health": {},
+ "last_run": "08:44",
  "taken": [],
  "trades": 0,
  "day_trades": 0,
- "open_slots": [
-  "09:20",
-  "09:25",
-  "09:30"
- ],
+ "nifty_id": "2026-11-23_0844_pre",
+ "open_slots": [],
  "cues": [
-  "pre",
-  "open"
+  "pre"
  ],
  "pre_fired": [
-  "pre",
-  "open"
+  "pre"
  ],
- "prescan": "08:10",
- "fire_error": null,
- "pre_id": "2026-11-19_0909",
- "nifty_id": "2026-11-19_0845_pre",
- "pre_done": {
-  "URBANCO": "ran past max entry 174.9, don't chase"
- }
+ "fire_error": null
 }
