@@ -1,17 +1,18 @@
-🔴 <b>NO TRADE — 12:30 scan</b>
+🔴 <b>NO TRADE — 13:35 scan</b>
 
-Weak expiry-day tape: Nifty -1.2%,
-31% of stocks above VWAP.
+Weak expiry-day tape: Nifty -1.3%,
+30% of stocks above VWAP.
 
 <pre>₹            Why
-JSWINFRA     R:R 1.0, block vol
-INTELLECT    dip only, conf 5
-DIVISLAB     R:R 1.1, call wall</pre>
+DABUR        R:R 0.9, conf 4
+KPITTECH     R:R 0.9
+INTELLECT    breakout failed
+TORNTPHARM   breakout failed</pre>
 
 <b>Flips if 5-min close above</b>
-• JSWINFRA ₹352.3 (real volume)
-• INTELLECT ₹586.5 (1.5x volume)
-• DIVISLAB ₹11,500 (2x volume)
+• DABUR ₹402.5 (150k+ volume)
+• KPITTECH ₹536 (2x volume)
+• GRAPHITE ₹787 (1.5x volume)
 
 💡 No clean setup. Stay flat for now.
 
