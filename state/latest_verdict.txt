@@ -1,18 +1,18 @@
-🔴 <b>NO TRADE — 12:00 scan</b>
+🔴 <b>NO TRADE — 12:30 scan</b>
 
-Weak expiry-day tape: Nifty -1.1%,
-34% of stocks above VWAP.
+Weak expiry-day tape: Nifty -1.2%,
+31% of stocks above VWAP.
 
 <pre>₹            Why
-TORNTPHARM   conf 5, R:R 0.9
-INTELLECT    +5.9% chase
-ARVIND       R:R 1.0
-TECHNOCRAF   R:R 0.8</pre>
+JSWINFRA     R:R 1.0, block vol
+INTELLECT    dip only, conf 5
+DIVISLAB     R:R 1.1, call wall</pre>
 
-<b>TORNTPHARM flips if</b>
-• 5-min close above ₹4830
-  on 1.5x volume
+<b>Flips if 5-min close above</b>
+• JSWINFRA ₹352.3 (real volume)
+• INTELLECT ₹586.5 (1.5x volume)
+• DIVISLAB ₹11,500 (2x volume)
 
-Stay flat for now.
+💡 No clean setup. Stay flat for now.
 
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
