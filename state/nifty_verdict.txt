@@ -1,16 +1,16 @@
-🧪 <b>PAPER</b> · Nifty options
-⚪ <b>NO TRADE — 13:33 IST</b>
+🧪 <b>PAPER</b> · Nifty day report
 
-📈 Nifty 25,463 −1.31% · VIX 17.3
-🧱 Calls 25,500 · Puts 25,400
-PCR 0.68 · Day low 25,440
+<b>Today</b>
+No paper trades (all NO TRADE)
+Nifty −1.71% · 25,358 near low
+Weekly expiry day: buys blocked
+Slid from 25,993 high all day
 
-<b>Why not</b>
-• Weekly expiry today: blocked
-• No close below 25,440 yet
-• Put wall 25,400 at target
-• Net R:R ~0.7 from ₹83 entry
-💡 Expiry decay: no buys today
+<b>Last 20 days</b> (after costs)
+Trades 0 · Win rate –
+Net ₹0 · Profit factor –
+Not filled: 0
 
-🔎 Next check: 25 Nov, 1 Dec expiry
-<i>Paper trade only, not advice.</i>
+💡 No trades yet: too early to judge
+📅 Tomorrow 24 Nov: NSE holiday
+<i>Paper trade for testing only, not SEBI-registered investment advice. Options trading is high risk.</i>
