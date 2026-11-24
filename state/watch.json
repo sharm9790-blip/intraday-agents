@@ -1,41 +1,6 @@
 {
- "date": "2026-11-23",
- "verdict_id": "2026-11-23_1404",
+ "date": "2026-11-24",
+ "holiday": true,
  "live": [],
- "log": [],
- "health": {
-  "pinger": true,
-  "ready": true,
-  "gap_09:34": true,
-  "gap_10:46": true,
-  "gap_11:36": true,
-  "gap_12:12": true,
-  "gap_12:37": true,
-  "gap_13:38": true,
-  "gap_14:03": true
- },
- "last_run": "16:56",
- "taken": [],
- "trades": 0,
- "day_trades": 0,
- "nifty_id": "2026-11-23_1514_eod",
- "open_slots": [
-  "09:25",
-  "09:30"
- ],
- "cues": [
-  "pre"
- ],
- "pre_fired": [
-  "pre"
- ],
- "fire_error": null,
- "pre_id": "2026-11-23_0850",
- "pre_done": {},
- "scan_slot": "14:00",
- "last_fire": "14:00",
- "fired_at": null,
- "verdicts": 6,
- "done_sent": true,
- "scorecard_sent": true
+ "log": []
 }
