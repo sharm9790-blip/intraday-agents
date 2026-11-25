@@ -1,6 +1,6 @@
 {
  "date": "2026-11-25",
- "verdict_id": "2026-11-25_1158",
+ "verdict_id": "2026-11-25_1242",
  "live": [
   {
    "symbol": "DMART",
@@ -67,13 +67,48 @@
    "status": "waiting",
    "since": "11:58",
    "paper_booked": 0
+  },
+  {
+   "symbol": "AUROPHARMA",
+   "vid": "2026-11-25_1242",
+   "plan": {
+    "symbol": "AUROPHARMA",
+    "yahoo": "AUROPHARMA.NS",
+    "name": "Aurobindo Pharma",
+    "side": "long",
+    "entry_type": "dip",
+    "confidence": 5,
+    "zone_low": 1835.5,
+    "zone_high": 1838.5,
+    "entry": 1837.0,
+    "max_entry": 1838.5,
+    "trigger_close_above": 1835.5,
+    "sl": 1830.5,
+    "t1": 1858.0,
+    "t2": 1878.0,
+    "qty": 54,
+    "atr5": 3.79,
+    "deadline": "13:45",
+    "cancel_if_high_reaches": 1858.0,
+    "cancel_if_close_below": 1830.5,
+    "exit_if_close_below_after_entry": 1832.0,
+    "time_stop": "15:00",
+    "sector": "Healthcare",
+    "rules_v": "2026-11-16",
+    "start": "12:42"
+   },
+   "status": "waiting",
+   "since": "12:42",
+   "paper_booked": 0
   }
  ],
  "log": [
   "11:41 DMART 3512.40 VWAP \u20b93,473.64 status waiting",
   "11:54 DMART 3559.30 VWAP \u20b93,483.9 status cancelled",
   "11:58 SBICARD 594.50 VWAP \u20b9592.46 status waiting",
-  "12:35 SBICARD 594.65 VWAP \u20b9592.6 status waiting"
+  "12:35 SBICARD 594.65 VWAP \u20b9592.6 status waiting",
+  "12:40 SBICARD 592.70 VWAP \u20b9592.61 status waiting",
+  "12:40 AUROPHARMA 1841.30 VWAP \u20b91,825.91 status waiting"
  ],
  "health": {
   "pinger": true,
@@ -82,7 +117,7 @@
   "gap_10:37": true,
   "gap_11:58": true
  },
- "last_run": "12:35",
+ "last_run": "12:40",
  "taken": [],
  "trades": 0,
  "day_trades": 0,
@@ -103,7 +138,7 @@
  "scan_slot": "12:30",
  "last_fire": "12:30",
  "fired_at": "12:35",
- "verdicts": 3,
+ "verdicts": 4,
  "plans": [
   {
    "symbol": "DMART",
@@ -156,6 +191,32 @@
    "sector": "NBFC / lenders",
    "rules_v": "2026-11-16",
    "start": "11:58"
+  },
+  {
+   "symbol": "AUROPHARMA",
+   "yahoo": "AUROPHARMA.NS",
+   "name": "Aurobindo Pharma",
+   "side": "long",
+   "entry_type": "dip",
+   "confidence": 5,
+   "zone_low": 1835.5,
+   "zone_high": 1838.5,
+   "entry": 1837.0,
+   "max_entry": 1838.5,
+   "trigger_close_above": 1835.5,
+   "sl": 1830.5,
+   "t1": 1858.0,
+   "t2": 1878.0,
+   "qty": 54,
+   "atr5": 3.79,
+   "deadline": "13:45",
+   "cancel_if_high_reaches": 1858.0,
+   "cancel_if_close_below": 1830.5,
+   "exit_if_close_below_after_entry": 1832.0,
+   "time_stop": "15:00",
+   "sector": "Healthcare",
+   "rules_v": "2026-11-16",
+   "start": "12:42"
   }
  ]
 }
