@@ -1,15 +1,51 @@
 {
  "date": "2026-11-25",
- "verdict_id": "2026-11-25_1036",
- "live": [],
- "log": [],
+ "verdict_id": "2026-11-25_1141",
+ "live": [
+  {
+   "symbol": "DMART",
+   "vid": "2026-11-25_1141",
+   "plan": {
+    "symbol": "DMART",
+    "yahoo": "DMART.NS",
+    "name": "Avenue Supermarts",
+    "side": "long",
+    "entry_type": "dip",
+    "confidence": 5,
+    "zone_low": 3498.0,
+    "zone_high": 3506.0,
+    "entry": 3502.0,
+    "max_entry": 3506.0,
+    "trigger_close_above": 3498.0,
+    "sl": 3476.0,
+    "t1": 3557.0,
+    "t2": 3600.0,
+    "qty": 28,
+    "atr5": 11.31,
+    "deadline": "14:00",
+    "cancel_if_high_reaches": 3550.0,
+    "cancel_if_close_below": 3480.0,
+    "exit_if_close_below_after_entry": 3480.0,
+    "time_stop": "15:00",
+    "sector": "Consumer Services",
+    "rules_v": "2026-11-16",
+    "start": "11:41"
+   },
+   "status": "waiting",
+   "since": "11:41",
+   "paper_booked": 0
+  }
+ ],
+ "log": [
+  "11:41 DMART 3512.40 VWAP \u20b93,473.64 status waiting"
+ ],
  "health": {
   "pinger": true,
   "ready": true,
   "gap_09:37": true,
   "gap_10:37": true
  },
- "last_run": "11:36",
+ "last_run": "11:41",
  "taken": [],
  "trades": 0,
  "day_trades": 0,
@@ -30,5 +66,33 @@
  "scan_slot": "11:30",
  "last_fire": "11:30",
  "fired_at": "11:36",
- "verdicts": 1
+ "verdicts": 2,
+ "plans": [
+  {
+   "symbol": "DMART",
+   "yahoo": "DMART.NS",
+   "name": "Avenue Supermarts",
+   "side": "long",
+   "entry_type": "dip",
+   "confidence": 5,
+   "zone_low": 3498.0,
+   "zone_high": 3506.0,
+   "entry": 3502.0,
+   "max_entry": 3506.0,
+   "trigger_close_above": 3498.0,
+   "sl": 3476.0,
+   "t1": 3557.0,
+   "t2": 3600.0,
+   "qty": 28,
+   "atr5": 11.31,
+   "deadline": "14:00",
+   "cancel_if_high_reaches": 3550.0,
+   "cancel_if_close_below": 3480.0,
+   "exit_if_close_below_after_entry": 3480.0,
+   "time_stop": "15:00",
+   "sector": "Consumer Services",
+   "rules_v": "2026-11-16",
+   "start": "11:41"
+  }
+ ]
 }
