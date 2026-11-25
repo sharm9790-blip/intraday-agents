@@ -11,6 +11,13 @@
   "TATACONSUM": "11:41 +4% chase, R:R 1.2, conf 4; flips on 5-min close >1180.2 on 2x vol then retest holds",
   "EMAMILTD": "11:58 entry missed, net R:R 1.06, book 76% ask; flips on 5-min close >434.6 on 2x vol",
   "LTF": "11:58 +5.9% chase, pinned at 290 call wall; flips on 5-min close >292.6 after VWAP pullback",
-  "DRREDDY": "11:58 net R:R 1.0, 52wk high 1414.9 above; flips on 5-min close >1415.5 on volume"
+  "DRREDDY": "11:58 net R:R 1.0, 52wk high 1414.9 above; flips on 5-min close >1415.5 on volume",
+  "LAURUSLABS": "12:42 net R:R T1 0.38, trapped gap supply at 2450, late impulse; flips on 5-min close >2451 on volume, or pullback 2420-2424 SL 2410",
+  "VIJAYA": "12:42 non-F&O thin, net R:R <1.5 at market, dip may not fill; flips on 5-min close >1660 on volume",
+  "TITAGARH": "12:42 net R:R 0.7, volume dried up; flips on 5-min close >751 on 2x vol",
+  "ITC": "12:42 net R:R 1.2 at 310 call wall; flips on 5-min close >313.05 on volume",
+  "STAR": "12:42 RSI 75, at day high, no pullback; flips on VWAP pullback bounce",
+  "JINDALSAW": "12:42 RSI 77, 1.5% above VWAP; flips on VWAP pullback bounce",
+  "CPPLUS": "12:42 at day high 1.2% over VWAP, vol 1.7x; flips on 5-min close >4200 on 2x vol"
  }
 }

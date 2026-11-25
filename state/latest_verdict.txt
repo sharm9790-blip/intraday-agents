@@ -1,45 +1,44 @@
-🟢 <b>GO — SBICARD</b>
-🕐 11:58 IST  ·  Confidence 5/10
+🟢 <b>GO — AUROPHARMA</b>
+🕐 12:42 IST  ·  Confidence 5/10
 
-📥 Buy  <b>₹592.5</b>  (max ₹592.8)
+📥 Buy  <b>₹1,837</b>  (max ₹1,838.5)
 ⏳ <b>Wait for dip</b>
-🛑 Stop loss  <b>₹589.8</b>
-🎯 Target 1  <b>₹598.7</b>  (sell half)
-🎯 Target 2  <b>₹603</b>
-📦 Qty  <b>168</b> shares
+🛑 Stop loss  <b>₹1,830.5</b>
+🎯 Target 1  <b>₹1,858</b>  (sell half)
+🎯 Target 2  <b>₹1,878</b>
+📦 Qty  <b>54</b> shares
 
 📝 <b>Draft order</b> (you place it)
 ⏳ <b>Don't place the buy yet</b>
 Wait for 🔔 BUY TRIGGER (green
-5-min close above 591.8)
-Then: Qty <code>168</code> · Limit <code>592.8</code>
-SL-M trigger  <code>589.8</code>
-Sell half  <code>84</code> @ <code>598.7</code>
-📲 INDmoney: search <code>SBICARD</code>
+5-min close above 1835.5)
+Then: Qty <code>54</code> · Limit <code>1838.5</code>
+SL-M trigger  <code>1830.5</code>
+Sell half  <code>27</code> @ <code>1858</code>
+📲 INDmoney: search <code>AUROPHARMA</code>
 
 <b>✅ Buy only if</b>
-• Dips to ₹591.8–592.8
-• Holds VWAP ~₹592
+• Dips to ₹1,835.5–1,838.5
+• Green 5-min close above ₹1,835.5
+• Price stays above VWAP
 
 <b>❌ Cancel if</b>
-• Not triggered by 13:30
-• Hits ₹598.7 before the dip
-• 5-min close below ₹589.8
+• Not triggered by 13:45
+• Hits ₹1,858 before the dip
+• 5-min close below ₹1,830.5
 
 <b>💰 Risk vs reward</b>
-Max loss ≈ ₹530
-Reward 1.8× the risk
-Call wall at ₹600: book half at T1
+Max loss ≈ ₹431
+Reward 2.4× the risk
 
 <b>Why this stock</b>
-• Holds VWAP, vol 3x usual
-• Puts written, PCR 0.54
-• Weak 52-wk trend: choppy day
+• Healthcare strongest sector
+• Higher lows, above VWAP
+• Calls built up at 1860/1900
 
 <b>Skipped</b>
-• EMAMILTD — R:R 1.06
-• LTF — chase, 290 wall
-• DRREDDY — R:R 1.0
+• LAURUSLABS — trapped supply 2450
+• VIJAYA — thin, R:R weak
 
 📡 Watcher checks every 5 min
 <i>Analysis only, not advice. You place orders yourself.</i>
