@@ -3,21 +3,23 @@
  "symbols": {
   "FORCEMOT": "10:36 net R:R 1.07-1.15, RSI72, conf 5 choppy; flips on 5-min close >20690 on 2x vol, R:R>=1.5",
   "JSWINFRA": "10:36 net R:R 0.83-1.0 at day high, block-volume doubt; flips on 5-min close >361.5 on 2x vol, bid-heavy",
-  "HINDUNILVR": "10:36 conf 4, FSSAI/margin news, net R:R 1.21; flips on 5-min close >2084 on 3x vol",
+  "HINDUNILVR": "13:30 +4% chase, volume fading, net R:R <1.5; flips on 5-min close >2103 on volume",
   "CREDITACC": "10:36 +6% chase; flips on VWAP ~1039 pullback then 5-min close >1058",
-  "HUBTOWN": "10:36 +4.7% chase; flips on VWAP ~180.8 pullback then 5-min close >182.5 on 2x vol",
-  "HAL": "11:41 RSI 90, 1.45% over VWAP, breakout R:R 1.1; flips on hold-bounce 4885-4895 above VWAP, SL<=4860, or 5-min close >5000 on 1.5x vol",
-  "TATACAP": "11:41 net R:R 1.06, chase, RSI 80; flips on pullback ~349.5 holding, SL<=348",
+  "HUBTOWN": "13:30 parabolic +10% chase; flips on VWAP pullback bounce",
+  "HAL": "13:30 net R:R 1.1, ask-heavy; flips on 5-min close >4945 on 1.5x vol",
+  "TATACAP": "13:30 flat range, net R:R <1.5; flips on 5-min close >354 on 2x vol",
   "TATACONSUM": "11:41 +4% chase, R:R 1.2, conf 4; flips on 5-min close >1180.2 on 2x vol then retest holds",
   "EMAMILTD": "11:58 entry missed, net R:R 1.06, book 76% ask; flips on 5-min close >434.6 on 2x vol",
   "LTF": "11:58 +5.9% chase, pinned at 290 call wall; flips on 5-min close >292.6 after VWAP pullback",
   "DRREDDY": "11:58 net R:R 1.0, 52wk high 1414.9 above; flips on 5-min close >1415.5 on volume",
   "LAURUSLABS": "12:42 net R:R T1 0.38, trapped gap supply at 2450, late impulse; flips on 5-min close >2451 on volume, or pullback 2420-2424 SL 2410",
   "VIJAYA": "12:42 non-F&O thin, net R:R <1.5 at market, dip may not fill; flips on 5-min close >1660 on volume",
-  "TITAGARH": "12:42 net R:R 0.7, volume dried up; flips on 5-min close >751 on 2x vol",
-  "ITC": "12:42 net R:R 1.2 at 310 call wall; flips on 5-min close >313.05 on volume",
+  "TITAGARH": "13:30 volume dried, R:R <1; flips on 5-min close >751 on 2x vol",
+  "ITC": "13:30 pinned at 310 call wall; flips on 5-min close >313.05",
   "STAR": "12:42 RSI 75, at day high, no pullback; flips on VWAP pullback bounce",
   "JINDALSAW": "12:42 RSI 77, 1.5% above VWAP; flips on VWAP pullback bounce",
-  "CPPLUS": "12:42 at day high 1.2% over VWAP, vol 1.7x; flips on 5-min close >4200 on 2x vol"
+  "CPPLUS": "13:30 thin liquidity, ask-heavy; flips on 5-min close >4217 on 2x vol",
+  "PNGSREVA": "13:30 illiquid zero-volume bars",
+  "STEAMHOUSE": "13:30 +4.5% chase near day high; flips on VWAP pullback bounce"
  }
 }
