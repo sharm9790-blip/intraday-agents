@@ -1,20 +1,23 @@
-🔴 <b>NO TRADE — 14:00 scan</b>
+🔴 <b>NO TRADE — 10:36 IST</b>
 
-Weak tape: Nifty -1.3%,
-32% of stocks above VWAP.
+Market choppy. Nifty +1.7% but
+only 35% of stocks above VWAP.
 
-<pre>Stock        Why
-GUJENERGY    breakout faded
-MPHASIS      R:R 1.4, conf 5
-LGEINDIA     dip only, conf 5
-SCHAEFFLE    thin, no data
-RRKABEL      R:R 1.2</pre>
+<b>Rejected</b>
+<pre>Stock       R:R   Why
+FORCEMOT    1.1   RSI 72
+JSWINFRA    0.8   at day high
+HINDUNILVR  1.2   FSSAI news
+CREDITACC    -    +6% chase
+HUBTOWN      -    +4.7% chase</pre>
 
-<b>Flips if 5-min close above</b>
-• GUJENERGY ₹232.75 (1.5x volume)
-• MPHASIS ₹2,490 (1.5x volume)
-• LGEINDIA ₹1,804.5 (1.5x volume)
+<b>Flips on 5-min close</b>
+• FORCEMOT above ₹20,690
+• JSWINFRA above ₹361.5
+• HINDUNILVR above ₹2,084
+(all on strong volume)
 
-💡 No clean setup, 14:30 cutoff near. Stay flat.
+💡 Net R:R under 1.5, conf under 6.
+Wait for VWAP pullbacks.
 
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
