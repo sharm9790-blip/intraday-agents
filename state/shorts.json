@@ -22,6 +22,17 @@
    "qty": 44,
    "sector": "Power",
    "at": "13:26"
+  },
+  {
+   "symbol": "ONGC",
+   "yahoo": "ONGC.NS",
+   "price": 220.2,
+   "sl": 223.03,
+   "t1": 215.95,
+   "t2": 213.12,
+   "qty": 353,
+   "sector": "Oil Gas & Consumable Fuels",
+   "at": "13:30"
   }
  ],
  "days": {

@@ -1,26 +1,4 @@
 {
  "date": "2026-11-25",
- "symbols": {
-  "HINDUNILVR": {
-   "at": "11:20",
-   "rejected_at": "10:36",
-   "level": 2084.0,
-   "kind": "flip level",
-   "close": 2088.7
-  },
-  "HUBTOWN": {
-   "at": "10:40",
-   "rejected_at": "10:36",
-   "level": 182.5,
-   "kind": "flip level",
-   "close": 183.68
-  },
-  "CPPLUS": {
-   "at": "12:45",
-   "rejected_at": "12:42",
-   "level": 4200.0,
-   "kind": "flip level",
-   "close": 4209.0
-  }
- }
+ "symbols": {}
 }
