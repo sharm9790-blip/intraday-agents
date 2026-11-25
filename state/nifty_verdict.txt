@@ -1,23 +1,16 @@
-🧪 <b>PAPER</b> · Nifty options
-⚪ <b>NO TRADE — 13:32 IST</b>
+🧪 <b>PAPER</b> · Nifty day report
 
-📈 Nifty 25,700 (+1.4%) · VIX 17.7
-🧱 Calls 26,000 · Puts 25,500
-PCR 0.81 · Expiry Tue 1 Dec
+<b>Today</b>
+No paper trades (all NO TRADE)
+Nifty +1.78% · 25,801
+High 25,951 · Low 25,619
+Faded from high, chop after
 
-<b>Why not</b>
-• Faded 25,951 → 25,634, bounce
-  rejected at 25,755
-• Inside opening range, below
-  VWAP ~25,813
-• Writers both sides: box
-• CE R:R ~1.2 to 25,900 wall
-• Breadth weak: 28% &gt; VWAP
+<b>Last 20 days</b> (after costs)
+Trades 0 · Win rate –
+Net ₹0 · Profit factor –
+Not filled: 0
 
-<b>GO only if</b> (by 14:10)
-• CE: 5-min close &gt; 25,815
-• 25,800 call OI falling
-• Breadth ≥45% &gt; VWAP
-
-🔎 Next check: 14:10 IST (last)
-<i>Paper trade only, not advice.</i>
+💡 No trades yet: too early to judge
+📅 Weekly expiry: Tue 1 Dec
+<i>Paper trade for testing only, not SEBI-registered investment advice. Options trading is high risk.</i>
