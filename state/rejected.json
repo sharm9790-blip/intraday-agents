@@ -8,6 +8,9 @@
   "HUBTOWN": "10:36 +4.7% chase; flips on VWAP ~180.8 pullback then 5-min close >182.5 on 2x vol",
   "HAL": "11:41 RSI 90, 1.45% over VWAP, breakout R:R 1.1; flips on hold-bounce 4885-4895 above VWAP, SL<=4860, or 5-min close >5000 on 1.5x vol",
   "TATACAP": "11:41 net R:R 1.06, chase, RSI 80; flips on pullback ~349.5 holding, SL<=348",
-  "TATACONSUM": "11:41 +4% chase, R:R 1.2, conf 4; flips on 5-min close >1180.2 on 2x vol then retest holds"
+  "TATACONSUM": "11:41 +4% chase, R:R 1.2, conf 4; flips on 5-min close >1180.2 on 2x vol then retest holds",
+  "EMAMILTD": "11:58 entry missed, net R:R 1.06, book 76% ask; flips on 5-min close >434.6 on 2x vol",
+  "LTF": "11:58 +5.9% chase, pinned at 290 call wall; flips on 5-min close >292.6 after VWAP pullback",
+  "DRREDDY": "11:58 net R:R 1.0, 52wk high 1414.9 above; flips on 5-min close >1415.5 on volume"
  }
 }
