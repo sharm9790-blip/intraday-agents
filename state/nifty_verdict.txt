@@ -1,20 +1,23 @@
 🧪 <b>PAPER</b> · Nifty options
-⚪ <b>NO TRADE — 12:32 IST</b>
+⚪ <b>NO TRADE — 13:32 IST</b>
 
-📈 Nifty 25,815 (+1.8%) · VIX 17.7
-🧱 Calls 26,000 · Puts 25,800
-PCR 1.09 · Expiry Tue 1 Dec
+📈 Nifty 25,700 (+1.4%) · VIX 17.7
+🧱 Calls 26,000 · Puts 25,500
+PCR 0.81 · Expiry Tue 1 Dec
 
 <b>Why not</b>
-• 12:30 drop to 25,812 at VWAP
-• Writers on both sides: box
-  25,800–26,000
-• CE R:R ~1.0, risk over ₹2,500
-• PE counter-trend, R:R ~1.3
+• Faded 25,951 → 25,634, bounce
+  rejected at 25,755
+• Inside opening range, below
+  VWAP ~25,813
+• Writers both sides: box
+• CE R:R ~1.2 to 25,900 wall
+• Breadth weak: 28% &gt; VWAP
 
-<b>GO only if</b>
-• CE: 5-min close &gt; 25,900
-• PE: 5-min close &lt; 25,780
+<b>GO only if</b> (by 14:10)
+• CE: 5-min close &gt; 25,815
+• 25,800 call OI falling
+• Breadth ≥45% &gt; VWAP
 
-🔎 Next check: 13:30 IST
+🔎 Next check: 14:10 IST (last)
 <i>Paper trade only, not advice.</i>
