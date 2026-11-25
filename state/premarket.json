@@ -1,12 +1,13 @@
 {
- "date": "2026-11-23",
+ "date": "2026-11-25",
  "stage": "overnight",
- "id": "2026-11-23_0850",
+ "id": "2026-11-25_0850",
  "connectors": {
   "indmoney": null,
-  "investsights": null
+  "investsights": true
  },
- "cues": "S&P -3.7%, Nasdaq -5.3%, Nikkei -5.1%, Kospi -5.5%, HSI -1.6%, VIX 17.3 (+7.5%); heavy gap-down risk",
+ "cues": "Nasdaq -1.5%, S&P -0.5%, Nikkei -3.3%, Kospi -6.0%, Brent -4.3%, VIX 17.7; Nifty -1.75% last close, Bank Nifty -3.2%; RBI hike fears; GIFT Nifty firmer",
  "events": [],
- "stocks": []
+ "stocks": [],
+ "note": "premarket_candidates.json stale (2026-11-19); no fresh momentum list, weak market"
 }
