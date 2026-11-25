@@ -1,16 +1,18 @@
-🧪 <b>PAPER</b> · Nifty day report
+🧪 <b>PAPER</b> · Nifty premarket
+🌍 Last close −1.75% (23 Nov, closed at low) · GIFT Nifty seen firmer · VIX 17.7
+📅 Event: none major (M3 data 11:30). RBI hike talk for Dec, banks weak. Expiry 1 Dec
 
-<b>Today</b>
-No paper trades (all NO TRADE)
-Nifty −1.71% · 25,358 near low
-Weekly expiry day: buys blocked
-Slid from 25,993 high all day
+<pre>Level        Nifty
+Call wall    25,500 / 25,800
+Max pain     ~25,500
+Yday high    25,993
+Yday close   25,350
+Yday low     25,344
+Put floor    25,000 (25,200 next)
+PCR          0.70</pre>
+🐂 Bull: oversold after −450 pts, gap-up cue, close sits on fresh 25,350 put writing
+🐻 Bear: closed at day low, Bank Nifty −3.2%, heavy call writing 25,400–25,500 caps bounces
+💡 Bias: neutral. Above 25,400 → bounce try to 25,500. Below 25,344 → 25,200 / 25,000. Wait for 09:30
+⚠️ Global cues file is from 23 Nov (stale), gap read from news only
 
-<b>Last 20 days</b> (after costs)
-Trades 0 · Win rate –
-Net ₹0 · Profit factor –
-Not filled: 0
-
-💡 No trades yet: too early to judge
-📅 Tomorrow 24 Nov: NSE holiday
 <i>Paper trade for testing only, not SEBI-registered investment advice. Options trading is high risk.</i>
