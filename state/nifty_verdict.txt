@@ -1,24 +1,20 @@
 🧪 <b>PAPER</b> · Nifty options
-⚪ <b>NO TRADE — 11:39 IST</b>
+⚪ <b>NO TRADE — 12:32 IST</b>
 
-📈 Nifty 25,910 (+2.2%) · VIX 17.7
-🧱 Calls 26,000 · PDH 25,993
-🧱 Puts 25,800 / 25,700
-PCR 1.13 · Expiry 1 Dec
+📈 Nifty 25,815 (+1.8%) · VIX 17.7
+🧱 Calls 26,000 · Puts 25,800
+PCR 1.09 · Expiry Tue 1 Dec
 
 <b>Why not</b>
-• Stalled under 25,943 high:
-  closes 25,935 → 25,901
-• 26000 CE is OTM; R:R ≥ 1.5
-  only if T1 past the wall
-• Late move, θ ~₹190/lot/hr
+• 12:30 drop to 25,812 at VWAP
+• Writers on both sides: box
+  25,800–26,000
+• CE R:R ~1.0, risk over ₹2,500
+• PE counter-trend, R:R ~1.3
 
-<b>Would flip to CE if</b>
-• 5-min close ≥ 26,010 by 13:30
-  → 26050 CE ≤ ₹248
-• Or dip 25,850–870, then close
-  &gt; 25,900 → 25900 CE ≤ ₹249
-⛔ Close &lt; 25,850: CE bias off
+<b>GO only if</b>
+• CE: 5-min close &gt; 25,900
+• PE: 5-min close &lt; 25,780
 
-🔎 Next check: next scheduled run
-<i>Paper trade for testing only, not SEBI-registered investment advice. Options trading is high risk.</i>
+🔎 Next check: 13:30 IST
+<i>Paper trade only, not advice.</i>
