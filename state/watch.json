@@ -1,6 +1,20 @@
 {
- "date": "2026-11-24",
- "holiday": true,
+ "date": "2026-11-25",
+ "verdict_id": null,
  "live": [],
- "log": []
+ "log": [],
+ "health": {},
+ "last_run": "08:44",
+ "taken": [],
+ "trades": 0,
+ "day_trades": 0,
+ "nifty_id": "2026-11-25_0844_pre",
+ "open_slots": [],
+ "cues": [
+  "pre"
+ ],
+ "pre_fired": [
+  "pre"
+ ],
+ "fire_error": null
 }
