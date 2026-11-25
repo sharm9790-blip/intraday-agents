@@ -1,22 +1,22 @@
 🧪 <b>PAPER</b> · Nifty options
-⚪ <b>NO TRADE — 09:37 IST</b>
+⚪ <b>NO TRADE — 10:38 IST</b>
 
-📈 Nifty 25,771 (+1.7%) · VIX 17.1
+📈 Nifty 25,815 (+1.8%) · VIX 17.4
 🧱 Calls 25,800 / 26,000
 🧱 Puts 25,700 / 25,500
-PCR 0.85 · Expiry 1 Dec
+PCR 0.96 · Expiry 1 Dec
 
 <b>Why not</b>
-• Gap-up stalled at 25,796, no
-  close above 25,800 / 25,809
-• Fresh call writing 25,800–850
-• Net R:R ~1.4 &lt; 1.5 after costs
-💡 IV can drop as VIX eases
+• 5 bars capped 25,808–818,
+  no close ≥ 25,820
+• Call OI still rising 25,800–850
+• 25850 CE ~₹232 at breakout:
+  net R:R 1.41 &lt; 1.5 (code)
 
 <b>Would flip to CE if</b>
-• 5-min close ≥ 25,812 by 11:00
-• Or dip holds 25,725–745 (VWAP)
-  then close &gt; 25,780
+• 5-min close ≥ 25,820, then
+  retest holds 25,800 by 11:15
+• 25850 CE ≤ ₹225, IV ≥ 16
 ⛔ Close &lt; 25,700: gap failing
 
 🔎 Next check: next scheduled run
