@@ -1,18 +1,23 @@
-🧪 <b>PAPER</b> · Nifty premarket
-🌍 Last close −1.75% (23 Nov, closed at low) · GIFT Nifty seen firmer · VIX 17.7
-📅 Event: none major (M3 data 11:30). RBI hike talk for Dec, banks weak. Expiry 1 Dec
+🧪 <b>PAPER</b> · Nifty options
+⚪ <b>NO TRADE — 09:37 IST</b>
 
-<pre>Level        Nifty
-Call wall    25,500 / 25,800
-Max pain     ~25,500
-Yday high    25,993
-Yday close   25,350
-Yday low     25,344
-Put floor    25,000 (25,200 next)
-PCR          0.70</pre>
-🐂 Bull: oversold after −450 pts, gap-up cue, close sits on fresh 25,350 put writing
-🐻 Bear: closed at day low, Bank Nifty −3.2%, heavy call writing 25,400–25,500 caps bounces
-💡 Bias: neutral. Above 25,400 → bounce try to 25,500. Below 25,344 → 25,200 / 25,000. Wait for 09:30
-⚠️ Global cues file is from 23 Nov (stale), gap read from news only
+📈 Nifty 25,771 (+1.7%) · VIX 17.1
+🧱 Calls 25,800 / 26,000
+🧱 Puts 25,700 / 25,500
+PCR 0.85 · Expiry 1 Dec
 
+<b>Why not</b>
+• Gap-up stalled at 25,796, no
+  close above 25,800 / 25,809
+• Fresh call writing 25,800–850
+• Net R:R ~1.4 &lt; 1.5 after costs
+💡 IV can drop as VIX eases
+
+<b>Would flip to CE if</b>
+• 5-min close ≥ 25,812 by 11:00
+• Or dip holds 25,725–745 (VWAP)
+  then close &gt; 25,780
+⛔ Close &lt; 25,700: gap failing
+
+🔎 Next check: next scheduled run
 <i>Paper trade for testing only, not SEBI-registered investment advice. Options trading is high risk.</i>
