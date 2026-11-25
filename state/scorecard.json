@@ -1846,5 +1846,196 @@
    "trail": 0,
    "targets": 0
   }
+ },
+ {
+  "date": "2026-11-25",
+  "plans": [
+   {
+    "symbol": "DMART",
+    "start": "11:41",
+    "rules_v": "2026-11-16",
+    "sector": "Consumer Services",
+    "entry": 3502.0,
+    "qty": 28,
+    "sl": 3476.0,
+    "t1": 3557.0,
+    "t2": 3600.0,
+    "close": 3592.0,
+    "rules": {
+     "pnl": 0,
+     "steps": [
+      "ran up without the dip"
+     ]
+    },
+    "trail": {
+     "pnl": 0,
+     "steps": [
+      "ran up without the dip"
+     ]
+    },
+    "limit": {
+     "pnl": 0,
+     "steps": [
+      "never filled"
+     ]
+    },
+    "price_at_plan": 3516.0,
+    "targets": {
+     "cash": 100000,
+     "qty": 28,
+     "half": 14,
+     "rest": 14,
+     "pf1": 770,
+     "pf2": 1372,
+     "total": 2142,
+     "t1_hit": true,
+     "t2_hit": false,
+     "entry_hit": false,
+     "high": 3580.0
+    },
+    "market": {
+     "pnl": 1268,
+     "steps": [
+      "bought 3516.00",
+      "11:50 T1",
+      "15:00 time stop 3574.00"
+     ]
+    },
+    "lock": {
+     "pnl": 1030,
+     "steps": [
+      "bought 3516.00",
+      "11:50 T1",
+      "12:05 SL to T1",
+      "12:40 locked T1"
+     ]
+    }
+   },
+   {
+    "symbol": "SBICARD",
+    "start": "11:58",
+    "rules_v": "2026-11-16",
+    "sector": "NBFC / lenders",
+    "entry": 592.5,
+    "qty": 168,
+    "sl": 589.8,
+    "t1": 598.7,
+    "t2": 603.0,
+    "close": 589.0,
+    "rules": {
+     "pnl": 0,
+     "steps": [
+      "closed below cancel level"
+     ]
+    },
+    "trail": {
+     "pnl": 0,
+     "steps": [
+      "closed below cancel level"
+     ]
+    },
+    "limit": {
+     "pnl": -573,
+     "steps": [
+      "12:40 filled",
+      "12:55 SL"
+     ]
+    },
+    "price_at_plan": 594.65,
+    "targets": {
+     "cash": 100000,
+     "qty": 168,
+     "half": 84,
+     "rest": 84,
+     "pf1": 521,
+     "pf2": 882,
+     "total": 1403,
+     "t1_hit": false,
+     "t2_hit": false,
+     "entry_hit": true,
+     "high": 595.65
+    },
+    "market": {
+     "pnl": -935,
+     "steps": [
+      "bought 594.65",
+      "12:55 SL"
+     ]
+    },
+    "lock": {
+     "pnl": -935,
+     "steps": [
+      "bought 594.65",
+      "12:55 SL"
+     ]
+    }
+   },
+   {
+    "symbol": "AUROPHARMA",
+    "start": "12:42",
+    "rules_v": "2026-11-16",
+    "sector": "Healthcare",
+    "entry": 1837.0,
+    "qty": 54,
+    "sl": 1830.5,
+    "t1": 1858.0,
+    "t2": 1878.0,
+    "close": 1843.0,
+    "rules": {
+     "pnl": 0,
+     "steps": [
+      "not triggered by 13:45"
+     ]
+    },
+    "trail": {
+     "pnl": 0,
+     "steps": [
+      "not triggered by 13:45"
+     ]
+    },
+    "limit": {
+     "pnl": 0,
+     "steps": [
+      "never filled"
+     ]
+    },
+    "price_at_plan": 1840.6,
+    "targets": {
+     "cash": 100000,
+     "qty": 54,
+     "half": 27,
+     "rest": 27,
+     "pf1": 567,
+     "pf2": 1107,
+     "total": 1674,
+     "t1_hit": false,
+     "t2_hit": false,
+     "entry_hit": false,
+     "high": 1845.9
+    },
+    "market": {
+     "pnl": -54,
+     "steps": [
+      "bought 1840.60",
+      "15:00 time stop 1841.80"
+     ]
+    },
+    "lock": {
+     "pnl": -54,
+     "steps": [
+      "bought 1840.60",
+      "15:00 time stop 1841.80"
+     ]
+    }
+   }
+  ],
+  "totals": {
+   "rules": 0,
+   "limit": -573,
+   "market": 279,
+   "lock": 41,
+   "trail": 0,
+   "targets": 770
+  }
  }
 ]

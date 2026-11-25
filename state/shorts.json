@@ -1,40 +1,6 @@
 {
  "date": "2026-11-25",
- "open": [
-  {
-   "symbol": "NATIONALUM",
-   "yahoo": "NATIONALUM.NS",
-   "price": 287.55,
-   "sl": 289.36,
-   "t1": 284.84,
-   "t2": 283.02,
-   "qty": 347,
-   "sector": "Metals & Mining",
-   "at": "13:26"
-  },
-  {
-   "symbol": "ADANIGREEN",
-   "yahoo": "ADANIGREEN.NS",
-   "price": 1363.0,
-   "sl": 1385.63,
-   "t1": 1329.05,
-   "t2": 1306.42,
-   "qty": 44,
-   "sector": "Power",
-   "at": "13:26"
-  },
-  {
-   "symbol": "ONGC",
-   "yahoo": "ONGC.NS",
-   "price": 220.2,
-   "sl": 223.03,
-   "t1": 215.95,
-   "t2": 213.12,
-   "qty": 353,
-   "sector": "Oil Gas & Consumable Fuels",
-   "at": "13:30"
-  }
- ],
+ "open": [],
  "days": {
   "2026-11-16": [
    {
@@ -248,6 +214,59 @@
     "steps": [
      "10:55 sold short 109.96",
      "15:00 time stop 109.08"
+    ]
+   }
+  ],
+  "2026-11-25": [
+   {
+    "symbol": "NATIONALUM",
+    "yahoo": "NATIONALUM.NS",
+    "price": 287.55,
+    "sl": 289.36,
+    "t1": 284.84,
+    "t2": 283.02,
+    "qty": 347,
+    "sector": "Metals & Mining",
+    "at": "13:26",
+    "entry": 287.4,
+    "pnl": -258,
+    "steps": [
+     "13:35 sold short 287.40",
+     "15:00 time stop 287.80"
+    ]
+   },
+   {
+    "symbol": "ADANIGREEN",
+    "yahoo": "ADANIGREEN.NS",
+    "price": 1363.0,
+    "sl": 1385.63,
+    "t1": 1329.05,
+    "t2": 1306.42,
+    "qty": 44,
+    "sector": "Power",
+    "at": "13:26",
+    "entry": 1362.4,
+    "pnl": -28,
+    "steps": [
+     "13:35 sold short 1362.40",
+     "15:00 time stop 1361.40"
+    ]
+   },
+   {
+    "symbol": "ONGC",
+    "yahoo": "ONGC.NS",
+    "price": 220.2,
+    "sl": 223.03,
+    "t1": 215.95,
+    "t2": 213.12,
+    "qty": 353,
+    "sector": "Oil Gas & Consumable Fuels",
+    "at": "13:30",
+    "entry": 220.25,
+    "pnl": -506,
+    "steps": [
+     "13:35 sold short 220.25",
+     "15:00 time stop 221.42"
     ]
    }
   ]
