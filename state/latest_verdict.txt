@@ -1,23 +1,46 @@
-🔴 <b>NO TRADE — 10:36 IST</b>
+🟢 <b>GO — DMART</b>
+🕐 11:41 IST  ·  Confidence 5/10
 
-Market choppy. Nifty +1.7% but
-only 35% of stocks above VWAP.
+📥 Buy  <b>₹3,502</b>  (max ₹3,506)
+⏳ <b>Wait for dip</b>
+🛑 Stop loss  <b>₹3,476</b>
+🎯 Target 1  <b>₹3,557</b>  (sell half)
+🎯 Target 2  <b>₹3,600</b>
+📦 Qty  <b>28</b> shares
+📝 <b>Draft order</b> (you place it)
+⏳ <b>Don't place the buy yet</b>
+Wait for 🔔 BUY TRIGGER (green
+5-min close above 3498)
+Then: Qty <code>28</code> · Limit <code>3506</code>
+SL-M trigger  <code>3476</code>
+Sell half  <code>14</code> @ <code>3557</code>
+📲 INDmoney: search <code>DMART</code>
 
-<b>Rejected</b>
-<pre>Stock       R:R   Why
-FORCEMOT    1.1   RSI 72
-JSWINFRA    0.8   at day high
-HINDUNILVR  1.2   FSSAI news
-CREDITACC    -    +6% chase
-HUBTOWN      -    +4.7% chase</pre>
+<b>✅ Buy only if</b>
+• Dips to ₹3,498–3,506
+• Green 5-min close above ₹3,498
+• Stays above VWAP ~3,473
 
-<b>Flips on 5-min close</b>
-• FORCEMOT above ₹20,690
-• JSWINFRA above ₹361.5
-• HINDUNILVR above ₹2,084
-(all on strong volume)
+<b>❌ Cancel if</b>
+• Not triggered by 14:00
+• Hits ₹3,550 before the dip
+• 5-min close below ₹3,480
 
-💡 Net R:R under 1.5, conf under 6.
-Wait for VWAP pullbacks.
+<b>💰 Risk vs reward</b>
+Max loss ≈ ₹810
+Profit ≈ ₹770 (T1 half)
+Reward 1.8× the risk
 
+<b>Why this stock</b>
+• Pulled to VWAP, bounced
+• Puts 3400 &gt; calls 3650
+• No results or news risk
+
+<b>Skipped</b>
+• HAL — RSI 90, chase
+• TATACAP — R:R 1.06
+• TATACONSUM — +4% chase
+
+⚠️ Narrow rally, 41% above VWAP
+📡 Watcher checks every 5 min
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>

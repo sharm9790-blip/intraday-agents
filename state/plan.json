@@ -1,1 +1,32 @@
-{"date": "2026-11-25", "verdict_id": "2026-11-25_1036", "go_count": 0, "plan": null, "connectors": {"indmoney": null, "investsights": true}}
+{
+ "date": "2026-11-25",
+ "verdict_id": "2026-11-25_1141",
+ "go_count": 1,
+ "connectors": {
+  "indmoney": true,
+  "investsights": true
+ },
+ "plan": {
+  "symbol": "DMART",
+  "yahoo": "DMART.NS",
+  "name": "Avenue Supermarts",
+  "side": "long",
+  "entry_type": "dip",
+  "confidence": 5,
+  "zone_low": 3498.0,
+  "zone_high": 3506.0,
+  "entry": 3502.0,
+  "max_entry": 3506.0,
+  "trigger_close_above": 3498.0,
+  "sl": 3476.0,
+  "t1": 3557.0,
+  "t2": 3600.0,
+  "qty": 28,
+  "atr5": 11.4,
+  "deadline": "14:00",
+  "cancel_if_high_reaches": 3550.0,
+  "cancel_if_close_below": 3480.0,
+  "exit_if_close_below_after_entry": 3480.0,
+  "time_stop": "15:00"
+ }
+}

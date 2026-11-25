@@ -5,6 +5,9 @@
   "JSWINFRA": "10:36 net R:R 0.83-1.0 at day high, block-volume doubt; flips on 5-min close >361.5 on 2x vol, bid-heavy",
   "HINDUNILVR": "10:36 conf 4, FSSAI/margin news, net R:R 1.21; flips on 5-min close >2084 on 3x vol",
   "CREDITACC": "10:36 +6% chase; flips on VWAP ~1039 pullback then 5-min close >1058",
-  "HUBTOWN": "10:36 +4.7% chase; flips on VWAP ~180.8 pullback then 5-min close >182.5 on 2x vol"
+  "HUBTOWN": "10:36 +4.7% chase; flips on VWAP ~180.8 pullback then 5-min close >182.5 on 2x vol",
+  "HAL": "11:41 RSI 90, 1.45% over VWAP, breakout R:R 1.1; flips on hold-bounce 4885-4895 above VWAP, SL<=4860, or 5-min close >5000 on 1.5x vol",
+  "TATACAP": "11:41 net R:R 1.06, chase, RSI 80; flips on pullback ~349.5 holding, SL<=348",
+  "TATACONSUM": "11:41 +4% chase, R:R 1.2, conf 4; flips on 5-min close >1180.2 on 2x vol then retest holds"
  }
 }
