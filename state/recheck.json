@@ -14,6 +14,13 @@
    "level": 182.5,
    "kind": "flip level",
    "close": 183.68
+  },
+  "CPPLUS": {
+   "at": "12:45",
+   "rejected_at": "12:42",
+   "level": 4200.0,
+   "kind": "flip level",
+   "close": 4209.0
   }
  }
 }

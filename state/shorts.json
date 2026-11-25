@@ -1,6 +1,29 @@
 {
- "date": "2026-11-23",
- "open": [],
+ "date": "2026-11-25",
+ "open": [
+  {
+   "symbol": "NATIONALUM",
+   "yahoo": "NATIONALUM.NS",
+   "price": 287.55,
+   "sl": 289.36,
+   "t1": 284.84,
+   "t2": 283.02,
+   "qty": 347,
+   "sector": "Metals & Mining",
+   "at": "13:26"
+  },
+  {
+   "symbol": "ADANIGREEN",
+   "yahoo": "ADANIGREEN.NS",
+   "price": 1363.0,
+   "sl": 1385.63,
+   "t1": 1329.05,
+   "t2": 1306.42,
+   "qty": 44,
+   "sector": "Power",
+   "at": "13:26"
+  }
+ ],
  "days": {
   "2026-11-16": [
    {
