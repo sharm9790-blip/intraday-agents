@@ -39,7 +39,8 @@
  "log": [
   "10:33 LODHA 1237.50 VWAP \u20b91,224.21 status waiting",
   "10:36 LODHA 1234.40 VWAP \u20b91,224.27 status waiting",
-  "11:31 LODHA 1227.80 VWAP \u20b91,225.71 status waiting"
+  "11:31 LODHA 1227.80 VWAP \u20b91,225.71 status waiting",
+  "11:35 LODHA 1231.40 VWAP \u20b91,225.76 status waiting"
  ],
  "health": {
   "pinger": true,
@@ -47,11 +48,11 @@
   "gap_09:35": true,
   "gap_10:36": true
  },
- "last_run": "11:31",
+ "last_run": "11:35",
  "taken": [],
  "trades": 0,
  "day_trades": 0,
- "nifty_id": "2026-11-26_1035",
+ "nifty_id": "2026-11-26_1136",
  "open_slots": [
   "09:20",
   "09:35"
