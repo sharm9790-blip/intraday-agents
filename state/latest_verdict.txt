@@ -1,46 +1,44 @@
-🟡 <b>GO (low conviction) — DABUR</b>
-🕐 13:30 IST  ·  Confidence 4/10
+🟢 <b>GO — LODHA</b>
+🕐 10:33 IST  ·  Confidence 5/10
 
-📥 Buy  <b>₹423.4</b>  (max ₹423.5)
-⏳ <b>Wait for dip to VWAP</b>
-🛑 Stop loss  <b>₹421.6</b>
-🎯 Target 1  <b>₹427.5</b>  (sell half)
-🎯 Target 2  <b>₹428.8</b>
-📦 Qty  <b>236</b> shares
-
+📥 Buy  <b>₹1,224</b>  (max ₹1,227)
+⏳ <b>Wait for dip</b> to VWAP
+🛑 Stop loss  <b>₹1,213</b>
+🎯 Target 1  <b>₹1,243</b>  (sell half)
+🎯 Target 2  <b>₹1,256</b>
+📦 Qty  <b>81</b> shares
 📝 <b>Draft order</b> (you place it)
 ⏳ <b>Don't place the buy yet</b>
 Wait for 🔔 BUY TRIGGER (green
-5-min close back above 422.8)
-Then: Qty <code>236</code> · Limit <code>423.5</code>
-SL-M trigger  <code>421.6</code>
-Sell half  <code>118</code> @ <code>427.5</code>
-📲 INDmoney: search <code>DABUR</code>
+5-min close back above 1222)
+Then: Qty <code>81</code> · Limit <code>1227</code>
+SL-M trigger  <code>1213</code>
+Sell half  <code>40</code> @ <code>1243</code>
+📲 INDmoney: search <code>LODHA</code>
 
 <b>✅ Buy only if</b>
-• Dips to ₹423–423.5
-• Green 5-min close above ₹422.8
-• Nifty holds its day low
+• Dips to ₹1,222–1,227 (VWAP)
+• Green 5-min close above ₹1,222
+• Realty stays above its VWAP
 
 <b>❌ Cancel if</b>
-• Not triggered by 14:15
-• Runs above ₹428 with no dip
-• 5-min close below ₹422.8
+• Not triggered by 12:15
+• Runs above ₹1,250 without dip
+• 5-min close below ₹1,213
 
 <b>💰 Risk vs reward</b>
-Max loss ≈ ₹505 (+ costs)
-Reward ≈ 1.76× the risk
+Max loss ≈ ₹971
+Reward 1.5× the risk (tight)
 
-<b>Why</b>
-• +6.6% on result news, now at VWAP
-• Weak bounce volume, lower highs
-• Not buying the chase at ₹426
+<b>Why this stock</b>
+• Realty +1%, 73% above VWAP
+• Higher lows, breakout on volume
+• Already +3%: dip entry only
 
 <b>Skipped</b>
-• HUL, ITC — chase / call wall
-• HAL, TITAGARH — low R:R
-• Healthcare — AUROPHARMA live
+• KFINTECH — +4.9%, call wall
+• EDELALTS — thin, chase
+• VMM / HEGAM — R:R below 1
 
-💡 Thin setup, narrow market. Skip if no dip.
 📡 Watcher checks every 5 min
-<i>Analysis only, not advice. You place orders yourself.</i>
+<i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
