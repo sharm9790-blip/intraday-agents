@@ -2037,5 +2037,82 @@
    "trail": 0,
    "targets": 770
   }
+ },
+ {
+  "date": "2026-11-26",
+  "plans": [
+   {
+    "symbol": "LODHA",
+    "start": "10:33",
+    "rules_v": "2026-11-16",
+    "sector": "Realty",
+    "entry": 1224.0,
+    "qty": 81,
+    "sl": 1213.0,
+    "t1": 1243.0,
+    "t2": 1256.0,
+    "close": 1261.2,
+    "rules": {
+     "pnl": 1953,
+     "steps": [
+      "13:05 T1",
+      "13:55 T2"
+     ],
+     "bought": true
+    },
+    "trail": {
+     "pnl": 1154,
+     "steps": [
+      "13:05 T1",
+      "13:10 locked T1"
+     ]
+    },
+    "limit": {
+     "pnl": 0,
+     "steps": [
+      "never filled"
+     ]
+    },
+    "price_at_plan": 1235.8,
+    "targets": {
+     "cash": 100000,
+     "qty": 81,
+     "half": 40,
+     "rest": 41,
+     "pf1": 760,
+     "pf2": 1312,
+     "total": 2072,
+     "t1_hit": true,
+     "t2_hit": true,
+     "entry_hit": false,
+     "high": 1268.8
+    },
+    "market": {
+     "pnl": 996,
+     "steps": [
+      "bought 1235.80",
+      "13:05 T1",
+      "13:55 T2"
+     ]
+    },
+    "lock": {
+     "pnl": 996,
+     "steps": [
+      "bought 1235.80",
+      "13:05 T1",
+      "13:45 SL to T1",
+      "13:55 T2"
+     ]
+    }
+   }
+  ],
+  "totals": {
+   "rules": 1953,
+   "limit": 0,
+   "market": 996,
+   "lock": 996,
+   "trail": 1154,
+   "targets": 2072
+  }
  }
 ]

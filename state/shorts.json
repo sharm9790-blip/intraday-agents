@@ -1,40 +1,6 @@
 {
  "date": "2026-11-26",
- "open": [
-  {
-   "symbol": "ZYDUSLIFE",
-   "yahoo": "ZYDUSLIFE.NS",
-   "price": 1203.1,
-   "sl": 1216.27,
-   "t1": 1183.34,
-   "t2": 1170.17,
-   "qty": 75,
-   "sector": "Healthcare",
-   "at": "11:31"
-  },
-  {
-   "symbol": "SHRIRAMFIN",
-   "yahoo": "SHRIRAMFIN.NS",
-   "price": 970.6,
-   "sl": 979.0,
-   "t1": 958.0,
-   "t2": 949.6,
-   "qty": 103,
-   "sector": "Financial Services",
-   "at": "11:31"
-  },
-  {
-   "symbol": "SONACOMS",
-   "yahoo": "SONACOMS.NS",
-   "price": 874.0,
-   "sl": 879.14,
-   "t1": 866.29,
-   "t2": 861.15,
-   "qty": 114,
-   "sector": "Automobile and Auto Components",
-   "at": "13:25"
-  }
- ],
+ "open": [],
  "days": {
   "2026-11-16": [
    {
@@ -301,6 +267,60 @@
     "steps": [
      "13:35 sold short 220.25",
      "15:00 time stop 221.42"
+    ]
+   }
+  ],
+  "2026-11-26": [
+   {
+    "symbol": "ZYDUSLIFE",
+    "yahoo": "ZYDUSLIFE.NS",
+    "price": 1203.1,
+    "sl": 1216.27,
+    "t1": 1183.34,
+    "t2": 1170.17,
+    "qty": 75,
+    "sector": "Healthcare",
+    "at": "11:31",
+    "entry": 1205.4,
+    "pnl": 897,
+    "steps": [
+     "11:40 sold short 1205.40",
+     "15:00 time stop 1192.00"
+    ]
+   },
+   {
+    "symbol": "SHRIRAMFIN",
+    "yahoo": "SHRIRAMFIN.NS",
+    "price": 970.6,
+    "sl": 979.0,
+    "t1": 958.0,
+    "t2": 949.6,
+    "qty": 103,
+    "sector": "Financial Services",
+    "at": "11:31",
+    "entry": 971.3,
+    "pnl": 1026,
+    "steps": [
+     "11:40 sold short 971.30",
+     "14:30 T1",
+     "15:00 time stop 962.30"
+    ]
+   },
+   {
+    "symbol": "SONACOMS",
+    "yahoo": "SONACOMS.NS",
+    "price": 874.0,
+    "sl": 879.14,
+    "t1": 866.29,
+    "t2": 861.15,
+    "qty": 114,
+    "sector": "Automobile and Auto Components",
+    "at": "13:25",
+    "entry": 875.75,
+    "pnl": -506,
+    "steps": [
+     "13:30 sold short 875.75",
+     "14:00 SL"
     ]
    }
   ]
