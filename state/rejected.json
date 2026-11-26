@@ -10,6 +10,8 @@
   "ENRIN": "11:37 post-result fade at VWAP, volume dried up",
   "JYOTICNC": "12:40 net R:R ~1.1, +3.5% day, one-spike volume; flips on 5-min close >1065.5 on >=2x vol",
   "INDOMIM": "12:40 flat range, 83% ask, net R:R 1.15; flips on 5-min close >1310 on 2.5x vol",
-  "MANAKCOAT": "12:40 net R:R 0.3, illiquid"
+  "MANAKCOAT": "12:40 net R:R 0.3, illiquid",
+  "SANGHVIMOV": "13:30 thin depth 4-12 shares, net R:R ~1.1; flips on 5-min close >391.9 on 2x vol, or hold at VWAP 383.3",
+  "ANANDRATHI": "13:30 RSI 79.5, net R:R ~1.25; flips on pullback 2403-2410 holding VWAP, or 5-min close >2432 on strong vol"
  }
 }
