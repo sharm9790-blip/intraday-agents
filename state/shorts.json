@@ -1,6 +1,29 @@
 {
- "date": "2026-11-25",
- "open": [],
+ "date": "2026-11-26",
+ "open": [
+  {
+   "symbol": "ZYDUSLIFE",
+   "yahoo": "ZYDUSLIFE.NS",
+   "price": 1203.1,
+   "sl": 1216.27,
+   "t1": 1183.34,
+   "t2": 1170.17,
+   "qty": 75,
+   "sector": "Healthcare",
+   "at": "11:31"
+  },
+  {
+   "symbol": "SHRIRAMFIN",
+   "yahoo": "SHRIRAMFIN.NS",
+   "price": 970.6,
+   "sl": 979.0,
+   "t1": 958.0,
+   "t2": 949.6,
+   "qty": 103,
+   "sector": "Financial Services",
+   "at": "11:31"
+  }
+ ],
  "days": {
   "2026-11-16": [
    {

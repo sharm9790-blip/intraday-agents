@@ -1,4 +1,19 @@
 {
- "date": "2026-11-25",
- "symbols": {}
+ "date": "2026-11-26",
+ "symbols": {
+  "KFINTECH": {
+   "at": "10:45",
+   "rejected_at": "10:33",
+   "level": 982.0,
+   "kind": "flip level",
+   "close": 985.15
+  },
+  "HEGAM": {
+   "at": "10:35",
+   "rejected_at": "10:33",
+   "level": 274.95,
+   "kind": "day high",
+   "close": 275.92
+  }
+ }
 }
