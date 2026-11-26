@@ -1,33 +1,10 @@
 {
  "date": "2026-11-26",
- "verdict_id": "2026-11-26_1033",
+ "verdict_id": "2026-11-26_1137",
  "go_count": 1,
  "connectors": {
   "indmoney": true,
   "investsights": true
  },
- "plan": {
-  "symbol": "LODHA",
-  "yahoo": "LODHA.NS",
-  "name": "Macrotech Developers",
-  "side": "long",
-  "entry_type": "dip",
-  "confidence": 5,
-  "zone_low": 1222.0,
-  "zone_high": 1227.0,
-  "entry": 1224.0,
-  "max_entry": 1227.0,
-  "trigger_close_above": 1222.0,
-  "sl": 1213.0,
-  "t1": 1243.0,
-  "t2": 1256.0,
-  "qty": 81,
-  "atr5": 6.98,
-  "deadline": "12:15",
-  "cancel_if_high_reaches": 1250.0,
-  "cancel_if_close_below": 1213.0,
-  "exit_if_close_below_after_entry": 1218.0,
-  "time_stop": "15:00",
-  "sector": "Realty"
- }
+ "plan": null
 }

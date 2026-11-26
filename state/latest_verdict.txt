@@ -1,44 +1,23 @@
-🟢 <b>GO — LODHA</b>
-🕐 10:33 IST  ·  Confidence 5/10
+🔴 <b>NO TRADE — 11:37 IST</b>
 
-📥 Buy  <b>₹1,224</b>  (max ₹1,227)
-⏳ <b>Wait for dip</b> to VWAP
-🛑 Stop loss  <b>₹1,213</b>
-🎯 Target 1  <b>₹1,243</b>  (sell half)
-🎯 Target 2  <b>₹1,256</b>
-📦 Qty  <b>81</b> shares
-📝 <b>Draft order</b> (you place it)
-⏳ <b>Don't place the buy yet</b>
-Wait for 🔔 BUY TRIGGER (green
-5-min close back above 1222)
-Then: Qty <code>81</code> · Limit <code>1227</code>
-SL-M trigger  <code>1213</code>
-Sell half  <code>40</code> @ <code>1243</code>
-📲 INDmoney: search <code>LODHA</code>
+Weak, choppy tape:
+Nifty +0.27%, only 31% of
+stocks above VWAP.
 
-<b>✅ Buy only if</b>
-• Dips to ₹1,222–1,227 (VWAP)
-• Green 5-min close above ₹1,222
-• Realty stays above its VWAP
+<pre>Stock      Why         Flips >
+TORNTPHARM R:R 1.2     5021
+NATIONALUM vol 1.2x    300.2
+HEGAM      65% sellers 278.2
+KFINTECH   MACD down   999
+ENRIN      result fade -</pre>
 
-<b>❌ Cancel if</b>
-• Not triggered by 12:15
-• Runs above ₹1,250 without dip
-• 5-min close below ₹1,213
+📌 LODHA plan still live
+(dip 1222–1227, SL 1213).
+Judge says low conviction
+(4/10) — dip plans are weak
+on a day like this. Optional.
 
-<b>💰 Risk vs reward</b>
-Max loss ≈ ₹971
-Reward 1.5× the risk (tight)
+💡 Best watch: NATIONALUM close
+above ₹300.2 on volume.
 
-<b>Why this stock</b>
-• Realty +1%, 73% above VWAP
-• Higher lows, breakout on volume
-• Already +3%: dip entry only
-
-<b>Skipped</b>
-• KFINTECH — +4.9%, call wall
-• EDELALTS — thin, chase
-• VMM / HEGAM — R:R below 1
-
-📡 Watcher checks every 5 min
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
