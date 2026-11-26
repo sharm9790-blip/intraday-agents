@@ -179,10 +179,10 @@ def quotes(symbols):
     return out
 
 
-def chain(sym, exp_list):
+def chain(sym, exp_list, strikes=8):
     if not worker_on():
         return None
-    d = _worker(f"chain={urllib.parse.quote(sym)}&expiry={','.join(exp_list)}&strikes=8")
+    d = _worker(f"chain={urllib.parse.quote(sym)}&expiry={','.join(exp_list)}&strikes={int(strikes)}")
     return d.get("chain") if d.get("ok") else None
 
 
