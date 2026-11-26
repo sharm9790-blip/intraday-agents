@@ -1,74 +1,74 @@
 {
- "date": "2026-11-25",
- "at": "08:44",
+ "date": "2026-11-26",
+ "at": "08:45",
  "items": {
   "S&P 500": {
-   "price": 7201.09,
-   "pct": -0.5,
-   "time": "25 Nov 03:24",
+   "price": 7182.78,
+   "pct": -0.25,
+   "time": "26 Nov 03:02",
    "kind": "US close"
   },
   "Nasdaq": {
-   "price": 23733.535,
-   "pct": -1.48,
-   "time": "25 Nov 03:45",
+   "price": 23585.803,
+   "pct": -0.62,
+   "time": "26 Nov 03:45",
    "kind": "US close"
   },
   "Dow": {
-   "price": 50018.7,
-   "pct": 0.85,
-   "time": "25 Nov 03:24",
+   "price": 50182.95,
+   "pct": 0.33,
+   "time": "26 Nov 03:02",
    "kind": "US close"
   },
   "Nikkei": {
-   "price": 56710.43,
-   "pct": -3.3,
-   "time": "25 Nov 08:05",
+   "price": 57886.95,
+   "pct": 1.54,
+   "time": "26 Nov 08:05",
    "kind": "Asia live"
   },
   "Hang Seng": {
-   "price": 22345.94,
-   "pct": 0.57,
-   "time": "25 Nov 08:29",
+   "price": 22452.74,
+   "pct": 2.22,
+   "time": "26 Nov 08:30",
    "kind": "Asia live"
   },
   "Kospi": {
-   "price": 4707.75,
-   "pct": -5.96,
-   "time": "25 Nov 08:24",
+   "price": 4715.92,
+   "pct": 0.39,
+   "time": "26 Nov 08:25",
    "kind": "Asia live"
   },
   "Brent": {
-   "price": 87.47,
-   "pct": -4.3,
-   "time": "25 Nov 08:33",
+   "price": 90.68,
+   "pct": -4.15,
+   "time": "26 Nov 08:33",
    "kind": "crude"
   },
   "WTI": {
-   "price": 80.72,
-   "pct": -1.62,
-   "time": "25 Nov 08:34",
+   "price": 84.07,
+   "pct": 0.47,
+   "time": "26 Nov 08:35",
    "kind": "crude"
   },
   "USD/INR": {
-   "price": 92.9,
-   "pct": -0.02,
-   "time": "25 Nov 08:30",
+   "price": 92.22,
+   "pct": -0.75,
+   "time": "26 Nov 04:00",
    "kind": "currency"
   },
   "India VIX": {
-   "price": 17.698,
-   "pct": 2.18,
-   "time": "23 Nov 15:44",
+   "price": 17.6975,
+   "pct": -0.01,
+   "time": "25 Nov 15:30",
    "kind": "prev close"
   },
   "Nifty": {
-   "price": 25349.65,
-   "pct": -1.75,
-   "time": "23 Nov 15:31",
+   "price": 25819.25,
+   "pct": 1.85,
+   "time": "25 Nov 15:31",
    "kind": "prev close"
   }
  },
- "line": "S&P 500 -0.5% \u00b7 Nasdaq -1.5% \u00b7 Dow +0.8% \u00b7 Nikkei -3.3% \u00b7 Hang Seng +0.6% \u00b7 Kospi -6.0% \u00b7 Brent -4.3% \u00b7 WTI -1.6% \u00b7 USD/INR -0.0% \u00b7 India VIX +2.2% \u00b7 Nifty -1.8%",
+ "line": "S&P 500 -0.2% \u00b7 Nasdaq -0.6% \u00b7 Dow +0.3% \u00b7 Nikkei +1.5% \u00b7 Hang Seng +2.2% \u00b7 Kospi +0.4% \u00b7 Brent -4.2% \u00b7 WTI +0.5% \u00b7 USD/INR -0.8% \u00b7 India VIX -0.0% \u00b7 Nifty +1.9%",
  "note": "GIFT Nifty is not available from this source; read the gap from Asia live + US close, then the 09:08 pre-open price."
 }
