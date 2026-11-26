@@ -1,23 +1,18 @@
-🔴 <b>NO TRADE — 11:37 IST</b>
+🔴 <b>NO TRADE — 12:40 IST</b>
 
-Weak, choppy tape:
-Nifty +0.27%, only 31% of
-stocks above VWAP.
+Choppy tape: Nifty +0.38%,
+only 35% of stocks above VWAP.
 
 <pre>Stock      Why         Flips >
-TORNTPHARM R:R 1.2     5021
-NATIONALUM vol 1.2x    300.2
-HEGAM      65% sellers 278.2
-KFINTECH   MACD down   999
-ENRIN      result fade -</pre>
+JYOTICNC   R:R 1.1     1065.5
+HEGAM      chase +9.9% 286
+INDOMIM    83% sellers 1310
+MANAKCOAT  R:R 0.3     -</pre>
 
 📌 LODHA plan still live
-(dip 1222–1227, SL 1213).
-Judge says low conviction
-(4/10) — dip plans are weak
-on a day like this. Optional.
+(in zone, SL ₹1,213).
 
-💡 Best watch: NATIONALUM close
-above ₹300.2 on volume.
+💡 Best watch: JYOTICNC close
+above ₹1,065.5 on 2x volume.
 
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
