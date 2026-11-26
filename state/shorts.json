@@ -22,6 +22,17 @@
    "qty": 103,
    "sector": "Financial Services",
    "at": "11:31"
+  },
+  {
+   "symbol": "SONACOMS",
+   "yahoo": "SONACOMS.NS",
+   "price": 874.0,
+   "sl": 879.14,
+   "t1": 866.29,
+   "t2": 861.15,
+   "qty": 114,
+   "sector": "Automobile and Auto Components",
+   "at": "13:25"
   }
  ],
  "days": {
