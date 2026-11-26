@@ -29,6 +29,7 @@ import recheck
 import risk
 import scan
 import shorts
+import strategies
 import tables as T
 
 PAUSED = set()  # chats that sent PAUSE today (broadcasts skip them)
@@ -410,6 +411,17 @@ def send_scorecard(state_dir, today, watch):
     except Exception as e:  # never block the scorecard
         print("shorts failed", e)
     try:
+        lp = os.path.join(state_dir, "strategies.json")
+        ld = load(lp, {})
+        lab_close_day(state_dir, today, ld)
+        save(lp, ld)
+        ll = strategies.lines(ld, today, inr)
+        if ll:
+            lines += ll + [""]
+        extra.append(("lab", ld.get("days", {}).get(today, {})))
+    except Exception as e:  # never block the scorecard
+        print("strategy lab failed", e)
+    try:
         nl = load(os.path.join(state_dir, "nifty_paper.json"), {})
         nt = [t for t in nl.get("trades", []) if t.get("date") == today and t.get("status") == "closed"]
         if nt:
@@ -466,6 +478,13 @@ def scorecard_insights(rows, tot, extra, cand, today):
     nt = extra.get("nifty") or []
     if nt:
         out.append(f"💡 Nifty options test: {len(nt)} paper trade(s) today, {inr(sum(t['pnl'] for t in nt))} after costs.")
+    lab = extra.get("lab") or {}
+    lab_r = [x["r"] for k in strategies.ENGINES for x in lab.get(k, [])]
+    if lab_r:
+        out.append(f"💡 Strategy lab: {len(lab_r)} stock paper trade(s), {inr(sum(lab_r) * 1000)} at ₹1,000 risk.")
+    fl = lab.get("fly")
+    if isinstance(fl, dict) and "pnl" in fl:
+        out.append(f"💡 Iron fly paper: {inr(fl['pnl'])} ({fl.get('exit', '')}).")
     sh = extra.get("shorts") or []
     if sh:
         out.append(f"💡 Short test: {len(sh)} paper short(s), {inr(sum(x['pnl'] for x in sh))}.")
@@ -795,6 +814,7 @@ def main(state_dir):
         save(watch_path, watch)
     if opening_step(state_dir, today, now, watch):
         save(watch_path, watch)
+    lab_step(state_dir, today, now)   # strategy lab: Nifty iron fly paper test (own state file)
     cues_step(state_dir, today, minutes, watch)   # before the 08:40 premarket fire
     prescan_step(state_dir, today, minutes, watch)
     if fire_premarket(now, watch):
@@ -1210,6 +1230,106 @@ def opening_step(state_dir, today, now, watch):
             "<i>Testing the opening engine for a week; results in the 15:45 scorecard.</i>"], footer=False))
     save(path, doc)
     return True
+
+
+def lab_step(state_dir, today, now):
+    """Strategy lab, live part: the Nifty iron fly PAPER test on the INDmoney option chain
+    (needs WORKER_URL / WORKER_KEY). 09:20–09:40 opens it once, then every run until 15:15
+    marks it to market and closes it at the stop / target / 15:15. State: strategies.json.
+    Isolated: any error here never touches the stock plans."""
+    try:
+        m = now.hour * 60 + now.minute
+        if not hhmm(strategies.F_FROM) <= m <= hhmm("15:25"):
+            return
+        path = os.path.join(state_dir, "strategies.json")
+        doc = load(path, {})
+        d = doc.setdefault("days", {}).setdefault(today, {})
+        t = d.get("fly")
+        if isinstance(t, dict) and (t.get("skipped") or t.get("done")):
+            return
+        if not ind.worker_on():
+            d["fly"] = {"skipped": "no INDmoney worker (WORKER_URL / WORKER_KEY)"}
+            save(path, doc)
+            return
+        exps = ([t["expiry"]] if t and t.get("expiry") else []) + strategies.next_expiries(now.date())
+        ch = ind.chain("NIFTY", exps, strikes=12)
+        if not t:
+            if m > hhmm(strategies.F_TO):
+                d["fly"] = {"skipped": f"no option chain between {strategies.F_FROM} and {strategies.F_TO}"}
+            elif ch:
+                gap = None
+                try:
+                    nb, _ = candles("^NSEI", "5d", False)
+                    tb = [b for b in nb if b[0].date() == now.date()]
+                    pv = [b for b in nb if b[0].date() < now.date()]
+                    gap = (tb[0][1] / pv[-1][4] - 1) * 100 if tb and pv else None
+                except Exception as e:
+                    print("lab nifty gap failed", e)
+                why = strategies.fly_skip(today, ch, gap, vix_change(), events_today(state_dir, today))
+                if why:
+                    d["fly"] = {"skipped": "; ".join(why)}
+                else:
+                    t, err = strategies.fly_open(ch, now)
+                    d["fly"] = t or {"skipped": err}
+                    if t:
+                        telegram(card("🧪", f"PAPER TEST · NIFTY IRON FLY {t['atm']:g}", [
+                            f"🕐 {t['at']} IST · Nifty {t['spot']:,.0f} · expiry {t['expiry']}",
+                            f"Sell {t['atm']:g} CE + PE, buy {t['atm'] + strategies.WING:g} CE / "
+                            f"{t['atm'] - strategies.WING:g} PE · credit {t['credit']:g} × {t['qty']}",
+                            f"Out at −₹{strategies.STOP:,} or +₹{strategies.TARGET:,}, else 15:15 · "
+                            f"max loss ₹{t['max_loss']:,}", "",
+                            "<b>Paper test only — don't trade this.</b>"], footer=False))
+            print("lab fly:", d.get("fly", {}).get("skipped") or "opened" if d.get("fly") else "no chain yet")
+            save(path, doc)
+            return
+        if not ch:
+            print("lab fly: no chain this run")
+            return
+        mtm = strategies.fly_mtm(t, ch)
+        if mtm is None:
+            print("lab fly: a leg has no price this run")
+            return
+        was = t["status"]
+        strategies.fly_update(t, mtm, now)
+        if was == "open" and t["status"] == "closed":
+            telegram(card("🧪", f"PAPER TEST · IRON FLY CLOSED", [
+                f"{t['exit']} · {inr(t['pnl'])} after costs (1 lot)",
+                "<i>Paper only. Result also in the 15:45 scorecard.</i>"], footer=False))
+        save(path, doc)
+    except Exception as e:
+        print("lab_step failed", repr(e))
+
+
+def lab_close_day(state_dir, today, doc):
+    """15:45: replay today's VWAP-reversion and gap-fade rules on the F&O stocks' 5-min
+    candles (Yahoo), and settle the iron fly if a run missed 15:15. Paper only."""
+    from concurrent.futures import ThreadPoolExecutor
+    d = doc.setdefault("days", {}).setdefault(today, {})
+    t = d.get("fly")
+    if isinstance(t, dict) and t.get("legs") and not t.get("done"):
+        last = t["path"][-1][1] if t.get("path") else 0
+        if t["status"] == "open":
+            t.update(status="closed", pnl=last, exit="last reading")
+        t["hold"], t["done"] = last, True
+    if all(k in d for k in strategies.ENGINES):
+        return
+    uni = scan.load_universe(state_dir)
+    syms = [s for s, v in uni.get("stocks", {}).items() if v.get("fo")]
+    data = {}
+
+    def one(s):
+        try:
+            data[s] = candles(s + ".NS", "5d", False)[0]
+        except Exception:
+            pass
+    with ThreadPoolExecutor(24) as ex:
+        list(ex.map(one, syms))
+    nb, _ = candles("^NSEI", "5d", False)
+    day = datetime.strptime(today, "%Y-%m-%d").date()
+    groups = {s: scan.group(s, uni) for s in data}
+    res = {eng: strategies.day_trades(eng, day, data, nb, groups) for eng in strategies.ENGINES}
+    strategies.record_stock_day(doc, today, res, events_today(state_dir, today))
+    print("lab:", {k: [x["symbol"] for x in v] for k, v in res.items()}, f"({len(data)} stocks)")
 
 
 def cues_step(state_dir, today, minutes, watch):
