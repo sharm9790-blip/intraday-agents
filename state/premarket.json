@@ -1,13 +1,13 @@
 {
- "date": "2026-11-25",
+ "date": "2026-11-26",
  "stage": "overnight",
- "id": "2026-11-25_0850",
+ "id": "2026-11-26_0852",
  "connectors": {
-  "indmoney": null,
+  "indmoney": true,
   "investsights": true
  },
- "cues": "Nasdaq -1.5%, S&P -0.5%, Nikkei -3.3%, Kospi -6.0%, Brent -4.3%, VIX 17.7; Nifty -1.75% last close, Bank Nifty -3.2%; RBI hike fears; GIFT Nifty firmer",
+ "cues": "S&P -0.2%, Nasdaq -0.6%, Nikkei +1.5%, Hang Seng +2.2%, Brent -4.2%, VIX 17.7; Nifty +1.85% last close, Bank Nifty +1.8%; constructive Asia",
  "events": [],
  "stocks": [],
- "note": "premarket_candidates.json stale (2026-11-19); no fresh momentum list, weak market"
+ "note": "premarket_candidates.json stale (2026-11-19) and Yahoo fetch returned 0 stocks; no daily candles (ATR/RSI/20d high) to level breakouts safely, so no watchlist. 52-wk-high movers (ICICIBANK +3.4%, EICHERMOT, DLF) seen but unvetted/extended."
 }
