@@ -29,11 +29,13 @@
     "time_stop": "15:00",
     "sector": "Realty",
     "rules_v": "2026-11-16",
-    "start": "10:33"
+    "start": "10:33",
+    "buy_at": "12:36"
    },
-   "status": "waiting",
+   "status": "in_zone",
    "since": "10:33",
-   "paper_booked": 0
+   "paper_booked": 0,
+   "triggered": "12:36"
   }
  ],
  "log": [
@@ -41,19 +43,21 @@
   "10:36 LODHA 1234.40 VWAP \u20b91,224.27 status waiting",
   "11:31 LODHA 1227.80 VWAP \u20b91,225.71 status waiting",
   "11:35 LODHA 1231.40 VWAP \u20b91,225.76 status waiting",
-  "11:36 LODHA 1229.60 VWAP \u20b91,225.79 status waiting"
+  "11:36 LODHA 1229.60 VWAP \u20b91,225.79 status waiting",
+  "12:36 LODHA 1236.70 VWAP \u20b91,227.84 status in_zone"
  ],
  "health": {
   "pinger": true,
   "ready": true,
   "gap_09:35": true,
-  "gap_10:36": true
+  "gap_10:36": true,
+  "gap_11:36": true
  },
- "last_run": "11:36",
+ "last_run": "12:36",
  "taken": [],
- "trades": 0,
- "day_trades": 0,
- "nifty_id": "2026-11-26_1136",
+ "trades": 1,
+ "day_trades": 1,
+ "nifty_id": "2026-11-26_1237",
  "open_slots": [
   "09:20",
   "09:35"
@@ -67,9 +71,9 @@
  "fire_error": null,
  "pre_id": "2026-11-26_0852",
  "pre_done": {},
- "scan_slot": "11:30",
- "last_fire": "11:30",
- "fired_at": "11:31",
+ "scan_slot": "12:30",
+ "last_fire": "12:30",
+ "fired_at": "12:36",
  "verdicts": 2,
  "plans": [
   {
