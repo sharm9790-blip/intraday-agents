@@ -1,22 +1,23 @@
 🧪 <b>PAPER</b> · Nifty options
-⚪ <b>NO TRADE — 09:35 IST</b>
+⚪ <b>NO TRADE — 10:35 IST</b>
 
-📈 Nifty 25,811 (−0.03%) · VIX 17.7
-🧱 Calls 26,000 · Puts 25,700
-PCR 0.89 · Max pain 25,750
+📈 Nifty 25,906 (+0.3%) · VIX 17.7
+🧱 Calls 26,000 · Puts 25,800
+PCR 0.93 · Max pain 25,800
 
 <b>Why not</b>
-• Gap-up filled, mid opening range
-• Call and put writing both rising
-• Best CE R:R 0.9 (needs 1.5)
-💡 Range day: buyers lose to decay
+• 25,922 high rejected, no close
+  above 25,925 yet
+• 26,000 call writing still rising
+• Best CE net R:R 1.34 (needs 1.5)
+💡 Breadth choppy: 49% &gt; VWAP
 
 <b>Flip to GO if</b>
-• CE: 5-min close &gt; 25,900 +
-  call unwinding at 26,000
-• PE: 5-min close &lt; 25,700 +
-  put unwinding
+• CE: 5-min close &gt; 25,955 +
+  26,000 call OI flat/falling
+  (25900 CE ~₹235, SL 25,900)
+• No CE entry after 12:00
 
-🔎 Next check: 10:05 IST
+🔎 Next check: 11:05 IST
 📊 Paper record: 0 trades
 <i>Paper trade for testing only, not SEBI-registered investment advice. Options trading is high risk.</i>
