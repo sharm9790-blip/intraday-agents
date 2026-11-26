@@ -1,22 +1,22 @@
-🧪 <b>PAPER</b> · Nifty premarket
-🌍 Cues stale · GIFT hints gap-up
-🇺🇸 US shut tonight · VIX 17.7
-📅 Event: none major today
-📅 Expiry Tue 1 Dec · lot 65
+🧪 <b>PAPER</b> · Nifty options
+⚪ <b>NO TRADE — 09:35 IST</b>
 
-<pre>Level        Nifty
-Call wall    26,000
-Yday high    25,952
-Yday close   25,819
-Max pain     25,750
-Yday low     25,619
-Put floor    25,500</pre>
-PCR 0.92 · ATM straddle 436
+📈 Nifty 25,811 (−0.03%) · VIX 17.7
+🧱 Calls 26,000 · Puts 25,700
+PCR 0.89 · Max pain 25,750
 
-💡 Bias: mild up, wait for 09:30
-🟢 CE only above 25,952 + VWAP
-🔴 PE only below 25,700 or a
-   gap-up fade under ORL
-⚪ 25,750–25,900 = chop zone
+<b>Why not</b>
+• Gap-up filled, mid opening range
+• Call and put writing both rising
+• Best CE R:R 0.9 (needs 1.5)
+💡 Range day: buyers lose to decay
 
+<b>Flip to GO if</b>
+• CE: 5-min close &gt; 25,900 +
+  call unwinding at 26,000
+• PE: 5-min close &lt; 25,700 +
+  put unwinding
+
+🔎 Next check: 10:05 IST
+📊 Paper record: 0 trades
 <i>Paper trade for testing only, not SEBI-registered investment advice. Options trading is high risk.</i>
