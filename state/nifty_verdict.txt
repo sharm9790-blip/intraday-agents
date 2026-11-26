@@ -1,24 +1,13 @@
-🧪 <b>PAPER</b> · Nifty options
-⚪ <b>NO TRADE — 13:35 IST</b>
+🧪 <b>PAPER</b> · Nifty day report
 
-📈 Nifty 25,820 (flat) · VIX 17.7
-🧱 Calls 26,000 · Puts 25,800
-PCR 1.05 · Max pain 25,800
+<b>Today</b>
+No paper trades (all NO TRADE)
+Net P&amp;L ₹0
 
-<b>Why not</b>
-• Slid to 25,820, no break of 25,800
-• 25,800 puts still added (+73%)
-• More put floors 25,700 / 25,600
-• PE net R:R ~1.5 max, ~0.8 real
-💡 Pin day near max pain
+<b>Last 20 days</b> (after costs)
+Trades 0 · Win rate –
+Net ₹0 · Profit factor –
+Not filled: 0
 
-<b>Flip to GO if</b> (by 14:00)
-• PE: 5-min close &lt; 25,790 +
-  25,800 put OI falling
-  (25800 PE, SL Nifty 25,865)
-• or 5-min close &lt; 25,733
-• CE: close &gt; 26,010 (unlikely)
-
-🔎 Next check: 14:32 IST
-📊 Paper record: 0 trades
+💡 No trades yet: too early to judge
 <i>Paper trade for testing only, not SEBI-registered investment advice. Options trading is high risk.</i>
