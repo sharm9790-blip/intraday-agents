@@ -1,46 +1,11 @@
-🟢 <b>GO — JWL</b>
-🕐 13:30 IST  ·  Confidence 6/10
+⚪ <b>NO TRADE</b>
+🕐 14:29 IST
 
-📥 Buy  <b>₹235.3</b>  (max ₹235.8)
-⚡ <b>BUY NOW</b> inside the band
-🛑 Stop loss  <b>₹233.4</b>
-🎯 Target 1  <b>₹241.7</b>  (sell half)
-🎯 Target 2  <b>₹245</b>
-📦 Qty  <b>424</b> shares
+Too late for a new entry.
+Code needs a deadline by 14:30,
+and the data pack is from 13:35.
 
-📝 <b>Draft order</b> (you place it)
-Qty <code>424</code> · Limit <code>235.8</code>
-SL-M trigger  <code>233.4</code>
-Sell half  <code>212</code> @ <code>241.7</code>
-📲 INDmoney: search <code>JWL</code>
+Market mode: choppy.
+No new plan today after JWL.
 
-<b>✅ Buy only if</b>
-• Price ₹234.85–235.8
-• Holding above VWAP ₹234.7
-
-<b>❌ Cancel if</b>
-• Not filled by 13:50
-• Hits ₹241.7 before entry
-• 5-min close below ₹233.9
-
-<b>💰 Risk vs reward</b>
-Max loss ≈ ₹890
-Reward ≈ 3× risk to T1
-Exit all by 15:00
-
-<b>Why</b>
-• Bounced off VWAP, vol 3.5×
-• EMAs stacked up
-• No results/news found
-
-<b>Watch out</b>
-• Up 6.5%, RSI 71
-• Fading from ₹243 high
-• Choppy market
-
-<b>Skipped</b>
-• SANGHVIMOV — thin depth
-• ANANDRATHI — RSI 79.5, R:R low
-
-📡 Watcher checks every 5 min
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
