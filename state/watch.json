@@ -48,7 +48,8 @@
   "12:36 LODHA 1236.70 VWAP \u20b91,227.84 status in_zone",
   "12:40 LODHA 1236.20 VWAP \u20b91,227.95 status in_zone",
   "13:25 LODHA 1241.70 VWAP \u20b91,230.43 status t1_hit",
-  "13:29 LODHA 1241.80 VWAP \u20b91,230.65 status t1_hit"
+  "13:29 LODHA 1241.80 VWAP \u20b91,230.65 status t1_hit",
+  "13:35 LODHA 1242.90 VWAP \u20b91,230.94 status t1_hit"
  ],
  "health": {
   "pinger": true,
@@ -58,11 +59,11 @@
   "gap_11:36": true,
   "gap_12:40": true
  },
- "last_run": "13:29",
+ "last_run": "13:35",
  "taken": [],
  "trades": 0,
  "day_trades": 0,
- "nifty_id": "2026-11-26_1237",
+ "nifty_id": "2026-11-26_1335",
  "open_slots": [
   "09:20",
   "09:35"
@@ -76,7 +77,7 @@
  "fire_error": null,
  "pre_id": "2026-11-26_0852",
  "pre_done": {},
- "scan_slot": "13:15",
+ "scan_slot": "13:30",
  "last_fire": "13:15",
  "fired_at": "13:25",
  "verdicts": 4,
