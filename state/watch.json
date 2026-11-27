@@ -46,16 +46,18 @@
   "11:37 GRSE 2138.20 VWAP \u20b92,136.02 status in_zone",
   "11:38 GRSE 2137.10 VWAP \u20b92,136.02 status in_zone",
   "12:35 GRSE 2153.20 VWAP \u20b92,137.25 status in_zone",
-  "12:38 GRSE 2150.40 VWAP \u20b92,137.29 status in_zone"
+  "12:38 GRSE 2150.40 VWAP \u20b92,137.29 status in_zone",
+  "13:23 GRSE 2151.00 VWAP \u20b92,138.71 status in_zone"
  ],
  "health": {
   "pinger": true,
   "ready": true,
   "gap_09:35": true,
   "gap_10:37": true,
-  "gap_11:38": true
+  "gap_11:38": true,
+  "gap_12:38": true
  },
- "last_run": "12:38",
+ "last_run": "13:23",
  "taken": [],
  "trades": 0,
  "day_trades": 0,
@@ -70,7 +72,8 @@
   "10:35",
   "11:30",
   "11:35",
-  "12:35"
+  "12:35",
+  "13:20"
  ],
  "cues": [
   "pre"
@@ -81,9 +84,9 @@
  "fire_error": null,
  "pre_id": "2026-11-27_0850",
  "pre_done": {},
- "scan_slot": "12:30",
- "last_fire": "12:30",
- "fired_at": "12:35",
+ "scan_slot": "13:15",
+ "last_fire": "13:15",
+ "fired_at": "13:23",
  "verdicts": 3,
  "plans": [
   {

@@ -1,6 +1,9 @@
 {
  "date": "2026-11-27",
- "sent": [],
+ "sent": [
+  "13:15"
+ ],
  "settled": false,
- "ratio": 87.67
+ "ratio": 87.67,
+ "src": "etf"
 }
