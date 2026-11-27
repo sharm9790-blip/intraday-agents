@@ -1,4 +1,12 @@
 {
  "date": "2026-11-27",
- "symbols": {}
+ "symbols": {
+  "NLCINDIA": {
+   "at": "11:40",
+   "rejected_at": "11:38",
+   "level": 241.0,
+   "kind": "flip level",
+   "close": 243.0
+  }
+ }
 }
