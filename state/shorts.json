@@ -1,6 +1,29 @@
 {
- "date": "2026-11-26",
- "open": [],
+ "date": "2026-11-27",
+ "open": [
+  {
+   "symbol": "HYUNDAI",
+   "yahoo": "HYUNDAI.NS",
+   "price": 2010.1,
+   "sl": 2037.82,
+   "t1": 1968.52,
+   "t2": 1940.8,
+   "qty": 36,
+   "sector": "Automobile and Auto Components",
+   "at": "10:33"
+  },
+  {
+   "symbol": "SHRIRAMFIN",
+   "yahoo": "SHRIRAMFIN.NS",
+   "price": 930.3,
+   "sl": 939.98,
+   "t1": 915.78,
+   "t2": 906.1,
+   "qty": 103,
+   "sector": "Financial Services",
+   "at": "10:33"
+  }
+ ],
  "days": {
   "2026-11-16": [
    {

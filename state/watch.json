@@ -1,14 +1,50 @@
 {
  "date": "2026-11-27",
- "verdict_id": null,
- "live": [],
- "log": [],
+ "verdict_id": "2026-11-27_1034",
+ "live": [
+  {
+   "symbol": "GRSE",
+   "vid": "2026-11-27_1034",
+   "plan": {
+    "symbol": "GRSE",
+    "yahoo": "GRSE.NS",
+    "name": "Garden Reach Shipbuilders",
+    "side": "long",
+    "entry_type": "dip",
+    "confidence": 5,
+    "atr5": 14.08,
+    "zone_low": 2130,
+    "zone_high": 2138,
+    "entry": 2136,
+    "max_entry": 2138,
+    "trigger_close_above": 2130,
+    "sl": 2118,
+    "t1": 2176,
+    "t2": 2210,
+    "qty": 46,
+    "deadline": "12:45",
+    "cancel_if_high_reaches": 2180,
+    "cancel_if_close_below": 2124,
+    "exit_if_close_below_after_entry": 2124,
+    "time_stop": "15:00",
+    "sector": "Capital Goods",
+    "rules_v": "2026-11-16",
+    "start": "10:34"
+   },
+   "status": "waiting",
+   "since": "10:34",
+   "paper_booked": 0
+  }
+ ],
+ "log": [
+  "10:33 GRSE 2148.00 VWAP \u20b92,131.3 status waiting"
+ ],
  "health": {
   "pinger": true,
   "ready": true,
   "gap_09:35": true
  },
- "last_run": "10:29",
+ "last_run": "10:33",
  "taken": [],
  "trades": 0,
  "day_trades": 0,
@@ -18,7 +54,8 @@
   "09:35"
  ],
  "ema_slots": [
-  "10:25"
+  "10:25",
+  "10:30"
  ],
  "cues": [
   "pre"
@@ -29,7 +66,36 @@
  "fire_error": null,
  "pre_id": "2026-11-27_0850",
  "pre_done": {},
- "scan_slot": "10:15",
- "last_fire": "10:15",
- "fired_at": "10:29"
+ "scan_slot": "10:30",
+ "last_fire": "10:30",
+ "fired_at": "10:33",
+ "verdicts": 1,
+ "plans": [
+  {
+   "symbol": "GRSE",
+   "yahoo": "GRSE.NS",
+   "name": "Garden Reach Shipbuilders",
+   "side": "long",
+   "entry_type": "dip",
+   "confidence": 5,
+   "atr5": 14.08,
+   "zone_low": 2130,
+   "zone_high": 2138,
+   "entry": 2136,
+   "max_entry": 2138,
+   "trigger_close_above": 2130,
+   "sl": 2118,
+   "t1": 2176,
+   "t2": 2210,
+   "qty": 46,
+   "deadline": "12:45",
+   "cancel_if_high_reaches": 2180,
+   "cancel_if_close_below": 2124,
+   "exit_if_close_below_after_entry": 2124,
+   "time_stop": "15:00",
+   "sector": "Capital Goods",
+   "rules_v": "2026-11-16",
+   "start": "10:34"
+  }
+ ]
 }
