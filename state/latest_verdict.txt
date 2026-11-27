@@ -1,11 +1,46 @@
-⚪ <b>NO TRADE</b>
-🕐 14:29 IST
+🟢 <b>GO — GRSE</b>
+🕐 10:34 IST  ·  Confidence 5/10
 
-Too late for a new entry.
-Code needs a deadline by 14:30,
-and the data pack is from 13:35.
+📥 Buy  <b>₹2,136</b>  (max ₹2,138)
+⏳ <b>Wait for dip</b>
+🛑 Stop loss  <b>₹2,118</b>
+🎯 Target 1  <b>₹2,176</b>  (sell half)
+🎯 Target 2  <b>₹2,210</b>
+📦 Qty  <b>46</b> shares
 
-Market mode: choppy.
-No new plan today after JWL.
+📝 <b>Draft order</b> (you place it)
+⏳ <b>Don't place the buy yet</b>
+Wait for 🔔 BUY TRIGGER (green
+5-min close back above 2,130)
+Then: Qty <code>46</code> · Limit <code>2138</code>
+SL-M trigger  <code>2118</code>
+Sell half  <code>23</code> @ <code>2176</code>
+📲 INDmoney: search <code>GRSE</code>
+
+<b>✅ Buy only if</b>
+• Dips to ₹2,130–2,138
+• Holds VWAP ₹2,129
+• EQ series, no ASM/GSM
+
+<b>❌ Cancel if</b>
+• Not filled by 12:45
+• Hits ₹2,180 before the dip
+• 5-min close below ₹2,124
+
+<b>💰 Risk vs reward</b>
+Max loss ≈ ₹910
+Profit ≈ ₹1,750 (T1) · ₹3,400 (T2)
+Reward ~1.9× the risk
+
+<b>Why this stock</b>
+• Defence cluster leads, +4.8%
+• Volume 6.4× usual
+• 1% above VWAP, RSI 77
+
+<b>Skipped</b>
+• MAZDOCK — RSI 87, call wall
+• NLCINDIA — R:R 1.0
+
+💡 Choppy day, extended stock: dip only, no chase.
 
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
