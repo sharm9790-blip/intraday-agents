@@ -1,13 +1,28 @@
-🧪 <b>PAPER</b> · Nifty day report
+🧪 <b>PAPER</b> · Nifty premarket
+🌍 US shut (Thanksgiving) · VIX 16.8
+📰 GIFT Nifty: firm opening
+📅 Events: RBI data 11:30 (low)
+⏳ Expiry Tue 1 Dec (weekly)
 
-<b>Today</b>
-No paper trades (all NO TRADE)
-Net P&amp;L ₹0
+<pre>Level        Nifty
+Call wall    26,000
+Yday high    25,975
+Yday close   25,885
+Max pain     25,850
+Put floor    25,800
+Yday low     25,734
+Big puts     25,500</pre>
+PCR 1.03 · Calls also 26,200
 
-<b>Last 20 days</b> (after costs)
-Trades 0 · Win rate –
-Net ₹0 · Profit factor –
-Not filled: 0
+<b>Bull</b>
+• VIX −4.9%, puts written 25,800
+• 3-day higher closes
+<b>Bear</b>
+• 26,000 call OI 10.9M (biggest)
+• Tight liquidity, Bank Nifty weak
 
-💡 No trades yet: too early to judge
+💡 Bias: mild up, capped near
+26,000. Range 25,800–26,000
+likely; wait for 09:30.
+
 <i>Paper trade for testing only, not SEBI-registered investment advice. Options trading is high risk.</i>
