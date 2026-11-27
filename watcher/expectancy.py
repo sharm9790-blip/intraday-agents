@@ -243,6 +243,11 @@ def lines(state_dir, chat=None, short=False):
     if oh:
         tests.append(["Opening", str(len(oh)), f"{100 * sum(1 for r in oh if r > 0) // len(oh)}%",
                       T.num(sum(oh) / len(oh) * 1000)])
+    ed = load(os.path.join(state_dir, "ema_vwap.json"), {})
+    eh = [x["r"] for d in sorted(ed.get("days", {})) for x in ed["days"][d]]
+    if eh:
+        tests.append(["Nifty EMA", str(len(eh)), f"{100 * sum(1 for r in eh if r > 0) // len(eh)}%",
+                      T.num(sum(eh) / len(eh) * 1000)])
     nl = load(os.path.join(state_dir, "nifty_paper.json"), {})
     nc = [t for t in nl.get("trades", []) if t.get("status") == "closed"]
     if nc:
@@ -250,7 +255,7 @@ def lines(state_dir, chat=None, short=False):
                       T.num(sum(t["pnl"] for t in nc) / len(nc))])
     if tests:
         out += ["", "<b>Paper tests</b> (not signals; opening backtest +₹750/trade, 76% win; "
-                "Nifty options risk up to ₹2,500/trade)",
+                "Nifty options risk up to ₹2,500/trade; Nifty EMA+VWAP backtest −0.10R/trade)",
                 T.table(["Test", "Trades", "Win", "₹/trade"], tests)]
     v = verdict(mp)
     out += ["", f"🎯 <b>Verdict (paper)</b>: {v[1]}"]
