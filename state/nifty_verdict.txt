@@ -1,24 +1,22 @@
 🧪 <b>PAPER</b> · Nifty options
-⚪ <b>NO TRADE — 11:37 IST</b>
+⚪ <b>NO TRADE — 12:35 IST</b>
 
-📈 Nifty 25,694 (−0.7%) · VIX 16.8
-🧱 Calls 25,800 · Puts 25,650
-PCR 0.74 · VWAP 25,791
+📈 Nifty 25,717 (−0.65%) · VIX 16.8
+🧱 Calls 25,800 · Puts 25,700
+PCR 0.72 · VWAP ~25,780
 
 <b>Why not</b>
-• Trend down, but 7.7 ATR
-  off high and bouncing
-• Puts written at 25,650/600
-  right before T1
-• Net R:R ≈ 1.1 (need 1.5)
-• Breadth 72% up
+• 1 hr chop 25,667–25,743
+• Writers adding on both sides
+• Net R:R ≈ 0.7–0.85 (need 1.5)
+• Friday decay before Tue expiry
 
-<b>Flip to GO</b> (by 12:15)
-• 25650 PE: close &lt; 25,640
-  and 25650 PE OI &lt; 4.5M
-• ≤ ₹180 · SL close &gt; 25,700
-• T1 25,560 · T2 25,500
+<b>Flip to GO</b> (by 13:45)
+• PE: 5-min close &lt; 25,640
+  with 25700/25650 PE OI falling
+• 25700 PE · SL close &gt; 25,700
+• T1 25,550
 
-💡 Direction right, spot wrong
-🔎 Next check: 12:05 IST
+💡 Range day: buyers lose to decay
+🔎 Next check: 13:35 IST
 <i>Paper trade for testing only, not SEBI-registered investment advice. Options trading is high risk.</i>
