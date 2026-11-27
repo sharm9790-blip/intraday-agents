@@ -22,6 +22,7 @@ from datetime import datetime, timedelta, timezone
 import health
 import ind
 import opening
+import ema_vwap
 import news
 import premarket
 import prescan
@@ -399,6 +400,23 @@ def send_scorecard(state_dir, today, watch):
     except Exception as e:  # never block the scorecard
         print("opening lines failed", e)
     try:
+        ep = os.path.join(state_dir, "ema_vwap.json")
+        ed = load(ep, {})
+        eres = ed.setdefault("days", {}).get(today, [])
+        if ed.get("date") == today and not ed.get("settled"):
+            bars, _ = candles(ema_vwap.SYMBOL + ".NS")
+            ratio = ed.get("ratio") or 0
+            eres = [dict(t, risk_pts=round(t["risk"] * ratio)) for t in
+                    ema_vwap.run_day(bars, datetime.strptime(today, "%Y-%m-%d").date())]
+            ed["days"][today], ed["settled"] = eres, True
+            save(ep, ed)
+        el = ema_vwap.lines(ed, eres, inr)
+        if el:
+            lines += el + [""]
+        extra.append(("ema_vwap", eres))
+    except Exception as e:  # never block the scorecard
+        print("ema_vwap lines failed", e)
+    try:
         sp = os.path.join(state_dir, "shorts.json")
         sd = load(sp, {})
         res = shorts.close_day(sd, today, candles)
@@ -463,6 +481,10 @@ def scorecard_insights(rows, tot, extra, cand, today):
     if o:
         tr = sum(x["r"] for x in o)
         out.append(f"💡 Opening test: {len(o)} paper trade(s), {tr:+.2f}R ({inr(tr * 1000)} at ₹1,000 risk).")
+    ev = extra.get("ema_vwap") or []
+    if ev:
+        tr = sum(x["r"] for x in ev)
+        out.append(f"💡 Nifty EMA + VWAP test: {len(ev)} paper trade(s), {tr:+.2f}R ({inr(tr * 1000)} at ₹1,000 risk).")
     nt = extra.get("nifty") or []
     if nt:
         out.append(f"💡 Nifty options test: {len(nt)} paper trade(s) today, {inr(sum(t['pnl'] for t in nt))} after costs.")
@@ -794,6 +816,8 @@ def main(state_dir):
     if nifty_step(state_dir, today, watch):   # Nifty options paper verdicts (no plans, no orders)
         save(watch_path, watch)
     if opening_step(state_dir, today, now, watch):
+        save(watch_path, watch)
+    if ema_step(state_dir, today, now, watch):
         save(watch_path, watch)
     cues_step(state_dir, today, minutes, watch)   # before the 08:40 premarket fire
     prescan_step(state_dir, today, minutes, watch)
@@ -1208,6 +1232,52 @@ def opening_step(state_dir, today, now, watch):
             "Out by 11:15 if T1 not reached; after T1 the rest trails.", "",
             "<b>Paper test only — don't trade this.</b>",
             "<i>Testing the opening engine for a week; results in the 15:45 scorecard.</i>"], footer=False))
+    save(path, doc)
+    return True
+
+
+def ema_step(state_dir, today, now, watch):
+    """09:45–14:00, every 5 min: the Nifty EMA + VWAP trend-pullback engine, PAPER TEST ONLY
+    (from 30 Nov). Nifty only (NIFTYBEES candles for VWAP/volume, levels shown in Nifty
+    points). Sends a 📈 card marked "don't trade this" per new paper entry; 15:45 settles
+    the day into the scorecard. Backtest Nov 2024–Nov 2026: 406 trades, −0.10R a trade
+    after costs (positive before costs), so this is a test, not a signal."""
+    slot = f"{now.hour:02d}:{now.minute // 5 * 5:02d}"
+    done = watch.setdefault("ema_slots", [])
+    if slot not in ema_vwap.SLOTS or slot in done:
+        return False
+    done.append(slot)
+    path = os.path.join(state_dir, "ema_vwap.json")
+    doc = load(path, {})
+    if doc.get("date") != today:
+        doc.update({"date": today, "sent": [], "settled": False})
+    try:
+        bars, _ = candles(ema_vwap.SYMBOL + ".NS", "5d", False)
+        nb, _ = candles("^NSEI", "5d", False)
+        tb = [b for b in bars if b[0].date() == now.date()]
+        tn = [b for b in nb if b[0].date() == now.date()]
+        if tb and tn:
+            doc["ratio"] = round(tn[-1][4] / tb[-1][4], 2)
+        trades = ema_vwap.run_day(bars, now.date(), until=now)
+    except Exception as e:
+        print("ema_vwap failed", e)
+        save(path, doc)
+        return True
+    ratio = doc.get("ratio") or 0
+    for t in trades:
+        if t["at"] in doc["sent"]:
+            continue
+        doc["sent"].append(t["at"])
+        pts = lambda x: f"{x * ratio:,.0f}" if ratio else f"{x:.2f} (ETF)"
+        long_ = t["side"] > 0
+        telegram(card("📈", f"PAPER TEST · NIFTY EMA+VWAP — {'LONG' if long_ else 'SHORT'}", [
+            f"🕐 {t['at']} IST · Nifty {t['pct']:+.2f}% · volume {t['vol_x']:.1f}× · pullback to EMA 9", "",
+            f"Paper {'buy' if long_ else 'sell'} Nifty ~{pts(t['entry'])} · SL {pts(t['sl'])} "
+            f"({t['risk'] * ratio:.0f} pts)" if ratio else f"Paper {'buy' if long_ else 'sell'} ~{t['entry']}",
+            f"T1 {pts(t['t1'])} · T2 {pts(t['t2'])}",
+            "Half at T1, then out on a 5-min close back across EMA 21; all out by 15:10.", "",
+            "<b>Paper test only — don't trade this.</b>",
+            "<i>Results in the 15:45 scorecard.</i>"], footer=False))
     save(path, doc)
     return True
 

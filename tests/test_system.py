@@ -1160,6 +1160,74 @@ class TestPrescan(unittest.TestCase):
         self.assertTrue(it["new_high"])
         self.assertEqual(doc["scanned"], 3)
 
+class TestEmaVwap(Base):
+    """Nifty-only EMA + VWAP paper engine."""
+    def bars(self, closes, day=dt.date(2026, 11, 9), vol=1000):
+        t0 = dt.datetime(day.year, day.month, day.day, 9, 15, tzinfo=IST)
+        prev = [(dt.datetime(2026, 11, 6, 9, 15, tzinfo=IST) + dt.timedelta(minutes=5 * i), 100, 100.02, 99.98, 100, 1000)
+                for i in range(60)]
+        out = []
+        for i, c in enumerate(closes):
+            o = closes[i - 1] if i else 100.0
+            out.append((t0 + dt.timedelta(minutes=5 * i), o, max(o, c) + 0.01, min(o, c) - 0.01, c, vol))
+        return prev + out
+
+    def with_pullback(self, step=0.03, n=20):
+        import ema_vwap as EV
+        bars = self.bars([100 + step * i for i in range(n)])
+        e9 = EV.ema([b[4] for b in bars], 9)[-1]
+        t = bars[-1][0] + dt.timedelta(minutes=5)
+        bars.append((t, e9 + 0.005, e9 + 0.06, e9 - 0.003, e9 + 0.05, 3000))
+        return bars, t + dt.timedelta(minutes=5)
+
+    def test_long_pullback_signal_and_plan(self):
+        import ema_vwap as EV
+        bars, now = self.with_pullback()
+        sig = EV.check(bars, now)
+        self.assertIsNotNone(sig)
+        self.assertEqual(sig["side"], 1)
+        p = EV.plan(sig, sig["price"])
+        self.assertLess(p["sl"], p["entry"])
+        self.assertAlmostEqual(p["t1"] - p["entry"], 1.5 * p["risk"], places=2)
+
+    def test_no_signal_without_pullback_or_when_late(self):
+        import ema_vwap as EV
+        bars = self.bars([100 + 0.03 * i for i in range(20)])
+        self.assertIsNone(EV.check(bars, bars[-1][0] + dt.timedelta(minutes=5)))   # no pullback/volume
+        hot, now = self.with_pullback(step=0.15)                                     # +2.9% > 2%
+        self.assertIsNone(EV.check(hot, now))
+
+    def test_manage_long_and_short(self):
+        import ema_vwap as EV
+        t0 = dt.datetime(2026, 11, 9, 10, 0, tzinfo=IST)
+        mk = lambda rows: [(t0 + dt.timedelta(minutes=5 * i), *r) for i, r in enumerate(rows)]
+        p = {"side": 1, "entry": 100.0, "sl": 99.8, "t1": 100.3, "t2": 100.6, "risk": 0.2}
+        r, st, xi = EV.manage(mk([(100, 100.1, 99.7, 99.75, 1)]), 0, p, [100] * 30)
+        self.assertAlmostEqual(r, -1 - EV.COST * 500, places=2)
+        self.assertIn("SL", st[-1])
+        self.assertEqual(xi, 0)
+        r, st, xi = EV.manage(mk([(100, 100.35, 99.95, 100.3, 1), (100.3, 100.65, 100.25, 100.6, 1)]), 0, p, [100] * 30)
+        self.assertAlmostEqual(r, 2.25 - EV.COST * 500, places=2)
+        ps = {"side": -1, "entry": 100.0, "sl": 100.2, "t1": 99.7, "t2": 99.4, "risk": 0.2}
+        r, st, xi = EV.manage(mk([(100, 100.05, 99.65, 99.7, 1), (99.7, 99.75, 99.35, 99.4, 1)]), 0, ps, [100] * 30)
+        self.assertAlmostEqual(r, 2.25 - EV.COST * 500, places=2)
+        r, st, xi = EV.manage(mk([(100, 100.1, 99.9, 100.05, 1)]), 0, p, [100] * 30)
+        self.assertIsNone(xi)                                   # still open
+
+    def test_run_day_live_and_full(self):
+        import ema_vwap as EV
+        bars, now = self.with_pullback()
+        live = EV.run_day(bars, now.date(), until=now)
+        self.assertEqual(len(live), 1)
+        self.assertFalse(live[0]["closed"])                    # entry candle not yet closed
+        self.assertLessEqual(len(EV.run_day(bars, now.date())), EV.PER_DAY)
+
+    def test_slots(self):
+        import ema_vwap as EV
+        self.assertEqual((EV.SLOTS[0], EV.SLOTS[-1]), ("09:45", "14:00"))
+        self.assertEqual(EV.SYMBOL, "NIFTYBEES")
+
+
 class TestOpening(Base):
     def mk(self, today_rows, prev_close=100.0, day=dt.date(2026, 11, 9)):
         prev = [(dt.datetime(2026, 11, 6, 15, 25, tzinfo=IST), prev_close, prev_close, prev_close, prev_close, 1000)]
