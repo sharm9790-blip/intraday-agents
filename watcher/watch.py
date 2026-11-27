@@ -24,6 +24,7 @@ import ind
 import opening
 import ema_vwap
 import news
+import nse_ids
 import premarket
 import prescan
 import recheck
@@ -404,8 +405,8 @@ def send_scorecard(state_dir, today, watch):
         ed = load(ep, {})
         eres = ed.setdefault("days", {}).get(today, [])
         if ed.get("date") == today and not ed.get("settled"):
-            bars, _ = candles(ema_vwap.SYMBOL + ".NS")
-            ratio = ed.get("ratio") or 0
+            bars, src = ema_bars()
+            ratio = 1.0 if src == "fut" else (ed.get("ratio") or 0)
             eres = [dict(t, risk_pts=round(t["risk"] * ratio)) for t in
                     ema_vwap.run_day(bars, datetime.strptime(today, "%Y-%m-%d").date())]
             ed["days"][today], ed["settled"] = eres, True
@@ -1236,12 +1237,32 @@ def opening_step(state_dir, today, now, watch):
     return True
 
 
+def ema_bars():
+    """5-min candles for the Nifty EMA + VWAP paper test and their source.
+    "fut": current-month NIFTY futures from INDmoney through the worker (same instrument as
+    the Tradetron strategy: futures VWAP and volume, levels in futures points).
+    "etf": fallback when the worker or the futures id is not there — NIFTYBEES from Yahoo,
+    levels converted to Nifty points with the Nifty / NIFTYBEES ratio."""
+    if os.environ.get("WORKER_URL") and os.environ.get("WORKER_KEY"):
+        try:
+            IND_CACHE.pop(nse_ids.FUT, None)          # fresh each call (the cache is per run)
+            ind_batch([nse_ids.FUT])
+            rows = IND_CACHE.get(nse_ids.FUT)
+            if rows and len(rows) > 60:
+                return rows, "fut"
+        except Exception as e:
+            print("Nifty futures candles failed, using NIFTYBEES:", e)
+    bars, _ = candles(ema_vwap.SYMBOL + ".NS", "5d", False)
+    return bars, "etf"
+
+
 def ema_step(state_dir, today, now, watch):
-    """09:45–14:00, every 5 min: the Nifty EMA + VWAP trend-pullback engine, PAPER TEST ONLY
-    (from 30 Nov). Nifty only (NIFTYBEES candles for VWAP/volume, levels shown in Nifty
-    points). Sends a 📈 card marked "don't trade this" per new paper entry; 15:45 settles
-    the day into the scorecard. Backtest Nov 2024–Nov 2026: 406 trades, −0.10R a trade
-    after costs (positive before costs), so this is a test, not a signal."""
+    """09:45–14:00, every 5 min: the Nifty EMA + VWAP trend-pullback engine, PAPER TEST ONLY.
+    Runs on Nifty current-month futures 5-min candles (VWAP and volume from the futures, as
+    in the Tradetron "Nifty EMA VWAP Pullback v1"), falling back to NIFTYBEES if INDmoney is
+    down. Sends a 📈 card marked "don't trade this" per new paper entry; 15:45 settles the
+    day into the scorecard. Backtest Nov 2024–Nov 2026 (NIFTYBEES): 406 trades, −0.10R a
+    trade after costs, so this is a test, not a signal."""
     slot = f"{now.hour:02d}:{now.minute // 5 * 5:02d}"
     done = watch.setdefault("ema_slots", [])
     if slot not in ema_vwap.SLOTS or slot in done:
@@ -1252,18 +1273,23 @@ def ema_step(state_dir, today, now, watch):
     if doc.get("date") != today:
         doc.update({"date": today, "sent": [], "settled": False})
     try:
-        bars, _ = candles(ema_vwap.SYMBOL + ".NS", "5d", False)
-        nb, _ = candles("^NSEI", "5d", False)
-        tb = [b for b in bars if b[0].date() == now.date()]
-        tn = [b for b in nb if b[0].date() == now.date()]
-        if tb and tn:
-            doc["ratio"] = round(tn[-1][4] / tb[-1][4], 2)
+        bars, src = ema_bars()
+        doc["src"] = src
+        if src == "fut":
+            doc["ratio"] = 1.0
+        else:
+            nb, _ = candles("^NSEI", "5d", False)
+            tb = [b for b in bars if b[0].date() == now.date()]
+            tn = [b for b in nb if b[0].date() == now.date()]
+            if tb and tn:
+                doc["ratio"] = round(tn[-1][4] / tb[-1][4], 2)
         trades = ema_vwap.run_day(bars, now.date(), until=now)
     except Exception as e:
         print("ema_vwap failed", e)
         save(path, doc)
         return True
     ratio = doc.get("ratio") or 0
+    what = "Nifty fut" if doc.get("src") == "fut" else "Nifty"
     for t in trades:
         if t["at"] in doc["sent"]:
             continue
@@ -1272,7 +1298,7 @@ def ema_step(state_dir, today, now, watch):
         long_ = t["side"] > 0
         telegram(card("📈", f"PAPER TEST · NIFTY EMA+VWAP — {'LONG' if long_ else 'SHORT'}", [
             f"🕐 {t['at']} IST · Nifty {t['pct']:+.2f}% · volume {t['vol_x']:.1f}× · pullback to EMA 9", "",
-            f"Paper {'buy' if long_ else 'sell'} Nifty ~{pts(t['entry'])} · SL {pts(t['sl'])} "
+            f"Paper {'buy' if long_ else 'sell'} {what} ~{pts(t['entry'])} · SL {pts(t['sl'])} "
             f"({t['risk'] * ratio:.0f} pts)" if ratio else f"Paper {'buy' if long_ else 'sell'} ~{t['entry']}",
             f"T1 {pts(t['t1'])} · T2 {pts(t['t2'])}",
             "Half at T1, then out on a 5-min close back across EMA 21; all out by 15:10.", "",
