@@ -160,6 +160,28 @@ class TestNseIds(unittest.TestCase):
         finally:
             nse_ids.build = orig
 
+    def test_futures_roll(self):
+        store = {}
+        orig, calls = nse_ids.build, []
+        def fake():
+            calls.append(1)
+            nse_ids.LAST_FUT_EXPIRY = "2026-12-29"
+            return {"SBIN": 3045, "NIFTYFUT": "NFO_58875"}
+        nse_ids.build = fake
+        try:
+            save = lambda p, d: store.__setitem__(p, d)
+            load = lambda p, d: store.get(p, d)
+            store[os.path.join("s", "nse_ids.json")] = {"built": "2026-11-26T00:00:00+00:00", "ids": {"SBIN": 3045}}
+            t0 = dt.datetime(2026, 11, 27, tzinfo=dt.timezone.utc)
+            self.assertTrue(nse_ids.refresh("s", save, load, t0))       # old file without futures → rebuild once
+            self.assertEqual(store[os.path.join("s", "nse_ids.json")]["fut_expiry"], "2026-12-29")
+            store[os.path.join("s", "nse_ids.json")]["built"] = "2026-12-28T00:00:00+00:00"
+            self.assertFalse(nse_ids.refresh("s", save, load, dt.datetime(2026, 12, 29, 5, tzinfo=dt.timezone.utc)))  # expiry day: keep
+            self.assertTrue(nse_ids.refresh("s", save, load, dt.datetime(2026, 12, 30, 3, tzinfo=dt.timezone.utc)))
+            self.assertEqual(len(calls), 2)
+        finally:
+            nse_ids.build = orig
+
 
 PRE = {"symbol": "KALYANKJIL", "yahoo": "KALYANKJIL.NS", "name": "Kalyan Jewellers",
        "buy_above": 101.5, "zone_low": 101.5, "zone_high": 102.2, "entry": 101.6, "max_entry": 102.2,

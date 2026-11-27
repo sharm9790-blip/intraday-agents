@@ -57,7 +57,7 @@ const STATE_BRANCH = "claude/intraday-state";
 const RETRY_AFTER_S = 600;
 const MAX_TRIES = 3;
 const IND = "https://api.indstocks.com";
-const VERSION = "2026-11-17a";  // shown by ?live=test so you can tell the new code is deployed
+const VERSION = "2026-11-27a";  // shown by ?live=test so you can tell the new code is deployed
 const OPEN = ["waiting", "in_zone", "t1_hit"];
 const IST_MS = 5.5 * 3600 * 1000;
 
@@ -345,7 +345,12 @@ async function nseIds(env) {
 
 export function indCodes(symbols, ids) {
   const code = {}, missing = [];
-  for (const s of symbols) (ids[s] ? (code["NSE_" + ids[s]] = s) : missing.push(s));
+  // ids are NSE cash ids (3045 → NSE_3045); a value already prefixed (NIFTYFUT: "NFO_58875",
+  // current-month Nifty futures) is passed through as is.
+  for (const s of symbols) {
+    const v = ids[s];
+    v ? (code[/^[A-Z]+_\d+$/.test(String(v)) ? String(v) : "NSE_" + v] = s) : missing.push(s);
+  }
   return { code, missing };
 }
 

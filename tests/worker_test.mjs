@@ -69,6 +69,7 @@ ok(a[0].text.includes("A&amp;B") && !a[0].text.includes("A&B"), "escape");
 // INDmoney: symbols → NSE_<id>, response back to symbols; unknown symbol skipped
 const ic = indCodes(["SBIN", "M&M", "NEWCO"], { SBIN: 3045, "M&M": 2031 });
 ok(JSON.stringify(Object.keys(ic.code)) === '["NSE_3045","NSE_2031"]' && ic.missing[0] === "NEWCO", "indCodes");
+ok(indCodes(["NIFTYFUT"], { NIFTYFUT: "NFO_58875" }).code.NFO_58875 === "NIFTYFUT", "indCodes futures pass-through");
 const ip = indParse({ status: "success", data: { NSE_3045: { live_price: 792.5 }, NSE_2031: { live_price: 3100 }, NSE_9: { live_price: 1 } } }, ic.code);
 ok(ip.SBIN === 792.5 && ip["M&M"] === 3100 && Object.keys(ip).length === 2, "indParse " + JSON.stringify(ip));
 
