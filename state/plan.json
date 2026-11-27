@@ -1,32 +1,10 @@
 {
  "date": "2026-11-27",
- "verdict_id": "2026-11-27_1034",
+ "verdict_id": "2026-11-27_1138",
  "go_count": 1,
  "connectors": {
-  "indmoney": null,
+  "indmoney": true,
   "investsights": true
  },
- "plan": {
-  "symbol": "GRSE",
-  "yahoo": "GRSE.NS",
-  "name": "Garden Reach Shipbuilders",
-  "side": "long",
-  "entry_type": "dip",
-  "confidence": 5,
-  "atr5": 13.64,
-  "zone_low": 2130,
-  "zone_high": 2138,
-  "entry": 2136,
-  "max_entry": 2138,
-  "trigger_close_above": 2130,
-  "sl": 2118,
-  "t1": 2176,
-  "t2": 2210,
-  "qty": 46,
-  "deadline": "12:45",
-  "cancel_if_high_reaches": 2180,
-  "cancel_if_close_below": 2124,
-  "exit_if_close_below_after_entry": 2124,
-  "time_stop": "15:00"
- }
+ "plan": null
 }

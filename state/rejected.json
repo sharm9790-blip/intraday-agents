@@ -2,6 +2,10 @@
  "date": "2026-11-27",
  "symbols": {
   "MAZDOCK": "10:34 RSI 86.6, call wall 2000, net R:R 1.34 at 1902; flips on 5-min close >1915 on strong vol, or hold 1890-1900",
-  "NLCINDIA": "10:34 net R:R 1.04, weak Power breadth; flips on pullback <=233 holding VWAP, or 5-min close >236 on 2x vol"
+  "NLCINDIA": "11:38 exhaustion candle, below VWAP; flips on 5-min close >241 on volume above VWAP",
+  "LUPIN": "11:38 weak-day no dip plans, R:R ~0.6 at 2040, conf 5; flips on 5-min close >2042 on 1.5x vol with market recovering (or dip 2031-2035 holding VWAP)",
+  "EMIL": "11:38 net R:R 1.3, thin, stalled at day high; flips on 5-min close >132.7 on 2x vol",
+  "BDL": "11:38 net R:R 1.04, call wall 1100, correlated with GRSE; flips on 5-min close >1093.5 on strong vol and 1100 break",
+  "SYMBIOTEC": "11:38 thin spike-driven volume, no plan; flips on 5-min close >1575 on 2x vol"
  }
 }
