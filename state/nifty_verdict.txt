@@ -1,24 +1,15 @@
-🧪 <b>PAPER</b> · Nifty options
-⚪ <b>NO TRADE — 13:37 IST</b>
+🧪 <b>PAPER</b> · Nifty day report
 
-📈 Nifty 25,675 (−0.8%) · VIX 16.8
-🧱 Calls 25,800 · Puts 25,600
-PCR 0.69 · VWAP ~25,760
+<b>Today</b>
+<pre>Contract   Result      P&amp;L
+No trade   —             0</pre>
+No GO today: Judge stood down
+(slow grind, poor R:R)
 
-<b>Why not</b>
-• No 5-min close &lt; 25,640
-  (low 25,644, bounced to 25,670)
-• Put floors holding 25,600/25,500
-• Writers adding on both sides
-• Real T1 25,600 → R:R ≈ 0.6
-• Friday decay before Tue expiry
+<b>Last 20 days</b> (after costs)
+Trades 0 · Win rate —
+Net ₹0 · Profit factor —
+Not filled: 0
 
-<b>Last flip</b> (13:45 candle)
-• PE: 5-min close &lt; 25,640
-• 25650/25700 PE OI down ≥ 3%
-• 25600 PE OI unwinding
-• Else stand down for the day
-
-💡 Slow grind, buyers lose to decay
-🔎 Next check: 13:50 IST
+💡 No paper trades logged yet
 <i>Paper trade for testing only, not SEBI-registered investment advice. Options trading is high risk.</i>
