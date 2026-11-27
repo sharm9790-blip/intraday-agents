@@ -3,13 +3,18 @@
  "verdict_id": null,
  "live": [],
  "log": [],
- "health": {},
- "last_run": "08:45",
+ "health": {
+  "pinger": true,
+  "ready": true
+ },
+ "last_run": "09:24",
  "taken": [],
  "trades": 0,
  "day_trades": 0,
  "nifty_id": "2026-11-27_0845_pre",
- "open_slots": [],
+ "open_slots": [
+  "09:20"
+ ],
  "ema_slots": [],
  "cues": [
   "pre"
@@ -18,5 +23,6 @@
   "pre"
  ],
  "fire_error": null,
- "pre_id": "2026-11-27_0850"
+ "pre_id": "2026-11-27_0850",
+ "pre_done": {}
 }
