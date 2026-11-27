@@ -9,6 +9,9 @@
   "SYMBIOTEC": "11:38 thin spike-driven volume, no plan; flips on 5-min close >1575 on 2x vol",
   "PARAS": "12:42 net R:R 0.8, volume dried up; flips on 5-min close >1329 on >=20k vol, T1>=1365",
   "DATAPATTNS": "12:42 net R:R 0.9, call wall 4500; flips on 5-min close >4425 on 2x vol and 4500 break",
-  "HAL": "13:25 net R:R 0.67 to T1, trigger 2pts above tested 52w high, volume fading, conf 5; flips on 5-min close >5160 on 1.5x vol before 14:15, T1>=5230"
+  "HAL": "13:25 net R:R 0.67 to T1, trigger 2pts above tested 52w high, volume fading, conf 5; flips on 5-min close >5160 on 1.5x vol before 14:15, T1>=5230",
+  "HINDZINC": "13:39 net R:R 0.9 to T1, double top 548.7, call writing, weak day conf 5; flips on 5-min close >549 on 2x vol, T1>=556",
+  "INDOMIM": "13:39 net R:R 1.2, MACD negative, volume fading; flips on 5-min close >1374.5 on 2x vol",
+  "VIKRAMSOLR": "13:39 net R:R 0.45, thin spike volume; flips on 5-min close >146.2 on 1.5x vol"
  }
 }

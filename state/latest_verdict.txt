@@ -1,15 +1,21 @@
-🔴 <b>NO TRADE</b>
-🕐 13:25 IST  ·  Weak market
+⚪ <b>NO TRADE — 13:39 scan</b>
 
-<pre>Stock     Net R:R  Flips &gt;
-HAL         0.67    5160</pre>
+Weak tape: Nifty -0.83%
+Only 32% stocks above VWAP
 
-• Nifty -0.8%, 31% above VWAP
-• HAL stalled under 52-wk high
-• Volume fading, conf 5/10
-• Others: R:R below 1
-• GRSE unbought, no chase
+<pre>₹  Why rejected
+HINDZINC  R:R 0.9, dbl top
+INDOMIM   R:R 1.2, MACD -
+VIKRAMSOLR R:R 0.5, thin</pre>
 
-💡 HAL flips only on a 5-min close above 5160 on fresh volume, before 14:15, T1 5230+.
+<b>Flips on</b>
+• HINDZINC 5-min close &gt;₹549
+  on 2x volume
+• INDOMIM close &gt;₹1,374.5
+
+⛔ Blocked: weak-day rule needs
+confidence 6+, best was 5
+
+💡 Late session, weak market: sitting out beats forcing a trade.
 
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
