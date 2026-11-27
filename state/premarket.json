@@ -1,13 +1,13 @@
 {
- "date": "2026-11-26",
+ "date": "2026-11-27",
  "stage": "overnight",
- "id": "2026-11-26_0852",
+ "id": "2026-11-27_0850",
  "connectors": {
-  "indmoney": true,
+  "indmoney": null,
   "investsights": true
  },
- "cues": "S&P -0.2%, Nasdaq -0.6%, Nikkei +1.5%, Hang Seng +2.2%, Brent -4.2%, VIX 17.7; Nifty +1.85% last close, Bank Nifty +1.8%; constructive Asia",
+ "cues": "S&P -0.3%, Nasdaq -0.6%, Nikkei +1.2%, Kospi +2.9%, Hang Seng +0.5%, Brent -2.5%, VIX 16.8; Nifty +0.25% last close; mixed-to-constructive",
  "events": [],
  "stocks": [],
- "note": "premarket_candidates.json stale (2026-11-19) and Yahoo fetch returned 0 stocks; no daily candles (ATR/RSI/20d high) to level breakouts safely, so no watchlist. 52-wk-high movers (ICICIBANK +3.4%, EICHERMOT, DLF) seen but unvetted/extended."
+ "note": "premarket_candidates.json stale (2026-11-19) and Yahoo blocked by proxy; no daily candles to level breakouts. Yesterday's movers (PRESTIGE +8.7%, ACE, MCX +7.6%) are extended: no chase. No watchlist."
 }
