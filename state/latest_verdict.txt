@@ -1,20 +1,10 @@
-⚪ <b>NO TRADE — 13:39 scan</b>
+⚪ <b>NO TRADE — 14:29 scan</b>
 
-Weak tape: Nifty -0.83%
-Only 32% stocks above VWAP
+Too late for a new entry
+Data pack is from 13:36
+Entry cutoff is 14:30
 
-<pre>₹  Why rejected
-HINDZINC  R:R 0.9, dbl top
-INDOMIM   R:R 1.2, MACD -
-VIKRAMSOLR R:R 0.5, thin</pre>
-
-<b>Flips on</b>
-• HINDZINC 5-min close &gt;₹549
-  on 2x volume
-• INDOMIM close &gt;₹1,374.5
-
-⛔ Blocked: weak-day rule needs
-confidence 6+, best was 5
+GRSE plan still live, not bought
 
 💡 Late session, weak market: sitting out beats forcing a trade.
 
