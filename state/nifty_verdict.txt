@@ -1,21 +1,24 @@
 🧪 <b>PAPER</b> · Nifty options
-⚪ <b>NO TRADE — 09:35 IST</b>
+⚪ <b>NO TRADE — 10:36 IST</b>
 
-📈 Nifty 25,850 (−0.1%) · VIX 16.8
-🧱 Calls 26,000 · Puts 25,800
-PCR 0.95 · Max pain 25,800–850
+📈 Nifty 25,757 (−0.5%) · VIX 16.8
+🧱 Calls 25,800 · Puts 25,700
+PCR 0.87 · VWAP 25,839
 
 <b>Why not</b>
-• At VWAP, inside opening range
-• Both sides written at 25,800/850
-• PE target sits on 25,700 put wall
+• Broke OR low, but 80 pts
+  below VWAP: stretched
+• 25700 put wall before T1:
+  net R:R ≈ 0.7 (need 1.5)
+• Breadth 70% up, VIX falling
 
-<b>Flip to GO</b>
-• PE: 5-min close &lt; 25,795 with
-  25800 PE OI falling, by 11:15
-• CE: close &gt; 25,910, 26000 CE
-  OI unwinding
+<b>Flip to GO</b> (by 11:45)
+• 25800 PE: retest 25,800
+  fails, close &lt; 25,790, ≤ ₹175
+• 25750 PE: close &lt; 25,733
+  with 25700 PE OI falling
+• Off if close &gt; 25,839
 
-💡 Pin day: buyers lose to decay
-🔎 Next check: 10:35 IST
+💡 Heavyweight dip, not trend
+🔎 Next check: 10:45 IST
 <i>Paper trade for testing only, not SEBI-registered investment advice. Options trading is high risk.</i>
