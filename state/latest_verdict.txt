@@ -1,17 +1,15 @@
 🔴 <b>NO TRADE</b>
-🕐 12:42 IST  ·  Weak market
+🕐 13:25 IST  ·  Weak market
 
 <pre>Stock     Net R:R  Flips &gt;
-MAZDOCK     1.1    1916
-PARAS       0.8    1329
-DATAPATTNS  0.9    4425
-NLCINDIA    fail    241</pre>
+HAL         0.67    5160</pre>
 
-• Nifty -0.6%, 39% above VWAP
-• Lunch volume has dried up
-• All 3 are one Capital Goods bet
-• GRSE plan stays live, unbought
+• Nifty -0.8%, 31% above VWAP
+• HAL stalled under 52-wk high
+• Volume fading, conf 5/10
+• Others: R:R below 1
+• GRSE unbought, no chase
 
-💡 No trade clears R:R 1.5 today. Sitting out is fine.
+💡 HAL flips only on a 5-min close above 5160 on fresh volume, before 14:15, T1 5230+.
 
 <i>Educational analysis from market data, not SEBI-registered investment advice. Intraday trading is high risk; you place and manage any order yourself.</i>
