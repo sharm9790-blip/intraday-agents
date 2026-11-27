@@ -1,28 +1,21 @@
-🧪 <b>PAPER</b> · Nifty premarket
-🌍 US shut (Thanksgiving) · VIX 16.8
-📰 GIFT Nifty: firm opening
-📅 Events: RBI data 11:30 (low)
-⏳ Expiry Tue 1 Dec (weekly)
+🧪 <b>PAPER</b> · Nifty options
+⚪ <b>NO TRADE — 09:35 IST</b>
 
-<pre>Level        Nifty
-Call wall    26,000
-Yday high    25,975
-Yday close   25,885
-Max pain     25,850
-Put floor    25,800
-Yday low     25,734
-Big puts     25,500</pre>
-PCR 1.03 · Calls also 26,200
+📈 Nifty 25,850 (−0.1%) · VIX 16.8
+🧱 Calls 26,000 · Puts 25,800
+PCR 0.95 · Max pain 25,800–850
 
-<b>Bull</b>
-• VIX −4.9%, puts written 25,800
-• 3-day higher closes
-<b>Bear</b>
-• 26,000 call OI 10.9M (biggest)
-• Tight liquidity, Bank Nifty weak
+<b>Why not</b>
+• At VWAP, inside opening range
+• Both sides written at 25,800/850
+• PE target sits on 25,700 put wall
 
-💡 Bias: mild up, capped near
-26,000. Range 25,800–26,000
-likely; wait for 09:30.
+<b>Flip to GO</b>
+• PE: 5-min close &lt; 25,795 with
+  25800 PE OI falling, by 11:15
+• CE: close &gt; 25,910, 26000 CE
+  OI unwinding
 
+💡 Pin day: buyers lose to decay
+🔎 Next check: 10:35 IST
 <i>Paper trade for testing only, not SEBI-registered investment advice. Options trading is high risk.</i>
