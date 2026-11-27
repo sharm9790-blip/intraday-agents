@@ -2114,5 +2114,78 @@
    "trail": 1154,
    "targets": 2072
   }
+ },
+ {
+  "date": "2026-11-27",
+  "plans": [
+   {
+    "symbol": "GRSE",
+    "start": "10:34",
+    "rules_v": "2026-11-16",
+    "sector": "Capital Goods",
+    "entry": 2136,
+    "qty": 46,
+    "sl": 2118,
+    "t1": 2176,
+    "t2": 2210,
+    "close": 2144.0,
+    "rules": {
+     "pnl": 374,
+     "steps": [
+      "15:00 time stop 2146.70"
+     ],
+     "bought": true
+    },
+    "trail": {
+     "pnl": 374,
+     "steps": [
+      "15:00 time stop 2146.70"
+     ]
+    },
+    "limit": {
+     "pnl": 374,
+     "steps": [
+      "11:20 filled",
+      "15:00 time stop 2146.70"
+     ]
+    },
+    "price_at_plan": 2146.1,
+    "targets": {
+     "cash": 100000,
+     "qty": 46,
+     "half": 23,
+     "rest": 23,
+     "pf1": 920,
+     "pf2": 1702,
+     "total": 2622,
+     "t1_hit": false,
+     "t2_hit": false,
+     "entry_hit": true,
+     "high": 2163.4
+    },
+    "market": {
+     "pnl": -91,
+     "steps": [
+      "bought 2146.10",
+      "15:00 time stop 2146.70"
+     ]
+    },
+    "lock": {
+     "pnl": -91,
+     "steps": [
+      "bought 2146.10",
+      "15:00 time stop 2146.70"
+     ]
+    }
+   }
+  ],
+  "totals": {
+   "rules": 374,
+   "limit": 374,
+   "market": -91,
+   "lock": -91,
+   "trail": 374,
+   "targets": 0
+  }
  }
 ]

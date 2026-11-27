@@ -66,7 +66,7 @@
   "gap_13:39": true,
   "gap_14:29": true
  },
- "last_run": "15:36",
+ "last_run": "16:50",
  "taken": [],
  "trades": 0,
  "day_trades": 0,
@@ -128,5 +128,6 @@
   }
  ],
  "day_pnl": 244,
- "done_sent": true
+ "done_sent": true,
+ "scorecard_sent": true
 }

@@ -1,40 +1,6 @@
 {
  "date": "2026-11-27",
- "open": [
-  {
-   "symbol": "HYUNDAI",
-   "yahoo": "HYUNDAI.NS",
-   "price": 2010.1,
-   "sl": 2037.82,
-   "t1": 1968.52,
-   "t2": 1940.8,
-   "qty": 36,
-   "sector": "Automobile and Auto Components",
-   "at": "10:33"
-  },
-  {
-   "symbol": "SHRIRAMFIN",
-   "yahoo": "SHRIRAMFIN.NS",
-   "price": 930.3,
-   "sl": 939.98,
-   "t1": 915.78,
-   "t2": 906.1,
-   "qty": 103,
-   "sector": "Financial Services",
-   "at": "10:33"
-  },
-  {
-   "symbol": "ABCAPITAL",
-   "yahoo": "ABCAPITAL.NS",
-   "price": 405.65,
-   "sl": 409.51,
-   "t1": 399.86,
-   "t2": 396.0,
-   "qty": 246,
-   "sector": "Financial Services",
-   "at": "11:34"
-  }
- ],
+ "open": [],
  "days": {
   "2026-11-16": [
    {
@@ -355,6 +321,59 @@
     "steps": [
      "13:30 sold short 875.75",
      "14:00 SL"
+    ]
+   }
+  ],
+  "2026-11-27": [
+   {
+    "symbol": "HYUNDAI",
+    "yahoo": "HYUNDAI.NS",
+    "price": 2010.1,
+    "sl": 2037.82,
+    "t1": 1968.52,
+    "t2": 1940.8,
+    "qty": 36,
+    "sector": "Automobile and Auto Components",
+    "at": "10:33",
+    "entry": 2014.5,
+    "pnl": -26,
+    "steps": [
+     "10:40 sold short 2014.50",
+     "15:00 time stop 2012.80"
+    ]
+   },
+   {
+    "symbol": "SHRIRAMFIN",
+    "yahoo": "SHRIRAMFIN.NS",
+    "price": 930.3,
+    "sl": 939.98,
+    "t1": 915.78,
+    "t2": 906.1,
+    "qty": 103,
+    "sector": "Financial Services",
+    "at": "10:33",
+    "entry": 929.6,
+    "pnl": -1184,
+    "steps": [
+     "10:40 sold short 929.60",
+     "12:45 SL"
+    ]
+   },
+   {
+    "symbol": "ABCAPITAL",
+    "yahoo": "ABCAPITAL.NS",
+    "price": 405.65,
+    "sl": 409.51,
+    "t1": 399.86,
+    "t2": 396.0,
+    "qty": 246,
+    "sector": "Financial Services",
+    "at": "11:34",
+    "entry": 407.4,
+    "pnl": -639,
+    "steps": [
+     "11:40 sold short 407.40",
+     "12:45 SL"
     ]
    }
   ]
