@@ -1,22 +1,24 @@
 🧪 <b>PAPER</b> · Nifty options
-⚪ <b>NO TRADE — 12:35 IST</b>
+⚪ <b>NO TRADE — 13:37 IST</b>
 
-📈 Nifty 25,717 (−0.65%) · VIX 16.8
-🧱 Calls 25,800 · Puts 25,700
-PCR 0.72 · VWAP ~25,780
+📈 Nifty 25,675 (−0.8%) · VIX 16.8
+🧱 Calls 25,800 · Puts 25,600
+PCR 0.69 · VWAP ~25,760
 
 <b>Why not</b>
-• 1 hr chop 25,667–25,743
+• No 5-min close &lt; 25,640
+  (low 25,644, bounced to 25,670)
+• Put floors holding 25,600/25,500
 • Writers adding on both sides
-• Net R:R ≈ 0.7–0.85 (need 1.5)
+• Real T1 25,600 → R:R ≈ 0.6
 • Friday decay before Tue expiry
 
-<b>Flip to GO</b> (by 13:45)
+<b>Last flip</b> (13:45 candle)
 • PE: 5-min close &lt; 25,640
-  with 25700/25650 PE OI falling
-• 25700 PE · SL close &gt; 25,700
-• T1 25,550
+• 25650/25700 PE OI down ≥ 3%
+• 25600 PE OI unwinding
+• Else stand down for the day
 
-💡 Range day: buyers lose to decay
-🔎 Next check: 13:35 IST
+💡 Slow grind, buyers lose to decay
+🔎 Next check: 13:50 IST
 <i>Paper trade for testing only, not SEBI-registered investment advice. Options trading is high risk.</i>
