@@ -1,6 +1,6 @@
 {
- "date": "2026-11-26",
- "at": "08:45",
+ "date": "2026-11-27",
+ "at": "08:44",
  "items": {
   "S&P 500": {
    "price": 7182.78,
@@ -21,54 +21,54 @@
    "kind": "US close"
   },
   "Nikkei": {
-   "price": 57886.95,
-   "pct": 1.54,
-   "time": "26 Nov 08:05",
+   "price": 58172.04,
+   "pct": 1.17,
+   "time": "27 Nov 08:05",
    "kind": "Asia live"
   },
   "Hang Seng": {
-   "price": 22452.74,
-   "pct": 2.22,
-   "time": "26 Nov 08:30",
+   "price": 22347.64,
+   "pct": 0.54,
+   "time": "27 Nov 08:29",
    "kind": "Asia live"
   },
   "Kospi": {
-   "price": 4715.92,
-   "pct": 0.39,
-   "time": "26 Nov 08:25",
+   "price": 4847.59,
+   "pct": 2.89,
+   "time": "27 Nov 08:24",
    "kind": "Asia live"
   },
   "Brent": {
-   "price": 90.68,
-   "pct": -4.15,
-   "time": "26 Nov 08:33",
+   "price": 92.29,
+   "pct": -2.45,
+   "time": "27 Nov 08:32",
    "kind": "crude"
   },
   "WTI": {
-   "price": 84.07,
-   "pct": 0.47,
-   "time": "26 Nov 08:35",
+   "price": 85.74,
+   "pct": 2.46,
+   "time": "27 Nov 08:34",
    "kind": "crude"
   },
   "USD/INR": {
-   "price": 92.22,
-   "pct": -0.75,
-   "time": "26 Nov 04:00",
+   "price": 92.435,
+   "pct": 0.21,
+   "time": "27 Nov 08:35",
    "kind": "currency"
   },
   "India VIX": {
-   "price": 17.6975,
-   "pct": -0.01,
-   "time": "25 Nov 15:30",
+   "price": 16.835,
+   "pct": -4.73,
+   "time": "26 Nov 15:43",
    "kind": "prev close"
   },
   "Nifty": {
-   "price": 25819.25,
-   "pct": 1.85,
-   "time": "25 Nov 15:31",
+   "price": 25884.5,
+   "pct": 0.25,
+   "time": "26 Nov 15:31",
    "kind": "prev close"
   }
  },
- "line": "S&P 500 -0.2% \u00b7 Nasdaq -0.6% \u00b7 Dow +0.3% \u00b7 Nikkei +1.5% \u00b7 Hang Seng +2.2% \u00b7 Kospi +0.4% \u00b7 Brent -4.2% \u00b7 WTI +0.5% \u00b7 USD/INR -0.8% \u00b7 India VIX -0.0% \u00b7 Nifty +1.9%",
+ "line": "S&P 500 -0.2% \u00b7 Nasdaq -0.6% \u00b7 Dow +0.3% \u00b7 Nikkei +1.2% \u00b7 Hang Seng +0.5% \u00b7 Kospi +2.9% \u00b7 Brent -2.5% \u00b7 WTI +2.5% \u00b7 USD/INR +0.2% \u00b7 India VIX -4.7% \u00b7 Nifty +0.2%",
  "note": "GIFT Nifty is not available from this source; read the gap from Asia live + US close, then the 09:08 pre-open price."
 }
