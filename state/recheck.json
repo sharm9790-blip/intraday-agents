@@ -1,26 +1,12 @@
 {
- "date": "2026-11-26",
+ "date": "2026-11-27",
  "symbols": {
-  "EDELALTS": {
-   "at": "13:00",
-   "rejected_at": "10:33",
-   "level": 1890.0,
+  "NLCINDIA": {
+   "at": "10:45",
+   "rejected_at": "10:34",
+   "level": 236.0,
    "kind": "flip level",
-   "close": 1898.8
-  },
-  "HEGAM": {
-   "at": "13:00",
-   "rejected_at": "12:40",
-   "level": 286.0,
-   "kind": "flip level",
-   "close": 289.0
-  },
-  "MANAKCOAT": {
-   "at": "13:05",
-   "rejected_at": "12:40",
-   "level": 158.89,
-   "kind": "day high",
-   "close": 160.84
+   "close": 236.7
   }
  }
 }

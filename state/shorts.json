@@ -22,6 +22,17 @@
    "qty": 103,
    "sector": "Financial Services",
    "at": "10:33"
+  },
+  {
+   "symbol": "ABCAPITAL",
+   "yahoo": "ABCAPITAL.NS",
+   "price": 405.65,
+   "sl": 409.51,
+   "t1": 399.86,
+   "t2": 396.0,
+   "qty": 246,
+   "sector": "Financial Services",
+   "at": "11:34"
   }
  ],
  "days": {
